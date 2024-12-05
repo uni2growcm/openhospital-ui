@@ -11,36 +11,29 @@
  * Do not edit the class manually.
  */
 
-import {
-    MedicalWardIdDTO,
-} from './';
-
 /**
  * @export
- * @interface MedicalWardDTO
+ * @interface LocalTime
  */
-export interface MedicalWardDTO {
+export interface LocalTime {
     /**
-     * @type {MedicalWardIdDTO}
-     * @memberof MedicalWardDTO
-     */
-    id?: MedicalWardIdDTO;
-    /**
-     * The in-quantity
      * @type {number}
-     * @memberof MedicalWardDTO
+     * @memberof LocalTime
      */
-    in_quantity?: number;
+    hour?: number;
     /**
-     * The out-quantity
      * @type {number}
-     * @memberof MedicalWardDTO
+     * @memberof LocalTime
      */
-    out_quantity?: number;
+    minute?: number;
     /**
-     * Lock
      * @type {number}
-     * @memberof MedicalWardDTO
+     * @memberof LocalTime
      */
-    lock?: number;
+    second?: number;
+    /**
+     * @type {number}
+     * @memberof LocalTime
+     */
+    nano?: number;
 }
