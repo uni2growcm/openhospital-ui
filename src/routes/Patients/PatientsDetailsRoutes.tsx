@@ -87,7 +87,7 @@ export const PatientDetailsRoutes: FC = () => {
             />
           }
         >
-          <Route index element={<></>} />
+          <Route path="" element={<Navigate to="studies" />} />
           <Route path="studies" element={<h1>Patient Studies</h1>} />
           <Route path="studies/:id/series" element={<h1>Studies Series</h1>} />
           <Route
