@@ -1,3 +1,4 @@
+import { Radiology } from "components/accessories/radiology";
 import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router";
@@ -77,6 +78,23 @@ export const PatientDetailsRoutes: FC = () => {
             />
           }
         />
+        <Route
+          path="radiology"
+          element={
+            <PatientDetailsContent
+              title={t("patient.radiology")}
+              content={Radiology}
+            />
+          }
+        >
+          <Route index element={<></>} />
+          <Route path="studies" element={<h1>Patient Studies</h1>} />
+          <Route path="studies/:id/series" element={<h1>Studies Series</h1>} />
+          <Route
+            path="studies/:id/series/:serie_id/instances"
+            element={<h1>Serie Instances</h1>}
+          />
+        </Route>
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
