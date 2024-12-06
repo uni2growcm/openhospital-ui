@@ -5,7 +5,7 @@ import {
 } from "../../generated";
 import { ApiResponse } from "../types";
 
-export type IHospitalState = {
+export type IRadiologyState = {
   studies: ApiResponse<StudyResponse[]>;
   series: ApiResponse<SeriesResponse[]>;
   instances: ApiResponse<InstanceResponse[]>;
