@@ -6,7 +6,7 @@ import "moment/min/locales";
 import React, { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router";
-import { getPatientStudies, getStudiesReset } from "state/radiology";
+import { getPatientStudies, getPatientStudiesReset } from "state/radiology";
 
 export const Radiology = () => {
   const { t, i18n } = useTranslation();
@@ -27,7 +27,7 @@ export const Radiology = () => {
 
   useEffect(() => {
     return () => {
-      dispatch(getStudiesReset());
+      dispatch(getPatientStudiesReset());
     };
   }, [dispatch]);
 

@@ -7,13 +7,13 @@ export const radiologySlice = createSlice({
   name: "radiology",
   initialState: initial,
   reducers: {
-    getStudiesReset: (state) => {
+    getPatientStudiesReset: (state) => {
       state.studies = initial.studies;
     },
-    getSeriesReset: (state) => {
+    getStudySeriesReset: (state) => {
       state.series = initial.series;
     },
-    getInstancesReset: (state) => {
+    getSerieInstancesReset: (state) => {
       state.instances = initial.instances;
     },
   },
@@ -51,5 +51,8 @@ export const radiologySlice = createSlice({
       }),
 });
 
-export const { getStudiesReset, getSeriesReset, getInstancesReset } =
-  radiologySlice.actions;
+export const {
+  getPatientStudiesReset,
+  getStudySeriesReset,
+  getSerieInstancesReset,
+} = radiologySlice.actions;
