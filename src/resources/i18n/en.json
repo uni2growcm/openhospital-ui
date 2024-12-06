@@ -1,4 +1,8 @@
 {
+  "radiology": {
+    "studiesSummary": "{count, plural, =0 {There are no studies for this patient} =1 {There is 1 study for this patient} other {There are # studies for this patient}}",
+    "lastStudy": "Latest study: {value}"
+  },
   "errors": {
     "somethingwrong": "Something went wrong, please retry later.",
     "incorrectcredentials": "Invalid username or password",
