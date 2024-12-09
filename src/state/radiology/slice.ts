@@ -16,6 +16,9 @@ export const radiologySlice = createSlice({
     getSerieInstancesReset: (state) => {
       state.instances = initial.instances;
     },
+    getInstancePreviewReset: (state) => {
+      state.preview = initial.preview;
+    },
   },
   extraReducers: (builder) =>
     builder
@@ -48,6 +51,16 @@ export const radiologySlice = createSlice({
       })
       .addCase(thunks.getSerieInstances.rejected, (state, action) => {
         state.instances = ApiResponse.error(action.payload);
+      })
+      // Get Instance Preview
+      .addCase(thunks.getInstancePreview.pending, (state) => {
+        state.preview = ApiResponse.loading();
+      })
+      .addCase(thunks.getInstancePreview.fulfilled, (state, action) => {
+        state.preview = ApiResponse.value(action.payload);
+      })
+      .addCase(thunks.getInstancePreview.rejected, (state, action) => {
+        state.preview = ApiResponse.error(action.payload);
       }),
 });
 
@@ -55,4 +68,5 @@ export const {
   getPatientStudiesReset,
   getStudySeriesReset,
   getSerieInstancesReset,
+  getInstancePreviewReset,
 } = radiologySlice.actions;

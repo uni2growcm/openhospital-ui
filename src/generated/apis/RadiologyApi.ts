@@ -42,20 +42,19 @@ export class RadiologyApi extends BaseAPI {
 
     /**
      */
-    getInstancePreview({ id }: GetInstancePreviewRequest): Observable<Blob>
-    getInstancePreview({ id }: GetInstancePreviewRequest, opts?: OperationOpts): Observable<RawAjaxResponse<Blob>>
-    getInstancePreview({ id }: GetInstancePreviewRequest, opts?: OperationOpts): Observable<Blob | RawAjaxResponse<Blob>> {
+    getInstancePreview({ id }: GetInstancePreviewRequest): Observable<string>
+    getInstancePreview({ id }: GetInstancePreviewRequest, opts?: OperationOpts): Observable<RawAjaxResponse<string>>
+    getInstancePreview({ id }: GetInstancePreviewRequest, opts?: OperationOpts): Observable<string | RawAjaxResponse<string>> {
         throwIfNullOrUndefined(id, 'id', 'getInstancePreview');
 
         const headers: HttpHeaders = {
             ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
         };
 
-        return this.request<Blob>({
+        return this.request<string>({
             url: '/radiology/instances/{id}/preview'.replace('{id}', encodeURI(id)),
             method: 'GET',
             headers,
-            responseType: 'blob',
         }, opts?.responseOpts);
     };
 

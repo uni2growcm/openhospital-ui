@@ -62,11 +62,6 @@ export interface StudyResponse {
      */
     seriesIds?: Array<string>;
     /**
-     * @type {string}
-     * @memberof StudyResponse
-     */
-    lastUpdateInstance?: string;
-    /**
      * @type {boolean}
      * @memberof StudyResponse
      */

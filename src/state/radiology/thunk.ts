@@ -30,3 +30,12 @@ export const getSerieInstances = createAsyncThunk(
       .toPromise()
       .catch((error) => thunkApi.rejectWithValue(error.response))
 );
+
+export const getInstancePreview = createAsyncThunk(
+  "radiology/getInstancePreview",
+  async (id: string, thunkApi) =>
+    api
+      .getInstancePreview({ id })
+      .toPromise()
+      .catch((error) => thunkApi.rejectWithValue(error.response))
+);

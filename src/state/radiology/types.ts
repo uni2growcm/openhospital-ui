@@ -9,4 +9,5 @@ export type IRadiologyState = {
   studies: ApiResponse<StudyResponse[]>;
   series: ApiResponse<SeriesResponse[]>;
   instances: ApiResponse<InstanceResponse[]>;
+  preview: ApiResponse<string>;
 };

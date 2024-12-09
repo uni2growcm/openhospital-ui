@@ -36,9 +36,4 @@ export interface Patient {
      * @memberof Patient
      */
     sex?: string;
-    /**
-     * @type {string}
-     * @memberof Patient
-     */
-    birthDateInstance?: string;
 }

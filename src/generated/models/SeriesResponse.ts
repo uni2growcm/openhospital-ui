@@ -66,11 +66,6 @@ export interface SeriesResponse {
      */
     status?: string;
     /**
-     * @type {string}
-     * @memberof SeriesResponse
-     */
-    lastUpdateInstance?: string;
-    /**
      * @type {boolean}
      * @memberof SeriesResponse
      */

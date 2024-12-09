@@ -68,7 +68,6 @@ models\Instance.ts
 models\InstanceResponse.ts
 models\LabWithRowsDTO.ts
 models\LaboratoryDTO.ts
-models\LocalTime.ts
 models\LoginRequest.ts
 models\LoginResponse.ts
 models\LotDTO.ts

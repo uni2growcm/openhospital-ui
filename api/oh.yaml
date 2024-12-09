@@ -3900,7 +3900,6 @@ paths:
             application/octet-stream:
               schema:
                 type: string
-                format: binary
       security:
         - bearerAuth: []
   /pricelists/prices:
@@ -6322,13 +6321,13 @@ components:
           description: lock
           format: int32
           example: 0
-        opd:
+        pharmacy:
           type: boolean
         male:
           type: boolean
         female:
           type: boolean
-        pharmacy:
+        opd:
           type: boolean
     PatientDTO:
       required:
@@ -8329,9 +8328,6 @@ components:
           type: string
         status:
           type: string
-        lastUpdateInstance:
-          type: string
-          format: date-time
         stable:
           type: boolean
     Instance:
@@ -8351,11 +8347,6 @@ components:
           type: string
         instanceUID:
           type: string
-        creationDateInstance:
-          type: string
-          format: date
-        creationTimeInstance:
-          $ref: "#/components/schemas/LocalTime"
     InstanceResponse:
       type: object
       properties:
@@ -8379,21 +8370,6 @@ components:
           type: string
         objectType:
           type: string
-    LocalTime:
-      type: object
-      properties:
-        hour:
-          type: integer
-          format: int32
-        minute:
-          type: integer
-          format: int32
-        second:
-          type: integer
-          format: int32
-        nano:
-          type: integer
-          format: int32
     Patient:
       type: object
       properties:
@@ -8405,9 +8381,6 @@ components:
           type: string
         sex:
           type: string
-        birthDateInstance:
-          type: string
-          format: date
     Study:
       type: object
       properties:
@@ -8427,11 +8400,6 @@ components:
           type: string
         instanceUID:
           type: string
-        dateInstance:
-          type: string
-          format: date
-        timeInstance:
-          $ref: "#/components/schemas/LocalTime"
     StudyResponse:
       type: object
       properties:
@@ -8455,9 +8423,6 @@ components:
           type: array
           items:
             type: string
-        lastUpdateInstance:
-          type: string
-          format: date-time
         stable:
           type: boolean
     PriceDTO:

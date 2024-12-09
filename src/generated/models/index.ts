@@ -21,7 +21,6 @@ export * from './Instance';
 export * from './InstanceResponse';
 export * from './LabWithRowsDTO';
 export * from './LaboratoryDTO';
-export * from './LocalTime';
 export * from './LoginRequest';
 export * from './LoginResponse';
 export * from './LotDTO';

@@ -11,10 +11,6 @@
  * Do not edit the class manually.
  */
 
-import {
-    LocalTime,
-} from './';
-
 /**
  * @export
  * @interface Study
@@ -60,14 +56,4 @@ export interface Study {
      * @memberof Study
      */
     instanceUID?: string;
-    /**
-     * @type {string}
-     * @memberof Study
-     */
-    dateInstance?: string;
-    /**
-     * @type {LocalTime}
-     * @memberof Study
-     */
-    timeInstance?: LocalTime;
 }
