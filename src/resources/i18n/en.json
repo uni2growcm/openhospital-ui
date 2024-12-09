@@ -1,7 +1,17 @@
 {
   "radiology": {
-    "studiesSummary": "{count, plural, =0 {There are no studies for this patient} =1 {There is 1 study for this patient} other {There are # studies for this patient}}",
-    "lastStudy": "Latest study: {value}"
+    "studies": {
+      "summary": "{count, plural, =0 {There are <0>not</0> studies for this patient} =1 {There is <0>1</0> study for this patient} other {There are <0>#</0> studies for this patient}}",
+      "last": "Latest study: {value}",
+      "date": "Date",
+      "title": "Title",
+      "series": "Series",
+      "viewSeries": "View series",
+      "institution": "Institution Name",
+      "referrencingPhysician": "Referrencing Physician",
+      "time": "Study Time",
+      "lastUpdate": "Last Update"
+    }
   },
   "errors": {
     "somethingwrong": "Something went wrong, please retry later.",

@@ -63,6 +63,7 @@ export interface IProps {
   labels?: Partial<
     Record<TActions, { title?: string; message?: string; tooltip?: string }>
   >;
+  renderCustomActions?: (row: any) => ReactNode;
 }
 
 export interface IRowProps {

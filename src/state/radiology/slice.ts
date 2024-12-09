@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { isEmpty } from "lodash";
 import { ApiResponse } from "state/types";
 import { initial } from "./initial";
 import * as thunks from "./thunk";
@@ -27,7 +28,10 @@ export const radiologySlice = createSlice({
         state.studies = ApiResponse.loading();
       })
       .addCase(thunks.getPatientStudies.fulfilled, (state, action) => {
-        state.studies = ApiResponse.value(action.payload);
+        state.studies.status = isEmpty(action.payload)
+          ? "SUCCESS_EMPTY"
+          : "SUCCESS";
+        state.studies.data = action.payload;
       })
       .addCase(thunks.getPatientStudies.rejected, (state, action) => {
         state.studies = ApiResponse.error(action.payload);
@@ -37,7 +41,10 @@ export const radiologySlice = createSlice({
         state.series = ApiResponse.loading();
       })
       .addCase(thunks.getStudySeries.fulfilled, (state, action) => {
-        state.series = ApiResponse.value(action.payload);
+        state.series.status = isEmpty(action.payload)
+          ? "SUCCESS_EMPTY"
+          : "SUCCESS";
+        state.series.data = action.payload;
       })
       .addCase(thunks.getStudySeries.rejected, (state, action) => {
         state.series = ApiResponse.error(action.payload);
@@ -47,7 +54,10 @@ export const radiologySlice = createSlice({
         state.instances = ApiResponse.loading();
       })
       .addCase(thunks.getSerieInstances.fulfilled, (state, action) => {
-        state.instances = ApiResponse.value(action.payload);
+        state.instances.status = isEmpty(action.payload)
+          ? "SUCCESS_EMPTY"
+          : "SUCCESS";
+        state.instances.data = action.payload;
       })
       .addCase(thunks.getSerieInstances.rejected, (state, action) => {
         state.instances = ApiResponse.error(action.payload);

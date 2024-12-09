@@ -80,6 +80,7 @@ const Table: FunctionComponent<IProps> = ({
   rowKey = "code",
   headerActions,
   labels,
+  renderCustomActions,
 }) => {
   const { t } = useTranslation();
   const [order, setOrder] = React.useState<TOrder>("desc");
@@ -304,7 +305,8 @@ const Table: FunctionComponent<IProps> = ({
       onView ||
       onCancel ||
       onRestore ||
-      onSoftDelete
+      onSoftDelete ||
+      renderCustomActions
     ) {
       return (
         <TableCell
@@ -313,6 +315,7 @@ const Table: FunctionComponent<IProps> = ({
           size="small"
           style={{ minWidth: 125 }}
         >
+          {renderCustomActions && renderCustomActions(row)}
           {onView && (displayRowAction ? displayRowAction(row, "view") : true)
             ? renderIcon("view", row)
             : ""}

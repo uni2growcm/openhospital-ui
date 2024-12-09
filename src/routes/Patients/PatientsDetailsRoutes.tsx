@@ -1,4 +1,4 @@
-import { Radiology } from "components/accessories/radiology";
+import { Radiology, Studies } from "components/accessories/radiology";
 import PermissionDenied from "components/activities/PermissionDenied/PermissionDenied";
 import { withPermission } from "libraries/permissionUtils/withPermission";
 import React, { FC } from "react";
@@ -32,7 +32,7 @@ export const PatientDetailsRoutes: FC = () => {
         }
       >
         <Route path="" element={<Navigate to="studies" />} />
-        <Route path="studies" element={<h1>Patient Studies</h1>} />
+        <Route path="studies" element={<Studies />} />
         <Route path="studies/:id/series" element={<h1>Studies Series</h1>} />
         <Route
           path="studies/:id/series/:serie_id/instances"
