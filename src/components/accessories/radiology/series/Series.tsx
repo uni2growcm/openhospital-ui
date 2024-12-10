@@ -3,7 +3,6 @@ import { Button, CircularProgress } from "@mui/material";
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import Table from "components/accessories/table/Table";
 import { TFilterField } from "components/accessories/table/filter/types";
-import { SeriesResponse } from "generated";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import { isEmpty } from "lodash";
 import moment from "moment";
@@ -11,9 +10,11 @@ import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate, useParams } from "react-router";
 import {
+  SeriesWithInstances,
   getStudySeriesWithInstances,
   getStudySeriesWithInstancesReset,
 } from "state/radiology";
+import { Instances } from "./instances/Instances";
 import "./styles.scss";
 
 export const Series = () => {
@@ -70,13 +71,14 @@ export const Series = () => {
     };
   }, [dispatch]);
 
-  const formatDataToDisplay = (data: SeriesResponse[]) => {
+  const formatDataToDisplay = (data: SeriesWithInstances[]) => {
     return data.map((series) => {
       return {
         id: series.id ?? "",
         title: isEmpty(series.series?.seriesDescription)
           ? "--"
           : series.series?.seriesDescription,
+        instancesData: series.instances,
         instances: series.instancesIds?.length ?? 0,
         expectedInstances: series.expectedNumberOfInstances ?? "",
         lastUpdate: series.lastUpdate
@@ -148,6 +150,9 @@ export const Series = () => {
                   }))}
                   manualFilter={false}
                   rowKey="id"
+                  customRenderDetails={(row) => (
+                    <Instances data={row.instancesData} />
+                  )}
                 />
               </>
             );
