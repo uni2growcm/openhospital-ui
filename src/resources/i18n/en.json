@@ -11,6 +11,17 @@
       "referrencingPhysician": "Referrencing Physician",
       "time": "Study Time",
       "lastUpdate": "Last Update"
+    },
+    "series": {
+      "title": "Title",
+      "instances": "Instances",
+      "expectedInstances": "Expected Instances",
+      "viewSeries": "View series",
+      "operators": "Operators Name",
+      "station": "Station Name",
+      "status": "Status",
+      "lastUpdate": "Last Update",
+      "backToStudies": "Back to studies"
     }
   },
   "errors": {
