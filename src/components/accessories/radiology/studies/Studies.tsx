@@ -80,8 +80,6 @@ export const Studies = () => {
           if (!accDate || !valueDate) {
             return valueDate ? value : acc;
           }
-          console.log(accDate);
-          console.log(valueDate);
           return accDate.isAfter(valueDate) ? acc : value;
         }, studiesState.data![0])
       : null;
