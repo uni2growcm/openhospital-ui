@@ -7,6 +7,7 @@ import { StudyResponse } from "generated";
 import { parseNumericDate } from "libraries/formatUtils/parseNumericDate";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import { useTimeAgo } from "libraries/hooks/useTimeAgo";
+import { isEmpty } from "lodash";
 import moment from "moment";
 import React, { useCallback, useEffect, useMemo } from "react";
 import { Trans, useTranslation } from "react-i18next";
@@ -91,7 +92,9 @@ export const Studies = () => {
     return data.map((study) => {
       return {
         id: study.id ?? "",
-        title: study.study?.description ?? "--",
+        title: isEmpty(study.study?.description)
+          ? "--"
+          : study.study?.description,
         date: study.study?.date
           ? moment(study.study.date, "YYYYMMDD")
               .locale(i18n.language)
