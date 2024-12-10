@@ -67,26 +67,25 @@ export const Studies = () => {
     const lastStudy = studiesState.data?.length
       ? studiesState.data?.reduce((acc, value) => {
           const accDate = acc.study?.date
-            ? (acc.study.time
-                ? moment(acc.study.date + acc.study.time, "YYYYMMDDHHmmss")
-                : moment(acc.study.date, "YYYYMMDD")
-              )
-                .toDate()
-                .getMilliseconds()
-            : 0;
+            ? acc.study.time
+              ? moment(acc.study.date + acc.study.time, "YYYYMMDDHHmmss")
+              : moment(acc.study.date, "YYYYMMDD")
+            : null;
           const valueDate = value.study?.date
-            ? (value.study.time
-                ? moment(value.study.date + value.study.time, "YYYYMMDDHHmmss")
-                : moment(value.study.date, "YYYYMMDD")
-              )
-                .toDate()
-                .getMilliseconds()
-            : 0;
-          return accDate > valueDate ? acc : value;
-        })
+            ? value.study.time
+              ? moment(value.study.date + value.study.time, "YYYYMMDDHHmmss")
+              : moment(value.study.date, "YYYYMMDD")
+            : null;
+          if (!accDate || !valueDate) {
+            return valueDate ? value : acc;
+          }
+          console.log(accDate);
+          console.log(valueDate);
+          return accDate.isAfter(valueDate) ? acc : value;
+        }, studiesState.data![0])
       : null;
     return parseNumericDate(lastStudy?.study?.date ?? "");
-  }, [studiesState]);
+  }, [studiesState.data]);
 
   const formatDataToDisplay = (data: StudyResponse[]) => {
     return data.map((study) => {

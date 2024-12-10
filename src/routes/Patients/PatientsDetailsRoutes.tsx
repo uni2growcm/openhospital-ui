@@ -38,8 +38,15 @@ export const PatientDetailsRoutes: FC = () => {
           path="studies/:id/series/:serie_id/instances"
           element={<h1>Serie Instances</h1>}
         />
+        <Route
+          path="*"
+          element={
+            <div>
+              <h1>Page not found !</h1>
+            </div>
+          }
+        />
       </Route>
-      <Route path="*" element={<NotFound />} />
     </Routes>
   ));
 
