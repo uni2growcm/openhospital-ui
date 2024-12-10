@@ -26,7 +26,8 @@
     "instances": {
       "date": "Creation Date",
       "title": "Instance {number}",
-      "time": "Creation Time"
+      "time": "Creation Time",
+      "preview": "Preview Instance"
     }
   },
   "errors": {

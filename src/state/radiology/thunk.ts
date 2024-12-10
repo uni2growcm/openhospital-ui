@@ -36,9 +36,16 @@ export const getStudySeriesWithInstances = createAsyncThunk(
               for (const serie of series) {
                 let instances: InstanceResponse[] = [];
                 try {
-                  instances = await api
-                    .getSeriesInstancesById({ id: serie.id ?? "" })
-                    .toPromise();
+                  instances =
+                    (
+                      await api
+                        .getSeriesInstancesById({ id: serie.id ?? "" })
+                        .toPromise()
+                    )?.sort(
+                      (a, b) =>
+                        parseInt(a.instance?.instanceNumber ?? "0") -
+                        parseInt(b.instance?.instanceNumber ?? "0")
+                    ) ?? [];
                 } catch (e) {
                   console.log(e);
                 } finally {

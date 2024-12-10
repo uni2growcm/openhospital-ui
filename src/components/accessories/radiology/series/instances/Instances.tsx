@@ -1,3 +1,5 @@
+import { Visibility } from "@mui/icons-material";
+import { IconButton, Tooltip } from "@mui/material";
 import Table from "components/accessories/table/Table";
 import { InstanceResponse } from "generated";
 import { useAppDispatch } from "libraries/hooks/redux";
@@ -62,7 +64,15 @@ export const Instances = ({ data }: IOwnProps) => {
         labelData={label}
         rowsPerPage={data.length}
         isCollapsabile={false}
-        renderCustomActions={(row) => <></>}
+        renderCustomActions={(row) => (
+          <div className="instances__actions">
+            <Tooltip title={t("radiology.instances.preview")}>
+              <IconButton>
+                <Visibility />
+              </IconButton>
+            </Tooltip>
+          </div>
+        )}
         hideHeader={true}
         hidePaginator={true}
       />
