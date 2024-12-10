@@ -14,6 +14,9 @@ export const radiologySlice = createSlice({
     getStudySeriesReset: (state) => {
       state.series = initial.series;
     },
+    getStudySeriesWithInstancesReset: (state) => {
+      state.seriesWithInstances = initial.seriesWithInstances;
+    },
     getSerieInstancesReset: (state) => {
       state.instances = initial.instances;
     },
@@ -49,6 +52,22 @@ export const radiologySlice = createSlice({
       .addCase(thunks.getStudySeries.rejected, (state, action) => {
         state.series = ApiResponse.error(action.payload);
       })
+      // Get Study Series With Instances
+      .addCase(thunks.getStudySeriesWithInstances.pending, (state) => {
+        state.seriesWithInstances = ApiResponse.loading();
+      })
+      .addCase(
+        thunks.getStudySeriesWithInstances.fulfilled,
+        (state, action) => {
+          state.seriesWithInstances.status = isEmpty(action.payload)
+            ? "SUCCESS_EMPTY"
+            : "SUCCESS";
+          state.seriesWithInstances.data = action.payload;
+        }
+      )
+      .addCase(thunks.getStudySeriesWithInstances.rejected, (state, action) => {
+        state.seriesWithInstances = ApiResponse.error(action.payload);
+      })
       // Get Serie Instances
       .addCase(thunks.getSerieInstances.pending, (state) => {
         state.instances = ApiResponse.loading();
@@ -79,4 +98,5 @@ export const {
   getStudySeriesReset,
   getSerieInstancesReset,
   getInstancePreviewReset,
+  getStudySeriesWithInstancesReset,
 } = radiologySlice.actions;

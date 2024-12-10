@@ -10,7 +10,10 @@ import moment from "moment";
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate, useParams } from "react-router";
-import { getStudySeries, getStudySeriesReset } from "state/radiology";
+import {
+  getStudySeriesWithInstances,
+  getStudySeriesWithInstancesReset,
+} from "state/radiology";
 import "./styles.scss";
 
 export const Series = () => {
@@ -23,7 +26,9 @@ export const Series = () => {
 
   const { state: study } = useLocation();
 
-  const seriesState = useAppSelector((state) => state.radiology.series);
+  const seriesState = useAppSelector(
+    (state) => state.radiology.seriesWithInstances
+  );
 
   const header = ["title", "lastUpdate", "instances"];
   const dateFields = ["lastUpdate"];
@@ -55,13 +60,13 @@ export const Series = () => {
 
   useEffect(() => {
     if (id) {
-      dispatch(getStudySeries(id));
+      dispatch(getStudySeriesWithInstances(id));
     }
   }, [dispatch, id]);
 
   useEffect(() => {
     return () => {
-      dispatch(getStudySeriesReset());
+      dispatch(getStudySeriesWithInstancesReset());
     };
   }, [dispatch]);
 
