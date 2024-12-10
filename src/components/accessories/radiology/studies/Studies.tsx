@@ -91,7 +91,7 @@ export const Studies = () => {
     return data.map((study) => {
       return {
         id: study.id ?? "",
-        title: study.study?.description ?? "",
+        title: study.study?.description ?? "--",
         date: study.study?.date
           ? moment(study.study.date, "YYYYMMDD")
               .locale(i18n.language)
