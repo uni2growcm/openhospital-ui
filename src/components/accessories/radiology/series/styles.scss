@@ -12,6 +12,11 @@
     text-transform: none;
   }
 
+  .series__actions {
+    display: flex;
+    justify-content: end;
+  }
+
   .header {
     margin-top: 16px;
   }

@@ -21,7 +21,8 @@
       "station": "Station Name",
       "status": "Status",
       "lastUpdate": "Last Update",
-      "backToStudies": "Back to studies"
+      "backToStudies": "Back to studies",
+      "viewMore": "View More"
     },
     "instances": {
       "date": "Creation Date",

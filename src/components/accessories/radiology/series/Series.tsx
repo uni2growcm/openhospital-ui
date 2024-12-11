@@ -1,5 +1,11 @@
-import { ChevronLeft } from "@mui/icons-material";
-import { Backdrop, Button, CircularProgress } from "@mui/material";
+import { ChevronLeft, Visibility } from "@mui/icons-material";
+import {
+  Backdrop,
+  Button,
+  CircularProgress,
+  IconButton,
+  Tooltip,
+} from "@mui/material";
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import Table from "components/accessories/table/Table";
 import { TFilterField } from "components/accessories/table/filter/types";
@@ -17,6 +23,7 @@ import {
   getStudySeriesWithInstances,
   getStudySeriesWithInstancesReset,
 } from "state/radiology";
+import { useViewMore } from "../hooks";
 import { Instances } from "./instances/Instances";
 import { Preview } from "./preview/Preview";
 import "./styles.scss";
@@ -131,6 +138,8 @@ export const Series = () => {
     }
   }, [previewState.status, setOpenPreview]);
 
+  const handleViewSeries = useViewMore("series");
+
   return (
     <div className="series">
       {(() => {
@@ -182,7 +191,15 @@ export const Series = () => {
                   columnsOrder={order}
                   rowsPerPage={5}
                   isCollapsabile={true}
-                  renderCustomActions={(row) => <></>}
+                  renderCustomActions={(row) => (
+                    <div className="series__actions">
+                      <Tooltip title={t("radiology.series.viewMore")}>
+                        <IconButton onClick={handleViewSeries(row)}>
+                          <Visibility />
+                        </IconButton>
+                      </Tooltip>
+                    </div>
+                  )}
                   filterColumns={filters}
                   rawData={(seriesState.data ?? []).map((series) => ({
                     id: series.id ?? "",
