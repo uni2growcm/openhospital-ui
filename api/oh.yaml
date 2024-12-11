@@ -3897,9 +3897,9 @@ paths:
         "200":
           description: OK
           content:
-            application/octet-stream:
+            application/json:
               schema:
-                type: string
+                $ref: "#/components/schemas/InstancePreviewDTO"
       security:
         - bearerAuth: []
   /pricelists/prices:
@@ -6321,13 +6321,13 @@ components:
           description: lock
           format: int32
           example: 0
-        pharmacy:
-          type: boolean
-        male:
+        opd:
           type: boolean
         female:
           type: boolean
-        opd:
+        male:
+          type: boolean
+        pharmacy:
           type: boolean
     PatientDTO:
       required:
@@ -8425,6 +8425,12 @@ components:
             type: string
         stable:
           type: boolean
+    InstancePreviewDTO:
+      type: object
+      properties:
+        data:
+          type: string
+          description: Base64 representation of the instance preview
     PriceDTO:
       required:
         - description

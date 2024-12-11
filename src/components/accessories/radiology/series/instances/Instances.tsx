@@ -2,26 +2,18 @@ import { Visibility } from "@mui/icons-material";
 import { IconButton, Tooltip } from "@mui/material";
 import Table from "components/accessories/table/Table";
 import { InstanceResponse } from "generated";
-import { useAppDispatch } from "libraries/hooks/redux";
 import moment from "moment";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate, useParams } from "react-router";
 import "./styles.scss";
 
 interface IOwnProps {
   data: InstanceResponse[];
+  onPreview: (row: any) => () => void;
 }
 
-export const Instances = ({ data }: IOwnProps) => {
+export const Instances = ({ data, onPreview }: IOwnProps) => {
   const { t, i18n } = useTranslation();
-  const dispatch = useAppDispatch();
-
-  const navigate = useNavigate();
-
-  const { id } = useParams();
-
-  const { state: study } = useLocation();
 
   const header = ["title", "date", "time"];
 
@@ -67,7 +59,7 @@ export const Instances = ({ data }: IOwnProps) => {
         renderCustomActions={(row) => (
           <div className="instances__actions">
             <Tooltip title={t("radiology.instances.preview")}>
-              <IconButton>
+              <IconButton onClick={onPreview(row)}>
                 <Visibility />
               </IconButton>
             </Tooltip>

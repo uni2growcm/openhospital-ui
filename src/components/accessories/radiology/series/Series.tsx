@@ -1,20 +1,24 @@
 import { ChevronLeft } from "@mui/icons-material";
-import { Button, CircularProgress } from "@mui/material";
+import { Backdrop, Button, CircularProgress } from "@mui/material";
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import Table from "components/accessories/table/Table";
 import { TFilterField } from "components/accessories/table/filter/types";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import { isEmpty } from "lodash";
 import moment from "moment";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate, useParams } from "react-router";
 import {
   SeriesWithInstances,
+  getInstancePreview,
+  getInstancePreviewReset,
+  getStudySeriesReset,
   getStudySeriesWithInstances,
   getStudySeriesWithInstancesReset,
 } from "state/radiology";
 import { Instances } from "./instances/Instances";
+import { Preview } from "./preview/Preview";
 import "./styles.scss";
 
 export const Series = () => {
@@ -27,9 +31,13 @@ export const Series = () => {
 
   const { state: study } = useLocation();
 
+  const [openPreview, setOpenPreview] = useState(false);
+
   const seriesState = useAppSelector(
     (state) => state.radiology.seriesWithInstances
   );
+
+  const previewState = useAppSelector((state) => state.radiology.preview);
 
   const header = ["title", "lastUpdate", "instances"];
   const dateFields = ["lastUpdate"];
@@ -96,6 +104,33 @@ export const Series = () => {
     navigate("..");
   }, [navigate]);
 
+  useEffect(() => {
+    return () => {
+      getStudySeriesReset();
+      if (previewState.status !== "IDLE") {
+        getInstancePreviewReset();
+      }
+    };
+  }, [dispatch]);
+
+  const handlePreview = useCallback(
+    (row: any) => () => {
+      dispatch(getInstancePreview(row.id));
+    },
+    [dispatch]
+  );
+
+  const handleClosePreview = useCallback(() => {
+    setOpenPreview(false);
+    dispatch(getInstancePreviewReset());
+  }, [dispatch, setOpenPreview]);
+
+  useEffect(() => {
+    if (previewState.hasSucceeded) {
+      setOpenPreview(true);
+    }
+  }, [previewState.status, setOpenPreview]);
+
   return (
     <div className="series">
       {(() => {
@@ -131,6 +166,14 @@ export const Series = () => {
                     {study.title} {study.date && " | " + study.date}
                   </p>
                 )}
+                {previewState.hasFailed && (
+                  <InfoBox
+                    type="error"
+                    message={t(
+                      previewState.error?.message ?? "common.somethingwrong"
+                    )}
+                  />
+                )}
                 <Table
                   rowData={formatDataToDisplay(seriesState.data ?? [])}
                   dateFields={dateFields}
@@ -151,9 +194,23 @@ export const Series = () => {
                   manualFilter={false}
                   rowKey="id"
                   customRenderDetails={(row) => (
-                    <Instances data={row.instancesData} />
+                    <Instances
+                      onPreview={handlePreview}
+                      data={row.instancesData}
+                    />
                   )}
                 />
+
+                <Backdrop
+                  sx={{
+                    color: "#fff",
+                    zIndex: (theme) => theme.zIndex.drawer + 1,
+                  }}
+                  open={previewState.isLoading}
+                >
+                  <CircularProgress color="inherit" />
+                </Backdrop>
+                <Preview open={openPreview} onClose={handleClosePreview} />
               </>
             );
 
