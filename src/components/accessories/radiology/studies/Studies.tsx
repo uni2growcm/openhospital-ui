@@ -115,7 +115,7 @@ export const Studies = () => {
 
   const navigateToSeries = useCallback(
     (row: any) => () => {
-      navigate(`./${row.id}/series`);
+      navigate(`./${row.id}/series`, { state: row });
     },
     [navigate]
   );

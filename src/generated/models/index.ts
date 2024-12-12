@@ -18,6 +18,7 @@ export * from './FullBillDTO';
 export * from './GroupPermissionsDTO';
 export * from './HospitalDTO';
 export * from './Instance';
+export * from './InstancePreviewDTO';
 export * from './InstanceResponse';
 export * from './LabWithRowsDTO';
 export * from './LaboratoryDTO';

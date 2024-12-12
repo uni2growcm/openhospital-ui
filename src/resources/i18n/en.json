@@ -11,6 +11,24 @@
       "referrencingPhysician": "Referrencing Physician",
       "time": "Study Time",
       "lastUpdate": "Last Update"
+    },
+    "series": {
+      "title": "Title",
+      "instances": "Instances",
+      "expectedInstances": "Expected Instances",
+      "viewSeries": "View series",
+      "operators": "Operators Name",
+      "station": "Station Name",
+      "status": "Status",
+      "lastUpdate": "Last Update",
+      "backToStudies": "Back to studies",
+      "viewInOrthanc": "View in ORTHANC Explorer"
+    },
+    "instances": {
+      "date": "Creation Date",
+      "title": "Instance {number}",
+      "time": "Creation Time",
+      "preview": "Instance Preview"
     }
   },
   "errors": {

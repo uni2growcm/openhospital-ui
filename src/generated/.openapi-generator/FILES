@@ -65,6 +65,7 @@ models\FullBillDTO.ts
 models\GroupPermissionsDTO.ts
 models\HospitalDTO.ts
 models\Instance.ts
+models\InstancePreviewDTO.ts
 models\InstanceResponse.ts
 models\LabWithRowsDTO.ts
 models\LaboratoryDTO.ts

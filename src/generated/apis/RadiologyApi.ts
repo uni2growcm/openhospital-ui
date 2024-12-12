@@ -14,6 +14,7 @@
 import { Observable } from 'rxjs';
 import { BaseAPI, HttpHeaders, throwIfNullOrUndefined, encodeURI, OperationOpts, RawAjaxResponse } from '../runtime';
 import {
+    InstancePreviewDTO,
     InstanceResponse,
     SeriesResponse,
     StudyResponse,
@@ -42,16 +43,16 @@ export class RadiologyApi extends BaseAPI {
 
     /**
      */
-    getInstancePreview({ id }: GetInstancePreviewRequest): Observable<string>
-    getInstancePreview({ id }: GetInstancePreviewRequest, opts?: OperationOpts): Observable<RawAjaxResponse<string>>
-    getInstancePreview({ id }: GetInstancePreviewRequest, opts?: OperationOpts): Observable<string | RawAjaxResponse<string>> {
+    getInstancePreview({ id }: GetInstancePreviewRequest): Observable<InstancePreviewDTO>
+    getInstancePreview({ id }: GetInstancePreviewRequest, opts?: OperationOpts): Observable<RawAjaxResponse<InstancePreviewDTO>>
+    getInstancePreview({ id }: GetInstancePreviewRequest, opts?: OperationOpts): Observable<InstancePreviewDTO | RawAjaxResponse<InstancePreviewDTO>> {
         throwIfNullOrUndefined(id, 'id', 'getInstancePreview');
 
         const headers: HttpHeaders = {
             ...(this.configuration.username != null && this.configuration.password != null ? { Authorization: `Basic ${btoa(this.configuration.username + ':' + this.configuration.password)}` } : undefined),
         };
 
-        return this.request<string>({
+        return this.request<InstancePreviewDTO>({
             url: '/radiology/instances/{id}/preview'.replace('{id}', encodeURI(id)),
             method: 'GET',
             headers,
