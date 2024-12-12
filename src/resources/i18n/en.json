@@ -22,13 +22,13 @@
       "status": "Status",
       "lastUpdate": "Last Update",
       "backToStudies": "Back to studies",
-      "viewMore": "View More"
+      "viewInOrthanc": "View in ORTHANC Explorer"
     },
     "instances": {
       "date": "Creation Date",
       "title": "Instance {number}",
       "time": "Creation Time",
-      "preview": "Preview"
+      "preview": "Instance Preview"
     }
   },
   "errors": {

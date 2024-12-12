@@ -1,4 +1,4 @@
-import { ChevronLeft, Visibility } from "@mui/icons-material";
+import { ChevronLeft, OpenInNew } from "@mui/icons-material";
 import {
   Backdrop,
   Button,
@@ -23,7 +23,7 @@ import {
   getStudySeriesWithInstances,
   getStudySeriesWithInstancesReset,
 } from "state/radiology";
-import { useViewMore } from "../hooks";
+import { useViewInOrthanc } from "../hooks";
 import { Instances } from "./instances/Instances";
 import { Preview } from "./preview/Preview";
 import "./styles.scss";
@@ -138,7 +138,7 @@ export const Series = () => {
     }
   }, [previewState.status, setOpenPreview]);
 
-  const handleViewSeries = useViewMore("series");
+  const handleViewSeries = useViewInOrthanc("series");
 
   return (
     <div className="series">
@@ -171,7 +171,7 @@ export const Series = () => {
                   <ChevronLeft /> {t("radiology.series.backToStudies")}
                 </Button>
                 {study?.title && (
-                  <p className="series__StudyTitle">
+                  <p className="series__studyTitle">
                     {study.title} {study.date && " | " + study.date}
                   </p>
                 )}
@@ -193,9 +193,9 @@ export const Series = () => {
                   isCollapsabile={true}
                   renderCustomActions={(row) => (
                     <div className="series__actions">
-                      <Tooltip title={t("radiology.series.viewMore")}>
+                      <Tooltip title={t("radiology.series.viewInOrthanc")}>
                         <IconButton onClick={handleViewSeries(row)}>
-                          <Visibility />
+                          <OpenInNew />
                         </IconButton>
                       </Tooltip>
                     </div>

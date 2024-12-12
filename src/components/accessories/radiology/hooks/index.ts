@@ -1,1 +1,1 @@
-export * from "./useViewMore";
+export * from "./useViewInOrthanc";
