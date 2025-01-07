@@ -41,6 +41,7 @@ const TableBodyRow: FunctionComponent<IRowProps> = ({
             <IconButton
               aria-label="expand row"
               size="small"
+              data-cy={`expand-row-${rowIndex}`}
               onClick={() => setOpen(!open)}
             >
               {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
