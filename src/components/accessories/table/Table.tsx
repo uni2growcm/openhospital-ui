@@ -286,7 +286,6 @@ const Table: FunctionComponent<IProps> = ({
 
   const handleOpenConfirmation = useCallback(
     (row: any, action?: TActions) => () => {
-      
       setCurrentRow(row);
       setOpenConfirmation({ open: true, action });
     },

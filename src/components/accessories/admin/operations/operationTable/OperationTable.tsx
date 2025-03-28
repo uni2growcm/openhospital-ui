@@ -94,7 +94,6 @@ export const OperationTable: FunctionComponent<IOwnProps> = ({
   };
 
   const handleDelete = (row: OperationDTO) => {
-    console.log("supression des elements avec le code:", row.code);
     onDelete(row);
   };
 
@@ -106,7 +105,6 @@ export const OperationTable: FunctionComponent<IOwnProps> = ({
 
   const formatDataToDisplay = (data: OperationDTO[]) => {
     return data.map((item) => {
-      console.log("Code:", item.code); // Ajoute cette ligne
       return {
         code: item.code ?? "",
         type: item.type?.description ?? "",

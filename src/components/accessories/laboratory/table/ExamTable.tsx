@@ -146,7 +146,6 @@ export const ExamTable: FC<IExamTableProps> = ({
   };
 
   const onDelete = (row: any) => {
-  
     let labExam = data.find(
       (item) => item.laboratoryDTO?.code === row.id
     )?.laboratoryDTO;
