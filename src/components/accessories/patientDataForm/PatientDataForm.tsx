@@ -119,7 +119,7 @@ const PatientDataForm: FunctionComponent<TProps> = ({
     initialValues,
     validationSchema,
     enableReinitialize: true,
-    onSubmit: (values) => {
+    onSubmit: (values) => { 
       const formattedValues = formatAllFieldValues(fields, values);
       const { birthDate, age } = getBirthDateAndAge(
         ageType,
@@ -419,6 +419,22 @@ const PatientDataForm: FunctionComponent<TProps> = ({
               maxLength={50}
             />
           </div>
+
+  <div className="patientDataForm__item">
+    <TextField
+      field={formik.getFieldProps("profession")}
+      theme="regular"
+      label={t("patient.profession")}
+      isValid={isValid("profession")}
+      errorText={getErrorText("profession")}
+      onBlur={formik.handleBlur}
+      disabled={isLoading}
+      required={isFieldSuggested(formCustomization, "profession")
+        ? FIELD_VALIDATION.SUGGESTED
+        : FIELD_VALIDATION.IDLE}
+        maxLength={50}
+    />
+  </div>
 
           <div className="patientDataForm__item">
             <TextField

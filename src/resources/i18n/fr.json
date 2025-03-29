@@ -161,6 +161,7 @@
     "firstname": "Prénom",
     "hasinsurance": "Assuré",
     "mothername": "Nom de la mère",
+    "profession": "Proffession ",
     "note": "Remarques",
     "height": "Hauteur (cm)",
     "weight": "Poids (kg)",
