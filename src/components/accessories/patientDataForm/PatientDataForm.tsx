@@ -84,6 +84,8 @@ const PatientDataForm: FunctionComponent<TProps> = ({
         /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/,
         t("common.incorrectformat")
       ),
+      motherBirthDay: number().required(t("common.required")),
+      fatherBirthDay: number().required(t("common.required")),
     });
   }, [ageType, t]);
 
@@ -119,7 +121,7 @@ const PatientDataForm: FunctionComponent<TProps> = ({
     initialValues,
     validationSchema,
     enableReinitialize: true,
-    onSubmit: (values) => { 
+    onSubmit: (values) => {
       const formattedValues = formatAllFieldValues(fields, values);
       const { birthDate, age } = getBirthDateAndAge(
         ageType,
@@ -420,21 +422,40 @@ const PatientDataForm: FunctionComponent<TProps> = ({
             />
           </div>
 
-  <div className="patientDataForm__item">
-    <TextField
-      field={formik.getFieldProps("profession")}
-      theme="regular"
-      label={t("patient.profession")}
-      isValid={isValid("profession")}
-      errorText={getErrorText("profession")}
-      onBlur={formik.handleBlur}
-      disabled={isLoading}
-      required={isFieldSuggested(formCustomization, "profession")
-        ? FIELD_VALIDATION.SUGGESTED
-        : FIELD_VALIDATION.IDLE}
-        maxLength={50}
-    />
-  </div>
+          <div className="patientDataForm__item">
+            <TextField
+              field={formik.getFieldProps("profession")}
+              theme="regular"
+              label={t("patient.profession")}
+              isValid={isValid("profession")}
+              errorText={getErrorText("profession")}
+              onBlur={formik.handleBlur}
+              disabled={isLoading}
+              required={
+                isFieldSuggested(formCustomization, "profession")
+                  ? FIELD_VALIDATION.SUGGESTED
+                  : FIELD_VALIDATION.IDLE
+              }
+            />
+          </div>
+
+          <div className="patientDataForm__item">
+            <TextField
+              field={formik.getFieldProps("motherBirthDay")}
+              theme="regular"
+              label={t("patient.motherBirthDay")}
+              isValid={isValid("motherBirthDay")}
+              errorText={getErrorText("motherBirthDay")}
+              onBlur={formik.handleBlur}
+              disabled={isLoading}
+              type="number"
+              required={
+                isFieldSuggested(formCustomization, "motherBirthDay")
+                  ? FIELD_VALIDATION.SUGGESTED
+                  : FIELD_VALIDATION.REQUIRED
+              }
+            />
+          </div>
 
           <div className="patientDataForm__item">
             <TextField
@@ -451,6 +472,41 @@ const PatientDataForm: FunctionComponent<TProps> = ({
                   : FIELD_VALIDATION.IDLE
               }
               maxLength={50}
+            />
+          </div>
+
+          <div className="patientDataForm__item">
+            <TextField
+              field={formik.getFieldProps("occupation")}
+              theme="regular"
+              label={t("patient.occupation")}
+              isValid={isValid("occupation")}
+              errorText={getErrorText("occupation")}
+              onBlur={formik.handleBlur}
+              disabled={isLoading}
+              required={
+                isFieldSuggested(formCustomization, "occupation")
+                  ? FIELD_VALIDATION.SUGGESTED
+                  : FIELD_VALIDATION.IDLE
+              }
+            />
+          </div>
+
+          <div className="patientDataForm__item">
+            <TextField
+              field={formik.getFieldProps("fatherBirthDay")}
+              theme="regular"
+              label={t("patient.fatherBirthDay")}
+              isValid={isValid("fatherBirthDay")}
+              errorText={getErrorText("fatherBirthDay")}
+              onBlur={formik.handleBlur}
+              disabled={isLoading}
+              type="number"
+              required={
+                isFieldSuggested(formCustomization, "fatherBirthDay")
+                  ? FIELD_VALIDATION.SUGGESTED
+                  : FIELD_VALIDATION.REQUIRED
+              }
             />
           </div>
 
