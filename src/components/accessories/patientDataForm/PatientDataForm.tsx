@@ -452,7 +452,7 @@ const PatientDataForm: FunctionComponent<TProps> = ({
               required={
                 isFieldSuggested(formCustomization, "motherBirthDay")
                   ? FIELD_VALIDATION.SUGGESTED
-                  : FIELD_VALIDATION.REQUIRED
+                  : FIELD_VALIDATION.IDLE
               }
             />
           </div>
@@ -505,7 +505,7 @@ const PatientDataForm: FunctionComponent<TProps> = ({
               required={
                 isFieldSuggested(formCustomization, "fatherBirthDay")
                   ? FIELD_VALIDATION.SUGGESTED
-                  : FIELD_VALIDATION.REQUIRED
+                  : FIELD_VALIDATION.IDLE
               }
             />
           </div>
