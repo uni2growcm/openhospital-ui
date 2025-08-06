@@ -1,4 +1,19 @@
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import FileIcon from "@mui/icons-material/Label";
+import {
+  IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemSecondaryAction,
+  ListItemText,
+} from "@mui/material";
+import { CustomDialog } from "components/accessories/customDialog/CustomDialog";
+import ContentCutIcon from "components/accessories/icons/content-cut";
 import { useFormik } from "formik";
+import { renderDate } from "libraries/formatUtils/dataFormatting";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import { get, has } from "lodash";
 import React, {
@@ -50,6 +65,16 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
   const status = useAppSelector(
     (state) => state.admissions.updateAdmission.status
   );
+
+  const [medicalHistoryCreationMode, setMedicalHistoryCreationMode] =
+    useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [medicalHistoryRows, setMedicalHistoryRows] = useState([]);
+  const [opRowToEdit, setOpRowToEdit] = useState({});
+  const [indexToEdit, setIndexToEdit] = useState(-1);
+  const changeStatus = useAppSelector((state) => {
+    return state.operations.deleteOperationRow.status;
+  });
 
   const errorMessage = useAppSelector(
     (state) =>
@@ -164,6 +189,24 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
     [setFieldValue, handleBlur]
   );
 
+  const onOperationCreated = () => {
+    setShowModal(false);
+  };
+
+  const onAddOperation = () => {
+    setMedicalHistoryCreationMode(true);
+    setShowModal(true);
+  };
+
+  const handleUpdateOperationRow = (value: any, index: number) => () => {
+    setOpRowToEdit(value);
+    setIndexToEdit(index);
+    setMedicalHistoryCreationMode(false);
+    setShowModal(true);
+  };
+
+  const handleRemoveOperationRow = (value: any) => () => {};
+
   const isLoading = status === "LOADING";
 
   return (
@@ -235,6 +278,70 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
               disabled={isLoading}
             />
           </div>
+
+          <div className="row start-sm center-xs">
+            <div className="fullWidth currentAdmissionForm__buttonSet">
+              <div className="submit_button">
+                <Button
+                  type="button"
+                  onClick={() => onAddOperation()}
+                  disabled={false}
+                >
+                  {" "}
+                  <AddIcon fontSize="small" />
+                  {t("button.addmedicalhistory")}
+                </Button>
+              </div>
+            </div>
+            <div className="currentAdmissionForm__item fullWidth">
+              <details open>
+                <summary>
+                  <ContentCutIcon fontSize="small" className="operation_icon" />
+                  {t("patient.medicalhistories")}
+                </summary>
+                <List dense={true}>
+                  {medicalHistoryRows.map((value, index: number) => (
+                    <ListItem key={index}>
+                      <ListItemIcon>
+                        <FileIcon color="secondary" />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={value + " " + value}
+                        secondary={renderDate(value)}
+                      />
+                      <ListItemSecondaryAction>
+                        <IconButton
+                          onClick={handleRemoveOperationRow(value)}
+                          edge="end"
+                          aria-label="delete"
+                        >
+                          <DeleteIcon color="primary" />
+                        </IconButton>
+                        <IconButton
+                          onClick={handleUpdateOperationRow(value, index)}
+                          edge="end"
+                          aria-label="update"
+                        >
+                          <EditIcon color="secondary" />
+                        </IconButton>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  ))}
+                  {changeStatus === "FAIL" && (
+                    <div className="info-box-container">
+                      <InfoBox type="error" message={errorMessage} />
+                    </div>
+                  )}
+                  {medicalHistoryRows.length <= 0 && (
+                    <span className="empty_operation_rows">
+                      {t("patient.noitemaddedyet")}
+                    </span>
+                  )}
+                </List>
+              </details>
+            </div>
+          </div>
+
           <div className="fullWidth currentAdmissionForm__item">
             <TextField
               field={formik.getFieldProps("note")}
@@ -250,6 +357,7 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
             />
           </div>
         </div>
+
         <div className="currentAdmissionForm__buttonSet">
           <div className="submit_button">
             <Button type="submit" variant="contained" disabled={isLoading}>
@@ -281,6 +389,22 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
         primaryButtonLabel={t("common.ok")}
         handlePrimaryButtonClick={() => setActivityTransitionState("TO_RESET")}
         handleSecondaryButtonClick={() => {}}
+      />
+
+      <CustomDialog
+        title={
+          medicalHistoryCreationMode
+            ? t("patient.addmedicalhistory")
+            : t("opd.editmedicalhistory")
+        }
+        description={t("patient.addmedicalhistorydesc")}
+        open={showModal}
+        onClose={onOperationCreated}
+        content={
+          <>
+            <div></div>
+          </>
+        }
       />
     </>
   );

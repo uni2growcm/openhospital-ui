@@ -219,7 +219,12 @@
     "created": "Paziente creato",
     "updatesuccessful": "Il paziente è stato aggiornato correttamente.",
     "createother": "Aggiungere un altro paziente",
-    "status": "Stato"
+    "status": "Stato",
+    "addmedicalhistory": "Aggiungere un'anamnesi",
+    "editmedicalhistory": "Modificare un'anamnesi",
+    "addmedicalhistorydesc": "Aggiungere un'anamnesi per questo paziente",
+    "medicalhistories": "Anamnesi del paziente",
+    "noitemaddedyet": "Nessuna anamnesi, fare clic sul pulsante Aggiungi anamnesi per aggiungerne una."
   },
   "opd": {
     "newopd": "Inserisci una nuova visita ambulatoriale",
@@ -843,7 +848,8 @@
     "discard": "Annulla",
     "suspend": "Sospendi",
     "add": "Aggiungi",
-    "addoperation": "Aggiungi intervento"
+    "addoperation": "Aggiungi intervento",
+    "addmedicalhistory": "Aggiungere un'anamnesi"
   },
   "picture": {
     "edit": "Modifica immagine",

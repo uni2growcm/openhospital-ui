@@ -219,7 +219,12 @@
     "created": "Patient créé",
     "updatesuccessful": "Le patient a été modifié avec succès.",
     "createother": "Ajouter un autre patient",
-    "status": "État de santé"
+    "status": "État de santé",
+    "addmedicalhistory": "Ajouter un historique médicale",
+    "editmedicalhistory": "Modifier un historique médicale",
+    "addmedicalhistorydesc": "Ajouter un historique médicale ce patient",
+    "medicalhistories": "Historique médical du patient",
+    "noitemaddedyet": "Aucun historique médicale , cliquez sur le bouton Ajouter un historique médicale pour en ajouter un."
   },
   "opd": {
     "newopd": "Créer une nouvelle visite OPD",
@@ -843,7 +848,8 @@
     "discard": "Annuler",
     "suspend": "Suspendre",
     "add": "Ajouter",
-    "addoperation": "Ajouter une opération"
+    "addoperation": "Ajouter une opération",
+    "addmedicalhistory": "Ajouter un historique medical"
   },
   "picture": {
     "edit": "Modifier l'image",
