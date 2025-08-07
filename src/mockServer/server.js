@@ -28,6 +28,7 @@ import { permissionRoutes } from "./routes/permission";
 import { pregnantTreatmentTypeRoutes } from "./routes/pregnantTreatmentType";
 import { pricesRoutes } from "./routes/prices";
 import { radiologyRoutes } from "./routes/radiology";
+import { settingsRoutes } from "./routes/settings";
 import { suppliersRoutes } from "./routes/suppliers";
 import { therapyRoutes } from "./routes/therapies";
 import { userGroupRoutes } from "./routes/userGroups";
@@ -82,6 +83,7 @@ export function makeServer() {
     permissionRoutes(server);
     labExamRequestRoutes(server);
     radiologyRoutes(server);
+    settingsRoutes(server);
   });
   return server;
 }
