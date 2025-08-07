@@ -121,7 +121,7 @@ export const Studies = () => {
   );
 
   return (
-    <div className="studies">
+    <div className="studies" data-cy="studies">
       {(() => {
         switch (studiesState.status) {
           case "FAIL":
@@ -174,6 +174,7 @@ export const Studies = () => {
                     <Button
                       variant="contained"
                       color="secondary"
+                      data-cy={`view-${row.id}`}
                       onClick={navigateToSeries(row)}
                     >
                       <span>{t("radiology.studies.viewSeries")}</span>

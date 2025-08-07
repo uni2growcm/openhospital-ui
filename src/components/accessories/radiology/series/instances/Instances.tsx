@@ -59,7 +59,10 @@ export const Instances = ({ data, onPreview }: IOwnProps) => {
         renderCustomActions={(row) => (
           <div className="instances__actions">
             <Tooltip title={t("radiology.instances.preview")}>
-              <IconButton onClick={onPreview(row)}>
+              <IconButton
+                data-cy={`preview-${row.id}`}
+                onClick={onPreview(row)}
+              >
                 <Visibility />
               </IconButton>
             </Tooltip>

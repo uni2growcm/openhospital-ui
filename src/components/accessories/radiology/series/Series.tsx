@@ -141,7 +141,7 @@ export const Series = () => {
   const handleViewSeries = useViewInOrthanc("series");
 
   return (
-    <div className="series">
+    <div className="series" data-cy="series">
       {(() => {
         switch (seriesState.status) {
           case "FAIL":
