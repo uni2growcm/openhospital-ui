@@ -30,7 +30,9 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
   shouldResetForm,
   resetFormCallback,
   submitButtonLabel,
+  saveAndPrint,
   resetButtonLabel,
+  printButtonLabel,
   isLoading,
 }) => {
   const { t } = useTranslation();
@@ -65,6 +67,7 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
       .min(30, t("common.greaterthan", { value: 30 }))
       .max(600, t("common.lessthan", { value: 600 })),
     pex_diuresis: number()
+      .transform((value) => (value === "" ? null : value))
       .min(1, t("common.greaterthan", { value: 1 }))
       .max(2500, t("common.lessthan", { value: 2500 })),
     pex_rr: number()
@@ -106,6 +109,7 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
     enableReinitialize: true,
     onSubmit: (values) => {
       const formattedValues = formatAllFieldValues(fields, values);
+      console.log(formattedValues);
       onSubmit({
         ...formattedValues,
         pex_auscultation: isEmpty(formattedValues.pex_auscultation)
@@ -122,7 +126,6 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
   });
 
   const { setFieldValue, resetForm, handleBlur } = formik;
-
   const dateFieldHandleOnChange = useCallback(
     (fieldName: string) => (value: any) => {
       setFieldValue(fieldName, value);
@@ -175,6 +178,13 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
     }
   }, [shouldResetForm, resetForm, resetFormCallback]);
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setFieldValue("pex_date", new Date());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [setFieldValue]);
+
   return (
     <>
       <div className="patientTriageForm">
@@ -196,7 +206,7 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
                 fieldValue={formik.values.pex_date}
                 disableFuture={true}
                 theme="regular"
-                format="dd/MM/yyyy"
+                format="dd/MM/yyyy HH:mm"
                 isValid={isValid("pex_date")}
                 errorText={getErrorText("pex_date")}
                 label={t("examination.datetriage")}
@@ -395,6 +405,16 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
             <div className="submit_button">
               <Button type="submit" variant="contained" disabled={isLoading}>
                 {submitButtonLabel}
+              </Button>
+            </div>
+            <div className="submit_button">
+              <Button
+                type="submit"
+                variant="contained"
+                disabled={isLoading}
+                onClick={saveAndPrint}
+              >
+                {printButtonLabel}
               </Button>
             </div>
             <div className="reset_button">

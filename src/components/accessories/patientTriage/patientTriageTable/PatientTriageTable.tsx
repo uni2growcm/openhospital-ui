@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { FunctionComponent, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { PatientExaminationDTO } from "../../../../generated";
-import { renderDate } from "../../../../libraries/formatUtils/dataFormatting";
+import { renderDateTime } from "../../../../libraries/formatUtils/dataFormatting";
 import { usePermission } from "../../../../libraries/permissionUtils/usePermission";
 import { examinationsByPatientId } from "../../../../state/examinations";
 import InfoBox from "../../infoBox/InfoBox";
@@ -12,15 +12,18 @@ interface IOwnProps {
   shouldUpdateTable: boolean;
   handleDelete: (code: number | undefined) => void;
   handleEdit: (row: PatientExaminationDTO) => void;
+  handlePrint: (examinationCode: number) => void;
 }
 
 const PatientTriageTable: FunctionComponent<IOwnProps> = ({
   shouldUpdateTable,
   handleDelete,
   handleEdit,
+  handlePrint,
 }) => {
   const { t } = useTranslation();
   const canUpdate = usePermission("examinations.update");
+  const canPrint = usePermission("examinations.read");
   const label = {
     pex_ID: t("common.code"),
     pex_date: t("examination.datetriage"),
@@ -61,6 +64,7 @@ const PatientTriageTable: FunctionComponent<IOwnProps> = ({
     const pex = data.find((item) => item.pex_ID === row.pex_ID);
     handleEdit(pex!);
   };
+
   const formatDataToDisplay = (data: PatientExaminationDTO[]) => {
     return data.map((item) => {
       return {
@@ -84,7 +88,7 @@ const PatientTriageTable: FunctionComponent<IOwnProps> = ({
         pex_auscultation: item.pex_auscultation
           ? t("examination." + item.pex_auscultation)
           : "",
-        pex_date: item.pex_date ? renderDate(item.pex_date) : "",
+        pex_date: item.pex_date ? renderDateTime(item.pex_date) : "",
         date: item.pex_date,
         pex_note: item.pex_note,
       };
@@ -124,6 +128,7 @@ const PatientTriageTable: FunctionComponent<IOwnProps> = ({
                 columnsOrder={order}
                 rowsPerPage={5}
                 onEdit={canUpdate ? onEdit : undefined}
+                onPrint={canPrint ? handlePrint : undefined}
                 isCollapsabile={true}
                 showEmptyCell={false}
               />
