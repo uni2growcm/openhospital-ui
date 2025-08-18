@@ -279,67 +279,65 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
             />
           </div>
 
-          <div className="row start-sm center-xs">
-            <div className="fullWidth currentAdmissionForm__buttonSet">
-              <div className="submit_button">
-                <Button
-                  type="button"
-                  onClick={() => onAddOperation()}
-                  disabled={false}
-                >
-                  {" "}
-                  <AddIcon fontSize="small" />
-                  {t("button.addmedicalhistory")}
-                </Button>
-              </div>
+          <div className="currentAdmissionForm__item fullWidth">
+            <div className="submit_button">
+              <Button
+                type="button"
+                onClick={() => onAddOperation()}
+                disabled={false}
+              >
+                {" "}
+                <AddIcon fontSize="small" />
+                {t("button.addmedicalhistory")}
+              </Button>
             </div>
-            <div className="currentAdmissionForm__item fullWidth">
-              <details open>
-                <summary>
-                  <ContentCutIcon fontSize="small" className="operation_icon" />
-                  {t("patient.medicalhistories")}
-                </summary>
-                <List dense={true}>
-                  {medicalHistoryRows.map((value, index: number) => (
-                    <ListItem key={index}>
-                      <ListItemIcon>
-                        <FileIcon color="secondary" />
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={value + " " + value}
-                        secondary={renderDate(value)}
-                      />
-                      <ListItemSecondaryAction>
-                        <IconButton
-                          onClick={handleRemoveOperationRow(value)}
-                          edge="end"
-                          aria-label="delete"
-                        >
-                          <DeleteIcon color="primary" />
-                        </IconButton>
-                        <IconButton
-                          onClick={handleUpdateOperationRow(value, index)}
-                          edge="end"
-                          aria-label="update"
-                        >
-                          <EditIcon color="secondary" />
-                        </IconButton>
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                  ))}
-                  {changeStatus === "FAIL" && (
-                    <div className="info-box-container">
-                      <InfoBox type="error" message={errorMessage} />
-                    </div>
-                  )}
-                  {medicalHistoryRows.length <= 0 && (
-                    <span className="empty_operation_rows">
-                      {t("patient.noitemaddedyet")}
-                    </span>
-                  )}
-                </List>
-              </details>
-            </div>
+          </div>
+          <div className="currentAdmissionForm__item fullWidth">
+            <details open>
+              <summary>
+                <ContentCutIcon fontSize="small" className="operation_icon" />
+                {t("patient.medicalhistories")}
+              </summary>
+              <List dense={true} className="opd_operations">
+                {medicalHistoryRows.map((value, index: number) => (
+                  <ListItem key={index}>
+                    <ListItemIcon>
+                      <FileIcon color="secondary" />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={value + " " + value}
+                      secondary={renderDate(value)}
+                    />
+                    <ListItemSecondaryAction>
+                      <IconButton
+                        onClick={handleRemoveOperationRow(value)}
+                        edge="end"
+                        aria-label="delete"
+                      >
+                        <DeleteIcon color="primary" />
+                      </IconButton>
+                      <IconButton
+                        onClick={handleUpdateOperationRow(value, index)}
+                        edge="end"
+                        aria-label="update"
+                      >
+                        <EditIcon color="secondary" />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                ))}
+                {changeStatus === "FAIL" && (
+                  <div className="info-box-container">
+                    <InfoBox type="error" message={errorMessage} />
+                  </div>
+                )}
+                {medicalHistoryRows.length <= 0 && (
+                  <span className="empty_operation_rows">
+                    {t("patient.noitemaddedyet")}
+                  </span>
+                )}
+              </List>
+            </details>
           </div>
 
           <div className="fullWidth currentAdmissionForm__item">
