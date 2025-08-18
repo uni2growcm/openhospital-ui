@@ -416,8 +416,7 @@
     "users": "Utenti e Gruppi",
     "types": "Gestisci i Tipi",
     "hospitalInfo": "Informazioni dell'Ospedale",
-    "hospital": "Ospedale",
-    "admissionState": "Stato di ammissione"
+    "hospital": "Ospedale"
   },
   "operation": {
     "newoperation": "Nuovo intervento chirurgico",
