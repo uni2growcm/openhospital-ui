@@ -23,4 +23,5 @@ export type ConditioningFormFieldName =
   | "bolusSsVolume"
   | "sngNumero"
   | "others"
-  | "date";
+  | "date"
+  | "cpap";

@@ -7,6 +7,10 @@ export const initialFields: TFields<ConditioningFormFieldName> = {
     value: "",
     type: "boolean",
   },
+  cpap: {
+    value: "",
+    type: "boolean",
+  },
   mceDuree: {
     value: "",
     type: "number",

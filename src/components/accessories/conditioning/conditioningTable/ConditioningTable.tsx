@@ -42,8 +42,14 @@ const ConditioningTable: FunctionComponent<IOwnProps> = ({
 
   const dispatch = useAppDispatch();
 
-  const data = useAppSelector(
-    (state) => state.conditioning.getConditioningByPatientCode.data || []
+  const data = useAppSelector((state) =>
+    state.conditioning.getConditioningByPatientCode.data
+      ? state.conditioning.getConditioningByPatientCode.data.filter(
+          (e) =>
+            state.conditioning.getLastConditioningByPatientCode.data?.id !==
+            e.id
+        )
+      : []
   );
 
   const patientCode = useAppSelector(

@@ -5,4 +5,5 @@ export type IConditioningsState = {
   newConditioning: ApiResponse<ConditioningDTO>;
   updateConditioning: ApiResponse<ConditioningDTO>;
   getConditioningByPatientCode: ApiResponse<Array<ConditioningDTO>>;
+  getLastConditioningByPatientCode: ApiResponse<ConditioningDTO>;
 };

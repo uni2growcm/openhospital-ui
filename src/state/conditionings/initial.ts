@@ -5,4 +5,5 @@ export const initial: IConditioningsState = {
   newConditioning: new ApiResponse({ status: "IDLE" }),
   updateConditioning: new ApiResponse({ status: "IDLE" }),
   getConditioningByPatientCode: new ApiResponse({ status: "IDLE", data: [] }),
+  getLastConditioningByPatientCode: new ApiResponse({ status: "IDLE" }),
 };

@@ -22,6 +22,14 @@ export const updateConditioning = createAsyncThunk(
       .catch((error) => thunkApi.rejectWithValue(error.response))
 );
 
+export const getLastConditioningByPatientCode = createAsyncThunk(
+  "conditioning/GET_LAST_CONDITIONING_BY_PATIENT",
+  async (patientCode: number, thunkApi) =>
+    wrapper(() => api.getLastConditioningByPatientCode({ patientCode }))
+      .toPromise()
+      .catch((error) => thunkApi.rejectWithValue(error.response))
+);
+
 export const getConditioningByPatientCode = createAsyncThunk(
   "conditioning/GET_CONDITIONINGS_BY_PATIENT",
   async (patientCode: number, thunkApi) =>

@@ -23,6 +23,10 @@ export interface GetConditioningByPatientCodeRequest {
     patientCode: number;
 }
 
+export interface GetLastConditioningByPatientCodeRequest {
+    patientCode: number;
+}
+
 export interface NewConditioningRequest {
     conditioningDTO: ConditioningDTO;
 }
@@ -49,6 +53,23 @@ export class ConditioningsApi extends BaseAPI {
 
         return this.request<Array<ConditioningDTO>>({
             url: '/conditionings/{patientCode}'.replace('{patientCode}', encodeURI(patientCode)),
+            method: 'GET',
+            headers,
+        }, opts?.responseOpts);
+    };
+
+    /**
+     */
+    getLastConditioningByPatientCode({ patientCode }: GetLastConditioningByPatientCodeRequest): Observable<ConditioningDTO>
+    getLastConditioningByPatientCode({ patientCode }: GetLastConditioningByPatientCodeRequest, opts?: OperationOpts): Observable<AjaxResponse<ConditioningDTO>>
+    getLastConditioningByPatientCode({ patientCode }: GetLastConditioningByPatientCodeRequest, opts?: OperationOpts): Observable<ConditioningDTO | AjaxResponse<ConditioningDTO>> {
+        throwIfNullOrUndefined(patientCode, 'patientCode', 'getLastConditioningByPatientCode');
+
+        const headers: HttpHeaders = {
+        };
+
+        return this.request<ConditioningDTO>({
+            url: '/conditionings/current/{patientCode}'.replace('{patientCode}', encodeURI(patientCode)),
             method: 'GET',
             headers,
         }, opts?.responseOpts);

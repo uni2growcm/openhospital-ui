@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { isEmpty } from "lodash";
 import { ApiResponse } from "state/types";
 import { initial } from "./initial";
-import * as thunks from "./thunk";
+import * as thunk from "./thunk";
 
 export const conditioningSlice = createSlice({
   name: "conditionings",
@@ -17,51 +17,74 @@ export const conditioningSlice = createSlice({
     getConditioningsByPatientCodeReset: (state) => {
       state.getConditioningByPatientCode = initial.getConditioningByPatientCode;
     },
+    getLastConditioningByPatientCodeReset: (state) => {
+      state.getLastConditioningByPatientCode =
+        initial.getLastConditioningByPatientCode;
+    },
   },
   extraReducers: (builder) =>
     builder
 
-      .addCase(thunks.newConditioning.pending, (state) => {
+      //Create conditioning
+      .addCase(thunk.newConditioning.pending, (state) => {
         state.newConditioning = ApiResponse.loading();
       })
-      .addCase(thunks.newConditioning.fulfilled, (state, action) => {
+      .addCase(thunk.newConditioning.fulfilled, (state, action) => {
         state.newConditioning = ApiResponse.value(action.payload);
       })
-      .addCase(thunks.newConditioning.rejected, (state, action) => {
+      .addCase(thunk.newConditioning.rejected, (state, action) => {
         state.newConditioning = ApiResponse.error(action.payload);
       })
-      .addCase(thunks.updateConditioning.pending, (state) => {
+      // Update Conditioning
+      .addCase(thunk.updateConditioning.pending, (state) => {
         state.updateConditioning = ApiResponse.loading();
       })
-      .addCase(thunks.updateConditioning.fulfilled, (state, action) => {
+      .addCase(thunk.updateConditioning.fulfilled, (state, action) => {
         state.updateConditioning = ApiResponse.value(action.payload);
       })
-      .addCase(thunks.updateConditioning.rejected, (state, action) => {
+      .addCase(thunk.updateConditioning.rejected, (state, action) => {
         state.updateConditioning = ApiResponse.error(action.payload);
       })
-      .addCase(thunks.getConditioningByPatientCode.pending, (state) => {
+      //Get last conditioning by patient code
+      .addCase(thunk.getLastConditioningByPatientCode.pending, (state) => {
+        state.getLastConditioningByPatientCode = ApiResponse.loading();
+      })
+      .addCase(
+        thunk.getLastConditioningByPatientCode.fulfilled,
+        (state, action) => {
+          state.getLastConditioningByPatientCode = ApiResponse.value(
+            action.payload
+          );
+        }
+      )
+      .addCase(
+        thunk.getLastConditioningByPatientCode.rejected,
+        (state, action) => {
+          state.getLastConditioningByPatientCode = ApiResponse.error(
+            action.payload
+          );
+        }
+      )
+      //Get conditionings by patient code
+      .addCase(thunk.getConditioningByPatientCode.pending, (state) => {
         state.getConditioningByPatientCode = ApiResponse.loading();
       })
       .addCase(
-        thunks.getConditioningByPatientCode.fulfilled,
+        thunk.getConditioningByPatientCode.fulfilled,
         (state, action) => {
           state.getConditioningByPatientCode = isEmpty(action.payload)
             ? ApiResponse.empty()
             : ApiResponse.value(action.payload);
         }
       )
-      .addCase(
-        thunks.getConditioningByPatientCode.rejected,
-        (state, action) => {
-          state.getConditioningByPatientCode = ApiResponse.error(
-            action.payload
-          );
-        }
-      ),
+      .addCase(thunk.getConditioningByPatientCode.rejected, (state, action) => {
+        state.getConditioningByPatientCode = ApiResponse.error(action.payload);
+      }),
 });
 
 export const {
   newConditioningReset,
   updateConditioningReset,
   getConditioningsByPatientCodeReset,
+  getLastConditioningByPatientCodeReset,
 } = conditioningSlice.actions;
