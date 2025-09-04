@@ -1422,6 +1422,9 @@
     "cpap": "CPAP",
     "created": "Conditioning created",
     "createsuccess": "Conditioning created successfully",
-    "previousentries": "Previous conditionings"
+    "previousentries": "Previous conditionings",
+    "currentexists": "A conditioning record already exists for this patient.",
+    "updated": "Conditioning updated",
+    "updatesuccess": "Conditioning has been updated successfully."
   }
 }

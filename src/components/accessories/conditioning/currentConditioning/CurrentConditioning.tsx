@@ -58,13 +58,6 @@ export const CurrentConditioning: FunctionComponent<IOwnProps> = ({
           conditioning={currentConditioning}
         />
       )}
-      {/* {currentConditioning && editionMode && (
-        <CurrentConditioningForm
-          fields={initialFields(currentConditioning)}
-          onSubmit={onSubmit}
-          onDiscard={handleDiscard}
-        />
-      )} */}
     </div>
   );
 };

@@ -26,7 +26,7 @@ const ConditioningTable: FunctionComponent<IOwnProps> = ({
 
   const label = {
     id: t("conditioning.code"),
-    date: t("conditioning.date"),
+    date: t("conditioning.performedAt"),
     aspiration: t("conditioning.aspiration"),
     mceDuree: t("conditioning.mceDuree"),
     ventilationDuree: t("conditioning.ventilationDuree"),

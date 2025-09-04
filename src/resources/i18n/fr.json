@@ -1386,6 +1386,11 @@
     "performedAt": "Date",
     "others": "Autres",
     "cpap": "CPAP",
-    "previousentries": "Mises en condition précédentes"
+    "previousentries": "Mises en condition précédentes",
+    "currentexists": "Une mise en condition est déjà enregistrée pour ce patient.",
+    "created": "Mise en condition créée",
+    "updated": "Mise en condition mise à jour",
+    "createsuccess": "La mise en condition a été enregistrée avec succès.",
+    "updatesuccess": "La mise en condition a été mise à jour avec succès."
   }
 }
