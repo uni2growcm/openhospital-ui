@@ -15,16 +15,16 @@ export const useFields = (conditioning?: ConditioningDTO) => {
       value: conditioning?.cpap ? "true" : "false",
       type: "boolean",
     },
-    mceDuree: {
-      value: conditioning?.mceDuree?.toString() ?? "",
+    mce: {
+      value: conditioning?.mce?.toString() ?? "",
       type: "number",
     },
-    ventilationDuree: {
-      value: conditioning?.ventilationDuree?.toString() ?? "",
+    ventilation: {
+      value: conditioning?.ventilation?.toString() ?? "",
       type: "number",
     },
-    oxygeneDebit: {
-      value: conditioning?.oxygeneDebit?.toString() ?? "",
+    oxygenDebit: {
+      value: conditioning?.oxygenDebit?.toString() ?? "",
       type: "number",
     },
     sgVolume: {
@@ -39,16 +39,16 @@ export const useFields = (conditioning?: ConditioningDTO) => {
       value: conditioning?.bolusSsVolume?.toString() ?? "",
       type: "number",
     },
-    sngNumero: {
-      value: conditioning?.sngNumero ?? "",
+    sngNumber: {
+      value: conditioning?.sngNumber ?? "",
       type: "text",
     },
     others: {
       value: conditioning?.others ?? "",
       type: "text",
     },
-    date: {
-      value: parseDateTime(conditioning?.date.toString()!, false),
+    performedAt: {
+      value: parseDateTime(conditioning?.performedAt.toString()!, false),
       type: "date",
     },
   };

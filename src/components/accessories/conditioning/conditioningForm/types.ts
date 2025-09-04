@@ -15,13 +15,13 @@ export type ConditioningFormProps = IConditioningFormProps;
 
 export type ConditioningFormFieldName =
   | "aspiration"
-  | "mceDuree"
-  | "ventilationDuree"
-  | "oxygeneDebit"
+  | "mce"
+  | "ventilation"
+  | "oxygenDebit"
   | "sgVolume"
   | "diazepamDose"
   | "bolusSsVolume"
-  | "sngNumero"
+  | "sngNumber"
   | "others"
-  | "date"
+  | "performedAt"
   | "cpap";

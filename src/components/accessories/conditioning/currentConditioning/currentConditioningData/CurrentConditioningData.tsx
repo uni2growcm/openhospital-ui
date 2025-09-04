@@ -28,10 +28,12 @@ export const CurrentConditioningData: FunctionComponent<IOwnProps> = ({
         )}
       </div>
       <div className="currentConditioningData__content">
-        {!isEmpty(conditioning?.date) && (
+        {!isEmpty(conditioning?.performedAt) && (
           <div className="currentConditioningData__item">
             <span className="item_label">{t("conditioning.date")}</span>
-            <p className="item_content">{renderDateTime(conditioning?.date)}</p>
+            <p className="item_content">
+              {renderDateTime(conditioning?.performedAt)}
+            </p>
           </div>
         )}
 
@@ -44,26 +46,26 @@ export const CurrentConditioningData: FunctionComponent<IOwnProps> = ({
           </div>
         )}
 
-        {!isEmpty(conditioning?.mceDuree) && (
+        {!isEmpty(conditioning?.mce) && (
           <div className="currentConditioningData__item">
             <span className="item_label">{t("conditioning.mceDuree")}</span>
-            <p className="item_content">{conditioning.mceDuree}</p>
+            <p className="item_content">{conditioning.mce}</p>
           </div>
         )}
 
-        {!isEmpty(conditioning?.ventilationDuree) && (
+        {!isEmpty(conditioning?.ventilation) && (
           <div className="currentConditioningData__item">
             <span className="item_label">
               {t("conditioning.ventilationDuree")}
             </span>
-            <p className="item_content">{conditioning.ventilationDuree}</p>
+            <p className="item_content">{conditioning.ventilation}</p>
           </div>
         )}
 
-        {!isEmpty(conditioning?.oxygeneDebit) && (
+        {!isEmpty(conditioning?.oxygenDebit) && (
           <div className="currentConditioningData__item">
             <span className="item_label">{t("conditioning.oxygeneDebit")}</span>
-            <p className="item_content">{conditioning.oxygeneDebit}</p>
+            <p className="item_content">{conditioning.oxygenDebit}</p>
           </div>
         )}
 
@@ -90,10 +92,10 @@ export const CurrentConditioningData: FunctionComponent<IOwnProps> = ({
           </div>
         )}
 
-        {!isEmpty(conditioning?.sngNumero) && (
+        {!isEmpty(conditioning?.sngNumber) && (
           <div className="currentConditioningData__item">
             <span className="item_label">{t("conditioning.sngNumero")}</span>
-            <p className="item_content">{conditioning.sngNumero}</p>
+            <p className="item_content">{conditioning.sngNumber}</p>
           </div>
         )}
 

@@ -3,12 +3,10 @@ import { Encounters } from "components/accessories/encounters/Encounters";
 import MedicalHistory from "components/accessories/medicalhistory/MedicalHistory";
 import { Radiology, Series, Studies } from "components/accessories/radiology";
 import PermissionDenied from "components/activities/PermissionDenied/PermissionDenied";
-import { useAppDispatch, useEncountersEnabled } from "libraries/hooks";
 import { withPermission } from "libraries/permissionUtils/withPermission";
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router";
-import { getAllSettings } from "state/settings";
 import PatientAdmission from "../../components/accessories/admission/PatientAdmission";
 import PatientExams from "../../components/accessories/patientExams/PatientExams";
 import PatientOperation from "../../components/accessories/patientOperation/PatientOperation";
@@ -21,14 +19,10 @@ import DischargeDetailsContent from "../../components/activities/patientDetailsA
 import PatientDetailsContent from "../../components/activities/patientDetailsActivityContent/PatientDetailsActivityContent";
 import VisitDetailsContent from "../../components/activities/patientDetailsActivityContent/VisitDetailsActivityContent";
 
-export const PatientDetailsRoutes: FC = () => {
+export const PatientDetailsRoutes: FC<{
+  encountersEnabled?: boolean;
+}> = ({ encountersEnabled }) => {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
-  const encountersEnabled = useEncountersEnabled();
-
-  useEffect(() => {
-    dispatch(getAllSettings());
-  }, [dispatch]);
 
   const RadiologyRoutes = withPermission(
     "radiology.read",

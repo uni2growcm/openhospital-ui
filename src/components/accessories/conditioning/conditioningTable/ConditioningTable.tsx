@@ -70,15 +70,15 @@ const ConditioningTable: FunctionComponent<IOwnProps> = ({
     return data.map((item) => {
       return {
         id: item.id ?? "",
-        date: item.date ? renderDateTime(item.date) : "",
+        date: item.performedAt ? renderDateTime(item.performedAt) : "",
         aspiration: item.aspiration ? t("common.yes") : t("common.no"),
-        mceDuree: item.mceDuree ?? "",
-        ventilationDuree: item.ventilationDuree ?? "",
-        oxygeneDebit: item.oxygeneDebit ?? "",
+        mceDuree: item.mce ?? "",
+        ventilationDuree: item.ventilation ?? "",
+        oxygeneDebit: item.oxygenDebit ?? "",
         sgVolume: item.sgVolume ?? "",
         diazepamDose: item.diazepamDose ?? "",
         bolusSsVolume: item.bolusSsVolume ?? "",
-        sngNumero: item.sngNumero ?? "",
+        sngNumero: item.sngNumber ?? "",
         others: item.others ?? "",
       };
     });
