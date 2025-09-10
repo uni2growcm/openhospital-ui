@@ -43,7 +43,7 @@ export const encounterSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
-      // Create Encounter
+      
       .addCase(thunks.createEncounter.pending, (state) => {
         state.createEncounter = ApiResponse.loading();
       })
@@ -53,7 +53,7 @@ export const encounterSlice = createSlice({
       .addCase(thunks.createEncounter.rejected, (state, action) => {
         state.createEncounter = ApiResponse.error(action.payload);
       })
-      // Get current encounter
+      
       .addCase(thunks.getCurrentEncounterByPatient.pending, (state) => {
         state.getCurrentEncounterByPatient = ApiResponse.loading();
       })
@@ -73,7 +73,7 @@ export const encounterSlice = createSlice({
           );
         }
       )
-      //Update Encounter code
+      
       .addCase(thunks.updateEncounter.pending, (state) => {
         state.updateEncounterCode = ApiResponse.loading();
       })
@@ -83,7 +83,7 @@ export const encounterSlice = createSlice({
       .addCase(thunks.updateEncounter.rejected, (state, action) => {
         state.updateEncounterCode = ApiResponse.error(action.payload);
       })
-      // Get Encounters
+      
       .addCase(thunks.getEncountersByPatient.pending, (state) => {
         state.getEncountersByPatient = ApiResponse.loading();
       })
@@ -95,7 +95,7 @@ export const encounterSlice = createSlice({
       .addCase(thunks.getEncountersByPatient.rejected, (state, action) => {
         state.getEncountersByPatient = ApiResponse.error(action.payload);
       })
-      // Get Encounter Admissions
+      
       .addCase(thunks.getEncounterAdmissions.pending, (state) => {
         state.encounterAdmissions = ApiResponse.loading();
       })
@@ -107,7 +107,7 @@ export const encounterSlice = createSlice({
       .addCase(thunks.getEncounterAdmissions.rejected, (state, action) => {
         state.encounterAdmissions = ApiResponse.error(action.payload);
       })
-      // Get Encounter Laboratory Exams - AJOUTEZ CES LIGNES
+      
       .addCase(thunks.getEncounterLaboratoryExams.pending, (state) => {
         state.encounterLaboratoryExams = ApiResponse.loading();
       })
@@ -119,7 +119,7 @@ export const encounterSlice = createSlice({
       .addCase(thunks.getEncounterLaboratoryExams.rejected, (state, action) => {
         state.encounterLaboratoryExams = ApiResponse.error(action.payload);
       })
-      // Get Encounter Exam Requests - AJOUTEZ CES LIGNES
+      
       .addCase(thunks.getEncounterExamRequests.pending, (state) => {
         state.encounterExamRequests = ApiResponse.loading();
       })
