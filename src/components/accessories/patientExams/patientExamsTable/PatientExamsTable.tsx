@@ -76,6 +76,10 @@ const PatientExamsTable: FunctionComponent<IOwnProps> = ({
     ? encounterStatus === "LOADING"
     : labsStatus === "LOADING";
 
+    const isFail = code 
+    ? encounterStatus === "FAIL"
+    : labsStatus === "FAIL";
+
   const isSuccess = code 
     ? encounterStatus === "SUCCESS"
     : labsStatus === "SUCCESS";
@@ -84,11 +88,18 @@ const PatientExamsTable: FunctionComponent<IOwnProps> = ({
     ? encounterStatus === "SUCCESS_EMPTY"
     : labsStatus === "SUCCESS_EMPTY";
 
-  const errorMessage = useAppSelector((state) =>
-    code
-      ? state.encounters.encounterLaboratoryExams.error?.message
-      : state.laboratories.labsByPatientId.error?.message
-  ) || t("common.somethingwrong");
+    const errorMessage = useAppSelector(
+      (state) =>
+        state.encounters.encounterLaboratoryExams.error?.message ||
+        state.laboratories.labsByPatientId.error?.message ||
+        t("common.somethingwrong")
+    ) as string;
+
+  // const errorMessage = useAppSelector((state) =>
+  //   code
+  //     ? state.encounters.encounterLaboratoryExams.error?.message
+  //     : state.laboratories.labsByPatientId.error?.message
+  // ) || t("common.somethingwrong");
 
   useEffect(() => {
     console.log("useEffect triggered:", { shouldUpdateTable, patientCode, code });
@@ -153,9 +164,7 @@ const PatientExamsTable: FunctionComponent<IOwnProps> = ({
           labelData={label}
           columnsOrder={order}
           rowsPerPage={5}
-          onDelete={handleDelete}
           isCollapsabile={true}
-          onEdit={handleEdit}
         />
       )}
       
@@ -165,7 +174,7 @@ const PatientExamsTable: FunctionComponent<IOwnProps> = ({
         </div>
       )}
       
-      {!isLoading && errorMessage && (
+      {isFail && errorMessage && (
         <div ref={infoBoxRef}>
           <InfoBox type="error" message={errorMessage} />
         </div>

@@ -67,6 +67,12 @@ const PatientExamRequestsTable: FunctionComponent<IOwnProps> = ({
       : state.laboratories.labsRequestByPatientId.status === "LOADING"
   );
 
+  const isFail = useAppSelector((state) =>
+    code
+      ? state.encounters.encounterExamRequests.status === "FAIL"
+      : state.laboratories.labsRequestByPatientId.status === "FAIL"
+  );
+
   const isSuccess = useAppSelector((state) =>
     code
       ? state.encounters.encounterExamRequests.status === "SUCCESS"
@@ -79,11 +85,12 @@ const PatientExamRequestsTable: FunctionComponent<IOwnProps> = ({
       : state.laboratories.labsRequestByPatientId.status === "SUCCESS_EMPTY"
   );
 
-  const errorMessage = useAppSelector((state) =>
-    code
-      ? state.encounters.encounterExamRequests.error?.message
-      : state.laboratories.labsRequestByPatientId.error?.message
-  ) || t("common.somethingwrong");
+  const errorMessage = useAppSelector(
+    (state) =>
+      state.encounters.encounterExamRequests.error?.message ||
+      state.laboratories.labsRequestByPatientId.error?.message ||
+      t("common.somethingwrong")
+  ) as string;
 
   // CORRECTION : Changement de la condition du useEffect
   useEffect(() => {
@@ -210,7 +217,7 @@ const PatientExamRequestsTable: FunctionComponent<IOwnProps> = ({
         </div>
       )}
       
-      {!isLoading && errorMessage && (
+      {isFail && errorMessage && (
         <div ref={infoBoxRef}>
           <InfoBox type="error" message={errorMessage} />
         </div>
