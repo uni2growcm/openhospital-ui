@@ -42,7 +42,6 @@ const PatientExamsTable: FunctionComponent<IOwnProps> = ({
 
   const dispatch = useAppDispatch();
 
-  // SÉLECTEURS SÉPARÉS POUR DEBUG
   const encounterData = useAppSelector(
     (state) => state.encounters.encounterLaboratoryExams.data
   );
@@ -61,13 +60,22 @@ const PatientExamsTable: FunctionComponent<IOwnProps> = ({
     (state) => state.patients.selectedPatient.data?.code
   );
 
-  // ÉTATS SÉPARÉS POUR DEBUG
   const encounterStatus = useAppSelector(
     (state) => state.encounters.encounterLaboratoryExams.status
   );
   const labsStatus = useAppSelector(
     (state) => state.laboratories.labsByPatientId.status
   );
+
+  const printExamRequestStatus = useAppSelector(
+    (state) => state.laboratories.printExamRequest.status
+  );
+
+  const printExamRequestErrorMessage = useAppSelector(
+    (state) =>
+      state.laboratories.printExamRequest.error?.message ||
+      t("common.failedtodownloadthereport")
+  ) as string;
 
   console.log('encounterStatus:', encounterStatus);
   console.log('labsStatus:', labsStatus);
@@ -95,11 +103,6 @@ const PatientExamsTable: FunctionComponent<IOwnProps> = ({
         t("common.somethingwrong")
     ) as string;
 
-  // const errorMessage = useAppSelector((state) =>
-  //   code
-  //     ? state.encounters.encounterLaboratoryExams.error?.message
-  //     : state.laboratories.labsByPatientId.error?.message
-  // ) || t("common.somethingwrong");
 
   useEffect(() => {
     console.log("useEffect triggered:", { shouldUpdateTable, patientCode, code });

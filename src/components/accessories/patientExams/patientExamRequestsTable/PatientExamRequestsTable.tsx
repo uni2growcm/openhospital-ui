@@ -60,7 +60,7 @@ const PatientExamRequestsTable: FunctionComponent<IOwnProps> = ({
     (state) => state.patients.selectedPatient.data?.code
   );
 
-  // CORRECTION : Utiliser le bon état selon la présence du code
+
   const isLoading = useAppSelector((state) =>
     code
       ? state.encounters.encounterExamRequests.status === "LOADING"
@@ -92,7 +92,6 @@ const PatientExamRequestsTable: FunctionComponent<IOwnProps> = ({
       t("common.somethingwrong")
   ) as string;
 
-  // CORRECTION : Changement de la condition du useEffect
   useEffect(() => {
     console.log("ExamRequests useEffect triggered:", { shouldUpdateTable, patientCode, code });
     
