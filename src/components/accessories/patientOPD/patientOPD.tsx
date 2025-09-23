@@ -151,13 +151,14 @@ const PatientOPD: FunctionComponent = () => {
           creationMode={creationMode}
           onSubmit={onSubmit}
           submitButtonLabel={
-            creationMode ? t("opd.saveopd") : t("opd.updateopd")
+            creationMode ? t("opd.saveconsultancy") : t("opd.updateconsultancy")
           }
           resetButtonLabel={t("common.reset")}
           isLoading={changeStatus === "LOADING"}
           shouldResetForm={shouldResetForm}
           resetFormCallback={resetFormCallback}
           operationRowsToEdit={!creationMode ? opdToEdit.operationRows : []}
+          patientStatus={patient?.status?.toString()}
         />
         {changeStatus === "FAIL" && (
           <div ref={infoBoxRef}>
