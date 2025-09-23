@@ -63,7 +63,7 @@ const PatientExamsTable: FunctionComponent<IOwnProps> = ({
           : "",
         exam: item.laboratoryDTO?.exam?.description ?? "",
         result:
-          item.laboratoryDTO?.exam?.procedure === 1
+          (item.laboratoryDTO?.exam?.procedure === 1 || item.laboratoryDTO?.exam?.procedure === 3)
             ? item.laboratoryDTO?.result
             : item.laboratoryRowList?.join(", "),
         note:
