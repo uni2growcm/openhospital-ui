@@ -164,6 +164,8 @@ const AutocompleteField: FC<IProps> = ({
               variant="outlined"
               size="small"
               error={isValid}
+              multiline
+              minRows={1}
               inputProps={{ ...params.inputProps, maxLength }}
               fullWidth
             />
