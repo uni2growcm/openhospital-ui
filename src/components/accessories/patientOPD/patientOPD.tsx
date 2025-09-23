@@ -151,7 +151,7 @@ const PatientOPD: FunctionComponent = () => {
           creationMode={creationMode}
           onSubmit={onSubmit}
           submitButtonLabel={
-            creationMode ? t("opd.saveconsultancy") : t("opd.updateconsultancy")
+            creationMode ? t("opd.saveopd") : t("opd.updateopd")
           }
           resetButtonLabel={t("common.reset")}
           isLoading={changeStatus === "LOADING"}
