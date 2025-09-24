@@ -63,6 +63,11 @@
     }
   }
 
+  .patientExamRequestForm__item.exam-field {
+  flex: 1;
+  max-width: none;
+}
+
   .submit_button {
     margin-top: 8px;  
     .MuiButton-label {
