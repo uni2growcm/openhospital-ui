@@ -74,6 +74,7 @@ const PatientOPDForm: FunctionComponent<TProps> = ({
   shouldResetForm,
   resetFormCallback,
   operationRowsToEdit,
+  patientStatus,
 }) => {
   const { t } = useTranslation();
   const [operationCreationMode, setOperationCreationMode] = useState(true);
@@ -530,62 +531,64 @@ const PatientOPDForm: FunctionComponent<TProps> = ({
                   />
                 </div>
               </div>
-              <div className="row start-sm center-xs">
-                <div className="patientOpdForm__item fullWidth">
-                  <details open>
-                    <summary>
-                      <ContentCutIcon
-                        fontSize="small"
-                        className="operation_icon"
-                      />
-                      {t("opd.operations")}
-                    </summary>
-                    <List dense={true} className="opd_operations">
-                      {operationRows.map((value, index: number) => (
-                        <ListItem key={index}>
-                          <ListItemIcon>
-                            <FileIcon color="secondary" />
-                          </ListItemIcon>
-                          <ListItemText
-                            primary={
-                              value.operation?.code +
-                              " " +
-                              value.operation?.description
-                            }
-                            secondary={renderDate(value.opDate!)}
-                          />
-                          <ListItemSecondaryAction>
-                            <IconButton
-                              onClick={handleRemoveOperationRow(value)}
-                              edge="end"
-                              aria-label="delete"
-                            >
-                              <DeleteIcon color="primary" />
-                            </IconButton>
-                            <IconButton
-                              onClick={handleUpdateOperationRow(value, index)}
-                              edge="end"
-                              aria-label="update"
-                            >
-                              <EditIcon color="secondary" />
-                            </IconButton>
-                          </ListItemSecondaryAction>
-                        </ListItem>
-                      ))}
-                      {changeStatus === "FAIL" && (
-                        <div className="info-box-container">
-                          <InfoBox type="error" message={errorMessage} />
-                        </div>
-                      )}
-                      {operationRows.length <= 0 && (
-                        <span className="empty_operation_rows">
-                          {t("operation.noitemaddedyet")}
-                        </span>
-                      )}
-                    </List>
-                  </details>
+              {patientStatus === "O" && (
+                <div className="row start-sm center-xs">
+                  <div className="patientOpdForm__item fullWidth">
+                    <details open>
+                      <summary>
+                        <ContentCutIcon
+                          fontSize="small"
+                          className="operation_icon"
+                        />
+                        {t("opd.operations")}
+                      </summary>
+                      <List dense={true} className="opd_operations">
+                        {operationRows.map((value, index: number) => (
+                          <ListItem key={index}>
+                            <ListItemIcon>
+                              <FileIcon color="secondary" />
+                            </ListItemIcon>
+                            <ListItemText
+                              primary={
+                                value.operation?.code +
+                                " " +
+                                value.operation?.description
+                              }
+                              secondary={renderDate(value.opDate!)}
+                            />
+                            <ListItemSecondaryAction>
+                              <IconButton
+                                onClick={handleRemoveOperationRow(value)}
+                                edge="end"
+                                aria-label="delete"
+                              >
+                                <DeleteIcon color="primary" />
+                              </IconButton>
+                              <IconButton
+                                onClick={handleUpdateOperationRow(value, index)}
+                                edge="end"
+                                aria-label="update"
+                              >
+                                <EditIcon color="secondary" />
+                              </IconButton>
+                            </ListItemSecondaryAction>
+                          </ListItem>
+                        ))}
+                        {changeStatus === "FAIL" && (
+                          <div className="info-box-container">
+                            <InfoBox type="error" message={errorMessage} />
+                          </div>
+                        )}
+                        {operationRows.length <= 0 && (
+                          <span className="empty_operation_rows">
+                            {t("operation.noitemaddedyet")}
+                          </span>
+                        )}
+                      </List>
+                    </details>
+                  </div>
                 </div>
-              </div>
+              )}
               <div className="patientOpdForm__buttonSet">
                 <div className="visits_button">
                   <div className="submit_button">
@@ -608,17 +611,18 @@ const PatientOPDForm: FunctionComponent<TProps> = ({
                     </Button>
                   </div>
                 </div>
-                <div className="add_button">
-                  <Button
-                    type="button"
-                    onClick={() => onAddOperation()}
-                    disabled={false}
-                  >
-                    {" "}
-                    <AddIcon fontSize="small" />
-                    {t("button.addoperation")}
-                  </Button>
-                </div>
+                {patientStatus === "O" && (
+                  <div className="add_button">
+                    <Button
+                      type="button"
+                      onClick={onAddOperation}
+                      disabled={false}
+                    >
+                      <AddIcon fontSize="small" />
+                      {t("button.addoperation")}
+                    </Button>
+                  </div>
+                )}
               </div>
               <ConfirmationDialog
                 isOpen={openResetConfirmation}

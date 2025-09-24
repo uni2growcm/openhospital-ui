@@ -7,6 +7,7 @@ interface IOwnProps {
   resetFormCallback: () => void;
   addOperationCallback?: () => void;
   operationRowsToEdit?: OperationRowDTO[];
+  patientStatus: string | undefined;
 }
 export type TProps = IForm<TPatientOPDFormFieldName, any> & IOwnProps;
 

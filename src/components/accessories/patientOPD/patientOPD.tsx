@@ -158,6 +158,7 @@ const PatientOPD: FunctionComponent = () => {
           shouldResetForm={shouldResetForm}
           resetFormCallback={resetFormCallback}
           operationRowsToEdit={!creationMode ? opdToEdit.operationRows : []}
+          patientStatus={patient?.status?.toString()}
         />
         {changeStatus === "FAIL" && (
           <div ref={infoBoxRef}>
