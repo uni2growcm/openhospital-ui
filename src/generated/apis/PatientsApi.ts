@@ -55,6 +55,8 @@ export interface SearchPatientRequest {
     secondName?: string;
     birthDate?: string;
     address?: string;
+    city?: string;
+    age?: string;
 }
 
 export interface UpdatePatientRequest {
@@ -239,9 +241,9 @@ export class PatientsApi extends BaseAPI {
 
     /**
      */
-    searchPatient({ firstName, secondName, birthDate, address }: SearchPatientRequest): Observable<Array<PatientDTO>>
-    searchPatient({ firstName, secondName, birthDate, address }: SearchPatientRequest, opts?: OperationOpts): Observable<AjaxResponse<Array<PatientDTO>>>
-    searchPatient({ firstName, secondName, birthDate, address }: SearchPatientRequest, opts?: OperationOpts): Observable<Array<PatientDTO> | AjaxResponse<Array<PatientDTO>>> {
+    searchPatient({ firstName, secondName, birthDate, address, city, age }: SearchPatientRequest): Observable<Array<PatientDTO>>
+    searchPatient({ firstName, secondName, birthDate, address, city, age }: SearchPatientRequest, opts?: OperationOpts): Observable<AjaxResponse<Array<PatientDTO>>>
+    searchPatient({ firstName, secondName, birthDate, address, city, age }: SearchPatientRequest, opts?: OperationOpts): Observable<Array<PatientDTO> | AjaxResponse<Array<PatientDTO>>> {
 
         const headers: HttpHeaders = {
         };
@@ -250,8 +252,10 @@ export class PatientsApi extends BaseAPI {
 
         if (firstName != null) { query['firstName'] = firstName; }
         if (secondName != null) { query['secondName'] = secondName; }
-        if (birthDate != null) { query['birthDate'] = (birthDate as any).toISOString(); }
+        if (birthDate != null) { query['birthDate'] = (birthDate as any).toISOString().split('T')[0]; }
         if (address != null) { query['address'] = address; }
+        if (city != null) { query['city'] = city; }
+        if (age != null) { query['age'] = age; }
 
         return this.request<Array<PatientDTO>>({
             url: '/patients/search',

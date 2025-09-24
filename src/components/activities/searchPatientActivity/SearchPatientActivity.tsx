@@ -55,12 +55,14 @@ const SearchPatientActivity = () => {
     secondName: "",
     birthDate: "",
     address: "",
+    city: "",
+    age: "",
   };
 
   const validationSchema = object({
-    id: number().when(["firstName", "secondName", "birthDate", "address"], {
-      is: (firstName, secondName, birthDate, address) =>
-        !firstName && !secondName && !birthDate && !address,
+    id: number().when(["firstName", "secondName", "birthDate", "address", "city", "age"], {
+      is: (firstName, secondName, birthDate, address, city, age) =>
+        !firstName && !secondName && !birthDate && !address && !city && !age,
       then: number().required(),
     }),
   });
@@ -237,6 +239,30 @@ const SearchPatientActivity = () => {
                       label={t("patient.address")}
                       isValid={isValid("address")}
                       errorText={getErrorText("address")}
+                      onBlur={formik.handleBlur}
+                      disabled={isSearchById}
+                    />
+                  </div>
+                </div>
+                <div className="row center-xs">
+                  <div className="searchPatient__formItem">
+                    <TextField
+                      field={formik.getFieldProps("city")}
+                      theme="regular"
+                      label={t("patient.city")}
+                      isValid={isValid("city")}
+                      errorText={getErrorText("city")}
+                      onBlur={formik.handleBlur}
+                      disabled={isSearchById}
+                    />
+                  </div>
+                  <div className="searchPatient__formItem">
+                    <TextField
+                      field={formik.getFieldProps("age")}
+                      theme="regular"
+                      label={t("patient.age")}
+                      isValid={isValid("age")}
+                      errorText={getErrorText("age")}
                       onBlur={formik.handleBlur}
                       disabled={isSearchById}
                     />

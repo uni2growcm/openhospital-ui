@@ -22,4 +22,12 @@ export const initialFields: TFields<TFieldName> = {
     value: "",
     type: "text",
   },
+  city: {
+    value: "",
+    type: "text",
+  },
+  age: {
+    value: "",
+    type: "text",
+  },
 };
