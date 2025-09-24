@@ -422,3 +422,44 @@
     background-color: lighten($c-gray, 10);
   }
 }
+
+@media print {
+  .patientDetails__panel {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 20px !important;
+    margin: 0 !important;
+    flex-wrap: wrap !important;
+  }
+  .patientDetails__panel * {
+    font-size: 20px !important;
+    color: #000 !important;
+    box-sizing: border-box !important;
+    flex-wrap: wrap !important;
+    white-space: normal !important;
+  }
+  .patientDetails {
+      flex-wrap: nowrap !important;
+      margin-top: 12px !important; 
+  }
+  .patientDetails__personalData__item {
+    flex-wrap: wrap !important;
+    display: block !important;
+  }
+  .patientDetails__personalData {
+   display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    height: auto !important;
+    background: none !important;
+    color: #000 !important;
+    gap: 16px !important;
+  }
+  .patientDetails__personalData__item {
+    flex: 1 1 220px !important; 
+    min-width: 220px !important;
+    box-sizing: border-box !important;
+    margin-bottom: 12px !important;
+  }
+}
