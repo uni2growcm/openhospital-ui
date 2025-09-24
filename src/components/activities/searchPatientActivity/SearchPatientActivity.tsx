@@ -1,9 +1,12 @@
+import { Pagination } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useFormik } from "formik";
+import { usePatients } from "libraries/hooks/api/usePatients";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import { get, has } from "lodash";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router";
 import { searchPatient, searchPatientsReset } from "state/patients";
 import { number, object } from "yup";
 import SearchIcon from "../../../assets/SearchIcon";
@@ -16,8 +19,8 @@ import DateField from "../../accessories/dateField/DateField";
 import Footer from "../../accessories/footer/Footer";
 import InfoBox from "../../accessories/infoBox/InfoBox";
 import TextField from "../../accessories/textField/TextField";
-import { initialFields } from "./consts";
 import PatientSearchItem from "./PatientSearchItem";
+import { initialFields } from "./consts";
 import "./styles.scss";
 import { TValues } from "./types";
 import { useIsSearchById } from "./useIsSearchById";
@@ -25,6 +28,15 @@ import { useIsSearchById } from "./useIsSearchById";
 const SearchPatientActivity = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+
+  const { data, pageInfo, page, handlePageChange } = usePatients();
+  const [filter, setFilter] = useState({
+    values: formatAllFieldValues(initialFields, {} as TValues) as TValues,
+    page: 0,
+    size: 10,
+  });
+
+  const location = useLocation();
 
   const { userCredentials, patientSearchResults, searchStatus } =
     useAppSelector((state) => ({
@@ -70,9 +82,15 @@ const SearchPatientActivity = () => {
     validationSchema,
     onSubmit: (values: TValues) => {
       const formattedValues = formatAllFieldValues(initialFields, values);
-      // First scroll to show searching message
-      scrollToElement(resultsRef.current);
-      dispatch(searchPatient(formattedValues as TValues));
+      const searchParam = {
+        values: formattedValues as TValues,
+        page: 0,
+        size: 10,
+      };
+      // // First scroll to show searching message
+      // scrollToElement(resultsRef.current);
+      // dispatch(searchPatient(searchParam));
+      setFilter(searchParam);
     },
   });
 
@@ -93,9 +111,28 @@ const SearchPatientActivity = () => {
     }
   }, [searchStatus]);
 
+  useEffect(() => {
+    setFilter((previous) => ({ ...previous, page: page }));
+  }, [page]);
+
+  useEffect(() => {
+    dispatch(searchPatient({ ...filter }));
+  }, [dispatch, filter]);
+
+  useEffect(() => {
+    const refresh = (
+      location.state as { refresh: boolean | undefined } | undefined
+    )?.refresh;
+    if (refresh) {
+      dispatch(searchPatient({ ...filter }));
+    }
+  }, [dispatch, filter, location]);
+
   const isSearchById = useIsSearchById(formik);
 
   const RESULTS_DATA_CY = "search-patient-results";
+
+  const onPageChange = (e: any, page: number) => handlePageChange(e, page - 1);
 
   const renderSearchResults = (): JSX.Element | undefined => {
     switch (searchStatus) {
@@ -112,12 +149,20 @@ const SearchPatientActivity = () => {
           <div data-cy={RESULTS_DATA_CY} className="searchPatient__results">
             <div className="searchPatient__results_count">
               {t("common.results")}:{" "}
-              <strong>{patientSearchResults?.length}</strong>
+              <strong>
+                {patientSearchResults instanceof Array
+                  ? patientSearchResults.length
+                  : patientSearchResults?.data?.length}
+              </strong>
             </div>
             <div className="searchPatient__results_list">
-              {patientSearchResults?.map((patient, index) => (
-                <PatientSearchItem key={index} patient={patient} />
-              ))}
+              {patientSearchResults instanceof Array
+                ? patientSearchResults?.map((patient, index) => (
+                    <PatientSearchItem key={index} patient={patient} />
+                  ))
+                : patientSearchResults?.data?.map((patient, index) => (
+                    <PatientSearchItem key={index} patient={patient} />
+                  ))}
             </div>
           </div>
         );
@@ -244,7 +289,19 @@ const SearchPatientActivity = () => {
                 </div>
               </div>
             </form>
-            <div ref={resultsRef}>{renderSearchResults()}</div>
+            {(data.length > 0 ||
+              (patientSearchResults instanceof Array &&
+                patientSearchResults.length)) && (
+              <div ref={resultsRef}>
+                {renderSearchResults()}
+                <Pagination
+                  className="searchPatient_pagination"
+                  page={(pageInfo?.page ?? 0) + 1}
+                  count={pageInfo?.totalPages}
+                  onChange={onPageChange}
+                />
+              </div>
+            )}
           </Permission>
         </div>
       </div>
