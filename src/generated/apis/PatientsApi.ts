@@ -57,6 +57,8 @@ export interface SearchPatientRequest {
     address?: string;
     city?: string;
     age?: string;
+    page?: number;
+    size?: number;
 }
 
 export interface UpdatePatientRequest {
@@ -241,9 +243,9 @@ export class PatientsApi extends BaseAPI {
 
     /**
      */
-    searchPatient({ firstName, secondName, birthDate, address, city, age }: SearchPatientRequest): Observable<Array<PatientDTO>>
-    searchPatient({ firstName, secondName, birthDate, address, city, age }: SearchPatientRequest, opts?: OperationOpts): Observable<AjaxResponse<Array<PatientDTO>>>
-    searchPatient({ firstName, secondName, birthDate, address, city, age }: SearchPatientRequest, opts?: OperationOpts): Observable<Array<PatientDTO> | AjaxResponse<Array<PatientDTO>>> {
+    searchPatient({ firstName, secondName, birthDate, address, city, age, page, size }: SearchPatientRequest): Observable<PagePatientDTO>
+    searchPatient({ firstName, secondName, birthDate, address, city, age, page, size }: SearchPatientRequest, opts?: OperationOpts): Observable<AjaxResponse<PagePatientDTO>>
+    searchPatient({ firstName, secondName, birthDate, address, city, age, page, size }: SearchPatientRequest, opts?: OperationOpts): Observable<PagePatientDTO | AjaxResponse<PagePatientDTO>> {
 
         const headers: HttpHeaders = {
         };
@@ -256,8 +258,10 @@ export class PatientsApi extends BaseAPI {
         if (address != null) { query['address'] = address; }
         if (city != null) { query['city'] = city; }
         if (age != null) { query['age'] = age; }
+        if (page != null) { query['page'] = page; }
+        if (size != null) { query['size'] = size; }
 
-        return this.request<Array<PatientDTO>>({
+        return this.request<PagePatientDTO>({
             url: '/patients/search',
             method: 'GET',
             headers,
