@@ -72,11 +72,14 @@ const SearchPatientActivity = () => {
   };
 
   const validationSchema = object({
-    id: number().when(["firstName", "secondName", "birthDate", "address", "city", "age"], {
-      is: (firstName, secondName, birthDate, address, city, age) =>
-        !firstName && !secondName && !birthDate && !address && !city && !age,
-      then: number().required(),
-    }),
+    id: number().when(
+      ["firstName", "secondName", "birthDate", "address", "city", "age"],
+      {
+        is: (firstName, secondName, birthDate, address, city, age) =>
+          !firstName && !secondName && !birthDate && !address && !city && !age,
+        then: number().required(),
+      }
+    ),
   });
 
   const formik = useFormik({
@@ -315,19 +318,19 @@ const SearchPatientActivity = () => {
                 </div>
               </div>
             </form>
-            {(data.length > 0 ||
-              (patientSearchResults instanceof Array &&
-                patientSearchResults.length)) && (
-              <div ref={resultsRef}>
-                {renderSearchResults()}
+
+            <div ref={resultsRef}>
+              {renderSearchResults()}
+
+              {(pageInfo?.totalPages ?? 0) > 1 && (
                 <Pagination
                   className="searchPatient_pagination"
                   page={(pageInfo?.page ?? 0) + 1}
                   count={pageInfo?.totalPages}
                   onChange={onPageChange}
                 />
-              </div>
-            )}
+              )}
+            </div>
           </Permission>
         </div>
       </div>

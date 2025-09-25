@@ -14,6 +14,8 @@ export const useIsSearchById = (formik: any): boolean => {
         "secondName",
         "birthDate",
         "address",
+        "city",
+        "age",
       ];
       setIsSearchById(true);
       keys.forEach((key) => {
