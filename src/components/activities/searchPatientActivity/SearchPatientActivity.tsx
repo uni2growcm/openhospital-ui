@@ -121,7 +121,12 @@ const SearchPatientActivity = () => {
   }, [page]);
 
   useEffect(() => {
-    dispatch(searchPatient({ ...filter }));
+    const hasSearchCriteria = Object.values(filter.values).some(
+      (value) => value !== undefined && value !== null && value !== ""
+    );
+    if (hasSearchCriteria) {
+      dispatch(searchPatient({ ...filter }));
+    }
   }, [dispatch, filter]);
 
   useEffect(() => {
