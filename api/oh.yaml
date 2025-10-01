@@ -4336,8 +4336,20 @@ paths:
         required: false
         schema:
           type: string
-          format: date-time
+          format: date
       - name: address
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ""
+      - name: city
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ""
+      - name: age
         in: query
         required: false
         schema:
@@ -6520,13 +6532,13 @@ components:
           format: int32
           description: lock
           example: 0
-        female:
+        pharmacy:
           type: boolean
         male:
           type: boolean
-        opd:
+        female:
           type: boolean
-        pharmacy:
+        opd:
           type: boolean
       required:
       - beds
