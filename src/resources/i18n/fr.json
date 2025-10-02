@@ -1225,5 +1225,11 @@
     "updateSuccess": "Le type d'examen a été mis à jour avec succès !",
     "cancelCreation": "Êtes-vous sûr d'annuler la création du type d'examen?",
     "cancelUpdate": "Êtes-vous sûr d'annuler la mise à jour du type d'examen?"
+  },
+
+  "pharmacy": {
+    "wards": {
+      "ward-stock": "Stock pharmaceutique par service"
+    }
   }
 }

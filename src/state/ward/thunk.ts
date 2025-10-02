@@ -36,3 +36,11 @@ export const deleteWard = createAsyncThunk(
       .toPromise()
       .catch((error) => thunkApi.rejectWithValue(error.response))
 );
+
+export const getPharmacyWards = createAsyncThunk(
+  "wards/getPharmacyWards",
+  async (_, thunkApi) =>
+    wrapper(() => api.getPharmacyWards())
+      .toPromise()
+      .catch((error) => thunkApi.rejectWithValue(error.response))
+);

@@ -1,10 +1,12 @@
 import { useAppSelector } from "libraries/hooks/redux";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Outlet } from "react-router";
+import { Outlet, Route } from "react-router";
 import { PATHS } from "../../../consts";
 import AppHeader from "../../accessories/appHeader/AppHeader";
 import Footer from "../../accessories/footer/Footer";
+import { Home } from "./Home";
+import WardStock from "./WardStock/WardStock";
 import "./styles.scss";
 
 export function PharmacyActivity() {
@@ -33,3 +35,10 @@ export function PharmacyActivity() {
     </div>
   );
 }
+
+export const pharmacyRoutes = (
+  <>
+    <Route index element={<Home />} />
+    <Route path="ward-stock" element={<WardStock />} />
+  </>
+);

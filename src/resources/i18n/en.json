@@ -1232,6 +1232,9 @@
       "medicals": "Medical products",
       "pharmaceutical-stock": "Pharmaceutical stock",
       "ward-stock": "Ward stock"
+    },
+    "wards": {
+      "ward-stock": "Pharmaceutical ward stock"
     }
   }
 }

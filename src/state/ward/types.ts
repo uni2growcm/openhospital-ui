@@ -6,4 +6,5 @@ export type IWardState = {
   create: ApiResponse<WardDTO>;
   update: ApiResponse<WardDTO>;
   delete: ApiResponse<boolean>;
+  pharmacyWards: ApiResponse<Array<WardDTO>>;
 };

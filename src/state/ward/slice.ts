@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { isEmpty } from "lodash";
+import { ApiResponse } from "state/types";
 import { initial } from "./initial";
 import * as thunks from "./thunk";
-import { ApiResponse } from "state/types";
-import { isEmpty } from "lodash";
 
 export const wardSlice = createSlice({
   name: "wards",
@@ -26,7 +26,8 @@ export const wardSlice = createSlice({
       })
       .addCase(thunks.getWards.fulfilled, (state, action) => {
         state.allWards = isEmpty(action.payload)
-          ? ApiResponse.empty() : ApiResponse.value(action.payload);
+          ? ApiResponse.empty()
+          : ApiResponse.value(action.payload);
       })
       .addCase(thunks.getWards.rejected, (state, action) => {
         state.allWards = ApiResponse.error(action.payload);
@@ -36,7 +37,7 @@ export const wardSlice = createSlice({
         state.create = ApiResponse.loading();
       })
       .addCase(thunks.createWard.fulfilled, (state, action) => {
-        state.create= ApiResponse.value(action.payload);
+        state.create = ApiResponse.value(action.payload);
       })
       .addCase(thunks.createWard.rejected, (state, action) => {
         state.create = ApiResponse.error(action.payload);
@@ -46,7 +47,7 @@ export const wardSlice = createSlice({
         state.update = ApiResponse.loading();
       })
       .addCase(thunks.updateWard.fulfilled, (state, action) => {
-        state.update= ApiResponse.value(action.payload);
+        state.update = ApiResponse.value(action.payload);
       })
       .addCase(thunks.updateWard.rejected, (state, action) => {
         state.update = ApiResponse.error(action.payload);
@@ -60,6 +61,18 @@ export const wardSlice = createSlice({
       })
       .addCase(thunks.deleteWard.rejected, (state, action) => {
         state.delete = ApiResponse.error(action.payload);
+      })
+      // Get Pharmacy Wards
+      .addCase(thunks.getPharmacyWards.pending, (state) => {
+        state.pharmacyWards = ApiResponse.loading();
+      })
+      .addCase(thunks.getPharmacyWards.fulfilled, (state, action) => {
+        state.pharmacyWards = isEmpty(action.payload)
+          ? ApiResponse.empty()
+          : ApiResponse.value(action.payload);
+      })
+      .addCase(thunks.getPharmacyWards.rejected, (state, action) => {
+        state.pharmacyWards = ApiResponse.error(action.payload);
       }),
 });
 

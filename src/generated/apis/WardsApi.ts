@@ -118,6 +118,21 @@ export class WardsApi extends BaseAPI {
 
     /**
      */
+    getPharmacyWards(): Observable<Array<WardDTO>>
+    getPharmacyWards(opts?: OperationOpts): Observable<AjaxResponse<Array<WardDTO>>>
+    getPharmacyWards(opts?: OperationOpts): Observable<Array<WardDTO> | AjaxResponse<Array<WardDTO>>> {
+        const headers: HttpHeaders = {
+        };
+
+        return this.request<Array<WardDTO>>({
+            url: '/wards/pharmacy',
+            method: 'GET',
+            headers,
+        }, opts?.responseOpts);
+    };
+
+    /**
+     */
     getWards(): Observable<Array<WardDTO>>
     getWards(opts?: OperationOpts): Observable<AjaxResponse<Array<WardDTO>>>
     getWards(opts?: OperationOpts): Observable<Array<WardDTO> | AjaxResponse<Array<WardDTO>>> {
