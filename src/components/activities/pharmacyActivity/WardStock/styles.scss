@@ -4,67 +4,41 @@
 .wardStock {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 24px 48px;
-  width: 100%;
+  margin: 0px;
+  height: calc(100vh - 120px);
+
+  @include susy-media($smartphone) {
+    height: 100%;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    padding: 24px 48px;
+    width: 100%;
+    height: 100%;
+  }
 
   &__title {
     font-size: xx-large;
     font-weight: bold;
-    margin-bottom: 32px;
     text-align: center;
-    width: 100%;
+    margin-bottom: 32px;
   }
 
   &__list {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 16px;
-    margin-bottom: 32px;
     width: fit-content;
-
-    &::after {
-      content: "";
-      display: block;
-      width: 80%;
-      height: 2px;
-      background: #ccc;
-      margin: 32px auto 0 auto;
-    }
-  }
-
-  &__button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
     justify-content: center;
 
-    width: 200px;
-    height: 130px;
-    background: #f5f5f5;
-    border: none;
-    border-radius: 10px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
-
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-
-    &:hover {
-      transform: scale(1.05);
-      background: #ebebeb;
+    @include susy-media($smartphone) {
+      * {
+        width: 100%;
+      }
     }
-  }
-
-  &__icon {
-    font-size: 28px;
-    margin-bottom: 12px;
-  }
-
-  &__label {
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
-    text-align: center;
   }
 }

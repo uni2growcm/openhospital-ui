@@ -5,16 +5,15 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { getPharmacyWards } from "../../../../state/ward";
+import "./styles.scss";
 
 export default function WardStock() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const pharmacyWards = useAppSelector(
-    (state) => state.wards.pharmacyWards.data
-  );
-  const status = useAppSelector((state) => state.wards.pharmacyWards.status);
+  const pharmacyWards = useAppSelector((s) => s.wards.pharmacyWards.data);
+  const status = useAppSelector((s) => s.wards.pharmacyWards.status);
 
   useEffect(() => {
     dispatch(getPharmacyWards());
@@ -31,6 +30,7 @@ export default function WardStock() {
         {(pharmacyWards || []).map((ward) => (
           <LargeButton
             key={ward.code}
+            className="wardStock__button"
             handleClick={() => navigate(`/ward-stock/${ward.code}`)}
             data-cy={ward.code}
           >
