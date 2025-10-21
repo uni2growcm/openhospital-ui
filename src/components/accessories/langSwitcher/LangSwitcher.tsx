@@ -18,6 +18,7 @@ const fallbackLanguages: Record<string, string> = {
   cs: "čeština",
   sq: "Shqiptar",
   zh: "中国人",
+  ti: "ትግርኛ",
 };
 
 const LangSwitcher: FunctionComponent = () => {

@@ -11,6 +11,7 @@ import sw from "./i18n/sw.json";
 import sq from "./i18n/sq.json";
 import cs from "./i18n/cs.json";
 import am from "./i18n/am.json";
+import ti from "./i18n/ti.json";
 import custom_en from "../customization/i18n/custom_en.json";
 import custom_it from "../customization/i18n/custom_it.json";
 import custom_ar from "../customization/i18n/custom_ar.json";
@@ -23,6 +24,8 @@ import custom_sw from "../customization/i18n/custom_sw.json";
 import custom_sq from "../customization/i18n/custom_sq.json";
 import custom_cs from "../customization/i18n/custom_cs.json";
 import custom_am from "../customization/i18n/custom_am.json";
+import custom_ti from "../customization/i18n/custom_ti.json";
+
 
 const resources = {
   en: { translation: _.merge(en, custom_en) },
@@ -37,6 +40,7 @@ const resources = {
   sq: { translation: _.merge(sq, custom_sq) },
   cs: { translation: _.merge(cs, custom_cs) },
   am: { translation: _.merge(am, custom_am) },
+  ti: { translation: _.merge(ti, custom_ti) },
 };
 
 export default resources;
