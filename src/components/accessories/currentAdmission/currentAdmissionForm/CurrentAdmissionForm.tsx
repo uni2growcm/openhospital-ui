@@ -74,6 +74,13 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
     (state: IState) => state.types.admissions.getAll.status
   );
 
+  const [isAlertReceivedChecked, setIsIronSupplementChecked] = useState(false);
+
+  const [isReferenceSheetChecked, setIsFolicAcidSupplementChecked] =
+    useState(false);
+
+  const [isQualifiedAgentChecked, setIsVitASupplementChecked] = useState(false);
+
   const userName = useAppSelector(
     (state: IState) => state.main.authentication.data?.username
   );
@@ -117,6 +124,9 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
       formattedValues.ward = wards?.find(
         (item) => item.code === formattedValues.ward
       );
+      formattedValues.alertReceived = isAlertReceivedChecked ? true : false;
+      formattedValues.referenceSheet = isReferenceSheetChecked ? true : false;
+      formattedValues.qualifiedAgent = isQualifiedAgentChecked ? true : false;
       onSubmit({
         ...currentAdmission,
         ...formattedValues,
@@ -133,6 +143,22 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
       onDiscard();
     }
   }, [dispatch, activityTransitionState, patient, onDiscard]);
+
+  useEffect(() => {
+    setIsIronSupplementChecked(
+      formik.values.alertReceived === "true" ? true : false
+    );
+    setIsFolicAcidSupplementChecked(
+      formik.values.referenceSheet === "true" ? true : false
+    );
+    setIsVitASupplementChecked(
+      formik.values.qualifiedAgent === "true" ? true : false
+    );
+  }, [
+    formik.values.alertReceived,
+    formik.values.referenceSheet,
+    formik.values.qualifiedAgent,
+  ]);
 
   const { setFieldValue, handleBlur } = formik;
 
@@ -167,6 +193,18 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
       },
     [setFieldValue, handleBlur]
   );
+
+  const handleAlertReceivedChecked = () => {
+    setIsIronSupplementChecked(!isAlertReceivedChecked);
+  };
+
+  const handleReferenceSheetChecked = () => {
+    setIsFolicAcidSupplementChecked(!isReferenceSheetChecked);
+  };
+
+  const handleQualifiedAgentChecked = () => {
+    setIsVitASupplementChecked(!isQualifiedAgentChecked);
+  };
 
   const isLoading = status === "LOADING";
 
