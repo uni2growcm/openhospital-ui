@@ -17,6 +17,7 @@ import { useNavigate } from "react-router";
 import Arrow from "../../../assets/arrow-w.svg";
 import "./styles.scss";
 import { TUserSection } from "./types";
+import { Permission } from "libraries/permissionUtils/Permission";
 
 interface IOwnProps {
   userSection: TUserSection;
@@ -34,7 +35,7 @@ const OutPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
     [userSection]
   );
 
-  const canReadRadiology = usePermission("radiology.read");
+  const canReadRadiology = usePermission("radiology.access");
 
   const navigate = useNavigate();
 
@@ -53,6 +54,7 @@ const OutPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
       <h6>{t("patient.usersections")}</h6>
 
       {encountersEnabled && (
+        <Permission require="encounters.access">
         <div
           className={
             "patientDetails__main_menu__item " + isActive("encounters")
@@ -70,9 +72,11 @@ const OutPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
           <span>{t("nav.encounters")}:</span>
           <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
         </div>
+        </Permission>
       )}
 
       {encountersEnabled && (
+        <Permission require="conditioning.access">
         <div
           className={
             "patientDetails__main_menu__item " + isActive("conditioning")
@@ -83,9 +87,11 @@ const OutPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
           <span>{t("nav.conditioning")}:</span>
           <img src={Arrow} className="icon_toggle" alt="Accordion toggle" />
         </div>
+        </Permission>
       )}
 
       {encountersEnabled && (
+        <Permission require="medicalhistories.access">
         <div
           className={
             "align__element patientDetails__main_menu__item " +
@@ -99,8 +105,10 @@ const OutPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
           <span>{t("nav.medicalHistory")}:</span>
           <img src={Arrow} className="icon_toggle" alt="Accordion toggle" />
         </div>
+        </Permission>
       )}
 
+      <Permission require="admissions.access">
       <div
         className={"patientDetails__main_menu__item " + isActive("admissions")}
         onClick={() => {
@@ -116,8 +124,10 @@ const OutPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
         <span>{t("nav.admissions")}:</span>
         <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
       </div>
+      </Permission>
 
       {!encountersEnabled && (
+        <Permission require="visits.access">
         <div
           className={
             "align__element patientDetails__main_menu__item " +
@@ -131,8 +141,10 @@ const OutPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
           <span>{t("nav.visits")}:</span>
           <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
         </div>
+        </Permission>
       )}
 
+      <Permission require="triage.access">
       <div
         className={
           "align__element patientDetails__main_menu__item " + isActive("triage")
@@ -145,7 +157,9 @@ const OutPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
         <span>{t("nav.triage")}:</span>
         <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
       </div>
+      </Permission>
 
+      <Permission require="laboratories.access">
       <div
         className={
           "align__element patientDetails__main_menu__item " +
@@ -159,7 +173,9 @@ const OutPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
         <span>{t("nav.laboratory")}:</span>
         <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
       </div>
+      </Permission>
 
+      <Permission require="therapies.access">
       {false && (
         <div
           className={
@@ -175,6 +191,8 @@ const OutPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
           <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
         </div>
       )}
+      </Permission>
+      <Permission require="clinic.access">
       <div
         className={
           "align__element patientDetails__main_menu__item " + isActive("clinic")
@@ -187,6 +205,7 @@ const OutPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
         <span>{t("nav.userclinic")}</span>
         <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
       </div>
+      </Permission>
       {canReadRadiology && (
         <div
           className={

@@ -32,7 +32,7 @@ const InPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
 
   const navigate = useNavigate();
 
-  const canReadRadiology = usePermission("radiology.read");
+  const canReadRadiology = usePermission("radiology.access");
 
   const encountersEnabled = useEncountersEnabled();
 
@@ -56,140 +56,164 @@ const InPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
       <h6>{t("patient.usersections")}</h6>
 
       {encountersEnabled && (
+        <Permission require="encounters.access">
+          <div
+            className={
+              "patientDetails__main_menu__item " + isActive("encounters")
+            }
+            onClick={() => {
+              changeUserSection("encounters");
+            }}
+          >
+            <AcUnit
+              fontSize="small"
+              style={{
+                color: "white",
+              }}
+            />
+            <span>{t("nav.encounters")}:</span>
+            <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
+          </div>
+        </Permission>
+      )}
+
+      {encountersEnabled && (
+        <Permission require="conditioning.access">
+          <div
+            className={
+              "patientDetails__main_menu__item " + isActive("conditioning")
+            }
+            onClick={() => changeUserSection("conditioning")}
+          >
+            <FormatListBulletedIcon
+              fontSize="small"
+              style={{ color: "white" }}
+            />
+            <span>{t("nav.conditioning")}:</span>
+            <img src={Arrow} className="icon_toggle" alt="Accordion toggle" />
+          </div>
+        </Permission>
+      )}
+
+      <Permission require="admissions.access">
         <div
           className={
-            "patientDetails__main_menu__item " + isActive("encounters")
+            "align__element patientDetails__main_menu__item " +
+            isActive("admissions")
           }
           onClick={() => {
-            changeUserSection("encounters");
+            changeUserSection("admissions");
           }}
         >
-          <AcUnit
+          <LocalHotel
             fontSize="small"
             style={{
               color: "white",
             }}
           />
-          <span>{t("nav.encounters")}:</span>
+          <span>{t("nav.admissions")}:</span>
           <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
         </div>
-      )}
+      </Permission>
 
       {encountersEnabled && (
-        <div
-          className={
-            "patientDetails__main_menu__item " + isActive("conditioning")
-          }
-          onClick={() => changeUserSection("conditioning")}
-        >
-          <FormatListBulletedIcon fontSize="small" style={{ color: "white" }} />
-          <span>{t("nav.conditioning")}:</span>
-          <img src={Arrow} className="icon_toggle" alt="Accordion toggle" />
-        </div>
-      )}
-
-      <div
-        className={"patientDetails__main_menu__item " + isActive("admissions")}
-        onClick={() => {
-          changeUserSection("admissions");
-        }}
-      >
-        <LocalHotel
-          fontSize="small"
-          style={{
-            color: "white",
-          }}
-        />
-        <span>{t("nav.admissions")}:</span>
-        <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
-      </div>
-
-      {encountersEnabled && (
-        <div
-          className={
-            "align__element patientDetails__main_menu__item " +
-            isActive("medical-history")
-          }
-          onClick={() => {
-            changeUserSection("medical-history");
-          }}
-        >
-          <HistoryEdu fontSize="small" style={{ color: "white" }} />
-          <span>{t("nav.medicalHistory")}:</span>
-          <img src={Arrow} className="icon_toggle" alt="Accordion toggle" />
-        </div>
+        <Permission require="medicalhistories.access">
+          <div
+            className={
+              "align__element patientDetails__main_menu__item " +
+              isActive("medical-history")
+            }
+            onClick={() => {
+              changeUserSection("medical-history");
+            }}
+          >
+            <HistoryEdu fontSize="small" style={{ color: "white" }} />
+            <span>{t("nav.medicalHistory")}:</span>
+            <img src={Arrow} className="icon_toggle" alt="Accordion toggle" />
+          </div>
+        </Permission>
       )}
 
       {!encountersEnabled && (
+        <Permission require="visits.access">
+          <div
+            className={
+              "align__element patientDetails__main_menu__item " +
+              isActive("visits")
+            }
+            onClick={() => {
+              changeUserSection("visits");
+            }}
+          >
+            <Pageview fontSize="small" style={{ color: "white" }} />
+            <span>{t("nav.consultancy")}:</span>
+            <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
+          </div>
+        </Permission>
+      )}
+
+      <Permission require="triage.access">
         <div
           className={
             "align__element patientDetails__main_menu__item " +
-            isActive("visits")
+            isActive("triage")
           }
           onClick={() => {
-            changeUserSection("visits");
+            changeUserSection("triage");
           }}
         >
-          <Pageview fontSize="small" style={{ color: "white" }} />
-          <span>{t("nav.consultancy")}:</span>
+          <ArtTrack fontSize="small" style={{ color: "white" }} />
+          <span>{t("nav.triage")}:</span>
           <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
         </div>
-      )}
-
-      <div
-        className={
-          "align__element patientDetails__main_menu__item " + isActive("triage")
-        }
-        onClick={() => {
-          changeUserSection("triage");
-        }}
-      >
-        <ArtTrack fontSize="small" style={{ color: "white" }} />
-        <span>{t("nav.triage")}:</span>
-        <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
-      </div>
-      <div
-        className={
-          "align__element patientDetails__main_menu__item " +
-          isActive("laboratory")
-        }
-        onClick={() => {
-          changeUserSection("laboratory");
-        }}
-      >
-        <Colorize fontSize="small" style={{ color: "white" }} />
-        <span>{t("nav.laboratory")}:</span>
-        <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
-      </div>
-      {false && (
+      </Permission>
+      <Permission require="laboratories.access">
         <div
           className={
             "align__element patientDetails__main_menu__item " +
-            isActive("therapy")
+            isActive("laboratory")
           }
           onClick={() => {
-            changeUserSection("therapy");
+            changeUserSection("laboratory");
           }}
         >
-          <Healing fontSize="small" style={{ color: "white" }} />
-          <span>{t("nav.therapy")}:</span>
+          <Colorize fontSize="small" style={{ color: "white" }} />
+          <span>{t("nav.laboratory")}:</span>
           <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
         </div>
-      )}
-
-      <div
-        className={
-          "align__element patientDetails__main_menu__item " +
-          isActive("operation")
-        }
-        onClick={() => {
-          changeUserSection("operation");
-        }}
-      >
-        <SettingsApplications fontSize="small" style={{ color: "white" }} />
-        <span>{t("nav.operation")}:</span>
-        <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
-      </div>
+      </Permission>
+      <Permission require="therapies.access">
+        {false && (
+          <div
+            className={
+              "align__element patientDetails__main_menu__item " +
+              isActive("therapy")
+            }
+            onClick={() => {
+              changeUserSection("therapy");
+            }}
+          >
+            <Healing fontSize="small" style={{ color: "white" }} />
+            <span>{t("nav.therapy")}:</span>
+            <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
+          </div>
+        )}
+      </Permission>
+      <Permission require="operation.access">
+        <div
+          className={
+            "align__element patientDetails__main_menu__item " +
+            isActive("operation")
+          }
+          onClick={() => {
+            changeUserSection("operation");
+          }}
+        >
+          <SettingsApplications fontSize="small" style={{ color: "white" }} />
+          <span>{t("nav.operation")}:</span>
+          <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
+        </div>
+      </Permission>
       <Permission require="admissions.update">
         <div
           className={
@@ -205,18 +229,21 @@ const InPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
           <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
         </div>
       </Permission>
-      <div
-        className={
-          "align__element patientDetails__main_menu__item " + isActive("clinic")
-        }
-        onClick={() => {
-          changeUserSection("clinic");
-        }}
-      >
-        <LocalHospital fontSize="small" style={{ color: "white" }} />
-        <span>{t("nav.userclinic")}</span>
-        <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
-      </div>
+      <Permission require="clinic.access">
+        <div
+          className={
+            "align__element patientDetails__main_menu__item " +
+            isActive("clinic")
+          }
+          onClick={() => {
+            changeUserSection("clinic");
+          }}
+        >
+          <LocalHospital fontSize="small" style={{ color: "white" }} />
+          <span>{t("nav.userclinic")}</span>
+          <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
+        </div>
+      </Permission>
       {canReadRadiology && (
         <div
           className={
