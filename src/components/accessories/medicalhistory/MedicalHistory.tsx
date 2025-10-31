@@ -15,6 +15,7 @@ import {
 } from "state/medicalhistory";
 import { getPatient } from "state/patients/thunk";
 import checkIcon from "../../../assets/check-icon.png";
+import failIcon from "../../../assets/fail-icon.png";
 import { IState } from "../../../types";
 import ConfirmationDialog from "../confirmationDialog/ConfirmationDialog";
 import InfoBox from "../infoBox/InfoBox";
@@ -36,8 +37,8 @@ const MedicalHistory: FC = () => {
   >();
   const [shouldUpdateTable, setShouldUpdateTable] = useState(false);
   const infoBoxRef = useRef<HTMLDivElement>(null);
-  const canCreate = usePermission("medicalhistory.create");
-  const canUpdate = usePermission("medicalhistory.update");
+  const canCreate = usePermission("medicalhistories.create");
+  const canUpdate = usePermission("medicalhistories.update");
 
   const { id, code } = useParams();
 
@@ -71,6 +72,8 @@ const MedicalHistory: FC = () => {
 
   const fields = useFields(medicalHistoryToEdit);
 
+  const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
+
   const errorMessage = useAppSelector(
     (state) =>
       state.medicalhistory.createMedicalHistory.error?.message ||
@@ -80,6 +83,10 @@ const MedicalHistory: FC = () => {
 
   const onSubmit = (mh: MedicalHistoryDTO) => {
     setShouldResetForm(false);
+    if (!encounter) {
+      setOpenConfirmDialog(true);
+      return;
+    }
     if (creationMode) {
       mh.drugAllergy = mh.allergyPrecision ? true : false;
       mh.patient = patient!;
@@ -90,11 +97,27 @@ const MedicalHistory: FC = () => {
         patient: patient!,
         siblingRank: mh.siblingRank,
         termPregnancy: mh.termPregnancy,
+        pregnancy: mh.pregnancy,
         deliveryMode: mh.deliveryMode,
+        reasonMode: mh.reasonMode,
         apgarScore: mh.apgarScore,
         birthWeight: mh.birthWeight,
-        vaccinationState: mh.vaccinationState,
-        antiMalarialProphylaxis: mh.antiMalarialProphylaxis,
+        vaccinationStatePev: mh.vaccinationStatePev,
+        vaccinationStateNoPev: mh.vaccinationStateNoPev,
+        antiMalarialProphylaxisVap: mh.antiMalarialProphylaxisVap,
+        antiMalarialProphylaxisMilda: mh.antiMalarialProphylaxisMilda,
+        antiMalarialProphylaxisOthers: mh.antiMalarialProphylaxisOthers,
+        surgicalProcedure: mh.surgicalProcedure,
+        surgicalProcedureCondition: mh.surgicalProcedureCondition,
+        surgicalProcedureType: mh.surgicalProcedureType,
+        surgicalProcedureDate: mh.surgicalProcedureDate,
+        diversification: mh.diversification,
+        neonatalPeriod: mh.neonatalPeriod,
+        previousHospitalization: mh.previousHospitalization,
+        father: mh.father,
+        mother: mh.mother,
+        siblings: mh.siblings,
+        otherUsefulInformation: mh.otherUsefulInformation,
         diet: mh.diet,
         deParasitization: mh.deParasitization,
         psychomotorDev: mh.psychomotorDev,
@@ -169,7 +192,9 @@ const MedicalHistory: FC = () => {
     <div className="medicalHistory">
       {!encounter?.closedAt && (creationMode ? canCreate : canUpdate) && (
         <Permission
-          require={creationMode ? "therapies.create" : "therapies.update"}
+          require={
+            creationMode ? "medicalhistories.create" : "medicalhistories.update"
+          }
         >
           <MedicalHistoryForm
             fields={fields}
@@ -212,6 +237,15 @@ const MedicalHistory: FC = () => {
         }
         primaryButtonLabel="Ok"
         handlePrimaryButtonClick={() => setActivityTransitionState("TO_RESET")}
+        handleSecondaryButtonClick={() => ({})}
+      />
+      <ConfirmationDialog
+        isOpen={openConfirmDialog}
+        title={t("encounters.information")}
+        icon={failIcon}
+        info={t("encounters.informationmessage")}
+        primaryButtonLabel="Ok"
+        handlePrimaryButtonClick={() => setOpenConfirmDialog(false)}
         handleSecondaryButtonClick={() => ({})}
       />
     </div>

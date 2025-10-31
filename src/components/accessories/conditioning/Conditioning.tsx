@@ -12,6 +12,7 @@ import {
 } from "state/conditionings";
 import { IState } from "types";
 import checkIcon from "../../../assets/check-icon.png";
+import failIcon from "../../../assets/fail-icon.png";
 import { ConditioningDTO } from "../../../generated";
 import ConfirmationDialog from "../confirmationDialog/ConfirmationDialog";
 import InfoBox from "../infoBox/InfoBox";
@@ -54,6 +55,10 @@ const Conditioning: FC = () => {
     (state: IState) => state.patients.selectedPatient.data
   );
 
+  const usersList = useAppSelector(
+    (state: IState) => state.users.userList.data
+  );
+
   const errorMessage = useAppSelector(
     (state) =>
       state.conditioning.newConditioning.error?.message ||
@@ -69,15 +74,39 @@ const Conditioning: FC = () => {
 
   const fields = useFields(conditioningToEdit);
 
+  const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
+
   const onSubmit = (conditioning: ConditioningDTO) => {
     setShouldResetForm(false);
+    if (!encounter) {
+      setOpenConfirmDialog(true);
+      return;
+    }
     if (creationMode) {
       conditioning.patient = patient!;
+      if (
+        conditioning.performedBy &&
+        typeof (conditioning.performedBy as unknown) === "string"
+      ) {
+        const username = conditioning.performedBy as unknown as string;
+        const found = usersList?.find((u) => u.userName === username);
+        conditioning.performedBy =
+          (found as any) ?? ({ userName: username } as any);
+      }
       dispatch(newConditioning(conditioning));
     } else {
       conditioning.id = conditioningToEdit?.id!;
       conditioning.patient = patient!;
       conditioning.lock = conditioningToEdit?.lock!;
+      if (
+        conditioning.performedBy &&
+        typeof (conditioning.performedBy as unknown) === "string"
+      ) {
+        const username = conditioning.performedBy as unknown as string;
+        const found = usersList?.find((u) => u.userName === username);
+        conditioning.performedBy =
+          (found as any) ?? ({ userName: username } as any);
+      }
       dispatch(
         updateConditioning({ id: conditioningToEdit?.id!, body: conditioning })
       );
@@ -111,7 +140,7 @@ const Conditioning: FC = () => {
   return (
     <div className="Conditioning">
       {!encounter?.closedAt && (
-        <Permission require="conditioning.new">
+        <Permission require="conditionings.create">
           <ConditioningForm
             fields={fields}
             creationMode={creationMode}
@@ -151,6 +180,15 @@ const Conditioning: FC = () => {
         }
         primaryButtonLabel="Ok"
         handlePrimaryButtonClick={() => setActivityTransitionState("TO_RESET")}
+        handleSecondaryButtonClick={() => ({})}
+      />
+      <ConfirmationDialog
+        isOpen={openConfirmDialog}
+        title={t("encounters.information")}
+        icon={failIcon}
+        info={t("encounters.informationmessage")}
+        primaryButtonLabel="Ok"
+        handlePrimaryButtonClick={() => setOpenConfirmDialog(false)}
         handleSecondaryButtonClick={() => ({})}
       />
     </div>

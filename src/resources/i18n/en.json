@@ -308,7 +308,9 @@
     "radiology": "Radiology",
     "status_open": "Open",
     "status_closed": "Closed",
-    "encounterId": "Encounter ID"
+    "encounterId": "Encounter ID",
+    "information": "Information",
+    "informationmessage": "Please Create an encounter for this patient before continous."
   },
   "opd": {
     "newopd": "Create new OPD Visit",
@@ -718,33 +720,54 @@
       "pregnancyAndDelivery": "Pregnancy and Delivery",
       "siblingRank": "Sibling Rank",
       "pregnancyTerm": "Pregnancy Term",
+      "pregnancy": "Pregnancy",
       "deliveryMode": "Mode",
       "apgarScore": "APGAR",
       "birthWeight": "Birth Weight",
       "vaccinationStatus": "Vaccination Status",
+      "vaccinationStatePev": "Vaccination State (Pev)",
+      "vaccinationStateNoPev": "Vaccination State (No Pev)",
+      "antiMalarialProphylaxisVap": "Anti-malarial Prophylaxis (Vap)",
+      "antiMalarialProphylaxisMilda": "Anti-malarial Prophylaxis (Milda)",
+      "antiMalarialProphylaxisOthers": "Anti-malarial Prophylaxis (Others)",
       "malariaProphylaxis": "Anti-malaria Prophylaxis",
-      "diet": "Diet",
-      "deworming": "Deworming",
+      "diet": "Diet (AME)",
+      "diversification": "Diversification",
+      "deworming": "Deworming (yes, If the patient do it more than three months. Otherwise No)",
+      "deParasitization": "Deworming",
       "psychomotorDevelopment": "Psychomotor Development",
       "somaticGrowth": "Somatic Growth",
       "Supplement": "Supplementation ",
       "ironSupplement": "Iron ",
       "folicAcidSupplement": "Folic Acid ",
       "vitASupplement": "Vitamin A ",
-      "otherSupplements": "Other Supplementation"
+      "otherSupplements": "Other Supplementation",
+      "vaginaldelivery": "Vaginal delivery",
+      "cesarian": "Cesarian",
+      "reasonMode": "Cesarian reason"
     },
     "personalPathological": {
       "title": "Pathological History (Personal)",
-      "transfusion": "Transfusion",
+      "transfusion": "History of transfusion",
       "lastTransfusionDate": "Date of Last Transfusion",
       "sickleCell": "Sickle Cell Disease",
       "drugAllergy": "Drug Allergy ",
+      "neonatalPeriod": "Neonatal Period",
+      "previousHospitalization": "Previous Hospitalization",
+      "surgicalProcedure": "Surgical Procedure",
+      "surgicalProcedureCondition": "Pathology",
+      "surgicalProcedureType": "Surgical Procedure Type",
+      "surgicalProcedureDate": "Surgical Procedure Date",
       "allergyPrecision": "Allergy Precision",
       "hemolysis": "Hemolysis",
-      "otherPathologies": "Others"
+      "otherPathologies": "Other background information"
     },
     "familyPathological": {
       "title": "Pathological History (Family)",
+      "father": "Father",
+      "mother": "Mother",
+      "siblings": "Siblings",
+      "otherUsefulInformation": "Other Useful Information",
       "otherFamilyPathologies": "Other Family Pathologies"
     },
     "newmedicalHistory": "New medical history",
@@ -772,7 +795,8 @@
     "accessarea": "Access area",
     "accesscontrollist": "Access control list",
     "toggle-check-all": "Toggle check all",
-    "all": "All"
+    "all": "All",
+    "accessform": "Access form"
   },
   "therapy": {
     "newtherapy": "New Therapy",
@@ -1451,10 +1475,10 @@
     "diazepamDose": "Diazepam (mg)",
     "bolusSsVolume": "Bolus SS (CC)",
     "sngNumber": "SNG Number",
-    "performedAt": "Date",
+    "performedAt": "MCE Date and time",
     "others": "Others",
     "cpap": "CPAP",
-    "tdr": "TDR",
+    "malaria": "Malaria",
     "code": "Code",
     "created": "Conditioning created",
     "createsuccess": "Conditioning created successfully",
@@ -1473,6 +1497,10 @@
       "coma": "Coma",
       "dehydration": "Dehydration",
       "hypoglycemia": "Hypoglycemia"
-    }
+    },
+    "bloodGlucoseLevel": "Blood glucose level",
+    "indeterminate": "Indeterminate",
+    "hivTest": "HIV Test",
+    "performedBy": "Performed by user"
   }
 }
