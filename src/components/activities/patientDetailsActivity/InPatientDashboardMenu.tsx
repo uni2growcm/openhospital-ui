@@ -95,7 +95,7 @@ const InPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
         </Permission>
       )}
 
-      <Permission require="admissions.access">
+      <Permission require="admission.access">
         <div
           className={
             "align__element patientDetails__main_menu__item " +

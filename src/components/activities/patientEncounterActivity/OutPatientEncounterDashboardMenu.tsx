@@ -55,7 +55,7 @@ const OutPatientEncounterDashboardMenu: FunctionComponent<IOwnProps> = ({
     >
       <h6>{t("patient.usersections")}</h6>
 
-      <Permission require="admissions.access">
+      <Permission require="admission.access">
         <div
           className={
             "patientEncounter__main_menu__item " + isActive("admissions")

@@ -108,7 +108,7 @@ const OutPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
         </Permission>
       )}
 
-      <Permission require="admissions.access">
+      <Permission require="admission.access">
       <div
         className={"patientDetails__main_menu__item " + isActive("admissions")}
         onClick={() => {

@@ -249,7 +249,7 @@ export type TPermission =
   | "conditioning.access"
   | "medicalhistories.access"
   | "operation.access"
-  | "admissions.access"
+  | "admission.access"
   | "radiology.read"
   | "encounters.create"
   | "encounters.update"
