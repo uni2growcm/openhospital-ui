@@ -82,6 +82,7 @@ const Table: FunctionComponent<IProps> = ({
   headerActions,
   labels,
   adjustQuantity,
+  adjustQuantityHandler,
 }) => {
   const { t } = useTranslation();
   const [order, setOrder] = React.useState<TOrder>("desc");
@@ -496,6 +497,7 @@ const Table: FunctionComponent<IProps> = ({
                     dateFields={dateFields}
                     detailsExcludedFields={detailsExcludedFields}
                     adjustQuantity={adjustQuantity}
+                    adjustQuantityHandler={adjustQuantityHandler}
                   />
                 );
               })}
