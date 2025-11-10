@@ -46,7 +46,7 @@ export function DisChargeMovement() {
       ...breadcrumbMap,
       [t("pharmacy.labels.pharmaceutical-stock")]:
         PATHS.pharmacy_pharmaceuticalstock,
-      [t("pharmacy.labels.DisCharge-movement")]:
+      [t("pharmacy.labels.discharge-movement")]:
         PATHS.pharmacy_pharmaceuticalstock_discharge,
     });
   };
@@ -55,7 +55,7 @@ export function DisChargeMovement() {
     setBreadcrumbMap({
       ...breadcrumbMap,
       [t("pharmacy.labels.pharmaceutical-stock")]: undefined,
-      [t("pharmacy.labels.DisCharge-movement")]: undefined,
+      [t("pharmacy.labels.discharge-movement")]: undefined,
     });
   };
 
@@ -77,7 +77,7 @@ export function DisChargeMovement() {
     return () => {
       const newMap = { ...breadcrumbMap };
       delete newMap[t("pharmacy.labels.pharmaceutical-stock")];
-      delete newMap[t("pharmacy.labels.DisCharge-movement")];
+      delete newMap[t("pharmacy.labels.discharge-movement")];
       setBreadcrumbMap(newMap);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -90,7 +90,7 @@ export function DisChargeMovement() {
   return (
     <PharmacyActivityContent
       data-cy="DisCharge-movement"
-      title={t("pharmacy.labels.DisCharge-movement")}
+      title={t("pharmacy.labels.discharge-movement")}
     >
       <div className="DisCharge-movement">
         <DisChargeMovementForm
@@ -98,7 +98,7 @@ export function DisChargeMovement() {
           onCancel={() => {
             const newMap = { ...breadcrumbMap };
             delete newMap[t("pharmacy.labels.pharmaceutical-stock")];
-            delete newMap[t("pharmacy.labels.DisCharge-movement")];
+            delete newMap[t("pharmacy.labels.discharge-movement")];
             setBreadcrumbMap(newMap);
             navigate(PATHS.pharmacy_pharmaceuticalstock, { replace: true });
           }}
@@ -113,7 +113,7 @@ export function DisChargeMovement() {
         handlePrimaryButtonClick={() => {
           const newMap = { ...breadcrumbMap };
           delete newMap[t("pharmacy.labels.pharmaceutical-stock")];
-          delete newMap[t("pharmacy.labels.DisCharge-movement")];
+          delete newMap[t("pharmacy.labels.discharge-movement")];
           dispatch(resetDischargeMovements());
           setBreadcrumbMap(newMap);
           setActivityTransitionState("TO_RESET");

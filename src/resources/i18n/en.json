@@ -1233,7 +1233,7 @@
       "pharmaceutical-stock": "Pharmaceutical stock",
       "ward-stock": "Ward stock",
       "charge-movement": "Charge movement",
-      "DisCharge-movement": "DisCharge movement"
+      "discharge-movement": "Discharge movement"
     },
     "form": {
       "fields": {
