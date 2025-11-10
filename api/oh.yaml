@@ -2059,6 +2059,33 @@ paths:
                 $ref: "#/components/schemas/AdmissionDTO"
       security:
       - bearerAuth: []
+  /adjust/{id}:
+    put:
+      tags:
+      - Stock Movements
+      operationId: updateQuantity
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: quantity
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MovementDTO"
+      security:
+      - bearerAuth: []
   /visits:
     post:
       tags:
@@ -6466,13 +6493,13 @@ components:
           format: int32
           description: lock
           example: 0
-        female:
+        pharmacy:
           type: boolean
         male:
           type: boolean
-        opd:
+        female:
           type: boolean
-        pharmacy:
+        opd:
           type: boolean
       required:
       - beds
@@ -7206,11 +7233,11 @@ components:
           type: string
           description: "Flag record deleted, values are 'Y' OR 'N' "
           example: "N"
+        fhu:
+          type: string
         yprog:
           type: integer
           format: int32
-        fhu:
-          type: string
       required:
       - admDate
       - admitted
@@ -7678,8 +7705,6 @@ components:
           format: int32
           description: Lock
           example: 0
-      required:
-      - lots
     MalnutritionDTO:
       type: object
       properties:
@@ -8133,6 +8158,48 @@ components:
       - description
       - from
       - to
+    MovementDTO:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The movement code
+          example: 1
+        medical:
+          $ref: "#/components/schemas/MedicalDTO"
+          description: The related medical
+        type:
+          $ref: "#/components/schemas/MovementTypeDTO"
+          description: The movement type
+        ward:
+          $ref: "#/components/schemas/WardDTO"
+          description: The target ward
+        lot:
+          $ref: "#/components/schemas/LotDTO"
+          description: The lot
+        date:
+          type: string
+          description: The movement date
+          example: 2020-06-24
+        quantity:
+          type: integer
+          format: int32
+          description: The movement's medical quantity
+          example: 50
+        supplier:
+          $ref: "#/components/schemas/SupplierDTO"
+          description: The movement's supplier
+        refNo:
+          type: string
+          description: The movement reference
+          example: MVN152445
+      required:
+      - date
+      - medical
+      - quantity
+      - refNo
+      - type
     TherapyRowDTO:
       type: object
       properties:
@@ -8260,48 +8327,6 @@ components:
           description: "The sms flag: true if sms need to be sent to patient, false\
             \ otherwise"
           example: false
-    MovementDTO:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: The movement code
-          example: 1
-        medical:
-          $ref: "#/components/schemas/MedicalDTO"
-          description: The related medical
-        type:
-          $ref: "#/components/schemas/MovementTypeDTO"
-          description: The movement type
-        ward:
-          $ref: "#/components/schemas/WardDTO"
-          description: The target ward
-        lot:
-          $ref: "#/components/schemas/LotDTO"
-          description: The lot
-        date:
-          type: string
-          description: The movement date
-          example: 2020-06-24
-        quantity:
-          type: integer
-          format: int32
-          description: The movement's medical quantity
-          example: 50
-        supplier:
-          $ref: "#/components/schemas/SupplierDTO"
-          description: The movement's supplier
-        refNo:
-          type: string
-          description: The movement reference
-          example: MVN152445
-      required:
-      - date
-      - medical
-      - quantity
-      - refNo
-      - type
     SmsDTO:
       type: object
       properties:

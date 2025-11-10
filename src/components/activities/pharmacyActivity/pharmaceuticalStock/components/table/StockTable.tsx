@@ -1,6 +1,4 @@
 import { CircularProgress } from "@mui/material";
-import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
-import ConfirmationDialogAjust from "components/accessories/confirmationDialogAjust/ConfirmationDialogAjust";
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import Table from "components/accessories/table/Table";
 import { TFilterField } from "components/accessories/table/filter/types";
@@ -9,10 +7,15 @@ import { useTranslation } from "libraries/hooks";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useEffect, useMemo } from "react";
 import { useForm, useWatch } from "react-hook-form";
-import { getMovements } from "state/pharmacy";
+import {
+  getMovements,
+  resetUpdateQuantity,
+  updateQuantity,
+} from "state/pharmacy";
 import { AjustFormValues } from "./types";
 import { ajustSchema, getInitialValues } from "./consts";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
+import ConfirmationDialogAjust from "components/accessories/confirmationDialogAjust/ConfirmationDialogAjust";
 
 export function StockTable() {
   const { t } = useTranslation();
@@ -89,8 +92,13 @@ export function StockTable() {
     [t]
   );
 
+  const updateStatus = useAppSelector(
+    (state) => state.pharmacy.updateQuantity.status
+  );
+
   const formattedData = useMemo(() => {
     return data.map((item) => ({
+      code: item.code,
       refNo: item.refNo,
       lot: item.lot?.code,
       expDate: renderDateTime(item.lot?.dueDate),
@@ -125,26 +133,44 @@ export function StockTable() {
     },
   });
 
-  const ajustQuantityHandler = (row: any) => {
-    setSelectedRow(row);
-    setOpenAdjustConfirmation(true);
-  };
+  const onSubmit = handleSubmit((values: AjustFormValues) => {
+    console.log("onSubmit", values);
+    console.log("Selected row:", selectedRow);
 
-  // useEffect(() => {
-  //   if (formState.isValid) {
-  //     onSubmit(values as any as AjustFormValues);
-  //   }
-  // }, [values]);
+    const movementId = selectedRow?.code;
 
-  const onSubmit = (values: AjustFormValues) => {
-    console.log("onSubmit");
-    console.log(values);
+    if (!movementId) {
+      console.error("Invalid movement code:", selectedRow?.code);
+      return;
+    }
+
+    console.log(
+      "Sending to API - Code:",
+      movementId,
+      "Quantity:",
+      values.newQuantity
+    );
+
+    dispatch(
+      updateQuantity({
+        id: movementId,
+        quantity: values.newQuantity,
+      })
+    );
+
     setOpenAdjustConfirmation(false);
-  };
+  });
 
   useEffect(() => {
     dispatch(getMovements());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (updateStatus === "SUCCESS") {
+      dispatch(getMovements());
+      dispatch(resetUpdateQuantity());
+    }
+  }, [updateStatus, dispatch]);
 
   return (
     <div data-cy="pharmaceutical-stock-table">
@@ -196,12 +222,7 @@ export function StockTable() {
         control={control}
         primaryButtonLabel={t("common.confirm")}
         secondaryButtonLabel={t("common.cancel")}
-        handlePrimaryButtonClick={() => {
-          // Appelle ici la fonction réelle d’ajustement
-          console.log("Quantité ajustée pour :", selectedRow);
-          onSubmit(values as any as AjustFormValues);
-          setOpenAdjustConfirmation(false);
-        }}
+        handlePrimaryButtonClick={onSubmit}
         handleSecondaryButtonClick={() => setOpenAdjustConfirmation(false)}
         icon={""}
       />

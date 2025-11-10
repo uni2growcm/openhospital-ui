@@ -61,7 +61,7 @@ const ConfirmationDialogAjust: FunctionComponent<IAjustProps> = ({
                 <div className="reset_button">
                   <Button
                     dataCy="close-dialog"
-                    type="reset"
+                    type="button"
                     variant="text"
                     onClick={handleSecondaryButtonClick}
                   >
@@ -78,3 +78,4 @@ const ConfirmationDialogAjust: FunctionComponent<IAjustProps> = ({
 };
 
 export default ConfirmationDialogAjust;
+

@@ -21,12 +21,20 @@ export function TextFormField<T extends Record<string, any>>({
     (field: ControllerRenderProps<T, Path<T>>) =>
       (event: ChangeEvent<HTMLInputElement>) => {
         if (props.type === "number") {
-          const value = parseFloat(event.target.value ?? "");
-          field.onChange(isNaN(value) ? null : value);
-        } else field.onChange(event);
+          const value = event.target.value;
+          if (value === "") {
+            field.onChange("");
+          } else {
+            const numericValue = parseFloat(value);
+            field.onChange(isNaN(numericValue) ? "" : numericValue);
+          }
+        } else {
+          field.onChange(event);
+        }
       },
-    []
+    [props.type]
   );
+
   return (
     <Controller
       name={name}
@@ -34,7 +42,9 @@ export function TextFormField<T extends Record<string, any>>({
       render={({ field, fieldState }) => (
         <TextField
           {...props}
-          value={field.value}
+          value={
+            field.value === null || field.value === undefined ? "" : field.value
+          }
           onChange={handleChange(field)}
           id={props.id ?? field.name}
           aria-invalid={props.error ?? fieldState.invalid}

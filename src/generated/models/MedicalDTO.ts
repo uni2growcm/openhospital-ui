@@ -80,7 +80,7 @@ export interface MedicalDTO {
      * @type {Array<LotDTO>}
      * @memberof MedicalDTO
      */
-    lots: Array<LotDTO>;
+    lots?: Array<LotDTO>;
     /**
      * Lock
      * @type {number}
