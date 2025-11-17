@@ -29,7 +29,8 @@ const TableBodyRow: FunctionComponent<IRowProps> = ({
   expanded,
   dateFields,
   detailsExcludedFields,
-  adjustQuantity = false,
+  adjustQuantity,
+  adjustQuantityHandler,
 }) => {
   const [open, setOpen] = React.useState(false);
   const { t } = useTranslation();
@@ -137,7 +138,7 @@ const TableBodyRow: FunctionComponent<IRowProps> = ({
                       )}
                   </ul>
                   {adjustQuantity && row.type === "Charge" && (
-                    <Button type="button" variant="outlined" color="inherit">
+                    <Button type="button" variant="outlined" color="inherit" onClick={() => adjustQuantityHandler?.(row)}>
                       {t("pharmacy.stock.adjustQuantity")}
                     </Button>
                   )}

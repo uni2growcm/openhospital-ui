@@ -61,5 +61,5 @@ export const MEDICALS: MedicalDTO[] = [
     outqty: 15,
     minqty: 100,
     lots: [],
-  },
+  }
 ];

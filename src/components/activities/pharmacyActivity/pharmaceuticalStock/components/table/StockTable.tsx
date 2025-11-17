@@ -5,13 +5,26 @@ import { TFilterField } from "components/accessories/table/filter/types";
 import { renderDateTime } from "libraries/formatUtils/dataFormatting";
 import { useTranslation } from "libraries/hooks";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
-import React, { useEffect, useMemo } from "react";
-import { getMovements } from "state/pharmacy";
+import React, { useCallback, useEffect, useMemo } from "react";
+import { useForm, useWatch } from "react-hook-form";
+import {
+  getMovements,
+  resetUpdateQuantity,
+  updateQuantity,
+} from "state/pharmacy";
+import { AjustFormValues } from "./types";
+import { ajustSchema, getInitialValues } from "./consts";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
+import ConfirmationDialogAjust from "components/accessories/confirmationDialogAjust/ConfirmationDialogAjust";
 
 export function StockTable() {
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
+
+  const [openAdjustConfirmation, setOpenAdjustConfirmation] =
+    React.useState(false);
+  const [selectedRow, setSelectedRow] = React.useState<any>(null);
 
   const data = useAppSelector((state) =>
     state.pharmacy.getMovements.data ? state.pharmacy.getMovements.data : []
@@ -23,6 +36,12 @@ export function StockTable() {
     (state) =>
       state.pharmacy.getMovements.error?.message || t("errors.somethingwrong")
   ) as string;
+
+  const adjustQuantityHandler = (row: any) => {
+    setSelectedRow(row);
+    setValue("lastQuantity", row.quantity);
+    setOpenAdjustConfirmation(true);
+  };
 
   const labelData = {
     refNo: t("pharmacy.stock.refNo"),
@@ -73,8 +92,13 @@ export function StockTable() {
     [t]
   );
 
+  const updateStatus = useAppSelector(
+    (state) => state.pharmacy.updateQuantity.status
+  );
+
   const formattedData = useMemo(() => {
     return data.map((item) => ({
+      code: item.code,
       refNo: item.refNo,
       lot: item.lot?.code,
       expDate: renderDateTime(item.lot?.dueDate),
@@ -91,9 +115,47 @@ export function StockTable() {
     }));
   }, [t, data]);
 
+  const { control, setValue, handleSubmit, formState } =
+    useForm<AjustFormValues>({
+      resolver: standardSchemaResolver(ajustSchema),
+      defaultValues: getInitialValues({
+        lastQuantity: selectedRow?.quantity,
+        newQuantity: 0,
+      }),
+    });
+
+  const submitLogic = useCallback(
+    (values: AjustFormValues) => {
+      const movementId = selectedRow?.code;
+
+      if (!movementId) {
+        console.error("Invalid movement code:", selectedRow?.code);
+        return;
+      }
+
+      dispatch(
+        updateQuantity({ id: movementId, quantity: values.newQuantity })
+      );
+      setOpenAdjustConfirmation(false);
+    },
+    [selectedRow, dispatch]
+  );
+
+  const onSubmit = useMemo(
+    () => handleSubmit(submitLogic),
+    [handleSubmit, submitLogic]
+  );
+
   useEffect(() => {
     dispatch(getMovements());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (updateStatus === "SUCCESS") {
+      dispatch(getMovements());
+      dispatch(resetUpdateQuantity());
+    }
+  }, [updateStatus, dispatch]);
 
   return (
     <div data-cy="pharmaceutical-stock-table">
@@ -127,6 +189,7 @@ export function StockTable() {
                 adjustQuantity={(data ?? []).some(
                   (item) => item.type?.type === "+"
                 )}
+                adjustQuantityHandler={adjustQuantityHandler}
               />
             );
           case "SUCCESS_EMPTY":
@@ -137,6 +200,17 @@ export function StockTable() {
             return <CircularProgress />;
         }
       })()}
+      <ConfirmationDialogAjust
+        isOpen={openAdjustConfirmation}
+        title={t("pharmacy.stock.adjustQuantity")}
+        info={selectedRow ? selectedRow.medical : ""}
+        control={control}
+        primaryButtonLabel={t("common.confirm")}
+        secondaryButtonLabel={t("common.cancel")}
+        handlePrimaryButtonClick={onSubmit}
+        handleSecondaryButtonClick={() => setOpenAdjustConfirmation(false)}
+        icon={""}
+      />
     </div>
   );
 }

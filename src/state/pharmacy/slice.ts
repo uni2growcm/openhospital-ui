@@ -51,6 +51,9 @@ export const pharmacySlice = createSlice({
     resetNewMedical: (state) => {
       state.newMedical = initial.newMedical;
     },
+    resetUpdateQuantity: (state) => {
+      state.updateQuantity = initial.updateQuantity;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -155,6 +158,16 @@ export const pharmacySlice = createSlice({
       .addCase(thunks.newMedical.rejected, (state, action) => {
         state.newMedical = ApiResponse.error(action.payload);
       })
+      // Update quantity
+      .addCase(thunks.updateQuantity.pending, (state) => {
+        state.updateQuantity = ApiResponse.loading();
+      })
+      .addCase(thunks.updateQuantity.fulfilled, (state, action) => {
+        state.updateQuantity = ApiResponse.value(action.payload);
+      })
+      .addCase(thunks.updateQuantity.rejected, (state, action) => {
+        state.updateQuantity = ApiResponse.error(action.payload);
+      })
   },
 });
 
@@ -172,4 +185,5 @@ export const {
   resetMedicals,
   resetMedicalTypes,
   resetNewMedical,
+  resetUpdateQuantity,
 } = pharmacySlice.actions;

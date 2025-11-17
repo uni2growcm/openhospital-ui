@@ -100,6 +100,25 @@ export const chargeMovements = createAsyncThunk(
   }
 );
 
+export const updateQuantity = createAsyncThunk(
+  "pharmacy/updateQuantity",
+  async (payload: { id: number; quantity: number }, thunkApi) => {
+    try {
+      const result = await firstValueFrom(
+        wrapper(() =>
+          api.updateQuantity({
+            id: payload.id,
+            quantity: payload.quantity,
+          })
+        )
+      );
+      return result;
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.response);
+    }
+  }
+);
+
 export const getMedicals = createAsyncThunk(
   "pharmacy/getMedicals",
   async (_, thunkApi) => {

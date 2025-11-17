@@ -104,6 +104,11 @@ export interface NewMultipleDischargingMovements1Request {
     movementDTO: Array<MovementDTO>;
 }
 
+export interface UpdateQuantityRequest {
+    id: number;
+    quantity: number;
+}
+
 /**
  * no description
  */
@@ -464,6 +469,29 @@ export class StockMovementsApi extends BaseAPI {
             headers,
             query,
             body: movementDTO,
+        }, opts?.responseOpts);
+    };
+
+    /**
+     */
+    updateQuantity({ id, quantity }: UpdateQuantityRequest): Observable<MovementDTO>
+    updateQuantity({ id, quantity }: UpdateQuantityRequest, opts?: OperationOpts): Observable<AjaxResponse<MovementDTO>>
+    updateQuantity({ id, quantity }: UpdateQuantityRequest, opts?: OperationOpts): Observable<MovementDTO | AjaxResponse<MovementDTO>> {
+        throwIfNullOrUndefined(id, 'id', 'updateQuantity');
+        throwIfNullOrUndefined(quantity, 'quantity', 'updateQuantity');
+
+        const headers: HttpHeaders = {
+        };
+
+        const query: HttpQuery = { // required parameters are used directly since they are already checked by throwIfNullOrUndefined
+            'quantity': quantity,
+        };
+
+        return this.request<MovementDTO>({
+            url: '/adjust/{id}'.replace('{id}', encodeURI(id)),
+            method: 'PUT',
+            headers,
+            query,
         }, opts?.responseOpts);
     };
 
