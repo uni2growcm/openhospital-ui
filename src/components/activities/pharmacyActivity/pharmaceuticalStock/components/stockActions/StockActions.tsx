@@ -29,14 +29,15 @@ export function StockActions() {
       </Button>
       <div className="separator"></div>
       <Link to={"./discharge-movement"}>
-      <Button
-        type="button"
-        variant="contained"
-        className="discharge_button"
-        startIcon={<LogoutIcon sx={{ transform: "rotate(90deg)" }} />}
-      >
-        {t("pharmacy.stock.discharge")}
-      </Button>
+        <Button
+          type="button"
+          variant="contained"
+          dataCy="discharge-button"
+          className="discharge_button"
+          startIcon={<LogoutIcon sx={{ transform: "rotate(90deg)" }} />}
+        >
+          {t("pharmacy.stock.discharge")}
+        </Button>
       </Link>
       <Link to={"./charge-movement"}>
         <Button
