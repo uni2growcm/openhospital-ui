@@ -87,7 +87,7 @@ export function DischargeMovementForm({
         },
         refNo: data.refNo,
       }));
-      console.log("Test");
+
       onSubmit?.(movements);
     },
     [onSubmit, medicals]
