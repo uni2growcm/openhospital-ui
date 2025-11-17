@@ -5,7 +5,7 @@ import { TFilterField } from "components/accessories/table/filter/types";
 import { renderDateTime } from "libraries/formatUtils/dataFormatting";
 import { useTranslation } from "libraries/hooks";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
-import React, { useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import {
   getMovements,
@@ -124,42 +124,27 @@ export function StockTable() {
       }),
     });
 
-  const values = useWatch({
-    control,
-    compute: (values) => {
-      return {
-        ...values,
-      };
+  const submitLogic = useCallback(
+    (values: AjustFormValues) => {
+      const movementId = selectedRow?.code;
+
+      if (!movementId) {
+        console.error("Invalid movement code:", selectedRow?.code);
+        return;
+      }
+
+      dispatch(
+        updateQuantity({ id: movementId, quantity: values.newQuantity })
+      );
+      setOpenAdjustConfirmation(false);
     },
-  });
+    [selectedRow, dispatch]
+  );
 
-  const onSubmit = handleSubmit((values: AjustFormValues) => {
-    console.log("onSubmit", values);
-    console.log("Selected row:", selectedRow);
-
-    const movementId = selectedRow?.code;
-
-    if (!movementId) {
-      console.error("Invalid movement code:", selectedRow?.code);
-      return;
-    }
-
-    console.log(
-      "Sending to API - Code:",
-      movementId,
-      "Quantity:",
-      values.newQuantity
-    );
-
-    dispatch(
-      updateQuantity({
-        id: movementId,
-        quantity: values.newQuantity,
-      })
-    );
-
-    setOpenAdjustConfirmation(false);
-  });
+  const onSubmit = useMemo(
+    () => handleSubmit(submitLogic),
+    [handleSubmit, submitLogic]
+  );
 
   useEffect(() => {
     dispatch(getMovements());

@@ -4,6 +4,8 @@ import {
   MovementTypeDTO,
   MovementWardDTO,
   WardDTO,
+  MedicalDTO,
+  MedicalTypeDTO
 } from "generated";
 import { ApiResponse } from "state/types";
 
@@ -15,7 +17,11 @@ export type IPharmacyState = {
   createMovement: ApiResponse<MovementDTO>;
   updateMovement: ApiResponse<MovementDTO>;
   deleteMovement: ApiResponse<void>;
+  getMedicals: ApiResponse<Array<MedicalDTO>>;
+  newMedical: ApiResponse<MedicalDTO>;
+  getMedicalTypes: ApiResponse<Array<MedicalTypeDTO>>;
   chargeMovements: ApiResponse<boolean>;
+  dischargeMovements: ApiResponse<boolean>;
   updateQuantity: ApiResponse<MovementDTO>;
   wardStock: {
     filter: TWardStockFIlter;
@@ -26,4 +32,10 @@ export type TWardStockFIlter = {
   ward?: WardDTO;
   type?: "outcoming" | "incoming" | "drugs";
   drugs?: boolean;
+    getMovements: ApiResponse<Array<MovementDTO>>;
+    createMovement: ApiResponse<MovementDTO>;
+    updateMovement: ApiResponse<MovementDTO>;
+    deleteMovement: ApiResponse<void>;
+    getMedicals: ApiResponse<Array<MedicalDTO>>;
+    getMedicalsMov: ApiResponse<Array<MedicalDTO>>;
 };

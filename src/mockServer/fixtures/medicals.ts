@@ -1,9 +1,10 @@
 import { MedicalDTO } from "generated";
+import { LOTS } from "./lots";
 
 export const MEDICALS: MedicalDTO[] = [
   {
     code: 1,
-    prod_code: "PARA500",
+    prodCode: "PARA500",
     description: "Paracetamol 500mg tablets",
     type: { code: "DRUG", description: "Pharmaceutical" },
     initialqty: 2000,
@@ -11,18 +12,11 @@ export const MEDICALS: MedicalDTO[] = [
     inqty: 500,
     outqty: 100,
     minqty: 100,
-    lots: [
-      {
-        code: "L2025-01",
-        preparationDate: "2025-01-02",
-        dueDate: "2027-01-02",
-        cost: 0.1,
-      }
-    ],
+    lots: LOTS.slice(0, 2),
   },
   {
     code: 2,
-    prod_code: "AMOX250",
+    prodCode: "AMOX250",
     description: "Amoxicillin 250mg capsules",
     type: { code: "DRUG", description: "Pharmaceutical" },
     initialqty: 1500,
@@ -30,18 +24,11 @@ export const MEDICALS: MedicalDTO[] = [
     inqty: 300,
     outqty: 80,
     minqty: 80,
-    lots: [
-      {
-        code: "L2025-02",
-        preparationDate: "2025-01-02",
-        dueDate: "2027-01-02",
-        cost: 0.1,
-      }
-    ],
+    lots: LOTS.slice(3, 4),
   },
   {
     code: 3,
-    prod_code: "COTTON01",
+    prodCode: "COTTON01",
     description: "Sterile cotton rolls",
     type: { code: "EQUIP", description: "Medical Equipment" },
     initialqty: 800,
@@ -49,51 +36,30 @@ export const MEDICALS: MedicalDTO[] = [
     inqty: 200,
     outqty: 50,
     minqty: 40,
-    lots: [
-      {
-        code: "L2025-03",
-        preparationDate: "2025-01-02",
-        dueDate: "2027-01-02",
-        cost: 0.1,
-      }
-    ],
+    lots: LOTS.slice(5, 7),
   },
   {
     code: 4,
-    prod_code: "VACC001",
+    prodCode: "VACC001",
     description: "Polio vaccines (10-dose vials)",
     type: { code: "DRUG", description: "Pharmaceutical" },
     initialqty: 500,
     pcsperpck: 10,
-    inqty: 100,
-    outqty: 20,
+    inqty: 0,
+    outqty: 0,
     minqty: 10,
-    lots: [
-      {
-        code: "L2025-04",
-        preparationDate: "2025-01-02",
-        dueDate: "2027-01-02",
-        cost: 0.1,
-      }
-    ],
+    lots: LOTS.slice(8, 10),
   },
   {
     code: 5,
-    prod_code: "KITMAT01",
+    prodCode: "KITMAT01",
     description: "Maternity delivery kits",
     type: { code: "EQUIP", description: "Medical Supply" },
     initialqty: 300,
     pcsperpck: 1,
     inqty: 60,
     outqty: 15,
-    minqty: 10,
-    lots: [
-      {
-        code: "L2025-05",
-        preparationDate: "2025-01-02",
-        dueDate: "2027-01-02",
-        cost: 0.1,
-      }
-    ],
-  },
+    minqty: 100,
+    lots: [],
+  }
 ];

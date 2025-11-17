@@ -5,7 +5,7 @@ export const MOVEMENTS: MovementDTO[] = [
     code: 1001,
     medical: {
       code: 1,
-      prod_code: "PARA500",
+      prodCode: "PARA500",
       description: "Paracetamol 500mg tablets",
       type: { code: "DRUG", description: "Pharmaceutical" },
       lots: [
@@ -22,7 +22,7 @@ export const MOVEMENTS: MovementDTO[] = [
       outqty: 100,
       minqty: 100,
     },
-    type: { code: "IN", description: "Purchase from supplier", type: "IN" },
+    type: { code: "IN", description: "Purchase from supplier", type: "+" },
     supplier: {
       supId: 1,
       supName: "MediHealth Ltd.",
@@ -43,7 +43,7 @@ export const MOVEMENTS: MovementDTO[] = [
     code: 1002,
     medical: {
       code: 2,
-      prod_code: "AMOX500",
+      prodCode: "AMOX500",
       description: "Amoxicillin 500mg capsules",
       type: { code: "DRUG", description: "Antibiotic" },
       lots: [
@@ -56,7 +56,7 @@ export const MOVEMENTS: MovementDTO[] = [
       ],
       initialqty: 1000,
     },
-    type: { code: "OUT", description: "Dispensed to ward", type: "OUT" },
+    type: { code: "OUT", description: "Dispensed to ward", type: "-" },
     date: "2025-01-07",
     quantity: 120,
     refNo: "REQ-001",
@@ -65,7 +65,7 @@ export const MOVEMENTS: MovementDTO[] = [
     code: 1003,
     medical: {
       code: 3,
-      prod_code: "GAUZE01",
+      prodCode: "GAUZE01",
       description: "Sterile Gauze Pads",
       type: { code: "SUPPLY", description: "Medical Supply" },
       lots: [
@@ -78,7 +78,7 @@ export const MOVEMENTS: MovementDTO[] = [
       ],
       initialqty: 500,
     },
-    type: { code: "IN", description: "Supplier delivery", type: "IN" },
+    type: { code: "IN", description: "Supplier delivery", type: "+" },
     supplier: {
       supId: 2,
       supName: "CarePlus Supplies",
@@ -98,7 +98,7 @@ export const MOVEMENTS: MovementDTO[] = [
     code: 1004,
     medical: {
       code: 1,
-      prod_code: "PARA500",
+      prodCode: "PARA500",
       description: "Paracetamol 500mg tablets",
       lots: [
         {
@@ -109,7 +109,7 @@ export const MOVEMENTS: MovementDTO[] = [
         }
       ]
     },
-    type: { code: "OUT", description: "Dispensed to pharmacy", type: "OUT" },
+    type: { code: "OUT", description: "Dispensed to pharmacy", type: "-" },
     date: "2025-02-12",
     quantity: 200,
     refNo: "ISS-002",
@@ -118,7 +118,7 @@ export const MOVEMENTS: MovementDTO[] = [
     code: 1005,
     medical: {
       code: 4,
-      prod_code: "VITC100",
+      prodCode: "VITC100",
       description: "Vitamin C 100mg tablets",
       type: { code: "SUPPLEMENT", description: "Vitamin supplement" },
       lots: [
@@ -130,7 +130,7 @@ export const MOVEMENTS: MovementDTO[] = [
         }
       ]
     },
-    type: { code: "IN", description: "Stock adjustment", type: "IN" },
+    type: { code: "IN", description: "Stock adjustment", type: "+" },
     date: "2025-02-14",
     quantity: 150,
     refNo: "ADJ-001",
@@ -139,7 +139,7 @@ export const MOVEMENTS: MovementDTO[] = [
     code: 1006,
     medical: {
       code: 5,
-      prod_code: "SALT01",
+      prodCode: "SALT01",
       description: "Normal Saline 500ml",
       type: { code: "FLUID", description: "Infusion fluid" },
       lots: [
@@ -151,7 +151,7 @@ export const MOVEMENTS: MovementDTO[] = [
         }
       ]
     },
-    type: { code: "OUT", description: "Used in surgery", type: "OUT" },
+    type: { code: "OUT", description: "Used in surgery", type: "-" },
     date: "2025-03-01",
     quantity: 50,
     refNo: "SURG-2025-03",
@@ -160,7 +160,7 @@ export const MOVEMENTS: MovementDTO[] = [
     code: 1007,
     medical: {
       code: 6,
-      prod_code: "INS100",
+      prodCode: "INS100",
       description: "Insulin 100 IU/ml",
       type: { code: "DRUG", description: "Hormone" },
       lots: [
@@ -172,7 +172,7 @@ export const MOVEMENTS: MovementDTO[] = [
         }
       ]
     },
-    type: { code: "IN", description: "New stock purchase", type: "IN" },
+    type: { code: "IN", description: "New stock purchase", type: "+" },
     supplier: { supId: 3, supName: "BioPharma S.A." },
     lot: {
       code: "L2025-03",
@@ -188,7 +188,7 @@ export const MOVEMENTS: MovementDTO[] = [
     code: 1008,
     medical: {
       code: 2,
-      prod_code: "AMOX500",
+      prodCode: "AMOX500",
       description: "Amoxicillin 500mg capsules",
       lots: [
         {
@@ -199,7 +199,7 @@ export const MOVEMENTS: MovementDTO[] = [
         }
       ]
     },
-    type: { code: "OUT", description: "Dispensed to patient", type: "OUT" },
+    type: { code: "OUT", description: "Dispensed to patient", type: "-" },
     date: "2025-03-07",
     quantity: 60,
     refNo: "PAT-023",
@@ -208,7 +208,7 @@ export const MOVEMENTS: MovementDTO[] = [
     code: 1009,
     medical: {
       code: 7,
-      prod_code: "GLOVEXL",
+      prodCode: "GLOVEXL",
       description: "Latex Gloves (XL)",
       type: { code: "SUPPLY", description: "Disposable" },
       lots: [
@@ -220,7 +220,7 @@ export const MOVEMENTS: MovementDTO[] = [
         }
       ]
     },
-    type: { code: "IN", description: "Donation received", type: "IN" },
+    type: { code: "IN", description: "Donation received", type: "-" },
     date: "2025-03-10",
     quantity: 500,
     refNo: "DON-2025-001",
@@ -229,7 +229,7 @@ export const MOVEMENTS: MovementDTO[] = [
     code: 1010,
     medical: {
       code: 7,
-      prod_code: "GLOVEXL",
+      prodCode: "GLOVEXL",
       description: "Latex Gloves (XL)",
       lots: [
         {
@@ -240,7 +240,7 @@ export const MOVEMENTS: MovementDTO[] = [
         }
       ]
     },
-    type: { code: "OUT", description: "Distributed to wards", type: "OUT" },
+    type: { code: "OUT", description: "Distributed to wards", type: "+" },
     date: "2025-03-12",
     quantity: 150,
     refNo: "DIST-005",

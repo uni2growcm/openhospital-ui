@@ -28,6 +28,7 @@ export function StockActions() {
         {t("pharmacy.stock.stockReport")}
       </Button>
       <div className="separator"></div>
+      <Link to={"./discharge-movement"}>
       <Button
         type="button"
         variant="contained"
@@ -36,9 +37,11 @@ export function StockActions() {
       >
         {t("pharmacy.stock.discharge")}
       </Button>
+      </Link>
       <Link to={"./charge-movement"}>
         <Button
           className="charge_button"
+          dataCy="charge-button"
           type="button"
           variant="contained"
           startIcon={<ExitToAppIcon sx={{ transform: "rotate(-90deg)" }} />}

@@ -9,6 +9,7 @@ import React, { useCallback, useEffect, useRef } from "react";
 import { useOutletContext } from "react-router";
 import { getMedicals } from "state/medicals";
 import { chargeMovements, resetChargeMovements } from "state/pharmacy";
+import { getSuppliers } from "state/suppliers";
 import { PharmacyActivityContent } from "../PharmacyActivityContent";
 import { ChargeMovementForm } from "./components/forms";
 import "./styles.scss";
@@ -23,7 +24,7 @@ export function ChargeMovement() {
     setBreadcrumbMap: (map: Record<string, string | undefined>) => void;
   }>();
 
-  const addBreadcrumb = () => {
+  const addBreadcrumb = useCallback(() => {
     setBreadcrumbMap({
       ...breadcrumbMap,
       [t("pharmacy.labels.pharmaceutical-stock")]:
@@ -31,15 +32,15 @@ export function ChargeMovement() {
       [t("pharmacy.labels.charge-movement")]:
         PATHS.pharmacy_pharmaceuticalstock_charge,
     });
-  };
+  }, [t, breadcrumbMap]);
 
-  const removeBreadcrumb = () => {
+  const removeBreadcrumb = useCallback(() => {
     setBreadcrumbMap({
       ...breadcrumbMap,
       [t("pharmacy.labels.pharmaceutical-stock")]: undefined,
       [t("pharmacy.labels.charge-movement")]: undefined,
     });
-  };
+  }, [t, breadcrumbMap]);
 
   const status = useAppSelector(
     (state) => state.pharmacy.chargeMovements.status
@@ -58,7 +59,17 @@ export function ChargeMovement() {
 
   const handleMovementCharge = useCallback(
     (values: MovementDTO) => {
-      dispatch(chargeMovements({ movementDTO: [values], ref: values.refNo }));
+      dispatch(
+        chargeMovements({
+          movementDTO: [
+            {
+              ...values,
+              type: { code: "charge", description: "Charge", type: "+" },
+            },
+          ],
+          ref: values.refNo,
+        })
+      );
     },
     [dispatch]
   );
@@ -77,6 +88,7 @@ export function ChargeMovement() {
 
   useEffect(() => {
     dispatch(getMedicals());
+    dispatch(getSuppliers());
   }, [dispatch]);
 
   return (
@@ -85,7 +97,10 @@ export function ChargeMovement() {
       title={t("pharmacy.labels.charge-movement")}
     >
       <div className="charge-movement">
-        <ChargeMovementForm onSubmit={handleMovementCharge} />
+        <ChargeMovementForm
+          onSubmit={handleMovementCharge}
+          loading={status === "LOADING"}
+        />
         {status === "FAIL" && (
           <div ref={infoBoxRef} className="info-box-container">
             <InfoBox type="error" message={errorMessage} />

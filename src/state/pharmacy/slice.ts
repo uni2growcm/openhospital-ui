@@ -39,6 +39,18 @@ export const pharmacySlice = createSlice({
     resetChargeMovements: (state) => {
       state.chargeMovements = initial.chargeMovements;
     },
+    resetDischargeMovements: (state) => {
+      state.dischargeMovements = initial.dischargeMovements;
+    },
+    resetMedicals: (state) => {
+      state.getMedicals = initial.getMedicals;
+    },
+    resetMedicalTypes: (state) => {
+      state.getMedicalTypes = initial.getMedicalTypes;
+    },
+    resetNewMedical: (state) => {
+      state.newMedical = initial.newMedical;
+    },
     resetUpdateQuantity: (state) => {
       state.updateQuantity = initial.updateQuantity;
     },
@@ -81,6 +93,18 @@ export const pharmacySlice = createSlice({
       .addCase(thunks.getWardMovements.rejected, (state, action) => {
         state.wardMovements = ApiResponse.error(action.payload);
       })
+      // get medicals list
+      .addCase(thunks.getMedicals.pending, (state) => {
+        state.getMedicals = ApiResponse.loading();
+      })
+      .addCase(thunks.getMedicals.fulfilled, (state, action) => {
+        state.getMedicals = isEmpty(action.payload)
+          ? ApiResponse.empty()
+          : ApiResponse.value(action.payload);
+      })
+      .addCase(thunks.getMedicals.rejected, (state, action) => {
+        state.getMedicals = ApiResponse.error(action.payload);
+      })
       // get ward medicals list
       .addCase(thunks.getWardMedicals.pending, (state) => {
         state.wardMedicals = ApiResponse.loading();
@@ -102,6 +126,37 @@ export const pharmacySlice = createSlice({
       })
       .addCase(thunks.chargeMovements.rejected, (state, action) => {
         state.chargeMovements = ApiResponse.error(action.payload);
+      })
+      // Discharge movements
+      .addCase(thunks.dischargeMovements.pending, (state) => {
+        state.dischargeMovements = ApiResponse.loading();
+      })
+      .addCase(thunks.dischargeMovements.fulfilled, (state, action) => {
+        state.dischargeMovements = ApiResponse.value(action.payload);
+      })
+      .addCase(thunks.dischargeMovements.rejected, (state, action) => {
+        state.dischargeMovements = ApiResponse.error(action.payload);
+      })
+      // get medical types list
+      .addCase(thunks.getMedicalTypes.pending, (state) => {
+        state.getMedicalTypes = ApiResponse.loading();
+      })
+      .addCase(thunks.getMedicalTypes.fulfilled, (state, action) => {
+        const data = action.payload.response || action.payload;
+        state.getMedicalTypes = ApiResponse.value(data);
+      })
+      .addCase(thunks.getMedicalTypes.rejected, (state, action) => {
+        state.getMedicalTypes = ApiResponse.error(action.payload);
+      })
+      // new medical
+      .addCase(thunks.newMedical.pending, (state) => {
+        state.newMedical = ApiResponse.loading();
+      })
+      .addCase(thunks.newMedical.fulfilled, (state, action) => {
+        state.newMedical = ApiResponse.value(action.payload);
+      })
+      .addCase(thunks.newMedical.rejected, (state, action) => {
+        state.newMedical = ApiResponse.error(action.payload);
       })
       // Update quantity
       .addCase(thunks.updateQuantity.pending, (state) => {
@@ -126,5 +181,9 @@ export const {
   resetWardStockFilter,
   resetChargeMovements,
   resetMovementTypes,
+  resetDischargeMovements,
+  resetMedicals,
+  resetMedicalTypes,
+  resetNewMedical,
   resetUpdateQuantity,
 } = pharmacySlice.actions;
