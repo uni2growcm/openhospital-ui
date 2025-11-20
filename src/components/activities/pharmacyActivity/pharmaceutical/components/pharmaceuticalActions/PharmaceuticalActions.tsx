@@ -9,10 +9,19 @@ import "./styles.scss";
 export default function PharmaceuticalActions() {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
-  const handleExpiring = () => {
-    // setIsOpen(true);
-    console.log("Test");
+  const handleOpenExpiringDialog = () => {
+    setIsOpen(true);
   };
+
+  const handleCloseExpiringDialog = () => {
+    setIsOpen(false);
+  };
+
+  const handleGetExpiring = (period: string | null, month: string | null) => {
+    console.log(period);
+    console.log(month);
+  };
+
   return (
     <div className="buttonSet">
       <Button type="button" variant="outlined" color="inherit">
@@ -31,9 +40,10 @@ export default function PharmaceuticalActions() {
         type="button"
         variant="outlined"
         color="inherit"
-        onClick={handleExpiring}
+        data-cy="expiring-button"
+        onClick={handleOpenExpiringDialog}
       >
-        {t("pharmacy.stock.expiring")}
+        {t("pharmacy.stock.expiring.label")}
       </Button>
       <Button type="button" variant="outlined" color="inherit">
         {t("pharmacy.stock.amcReport")}
@@ -44,7 +54,11 @@ export default function PharmaceuticalActions() {
         </Button>
       </Link>
 
-      <PharmaceuticalExpiringDialog isOpen={isOpen} />
+      <PharmaceuticalExpiringDialog
+        isOpen={isOpen}
+        handlePrimaryButtonClick={handleGetExpiring}
+        handleSecondaryButtonClick={handleCloseExpiringDialog}
+      />
     </div>
   );
 }

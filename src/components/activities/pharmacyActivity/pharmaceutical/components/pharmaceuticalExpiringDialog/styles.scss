@@ -3,7 +3,7 @@
 
 .dialog__title {
   width: 100%;
-  text-align: center;
+  text-align: left;
   font-weight: bold;
   margin-left: auto;
   margin-right: auto;
@@ -18,7 +18,7 @@
 }
 
 .dialog__info {
-  margin: 25px 0px 40px;
+  margin: 25px 0px;
 }
 
 .dialog__divider {
@@ -29,13 +29,14 @@
 
 .dialog__dateField {
   text-align: center;
-  margin: 25px 0px 40px;
+  margin: 10px 0px;
 }
 
 .dialog__buttonSet {
   display: flex;
   flex-direction: row-reverse;
   margin-bottom: 10px;
+  margin-top: 50px;
   gap: 2px;
   @include susy-media($smartphone_small) {
     display: block;

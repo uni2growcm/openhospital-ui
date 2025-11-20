@@ -1257,7 +1257,34 @@
       "stockCardReport": "Rapport de stock",
       "addMedecine": "Ajouter un médicament",
       "order": "Commander",
-      "expiring": "Expirer",
+      "expiring": {
+        "label": "Expirer",
+        "close": "Fermer",
+        "generate": "Générer",
+        "info": "Sélectionner la période",
+        "title": "Rapport d'expiration",
+        "period": "Période",
+        "month": "Mois",
+        "options": {
+          "today": "Aujourd'hui",
+          "thisMonth": " Ce mois",
+          "nextMonth": "Le mois prochain",
+          "nextTwoMonths": "Les deux prochains mois",
+          "specificMonth": "Mois spécifique",
+          "january": "Janvier",
+          "february": "Fevrier",
+          "march": "Mars",
+          "april": "Avril",
+          "may": "Mai",
+          "june": "Juin",
+          "july": "Juillet",
+          "august": "Août",
+          "september": "Septembre",
+          "october": "Octobre",
+          "november": "Novembre",
+          "december": "Décembre"
+        }
+      },
       "amcReport": "Rapport AMC"
     }
   }
