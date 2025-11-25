@@ -8,7 +8,11 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useOutletContext } from "react-router";
 import { getMedicals } from "state/medicals";
-import { dischargeMovements, resetDischargeMovements } from "state/pharmacy";
+import {
+  dischargeMovements,
+  resetChargeMovements,
+  resetDischargeMovements,
+} from "state/pharmacy";
 import checkIcon from "../../../../assets/check-icon.png";
 import { PharmacyActivityContent } from "../PharmacyActivityContent";
 import { DischargeMovementForm } from "./components/forms/DischargeMovementForm/DischargeMovementForm";
@@ -29,7 +33,9 @@ export function DischargeMovement() {
   );
 
   const errorMessage = useAppSelector(
-    (state) => state.pharmacy.dischargeMovements.error?.message
+    (state) =>
+      state.pharmacy.dischargeMovements.error?.message ??
+      t("pharmacy.messages.discharge-movement-fail.description")
   ) as string;
 
   const { breadcrumbMap, setBreadcrumbMap } = useOutletContext<{
@@ -66,7 +72,7 @@ export function DischargeMovement() {
 
   useEffect(() => {
     if (activityTransitionState === "TO_RESET") {
-      dispatch(resetDischargeMovements());
+      dispatch(resetChargeMovements());
       setActivityTransitionState("IDLE");
     }
   }, [dispatch, activityTransitionState]);
