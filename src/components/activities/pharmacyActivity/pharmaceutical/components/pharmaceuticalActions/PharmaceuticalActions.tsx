@@ -23,7 +23,7 @@ export default function PharmaceuticalActions() {
   };
 
   return (
-    <div className="buttonSet">
+    <div className="buttonSet" data-cy="button-actions">
       <Button type="button" variant="outlined" color="inherit">
         {t("pharmacy.stock.exportList")}
       </Button>
@@ -36,15 +36,18 @@ export default function PharmaceuticalActions() {
       <Button type="button" variant="outlined" color="inherit">
         {t("pharmacy.stock.order")}
       </Button>
-      <Button
-        type="button"
-        variant="outlined"
-        color="inherit"
-        data-cy="expiring-button"
-        onClick={handleOpenExpiringDialog}
-      >
-        {t("pharmacy.stock.expiring.label")}
-      </Button>
+      <div data-cy="expiring-button">
+        <Button
+          type="button"
+          variant="outlined"
+          color="inherit"
+          data-cy="expiring-button"
+          onClick={handleOpenExpiringDialog}
+        >
+          {t("pharmacy.stock.expiring.label")}
+        </Button>
+      </div>
+
       <Button type="button" variant="outlined" color="inherit">
         {t("pharmacy.stock.amcReport")}
       </Button>

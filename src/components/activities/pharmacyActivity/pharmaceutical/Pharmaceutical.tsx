@@ -1,10 +1,10 @@
+import { PATHS } from "consts";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import PharmaceuticalActions from "./components/pharmaceuticalActions/PharmaceuticalActions";
-import { PATHS } from "consts";
 import { useOutletContext } from "react-router";
-import PharmaceuticalTable from "./components/pharmaceuticalTable/PharmaceuticalTable";
 import { PharmacyActivityContent } from "../PharmacyActivityContent";
+import PharmaceuticalActions from "./components/pharmaceuticalActions/PharmaceuticalActions";
+import PharmaceuticalTable from "./components/pharmaceuticalTable/PharmaceuticalTable";
 
 export default function Pharmaceutical() {
   const { t } = useTranslation();
@@ -40,7 +40,7 @@ export default function Pharmaceutical() {
     >
       <div className="pharmaceutical">
         <div data-cy="pharmaceutical-actions">
-          <PharmaceuticalActions />
+          <PharmaceuticalActions data-cy="pharmaceutical-actions" />
         </div>
 
         <div data-cy="pharmaceutical-table">

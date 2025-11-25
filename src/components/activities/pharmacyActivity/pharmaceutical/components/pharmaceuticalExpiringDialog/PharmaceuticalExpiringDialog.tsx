@@ -115,12 +115,13 @@ const PharmaceuticalExpiringDialog: FunctionComponent<{
         </div>
       </DialogTitle>
       <DialogContent>
-        <div className="dialog__content">
+        <div className="dialog__content" data-cy="dialog-content">
           <div className="dialog__info" data-cy="dialog-info">
             {t("pharmacy.stock.expiring.info")}
           </div>
           <div className="dialog__dateField">
             <Autocomplete
+              id="periodSelected"
               disablePortal
               options={periodOptions}
               sx={{ width: 300 }}
@@ -128,6 +129,7 @@ const PharmaceuticalExpiringDialog: FunctionComponent<{
                 <TextField
                   {...params}
                   label={t("pharmacy.stock.expiring.period")}
+                  data-cy="periodSelected"
                   name="periodSelected"
                 />
               )}
@@ -139,6 +141,7 @@ const PharmaceuticalExpiringDialog: FunctionComponent<{
           {periodSelected === "SPECIFICMONTH" && (
             <div className="dialog__dateField">
               <Autocomplete
+                id="monthSelected"
                 disablePortal
                 options={monthOptions}
                 sx={{ width: 300, overflow: "auto" }}
@@ -146,6 +149,7 @@ const PharmaceuticalExpiringDialog: FunctionComponent<{
                   <TextField
                     {...params}
                     label={t("pharmacy.stock.expiring.month")}
+                    data-cy="monthSelected"
                     name="monthSelected"
                   />
                 )}
@@ -159,7 +163,7 @@ const PharmaceuticalExpiringDialog: FunctionComponent<{
           <div className="dialog__buttonSet" data-cy="dialog-button-set">
             <div data-cy="dialog-return-button" className="return_button">
               <Button
-                dataCy="approve-dialog"
+                dataCy="generate-expiring-button"
                 type="submit"
                 variant="contained"
                 onClick={handleConfirm}
@@ -169,7 +173,7 @@ const PharmaceuticalExpiringDialog: FunctionComponent<{
             </div>
             <div className="reset_button">
               <Button
-                dataCy="close-dialog"
+                dataCy="close-dialog-button"
                 type="reset"
                 variant="text"
                 onClick={handleSecondaryButtonClick}
