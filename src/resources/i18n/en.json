@@ -1288,7 +1288,7 @@
         "pcsperpck": "Pieces per Packet",
         "minqty": "Critical level",
         "ignoreSimilar": "Ignore somilar",
-        "deleted": "Deleted"
+        "deleted": "active"
       }
     },
     "lot": {
