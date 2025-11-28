@@ -14,10 +14,19 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { Controller, ControllerRenderProps, useWatch } from "react-hook-form";
-import { LotFormFieldProps, TFormValues } from "./types";
+import {
+  Controller,
+  ControllerRenderProps,
+  Path,
+  useWatch,
+} from "react-hook-form";
+import { LotFormFieldProps } from "./types";
 
-export function LotFormField({ medical, control }: LotFormFieldProps) {
+export function LotFormField<T extends Record<string, any>>({
+  control,
+  medical,
+  name,
+}: LotFormFieldProps<T>) {
   const { t } = useTranslation();
   const [newLot, setNewLot] = useState<LotDTO>({
     code: "LOT_00",
@@ -26,7 +35,7 @@ export function LotFormField({ medical, control }: LotFormFieldProps) {
     cost: 0,
   });
 
-  const value = useWatch({ control, name: "lot" });
+  const value = useWatch({ control, name });
 
   const isNewLotActive = useMemo(
     () => !medical.lots?.some((lot) => lot.code === value?.code),
@@ -34,7 +43,7 @@ export function LotFormField({ medical, control }: LotFormFieldProps) {
   );
 
   const handleChange = useCallback(
-    (field: ControllerRenderProps<TFormValues, "lot">, lot: LotDTO) => () => {
+    (field: ControllerRenderProps<T, any>, lot: LotDTO) => () => {
       field.onChange({
         ...lot,
         dueDate: lot.dueDate ? parseISO(lot.dueDate) : undefined,
@@ -68,7 +77,7 @@ export function LotFormField({ medical, control }: LotFormFieldProps) {
       )}
       <Controller
         control={control}
-        name="lot"
+        name={name}
         render={({ field }) => (
           <>
             {(medical.lots ?? []).map((lot, index) => (
@@ -83,7 +92,7 @@ export function LotFormField({ medical, control }: LotFormFieldProps) {
                 <TextField
                   value={lot.code}
                   label={t("pharmacy.lot.fields.code")}
-                  name={`lot.${index}.code`}
+                  name={`${name}.${index}.code`}
                   sx={{ marginTop: 1 }}
                   disabled
                 />
@@ -91,7 +100,7 @@ export function LotFormField({ medical, control }: LotFormFieldProps) {
                   format={DATETIME_FORMAT}
                   fieldValue={lot.preparationDate}
                   label={t("pharmacy.lot.fields.preparationDate")}
-                  fieldName={`lot.${index}.preperationDate`}
+                  fieldName={`${name}.${index}.preperationDate`}
                   isValid={true}
                   errorText=""
                   onChange={() => {}}
@@ -101,7 +110,7 @@ export function LotFormField({ medical, control }: LotFormFieldProps) {
                   format={DATETIME_FORMAT}
                   fieldValue={lot.dueDate}
                   label={t("pharmacy.lot.fields.dueDate")}
-                  fieldName={`lot.${index}.dueDate`}
+                  fieldName={`${name}.${index}.dueDate`}
                   isValid={true}
                   errorText=""
                   onChange={() => {}}
@@ -110,7 +119,7 @@ export function LotFormField({ medical, control }: LotFormFieldProps) {
                 <TextField
                   value={lot.cost}
                   label={t("pharmacy.lot.fields.cost")}
-                  name={`lot.${index}.cost`}
+                  name={`${name}.${index}.cost`}
                   sx={{ marginTop: 1 }}
                   disabled
                 />
@@ -129,28 +138,28 @@ export function LotFormField({ medical, control }: LotFormFieldProps) {
             <TextFormField
               label={t("pharmacy.lot.fields.code")}
               control={control}
-              name="lot.code"
+              name={`${name}.code` as Path<T>}
               disabled={!isNewLotActive}
             />
             <DateFormField
               format={DATETIME_FORMAT}
               label={t("pharmacy.lot.fields.preparationDate")}
               control={control}
-              name="lot.preparationDate"
+              name={`${name}.preparationDate` as Path<T>}
               disabled={!isNewLotActive}
             />
             <DateFormField
               format={DATETIME_FORMAT}
               label={t("pharmacy.lot.fields.dueDate")}
               control={control}
-              name="lot.dueDate"
+              name={`${name}.dueDate` as Path<T>}
               disabled={!isNewLotActive}
             />
             <TextFormField
               type="number"
               label={t("pharmacy.lot.fields.cost")}
               control={control}
-              name="lot.cost"
+              name={`${name}.cost` as Path<T>}
               disabled={!isNewLotActive}
             />
           </>
