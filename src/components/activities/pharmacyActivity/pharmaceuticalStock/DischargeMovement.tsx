@@ -8,11 +8,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useOutletContext } from "react-router";
 import { getMedicals } from "state/medicals";
-import {
-  dischargeMovements,
-  resetChargeMovements,
-  resetDischargeMovements,
-} from "state/pharmacy";
+import { dischargeMovements, resetDischargeMovements } from "state/pharmacy";
 import checkIcon from "../../../../assets/check-icon.png";
 import { PharmacyActivityContent } from "../PharmacyActivityContent";
 import { DischargeMovementForm } from "./components/forms/DischargeMovementForm/DischargeMovementForm";
@@ -72,7 +68,7 @@ export function DischargeMovement() {
 
   useEffect(() => {
     if (activityTransitionState === "TO_RESET") {
-      dispatch(resetChargeMovements());
+      dispatch(resetDischargeMovements());
       setActivityTransitionState("IDLE");
     }
   }, [dispatch, activityTransitionState]);
