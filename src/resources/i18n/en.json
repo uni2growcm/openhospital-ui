@@ -1367,9 +1367,27 @@
         "recipient": "Recipient",
         "movementType": {
           "patient": "To patient",
-          "ward": "Internal"
-        }
-      }
+          "ward": "Internal use",
+          "toAnotherWard": "To another ward"
+        },
+        "dischargeMovement": "Discharge movement from ",
+        "destination": "Destination",
+        "toPatient": "Vers un patient",
+        "internalUse": "Usage interne",
+        "selectPatient": "Sélectionner un patient",
+        "selectWard": "Sélectionner un pavillon",
+        "totalStock": "Total stock",
+        "selectLot": "Select lot",
+        "quantityGreaterThanZero": "Quantity must be greater than zero",
+        "quantityNotExceedoTtalStock": "Quantity must not exceed total stock",
+        "loading": "Loading...",
+        "pleaseSelectLot": "Please select a lot",
+        "pleaseSelectPatient": "Please select a patient",
+        "pleaseSelectWard": "Please select a ward",
+        "pieces": "pieces",
+        "failedTocreateDischargeMovement" : "Failed to create dischargem movement. Please try again.",
+        "dischargeMovementCreatedSuccessfully" : "Discharge movement created successfully!"
+      }  
     }
   }
 }
