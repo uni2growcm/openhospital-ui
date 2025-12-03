@@ -41,19 +41,19 @@ export interface LotDTO {
      */
     cost?: number;
     /**
-     * The main store quantity
+     * Main store quantity
      * @type {number}
      * @memberof LotDTO
      */
     mainStoreQuantity?: number;
     /**
-     * The ward store quantity
+     * Wards total quantity
      * @type {number}
      * @memberof LotDTO
      */
     wardsTotalQuantity?: number;
     /**
-     * The overall quantity
+     * over all quantity
      * @type {number}
      * @memberof LotDTO
      */

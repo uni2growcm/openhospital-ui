@@ -41,6 +41,11 @@ export interface MovementWardDTO {
      */
     date: string;
     /**
+     * @type {boolean}
+     * @memberof MovementWardDTO
+     */
+    isPatient?: boolean;
+    /**
      * The patient in case the movement is associated to a patient
      * @type {PatientDTO}
      * @memberof MovementWardDTO

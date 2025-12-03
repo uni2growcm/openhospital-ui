@@ -10,6 +10,8 @@ import {
   NewMedicalRequest,
   NewMultipleChargingMovementsRequest,
   NewMultipleDischargingMovementsRequest,
+  PrintPharmaceuticalStockWardPdfRequest,
+  ReportsApi,
   StockMovementsApi,
   UpdateMedicalRequest,
 } from "generated";
@@ -18,6 +20,7 @@ import { wrapper } from "libraries/apiUtils/wrapper";
 import { firstValueFrom } from "rxjs";
 
 const api = new StockMovementsApi(customConfiguration());
+const apiReport = new ReportsApi(customConfiguration());
 const movementTypeApi = new MedicalStockMovementTypeApi(customConfiguration());
 const wardStockApi = new MedicalStockWardApi(customConfiguration());
 const medicalApi = new MedicalsApi(customConfiguration());
@@ -204,3 +207,26 @@ export const dischargeMovements = createAsyncThunk<
     return thunkApi.rejectWithValue(error.response);
   }
 });
+
+// export const printPharmaceuticalStockWardPdf = createAsyncThunk(
+//   "pharmacy/getStockReport",
+//   async (payload: PrintPharmaceuticalStockWardPdfRequest, thunkApi) => {
+//     firstValueFrom(
+//       wrapper(() => apiReport.printPharmaceuticalStockWardPdf(payload))
+//     ).catch((error) => thunkApi.rejectWithValue(error.response));
+//   }
+// );
+
+export const printPharmaceuticalStockWardPdf = createAsyncThunk(
+  "pharmacy/getStockReport",
+  async (payload: PrintPharmaceuticalStockWardPdfRequest, thunkApi) => {
+    try {
+      const result = await firstValueFrom(
+        wrapper(() => apiReport.printPharmaceuticalStockWardPdf(payload))
+      );
+      return result;
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.response);
+    }
+  }
+);

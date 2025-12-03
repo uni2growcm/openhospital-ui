@@ -27,7 +27,7 @@ export function getInitialValues(from?: MedicalDTO): Partial<TFormValues> {
   if (!from) return {};
 
   return {
-    prodCode: from.prodCode,
+    prodCode: from.prod_code,
     description: from.description,
     type: from?.type?.code,
     initialqty: from.initialqty || 0,

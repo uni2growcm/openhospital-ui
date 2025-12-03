@@ -57,6 +57,10 @@ export const pharmacySlice = createSlice({
     resetUpdateMedical: (state) => {
       state.updateMedical = initial.updateMedical;
     },
+    resetPrintPharmaceuticalStockWardPdf: (state) => {
+      state.printPharmaceuticalStockWardPdf =
+        initial.printPharmaceuticalStockWardPdf;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -180,7 +184,33 @@ export const pharmacySlice = createSlice({
       })
       .addCase(thunks.updateMedical.rejected, (state, action) => {
         state.updateMedical = ApiResponse.error(action.payload);
-      });
+      })
+      // Print pharmaceutical stock report
+      .addCase(thunks.printPharmaceuticalStockWardPdf.pending, (state) => {
+        state.printPharmaceuticalStockWardPdf = ApiResponse.loading();
+      })
+      .addCase(
+        thunks.printPharmaceuticalStockWardPdf.fulfilled,
+        (state, action) => {
+          if (action.payload instanceof Blob) {
+            state.printPharmaceuticalStockWardPdf = ApiResponse.value(
+              action.payload
+            );
+          } else {
+            state.printPharmaceuticalStockWardPdf = ApiResponse.error(
+              action.payload
+            );
+          }
+        }
+      )
+      .addCase(
+        thunks.printPharmaceuticalStockWardPdf.rejected,
+        (state, action) => {
+          state.printPharmaceuticalStockWardPdf = ApiResponse.error(
+            action.payload
+          );
+        }
+      );
   },
 });
 
@@ -200,4 +230,5 @@ export const {
   resetGetMedical,
   resetNewMedical,
   resetUpdateMedical,
+  resetPrintPharmaceuticalStockWardPdf,
 } = pharmacySlice.actions;

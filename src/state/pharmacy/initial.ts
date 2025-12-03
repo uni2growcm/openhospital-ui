@@ -29,4 +29,5 @@ export const initial: IPharmacyState = {
       getMedicalsMov: new ApiResponse({ status: "IDLE", data: [] }),
     },
   },
+  printPharmaceuticalStockWardPdf: new ApiResponse({ status: "IDLE" }),
 };

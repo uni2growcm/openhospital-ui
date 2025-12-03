@@ -2,7 +2,7 @@ import { MedicalServices } from "@mui/icons-material";
 import Button from "components/accessories/button/Button";
 import { WardDTO } from "generated";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
-import React, { useCallback, useEffect } from "react";
+import React, { FunctionComponent, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { updateWardStockFIilter } from "state/pharmacy";
 import "./styles.scss";
@@ -10,9 +10,13 @@ import "./styles.scss";
 const types = ["outcoming", "incoming", "drugs"] as const;
 const actions = ["report", "excel"];
 
-type WardStockHeaderProps = {};
+interface WardStockHeaderProps {
+  handleExportReport: (wardCode: string, action: string) => void;
+}
 
-export function WardStockHeader({}: WardStockHeaderProps) {
+export const WardStockHeader: FunctionComponent<WardStockHeaderProps> = ({
+  handleExportReport,
+}) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
@@ -46,6 +50,10 @@ export function WardStockHeader({}: WardStockHeaderProps) {
       dispatch(updateWardStockFIilter({ ...filter, ward: wards[0] }));
     }
   }, [wards, filter, dispatch]);
+
+  const handleExport = (action: string) => {
+    handleExportReport("c", action);
+  };
 
   return (
     <div className="ward-stock-header">
@@ -93,6 +101,7 @@ export function WardStockHeader({}: WardStockHeaderProps) {
             type="button"
             variant={"outlined"}
             color="inherit"
+            onClick={() => handleExport(action)}
           >
             {t(`pharmacy.stock.actions.${action}`)}
           </Button>
@@ -100,4 +109,4 @@ export function WardStockHeader({}: WardStockHeaderProps) {
       </div>
     </div>
   );
-}
+};

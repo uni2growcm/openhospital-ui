@@ -41,6 +41,20 @@ export interface PrintPharmaceuticalStockPdfRequest {
     filter?: string;
 }
 
+export interface PrintPharmaceuticalStockWardExcelRequest {
+    wardCode: string;
+    dateFrom: string;
+    dateTo: string;
+    medicalCode?: number;
+    medicalTypeCode?: string;
+    sex?: string;
+    ageFrom?: number;
+    ageTo?: number;
+    weightFrom?: number;
+    weightTo?: number;
+    index?: number;
+}
+
 export interface PrintPharmaceuticalStockWardPdfRequest {
     date: string;
     wardCode: string;
@@ -53,39 +67,41 @@ export class ReportsApi extends BaseAPI {
 
     /**
      */
-    printDiseasesListPdf(): Observable<string>
-    printDiseasesListPdf(opts?: OperationOpts): Observable<AjaxResponse<string>>
-    printDiseasesListPdf(opts?: OperationOpts): Observable<string | AjaxResponse<string>> {
+    printDiseasesListPdf(): Observable<Blob>
+    printDiseasesListPdf(opts?: OperationOpts): Observable<AjaxResponse<Blob>>
+    printDiseasesListPdf(opts?: OperationOpts): Observable<Blob | AjaxResponse<Blob>> {
         const headers: HttpHeaders = {
         };
 
-        return this.request<string>({
+        return this.request<Blob>({
             url: '/reports/diseases-list',
             method: 'GET',
             headers,
+            responseType: 'blob',
         }, opts?.responseOpts);
     };
 
     /**
      */
-    printExamsListPdf(): Observable<string>
-    printExamsListPdf(opts?: OperationOpts): Observable<AjaxResponse<string>>
-    printExamsListPdf(opts?: OperationOpts): Observable<string | AjaxResponse<string>> {
+    printExamsListPdf(): Observable<Blob>
+    printExamsListPdf(opts?: OperationOpts): Observable<AjaxResponse<Blob>>
+    printExamsListPdf(opts?: OperationOpts): Observable<Blob | AjaxResponse<Blob>> {
         const headers: HttpHeaders = {
         };
 
-        return this.request<string>({
+        return this.request<Blob>({
             url: '/reports/exams-list',
             method: 'GET',
             headers,
+            responseType: 'blob',
         }, opts?.responseOpts);
     };
 
     /**
      */
-    printPharmaceuticalAMC({ date }: PrintPharmaceuticalAMCRequest): Observable<string>
-    printPharmaceuticalAMC({ date }: PrintPharmaceuticalAMCRequest, opts?: OperationOpts): Observable<AjaxResponse<string>>
-    printPharmaceuticalAMC({ date }: PrintPharmaceuticalAMCRequest, opts?: OperationOpts): Observable<string | AjaxResponse<string>> {
+    printPharmaceuticalAMC({ date }: PrintPharmaceuticalAMCRequest): Observable<Blob>
+    printPharmaceuticalAMC({ date }: PrintPharmaceuticalAMCRequest, opts?: OperationOpts): Observable<AjaxResponse<Blob>>
+    printPharmaceuticalAMC({ date }: PrintPharmaceuticalAMCRequest, opts?: OperationOpts): Observable<Blob | AjaxResponse<Blob>> {
 
         const headers: HttpHeaders = {
         };
@@ -94,19 +110,20 @@ export class ReportsApi extends BaseAPI {
 
         if (date != null) { query['date'] = (date as any).toISOString(); }
 
-        return this.request<string>({
+        return this.request<Blob>({
             url: '/reports/pharmaceuticalAMC',
             method: 'GET',
             headers,
             query,
+            responseType: 'blob',
         }, opts?.responseOpts);
     };
 
     /**
      */
-    printPharmaceuticalExpirationPdf({ fromDate, toDate }: PrintPharmaceuticalExpirationPdfRequest): Observable<string>
-    printPharmaceuticalExpirationPdf({ fromDate, toDate }: PrintPharmaceuticalExpirationPdfRequest, opts?: OperationOpts): Observable<AjaxResponse<string>>
-    printPharmaceuticalExpirationPdf({ fromDate, toDate }: PrintPharmaceuticalExpirationPdfRequest, opts?: OperationOpts): Observable<string | AjaxResponse<string>> {
+    printPharmaceuticalExpirationPdf({ fromDate, toDate }: PrintPharmaceuticalExpirationPdfRequest): Observable<Blob>
+    printPharmaceuticalExpirationPdf({ fromDate, toDate }: PrintPharmaceuticalExpirationPdfRequest, opts?: OperationOpts): Observable<AjaxResponse<Blob>>
+    printPharmaceuticalExpirationPdf({ fromDate, toDate }: PrintPharmaceuticalExpirationPdfRequest, opts?: OperationOpts): Observable<Blob | AjaxResponse<Blob>> {
         throwIfNullOrUndefined(fromDate, 'fromDate', 'printPharmaceuticalExpirationPdf');
         throwIfNullOrUndefined(toDate, 'toDate', 'printPharmaceuticalExpirationPdf');
 
@@ -118,11 +135,12 @@ export class ReportsApi extends BaseAPI {
             'toDate': (toDate as any).toISOString().split('T')[0],
         };
 
-        return this.request<string>({
+        return this.request<Blob>({
             url: '/reports/pharmaceuticalExpiration',
             method: 'GET',
             headers,
             query,
+            responseType: 'blob',
         }, opts?.responseOpts);
     };
 
@@ -143,9 +161,9 @@ export class ReportsApi extends BaseAPI {
 
     /**
      */
-    printPharmaceuticalStockCardPdf({ exportFileName, dateFrom, dateTo, medicalCode, wardCode }: PrintPharmaceuticalStockCardPdfRequest): Observable<string>
-    printPharmaceuticalStockCardPdf({ exportFileName, dateFrom, dateTo, medicalCode, wardCode }: PrintPharmaceuticalStockCardPdfRequest, opts?: OperationOpts): Observable<AjaxResponse<string>>
-    printPharmaceuticalStockCardPdf({ exportFileName, dateFrom, dateTo, medicalCode, wardCode }: PrintPharmaceuticalStockCardPdfRequest, opts?: OperationOpts): Observable<string | AjaxResponse<string>> {
+    printPharmaceuticalStockCardPdf({ exportFileName, dateFrom, dateTo, medicalCode, wardCode }: PrintPharmaceuticalStockCardPdfRequest): Observable<Blob>
+    printPharmaceuticalStockCardPdf({ exportFileName, dateFrom, dateTo, medicalCode, wardCode }: PrintPharmaceuticalStockCardPdfRequest, opts?: OperationOpts): Observable<AjaxResponse<Blob>>
+    printPharmaceuticalStockCardPdf({ exportFileName, dateFrom, dateTo, medicalCode, wardCode }: PrintPharmaceuticalStockCardPdfRequest, opts?: OperationOpts): Observable<Blob | AjaxResponse<Blob>> {
         throwIfNullOrUndefined(exportFileName, 'exportFileName', 'printPharmaceuticalStockCardPdf');
         throwIfNullOrUndefined(dateFrom, 'dateFrom', 'printPharmaceuticalStockCardPdf');
         throwIfNullOrUndefined(dateTo, 'dateTo', 'printPharmaceuticalStockCardPdf');
@@ -163,19 +181,20 @@ export class ReportsApi extends BaseAPI {
             'wardCode': wardCode,
         };
 
-        return this.request<string>({
+        return this.request<Blob>({
             url: '/reports/pharmaceuticalStockCard',
             method: 'GET',
             headers,
             query,
+            responseType: 'blob',
         }, opts?.responseOpts);
     };
 
     /**
      */
-    printPharmaceuticalStockPdf({ option, date, groupBy, sortBy, filter }: PrintPharmaceuticalStockPdfRequest): Observable<string>
-    printPharmaceuticalStockPdf({ option, date, groupBy, sortBy, filter }: PrintPharmaceuticalStockPdfRequest, opts?: OperationOpts): Observable<AjaxResponse<string>>
-    printPharmaceuticalStockPdf({ option, date, groupBy, sortBy, filter }: PrintPharmaceuticalStockPdfRequest, opts?: OperationOpts): Observable<string | AjaxResponse<string>> {
+    printPharmaceuticalStockPdf({ option, date, groupBy, sortBy, filter }: PrintPharmaceuticalStockPdfRequest): Observable<Blob>
+    printPharmaceuticalStockPdf({ option, date, groupBy, sortBy, filter }: PrintPharmaceuticalStockPdfRequest, opts?: OperationOpts): Observable<AjaxResponse<Blob>>
+    printPharmaceuticalStockPdf({ option, date, groupBy, sortBy, filter }: PrintPharmaceuticalStockPdfRequest, opts?: OperationOpts): Observable<Blob | AjaxResponse<Blob>> {
         throwIfNullOrUndefined(option, 'option', 'printPharmaceuticalStockPdf');
         throwIfNullOrUndefined(date, 'date', 'printPharmaceuticalStockPdf');
 
@@ -191,8 +210,44 @@ export class ReportsApi extends BaseAPI {
         if (sortBy != null) { query['sortBy'] = sortBy; }
         if (filter != null) { query['filter'] = filter; }
 
-        return this.request<string>({
+        return this.request<Blob>({
             url: '/reports/pharmaceuticalStock',
+            method: 'GET',
+            headers,
+            query,
+            responseType: 'blob',
+        }, opts?.responseOpts);
+    };
+
+    /**
+     */
+    printPharmaceuticalStockWardExcel({ wardCode, dateFrom, dateTo, medicalCode, medicalTypeCode, sex, ageFrom, ageTo, weightFrom, weightTo, index }: PrintPharmaceuticalStockWardExcelRequest): Observable<object>
+    printPharmaceuticalStockWardExcel({ wardCode, dateFrom, dateTo, medicalCode, medicalTypeCode, sex, ageFrom, ageTo, weightFrom, weightTo, index }: PrintPharmaceuticalStockWardExcelRequest, opts?: OperationOpts): Observable<AjaxResponse<object>>
+    printPharmaceuticalStockWardExcel({ wardCode, dateFrom, dateTo, medicalCode, medicalTypeCode, sex, ageFrom, ageTo, weightFrom, weightTo, index }: PrintPharmaceuticalStockWardExcelRequest, opts?: OperationOpts): Observable<object | AjaxResponse<object>> {
+        throwIfNullOrUndefined(wardCode, 'wardCode', 'printPharmaceuticalStockWardExcel');
+        throwIfNullOrUndefined(dateFrom, 'dateFrom', 'printPharmaceuticalStockWardExcel');
+        throwIfNullOrUndefined(dateTo, 'dateTo', 'printPharmaceuticalStockWardExcel');
+
+        const headers: HttpHeaders = {
+        };
+
+        const query: HttpQuery = { // required parameters are used directly since they are already checked by throwIfNullOrUndefined
+            'wardCode': wardCode,
+            'dateFrom': (dateFrom as any).toISOString(),
+            'dateTo': (dateTo as any).toISOString(),
+        };
+
+        if (medicalCode != null) { query['medicalCode'] = medicalCode; }
+        if (medicalTypeCode != null) { query['medicalTypeCode'] = medicalTypeCode; }
+        if (sex != null) { query['sex'] = sex; }
+        if (ageFrom != null) { query['ageFrom'] = ageFrom; }
+        if (ageTo != null) { query['ageTo'] = ageTo; }
+        if (weightFrom != null) { query['weightFrom'] = weightFrom; }
+        if (weightTo != null) { query['weightTo'] = weightTo; }
+        if (index != null) { query['index'] = index; }
+
+        return this.request<object>({
+            url: '/reports/pharmaceuticalStockWardExcel',
             method: 'GET',
             headers,
             query,
@@ -201,9 +256,9 @@ export class ReportsApi extends BaseAPI {
 
     /**
      */
-    printPharmaceuticalStockWardPdf({ date, wardCode }: PrintPharmaceuticalStockWardPdfRequest): Observable<string>
-    printPharmaceuticalStockWardPdf({ date, wardCode }: PrintPharmaceuticalStockWardPdfRequest, opts?: OperationOpts): Observable<AjaxResponse<string>>
-    printPharmaceuticalStockWardPdf({ date, wardCode }: PrintPharmaceuticalStockWardPdfRequest, opts?: OperationOpts): Observable<string | AjaxResponse<string>> {
+    printPharmaceuticalStockWardPdf({ date, wardCode }: PrintPharmaceuticalStockWardPdfRequest): Observable<Blob>
+    printPharmaceuticalStockWardPdf({ date, wardCode }: PrintPharmaceuticalStockWardPdfRequest, opts?: OperationOpts): Observable<AjaxResponse<Blob>>
+    printPharmaceuticalStockWardPdf({ date, wardCode }: PrintPharmaceuticalStockWardPdfRequest, opts?: OperationOpts): Observable<Blob | AjaxResponse<Blob>> {
         throwIfNullOrUndefined(date, 'date', 'printPharmaceuticalStockWardPdf');
         throwIfNullOrUndefined(wardCode, 'wardCode', 'printPharmaceuticalStockWardPdf');
 
@@ -215,11 +270,12 @@ export class ReportsApi extends BaseAPI {
             'wardCode': wardCode,
         };
 
-        return this.request<string>({
+        return this.request<Blob>({
             url: '/reports/pharmaceuticalStockWard',
             method: 'GET',
             headers,
             query,
+            responseType: 'blob',
         }, opts?.responseOpts);
     };
 
