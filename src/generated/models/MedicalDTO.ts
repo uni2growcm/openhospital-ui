@@ -21,70 +21,76 @@ import type {
  * @interface MedicalDTO
  */
 export interface MedicalDTO {
-    /**
-     * The id of the medical
-     * @type {number}
-     * @memberof MedicalDTO
-     */
-    code?: number;
-    /**
-     * The product code
-     * @type {string}
-     * @memberof MedicalDTO
-     */
-    prod_code?: string;
-    /**
-     * The medical type
-     * @type {MedicalTypeDTO}
-     * @memberof MedicalDTO
-     */
-    type?: MedicalTypeDTO;
-    /**
-     * The description of the medical
-     * @type {string}
-     * @memberof MedicalDTO
-     */
-    description?: string;
-    /**
-     * The initial quantity of the medical
-     * @type {number}
-     * @memberof MedicalDTO
-     */
-    initialqty?: number;
-    /**
-     * The number of pieces per packet
-     * @type {number}
-     * @memberof MedicalDTO
-     */
-    pcsperpck?: number;
-    /**
-     * The input quantity of the medical
-     * @type {number}
-     * @memberof MedicalDTO
-     */
-    inqty?: number;
-    /**
-     * The out quantity of the medical
-     * @type {number}
-     * @memberof MedicalDTO
-     */
-    outqty?: number;
-    /**
-     * The min quantity of the medical
-     * @type {number}
-     * @memberof MedicalDTO
-     */
-    minqty?: number;
-    /**
-     * The lots associated to the medical
-     * @type {Array<LotDTO>}
-     * @memberof MedicalDTO
-     */
-    lots?: Array<LotDTO>;
-    /**
-     * Lock
-     * @type {number}
-     * @memberof MedicalDTO
-     */
-    lock?: number;
+  /**
+   * The id of the medical
+   * @type {number}
+   * @memberof MedicalDTO
+   */
+  code?: number;
+  /**
+   * The product code
+   * @type {string}
+   * @memberof MedicalDTO
+   */
+  prod_code?: string;
+  /**
+   * The medical type
+   * @type {MedicalTypeDTO}
+   * @memberof MedicalDTO
+   */
+  type?: MedicalTypeDTO;
+  /**
+   * The description of the medical
+   * @type {string}
+   * @memberof MedicalDTO
+   */
+  description?: string;
+  /**
+   * The initial quantity of the medical
+   * @type {number}
+   * @memberof MedicalDTO
+   */
+  initialqty?: number;
+  /**
+   * The number of pieces per packet
+   * @type {number}
+   * @memberof MedicalDTO
+   */
+  pcsperpck?: number;
+  /**
+   * The input quantity of the medical
+   * @type {number}
+   * @memberof MedicalDTO
+   */
+  inqty?: number;
+  /**
+   * The out quantity of the medical
+   * @type {number}
+   * @memberof MedicalDTO
+   */
+  outqty?: number;
+  /**
+   * The min quantity of the medical
+   * @type {number}
+   * @memberof MedicalDTO
+   */
+  minqty?: number;
+  /**
+   * The deletad value of the medical
+   * @type {string}
+   * @memberof MedicalDTO
+   */
+  deleted?: string;
+  /**
+   * The lots associated to the medical
+   * @type {Array<LotDTO>}
+   * @memberof MedicalDTO
+   */
+  lots?: Array<LotDTO>;
+  /**
+   * Lock
+   * @type {number}
+   * @memberof MedicalDTO
+   */
+  lock?: number;
 }

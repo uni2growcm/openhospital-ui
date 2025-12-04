@@ -36,6 +36,7 @@ export function PharmaceuticalForm({
       return {
         ...values,
         type: medicalTypes.find((type) => type.code === values.type),
+        deleted: values.deleted ? "Y" : "N",
         initialqty: 0,
         inqty: 0,
         outqty: 0,
@@ -51,7 +52,6 @@ export function PharmaceuticalForm({
     (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       if (isEmpty(Object.keys(formState.errors))) {
-        console.log("Submitting values:", values);
         onSubmit?.(values as MedicalDTO);
       }
     },
@@ -97,6 +97,11 @@ export function PharmaceuticalForm({
           name="minqty"
         />
         <div className="col-start-1 col-span-full"></div>
+        <CheckboxFormField
+          label={t("pharmacy.form.fields.deleted")}
+          control={control}
+          name="deleted"
+        />
         {pharmaceutical && (
           <CheckboxFormField
             label={t("pharmacy.form.fields.ignoreSimilar")}
