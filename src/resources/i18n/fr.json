@@ -1282,7 +1282,8 @@
         "pleaseSelectWard": "Veuillez sélectionner un pavillon",
         "pieces": "pièces",
         "failedTocreateDischargeMovement": "Échec de la création du mouvement de décharge. Veuillez réessayer.",
-        "dischargeMovementCreatedSuccessfully": "Mouvement de décharge créé avec succès !"
+        "dischargeMovementCreatedSuccessfully": "Mouvement de décharge créé avec succès !",
+        "errorPatient": "Erreur lors de la recherche du patient"
       }
     }
   }

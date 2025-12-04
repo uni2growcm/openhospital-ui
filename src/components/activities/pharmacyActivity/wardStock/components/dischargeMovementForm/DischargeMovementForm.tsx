@@ -5,6 +5,7 @@ import {
   Radio,
   RadioGroup,
   Snackbar,
+  TextField,
 } from "@mui/material";
 import Button from "components/accessories/button/Button";
 import {
@@ -12,9 +13,11 @@ import {
   DateFormField,
   TextFormField,
 } from "components/accessories/forms";
+import PatientPicker from "components/accessories/patientPicker/PatientPicker";
 import { LotFormField } from "components/activities/pharmacyActivity/pharmaceuticalStock/components/forms/lotFormField";
 import StockWardModal from "components/activities/pharmacyActivity/wardStock/components/modal/StockWardModal";
-import { MedicalDTO, MovementWardDTO, PatientDTO } from "generated";
+import { MedicalDTO, MovementWardDTO } from "generated";
+import { DATETIME_FORMAT } from "libraries/consts";
 import { useTranslation } from "libraries/hooks";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useCallback, useMemo, useState } from "react";
@@ -47,39 +50,22 @@ export function WardDischargeForm({
 
   const wards = useAppSelector((s) => s.wards.allWards?.data ?? []);
   const wardsStatus = useAppSelector((s) => s.wards.allWards?.status);
-
-  const patients = useAppSelector((s) => s.patients.searchResults?.data ?? []);
-  const patientsStatus = useAppSelector(
-    (s) => s.patients.searchResults?.status
-  );
-
   const totalStock = movement?.quantity ?? 0;
-
   const schema = MovementWardDTOSchema;
 
   const {
     control,
     watch,
-    handleSubmit,
     formState: { errors },
     getValues,
+    setValue,
+    trigger,
   } = useForm<TFormValues>({
     resolver: zodResolver(schema),
     defaultValues: getInitialValues(movement?.medical, movement?.ward),
   });
 
   const formValues = watch();
-
-  const patientOptions = useMemo(
-    () =>
-      patients.map((p: PatientDTO) => ({
-        value: p.code?.toString() ?? "",
-        label: `${p.firstName ?? ""} ${p.secondName ?? ""}`,
-        ...p,
-      })),
-    [patients]
-  );
-
   const wardOptions = useMemo(
     () =>
       wards
@@ -111,7 +97,7 @@ export function WardDischargeForm({
   }, [totalStock, getValues, t]);
 
   const validateDestination = useCallback(() => {
-    if (destinationType === "patient" && !formValues.patient) {
+    if (destinationType === "patient" && !formValues.patient?.code) {
       setQuantityError(t("pharmacy.stock.ward.pleaseSelectPatient"));
       return false;
     }
@@ -138,6 +124,20 @@ export function WardDischargeForm({
     }
     await submitWardMovement(getValues());
   };
+
+  const onBlurCallback = useCallback(
+    (fieldName: keyof TFormValues) =>
+      (
+        e: React.SyntheticEvent,
+        value: TFormValues[keyof TFormValues] | null
+      ) => {
+        if (value && typeof value === "object") {
+          setValue(fieldName, value, { shouldValidate: true });
+        }
+        trigger(fieldName);
+      },
+    [setValue, trigger]
+  );
 
   const submitWardMovement = async (data: TFormValues) => {
     setIsSubmitting(true);
@@ -169,23 +169,15 @@ export function WardDischargeForm({
           ? wardTo?.description || ""
           : t("pharmacy.stock.ward.movementType.ward");
 
-
       const payload: MovementWardDTO = {
         ward: movement?.ward || { code: "" },
         date: (data.date as any).toISOString(),
+        isPatient: destinationType === "patient",
         patient: destinationType === "patient" ? formValues.patient : undefined,
         age: destinationType === "patient" ? data.age ?? undefined : undefined,
         weight:
           destinationType === "patient" ? data.weight ?? undefined : undefined,
-        description:
-          destinationType === "patient"
-            ? `${formValues.patient?.firstName || ""} ${
-                formValues.patient?.secondName || ""
-              }`
-            : destinationType === "ward"
-            ? wards.find((w) => w.code === (formValues.wardTo as any)?.code)
-                ?.description || ""
-            : t("pharmacy.stock.ward.movementType.ward"),
+        description: description ?? "",
         medical: movement?.medical!,
         quantity: data.quantity,
         units: t("pharmacy.stock.ward.pieces"),
@@ -194,6 +186,7 @@ export function WardDischargeForm({
             ? wards.find((w) => w.code === (formValues.wardTo as any)?.code)
             : undefined,
         wardFrom: undefined,
+        lot: formValues.lot,
       };
 
       await dispatch(createWardMovement(payload)).unwrap();
@@ -204,8 +197,11 @@ export function WardDischargeForm({
         severity: "success",
       });
 
-      setShowLotSection(false);
-      onSubmit?.(payload);
+      setTimeout(() => {
+        setShowLotSection(false);
+        onCancel?.();
+        onSubmit?.(payload);
+      }, 800);
     } catch (err) {
       setSnackbar({
         open: true,
@@ -219,24 +215,22 @@ export function WardDischargeForm({
 
   return (
     <form className="wardDischargeForm">
-      {/* Date + Pharmaceutical */}
       <div className="wardDischargeForm__row">
         <div className="wardDischargeForm__section wardDischargeForm__section--quarter">
           <DateFormField
             label={t("pharmacy.stock.ward.date")}
             control={control}
             name="date"
-            format="dd/MM/yyyy"
+            format={DATETIME_FORMAT}
           />
         </div>
 
         <div className="wardDischargeForm__section wardDischargeForm__section--three-quarter">
-          <TextFormField
+          <TextField
             label={t("pharmacy.stock.ward.pharmaceutical")}
-            control={control}
             name="medical"
             disabled
-            defaultValue={movement?.medical?.description ?? ""}
+            value={movement?.medical?.description || ""}
           />
         </div>
       </div>
@@ -277,18 +271,26 @@ export function WardDischargeForm({
         </div>
       </div>
 
-      {/* Patient selector */}
       {destinationType === "patient" && (
-        <AutocompleteFormField
-          control={control}
-          name="patient"
+        <PatientPicker
+          theme="regular"
+          fieldName="patient"
           label={t("pharmacy.stock.ward.selectPatient")}
-          options={patientOptions}
-          isLoading={patientsStatus === "LOADING"}
+          fieldValue={formValues.patient?.code ?? ""}
+          isValid={!!errors.patient}
+          errorText={
+            errors.patient ? t("pharmacy.stock.ward.errorPatient") : ""
+          }
+          onBlur={onBlurCallback("patient")}
+          onSelect={(patient) => {
+            setValue("patient", patient, {
+              shouldValidate: true,
+              shouldTouch: true,
+            });
+          }}
         />
       )}
 
-      {/* Ward selector */}
       {destinationType === "ward" && (
         <AutocompleteFormField
           control={control}
@@ -310,12 +312,10 @@ export function WardDischargeForm({
         )}
       </div>
 
-      {/* Lot Modal */}
       {movement?.medical && (
         <StockWardModal
           open={showLotSection}
           onClose={() => setShowLotSection(false)}
-          title={t("pharmacy.stock.ward.selectLot")}
         >
           <div className="wardDischargeForm__lotModalContent">
             <LotFormField
@@ -342,12 +342,11 @@ export function WardDischargeForm({
                   : t("pharmacy.stock.discharge")}
               </Button>
             </div>
-            {/* Snackbar */}
             <Snackbar
               open={snackbar.open}
               autoHideDuration={6000}
               onClose={() => setSnackbar((prev) => ({ ...prev, open: false }))}
-              anchorOrigin={{ vertical: "top", horizontal: "center" }}
+              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
             >
               <Alert
                 severity={snackbar.severity}
@@ -363,7 +362,6 @@ export function WardDischargeForm({
         </StockWardModal>
       )}
 
-      {/* Buttons */}
       <div className="wardDischargeForm__actions">
         <Button variant="outlined" onClick={onCancel}>
           {t("common.discard")}

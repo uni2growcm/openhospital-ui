@@ -207,16 +207,20 @@ export const dischargeMovements = createAsyncThunk<
 });
 
 export const createWardMovement = createAsyncThunk<
-  MovementWardDTO,
-  MovementWardDTO,
+  boolean, // return type
+  MovementWardDTO, // payload type
   { rejectValue: any }
 >("pharmacy/createWardMovement", async (movementWardDTO, thunkApi) => {
   try {
-    await firstValueFrom(
-      wrapper(() => wardStockApi.newMovementWard({ movementWardDTO }))
+    const result = await firstValueFrom(
+      wrapper(
+        () => wardStockApi.newMovementWard({ movementWardDTO }) // wrap in object
+      )
     );
-    return movementWardDTO;
+
+    return result; // result is already boolean
   } catch (error: any) {
     return thunkApi.rejectWithValue(error.response);
   }
 });
+

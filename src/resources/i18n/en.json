@@ -1386,7 +1386,8 @@
         "pleaseSelectWard": "Please select a ward",
         "pieces": "pieces",
         "failedTocreateDischargeMovement" : "Failed to create dischargem movement. Please try again.",
-        "dischargeMovementCreatedSuccessfully" : "Discharge movement created successfully!"
+        "dischargeMovementCreatedSuccessfully" : "Discharge movement created successfully!",
+        "errorPatient": "Error finding patient."
       }  
     }
   }

@@ -47,6 +47,7 @@ const PatientPicker: FC<IProps> = ({
   theme,
   initialValue,
   enableFocus = true,
+  onSelect,
 }) => {
   const [value, setValue] = useState((initialValue ?? {}) as PatientDTO);
   const { t } = useTranslation();
@@ -172,11 +173,11 @@ const PatientPicker: FC<IProps> = ({
             </div>
             <div className="searchPatient__results_list">
               {getCurrentPatients(patientData)?.map((patient, index) => (
-                <div onClick={() => handleClick(patient)}>
+                <div key={patient.code} onClick={() => handleClick(patient)}>
                   <PatientSearchItem
-                    key={index}
                     patient={patient}
                     hideAdditionalInformation={true}
+                    getPatientSuccessCallback={handleClick}
                   />
                 </div>
               ))}

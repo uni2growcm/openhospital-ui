@@ -3,6 +3,7 @@ import { CircularProgress, IconButton } from "@mui/material";
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import Table from "components/accessories/table/Table";
 import { TFilterField } from "components/accessories/table/filter/types";
+import { MedicalWardDTO } from "generated";
 import { useTranslation } from "libraries/hooks";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useEffect, useMemo, useState } from "react";
@@ -16,7 +17,7 @@ export function WardMedicalsTable() {
   const dispatch = useAppDispatch();
   const filter = useAppSelector((state) => state.pharmacy.wardStock.filter);
   const [openModal, setOpenModal] = useState(false);
-  const [selectedMedical, setSelectedMedical] = useState<any>(null);
+  const [selectedMedical, setSelectedMedical] = useState<MedicalWardDTO>({});
 
   const data = useAppSelector(
     (state) => state.pharmacy.wardMedicals.data ?? []
@@ -29,14 +30,14 @@ export function WardMedicalsTable() {
       state.pharmacy.wardMedicals.error?.message || t("errors.somethingwrong")
   ) as string;
 
-  const handleDischargeClick = (medical: any) => {
+  const handleDischargeClick = (medical: MedicalWardDTO) => {
     setSelectedMedical(medical);
     setOpenModal(true);
   };
 
   const handleCloseModal = () => {
     setOpenModal(false);
-    setSelectedMedical(null);
+    setSelectedMedical({});
   };
 
   const labelData = {
@@ -125,7 +126,7 @@ export function WardMedicalsTable() {
                   ...item,
                   code: item.id?.medical?.code ?? "",
                   pharmaceutical: item.id?.medical?.description ?? "",
-                  units: item.id?.medical?.prodCode ?? "",
+                  units: item.id?.medical?.prod_code ?? "",
                   quantity: (item.in_quantity ?? 0) - (item.out_quantity ?? 0),
                 }))}
                 manualFilter={false}
@@ -143,13 +144,15 @@ export function WardMedicalsTable() {
       <StockWardModal
         open={openModal}
         onClose={handleCloseModal}
-        title={t("pharmacy.stock.ward.dischargeMovement")}
+        title={`${t("pharmacy.stock.ward.dischargeMovement")} ${
+          selectedMedical?.id?.ward?.description ?? ""
+        }`}
       >
         {selectedMedical && (
           <WardDischargeForm
             movement={{
-              medical: selectedMedical.id?.medical,
-              ward: selectedMedical.ward ?? {},
+              medical: selectedMedical.id?.medical || {},
+              ward: selectedMedical.id?.ward!,
               quantity:
                 (selectedMedical.in_quantity ?? 0) -
                 (selectedMedical.out_quantity ?? 0),

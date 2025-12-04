@@ -35,7 +35,7 @@ export function getInitialValues(
     description: "Ward medical discharge",
     medical: medical,
     quantity: 0,
-    units: medical?.prodCode ?? "",
+    units: medical?.prod_code ?? "",
     wardTo: undefined,
     wardFrom: ward ? { code: ward.code ?? "" } : undefined,
     lot: undefined,
