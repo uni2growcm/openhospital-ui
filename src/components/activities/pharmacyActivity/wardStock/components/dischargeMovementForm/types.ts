@@ -1,11 +1,11 @@
-import { MedicalDTO, MovementWardDTO, WardDTO } from "generated";
+import { MedicalDTO, MedicalWardDTO, MovementWardDTO, WardDTO } from "generated";
 import { z } from "zod";
 import { MovementWardDTOSchema } from "./const";
 
 export type TFormValues = z.infer<typeof MovementWardDTOSchema>;
 
 export interface IWardDischargeFormProps {
-  movement: { medical: MedicalDTO; ward: WardDTO; quantity: number } | null;
+  wardMedical:MedicalWardDTO;
   onCancel: () => void;
   onSubmit?: (values: MovementWardDTO) => void;
 }

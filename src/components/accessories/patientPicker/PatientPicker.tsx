@@ -47,7 +47,6 @@ const PatientPicker: FC<IProps> = ({
   theme,
   initialValue,
   enableFocus = true,
-  onSelect,
 }) => {
   const [value, setValue] = useState((initialValue ?? {}) as PatientDTO);
   const { t } = useTranslation();

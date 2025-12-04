@@ -28,7 +28,7 @@ import "./style.scss";
 import { DestinationType, IWardDischargeFormProps, TFormValues } from "./types";
 
 export function WardDischargeForm({
-  movement,
+  wardMedical,
   onCancel,
   onSubmit,
 }: IWardDischargeFormProps) {
@@ -50,7 +50,8 @@ export function WardDischargeForm({
 
   const wards = useAppSelector((s) => s.wards.allWards?.data ?? []);
   const wardsStatus = useAppSelector((s) => s.wards.allWards?.status);
-  const totalStock = movement?.quantity ?? 0;
+  const totalStock =
+    (wardMedical.in_quantity ?? 0) - (wardMedical.out_quantity ?? 0);
   const schema = MovementWardDTOSchema;
 
   const {
@@ -62,30 +63,29 @@ export function WardDischargeForm({
     trigger,
   } = useForm<TFormValues>({
     resolver: zodResolver(schema),
-    defaultValues: getInitialValues(movement?.medical, movement?.ward),
+    defaultValues: getInitialValues(wardMedical?.id?.medical, wardMedical?.id?.ward),
   });
 
   const formValues = watch();
   const wardOptions = useMemo(
     () =>
       wards
-        .filter((w) => w.code !== movement?.ward?.code)
+        .filter((w) => w.code !== wardMedical?.id?.ward?.code)
         .map((w) => ({
           value: w.code ?? "",
           label: w.description ?? "",
           ...w,
         })),
-    [wards, movement?.ward?.code]
+    [wards, wardMedical?.id?.ward?.code]
   );
 
   const validateQuantity = useCallback(() => {
-    const qty = getValues("quantity");
-
-    if (!qty || qty <= 0) {
+    const quantity = formValues.quantity;
+    if (!quantity || quantity <= 0) {
       setQuantityError(t("pharmacy.stock.ward.quantityGreaterThanZero"));
       return false;
     }
-    if (qty > totalStock) {
+    if (quantity > totalStock) {
       setQuantityError(
         `${t(
           "pharmacy.stock.ward.quantityNotExceedoTtalStock"
@@ -94,36 +94,127 @@ export function WardDischargeForm({
       return false;
     }
     return true;
-  }, [totalStock, getValues, t]);
+  }, [formValues.quantity, totalStock, t]);
 
   const validateDestination = useCallback(() => {
     if (destinationType === "patient" && !formValues.patient?.code) {
       setQuantityError(t("pharmacy.stock.ward.pleaseSelectPatient"));
       return false;
     }
-    if (destinationType === "ward" && !formValues.wardTo) {
+    if (destinationType === "ward" && !formValues.wardTo?.code) {
       setQuantityError(t("pharmacy.stock.ward.pleaseSelectWard"));
       return false;
     }
     return true;
-  }, [destinationType, formValues, t]);
+  }, [destinationType, formValues.patient?.code, formValues.wardTo?.code, t]);
 
-  const handleOpenLotModal = () => {
+  const handleOpenLotModal = useCallback(() => {
     setQuantityError("");
     if (!validateQuantity()) return;
     if (!validateDestination()) return;
 
     setShowLotSection(true);
-  };
+  }, [validateQuantity, validateDestination]);
 
-  const handleLotConfirm = async () => {
+  const submitWardMovement = useCallback(
+    async (data: TFormValues) => {
+      setIsSubmitting(true);
+      try {
+        if (!wardMedical?.id?.ward) {
+          setSnackbar({
+            open: true,
+            message: t("pharmacy.stock.ward.failedTocreateDischargeMovement"),
+            severity: "error",
+          });
+          setIsSubmitting(false);
+          return;
+        }
+
+        const wardTo =
+          destinationType === "ward"
+            ? wards.find((w) => w.code === (formValues.wardTo as any)?.code)
+            : undefined;
+
+        const patient =
+          destinationType === "patient" ? formValues.patient : undefined;
+
+        const description =
+          destinationType === "patient"
+            ? `${patient?.firstName || ""} ${patient?.secondName || ""}`
+            : destinationType ===
+              t("pharmacy.stock.ward.movementType.toAnotherWard")
+            ? wardTo?.description || ""
+            : t("pharmacy.stock.ward.movementType.ward");
+
+        const payload: MovementWardDTO = {
+          ward: wardMedical?.id?.ward || { code: "" },
+          date: (data.date as any).toISOString(),
+          isPatient: destinationType === "patient",
+          patient:
+            destinationType === "patient" ? formValues.patient : undefined,
+          age:
+            destinationType === "patient" ? data.age ?? undefined : undefined,
+          weight:
+            destinationType === "patient"
+              ? data.weight ?? undefined
+              : undefined,
+          description: description ?? "",
+          medical: wardMedical?.id?.medical!,
+          quantity: data.quantity,
+          units: t("pharmacy.stock.ward.pieces"),
+          wardTo:
+            destinationType === "ward"
+              ? wards.find((w) => w.code === (formValues.wardTo as any)?.code)
+              : undefined,
+          wardFrom: undefined,
+          lot: formValues.lot,
+        };
+
+        await dispatch(createWardMovement(payload)).unwrap();
+
+        setSnackbar({
+          open: true,
+          message: t(
+            "pharmacy.stock.ward.dischargeMovementCreatedSuccessfully"
+          ),
+          severity: "success",
+        });
+
+        setTimeout(() => {
+          setShowLotSection(false);
+          onCancel?.();
+          onSubmit?.(payload);
+        }, 800);
+      } catch (err) {
+        setSnackbar({
+          open: true,
+          message: t("pharmacy.stock.ward.failedTocreateDischargeMovement"),
+          severity: "error",
+        });
+      } finally {
+        setIsSubmitting(false);
+      }
+    },
+    [
+      wardMedical,
+      wards,
+      destinationType,
+      formValues,
+      t,
+      onCancel,
+      onSubmit,
+      dispatch,
+    ]
+  );
+
+  const handleLotConfirm = useCallback(async () => {
     const lot = getValues("lot");
     if (!lot) {
       setQuantityError(t("pharmacy.stock.ward.pleaseSelectLot"));
       return;
     }
     await submitWardMovement(getValues());
-  };
+  }, [getValues, submitWardMovement, t]);
 
   const onBlurCallback = useCallback(
     (fieldName: keyof TFormValues) =>
@@ -138,80 +229,6 @@ export function WardDischargeForm({
       },
     [setValue, trigger]
   );
-
-  const submitWardMovement = async (data: TFormValues) => {
-    setIsSubmitting(true);
-
-    try {
-      if (!movement?.ward) {
-        setSnackbar({
-          open: true,
-          message: t("pharmacy.stock.ward.failedTocreateDischargeMovement"),
-          severity: "error",
-        });
-        setIsSubmitting(false);
-        return;
-      }
-
-      const wardTo =
-        destinationType === "ward"
-          ? wards.find((w) => w.code === (formValues.wardTo as any)?.code)
-          : undefined;
-
-      const patient =
-        destinationType === "patient" ? formValues.patient : undefined;
-
-      const description =
-        destinationType === "patient"
-          ? `${patient?.firstName || ""} ${patient?.secondName || ""}`
-          : destinationType ===
-            t("pharmacy.stock.ward.movementType.toAnotherWard")
-          ? wardTo?.description || ""
-          : t("pharmacy.stock.ward.movementType.ward");
-
-      const payload: MovementWardDTO = {
-        ward: movement?.ward || { code: "" },
-        date: (data.date as any).toISOString(),
-        isPatient: destinationType === "patient",
-        patient: destinationType === "patient" ? formValues.patient : undefined,
-        age: destinationType === "patient" ? data.age ?? undefined : undefined,
-        weight:
-          destinationType === "patient" ? data.weight ?? undefined : undefined,
-        description: description ?? "",
-        medical: movement?.medical!,
-        quantity: data.quantity,
-        units: t("pharmacy.stock.ward.pieces"),
-        wardTo:
-          destinationType === "ward"
-            ? wards.find((w) => w.code === (formValues.wardTo as any)?.code)
-            : undefined,
-        wardFrom: undefined,
-        lot: formValues.lot,
-      };
-
-      await dispatch(createWardMovement(payload)).unwrap();
-
-      setSnackbar({
-        open: true,
-        message: t("pharmacy.stock.ward.dischargeMovementCreatedSuccessfully"),
-        severity: "success",
-      });
-
-      setTimeout(() => {
-        setShowLotSection(false);
-        onCancel?.();
-        onSubmit?.(payload);
-      }, 800);
-    } catch (err) {
-      setSnackbar({
-        open: true,
-        message: t("pharmacy.stock.ward.failedTocreateDischargeMovement"),
-        severity: "error",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   return (
     <form className="wardDischargeForm">
@@ -230,7 +247,7 @@ export function WardDischargeForm({
             label={t("pharmacy.stock.ward.pharmaceutical")}
             name="medical"
             disabled
-            value={movement?.medical?.description || ""}
+            value={wardMedical?.id?.medical?.description || ""}
           />
         </div>
       </div>
@@ -282,12 +299,6 @@ export function WardDischargeForm({
             errors.patient ? t("pharmacy.stock.ward.errorPatient") : ""
           }
           onBlur={onBlurCallback("patient")}
-          onSelect={(patient) => {
-            setValue("patient", patient, {
-              shouldValidate: true,
-              shouldTouch: true,
-            });
-          }}
         />
       )}
 
@@ -312,7 +323,7 @@ export function WardDischargeForm({
         )}
       </div>
 
-      {movement?.medical && (
+      {wardMedical?.id?.medical && (
         <StockWardModal
           open={showLotSection}
           onClose={() => setShowLotSection(false)}
@@ -320,7 +331,7 @@ export function WardDischargeForm({
           <div className="wardDischargeForm__lotModalContent">
             <LotFormField
               control={control}
-              medical={movement.medical as MedicalDTO}
+              medical={wardMedical?.id?.medical as MedicalDTO}
               name="lot"
             />
 

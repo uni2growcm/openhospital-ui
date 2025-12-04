@@ -150,13 +150,7 @@ export function WardMedicalsTable() {
       >
         {selectedMedical && (
           <WardDischargeForm
-            movement={{
-              medical: selectedMedical.id?.medical || {},
-              ward: selectedMedical.id?.ward!,
-              quantity:
-                (selectedMedical.in_quantity ?? 0) -
-                (selectedMedical.out_quantity ?? 0),
-            }}
+            wardMedical={selectedMedical}
             onCancel={handleCloseModal}
           />
         )}
