@@ -1237,7 +1237,7 @@
       "labels": {
         "existingLots": "Lots existants",
         "newLot": "Nouveau lot",
-        "change-on-this": "Changement sur ce lot",
+        "change-on-this": "Utiliser ce lot",
         "select-lot": "Selectionner le lot",
         "lots": "Lots",
         "total": "Quantity totale en stock: <1>{{count}}</1>"
