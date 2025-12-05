@@ -1233,6 +1233,27 @@
       "pharmaceutical-stock": "Stock pharmaceutique",
       "ward-stock": "Stock du pavillon"
     },
+    "lot": {
+      "labels": {
+        "existingLots": "Lots existants",
+        "newLot": "Nouveau lot",
+        "change-on-this": "Changement sur ce lot",
+        "select-lot": "Selectionner le lot",
+        "lots": "Lots",
+        "total": "Quantity totale en stock: <1>{{count}}</1>"
+      },
+      "fields": {
+        "code": "Code du lot",
+        "preparationDate": "Date de production",
+        "dueDate": "Date de peremption",
+        "cost": "Coût unitaire",
+        "quantity": "Quantité",
+        "ward": "Vers le pavillon",
+        "mainStoreQuantity": "Quantité dans le magasin principal",
+        "wardsTotalQuantity": "Quantité dans le pavillons",
+        "overallQuantity": "Quantité totale"
+      }
+    },
     "stock": {
       "refNo": "Ref",
       "lot": "Lot",
@@ -1283,7 +1304,8 @@
         "pieces": "pièces",
         "failedTocreateDischargeMovement": "Échec de la création du mouvement de décharge. Veuillez réessayer.",
         "dischargeMovementCreatedSuccessfully": "Mouvement de décharge créé avec succès !",
-        "errorPatient": "Erreur lors de la recherche du patient"
+        "errorPatient": "Erreur lors de la recherche du patient",
+        "movementCreated": "Mouvement créé"
       }
     }
   }

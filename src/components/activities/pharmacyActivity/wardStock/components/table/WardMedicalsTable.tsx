@@ -1,23 +1,20 @@
-import LogoutIcon from "@mui/icons-material/Logout";
-import { CircularProgress, IconButton } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import Table from "components/accessories/table/Table";
 import { TFilterField } from "components/accessories/table/filter/types";
-import { MedicalWardDTO } from "generated";
+import { PATHS } from "consts";
 import { useTranslation } from "libraries/hooks";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router";
 import { getMovements } from "state/pharmacy";
-import { WardDischargeForm } from "../dischargeMovementForm/DischargeMovementForm";
-import StockWardModal from "../modal/StockWardModal";
 
 export function WardMedicalsTable() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
   const filter = useAppSelector((state) => state.pharmacy.wardStock.filter);
-  const [openModal, setOpenModal] = useState(false);
-  const [selectedMedical, setSelectedMedical] = useState<MedicalWardDTO>({});
 
   const data = useAppSelector(
     (state) => state.pharmacy.wardMedicals.data ?? []
@@ -30,15 +27,15 @@ export function WardMedicalsTable() {
       state.pharmacy.wardMedicals.error?.message || t("errors.somethingwrong")
   ) as string;
 
-  const handleDischargeClick = (medical: MedicalWardDTO) => {
-    setSelectedMedical(medical);
-    setOpenModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setOpenModal(false);
-    setSelectedMedical({});
-  };
+  const handleDischarge = useCallback((row: any) => {
+    console.log("Discharge row:", row);
+    navigate(
+      PATHS.pharmacy_ward_stock_discharge
+        .replace(":medId", row.code)
+        .replace(":lotCode", row.lotCode)
+        .replace(":wardCode", row.wardCode)
+    );
+  }, [navigate]);
 
   const labelData = {
     pharmaceutical: t("pharmacy.stock.ward.pharmaceutical"),
@@ -85,18 +82,11 @@ export function WardMedicalsTable() {
   const formattedData = useMemo(() => {
     return data.map((item) => ({
       code: item.id?.medical?.code ?? "",
+      lotCode: item.id?.lot?.code ?? "",
+      wardCode: item.id?.ward?.code ?? "",
       pharmaceutical: item.id?.medical?.description ?? "",
       units: "",
       quantity: (item.in_quantity ?? 0) - (item.out_quantity ?? 0),
-      action: (
-        <IconButton
-          size="small"
-          onClick={() => handleDischargeClick(item)}
-          title={t("pharmacy.stock.discharge")}
-        >
-          <LogoutIcon sx={{ color: "black" }} />
-        </IconButton>
-      ),
     }));
   }, [data, filter, t]);
 
@@ -130,6 +120,7 @@ export function WardMedicalsTable() {
                   quantity: (item.in_quantity ?? 0) - (item.out_quantity ?? 0),
                 }))}
                 manualFilter={false}
+                onDischarge={(row) => handleDischarge(row)}
               />
             );
           case "SUCCESS_EMPTY":
@@ -140,21 +131,6 @@ export function WardMedicalsTable() {
             return <CircularProgress />;
         }
       })()}
-
-      <StockWardModal
-        open={openModal}
-        onClose={handleCloseModal}
-        title={`${t("pharmacy.stock.ward.dischargeMovement")} ${
-          selectedMedical?.id?.ward?.description ?? ""
-        }`}
-      >
-        {selectedMedical && (
-          <WardDischargeForm
-            wardMedical={selectedMedical}
-            onCancel={handleCloseModal}
-          />
-        )}
-      </StockWardModal>
     </div>
   );
 }

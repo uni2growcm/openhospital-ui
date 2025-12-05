@@ -1372,10 +1372,10 @@
         },
         "dischargeMovement": "Discharge movement from ",
         "destination": "Destination",
-        "toPatient": "Vers un patient",
-        "internalUse": "Usage interne",
-        "selectPatient": "Sélectionner un patient",
-        "selectWard": "Sélectionner un pavillon",
+        "toPatient": "To patient",
+        "internalUse": "Internal use",
+        "selectPatient": "Select a patient",
+        "selectWard": "Select a ward",
         "totalStock": "Total stock",
         "selectLot": "Select lot",
         "quantityGreaterThanZero": "Quantity must be greater than zero",
@@ -1385,9 +1385,10 @@
         "pleaseSelectPatient": "Please select a patient",
         "pleaseSelectWard": "Please select a ward",
         "pieces": "pieces",
-        "failedTocreateDischargeMovement" : "Failed to create dischargem movement. Please try again.",
-        "dischargeMovementCreatedSuccessfully" : "Discharge movement created successfully!",
-        "errorPatient": "Error finding patient."
+        "failedTocreateDischargeMovement": "Failed to create dischargem movement. Please try again.",
+        "dischargeMovementCreatedSuccessfully": "Discharge movement created successfully !",
+        "errorPatient": "Error finding patient.",
+        "movementCreated": "Movement created"
       }  
     }
   }

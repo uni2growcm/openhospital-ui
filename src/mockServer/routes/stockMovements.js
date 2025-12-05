@@ -64,22 +64,44 @@ export const stockMovementsRoutes = (server) => {
 
     if (!lot) {
       errors.push("please select a lot");
-    } 
-
-    if (errors.length > 0) {
-      return res.status(400).json({
-        success: false,
-        errors: errors,
-      });
     }
 
-    const newMovement = {
-      ...body,
-      code: WARD_MOVEMENTS.length + 1,
-    };
+    if (errors.length > 0) {
+      return res.status(400).json({ success: false, errors });
+    }
 
+    const newMovement = { ...body, code: WARD_MOVEMENTS.length + 1 };
     WARD_MOVEMENTS.push(newMovement);
-
+    
     res.status(201).json(true);
+  });
+  server.namespace("/medicalstockward", () => {
+    server.get("/:code").intercept((req, res) => {
+      const code = req.params.code;
+      res
+        .status(200)
+        .json(WARD_MEDICALS.filter((ward) => ward.id?.ward?.code === code));
+    });
+    server
+      .get("/:wardCode/medical/:medicalId/lot/:lotCode")
+      .intercept((req, res) => {
+        const { wardCode, medicalId, lotCode } = req.params;
+
+        const item = WARD_MEDICALS.find(
+          (w) =>
+            w.id?.ward?.code === wardCode &&
+            String(w.id?.medical?.code) === String(medicalId) &&
+            String(w.id?.lot?.code) === String(lotCode)
+        );
+
+        if (!item) {
+          return res.status(404).json({
+            success: false,
+            message: "Medical ward record not found.",
+          });
+        }
+
+        return res.status(200).json(item);
+      });
   });
 };
