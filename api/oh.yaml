@@ -4852,6 +4852,37 @@ paths:
                   $ref: "#/components/schemas/MedicalWardDTO"
       security:
       - bearerAuth: []
+  /medicalstockward/{ward_code}/medical/{medical_id}/lot/{lot_code}:
+    get:
+      tags:
+      - Medical Stock Ward
+      operationId: getMedicalWardByWardMedicalAndLot
+      parameters:
+      - name: ward_code
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: medical_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: lot_code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalWardDTO"
+      security:
+      - bearerAuth: []
   /medicalstockward/movements/{ward_code}:
     get:
       tags:
@@ -6550,13 +6581,13 @@ components:
           format: int32
           description: lock
           example: 0
-        pharmacy:
+        opd:
           type: boolean
         female:
           type: boolean
         male:
           type: boolean
-        opd:
+        pharmacy:
           type: boolean
       required:
       - beds
@@ -7290,11 +7321,11 @@ components:
           type: string
           description: "Flag record deleted, values are 'Y' OR 'N' "
           example: "N"
-        fhu:
-          type: string
         yprog:
           type: integer
           format: int32
+        fhu:
+          type: string
       required:
       - admDate
       - admitted
