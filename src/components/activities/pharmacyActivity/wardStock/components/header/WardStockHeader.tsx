@@ -2,7 +2,12 @@ import { MedicalServices } from "@mui/icons-material";
 import Button from "components/accessories/button/Button";
 import { WardDTO } from "generated";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
-import React, { FunctionComponent, useCallback, useEffect } from "react";
+import React, {
+  FunctionComponent,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
 import { updateWardStockFIilter } from "state/pharmacy";
 import "./styles.scss";
@@ -19,6 +24,7 @@ export const WardStockHeader: FunctionComponent<WardStockHeaderProps> = ({
 }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const [wardCode, setWardCode] = useState<string>("c");
 
   const wards = useAppSelector(
     (state) => state.wards.allWards.data?.filter((ward) => ward.pharmacy) ?? []
@@ -29,6 +35,7 @@ export const WardStockHeader: FunctionComponent<WardStockHeaderProps> = ({
   const handleWardSelection = useCallback(
     (ward: WardDTO) => () => {
       dispatch(updateWardStockFIilter({ ...filter, ward }));
+      setWardCode(ward.code!);
     },
     [dispatch, filter]
   );
@@ -52,7 +59,7 @@ export const WardStockHeader: FunctionComponent<WardStockHeaderProps> = ({
   }, [wards, filter, dispatch]);
 
   const handleExport = (action: string) => {
-    handleExportReport("c", action);
+    handleExportReport(wardCode, action);
   };
 
   return (

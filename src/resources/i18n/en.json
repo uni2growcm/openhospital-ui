@@ -580,7 +580,8 @@
     "cancelMessage": "Are you sure to cancel this operation ? All unsaved data will be lost.",
     "back": "Back",
     "backToEdit": "No, keep editing",
-    "discardMessage": "Are you sure to discard this operation ? All unsaved data will be lost."
+    "discardMessage": "Are you sure to discard this operation ? All unsaved data will be lost.",
+    "print": "Print"
   },
   "permission": {
     "denied": "Permission denied",
@@ -1370,6 +1371,18 @@
           "ward": "Internal"
         }
       }
+    },
+    "selectDate": "Select a date",
+    "selectReport": "Select a report",
+    "selectOption": "Select an option",
+    "selectMedical": "Select Medical",
+    "selectWard": "Select ward",
+    "selectDateTo": "Date to",
+    "selectDateFrom": "Date From",
+    "errorMessageForm": "This field is required",
+    "option": {
+      "withLot": "With lot",
+      "onlyQuantity": "Only quantity"
     }
   }
 }

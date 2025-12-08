@@ -61,6 +61,16 @@ export const pharmacySlice = createSlice({
       state.printPharmaceuticalStockWardPdf =
         initial.printPharmaceuticalStockWardPdf;
     },
+    resetPrintPharmaceuticalStockPdf: (state) => {
+      state.printPharmaceuticalStockPdf = initial.printPharmaceuticalStockPdf;
+    },
+    resetPrintPharmaceuticalStockCardPdf: (state) => {
+      state.printPharmaceuticalStockCardPdf =
+        initial.printPharmaceuticalStockCardPdf;
+    },
+    resetPrintPharmaceuticalAMCPdf: (state) => {
+      state.printPharmaceuticalAMCPdf = initial.printPharmaceuticalAMCPdf;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -185,7 +195,7 @@ export const pharmacySlice = createSlice({
       .addCase(thunks.updateMedical.rejected, (state, action) => {
         state.updateMedical = ApiResponse.error(action.payload);
       })
-      // Print pharmaceutical stock report
+      // Print pharmaceutical stock ward pdf report
       .addCase(thunks.printPharmaceuticalStockWardPdf.pending, (state) => {
         state.printPharmaceuticalStockWardPdf = ApiResponse.loading();
       })
@@ -210,7 +220,68 @@ export const pharmacySlice = createSlice({
             action.payload
           );
         }
-      );
+      )
+      // Print pharmaceutical stock pdf report
+      .addCase(thunks.printPharmaceuticalStockPdf.pending, (state) => {
+        state.printPharmaceuticalStockPdf = ApiResponse.loading();
+      })
+      .addCase(
+        thunks.printPharmaceuticalStockPdf.fulfilled,
+        (state, action) => {
+          if (action.payload instanceof Blob) {
+            state.printPharmaceuticalStockPdf = ApiResponse.value(
+              action.payload
+            );
+          } else {
+            state.printPharmaceuticalStockPdf = ApiResponse.error(
+              action.payload
+            );
+          }
+        }
+      )
+      .addCase(thunks.printPharmaceuticalStockPdf.rejected, (state, action) => {
+        state.printPharmaceuticalStockPdf = ApiResponse.error(action.payload);
+      })
+      // Print pharmaceutical stock card pdf report
+      .addCase(thunks.printPharmaceuticalStockCardPdf.pending, (state) => {
+        state.printPharmaceuticalStockCardPdf = ApiResponse.loading();
+      })
+      .addCase(
+        thunks.printPharmaceuticalStockCardPdf.fulfilled,
+        (state, action) => {
+          if (action.payload instanceof Blob) {
+            state.printPharmaceuticalStockCardPdf = ApiResponse.value(
+              action.payload
+            );
+          } else {
+            state.printPharmaceuticalStockCardPdf = ApiResponse.error(
+              action.payload
+            );
+          }
+        }
+      )
+      .addCase(
+        thunks.printPharmaceuticalStockCardPdf.rejected,
+        (state, action) => {
+          state.printPharmaceuticalStockCardPdf = ApiResponse.error(
+            action.payload
+          );
+        }
+      )
+      // Print pharmaceutical AMC pdf report
+      .addCase(thunks.printPharmaceuticalAMCPdf.pending, (state) => {
+        state.printPharmaceuticalAMCPdf = ApiResponse.loading();
+      })
+      .addCase(thunks.printPharmaceuticalAMCPdf.fulfilled, (state, action) => {
+        if (action.payload instanceof Blob) {
+          state.printPharmaceuticalAMCPdf = ApiResponse.value(action.payload);
+        } else {
+          state.printPharmaceuticalAMCPdf = ApiResponse.error(action.payload);
+        }
+      })
+      .addCase(thunks.printPharmaceuticalAMCPdf.rejected, (state, action) => {
+        state.printPharmaceuticalAMCPdf = ApiResponse.error(action.payload);
+      });
   },
 });
 
@@ -231,4 +302,7 @@ export const {
   resetNewMedical,
   resetUpdateMedical,
   resetPrintPharmaceuticalStockWardPdf,
+  resetPrintPharmaceuticalStockPdf,
+  resetPrintPharmaceuticalStockCardPdf,
+  resetPrintPharmaceuticalAMCPdf,
 } = pharmacySlice.actions;

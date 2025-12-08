@@ -58,6 +58,9 @@ export interface PrintPharmaceuticalStockWardExcelRequest {
 export interface PrintPharmaceuticalStockWardPdfRequest {
     date: string;
     wardCode: string;
+    index?: number;
+    dateForm?: string;
+    dateTo?: string;
 }
 
 /**
@@ -256,9 +259,9 @@ export class ReportsApi extends BaseAPI {
 
     /**
      */
-    printPharmaceuticalStockWardPdf({ date, wardCode }: PrintPharmaceuticalStockWardPdfRequest): Observable<Blob>
-    printPharmaceuticalStockWardPdf({ date, wardCode }: PrintPharmaceuticalStockWardPdfRequest, opts?: OperationOpts): Observable<AjaxResponse<Blob>>
-    printPharmaceuticalStockWardPdf({ date, wardCode }: PrintPharmaceuticalStockWardPdfRequest, opts?: OperationOpts): Observable<Blob | AjaxResponse<Blob>> {
+    printPharmaceuticalStockWardPdf({ date, wardCode, index, dateForm, dateTo }: PrintPharmaceuticalStockWardPdfRequest): Observable<Blob>
+    printPharmaceuticalStockWardPdf({ date, wardCode, index, dateForm, dateTo }: PrintPharmaceuticalStockWardPdfRequest, opts?: OperationOpts): Observable<AjaxResponse<Blob>>
+    printPharmaceuticalStockWardPdf({ date, wardCode, index, dateForm, dateTo }: PrintPharmaceuticalStockWardPdfRequest, opts?: OperationOpts): Observable<Blob | AjaxResponse<Blob>> {
         throwIfNullOrUndefined(date, 'date', 'printPharmaceuticalStockWardPdf');
         throwIfNullOrUndefined(wardCode, 'wardCode', 'printPharmaceuticalStockWardPdf');
 
@@ -269,6 +272,10 @@ export class ReportsApi extends BaseAPI {
             'date': (date as any).toISOString(),
             'wardCode': wardCode,
         };
+
+        if (index != null) { query['index'] = index; }
+        if (dateForm != null) { query['dateForm'] = (dateForm as any).toISOString(); }
+        if (dateTo != null) { query['dateTo'] = (dateTo as any).toISOString(); }
 
         return this.request<Blob>({
             url: '/reports/pharmaceuticalStockWard',

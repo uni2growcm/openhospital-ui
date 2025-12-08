@@ -579,7 +579,8 @@
     "cancelMessage": "Are you sure to cancel this operation ? All unsaved data will be lost.",
     "back": "Back",
     "backToEdit": "No, keep editing",
-    "discardMessage": "Are you sure to discard this operation ? All unsaved data will be lost."
+    "discardMessage": "Are you sure to discard this operation ? All unsaved data will be lost.",
+    "print": "Imprimer"
   },
   "permission": {
     "denied": "Autorisation refusée",
@@ -1259,6 +1260,18 @@
       "order": "Commander",
       "expiring": "Expirer",
       "amcReport": "Rapport AMC"
+    },
+    "selectDate": "Sélectionnez une date",
+    "selectReport": "Sélectionnez un report",
+    "selectOption": "Sélectionnez une option",
+    "selectMedical": "Sélectionnez médicament",
+    "selectWard": "Selectionnez un pavillon",
+    "selectDateTo": "A",
+    "selectDateFrom": "De",
+    "errorMessageForm": "Ce champ est obligatoire",
+    "option": {
+      "withLot": "Avec lot",
+      "onlyQuantity": "Seulement la quantité"
     }
   }
 }

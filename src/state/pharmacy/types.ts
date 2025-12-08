@@ -28,6 +28,9 @@ export type IPharmacyState = {
     filter: TWardStockFIlter;
   };
   printPharmaceuticalStockWardPdf: ApiResponse<Blob>;
+  printPharmaceuticalStockPdf: ApiResponse<Blob>;
+  printPharmaceuticalStockCardPdf: ApiResponse<Blob>;
+  printPharmaceuticalAMCPdf: ApiResponse<Blob>;
 };
 
 export type TWardStockFIlter = {

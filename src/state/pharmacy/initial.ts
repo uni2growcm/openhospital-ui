@@ -30,4 +30,7 @@ export const initial: IPharmacyState = {
     },
   },
   printPharmaceuticalStockWardPdf: new ApiResponse({ status: "IDLE" }),
+  printPharmaceuticalStockPdf: new ApiResponse({ status: "IDLE" }),
+  printPharmaceuticalStockCardPdf: new ApiResponse({ status: "IDLE" }),
+  printPharmaceuticalAMCPdf: new ApiResponse({ status: "IDLE" }),
 };

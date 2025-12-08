@@ -3873,6 +3873,25 @@ paths:
         required: true
         schema:
           type: string
+      - name: index
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: dateForm
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: dateTo
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
       responses:
         "200":
           description: OK
@@ -6550,11 +6569,11 @@ components:
           format: int32
           description: lock
           example: 0
-        male:
+        opd:
           type: boolean
         female:
           type: boolean
-        opd:
+        male:
           type: boolean
         pharmacy:
           type: boolean

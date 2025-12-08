@@ -1,5 +1,6 @@
 import { PATHS } from "consts";
 import { downloadBlob } from "libraries/downloadUtils/downloardUtils";
+import { formatDateToCustomISO } from "libraries/formatUtils";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -65,11 +66,10 @@ export function WardStock() {
 
   const handleGetReport = (wardCode: string, action: string) => {
     if (action === "report") {
-      console.log(new Date().toISOString());
       dispatch(
         printPharmaceuticalStockWardPdf({
           wardCode: wardCode,
-          date: new Date().toISOString(),
+          date: formatDateToCustomISO(new Date()),
         })
       )
         .unwrap()
@@ -77,7 +77,7 @@ export function WardStock() {
           if (result instanceof Blob)
             downloadBlob(
               result,
-              `pharmaceutical-report-${wardCode}-${new Date().getTime()}.pdf`
+              `pharmaceutical-stock-ward-drugs-report-${wardCode}-${new Date().getTime()}.pdf`
             );
         });
     } else {
