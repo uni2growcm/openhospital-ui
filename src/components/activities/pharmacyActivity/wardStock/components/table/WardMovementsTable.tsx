@@ -7,24 +7,37 @@ import { useTranslation } from "libraries/hooks";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useEffect, useMemo } from "react";
 import { getMovements } from "state/pharmacy";
+import { searchPatient } from "state/patients/thunk";
+import { TValues } from "components/activities/searchPatientActivity/types";
 
 export function WardMovementsTable() {
   const { t } = useTranslation();
-
   const dispatch = useAppDispatch();
 
   const filter = useAppSelector((state) => state.pharmacy.wardStock.filter);
-
   const data = useAppSelector(
     (state) => state.pharmacy.wardMovements.data ?? []
   );
-
   const status = useAppSelector((state) => state.pharmacy.wardMovements.status);
-
   const errorMessage = useAppSelector(
     (state) =>
       state.pharmacy.getMovements.error?.message || t("errors.somethingwrong")
   ) as string;
+
+  useEffect(() => {
+    data.forEach((movement) => {
+      if (movement.patientId) {
+        const payload: TValues = {
+          id: String(movement.patientId),
+          firstName: "",
+          secondName: "",
+          birthDate: "",
+          address: "",
+        };
+        dispatch(searchPatient(payload));
+      }
+    });
+  }, [data, dispatch]);
 
   const labelData = {
     date: t("pharmacy.stock.ward.date"),
@@ -42,7 +55,7 @@ export function WardMovementsTable() {
     ward: t("pharmacy.stock.ward.ward"),
     weight: t("pharmacy.stock.ward.weight"),
     age: t("pharmacy.stock.ward.age"),
-  };
+  } as const;
 
   type LabelDataKey = keyof typeof labelData;
 
@@ -54,7 +67,6 @@ export function WardMovementsTable() {
     "quantity",
     "units",
   ];
-
   const dateFields: LabelDataKey[] = ["date"];
   const order: LabelDataKey[] = ["pharmaceutical", "quantity"];
 
@@ -66,11 +78,7 @@ export function WardMovementsTable() {
           label: t("pharmacy.stock.ward.recipient"),
           type: "text",
         },
-        {
-          key: "units",
-          label: t("pharmacy.stock.ward.units"),
-          type: "text",
-        },
+        { key: "units", label: t("pharmacy.stock.ward.units"), type: "text" },
         {
           key: "quantity",
           label: t("pharmacy.stock.ward.quantity"),
@@ -92,58 +100,60 @@ export function WardMovementsTable() {
           ],
         },
         { key: "date", label: t("pharmacy.stock.ward.date"), type: "date" },
-        {
-          key: "medical",
-          label: t("pharmacy.stock.medical"),
-          type: "text",
-        },
+        { key: "medical", label: t("pharmacy.stock.medical"), type: "text" },
       ] satisfies TFilterField[],
     [t]
   );
 
+  // ------------------------------------------------------------
+  // 3. FORMAT DATA FOR TABLE
+  // ------------------------------------------------------------
   const formattedData = useMemo(() => {
     return data
       .filter(
         (item) =>
           !filter.type ||
-          (filter.type === "incoming" ? item.wardTo : item.wardFrom)?.code ===
-            filter.ward?.code
+          (filter.type === "incoming"
+            ? item.wardTo?.code
+            : item.wardFrom?.code) === filter.ward?.code
       )
       .map((item) => ({
-        recipient:
-          (item.patient
-            ? `${item.patient.firstName} ${item.patient.secondName}`
-            : item.wardTo?.description) ?? "",
-        patient: item.patient?.name ?? "",
+        recipient: item.wardTo?.description ?? "",
+        patient: "", // We don't have patient details locally
         pharmaceutical: item.medical?.description ?? "",
         wardFrom: item.wardFrom?.description ?? "",
         wardTo: item.wardTo?.description ?? "",
         date: renderDateTime(item.date),
         code: item.code ?? "",
         units: item.units ?? "",
-        description: item.description,
-        quantity: item.quantity,
+        description: item.description ?? "",
+        quantity: item.quantity ?? "",
         ward: item.ward?.description ?? "",
         weight: item.weight ?? "",
         age: item.age ?? "",
-        type: t(
-          `pharmacy.stock.ward.movementType.${
-            item.patient ? "patient" : "ward"
-          }`
-        ),
+        type: item.patientId
+          ? t("pharmacy.stock.ward.movementType.patient")
+          : t("pharmacy.stock.ward.movementType.ward"),
       }));
   }, [data, filter, t]);
 
+  // ------------------------------------------------------------
+  // 4. LOAD MOVEMENTS INITIALLY
+  // ------------------------------------------------------------
   useEffect(() => {
     dispatch(getMovements());
   }, [dispatch]);
 
+  // ------------------------------------------------------------
+  // 5. RENDER UI
+  // ------------------------------------------------------------
   return (
     <div data-cy="ward-movements-table">
       {(() => {
         switch (status) {
           case "IDLE":
             return <CircularProgress />;
+
           case "SUCCESS":
             return (
               <Table
@@ -158,22 +168,22 @@ export function WardMovementsTable() {
                 isCollapsabile={true}
                 detailColSpan={6}
                 filterColumns={filters}
-                rawData={(data ?? []).map((item) => ({
-                  ...item,
-                  type: item.patient ? "patient" : "ward",
-                  pharmaceutical: item.medical?.description ?? "",
-                  recipient:
-                    (item.patient
-                      ? `${item.patient.firstName} ${item.patient.secondName}`
-                      : item.wardTo?.description) ?? "",
-                }))}
                 manualFilter={false}
+                rawData={data.map((item) => ({
+                  ...item,
+                  type: item.patientId ? "patient" : "ward",
+                  pharmaceutical: item.medical?.description ?? "",
+                  recipient: item.wardTo?.description ?? "",
+                }))}
               />
             );
+
           case "SUCCESS_EMPTY":
             return <InfoBox type="info" message={t("common.emptydata")} />;
+
           case "FAIL":
             return <InfoBox type="error" message={errorMessage} />;
+
           default:
             return <CircularProgress />;
         }

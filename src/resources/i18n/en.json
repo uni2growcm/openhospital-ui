@@ -1268,6 +1268,14 @@
       "update-pharmaceutical-fail": {
         "title": "Pharamaceutical update failed",
         "description": "We were unable to update the pharmaceutical. Please try again or contact support."
+      },
+      "rectify-movement-success": {
+        "title": "Rectification completed successfully",
+        "description": "The stock rectification has been saved successfully."
+      },
+      "rectify-movement-fail": {
+        "title": "Rectification failed",
+        "description": "We were unable to rectify the ward stock. Please try again or contact support."
       }
     },
     "form": {

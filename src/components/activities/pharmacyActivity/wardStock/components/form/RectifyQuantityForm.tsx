@@ -8,7 +8,7 @@ import {
 } from "components/accessories/forms";
 import { LotFormField } from "components/activities/pharmacyActivity/pharmaceuticalStock/components/forms/lotFormField";
 import { PATHS } from "consts";
-import { MedicalWardDTO, MovementWardDTO } from "generated";
+import { LotDTO, MedicalWardDTO, MovementWardDTO } from "generated";
 import { useNavigationHandler, useTranslation } from "libraries/hooks";
 import { isEmpty } from "lodash";
 import { useForm, useWatch } from "react-hook-form";
@@ -58,7 +58,8 @@ function RectifyQuantityForm({
     description: values.reason || "",
     quantity: actualQty - values.actualQuantity,
     units: t("pharmacy.stock.ward.pieces"),
- };
+    lot: pharmaceutical!.id!.lot,
+  };
 
   const handleSubmit = useCallback(
     (event: FormEvent<HTMLFormElement>) => {

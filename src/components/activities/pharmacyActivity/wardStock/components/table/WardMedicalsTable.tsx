@@ -111,7 +111,7 @@ export function WardMedicalsTable() {
                   ...item,
                   code: item.id?.medical?.code ?? "",
                   pharmaceutical: item.id?.medical?.description ?? "",
-                  units: item.id?.medical?.prodCode ?? "",
+                  units: item.id?.medical?.prod_code ?? "",
                   quantity: (item.in_quantity ?? 0) - (item.out_quantity ?? 0),
                 }))}
                 manualFilter={false}
