@@ -25,12 +25,6 @@ export interface GetCurrentQuantityInWardRequest {
     medId: number;
 }
 
-export interface GetMedicalWardByWardMedicalAndLotRequest {
-    wardCode: string;
-    medicalId: number;
-    lotCode: string;
-}
-
 export interface GetMedicalsWardRequest {
     wardCode: string;
 }
@@ -76,25 +70,6 @@ export class MedicalStockWardApi extends BaseAPI {
             method: 'GET',
             headers,
             query,
-        }, opts?.responseOpts);
-    };
-
-    /**
-     */
-    getMedicalWardByWardMedicalAndLot({ wardCode, medicalId, lotCode }: GetMedicalWardByWardMedicalAndLotRequest): Observable<MedicalWardDTO>
-    getMedicalWardByWardMedicalAndLot({ wardCode, medicalId, lotCode }: GetMedicalWardByWardMedicalAndLotRequest, opts?: OperationOpts): Observable<AjaxResponse<MedicalWardDTO>>
-    getMedicalWardByWardMedicalAndLot({ wardCode, medicalId, lotCode }: GetMedicalWardByWardMedicalAndLotRequest, opts?: OperationOpts): Observable<MedicalWardDTO | AjaxResponse<MedicalWardDTO>> {
-        throwIfNullOrUndefined(wardCode, 'wardCode', 'getMedicalWardByWardMedicalAndLot');
-        throwIfNullOrUndefined(medicalId, 'medicalId', 'getMedicalWardByWardMedicalAndLot');
-        throwIfNullOrUndefined(lotCode, 'lotCode', 'getMedicalWardByWardMedicalAndLot');
-
-        const headers: HttpHeaders = {
-        };
-
-        return this.request<MedicalWardDTO>({
-            url: '/medicalstockward/{ward_code}/medical/{medical_id}/lot/{lot_code}'.replace('{ward_code}', encodeURI(wardCode)).replace('{medical_id}', encodeURI(medicalId)).replace('{lot_code}', encodeURI(lotCode)),
-            method: 'GET',
-            headers,
         }, opts?.responseOpts);
     };
 

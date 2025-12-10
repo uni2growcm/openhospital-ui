@@ -1,7 +1,7 @@
 import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import { PATHS } from "consts";
-import { MovementWardDTO } from "generated";
+import { MedicalWardDTO, MovementWardDTO } from "generated";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, {
   useCallback,
@@ -15,7 +15,6 @@ import { useNavigate, useOutletContext, useParams } from "react-router";
 import {
   createMovementReset,
   createWardMovement,
-  getMedicalWardByWardMedicalAndLot,
   resetCreateWardMovement,
 } from "state/pharmacy";
 import checkIcon from "../../../../assets/check-icon.png";
@@ -24,30 +23,22 @@ import { WardDischargeForm } from "./components/dischargeMovementForm/DischargeM
 import { DisChargeMovementTransitionState } from "./types";
 
 export function WardDischargeMovement() {
-  const { medId, wardCode, lotCode } = useParams<{
-    medId: string;
-    wardCode: string;
-    lotCode: string;
-  }>();
+  const { id = "" } = useParams();
+
+  const parts = id.split("-");
+
+  const medId = parts.shift();
+  const wardCode = parts.shift();
+  const lotCode = parts.join("-");
 
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-     dispatch(resetCreateWardMovement());
-
-    if (medId && wardCode && lotCode) {
-      dispatch(
-        getMedicalWardByWardMedicalAndLot({
-          wardCode,
-          medicalId: Number(medId),
-          lotCode,
-        })
-      );
-    }
-  }, [dispatch, wardCode, medId, lotCode]);
-
-  const wardMedical = useAppSelector(
-    (state) => state.pharmacy.getMedicalWardByWardMedicalAndLot.data
+  const wardMedical = useAppSelector((state) =>
+    state.pharmacy.wardMedicals.data?.find(
+      (item: MedicalWardDTO) =>
+        item?.id?.medical?.code === Number(medId) &&
+        item?.id?.ward?.code === wardCode &&
+        item?.id?.lot?.code === lotCode
+    )
   );
 
   const { t } = useTranslation();
@@ -122,7 +113,8 @@ export function WardDischargeMovement() {
     <PharmacyActivityContent
       data-cy="ward-discharge-movement"
       title={`${t("pharmacy.stock.ward.dischargeMovement")} (${
-        wardMedical?.id?.ward.description})`}
+        wardMedical?.id?.ward.description
+      })`}
     >
       <div className="discharge-movement">
         {wardMedical && (

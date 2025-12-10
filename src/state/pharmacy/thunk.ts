@@ -210,28 +210,3 @@ export const createWardMovement = createAsyncThunk<
     return thunkApi.rejectWithValue(error.response);
   }
 });
-
-export const getMedicalWardByWardMedicalAndLot = createAsyncThunk<
-  MedicalWardDTO,
-  { wardCode: string; medicalId: number; lotCode: string },
-  { rejectValue: any }
->(
-  "pharmacy/getMedicalWardByWardMedicalAndLot",
-  async ({ wardCode, medicalId, lotCode }, thunkApi) => {
-    try {
-      const result = await firstValueFrom(
-        wrapper(() =>
-          wardStockApi.getMedicalWardByWardMedicalAndLot({
-            wardCode,
-            medicalId,
-            lotCode,
-          })
-        )
-      );
-
-      return result;
-    } catch (error: any) {
-      return thunkApi.rejectWithValue(error.response);
-    }
-  }
-);

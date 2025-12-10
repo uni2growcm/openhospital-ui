@@ -4852,37 +4852,6 @@ paths:
                   $ref: "#/components/schemas/MedicalWardDTO"
       security:
       - bearerAuth: []
-  /medicalstockward/{ward_code}/medical/{medical_id}/lot/{lot_code}:
-    get:
-      tags:
-      - Medical Stock Ward
-      operationId: getMedicalWardByWardMedicalAndLot
-      parameters:
-      - name: ward_code
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: medical_id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
-      - name: lot_code
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/MedicalWardDTO"
-      security:
-      - bearerAuth: []
   /medicalstockward/movements/{ward_code}:
     get:
       tags:
@@ -8504,9 +8473,10 @@ components:
         isPatient:
           type: boolean
           writeOnly: true
-        patient:
-          $ref: "#/components/schemas/PatientDTO"
-          description: The patient in case the movement is associated to a patient
+        patientId:
+          type: integer
+          format: int32
+          description: The patient id in case the movement is associated to a patient
         age:
           type: integer
           format: int32
@@ -8543,6 +8513,8 @@ components:
         lot:
           $ref: "#/components/schemas/LotDTO"
           description: The lot of the medical concerned by the movement
+        patient:
+          type: boolean
       required:
       - date
       - description

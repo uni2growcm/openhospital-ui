@@ -7,7 +7,9 @@
   gap: 1.5rem;
   padding: 2rem;
   max-width: 1500px;
+  max-height: 600px;
   background-color: $c-white;
+  overflow-y: auto;
 
   &__row {
     display: flex;
@@ -72,7 +74,16 @@
 
   @include susy-media($medium-down) {
     &__row {
-      flex-direction: column;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      &__section {
+        &--quarter,
+        &--three-quarter {
+          flex: 1 1 100%;
+          min-width: 0;
+        }
+      }
     }
   }
-}

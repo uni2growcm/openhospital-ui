@@ -124,7 +124,7 @@ export const WARD_MOVEMENTS: MovementWardDTO[] = [
     units: "syrups",
     medical: MEDICALS[0],
     wardFrom: wards.find((w) => w.code === "C")!,
-    patient: patients[0],
+    patientId: patients[0].code,
   },
   {
     code: 12,
@@ -135,7 +135,7 @@ export const WARD_MOVEMENTS: MovementWardDTO[] = [
     units: "packs",
     medical: MEDICALS[1],
     wardFrom: wards.find((w) => w.code === "F")!,
-    patient: patients[1],
+    patientId: patients[1].code,
   },
   {
     code: 13,
@@ -146,6 +146,6 @@ export const WARD_MOVEMENTS: MovementWardDTO[] = [
     units: "kit",
     medical: MEDICALS[4],
     wardFrom: wards.find((w) => w.code === "M")!,
-    patient: patients[2],
+    patientId: patients[2].code,
   },
 ];

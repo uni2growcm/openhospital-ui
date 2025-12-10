@@ -100,7 +100,7 @@ export function WardDischargeForm({
       });
       return false;
     }
-    if (destinationType === "ward" && !formValues.ward?.code) {
+    if (destinationType === "ward" && !formValues.wardTo) {
       setInfo({
         type: "error",
         message: t("pharmacy.stock.ward.pleaseSelectWard"),
@@ -108,11 +108,11 @@ export function WardDischargeForm({
       return false;
     }
     return true;
-  }, [destinationType, formValues.patient?.code, formValues.wardTo?.code, t]);
+  }, [destinationType, formValues.patient?.code, formValues.wardTo, t]);
 
   const submitWardMovement = useCallback(
     async (data: TFormValues) => {
-      if (!wardMedical?.id?.ward) {
+      if (!wardMedical?.id?.medical || !wardMedical?.id?.ward) {
         setInfo({
           type: "error",
           message: t("pharmacy.stock.ward.failedTocreateDischargeMovement"),
@@ -134,7 +134,7 @@ export function WardDischargeForm({
           destinationType === "patient"
             ? `${patient?.firstName || ""} ${patient?.secondName || ""}`
             : destinationType === "ward"
-            ? wardTo?.description || ""
+            ? `${formValues.wardTo}` || ""
             : t("pharmacy.stock.ward.movementType.ward");
 
         const payload: MovementWardDTO = {
@@ -160,6 +160,7 @@ export function WardDischargeForm({
         await dispatch(createWardMovement(payload)).unwrap();
         onSubmit?.(payload);
       } catch (err) {
+        console.error("Error creating ward movement:", err);
         setInfo({
           type: "error",
           message: t("pharmacy.stock.ward.failedTocreateDischargeMovement"),
@@ -175,7 +176,7 @@ export function WardDischargeForm({
     if (!validateDestination() || !validateQuantity()) return;
 
     const lot = getValues("lot");
-    if (!lot?.code) {
+    if (!lot) {
       setInfo({
         type: "error",
         message: t("pharmacy.stock.ward.pleaseSelectLot"),
@@ -294,7 +295,7 @@ export function WardDischargeForm({
           control={control}
           medical={wardMedical?.id?.medical as MedicalDTO}
           name="lot"
-          showNewLotOption={false}
+          showNewLotOption={(wardMedical?.id?.medical?.lots ?? []).length === 0}
         />
       </div>
 

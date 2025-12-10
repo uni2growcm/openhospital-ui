@@ -26,16 +26,15 @@ export function WardMedicalsTable() {
     (state) =>
       state.pharmacy.wardMedicals.error?.message || t("errors.somethingwrong")
   ) as string;
+  
+  const handleDischarge = useCallback(
+    (row: any) => {
+      const combinedId = `${row.code}-${row.wardCode}-${row.lotCode}`;
 
-  const handleDischarge = useCallback((row: any) => {
-    console.log("Discharge row:", row);
-    navigate(
-      PATHS.pharmacy_ward_stock_discharge
-        .replace(":medId", row.code)
-        .replace(":lotCode", row.lotCode)
-        .replace(":wardCode", row.wardCode)
-    );
-  }, [navigate]);
+      navigate(PATHS.pharmacy_ward_stock_discharge.replace(":id", combinedId));
+    },
+    [navigate]
+  );
 
   const labelData = {
     pharmaceutical: t("pharmacy.stock.ward.pharmaceutical"),
