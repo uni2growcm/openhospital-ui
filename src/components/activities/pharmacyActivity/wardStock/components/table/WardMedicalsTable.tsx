@@ -3,7 +3,6 @@ import InfoBox from "components/accessories/infoBox/InfoBox";
 import Table from "components/accessories/table/Table";
 import { TFilterField } from "components/accessories/table/filter/types";
 import { PATHS } from "consts";
-import { MedicalWardDTO } from "generated";
 import { useTranslation } from "libraries/hooks";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useCallback, useEffect, useMemo } from "react";
@@ -74,20 +73,23 @@ export function WardMedicalsTable() {
       units: "",
       quantity: (item.in_quantity ?? 0) - (item.out_quantity ?? 0),
     }));
-  }, [data, filter, t]);
+  }, [data]);
 
   useEffect(() => {
     dispatch(getMovements());
   }, [dispatch]);
 
-  const handleRectify = (medical: any) => {
-    navigate(
-      PATHS.pharmacy_ward_stock_rectify
-        .replace(":medCode", medical.code.toString() ?? "")
-        .replace(":wardCode", medical.wardCode ?? "")
-        .replace(":lotCode", medical.lotCode ?? "")
-    );
-  };
+  const handleRectify = useCallback(
+    (medical: any) => {
+      navigate(
+        PATHS.pharmacy_ward_stock_rectify
+          .replace(":medCode", medical.code.toString() ?? "")
+          .replace(":wardCode", medical.wardCode ?? "")
+          .replace(":lotCode", medical.lotCode ?? "")
+      );
+    },
+    [navigate]
+  );
 
   return (
     <div data-cy="ward-movements-table">
@@ -115,7 +117,7 @@ export function WardMedicalsTable() {
                   quantity: (item.in_quantity ?? 0) - (item.out_quantity ?? 0),
                 }))}
                 manualFilter={false}
-                onRectify={(row) => handleRectify(row)}
+                onRectify={handleRectify}
               />
             );
           case "SUCCESS_EMPTY":

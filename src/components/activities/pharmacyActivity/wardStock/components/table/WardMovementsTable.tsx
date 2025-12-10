@@ -2,12 +2,10 @@ import { CircularProgress } from "@mui/material";
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import Table from "components/accessories/table/Table";
 import { TFilterField } from "components/accessories/table/filter/types";
-import { PatientDTO } from "generated";
 import { renderDateTime } from "libraries/formatUtils/dataFormatting";
 import { useTranslation } from "libraries/hooks";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useEffect, useMemo, useState } from "react";
-import { searchPatient } from "state/patients/thunk";
 
 export function WardMovementsTable() {
   const { t } = useTranslation();
@@ -102,51 +100,24 @@ export function WardMovementsTable() {
     [t]
   );
 
-  const [formattedData, setFormattedData] = useState<any[]>([]);
-
-  useEffect(() => {
-    async function fetchFormattedData() {
-      const results = await Promise.all(
-        data.map(async (item) => {
-          let patientName = "";
-          if (item.patientId) {
-            const res = await dispatch(
-              searchPatient({
-                id: String(item.patientId),
-                firstName: "",
-                secondName: "",
-                birthDate: "",
-                address: "",
-              })
-            );
-            const patient = (res.payload as PatientDTO[] | undefined)?.[0];
-            if (patient)
-              patientName = `${patient.firstName} ${patient.secondName}`;
-          }
-
-          return {
-            recipient: (patientName || item.wardTo?.description) ?? "",
-            patient: patientName,
-            pharmaceutical: item.medical?.description ?? "",
-            wardFrom: item.wardFrom?.description ?? "",
-            wardTo: item.wardTo?.description ?? "",
-            date: renderDateTime(item.date),
-            code: item.code ?? "",
-            units: item.units ?? "",
-            description: item.description ?? "",
-            quantity: item.quantity,
-            ward: item.ward?.description ?? "",
-            weight: item.weight ?? "",
-            age: item.age ?? "",
-            type: patientName ? "patient" : "ward",
-          };
-        })
-      );
-      setFormattedData(results);
-    }
-
-    fetchFormattedData();
-  }, [data, dispatch]);
+  const formattedData = useMemo(() => {
+    return data.map((item) => ({
+      recipient: item.patientId?.toString() || item.wardTo?.description || "",
+      patient: item.patientId?.toString(),
+      pharmaceutical: item.medical?.description ?? "",
+      wardFrom: item.wardFrom?.description ?? "",
+      wardTo: item.wardTo?.description ?? "",
+      date: renderDateTime(item.date),
+      code: item.code ?? "",
+      units: item.units ?? "",
+      description: item.description ?? "",
+      quantity: item.quantity,
+      ward: item.ward?.description ?? "",
+      weight: item.weight ?? "",
+      age: item.age ?? "",
+      type: item.patientId ? "patient" : "ward",
+    }));
+  }, [data]);
 
   return (
     <div data-cy="ward-movements-table">
@@ -168,12 +139,7 @@ export function WardMovementsTable() {
                 isCollapsabile={true}
                 detailColSpan={6}
                 filterColumns={filters}
-                rawData={formattedData.map((item) => ({
-                  ...item,
-                  type: item.patient ? "patient" : "ward",
-                  pharmaceutical: item.pharmaceutical,
-                  recipient: item.recipient,
-                }))}
+                rawData={formattedData}
                 manualFilter={false}
               />
             );

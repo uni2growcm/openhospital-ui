@@ -1,15 +1,16 @@
+import checkIcon from "assets/check-icon.png";
+import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
+import InfoBox from "components/accessories/infoBox/InfoBox";
 import { PATHS } from "consts";
 import { MedicalWardDTO, MovementWardDTO } from "generated";
 import { useNavigationHandler, useTranslation } from "libraries/hooks";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useCallback, useEffect, useRef } from "react";
 import { useOutletContext, useParams } from "react-router";
+import { getMedicals } from "state/medicals";
 import { newMovementWard, resetNewMovementWard } from "state/pharmacy";
 import { PharmacyActivityContent } from "../PharmacyActivityContent";
 import RectifyQuantityForm from "./components/form/RectifyQuantityForm";
-import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
-import InfoBox from "components/accessories/infoBox/InfoBox";
-import checkIcon from "assets/check-icon.png";
 
 const WardStockRectify: React.FC = () => {
   const { t } = useTranslation();
@@ -48,23 +49,6 @@ const WardStockRectify: React.FC = () => {
     setBreadcrumbMap: (map: Record<string, string | undefined>) => void;
   }>();
 
-  useEffect(() => {
-    setBreadcrumbMap({
-      ...breadcrumbMap,
-      [t("pharmacy.labels.ward-stock")]: PATHS.pharmacy_ward_stock,
-      [t("pharmacy.labels.rectify-ward-stock")]:
-        PATHS.pharmacy_ward_stock_rectify
-          .replace(":medCode", params.medCode ?? "")
-          .replace(":wardCode", params.wardCode ?? "")
-          .replace(":lotCode", params.lotCode ?? ""),
-    });
-
-    return () => {
-      setBreadcrumbMap({
-        [t("pharmacy.labels.ward-stock")]: PATHS.pharmacy_ward_stock,
-      });
-    };
-  }, [params.medCode, params.wardCode, params.lotCode, t, breadcrumbMap]);
 
   const selectedMedical = useAppSelector((state) =>
     state.pharmacy.wardMedicals.data?.find((med: MedicalWardDTO) => {
@@ -81,6 +65,28 @@ const WardStockRectify: React.FC = () => {
     },
     [dispatch]
   );
+
+  useEffect(() => {
+    setBreadcrumbMap({
+      ...breadcrumbMap,
+      [t("pharmacy.labels.ward-stock")]: PATHS.pharmacy_ward_stock,
+      [t("pharmacy.labels.rectify-ward-stock")]:
+        PATHS.pharmacy_ward_stock_rectify
+          .replace(":medCode", params.medCode ?? "")
+          .replace(":wardCode", params.wardCode ?? "")
+          .replace(":lotCode", params.lotCode ?? ""),
+    });
+
+    return () => {
+      setBreadcrumbMap({
+        [t("pharmacy.labels.ward-stock")]: PATHS.pharmacy_ward_stock,
+      });
+    };
+  }, [params.medCode, params.wardCode, params.lotCode, t, breadcrumbMap, setBreadcrumbMap]);
+
+  useEffect(() => {
+    dispatch(getMedicals())
+  }, [dispatch]);
 
   return (
     <PharmacyActivityContent

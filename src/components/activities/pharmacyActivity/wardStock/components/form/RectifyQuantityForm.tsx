@@ -1,17 +1,16 @@
-import React, { FormEvent, useCallback, useMemo, useState } from "react";
+import React, { FormEvent, useCallback, useMemo } from "react";
 
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
-import { Button } from "@mui/material";
+import Button from "components/accessories/button/Button";
 import {
   AutocompleteFormField,
   TextFormField,
 } from "components/accessories/forms";
-import { LotFormField } from "components/activities/pharmacyActivity/pharmaceuticalStock/components/forms/lotFormField";
 import { PATHS } from "consts";
-import { LotDTO, MedicalWardDTO, MovementWardDTO } from "generated";
+import { MovementWardDTO } from "generated";
 import { useNavigationHandler, useTranslation } from "libraries/hooks";
 import { isEmpty } from "lodash";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { MedicalWardDTOSchema, getInitialValues } from "./consts";
 import "./styles.scss";
 import { PharmaceuticalStockFormProps, TFormValues } from "./types";
@@ -23,7 +22,7 @@ function RectifyQuantityForm({
 }: PharmaceuticalStockFormProps) {
   const { t } = useTranslation();
 
-  const { control, formState } = useForm<TFormValues>({
+  const { control, watch, formState } = useForm<TFormValues>({
     defaultValues: getInitialValues(pharmaceutical),
     resolver: standardSchemaResolver(MedicalWardDTOSchema),
   });
@@ -38,28 +37,21 @@ function RectifyQuantityForm({
     ];
   }, [pharmaceutical]);
 
-  const actualQty =
-    (pharmaceutical?.in_quantity ?? 0) - (pharmaceutical?.out_quantity ?? 0);
+  const values = watch();
 
-  const values = useWatch({
-    control,
-    compute: (values) => {
-      return {
-        ...values,
-        actualQuantity: Number(values.actualQuantity),
-      };
-    },
-  });
-
-  const formValues: MovementWardDTO = {
-    ward: pharmaceutical!.id!.ward,
-    medical: pharmaceutical?.id?.medical,
-    date: new Date().toISOString(),
-    description: values.reason || "",
-    quantity: actualQty - values.actualQuantity,
-    units: t("pharmacy.stock.ward.pieces"),
-    lot: pharmaceutical!.id!.lot,
-  };
+  const formValues: MovementWardDTO = useMemo(
+    () =>
+      ({
+        ward: pharmaceutical!.id!.ward,
+        medical: pharmaceutical!.id!.medical,
+        date: new Date().toISOString(),
+        description: values.reason || "",
+        quantity: values.quantity,
+        units: t("pharmacy.stock.ward.pieces"),
+        lot: values.lot,
+      } as any as MovementWardDTO),
+    [values, t, pharmaceutical]
+  );
 
   const handleSubmit = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
@@ -68,7 +60,7 @@ function RectifyQuantityForm({
         onSubmit?.(formValues);
       }
     },
-    [formState, values, onSubmit]
+    [formState.errors, formValues, onSubmit]
   );
 
   const handleGoBack = useNavigationHandler(PATHS.pharmacy_ward_stock, {
@@ -77,74 +69,43 @@ function RectifyQuantityForm({
 
   return (
     <div className="rectifyStockForm">
-      <div className="rectifyStockForm__header">
-        <span className="rectifyStockForm__stock-status">
-          {t("pharmacy.stock.ward.inStock")}: {actualQty}
+      <form className="form-grid-layout gap-2 w-full" onSubmit={handleSubmit}>
+        <span className="col-span-full text-lg">
+          {t("pharmacy.stock.ward.inStock")}: {values.actualQuantity}
         </span>
-      </div>
-
-      <form onSubmit={handleSubmit} className="rectifyStockForm__form">
-        <div className="rectifyStockForm__row">
-          <div className="rectifyStockForm__label">
-            {t("pharmacy.stock.ward.medical")}
-          </div>
-          <div className="rectifyStockForm__control">
-            <AutocompleteFormField
-              label=""
-              name="id.medical.code"
-              control={control}
-              options={medicalOptions}
-              disabled
-            />
-          </div>
-        </div>
-
-        <div className="rectifyStockForm__row">
-          <div className="form-grid-layout col-start-2 ">
-            {pharmaceutical?.id?.medical && (
-              <LotFormField
-                control={control}
-                medical={pharmaceutical?.id?.medical}
-                name="id.lot"
-              />
-            )}
-          </div>
-        </div>
-        <div className="rectifyStockForm__row">
-          <div className="rectifyStockForm__label">
-            {t("pharmacy.stock.ward.actualQuantity")}
-          </div>
-          <div className="rectifyStockForm__control">
-            <TextFormField
-              type="number"
-              name="actualQuantity"
-              label=""
-              control={control}
-              defaultValue={0}
-              inputProps={{ min: 0 }}
-              className="rectifyStockForm__actual-input"
-            />
-          </div>
-        </div>
-
-        <div className="rectifyStockForm__row">
-          <div className="rectifyStockForm__label">
-            {t("pharmacy.stock.ward.reason")}
-          </div>
-          <div className="rectifyStockForm__control">
-            <TextFormField
-              fullWidth
-              name="reason"
-              label=""
-              control={control}
-              multiline
-            />
-          </div>
-        </div>
-
+        <AutocompleteFormField
+          label={t("pharmacy.stock.ward.medical")}
+          name="medical"
+          control={control}
+          options={medicalOptions}
+          disabled
+        />
+        <div className="col-start-1 col-span-full"></div>
+        <TextFormField
+          type="number"
+          name="actualQuantity"
+          label={t("pharmacy.stock.ward.actualQuantity")}
+          control={control}
+        />
+        <TextFormField
+          type="number"
+          name="quantity"
+          label={t("pharmacy.stock.ward.quantity")}
+          control={control}
+        />
+        <div className="col-start-1 col-span-full"></div>
+        <TextFormField
+          name="reason"
+          label={t("pharmacy.stock.ward.reason")}
+          control={control}
+          multiline
+          className="col-span-full"
+        />
+        <div className="col-start-1 col-span-full"></div>
         <div className="col-span-full flex gap-2 justify-end">
           <Button
             type="reset"
+            dataCy="reset-button"
             onClick={handleGoBack}
             disabled={loading}
           >
@@ -152,6 +113,7 @@ function RectifyQuantityForm({
           </Button>
           <Button
             variant="contained"
+            dataCy="submit-button"
             type="submit"
             disabled={loading}
           >
