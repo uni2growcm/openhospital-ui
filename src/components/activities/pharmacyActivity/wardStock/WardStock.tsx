@@ -1,15 +1,9 @@
 import { PATHS } from "consts";
-import { downloadBlob } from "libraries/downloadUtils/downloardUtils";
-import { formatDateToCustomISO } from "libraries/formatUtils";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useOutletContext } from "react-router";
-import {
-  getWardMedicals,
-  getWardMovements,
-  printPharmaceuticalStockWardPdf,
-} from "state/pharmacy";
+import { getWardMedicals, getWardMovements } from "state/pharmacy";
 import { getWards } from "state/ward";
 import { PharmacyActivityContent } from "../PharmacyActivityContent";
 import {
@@ -64,34 +58,13 @@ export function WardStock() {
     }
   }, [dispatch, filter]);
 
-  const handleGetReport = (wardCode: string, action: string) => {
-    if (action === "report") {
-      dispatch(
-        printPharmaceuticalStockWardPdf({
-          wardCode: wardCode,
-          date: formatDateToCustomISO(new Date()),
-        })
-      )
-        .unwrap()
-        .then((result) => {
-          if (result instanceof Blob)
-            downloadBlob(
-              result,
-              `pharmaceutical-stock-ward-drugs-report-${wardCode}-${new Date().getTime()}.pdf`
-            );
-        });
-    } else {
-      console.log(action, wardCode);
-    }
-  };
-
   return (
     <PharmacyActivityContent
       data-cy="ward-stock"
       title={t("pharmacy.labels.ward-stock")}
     >
       <div className="ward-stock">
-        <WardStockHeader handleExportReport={handleGetReport} />
+        <WardStockHeader />
         {filter.type === "drugs" ? (
           <WardMedicalsTable />
         ) : (

@@ -24,6 +24,7 @@ const GetDownloadDateDialog: FunctionComponent<
   title,
   isPrincipalStock = false,
   isStockCard = false,
+  isStockWard = false,
   primaryButtonLabel,
   secondaryButtonLabel,
   handlePrimaryButtonClick,
@@ -88,25 +89,41 @@ const GetDownloadDateDialog: FunctionComponent<
 
   useEffect(() => {
     if (isOpen) {
-      if (isStockCard) {
+      if (isStockCard || isStockWard) {
         setDateFrom(
           dateFrom ? dateFrom : moment(new Date()).format("YYYY-MM-DDTHH:mm:ss")
         );
         setDateTo(
           dateTo ? dateTo : moment(new Date()).format("YYYY-MM-DDTHH:mm:ss")
         );
-        setErrorWard(false);
-        setErrorMedical(false);
-        dispatch(getMedicals());
-        dispatch(getWards());
+        if (isStockCard) {
+          setErrorWard(false);
+          setErrorMedical(false);
+          dispatch(getMedicals());
+          dispatch(getWards());
+        }
       } else {
         setDate(date ? date : moment(new Date()).format("YYYY-MM-DDTHH:mm:ss"));
       }
     }
-  }, [setDateTo, isOpen, date, isStockCard, dateFrom, dateTo, dispatch]);
+  }, [
+    setDateTo,
+    isOpen,
+    date,
+    isStockCard,
+    isStockWard,
+    dateFrom,
+    dateTo,
+    dispatch,
+  ]);
 
   const handleConfirm = () => {
-    if (isStockCard) {
+    if (isStockWard) {
+      handlePrimaryButtonClick({
+        dateTo: dateTo,
+        dateFrom: dateFrom,
+      });
+    } else if (isStockCard) {
       if (!wardCode || !medCode) {
         setErrorWard(!wardCode);
         setErrorMedical(!medCode);
@@ -149,7 +166,7 @@ const GetDownloadDateDialog: FunctionComponent<
       <DialogContent>
         <div className="dialog__content">
           <div className="dialog__divider" />
-          {!isStockCard && (
+          {!isStockCard && !isStockWard && (
             <div className="dialog__dateField">
               <DateField
                 fieldName="date"
@@ -195,7 +212,7 @@ const GetDownloadDateDialog: FunctionComponent<
             </div>
           )}
 
-          {isStockCard && (
+          {(isStockCard || isStockWard) && (
             <>
               <div className="dialog__dateField">
                 <DateField
@@ -226,52 +243,57 @@ const GetDownloadDateDialog: FunctionComponent<
                   isValid={false}
                   errorText=""
                 />
-                <div className="dialog__dateField">
-                  <Autocomplete
-                    id="optionsMedical"
-                    disablePortal
-                    options={renderOptions(medicalsData)}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label={t("pharmacy.selectMedical")}
-                        data-cy="optionsMedical"
-                        name="optionsMedical"
-                        error={errorMedical}
-                        helperText={
-                          errorMedical ? t("pharmacy.errorMessageForm") : ""
-                        }
-                      />
-                    )}
-                    onChange={(event, value) => {
-                      setMedCode(value ? Number(value.value) : undefined);
-                      setErrorMedical(false);
-                    }}
-                  />
-                </div>
-                <div className="dialog__dateField">
-                  <Autocomplete
-                    id="optionsWard"
-                    disablePortal
-                    options={renderOptions(wardsData)}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label={t("pharmacy.selectWard")}
-                        data-cy="optionsWard"
-                        name="optionsWard"
-                        error={errorWard}
-                        helperText={
-                          errorWard ? t("pharmacy.errorMessageForm") : ""
-                        }
-                      />
-                    )}
-                    onChange={(event, value) => {
-                      setWardCode(value ? value.value : undefined);
-                      setErrorWard(false);
-                    }}
-                  />
-                </div>
+              </div>
+            </>
+          )}
+
+          {isStockCard && (
+            <>
+              <div className="dialog__dateField">
+                <Autocomplete
+                  id="optionsMedical"
+                  disablePortal
+                  options={renderOptions(medicalsData)}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label={t("pharmacy.selectMedical")}
+                      data-cy="optionsMedical"
+                      name="optionsMedical"
+                      error={errorMedical}
+                      helperText={
+                        errorMedical ? t("pharmacy.errorMessageForm") : ""
+                      }
+                    />
+                  )}
+                  onChange={(event, value) => {
+                    setMedCode(value ? Number(value.value) : undefined);
+                    setErrorMedical(false);
+                  }}
+                />
+              </div>
+              <div className="dialog__dateField">
+                <Autocomplete
+                  id="optionsWard"
+                  disablePortal
+                  options={renderOptions(wardsData)}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label={t("pharmacy.selectWard")}
+                      data-cy="optionsWard"
+                      name="optionsWard"
+                      error={errorWard}
+                      helperText={
+                        errorWard ? t("pharmacy.errorMessageForm") : ""
+                      }
+                    />
+                  )}
+                  onChange={(event, value) => {
+                    setWardCode(value ? value.value : undefined);
+                    setErrorWard(false);
+                  }}
+                />
               </div>
             </>
           )}

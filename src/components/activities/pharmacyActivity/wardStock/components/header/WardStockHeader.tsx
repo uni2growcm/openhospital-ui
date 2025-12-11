@@ -1,31 +1,29 @@
 import { MedicalServices } from "@mui/icons-material";
 import Button from "components/accessories/button/Button";
+import GetDownloadDateDialog from "components/activities/pharmacyActivity/getDownloadDateDialog/GetDownloadDateDialog";
+import { PrintProperties } from "components/activities/pharmacyActivity/getDownloadDateDialog/types";
 import { WardDTO } from "generated";
+import { downloadBlob } from "libraries/downloadUtils/downloardUtils";
+import { formatDateToCustomISO } from "libraries/formatUtils";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
-import React, {
-  FunctionComponent,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { updateWardStockFIilter } from "state/pharmacy";
+import {
+  printPharmaceuticalStockWardPdf,
+  updateWardStockFIilter,
+} from "state/pharmacy";
 import "./styles.scss";
 
 const types = ["outcoming", "incoming", "drugs"] as const;
 const actions = ["report", "excel"];
 
-interface WardStockHeaderProps {
-  handleExportReport: (wardCode: string, action: string) => void;
-}
-
-export const WardStockHeader: FunctionComponent<WardStockHeaderProps> = ({
-  handleExportReport,
-}) => {
+export const WardStockHeader = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const [wardCode, setWardCode] = useState<string>("c");
-
+  const [typeMed, setTypeMed] = useState<string>("outcoming");
+  const [isPrint, setIsPrint] = useState<boolean>(false);
+  const [action, setAction] = useState<string>("report");
   const wards = useAppSelector(
     (state) => state.wards.allWards.data?.filter((ward) => ward.pharmacy) ?? []
   );
@@ -48,6 +46,7 @@ export const WardStockHeader: FunctionComponent<WardStockHeaderProps> = ({
           type: filter.type === type ? undefined : type,
         })
       );
+      setTypeMed(type);
     },
     [dispatch, filter]
   );
@@ -58,8 +57,25 @@ export const WardStockHeader: FunctionComponent<WardStockHeaderProps> = ({
     }
   }, [wards, filter, dispatch]);
 
-  const handleExport = (action: string) => {
-    handleExportReport(wardCode, action);
+  const handleGetReport = (payload: PrintProperties) => {
+    if (action === "report") {
+      dispatch(
+        printPharmaceuticalStockWardPdf({
+          wardCode: wardCode,
+          date: formatDateToCustomISO(new Date()),
+        })
+      )
+        .unwrap()
+        .then((result) => {
+          if (result instanceof Blob)
+            downloadBlob(
+              result,
+              `pharmaceutical-stock-ward-drugs-report-${wardCode}-${new Date().getTime()}.pdf`
+            );
+        });
+    } else {
+      console.log("Getting Excel report");
+    }
   };
 
   return (
@@ -108,12 +124,24 @@ export const WardStockHeader: FunctionComponent<WardStockHeaderProps> = ({
             type="button"
             variant={"outlined"}
             color="inherit"
-            onClick={() => handleExport(action)}
+            onClick={() => {
+              setIsPrint(true);
+              setAction(action);
+            }}
           >
             {t(`pharmacy.stock.actions.${action}`)}
           </Button>
         ))}
       </div>
+      <GetDownloadDateDialog
+        isOpen={isPrint}
+        title={t("pharmacy.selectReport").toUpperCase()}
+        isStockWard={true}
+        primaryButtonLabel={t("common.print")}
+        secondaryButtonLabel={t("common.cancel")}
+        handlePrimaryButtonClick={handleGetReport}
+        handleSecondaryButtonClick={() => setIsPrint(false)}
+      />
     </div>
   );
 };

@@ -3,6 +3,7 @@ export interface IProps {
   title: string;
   isPrincipalStock?: boolean;
   isStockCard?: boolean;
+  isStockWard?: boolean;
   primaryButtonLabel: string;
   secondaryButtonLabel?: string;
   handlePrimaryButtonClick: (payload: PrintProperties) => void;
