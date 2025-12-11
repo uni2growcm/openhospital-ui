@@ -106,8 +106,15 @@ export function WardMovementsTable() {
 
   useEffect(() => {
     async function fetchFormattedData() {
+      const filteredData = data.filter(
+        (item) =>
+          !filter.type ||
+          (filter.type === "incoming" ? item.wardTo : item.wardFrom)?.code ===
+            filter.ward?.code
+      );
+
       const results = await Promise.all(
-        data.map(async (item) => {
+        filteredData.map(async (item) => {
           let patientName = "";
           if (item.patientId) {
             const res = await dispatch(
@@ -142,11 +149,12 @@ export function WardMovementsTable() {
           };
         })
       );
+
       setFormattedData(results);
     }
 
     fetchFormattedData();
-  }, [data, filter, dispatch]);
+  }, [filter, data, dispatch]);
 
   return (
     <div data-cy="ward-movements-table">
