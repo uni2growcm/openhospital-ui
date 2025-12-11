@@ -5,7 +5,7 @@ import { TFormValues } from "./types";
 export const MedicalWardDTOSchema = z.object({
   medical: z.number().nullish(),
   ward: z.string().nullish(),
-  lot: z.string().nullish(),
+  lot: z.string().optional(),
   actualQuantity: z.number(),
   quantity: z.number().min(0),
   reason: z.string().optional(),

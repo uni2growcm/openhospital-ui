@@ -1,4 +1,4 @@
-import { MedicalWardDTO, MovementDTO, MovementWardDTO } from "generated";
+import { LotDTO, MedicalWardDTO, MovementDTO, MovementWardDTO } from "generated";
 import z from "zod";
 import { MedicalWardDTOSchema } from "./consts";
 

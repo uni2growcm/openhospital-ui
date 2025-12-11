@@ -48,7 +48,7 @@ function RectifyQuantityForm({
         description: values.reason || "",
         quantity: values.quantity,
         units: t("pharmacy.stock.ward.pieces"),
-        lot: values.lot,
+        lot: pharmaceutical!.id!.lot,
       } as any as MovementWardDTO),
     [values, t, pharmaceutical]
   );
@@ -56,7 +56,9 @@ function RectifyQuantityForm({
   const handleSubmit = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
+      console.log("FORM ERRORS:", formState.errors);
       if (isEmpty(Object.keys(formState.errors))) {
+        console.log("FORM VALUES SENT TO API:", formValues);
         onSubmit?.(formValues);
       }
     },
@@ -86,6 +88,7 @@ function RectifyQuantityForm({
           name="actualQuantity"
           label={t("pharmacy.stock.ward.actualQuantity")}
           control={control}
+          disabled
         />
         <TextFormField
           type="number"
