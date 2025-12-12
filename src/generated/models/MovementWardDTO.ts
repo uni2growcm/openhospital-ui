@@ -14,6 +14,7 @@
 import type {
     LotDTO,
     MedicalDTO,
+    PatientDTO,
     WardDTO,
 } from './';
 
@@ -46,11 +47,11 @@ export interface MovementWardDTO {
      */
     isPatient?: boolean;
     /**
-     * The patient id in case the movement is associated to a patient
-     * @type {number}
+     * The patient in case the movement is associated to a patient
+     * @type {PatientDTO}
      * @memberof MovementWardDTO
      */
-    patientId?: number;
+    fullPatient?: PatientDTO;
     /**
      * The patient\'s age in case the movement is associated to a patient
      * @type {number}

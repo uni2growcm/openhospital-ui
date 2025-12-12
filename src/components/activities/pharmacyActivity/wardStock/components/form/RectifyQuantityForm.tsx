@@ -56,9 +56,7 @@ function RectifyQuantityForm({
   const handleSubmit = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      console.log("FORM ERRORS:", formState.errors);
       if (isEmpty(Object.keys(formState.errors))) {
-        console.log("FORM VALUES SENT TO API:", formValues);
         onSubmit?.(formValues);
       }
     },

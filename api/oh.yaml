@@ -6550,13 +6550,13 @@ components:
           format: int32
           description: lock
           example: 0
-        female:
-          type: boolean
         male:
           type: boolean
-        pharmacy:
+        female:
           type: boolean
         opd:
+          type: boolean
+        pharmacy:
           type: boolean
       required:
       - beds
@@ -8473,10 +8473,9 @@ components:
         isPatient:
           type: boolean
           writeOnly: true
-        patientId:
-          type: integer
-          format: int32
-          description: The patient id in case the movement is associated to a patient
+        fullPatient:
+          $ref: "#/components/schemas/PatientDTO"
+          description: The patient in case the movement is associated to a patient
         age:
           type: integer
           format: int32
