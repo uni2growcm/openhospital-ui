@@ -41,6 +41,20 @@ export interface PrintPharmaceuticalStockPdfRequest {
     filter?: string;
 }
 
+export interface PrintPharmaceuticalStockWardExcelRequest {
+    wardCode: string;
+    dateFrom: string;
+    dateTo: string;
+    medicalCode?: number;
+    medicalTypeCode?: string;
+    sex?: string;
+    ageFrom?: number;
+    ageTo?: number;
+    weightFrom?: number;
+    weightTo?: number;
+    index?: number;
+}
+
 export interface PrintPharmaceuticalStockWardPdfRequest {
     date: string;
     wardCode: string;
@@ -193,6 +207,41 @@ export class ReportsApi extends BaseAPI {
 
         return this.request<string>({
             url: '/reports/pharmaceuticalStock',
+            method: 'GET',
+            headers,
+            query,
+        }, opts?.responseOpts);
+    };
+
+    /**
+     */
+    printPharmaceuticalStockWardExcel({ wardCode, dateFrom, dateTo, medicalCode, medicalTypeCode, sex, ageFrom, ageTo, weightFrom, weightTo, index }: PrintPharmaceuticalStockWardExcelRequest): Observable<object>
+    printPharmaceuticalStockWardExcel({ wardCode, dateFrom, dateTo, medicalCode, medicalTypeCode, sex, ageFrom, ageTo, weightFrom, weightTo, index }: PrintPharmaceuticalStockWardExcelRequest, opts?: OperationOpts): Observable<AjaxResponse<object>>
+    printPharmaceuticalStockWardExcel({ wardCode, dateFrom, dateTo, medicalCode, medicalTypeCode, sex, ageFrom, ageTo, weightFrom, weightTo, index }: PrintPharmaceuticalStockWardExcelRequest, opts?: OperationOpts): Observable<object | AjaxResponse<object>> {
+        throwIfNullOrUndefined(wardCode, 'wardCode', 'printPharmaceuticalStockWardExcel');
+        throwIfNullOrUndefined(dateFrom, 'dateFrom', 'printPharmaceuticalStockWardExcel');
+        throwIfNullOrUndefined(dateTo, 'dateTo', 'printPharmaceuticalStockWardExcel');
+
+        const headers: HttpHeaders = {
+        };
+
+        const query: HttpQuery = { // required parameters are used directly since they are already checked by throwIfNullOrUndefined
+            'wardCode': wardCode,
+            'dateFrom': (dateFrom as any).toISOString(),
+            'dateTo': (dateTo as any).toISOString(),
+        };
+
+        if (medicalCode != null) { query['medicalCode'] = medicalCode; }
+        if (medicalTypeCode != null) { query['medicalTypeCode'] = medicalTypeCode; }
+        if (sex != null) { query['sex'] = sex; }
+        if (ageFrom != null) { query['ageFrom'] = ageFrom; }
+        if (ageTo != null) { query['ageTo'] = ageTo; }
+        if (weightFrom != null) { query['weightFrom'] = weightFrom; }
+        if (weightTo != null) { query['weightTo'] = weightTo; }
+        if (index != null) { query['index'] = index; }
+
+        return this.request<object>({
+            url: '/reports/pharmaceuticalStockWardExcel',
             method: 'GET',
             headers,
             query,

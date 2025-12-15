@@ -6,6 +6,7 @@ import {
   Edit,
   HighlightOff,
   InfoOutlined,
+  Logout,
   MonetizationOn,
   Print,
   Restore,
@@ -56,6 +57,7 @@ const Table: FunctionComponent<IProps> = ({
   columnsOrder,
   initialOrderBy,
   onEdit,
+  onDischarge,
   onDelete,
   onPrint,
   onPay,
@@ -143,6 +145,22 @@ const Table: FunctionComponent<IProps> = ({
             }
           >
             <Edit />
+          </IconButton>
+        );
+      case "discharge":
+        return (
+          <IconButton
+            data-cy="table-discharge-action"
+            title={labels?.edit?.tooltip ?? "Discharge"}
+            size="small"
+            disabled={disableAction(row, "discharge")}
+            onClick={
+              disableAction(row, "discharge")
+                ? () => {}
+                : () => onDischarge && onDischarge(row)
+            }
+          >
+            <Logout sx={{ color: "black" }} />
           </IconButton>
         );
       case "delete":
@@ -310,6 +328,7 @@ const Table: FunctionComponent<IProps> = ({
   const renderActions = (row: any) => {
     if (
       onEdit ||
+      onDischarge ||
       onDelete ||
       onPrint ||
       onView ||
@@ -332,6 +351,10 @@ const Table: FunctionComponent<IProps> = ({
             : ""}
           {onEdit && (displayRowAction ? displayRowAction(row, "edit") : true)
             ? renderIcon("edit", row)
+            : ""}
+
+          {onDischarge && (displayRowAction ? displayRowAction(row, "discharge") : true)
+            ? renderIcon("discharge", row)
             : ""}
           {onPrint && (displayRowAction ? displayRowAction(row, "print") : true)
             ? renderIcon("print", row)

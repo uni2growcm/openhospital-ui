@@ -1233,6 +1233,27 @@
       "pharmaceutical-stock": "Stock pharmaceutique",
       "ward-stock": "Stock du pavillon"
     },
+    "lot": {
+      "labels": {
+        "existingLots": "Lots existants",
+        "newLot": "Nouveau lot",
+        "change-on-this": "Utiliser ce lot",
+        "select-lot": "Selectionner le lot",
+        "lots": "Lots",
+        "total": "Quantity totale en stock: <1>{{count}}</1>"
+      },
+      "fields": {
+        "code": "Code du lot",
+        "preparationDate": "Date de production",
+        "dueDate": "Date de peremption",
+        "cost": "Coût unitaire",
+        "quantity": "Quantité",
+        "ward": "Vers le pavillon",
+        "mainStoreQuantity": "Quantité dans le magasin principal",
+        "wardsTotalQuantity": "Quantité dans le pavillons",
+        "overallQuantity": "Quantité totale"
+      }
+    },
     "stock": {
       "refNo": "Ref",
       "lot": "Lot",
@@ -1258,7 +1279,34 @@
       "addMedecine": "Ajouter un médicament",
       "order": "Commander",
       "expiring": "Expirer",
-      "amcReport": "Rapport AMC"
+      "amcReport": "Rapport AMC",
+      "ward": {
+        "dischargeMovement": "Mouvement de décharge depuis ",
+        "date": "Date",
+        "pharmaceutical": "Médicament",
+        "totalStock": "Stock total",
+        "destination": "Destination",
+        "movementType": {
+          "patient": "Vers un patient",
+          "ward": "Pour usage interne",
+          "toAnotherWard": "Vers un autre pavillon"
+        },
+        "selectPatient": "Sélectionner un patient",
+        "selectWard": "Sélectionner un pavillon",
+        "quantity": "Quantité",
+        "selectLot": "Sélectionner le lot",
+        "quantityGreaterThanZero": "La quantité doit être supérieure à zéro",
+        "quantityNotExceedoTtalStock": "La quantité ne doit pas dépasser le stock total",
+        "loading": "Chargement...",
+        "pleaseSelectLot": "Veuillez sélectionner un lot",
+        "pleaseSelectPatient": "Veuillez sélectionner un patient",
+        "pleaseSelectWard": "Veuillez sélectionner un pavillon",
+        "pieces": "pièces",
+        "failedTocreateDischargeMovement": "Échec de la création du mouvement de décharge. Veuillez réessayer.",
+        "dischargeMovementCreatedSuccessfully": "Mouvement de décharge créé avec succès !",
+        "errorPatient": "Erreur lors de la recherche du patient",
+        "movementCreated": "Mouvement créé"
+      }
     }
   }
 }
