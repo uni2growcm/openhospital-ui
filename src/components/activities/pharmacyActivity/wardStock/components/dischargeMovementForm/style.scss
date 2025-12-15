@@ -72,6 +72,13 @@
     }
   }
 
+  .lot-error {
+    color: $c-red;
+    font-size: 0.75rem;
+    padding: 0;
+    margin: 0;
+  }
+
   @include susy-media($medium-down) {
     &__row {
         flex-direction: column;

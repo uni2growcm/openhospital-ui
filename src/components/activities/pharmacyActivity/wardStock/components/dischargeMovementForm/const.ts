@@ -1,7 +1,20 @@
 import { MedicalDTO, WardDTO } from "generated";
 import { z } from "zod";
+import { DestinationType } from "./types";
 
-export const MovementWardDTOSchema = z.object({
+export type LotErrorKey = "pharmacy.stock.ward.pleaseSelectLot";
+
+export type DestinationErrorKey =
+  | "pharmacy.stock.ward.pleaseSelectPatient"
+  | "pharmacy.stock.ward.pleaseSelectWard";
+
+export type QuantityErrorKey =
+  | "pharmacy.stock.ward.quantityGreaterThanZero"
+  | "pharmacy.stock.ward.quantityNotExceedoTtalStock";
+
+export type MovementWardErrorKey = QuantityErrorKey | DestinationErrorKey | LotErrorKey; // <-- UPDATED
+
+const BaseMovementWardDTOSchema = z.object({
   code: z.number().optional(),
   ward: z.object({ code: z.string() }).optional(),
   date: z.date(),
@@ -13,17 +26,58 @@ export const MovementWardDTOSchema = z.object({
   medical: z.any(),
   quantity: z
     .number()
-    .min(0, { message: "pharmacy.stock.ward.quantityGreaterThanZero" }),
+    .min(0.00000001, { message: "pharmacy.stock.ward.quantityGreaterThanZero" as QuantityErrorKey }),
   units: z.string().optional(),
-  wardTo: z.object({ code: z.string() }).optional(),
+  wardTo: z.any().optional(),
   wardFrom: z.object({ code: z.string() }).optional(),
   lot: z.any().optional(),
 });
 
+export type TFormValues = z.infer<typeof BaseMovementWardDTOSchema>;
+
+export function createMovementWardDTOSchema(
+  totalStock: number,
+  destinationType: DestinationType
+) {
+  let schema = BaseMovementWardDTOSchema.refine(
+    (data) => data.quantity <= totalStock,
+    {
+      message: "pharmacy.stock.ward.quantityNotExceedoTtalStock" as QuantityErrorKey,
+      path: ["quantity"],
+    }
+  );
+
+  schema = schema.refine(
+    (data) => destinationType !== "ward" || (destinationType === "ward" && data.wardTo),
+    {
+      message: "pharmacy.stock.ward.pleaseSelectWard" as DestinationErrorKey,
+      path: ["wardTo"],
+    }
+  );
+
+  schema = schema.refine(
+    (data) => destinationType !== "patient" || (destinationType === "patient" && data.patient?.code),
+    {
+      message: "pharmacy.stock.ward.pleaseSelectPatient" as DestinationErrorKey,
+      path: ["patient"],
+    }
+  );
+
+  schema = schema.refine(
+    (data) => !!data.lot,
+    {
+      message: "pharmacy.stock.ward.pleaseSelectLot" as LotErrorKey,
+      path: ["lot"],
+    }
+  );
+  
+  return schema;
+}
+
 export function getInitialValues(
   medical?: MedicalDTO,
   ward?: WardDTO
-): Partial<z.infer<typeof MovementWardDTOSchema>> {
+): Partial<TFormValues> {
   return {
     code: undefined,
     ward: ward ? { code: ward.code ?? "" } : undefined,

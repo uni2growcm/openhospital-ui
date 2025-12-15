@@ -8473,10 +8473,9 @@ components:
         isPatient:
           type: boolean
           writeOnly: true
-        patientId:
-          type: integer
-          format: int32
-          description: The patient id in case the movement is associated to a patient
+        fullPatient:
+          $ref: "#/components/schemas/PatientDTO"
+          description: The patient in case the movement is associated to a patient
         age:
           type: integer
           format: int32

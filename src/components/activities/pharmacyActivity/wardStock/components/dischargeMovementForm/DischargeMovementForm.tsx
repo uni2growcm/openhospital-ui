@@ -16,9 +16,16 @@ import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { createWardMovement } from "state/pharmacy";
-import { MovementWardDTOSchema, getInitialValues } from "./const";
+import {
+  createMovementWardDTOSchema,
+  getInitialValues,
+  QuantityErrorKey,
+  TFormValues,
+  DestinationErrorKey,
+  LotErrorKey,
+} from "./const";
 import "./style.scss";
-import { DestinationType, IWardDischargeFormProps, TFormValues } from "./types";
+import { DestinationType, IWardDischargeFormProps } from "./types";
 
 export function WardDischargeForm({
   wardMedical,
@@ -41,6 +48,11 @@ export function WardDischargeForm({
 
   const totalStock =
     (wardMedical.in_quantity ?? 0) - (wardMedical.out_quantity ?? 0);
+
+  const MovementWardDTOSchema = useMemo(
+    () => createMovementWardDTOSchema(totalStock, destinationType),
+    [totalStock, destinationType]
+  );
 
   const {
     control,
@@ -70,45 +82,6 @@ export function WardDischargeForm({
         })),
     [wards, wardMedical?.id?.ward?.code]
   );
-
-  const validateQuantity = useCallback(() => {
-    const { quantity } = formValues;
-    if (!quantity || quantity <= 0) {
-      setInfo({
-        type: "error",
-        message: t("pharmacy.stock.ward.quantityGreaterThanZero"),
-      });
-      return false;
-    }
-    if (quantity > totalStock) {
-      setInfo({
-        type: "error",
-        message: `${t(
-          "pharmacy.stock.ward.quantityNotExceedoTtalStock"
-        )} (${totalStock})`,
-      });
-      return false;
-    }
-    return true;
-  }, [formValues.quantity, totalStock, t]);
-
-  const validateDestination = useCallback(() => {
-    if (destinationType === "patient" && !formValues.patient?.code) {
-      setInfo({
-        type: "error",
-        message: t("pharmacy.stock.ward.pleaseSelectPatient"),
-      });
-      return false;
-    }
-    if (destinationType === "ward" && !formValues.wardTo) {
-      setInfo({
-        type: "error",
-        message: t("pharmacy.stock.ward.pleaseSelectWard"),
-      });
-      return false;
-    }
-    return true;
-  }, [destinationType, formValues.patient?.code, formValues.wardTo, t]);
 
   const submitWardMovement = useCallback(
     async (data: TFormValues) => {
@@ -173,19 +146,23 @@ export function WardDischargeForm({
   );
 
   const handleDischargeMovement = useCallback(async () => {
-    if (!validateDestination() || !validateQuantity()) return;
-
-    const lot = getValues("lot");
-    if (!lot) {
-      setInfo({
-        type: "error",
-        message: t("pharmacy.stock.ward.pleaseSelectLot"),
-      });
+    const isValid = await trigger();
+    if (!isValid) {
+      if (infoBoxRef.current)
+        infoBoxRef.current.scrollIntoView({ behavior: "smooth" });
       return;
     }
 
     await submitWardMovement(getValues());
-  }, [validateDestination, validateQuantity, getValues, submitWardMovement, t]);
+  }, [getValues, submitWardMovement, trigger]);
+
+  const getLotError = () => {
+    const error = errors.lot?.message;
+    if (!error) return undefined;
+
+    const errorKey = error as LotErrorKey;
+    return t(errorKey);
+  };
 
   const onBlurCallback = useCallback(
     (fieldName: keyof TFormValues) =>
@@ -200,6 +177,27 @@ export function WardDischargeForm({
     [setValue, trigger]
   );
 
+  const getQuantityError = () => {
+    const error = errors.quantity?.message;
+    if (!error) return undefined;
+    const errorKey = error as QuantityErrorKey;
+    if (errorKey === "pharmacy.stock.ward.quantityNotExceedoTtalStock") {
+      return `${t(errorKey)} (${totalStock})`;
+    }
+    return t(errorKey);
+  };
+
+  const getDestinationError = (key: "patient" | "wardTo") => {
+    const error = errors[key];
+    if (!error) return undefined;
+    const message = error.message;
+
+    if (!message) return undefined;
+
+    const errorKey = message as DestinationErrorKey;
+
+    return t(errorKey);
+  };
   return (
     <form className="wardDischargeForm">
       <div className="wardDischargeForm__row">
@@ -234,9 +232,13 @@ export function WardDischargeForm({
           <RadioGroup
             row
             value={destinationType}
-            onChange={(e) =>
-              setDestinationType(e.target.value as DestinationType)
-            }
+            onChange={(e) => {
+              const newDestination = e.target.value as DestinationType;
+              setDestinationType(newDestination);
+              if (newDestination !== "patient") setValue("patient", undefined);
+              if (newDestination !== "ward") setValue("wardTo", undefined);
+              trigger();
+            }}
           >
             <FormControlLabel
               value="patient"
@@ -264,9 +266,7 @@ export function WardDischargeForm({
           label={t("pharmacy.stock.ward.selectPatient")}
           fieldValue={formValues.patient?.code ?? ""}
           isValid={!errors.patient}
-          errorText={
-            errors.patient ? t("pharmacy.stock.ward.errorPatient") : ""
-          }
+          errorText={getDestinationError("patient") || ""}
           onBlur={onBlurCallback("patient")}
         />
       )}
@@ -287,6 +287,8 @@ export function WardDischargeForm({
           label={t("pharmacy.stock.ward.quantity")}
           control={control}
           name="quantity"
+          helperText={getQuantityError()}
+          error={!!errors.quantity}
         />
       </div>
 
@@ -297,6 +299,9 @@ export function WardDischargeForm({
           name="lot"
           showNewLotOption={(wardMedical?.id?.medical?.lots ?? []).length === 0}
         />
+        {getLotError() && (
+          <div className="lot-error col-span-full">{getLotError()}</div>
+        )}
       </div>
 
       {info.type && (

@@ -26,7 +26,7 @@ export function LotFormField<T extends Record<string, any>>({
   control,
   medical,
   name,
-  showNewLotOption
+  showNewLotOption,
 }: LotFormFieldProps<T>) {
   const { t } = useTranslation();
   const [newLot, setNewLot] = useState<LotDTO>({
@@ -126,8 +126,8 @@ export function LotFormField<T extends Record<string, any>>({
                 />
               </Fragment>
             ))}
-           
-            { showNewLotOption && ( 
+
+            {showNewLotOption && (
               <>
                 <span className="col-start-1 col-span-full text-lg">
                   {t("pharmacy.lot.labels.newLot")}
@@ -166,7 +166,8 @@ export function LotFormField<T extends Record<string, any>>({
                   name={`${name}.cost` as Path<T>}
                   disabled={!isNewLotActive}
                 />
-              </>)}
+              </>
+            )}
           </>
         )}
       />
