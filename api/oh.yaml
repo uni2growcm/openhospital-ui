@@ -3862,25 +3862,12 @@ paths:
       - Reports
       operationId: printPharmaceuticalStockWardPdf
       parameters:
-      - name: date
-        in: query
-        required: true
-        schema:
-          type: string
-          format: date-time
       - name: wardCode
         in: query
         required: true
         schema:
           type: string
-      - name: index
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 0
-      - name: dateForm
+      - name: dateFrom
         in: query
         required: false
         schema:
@@ -3892,6 +3879,16 @@ paths:
         schema:
           type: string
           format: date-time
+      - name: stockWardReportModel
+        in: query
+        required: false
+        schema:
+          type: string
+          default: OUTCOMING
+          enum:
+          - INCOMING
+          - OUTCOMING
+          - DRUGS
       responses:
         "200":
           description: OK
@@ -7309,11 +7306,11 @@ components:
           type: string
           description: "Flag record deleted, values are 'Y' OR 'N' "
           example: "N"
+        fhu:
+          type: string
         yprog:
           type: integer
           format: int32
-        fhu:
-          type: string
       required:
       - admDate
       - admitted
@@ -7719,23 +7716,23 @@ components:
           example: 2021-06-24
         cost:
           type: number
-          description: The lot's code
+          description: The lot's cost
           example: 750
         mainStoreQuantity:
           type: integer
           format: int32
-          description: Main store quantity
-          example: 22
+          description: The lot's main store quantity
+          example: 10
         wardsTotalQuantity:
           type: number
           format: double
-          description: Wards total quantity
-          example: 40
+          description: The lot's ward total  quantity
+          example: 15
         overallQuantity:
           type: number
           format: double
-          description: over all quantity
-          example: 62
+          description: The lot's overall quantity
+          example: 35
       required:
       - code
       - dueDate
@@ -7798,8 +7795,7 @@ components:
           example: 0
         deleted:
           type: string
-          description: Deleted
-          example: "N"
+          description: The if medical is deleted
     MalnutritionDTO:
       type: object
       properties:
@@ -8493,7 +8489,7 @@ components:
         isPatient:
           type: boolean
           writeOnly: true
-        patient:
+        fullPatient:
           $ref: "#/components/schemas/PatientDTO"
           description: The patient in case the movement is associated to a patient
         age:
@@ -8529,6 +8525,11 @@ components:
         wardFrom:
           $ref: "#/components/schemas/WardDTO"
           description: The ward from which the movement is done
+        lot:
+          $ref: "#/components/schemas/LotDTO"
+          description: The lot of the medical concerned by the movement
+        patient:
+          type: boolean
       required:
       - date
       - description

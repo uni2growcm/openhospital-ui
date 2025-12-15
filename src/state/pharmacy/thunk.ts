@@ -216,12 +216,16 @@ export const printPharmaceuticalStockWardPdf = createAsyncThunk(
   "pharmacy/getPharmaceuticalStockWardPdfReport",
   async (payload: PrintPharmaceuticalStockWardPdfRequest, thunkApi) => {
     try {
-      const date = payload.date ? parseISO(payload.date) : payload.date;
+      const dateTo = payload.dateTo ? parseISO(payload.dateTo) : payload.dateTo;
+      const dateFrom = payload.dateFrom
+        ? parseISO(payload.dateFrom)
+        : payload.dateFrom;
       const result = await firstValueFrom(
         wrapper(() =>
           apiReport.printPharmaceuticalStockWardPdf({
             ...payload,
-            date: isValid(date) ? date : new Date(),
+            dateTo: isValid(dateTo) ? dateTo : new Date(),
+            dateFrom: isValid(dateFrom) ? dateFrom : new Date(),
           } as PrintPharmaceuticalStockWardPdfRequest)
         )
       );

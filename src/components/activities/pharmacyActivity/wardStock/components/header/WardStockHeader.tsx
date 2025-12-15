@@ -2,7 +2,10 @@ import { MedicalServices } from "@mui/icons-material";
 import Button from "components/accessories/button/Button";
 import GetDownloadDateDialog from "components/activities/pharmacyActivity/getDownloadDateDialog/GetDownloadDateDialog";
 import { PrintProperties } from "components/activities/pharmacyActivity/getDownloadDateDialog/types";
-import { WardDTO } from "generated";
+import {
+  PrintPharmaceuticalStockWardPdfStockWardReportModelEnum,
+  WardDTO,
+} from "generated";
 import { downloadBlob } from "libraries/downloadUtils/downloardUtils";
 import { formatDateToCustomISO } from "libraries/formatUtils";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
@@ -20,10 +23,11 @@ const actions = ["report", "excel"];
 export const WardStockHeader = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const [wardCode, setWardCode] = useState<string>("c");
+  const [wardCode, setWardCode] = useState<string>("C");
   const [typeMed, setTypeMed] = useState<string>("outcoming");
   const [isPrint, setIsPrint] = useState<boolean>(false);
   const [action, setAction] = useState<string>("report");
+
   const wards = useAppSelector(
     (state) => state.wards.allWards.data?.filter((ward) => ward.pharmacy) ?? []
   );
@@ -61,8 +65,19 @@ export const WardStockHeader = () => {
     if (action === "report") {
       dispatch(
         printPharmaceuticalStockWardPdf({
-          wardCode: wardCode,
-          date: formatDateToCustomISO(new Date()),
+          wardCode: wardCode.toUpperCase(),
+          dateFrom: payload.dateFrom
+            ? payload.dateFrom
+            : formatDateToCustomISO(new Date()),
+          dateTo: payload.dateTo
+            ? payload.dateTo
+            : formatDateToCustomISO(new Date()),
+          stockWardReportModel:
+            typeMed === "incoming"
+              ? PrintPharmaceuticalStockWardPdfStockWardReportModelEnum.Incoming
+              : typeMed === "outcoming"
+              ? PrintPharmaceuticalStockWardPdfStockWardReportModelEnum.Outcoming
+              : PrintPharmaceuticalStockWardPdfStockWardReportModelEnum.Drugs,
         })
       )
         .unwrap()
@@ -70,11 +85,11 @@ export const WardStockHeader = () => {
           if (result instanceof Blob)
             downloadBlob(
               result,
-              `pharmaceutical-stock-ward-drugs-report-${wardCode}-${new Date().getTime()}.pdf`
+              `pharmaceutical-stock-ward-${typeMed}-report-${wardCode}-${new Date().getTime()}.pdf`
             );
         });
     } else {
-      console.log("Getting Excel report");
+      console.log("Excel action is not implemented yet");
     }
   };
 

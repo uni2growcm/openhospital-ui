@@ -111,10 +111,10 @@ export function WardMovementsTable() {
       )
       .map((item) => ({
         recipient:
-          (item.patient
-            ? `${item.patient.firstName} ${item.patient.secondName}`
+          (item.fullPatient
+            ? `${item.fullPatient.firstName} ${item.fullPatient.secondName}`
             : item.wardTo?.description) ?? "",
-        patient: item.patient?.name ?? "",
+        fullPatient: item.fullPatient?.name ?? "",
         pharmaceutical: item.medical?.description ?? "",
         wardFrom: item.wardFrom?.description ?? "",
         wardTo: item.wardTo?.description ?? "",
@@ -163,8 +163,8 @@ export function WardMovementsTable() {
                   type: item.patient ? "patient" : "ward",
                   pharmaceutical: item.medical?.description ?? "",
                   recipient:
-                    (item.patient
-                      ? `${item.patient.firstName} ${item.patient.secondName}`
+                    (item.fullPatient
+                      ? `${item.fullPatient.firstName} ${item.fullPatient.secondName}`
                       : item.wardTo?.description) ?? "",
                 }))}
                 manualFilter={false}

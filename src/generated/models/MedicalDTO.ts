@@ -88,7 +88,7 @@ export interface MedicalDTO {
      */
     lock?: number;
     /**
-     * Deleted
+     * The if medical is deleted
      * @type {string}
      * @memberof MedicalDTO
      */
