@@ -3862,17 +3862,33 @@ paths:
       - Reports
       operationId: printPharmaceuticalStockWardPdf
       parameters:
-      - name: date
-        in: query
-        required: true
-        schema:
-          type: string
-          format: date-time
       - name: wardCode
         in: query
         required: true
         schema:
           type: string
+      - name: dateFrom
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: dateTo
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: stockWardReportModel
+        in: query
+        required: false
+        schema:
+          type: string
+          default: OUTCOMING
+          enum:
+          - INCOMING
+          - OUTCOMING
+          - DRUGS
       responses:
         "200":
           description: OK
@@ -6550,11 +6566,11 @@ components:
           format: int32
           description: lock
           example: 0
-        male:
+        opd:
           type: boolean
         female:
           type: boolean
-        opd:
+        male:
           type: boolean
         pharmacy:
           type: boolean
