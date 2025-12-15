@@ -27,6 +27,8 @@ export type IPharmacyState = {
   wardStock: {
     filter: TWardStockFIlter;
   };
+  createWardMovement: ApiResponse<boolean>;
+  getMedicalWardByWardMedicalAndLot: ApiResponse<MedicalWardDTO>;
   printPharmaceuticalStockWardPdf: ApiResponse<Blob>;
   printPharmaceuticalStockPdf: ApiResponse<Blob>;
   printPharmaceuticalStockCardPdf: ApiResponse<Blob>;

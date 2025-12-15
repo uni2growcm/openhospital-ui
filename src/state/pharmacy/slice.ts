@@ -57,6 +57,9 @@ export const pharmacySlice = createSlice({
     resetUpdateMedical: (state) => {
       state.updateMedical = initial.updateMedical;
     },
+    resetCreateWardMovement: (state) => {
+      state.createWardMovement = initial.createWardMovement;
+    },
     resetPrintPharmaceuticalStockWardPdf: (state) => {
       state.printPharmaceuticalStockWardPdf =
         initial.printPharmaceuticalStockWardPdf;
@@ -195,6 +198,16 @@ export const pharmacySlice = createSlice({
       .addCase(thunks.updateMedical.rejected, (state, action) => {
         state.updateMedical = ApiResponse.error(action.payload);
       })
+      // Ward movement
+      .addCase(thunks.createWardMovement.pending, (state) => {
+        state.createWardMovement = ApiResponse.loading();
+      })
+      .addCase(thunks.createWardMovement.fulfilled, (state, action) => {
+        state.createWardMovement = ApiResponse.value(action.payload);
+      })
+      .addCase(thunks.createWardMovement.rejected, (state, action) => {
+        state.createWardMovement = ApiResponse.error(action.payload);
+      })
       // Print pharmaceutical stock ward pdf report
       .addCase(thunks.printPharmaceuticalStockWardPdf.pending, (state) => {
         state.printPharmaceuticalStockWardPdf = ApiResponse.loading();
@@ -301,6 +314,7 @@ export const {
   resetGetMedical,
   resetNewMedical,
   resetUpdateMedical,
+  resetCreateWardMovement,
   resetPrintPharmaceuticalStockWardPdf,
   resetPrintPharmaceuticalStockPdf,
   resetPrintPharmaceuticalStockCardPdf,
