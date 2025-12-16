@@ -26,6 +26,7 @@ export function LotFormField<T extends Record<string, any>>({
   control,
   medical,
   name,
+  showNewLotOption,
 }: LotFormFieldProps<T>) {
   const { t } = useTranslation();
   const [newLot, setNewLot] = useState<LotDTO>({
@@ -125,43 +126,48 @@ export function LotFormField<T extends Record<string, any>>({
                 />
               </Fragment>
             ))}
-            <span className="col-start-1 col-span-full text-lg">
-              {t("pharmacy.lot.labels.newLot")}
-            </span>
-            <FormControlLabel
-              value={newLot.code}
-              checked={newLot.code === value?.code}
-              className="col-start-1 col-span-full"
-              control={<Radio onClick={handleChange(field, newLot)} />}
-              label={t("pharmacy.lot.labels.change-on-this")}
-            />
-            <TextFormField
-              label={t("pharmacy.lot.fields.code")}
-              control={control}
-              name={`${name}.code` as Path<T>}
-              disabled={!isNewLotActive}
-            />
-            <DateFormField
-              format={DATETIME_FORMAT}
-              label={t("pharmacy.lot.fields.preparationDate")}
-              control={control}
-              name={`${name}.preparationDate` as Path<T>}
-              disabled={!isNewLotActive}
-            />
-            <DateFormField
-              format={DATETIME_FORMAT}
-              label={t("pharmacy.lot.fields.dueDate")}
-              control={control}
-              name={`${name}.dueDate` as Path<T>}
-              disabled={!isNewLotActive}
-            />
-            <TextFormField
-              type="number"
-              label={t("pharmacy.lot.fields.cost")}
-              control={control}
-              name={`${name}.cost` as Path<T>}
-              disabled={!isNewLotActive}
-            />
+
+            {showNewLotOption && (
+              <>
+                <span className="col-start-1 col-span-full text-lg">
+                  {t("pharmacy.lot.labels.newLot")}
+                </span>
+                <FormControlLabel
+                  value={newLot.code}
+                  checked={newLot.code === value?.code}
+                  className="col-start-1 col-span-full"
+                  control={<Radio onClick={handleChange(field, newLot)} />}
+                  label={t("pharmacy.lot.labels.change-on-this")}
+                />
+                <TextFormField
+                  label={t("pharmacy.lot.fields.code")}
+                  control={control}
+                  name={`${name}.code` as Path<T>}
+                  disabled={!isNewLotActive}
+                />
+                <DateFormField
+                  format={DATETIME_FORMAT}
+                  label={t("pharmacy.lot.fields.preparationDate")}
+                  control={control}
+                  name={`${name}.preparationDate` as Path<T>}
+                  disabled={!isNewLotActive}
+                />
+                <DateFormField
+                  format={DATETIME_FORMAT}
+                  label={t("pharmacy.lot.fields.dueDate")}
+                  control={control}
+                  name={`${name}.dueDate` as Path<T>}
+                  disabled={!isNewLotActive}
+                />
+                <TextFormField
+                  type="number"
+                  label={t("pharmacy.lot.fields.cost")}
+                  control={control}
+                  name={`${name}.cost` as Path<T>}
+                  disabled={!isNewLotActive}
+                />
+              </>
+            )}
             <TextFormField
               type="number"
               label={t("pharmacy.lot.fields.mainStoreQuantity")}

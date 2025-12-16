@@ -1272,10 +1272,6 @@
       "rectify-movement-success": {
         "title": "Rectification completed successfully",
         "description": "The stock rectification has been saved successfully."
-      },
-      "rectify-movement-fail": {
-        "title": "Rectification failed",
-        "description": "We were unable to rectify the ward stock. Please try again or contact support."
       }
     },
     "form": {
@@ -1384,8 +1380,29 @@
         "pieces": "Pieces",
         "movementType": {
           "patient": "To patient",
-          "ward": "Internal"
-        }
+          "ward": "Internal use",
+          "toAnotherWard": "To another ward"
+        },
+        "dischargeMovement": "Discharge movement from ",
+        "destination": "Destination",
+        "toPatient": "To patient",
+        "internalUse": "Internal use",
+        "selectPatient": "Select a patient",
+        "selectWard": "Select a ward",
+        "totalStock": "Total stock",
+        "selectLot": "Select lot",
+        "quantityGreaterThanZero": "Quantity must be greater than zero",
+        "quantityNotExceedoTtalStock": "Quantity must not exceed total stock",
+        "loading": "Loading...",
+        "pleaseSelectLot": "Please select a lot",
+        "pleaseSelectPatient": "Please select a patient",
+        "pleaseSelectWard": "Please select a ward",
+        "failedTocreateDischargeMovement": "Failed to create dischargem movement. Please try again.",
+        "dischargeMovementCreatedSuccessfully": "Discharge movement created successfully !",
+        "errorPatient": "Error finding patient.",
+        "movementCreated": "Movement created",
+        "quantityMustBeDifferent": "The entered quantity must be different from the current quantity.",
+        "reasonRequired": "Please provide a reason for the rectification"
       }
     }
   }

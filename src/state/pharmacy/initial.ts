@@ -30,4 +30,8 @@ export const initial: IPharmacyState = {
       getMedicalsMov: new ApiResponse({ status: "IDLE", data: [] }),
     },
   },
+  createWardMovement: new ApiResponse({ status: "IDLE", data: false }),
+  getMedicalWardByWardMedicalAndLot: new ApiResponse({
+    status: "IDLE",
+  }),
 };

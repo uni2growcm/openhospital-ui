@@ -62,7 +62,7 @@ export const stockMovementsRoutes = (server) => {
       errors.push("please select a drug");
     }
 
-    if (medical?.lots?.length > 0 && !lot) {
+    if (!lot) {
       errors.push("please select a lot");
     }
 
@@ -73,7 +73,6 @@ export const stockMovementsRoutes = (server) => {
     const newMovement = { ...body, code: WARD_MOVEMENTS.length + 1 };
     WARD_MOVEMENTS.push(newMovement);
 
-    return res.status(201).json(true);
+    res.status(201).json(true);
   });
-
 };

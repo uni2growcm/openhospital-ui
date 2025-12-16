@@ -1,30 +1,22 @@
 import checkIcon from "assets/check-icon.png";
 import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
-import InfoBox from "components/accessories/infoBox/InfoBox";
 import { PATHS } from "consts";
 import { MedicalWardDTO, MovementWardDTO } from "generated";
 import { useNavigationHandler, useTranslation } from "libraries/hooks";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useOutletContext, useParams } from "react-router";
 import { getMedicals } from "state/medicals";
-import { newMovementWard, resetNewMovementWard } from "state/pharmacy";
+import { createWardMovement, resetCreateWardMovement } from "state/pharmacy";
 import { PharmacyActivityContent } from "../PharmacyActivityContent";
 import RectifyQuantityForm from "./components/form/RectifyQuantityForm";
 
 const WardStockRectify: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const infoBoxRef = useRef<HTMLDivElement>(null);
 
   const status = useAppSelector(
-    (state) => state.pharmacy.newMovementWard.status
-  );
-
-  const errorMessage = useAppSelector(
-    (state) =>
-      state.pharmacy.newMovementWard.error?.message ??
-      t("pharmacy.messages.rectify-movement-fail.description")
+    (state) => state.pharmacy.createWardMovement.status
   );
 
   const handleGoBack = useNavigationHandler(PATHS.pharmacy_ward_stock, {
@@ -32,7 +24,7 @@ const WardStockRectify: React.FC = () => {
   });
 
   const handleDialogActions = useCallback(() => {
-    dispatch(resetNewMovementWard());
+    dispatch(resetCreateWardMovement());
     if (status === "SUCCESS") {
       handleGoBack();
     }
@@ -49,7 +41,6 @@ const WardStockRectify: React.FC = () => {
     setBreadcrumbMap: (map: Record<string, string | undefined>) => void;
   }>();
 
-
   const selectedMedical = useAppSelector((state) =>
     state.pharmacy.wardMedicals.data?.find((med: MedicalWardDTO) => {
       return (
@@ -61,7 +52,7 @@ const WardStockRectify: React.FC = () => {
 
   const handleSubmit = useCallback(
     (updatedMedical: MovementWardDTO) => {
-      dispatch(newMovementWard(updatedMedical));
+      dispatch(createWardMovement(updatedMedical));
     },
     [dispatch]
   );
@@ -82,10 +73,17 @@ const WardStockRectify: React.FC = () => {
         [t("pharmacy.labels.ward-stock")]: PATHS.pharmacy_ward_stock,
       });
     };
-  }, [params.medCode, params.wardCode, params.lotCode, t, breadcrumbMap, setBreadcrumbMap]);
+  }, [
+    params.medCode,
+    params.wardCode,
+    params.lotCode,
+    t,
+    breadcrumbMap,
+    setBreadcrumbMap,
+  ]);
 
   useEffect(() => {
-    dispatch(getMedicals())
+    dispatch(getMedicals());
   }, [dispatch]);
 
   return (
@@ -100,12 +98,6 @@ const WardStockRectify: React.FC = () => {
             pharmaceutical={selectedMedical}
             loading={status === "LOADING"}
           />
-        )}
-
-        {status === "FAIL" && (
-          <div ref={infoBoxRef} className="info-box-container">
-            <InfoBox type="error" message={errorMessage} />
-          </div>
         )}
       </div>
 

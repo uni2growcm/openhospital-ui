@@ -14,7 +14,6 @@ export function WardMedicalsTable() {
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
-
   const filter = useAppSelector((state) => state.pharmacy.wardStock.filter);
 
   const data = useAppSelector(
@@ -27,16 +26,31 @@ export function WardMedicalsTable() {
     (state) =>
       state.pharmacy.wardMedicals.error?.message || t("errors.somethingwrong")
   ) as string;
+  
+  const handleDischarge = useCallback(
+    (row: any) => {
+      const combinedId = `${row.code}-${row.wardCode}-${row.lotCode}`;
+
+      navigate(PATHS.pharmacy_ward_stock_discharge.replace(":id", combinedId));
+    },
+    [navigate]
+  );
 
   const labelData = {
     pharmaceutical: t("pharmacy.stock.ward.pharmaceutical"),
     quantity: t("pharmacy.stock.ward.quantity"),
     units: t("pharmacy.stock.ward.units"),
+    action: "",
   };
 
   type LabelDataKey = keyof typeof labelData;
 
-  const tableHeader: LabelDataKey[] = ["pharmaceutical", "quantity", "units"];
+  const tableHeader: LabelDataKey[] = [
+    "pharmaceutical",
+    "quantity",
+    "units",
+    "action",
+  ];
 
   const dateFields: LabelDataKey[] = [];
   const order: LabelDataKey[] = ["pharmaceutical", "quantity"];
@@ -67,8 +81,8 @@ export function WardMedicalsTable() {
   const formattedData = useMemo(() => {
     return data.map((item) => ({
       code: item.id?.medical?.code ?? "",
-      wardCode: item.id?.ward.code ?? "",
       lotCode: item.id?.lot?.code ?? "",
+      wardCode: item.id?.ward?.code ?? "",
       pharmaceutical: item.id?.medical?.description ?? "",
       units: "",
       quantity: (item.in_quantity ?? 0) - (item.out_quantity ?? 0),
@@ -118,6 +132,7 @@ export function WardMedicalsTable() {
                 }))}
                 manualFilter={false}
                 onRectify={handleRectify}
+                onDischarge={(row) => handleDischarge(row)}
               />
             );
           case "SUCCESS_EMPTY":

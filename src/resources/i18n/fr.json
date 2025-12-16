@@ -1231,7 +1231,29 @@
       "pharmaceutical-title": "Pharmaceutique",
       "pharmaceutical": "Produits médicaux",
       "pharmaceutical-stock": "Stock pharmaceutique",
-      "ward-stock": "Stock du pavillon"
+      "ward-stock": "Stock du pavillon",
+      "rectify-ward-stock": "Rectifier la quantité"
+    },
+    "lot": {
+      "labels": {
+        "existingLots": "Lots existants",
+        "newLot": "Nouveau lot",
+        "change-on-this": "Utiliser ce lot",
+        "select-lot": "Selectionner le lot",
+        "lots": "Lots",
+        "total": "Quantity totale en stock: <1>{{count}}</1>"
+      },
+      "fields": {
+        "code": "Code du lot",
+        "preparationDate": "Date de production",
+        "dueDate": "Date de peremption",
+        "cost": "Coût unitaire",
+        "quantity": "Quantité",
+        "ward": "Vers le pavillon",
+        "mainStoreQuantity": "Quantité dans le magasin principal",
+        "wardsTotalQuantity": "Quantité dans le pavillons",
+        "overallQuantity": "Quantité totale"
+      }
     },
     "stock": {
       "refNo": "Ref",
@@ -1258,7 +1280,57 @@
       "addMedecine": "Ajouter un médicament",
       "order": "Commander",
       "expiring": "Expirer",
-      "amcReport": "Rapport AMC"
+      "amcReport": "Rapport AMC",
+      "ward": {
+        "lotNo": "Numéro de lot",
+        "inStock": "En stock",
+        "chooseALot": "Choisir un lot",
+        "newLot": "Nouveau lot",
+        "reason": "Motif",
+        "actualQuantity": "Quantité actuelle",
+        "pharmaceutical": "Médicament",
+        "patient": "Patient",
+        "medical": "Médicament",
+        "wardFrom": "Depuis le pavillon",
+        "wardTo": "Vers le pavillon",
+        "date": "Date",
+        "code": "Code",
+        "units": "Unités",
+        "description": "Description",
+        "quantity": "Quantité",
+        "ward": "Pavillon",
+        "weight": "Poids",
+        "age": "Âge",
+        "type": "Type",
+        "recipient": "Destinataire",
+        "SelectMedical": "Sélectionner un médicament",
+        "pieces": "pièces",
+        "movementType": {
+          "patient": "Vers un patient",
+          "ward": "Usage interne",
+          "toAnotherWard": "Vers un autre pavillon"
+        },
+        "dischargeMovement": "Mouvement de décharge depuis ",
+        "destination": "Destination",
+        "toPatient": "Vers un patient",
+        "internalUse": "Usage interne",
+        "selectPatient": "Sélectionner un patient",
+        "selectWard": "Sélectionner un pavillon",
+        "totalStock": "Stock total",
+        "selectLot": "Sélectionner le lot",
+        "quantityGreaterThanZero": "La quantité doit être supérieure à zéro",
+        "quantityNotExceedoTtalStock": "La quantité ne doit pas dépasser le stock total",
+        "quantityMustBeDifferent": "La quantité saisie doit être différente de la quantité actuelle",
+        "reasonRequired": "Veuillez fournir un motif pour la rectification",
+        "loading": "Chargement...",
+        "pleaseSelectLot": "Veuillez sélectionner un lot",
+        "pleaseSelectPatient": "Veuillez sélectionner un patient",
+        "pleaseSelectWard": "Veuillez sélectionner un pavillon",
+        "failedTocreateDischargeMovement": "Échec de la création du mouvement de décharge. Veuillez réessayer.",
+        "dischargeMovementCreatedSuccessfully": "Mouvement de décharge créé avec succès !",
+        "errorPatient": "Erreur lors de la recherche du patient",
+        "movementCreated": "Mouvement créé"
+      }
     }
   }
 }

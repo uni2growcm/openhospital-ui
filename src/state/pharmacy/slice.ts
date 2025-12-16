@@ -57,8 +57,8 @@ export const pharmacySlice = createSlice({
     resetUpdateMedical: (state) => {
       state.updateMedical = initial.updateMedical;
     },
-    resetNewMovementWard: (state) => {
-      state.newMovementWard = initial.newMovementWard;
+    resetCreateWardMovement: (state) => {
+      state.createWardMovement = initial.createWardMovement;
     },
   },
   extraReducers: (builder) => {
@@ -184,16 +184,16 @@ export const pharmacySlice = createSlice({
       .addCase(thunks.updateMedical.rejected, (state, action) => {
         state.updateMedical = ApiResponse.error(action.payload);
       })
-      // Rectify ward movement
-      .addCase(thunks.newMovementWard.pending, (state) => {
-        state.newMovementWard = ApiResponse.loading();
+      // Ward movement
+      .addCase(thunks.createWardMovement.pending, (state) => {
+        state.createWardMovement = ApiResponse.loading();
       })
-      .addCase(thunks.newMovementWard.fulfilled, (state, action) => {
-        state.newMovementWard = ApiResponse.value(action.payload);
+      .addCase(thunks.createWardMovement.fulfilled, (state, action) => {
+        state.createWardMovement = ApiResponse.value(action.payload);
       })
-      .addCase(thunks.newMovementWard.rejected, (state, action) => {
-        state.newMovementWard = ApiResponse.error(action.payload);
-      });
+      .addCase(thunks.createWardMovement.rejected, (state, action) => {
+        state.createWardMovement = ApiResponse.error(action.payload);
+      })
   },
 });
 
@@ -213,5 +213,5 @@ export const {
   resetGetMedical,
   resetNewMedical,
   resetUpdateMedical,
-  resetNewMovementWard,
+  resetCreateWardMovement,
 } = pharmacySlice.actions;

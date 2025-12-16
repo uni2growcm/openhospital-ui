@@ -1,4 +1,4 @@
-import React, { FormEvent, useCallback, useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import Button from "components/accessories/button/Button";
@@ -9,9 +9,13 @@ import {
 import { PATHS } from "consts";
 import { MovementWardDTO } from "generated";
 import { useNavigationHandler, useTranslation } from "libraries/hooks";
-import { isEmpty } from "lodash";
 import { useForm } from "react-hook-form";
-import { MedicalWardDTOSchema, getInitialValues } from "./consts";
+import {
+  MedicalWardDTOSchema,
+  QuantityErrorKey,
+  ReasonErrorKey,
+  getInitialValues,
+} from "./consts";
 import "./styles.scss";
 import { PharmaceuticalStockFormProps, TFormValues } from "./types";
 
@@ -22,7 +26,7 @@ function RectifyQuantityForm({
 }: PharmaceuticalStockFormProps) {
   const { t } = useTranslation();
 
-  const { control, watch, formState } = useForm<TFormValues>({
+  const { control, watch, formState, handleSubmit } = useForm<TFormValues>({
     defaultValues: getInitialValues(pharmaceutical),
     resolver: standardSchemaResolver(MedicalWardDTOSchema),
   });
@@ -39,9 +43,9 @@ function RectifyQuantityForm({
 
   const values = watch();
 
-  const formValues: MovementWardDTO = useMemo(
-    () =>
-      ({
+  const onValidSubmit = useCallback(
+    (values: TFormValues) => {
+      const payload: MovementWardDTO = {
         ward: pharmaceutical!.id!.ward,
         medical: pharmaceutical!.id!.medical,
         date: new Date().toISOString(),
@@ -49,18 +53,11 @@ function RectifyQuantityForm({
         quantity: values.quantity,
         units: t("pharmacy.stock.ward.pieces"),
         lot: pharmaceutical!.id!.lot,
-      } as any as MovementWardDTO),
-    [values, t, pharmaceutical]
-  );
+      } as MovementWardDTO;
 
-  const handleSubmit = useCallback(
-    (event: FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      if (isEmpty(Object.keys(formState.errors))) {
-        onSubmit?.(formValues);
-      }
+      onSubmit?.(payload);
     },
-    [formState.errors, formValues, onSubmit]
+    [onSubmit, pharmaceutical, t]
   );
 
   const handleGoBack = useNavigationHandler(PATHS.pharmacy_ward_stock, {
@@ -69,10 +66,14 @@ function RectifyQuantityForm({
 
   return (
     <div className="rectifyStockForm">
-      <form className="form-grid-layout gap-2 w-full" onSubmit={handleSubmit}>
+      <form
+        className="form-grid-layout gap-2 w-full"
+        onSubmit={handleSubmit(onValidSubmit)}
+      >
         <span className="col-span-full text-lg">
           {t("pharmacy.stock.ward.inStock")}: {values.actualQuantity}
         </span>
+
         <AutocompleteFormField
           label={t("pharmacy.stock.ward.medical")}
           name="medical"
@@ -80,7 +81,9 @@ function RectifyQuantityForm({
           options={medicalOptions}
           disabled
         />
-        <div className="col-start-1 col-span-full"></div>
+
+        <div className="col-start-1 col-span-full" />
+
         <TextFormField
           type="number"
           name="actualQuantity"
@@ -88,21 +91,38 @@ function RectifyQuantityForm({
           control={control}
           disabled
         />
+
         <TextFormField
           type="number"
           name="quantity"
           label={t("pharmacy.stock.ward.quantity")}
           control={control}
+          error={!!formState.errors.quantity}
+          helperText={
+            formState.errors.quantity?.message
+              ? t(formState.errors.quantity.message as QuantityErrorKey)
+              : undefined
+          }
         />
-        <div className="col-start-1 col-span-full"></div>
+
+        <div className="col-start-1 col-span-full" />
+
         <TextFormField
           name="reason"
           label={t("pharmacy.stock.ward.reason")}
           control={control}
           multiline
           className="col-span-full"
+          error={!!formState.errors.reason}
+          helperText={
+            formState.errors.reason?.message
+              ? t(formState.errors.reason.message as ReasonErrorKey)
+              : undefined
+          }
         />
-        <div className="col-start-1 col-span-full"></div>
+
+        <div className="col-start-1 col-span-full" />
+
         <div className="col-span-full flex gap-2 justify-end">
           <Button
             type="reset"
@@ -112,6 +132,7 @@ function RectifyQuantityForm({
           >
             {t("common.cancel")}
           </Button>
+
           <Button
             variant="contained"
             dataCy="submit-button"

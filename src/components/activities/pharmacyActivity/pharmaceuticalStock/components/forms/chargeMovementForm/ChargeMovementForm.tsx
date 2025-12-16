@@ -119,6 +119,7 @@ export function ChargeMovementForm({
             control={control}
             medical={formatedValues.medical}
             name="lot"
+            showNewLotOption= {true}
           />
         )}
         <div className="col-start-1 col-span-full"></div>
