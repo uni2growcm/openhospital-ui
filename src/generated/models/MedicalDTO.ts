@@ -32,7 +32,7 @@ export interface MedicalDTO {
      * @type {string}
      * @memberof MedicalDTO
      */
-    prodCode?: string;
+    prod_code?: string;
     /**
      * The medical type
      * @type {MedicalTypeDTO}
@@ -76,12 +76,6 @@ export interface MedicalDTO {
      */
     minqty?: number;
     /**
-     * The deletad value of the medical
-     * @type {string}
-     * @memberof MedicalDTO
-     */
-    deleted?: string;
-    /**
      * The lots associated to the medical
      * @type {Array<LotDTO>}
      * @memberof MedicalDTO
@@ -93,4 +87,10 @@ export interface MedicalDTO {
      * @memberof MedicalDTO
      */
     lock?: number;
+    /**
+     * The if medical is deleted
+     * @type {string}
+     * @memberof MedicalDTO
+     */
+    deleted?: string;
 }

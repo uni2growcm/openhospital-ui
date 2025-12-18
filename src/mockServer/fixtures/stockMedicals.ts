@@ -3,7 +3,7 @@ import { MedicalDTO } from "generated";
 export const MEDICALS: MedicalDTO[] = [
   {
     code: 1,
-    prodCode: "PARA500",
+    prod_code: "PARA500",
     description: "Paracetamol 500mg tablets",
     type: { code: "DRUG", description: "Pharmaceutical" },
     initialqty: 2000,
@@ -11,17 +11,19 @@ export const MEDICALS: MedicalDTO[] = [
     inqty: 500,
     outqty: 300,
     minqty: 100,
-    lots: [{
-      code: "L2025-01",
-      preparationDate: "2025-01-02",
-      dueDate: "2027-01-02",
-      cost: 0.1,
-    }],
+    lots: [
+      {
+        code: "L2025-01",
+        preparationDate: "2025-01-02",
+        dueDate: "2027-01-02",
+        cost: 0.1,
+      },
+    ],
     lock: 0,
   },
   {
     code: 2,
-    prodCode: "AMOX500",
+    prod_code: "AMOX500",
     description: "Amoxicillin 500mg capsules",
     type: { code: "DRUG", description: "Antibiotic" },
     initialqty: 1000,
@@ -29,17 +31,19 @@ export const MEDICALS: MedicalDTO[] = [
     inqty: 200,
     outqty: 180,
     minqty: 50,
-    lots: [{
-      code: "L2025-02",
-      preparationDate: "2025-02-01",
-      dueDate: "2026-02-01",
-      cost: 0.25,
-    }],
+    lots: [
+      {
+        code: "L2025-02",
+        preparationDate: "2025-02-01",
+        dueDate: "2026-02-01",
+        cost: 0.25,
+      },
+    ],
     lock: 0,
   },
   {
     code: 3,
-    prodCode: "GAUZE01",
+    prod_code: "GAUZE01",
     description: "Sterile Gauze Pads",
     type: { code: "SUPPLY", description: "Medical Supply" },
     initialqty: 500,
@@ -47,17 +51,19 @@ export const MEDICALS: MedicalDTO[] = [
     inqty: 300,
     outqty: 100,
     minqty: 50,
-    lots: [{
-      code: "L2025-03",
-      preparationDate: "2025-02-10",
-      dueDate: "2028-02-10",
-      cost: 0.05,
-    }],
+    lots: [
+      {
+        code: "L2025-03",
+        preparationDate: "2025-02-10",
+        dueDate: "2028-02-10",
+        cost: 0.05,
+      },
+    ],
     lock: 0,
   },
   {
     code: 4,
-    prodCode: "VITC100",
+    prod_code: "VITC100",
     description: "Vitamin C 100mg tablets",
     type: { code: "SUPPLEMENT", description: "Vitamin supplement" },
     initialqty: 0,
@@ -70,7 +76,7 @@ export const MEDICALS: MedicalDTO[] = [
   },
   {
     code: 5,
-    prodCode: "SALT01",
+    prod_code: "SALT01",
     description: "Normal Saline 500ml",
     type: { code: "FLUID", description: "Infusion fluid" },
     initialqty: 0,
@@ -83,7 +89,7 @@ export const MEDICALS: MedicalDTO[] = [
   },
   {
     code: 6,
-    prodCode: "INS100",
+    prod_code: "INS100",
     description: "Insulin 100 IU/ml",
     type: { code: "DRUG", description: "Hormone" },
     initialqty: 0,
@@ -91,17 +97,19 @@ export const MEDICALS: MedicalDTO[] = [
     inqty: 100,
     outqty: 0,
     minqty: 10,
-    lots: [{
-      code: "L2025-04",
-      preparationDate: "2025-03-05",
-      dueDate: "2026-03-05",
-      cost: 1.5,
-    }],
+    lots: [
+      {
+        code: "L2025-04",
+        preparationDate: "2025-03-05",
+        dueDate: "2026-03-05",
+        cost: 1.5,
+      },
+    ],
     lock: 0,
   },
   {
     code: 7,
-    prodCode: "GLOVEXL",
+    prod_code: "GLOVEXL",
     description: "Latex Gloves (XL)",
     type: { code: "SUPPLY", description: "Disposable" },
     initialqty: 0,

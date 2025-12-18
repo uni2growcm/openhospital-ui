@@ -12,6 +12,8 @@ export interface IProps {
   initialOrderBy?: string;
   columnsOrder: Array<string>;
   onEdit?: (row: any) => void;
+  onRectify?: (row: any) => void;
+  onDischarge?: (row: any) => void;
   onDelete?: (row: any) => void;
   onPrint?: (row: any) => void;
   onView?: (row: any) => void;
@@ -88,6 +90,8 @@ export interface IRowProps {
 
 export type TActions =
   | "edit"
+  | "rectify"
+  | "discharge"
   | "delete"
   | "view"
   | "print"

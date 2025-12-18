@@ -16,6 +16,7 @@ export const initial: IPharmacyState = {
   newMedical: new ApiResponse({ status: "IDLE" }),
   updateMedical: new ApiResponse({ status: "IDLE" }),
   getMedicalTypes: new ApiResponse({ status: "IDLE", data: [] }),
+  newMovementWard: new ApiResponse({ status: "IDLE" }),
   wardStock: {
     filter: {
       ward: undefined,
@@ -29,4 +30,8 @@ export const initial: IPharmacyState = {
       getMedicalsMov: new ApiResponse({ status: "IDLE", data: [] }),
     },
   },
+  createWardMovement: new ApiResponse({ status: "IDLE", data: false }),
+  getMedicalWardByWardMedicalAndLot: new ApiResponse({
+    status: "IDLE",
+  }),
 };

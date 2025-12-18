@@ -1,0 +1,96 @@
+@import "../../../../../../styles/variables";
+@import "../../../../../../../node_modules/susy/sass/susy";
+
+.wardDischargeForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 1500px;
+  max-height: 600px;
+  background-color: $c-white;
+  overflow-y: auto;
+
+  &__row {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    align-items: center;
+  }
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    &--quarter {
+      flex: 0 0 30%;
+    }
+
+    &--three-quarter {
+      flex: 1;
+    }
+  }
+
+  &__label {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+  }
+
+  &__totalStock {
+    font-weight: 700;
+    padding: 0.4rem 0;
+  }
+
+  &__radioWrapper {
+    .MuiRadioGroup-root {
+      display: flex !important;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .MuiFormControlLabel-root {
+      flex: 1;
+      margin: 0 !important;
+
+      .MuiFormControlLabel-label {
+        white-space: nowrap;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+
+    button {
+      min-width: 120px;
+    }
+  }
+
+  .lot-error {
+    color: $c-red;
+    font-size: 0.75rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  @include susy-media($medium-down) {
+    &__row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      &__section {
+        &--quarter,
+        &--three-quarter {
+          flex: 1 1 100%;
+          min-width: 0;
+        }
+      }
+    }
+  }

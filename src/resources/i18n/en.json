@@ -1233,6 +1233,7 @@
       "pharmaceutical": "Medical products",
       "pharmaceutical-stock": "Pharmaceutical stock",
       "ward-stock": "Ward stock",
+      "rectify-ward-stock": "Rectify Quantity",
       "charge-movement": "Charge movement",
       "discharge-movement": "Discharge movement",
       "discharge-movement-created": "Discharge movement created",
@@ -1267,6 +1268,10 @@
       "update-pharmaceutical-fail": {
         "title": "Pharamaceutical update failed",
         "description": "We were unable to update the pharmaceutical. Please try again or contact support."
+      },
+      "rectify-movement-success": {
+        "title": "Rectification completed successfully",
+        "description": "The stock rectification has been saved successfully."
       }
     },
     "form": {
@@ -1288,7 +1293,13 @@
         "pcsperpck": "Pieces per Packet",
         "minqty": "Critical level",
         "ignoreSimilar": "Ignore somilar",
-        "deleted": "active"
+        "deleted": "Active",
+        "currentQuantity": "Current Quantity",
+        "newQuantity": "New Quantity",
+        "adjust": "Adjust",
+        "adjustQuantity": "Adjust quantity",
+        "currentQntyNonNegetive": "Current quantity must be non-negative",
+        "newQntyNonNegetive": "New quantity must be non-negative"
       }
     },
     "lot": {
@@ -1350,6 +1361,12 @@
         "excel": "Excel"
       },
       "ward": {
+        "lotNo": "Lot No.",
+        "inStock": "In Stock",
+        "chooseALot": "Choose Lot",
+        "newLot": "New Lot",
+        "reason": "Reason",
+        "actualQuantity": "Actual Quantity",
         "pharmaceutical": "Pharmaceutical",
         "patient": "Patient",
         "medical": "Medical",
@@ -1365,10 +1382,33 @@
         "age": "Age",
         "type": "Type",
         "recipient": "Recipient",
+        "SelectMedical": "Select Medical",
+        "pieces": "Pieces",
         "movementType": {
           "patient": "To patient",
-          "ward": "Internal"
-        }
+          "ward": "Internal use",
+          "toAnotherWard": "To another ward"
+        },
+        "dischargeMovement": "Discharge movement from ",
+        "destination": "Destination",
+        "toPatient": "To patient",
+        "internalUse": "Internal use",
+        "selectPatient": "Select a patient",
+        "selectWard": "Select a ward",
+        "totalStock": "Total stock",
+        "selectLot": "Select lot",
+        "quantityGreaterThanZero": "Quantity must be greater than zero",
+        "quantityNotExceedoTtalStock": "Quantity must not exceed total stock",
+        "loading": "Loading...",
+        "pleaseSelectLot": "Please select a lot",
+        "pleaseSelectPatient": "Please select a patient",
+        "pleaseSelectWard": "Please select a ward",
+        "failedTocreateDischargeMovement": "Failed to create dischargem movement. Please try again.",
+        "dischargeMovementCreatedSuccessfully": "Discharge movement created successfully !",
+        "errorPatient": "Error finding patient.",
+        "movementCreated": "Movement created",
+        "quantityMustBeDifferent": "The entered quantity must be different from the current quantity.",
+        "reasonRequired": "Please provide a reason for the rectification"
       }
     }
   }

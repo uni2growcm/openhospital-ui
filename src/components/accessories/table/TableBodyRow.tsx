@@ -97,7 +97,7 @@ const TableBodyRow: FunctionComponent<IRowProps> = ({
       {isCollapsabile && (
         <TableRow>
           <TableCell
-            style={{ padding: 0, borderBottom: 0, margin: 0 }}
+            style={{ padding: 0, borderBottom: 0, margin: 0, width: "100%" }}
             colSpan={detailColSpan ?? 6}
             className="collapseCell"
           >

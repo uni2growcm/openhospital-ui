@@ -1,0 +1,150 @@
+import React, { useCallback, useMemo } from "react";
+
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
+import Button from "components/accessories/button/Button";
+import {
+  AutocompleteFormField,
+  TextFormField,
+} from "components/accessories/forms";
+import { PATHS } from "consts";
+import { MovementWardDTO } from "generated";
+import { useNavigationHandler, useTranslation } from "libraries/hooks";
+import { useForm } from "react-hook-form";
+import {
+  MedicalWardDTOSchema,
+  QuantityErrorKey,
+  ReasonErrorKey,
+  getInitialValues,
+} from "./consts";
+import "./styles.scss";
+import { PharmaceuticalStockFormProps, TFormValues } from "./types";
+
+function RectifyQuantityForm({
+  pharmaceutical,
+  onSubmit,
+  loading,
+}: PharmaceuticalStockFormProps) {
+  const { t } = useTranslation();
+
+  const { control, watch, formState, handleSubmit } = useForm<TFormValues>({
+    defaultValues: getInitialValues(pharmaceutical),
+    resolver: standardSchemaResolver(MedicalWardDTOSchema),
+  });
+
+  const medicalOptions = useMemo(() => {
+    if (!pharmaceutical?.id?.medical) return [];
+    return [
+      {
+        label: pharmaceutical.id.medical.description,
+        value: pharmaceutical.id.medical.code,
+      },
+    ];
+  }, [pharmaceutical]);
+
+  const values = watch();
+
+  const onValidSubmit = useCallback(
+    (values: TFormValues) => {
+      const payload: MovementWardDTO = {
+        ward: pharmaceutical!.id!.ward,
+        medical: pharmaceutical!.id!.medical,
+        date: new Date().toISOString(),
+        description: values.reason || "",
+        quantity: values.quantity,
+        units: t("pharmacy.stock.ward.pieces"),
+        lot: pharmaceutical!.id!.lot,
+      } as MovementWardDTO;
+
+      onSubmit?.(payload);
+    },
+    [onSubmit, pharmaceutical, t]
+  );
+
+  const handleGoBack = useNavigationHandler(PATHS.pharmacy_ward_stock, {
+    replace: true,
+  });
+
+  return (
+    <div className="rectifyStockForm">
+      <form
+        className="form-grid-layout gap-2 w-full"
+        onSubmit={handleSubmit(onValidSubmit)}
+      >
+        <span className="col-span-full text-lg">
+          {t("pharmacy.stock.ward.inStock")}: {values.actualQuantity}
+        </span>
+
+        <AutocompleteFormField
+          label={t("pharmacy.stock.ward.medical")}
+          name="medical"
+          control={control}
+          options={medicalOptions}
+          disabled
+        />
+
+        <div className="col-start-1 col-span-full" />
+
+        <TextFormField
+          type="number"
+          name="actualQuantity"
+          label={t("pharmacy.stock.ward.actualQuantity")}
+          control={control}
+          disabled
+        />
+
+        <TextFormField
+          type="number"
+          name="quantity"
+          label={t("pharmacy.stock.ward.quantity")}
+          control={control}
+          error={!!formState.errors.quantity}
+          helperText={
+            formState.errors.quantity?.message
+              ? t(formState.errors.quantity.message as QuantityErrorKey)
+              : undefined
+          }
+        />
+
+        <div className="col-start-1 col-span-full" />
+
+        <TextFormField
+          name="reason"
+          label={t("pharmacy.stock.ward.reason")}
+          control={control}
+          multiline
+          className="col-span-full"
+          error={!!formState.errors.reason}
+          helperText={
+            formState.errors.reason?.message
+              ? t(formState.errors.reason.message as ReasonErrorKey)
+              : undefined
+          }
+        />
+
+        <div className="col-start-1 col-span-full" />
+
+        <div className="col-span-full flex gap-2 justify-end">
+          <Button
+            type="reset"
+            dataCy="reset-button"
+            onClick={handleGoBack}
+            disabled={loading}
+          >
+            {t("common.cancel")}
+          </Button>
+
+          <Button
+            variant="contained"
+            dataCy="submit-button"
+            type="submit"
+            disabled={loading}
+          >
+            {t("common.confirm")}
+          </Button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
+export default RectifyQuantityForm;

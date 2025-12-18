@@ -12,6 +12,7 @@
  */
 
 import type {
+    LotDTO,
     MedicalDTO,
     PatientDTO,
     WardDTO,
@@ -41,11 +42,16 @@ export interface MovementWardDTO {
      */
     date: string;
     /**
+     * @type {boolean}
+     * @memberof MovementWardDTO
+     */
+    isPatient?: boolean;
+    /**
      * The patient in case the movement is associated to a patient
      * @type {PatientDTO}
      * @memberof MovementWardDTO
      */
-    patient?: PatientDTO;
+    fullPatient?: PatientDTO;
     /**
      * The patient\'s age in case the movement is associated to a patient
      * @type {number}
@@ -94,4 +100,15 @@ export interface MovementWardDTO {
      * @memberof MovementWardDTO
      */
     wardFrom?: WardDTO;
+    /**
+     * The lot of the medical concerned by the movement
+     * @type {LotDTO}
+     * @memberof MovementWardDTO
+     */
+    lot?: LotDTO;
+    /**
+     * @type {boolean}
+     * @memberof MovementWardDTO
+     */
+    patient?: boolean;
 }

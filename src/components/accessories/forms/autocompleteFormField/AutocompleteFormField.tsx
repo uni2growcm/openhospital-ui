@@ -6,6 +6,7 @@ import {
   ControllerRenderProps,
   Path,
 } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 export type AutocompleteFormFieldProps<T extends Record<string, any>> = {
   control: Control<T>;
@@ -20,29 +21,39 @@ export function AutocompleteFormField<T extends Record<string, any>>({
   control,
   ...props
 }: AutocompleteFormFieldProps<T>) {
+  const { t } = useTranslation();
+
   const handleChange = useCallback(
     (field: ControllerRenderProps<T, Path<T>>) => (_: object, value: any) => {
       field.onChange(value?.value);
     },
     []
   );
+
   return (
     <Controller
       name={name}
       control={control}
-      render={({ field, fieldState }) => (
-        <AutocompleteField
-          {...props}
-          aria-invalid={fieldState.invalid}
-          fieldName={field.name}
-          fieldValue={field.value ?? ""}
-          disabled={props.disabled ?? field.disabled}
-          onBlur={field.onBlur}
-          errorText={fieldState.error?.message ?? ""}
-          isValid={!fieldState.invalid}
-          onChange={handleChange(field)}
-        />
-      )}
+      render={({ field, fieldState }) => {
+        const translatedError =
+          typeof fieldState.error?.message === "string"
+            ? t(fieldState.error.message)
+            : "";
+
+        return (
+          <AutocompleteField
+            {...props}
+            aria-invalid={fieldState.invalid}
+            fieldName={field.name}
+            fieldValue={field.value ?? ""}
+            disabled={props.disabled ?? field.disabled}
+            onBlur={field.onBlur}
+            errorText={translatedError}
+            isValid={!fieldState.invalid}
+            onChange={handleChange(field)}
+          />
+        );
+      }}
     />
   );
 }
