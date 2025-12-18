@@ -87,11 +87,23 @@ export function WardMedicalsTable() {
       units: "",
       quantity: (item.in_quantity ?? 0) - (item.out_quantity ?? 0),
     }));
-  }, [data, filter, t]);
+  }, [data]);
 
   useEffect(() => {
     dispatch(getMovements());
   }, [dispatch]);
+
+  const handleRectify = useCallback(
+    (medical: any) => {
+      navigate(
+        PATHS.pharmacy_ward_stock_rectify
+          .replace(":medCode", medical.code.toString() ?? "")
+          .replace(":wardCode", medical.wardCode ?? "")
+          .replace(":lotCode", medical.lotCode ?? "")
+      );
+    },
+    [navigate]
+  );
 
   return (
     <div data-cy="ward-movements-table">
@@ -119,6 +131,7 @@ export function WardMedicalsTable() {
                   quantity: (item.in_quantity ?? 0) - (item.out_quantity ?? 0),
                 }))}
                 manualFilter={false}
+                onRectify={handleRectify}
                 onDischarge={(row) => handleDischarge(row)}
               />
             );

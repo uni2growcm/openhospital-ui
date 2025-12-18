@@ -16,7 +16,7 @@ import {
   useSuppliers,
 } from "libraries/hooks/api";
 import { isEmpty } from "lodash";
-import React, { FormEvent, useCallback, useEffect, useMemo } from "react";
+import React, { FormEvent, useCallback, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { LotFormField } from "../lotFormField";
 import { MovementDTOSchema, getInitialValues } from "./consts";
@@ -58,7 +58,7 @@ export function ChargeMovementForm({
       type: selectMovementType(values.type),
       ward: undefined,
     };
-  }, [values, selectMedical, selectMovementType]);
+  }, [values, selectMedical, selectSupplier, selectMovementType]);
 
   const handleSubmit = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
@@ -76,10 +76,6 @@ export function ChargeMovementForm({
       replace: true,
     }
   );
-
-  useEffect(() => {
-    console.log(values);
-  }, [values]);
 
   return (
     <div className="chargeMovementForm">

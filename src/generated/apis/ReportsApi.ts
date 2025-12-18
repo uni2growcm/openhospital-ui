@@ -56,8 +56,10 @@ export interface PrintPharmaceuticalStockWardExcelRequest {
 }
 
 export interface PrintPharmaceuticalStockWardPdfRequest {
-    date: string;
     wardCode: string;
+    dateFrom?: string;
+    dateTo?: string;
+    stockWardReportModel?: PrintPharmaceuticalStockWardPdfStockWardReportModelEnum;
 }
 
 /**
@@ -250,19 +252,21 @@ export class ReportsApi extends BaseAPI {
 
     /**
      */
-    printPharmaceuticalStockWardPdf({ date, wardCode }: PrintPharmaceuticalStockWardPdfRequest): Observable<string>
-    printPharmaceuticalStockWardPdf({ date, wardCode }: PrintPharmaceuticalStockWardPdfRequest, opts?: OperationOpts): Observable<AjaxResponse<string>>
-    printPharmaceuticalStockWardPdf({ date, wardCode }: PrintPharmaceuticalStockWardPdfRequest, opts?: OperationOpts): Observable<string | AjaxResponse<string>> {
-        throwIfNullOrUndefined(date, 'date', 'printPharmaceuticalStockWardPdf');
+    printPharmaceuticalStockWardPdf({ wardCode, dateFrom, dateTo, stockWardReportModel }: PrintPharmaceuticalStockWardPdfRequest): Observable<string>
+    printPharmaceuticalStockWardPdf({ wardCode, dateFrom, dateTo, stockWardReportModel }: PrintPharmaceuticalStockWardPdfRequest, opts?: OperationOpts): Observable<AjaxResponse<string>>
+    printPharmaceuticalStockWardPdf({ wardCode, dateFrom, dateTo, stockWardReportModel }: PrintPharmaceuticalStockWardPdfRequest, opts?: OperationOpts): Observable<string | AjaxResponse<string>> {
         throwIfNullOrUndefined(wardCode, 'wardCode', 'printPharmaceuticalStockWardPdf');
 
         const headers: HttpHeaders = {
         };
 
         const query: HttpQuery = { // required parameters are used directly since they are already checked by throwIfNullOrUndefined
-            'date': (date as any).toISOString(),
             'wardCode': wardCode,
         };
+
+        if (dateFrom != null) { query['dateFrom'] = (dateFrom as any).toISOString(); }
+        if (dateTo != null) { query['dateTo'] = (dateTo as any).toISOString(); }
+        if (stockWardReportModel != null) { query['stockWardReportModel'] = stockWardReportModel; }
 
         return this.request<string>({
             url: '/reports/pharmaceuticalStockWard',
@@ -272,4 +276,14 @@ export class ReportsApi extends BaseAPI {
         }, opts?.responseOpts);
     };
 
+}
+
+/**
+ * @export
+ * @enum {string}
+ */
+export enum PrintPharmaceuticalStockWardPdfStockWardReportModelEnum {
+    Incoming = 'INCOMING',
+    Outcoming = 'OUTCOMING',
+    Drugs = 'DRUGS'
 }
