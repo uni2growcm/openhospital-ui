@@ -88,6 +88,7 @@ export const WardStockHeader = () => {
               `pharmaceutical-stock-ward-${typeMed}-report-${wardCode}-${new Date().getTime()}.pdf`
             );
         });
+      setIsPrint(false);
     } else {
       console.log("Excel action is not implemented yet");
     }
