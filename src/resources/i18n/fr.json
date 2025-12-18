@@ -1255,6 +1255,81 @@
         "overallQuantity": "Quantité totale"
       }
     },
+    "messages": {
+      "charge-movement-success": {
+        "title": "Mouvement de charge réussi",
+        "description": "Le mouvement de charge a été enregistré avec succès."
+      },
+      "charge-movement-fail": {
+        "title": "Échec du mouvement de charge",
+        "description": "Impossible d’enregistrer le mouvement de charge. Veuillez réessayer ou contacter le support."
+      },
+      "new-pharmaceutical-success": {
+        "title": "Pharmaceutique ajouté avec succès",
+        "description": "Le produit pharmaceutique a été ajouté avec succès."
+      },
+      "new-pharmaceutical-fail": {
+        "title": "Échec de la création du pharmaceutique",
+        "description": "Impossible d’ajouter le produit pharmaceutique. Veuillez réessayer ou contacter le support."
+      },
+      "update-pharmaceutical-success": {
+        "title": "Pharmaceutique mis à jour avec succès",
+        "description": "Le produit pharmaceutique a été mis à jour avec succès."
+      },
+      "update-pharmaceutical-fail": {
+        "title": "Échec de la mise à jour du pharmaceutique",
+        "description": "Impossible de mettre à jour le produit pharmaceutique. Veuillez réessayer ou contacter le support."
+      }
+    },
+    "form": {
+      "fields": {
+        "code": "Code du mouvement",
+        "medical": "Médicament",
+        "type": "Type de mouvement",
+        "ward": "Service cible",
+        "lot": "Lot",
+        "date": "Date du mouvement",
+        "quantity": "Quantité",
+        "supplier": "Fournisseur",
+        "refNo": "Numéro de référence",
+        "discharge": "Sortie",
+        "cancel": "Annuler",
+        "prodCode": "Code",
+        "typeMedical": "Type",
+        "description": "Description",
+        "pcsperpck": "Pièces par paquet",
+        "minqty": "Niveau critique",
+        "ignoreSimilar": "Ignorer les similaires",
+        "deleted": "Supprimé",
+        "currentQuantity": "Quantité actuelle",
+        "newQuantity": "Nouvelle quantité",
+        "adjust": "Ajuster",
+        "adjustQuantity": "Ajuster la quantité",
+        "currentQntyNonNegetive": "Current quantity must be non-negative",
+        "newQntyNonNegetive": "New quantity must be non-negative"
+      }
+    },
+    "lot": {
+      "labels": {
+        "existingLots": "Lots existants",
+        "newLot": "Nouveau lot",
+        "change-on-this": "Modifier ce lot",
+        "select-lot": "Sélectionner le lot",
+        "lots": "Lots",
+        "total": "Quantité totale en stock : <1>{{count}}</1>"
+      },
+      "fields": {
+        "code": "Code du lot",
+        "preparationDate": "Date de préparation",
+        "dueDate": "Date d’expiration",
+        "cost": "Coût par unité",
+        "quantity": "Quantité",
+        "ward": "Vers le service",
+        "mainStoreQuantity": "Quantité en magasin principal",
+        "wardsTotalQuantity": "Quantité totale dans les services",
+        "overallQuantity": "Quantité totale"
+      }
+    },
     "stock": {
       "refNo": "Ref",
       "lot": "Lot",

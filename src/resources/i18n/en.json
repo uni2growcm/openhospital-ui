@@ -1293,7 +1293,13 @@
         "pcsperpck": "Pieces per Packet",
         "minqty": "Critical level",
         "ignoreSimilar": "Ignore somilar",
-        "deleted": "Deleted"
+        "deleted": "Deleted",
+        "currentQuantity": "Current Quantity",
+        "newQuantity": "New Quantity",
+        "adjust": "Adjust",
+        "adjustQuantity":"Adjust quantity",
+        "currentQntyNonNegetive": "Current quantity must be non-negative",
+        "newQntyNonNegetive": "New quantity must be non-negative"
       }
     },
     "lot": {
