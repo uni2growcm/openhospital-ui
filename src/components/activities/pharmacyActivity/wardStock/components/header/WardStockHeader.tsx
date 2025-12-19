@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
+  printPharmaceuticalStockWardExcel,
   printPharmaceuticalStockWardPdf,
   updateWardStockFIilter,
 } from "state/pharmacy";
@@ -90,7 +91,30 @@ export const WardStockHeader = () => {
         });
       setIsPrint(false);
     } else {
-      console.log("Excel action is not implemented yet");
+      dispatch(
+        printPharmaceuticalStockWardExcel({
+          wardCode: wardCode.toUpperCase(),
+          dateFrom: payload.dateFrom
+            ? payload.dateFrom
+            : formatDateToCustomISO(new Date()),
+          dateTo: payload.dateTo
+            ? payload.dateTo
+            : formatDateToCustomISO(new Date()),
+          index: typeMed === "incoming" ? 1 : typeMed === "outcoming" ? 0 : 2,
+        })
+      )
+        .unwrap()
+        .then((result) => {
+          console.log(result);
+          if (result instanceof Blob) {
+            console.log(result);
+            downloadBlob(
+              result,
+              `pharmaceutical-stock-ward-${typeMed}-report-${wardCode}-${new Date().getTime()}.xlsx`
+            );
+          }
+        });
+      setIsPrint(false);
     }
   };
 

@@ -74,6 +74,10 @@ export const pharmacySlice = createSlice({
     resetPrintPharmaceuticalAMCPdf: (state) => {
       state.printPharmaceuticalAMCPdf = initial.printPharmaceuticalAMCPdf;
     },
+    resetPrintPharmaceuticalStockWardExcel: (state) => {
+      state.printPharmaceuticalStockWardExcel =
+        initial.printPharmaceuticalStockWardExcel;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -294,7 +298,33 @@ export const pharmacySlice = createSlice({
       })
       .addCase(thunks.printPharmaceuticalAMCPdf.rejected, (state, action) => {
         state.printPharmaceuticalAMCPdf = ApiResponse.error(action.payload);
-      });
+      })
+      // Print pharmaceutical stock ward excel report
+      .addCase(thunks.printPharmaceuticalStockWardExcel.pending, (state) => {
+        state.printPharmaceuticalStockWardExcel = ApiResponse.loading();
+      })
+      .addCase(
+        thunks.printPharmaceuticalStockWardExcel.fulfilled,
+        (state, action) => {
+          if (action.payload instanceof Blob) {
+            state.printPharmaceuticalStockWardExcel = ApiResponse.value(
+              action.payload
+            );
+          } else {
+            state.printPharmaceuticalStockWardExcel = ApiResponse.error(
+              action.payload
+            );
+          }
+        }
+      )
+      .addCase(
+        thunks.printPharmaceuticalStockWardExcel.rejected,
+        (state, action) => {
+          state.printPharmaceuticalStockWardExcel = ApiResponse.error(
+            action.payload
+          );
+        }
+      );
   },
 });
 
@@ -319,4 +349,5 @@ export const {
   resetPrintPharmaceuticalStockPdf,
   resetPrintPharmaceuticalStockCardPdf,
   resetPrintPharmaceuticalAMCPdf,
+  resetPrintPharmaceuticalStockWardExcel,
 } = pharmacySlice.actions;

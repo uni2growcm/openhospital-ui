@@ -15,6 +15,7 @@ import {
   PrintPharmaceuticalAMCRequest,
   PrintPharmaceuticalStockCardPdfRequest,
   PrintPharmaceuticalStockPdfRequest,
+  PrintPharmaceuticalStockWardExcelRequest,
   PrintPharmaceuticalStockWardPdfRequest,
   ReportsApi,
   StockMovementsApi,
@@ -302,3 +303,27 @@ export const createWardMovement = createAsyncThunk<
     return thunkApi.rejectWithValue(error.response);
   }
 });
+
+export const printPharmaceuticalStockWardExcel = createAsyncThunk(
+  "pharmacy/getPharmaceuticalStockWardExcelReport",
+  async (payload: PrintPharmaceuticalStockWardExcelRequest, thunkApi) => {
+    try {
+      const dateTo = payload.dateTo ? parseISO(payload.dateTo) : payload.dateTo;
+      const dateFrom = payload.dateFrom
+        ? parseISO(payload.dateFrom)
+        : payload.dateFrom;
+      const result = await firstValueFrom(
+        wrapper(() =>
+          apiReport.printPharmaceuticalStockWardExcel({
+            ...payload,
+            dateTo: isValid(dateTo) ? dateTo : new Date(),
+            dateFrom: isValid(dateFrom) ? dateFrom : new Date(),
+          } as PrintPharmaceuticalStockWardExcelRequest)
+        )
+      );
+      return result;
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.response);
+    }
+  }
+);

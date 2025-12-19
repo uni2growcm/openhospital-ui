@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import {
   printPharmaceuticalAMCPdf,
   printPharmaceuticalStockCardPdf,
+  printPharmaceuticalStockPdf,
 } from "state/pharmacy";
 import "./styles.scss";
 
@@ -18,6 +19,7 @@ export default function PharmaceuticalActions() {
   const dispatch = useAppDispatch();
   const [isPrint, setIsPrint] = useState<boolean>(false);
   const [isAMCReport, setIsAMCReport] = useState<boolean>(false);
+  const [isPrincipalStock, setIsPrincipalStock] = useState<boolean>(false);
 
   const handleGetStockCardReport = (payload: PrintProperties) => {
     dispatch(
@@ -56,19 +58,51 @@ export default function PharmaceuticalActions() {
       });
     setIsPrint(false);
   };
+
+  const handleGetStockReport = (payload: PrintProperties) => {
+    dispatch(
+      printPharmaceuticalStockPdf({
+        option: payload.option!,
+        date: payload.date!,
+      })
+    )
+      .unwrap()
+      .then((result) => {
+        if (result instanceof Blob)
+          downloadBlob(
+            result,
+            `pharmaceutical-stock-report-${new Date().getTime()}.pdf`
+          );
+      });
+    setIsPrint(false);
+  };
+
   return (
     <div className="buttonSet">
       <Button type="button" variant="outlined" color="inherit">
         {t("pharmacy.stock.exportList")}
       </Button>
-      <Button type="button" variant="outlined" color="inherit">
+      <Button
+        type="button"
+        variant="outlined"
+        color="inherit"
+        onClick={() => {
+          setIsPrint(true);
+          setIsAMCReport(false);
+          setIsPrincipalStock(true);
+        }}
+      >
         {t("pharmacy.stock.stockReport")}
       </Button>
       <Button
         type="button"
         variant="outlined"
         color="inherit"
-        onClick={() => setIsPrint(true)}
+        onClick={() => {
+          setIsPrint(true);
+          setIsPrincipalStock(false);
+          setIsAMCReport(false);
+        }}
       >
         {t("pharmacy.stock.stockCardReport")}
       </Button>
@@ -84,6 +118,7 @@ export default function PharmaceuticalActions() {
         color="inherit"
         onClick={() => {
           setIsPrint(true);
+          setIsPrincipalStock(false);
           setIsAMCReport(true);
         }}
       >
@@ -97,11 +132,16 @@ export default function PharmaceuticalActions() {
       <GetDownloadDateDialog
         isOpen={isPrint}
         title={t("pharmacy.selectReport").toUpperCase()}
-        isStockCard={true && !isAMCReport}
+        isStockCard={true && !isAMCReport && !isPrincipalStock}
+        isPrincipalStock={isPrincipalStock}
         primaryButtonLabel={t("common.print")}
         secondaryButtonLabel={t("common.cancel")}
         handlePrimaryButtonClick={
-          isAMCReport ? handleGetAMCReport : handleGetStockCardReport
+          isAMCReport
+            ? handleGetAMCReport
+            : isPrincipalStock
+            ? handleGetStockReport
+            : handleGetStockCardReport
         }
         handleSecondaryButtonClick={() => setIsPrint(false)}
       />

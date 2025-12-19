@@ -29,7 +29,7 @@ export function StockActions() {
         if (result instanceof Blob)
           downloadBlob(
             result,
-            `pharmaceutical-report-${new Date().getTime()}.pdf`
+            `pharmaceutical-stock-report-${new Date().getTime()}.pdf`
           );
       });
     setIsPrint(false);
