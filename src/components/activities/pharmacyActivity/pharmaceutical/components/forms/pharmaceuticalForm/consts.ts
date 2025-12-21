@@ -2,24 +2,44 @@ import { MedicalDTO } from "generated";
 import { z } from "zod";
 import { TFormValues } from "./types";
 
-export const MedicalDTOSchema = z.object({
-  prodCode: z.string({
-    error: "code is required",
-  }),
+export type MedicalErrorKey =
+  | "pharmacy.form.errors.prodCodeRequired"
+  | "pharmacy.form.errors.typeRequired"
+  | "pharmacy.form.errors.descriptionRequired"
+  | "pharmacy.form.errors.pcsperpckRequired"
+  | "pharmacy.form.errors.minqtyRequired";
+
+const BaseMedicalDTOSchema = z.object({
+  code: z.number().optional(),
+  lock: z.number().optional(),
+  prod_code: z.string(),
   type: z.string(),
-  description: z.string({
-    error: "description is required",
+  description: z.string(),
+  pcsperpck: z.number(),
+  minqty: z.number(),
+  deleted: z.boolean().default(false),
+  ignoreSimilar: z.boolean().optional(),
+});
+export const MedicalDTOSchema = z.object({
+  code: z.number().optional(),
+  lock: z.number().optional(),
+
+  prod_code: z
+    .string()
+    .min(1, { message: "pharmacy.form.errors.prodCodeRequired" }),
+  type: z.string().refine((v) => v && v.trim().length > 0, {
+    message: "pharmacy.form.errors.typeRequired",
   }),
-  pcsperpck: z.number({
-    error: "pieces per packet is required",
+  description: z
+    .string()
+    .min(1, { message: "pharmacy.form.errors.descriptionRequired" }),
+  pcsperpck: z.number().refine((v) => v !== undefined && v > 0, {
+    message: "pharmacy.form.errors.pcsperpckRequired",
   }),
-  minqty: z.number({
-    error: "critical level is required",
+  minqty: z.number().refine((v) => v !== undefined && v >= 0, {
+    message: "pharmacy.form.errors.minqtyRequired",
   }),
   deleted: z.boolean().default(false),
-  initialqty: z.number().default(0),
-  inqty: z.number().default(0),
-  outqty: z.number().default(0),
   ignoreSimilar: z.boolean().optional(),
 });
 
@@ -27,14 +47,13 @@ export function getInitialValues(from?: MedicalDTO): Partial<TFormValues> {
   if (!from) return {};
 
   return {
-    prodCode: from.prod_code,
-    description: from.description,
-    type: from?.type?.code,
-    initialqty: from.initialqty || 0,
-    pcsperpck: from.pcsperpck || 0,
-    inqty: from.inqty || 0,
-    outqty: from.outqty || 0,
-    minqty: from.minqty || 0,
-    deleted: from.deleted === "N",
+    code: from.code,
+    lock: from.lock,
+    prod_code: from.prodCode ?? "",
+    description: from.description ?? "",
+    type: from.type?.code ?? "",
+    pcsperpck: from.pcsperpck ?? 0,
+    minqty: from.minqty ?? 0,
+    deleted: from.deleted === "Y",
   };
 }

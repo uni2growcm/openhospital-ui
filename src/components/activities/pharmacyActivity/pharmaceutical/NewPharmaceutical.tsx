@@ -1,6 +1,5 @@
 import checkIcon from "assets/check-icon.png";
 import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
-import InfoBox from "components/accessories/infoBox/InfoBox";
 import { PATHS } from "consts";
 import { MedicalDTO } from "generated";
 import { useNavigationHandler, useTranslation } from "libraries/hooks";
@@ -39,12 +38,6 @@ export function NewPharmaceutical() {
 
   const status = useAppSelector((state) => state.pharmacy.newMedical.status);
 
-  const errorMessage = useAppSelector(
-    (state) =>
-      state.pharmacy.newMedical.error?.message ??
-      t("pharmacy.messages.new-pharmaceutical-fail.description")
-  );
-
   const handleGoBack = useNavigationHandler(PATHS.pharmacy_pharmaceutical, {
     replace: true,
   });
@@ -77,11 +70,6 @@ export function NewPharmaceutical() {
           onSubmit={handleSubmit}
           loading={status === "LOADING"}
         />
-        {status === "FAIL" && (
-          <div ref={infoBoxRef} className="info-box-container">
-            <InfoBox type="error" message={errorMessage} />
-          </div>
-        )}
       </div>
       <ConfirmationDialog
         isOpen={status === "SUCCESS"}

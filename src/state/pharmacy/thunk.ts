@@ -5,7 +5,6 @@ import {
   MedicalStockMovementTypeApi,
   MedicalStockWardApi,
   MedicalTypesApi,
-  MedicalWardDTO,
   MedicalsApi,
   MovementDTO,
   MovementWardDTO,
@@ -162,6 +161,7 @@ export const newMedical = createAsyncThunk(
 export const updateMedical = createAsyncThunk(
   "pharmacy/updateMedical",
   async (payload: UpdateMedicalRequest, thunkApi) => {
+    console.log("Updating medical with payload:", payload);
     try {
       const result = await firstValueFrom(
         wrapper(() => medicalApi.updateMedical(payload))
@@ -200,9 +200,7 @@ export const createWardMovement = createAsyncThunk<
 >("pharmacy/createWardMovement", async (movementWardDTO, thunkApi) => {
   try {
     const result = await firstValueFrom(
-      wrapper(
-        () => wardStockApi.newMovementWard({ movementWardDTO })
-      )
+      wrapper(() => wardStockApi.newMovementWard({ movementWardDTO }))
     );
 
     return result;

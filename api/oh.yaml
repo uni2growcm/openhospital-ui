@@ -3849,11 +3849,11 @@ paths:
             application/pdf:
               schema:
                 type: string
-                format: byte
+                format: binary
             application/json:
               schema:
                 type: string
-                format: byte
+                format: binary
       security:
       - bearerAuth: []
   /reports/pharmaceuticalStockWard:
@@ -3896,7 +3896,7 @@ paths:
             application/json:
               schema:
                 type: string
-                format: byte
+                format: binary
       security:
       - bearerAuth: []
   /reports/pharmaceuticalStockWardExcel:
@@ -4024,7 +4024,7 @@ paths:
             application/json:
               schema:
                 type: string
-                format: byte
+                format: binary
       security:
       - bearerAuth: []
   /reports/pharmaceuticalOrder:
@@ -4067,7 +4067,7 @@ paths:
             application/json:
               schema:
                 type: string
-                format: byte
+                format: binary
       security:
       - bearerAuth: []
   /reports/pharmaceuticalAMC:
@@ -4089,7 +4089,7 @@ paths:
             application/json:
               schema:
                 type: string
-                format: byte
+                format: binary
       security:
       - bearerAuth: []
   /reports/exams-list:
@@ -4104,7 +4104,7 @@ paths:
             application/json:
               schema:
                 type: string
-                format: byte
+                format: binary
       security:
       - bearerAuth: []
   /reports/diseases-list:
@@ -4119,7 +4119,7 @@ paths:
             application/json:
               schema:
                 type: string
-                format: byte
+                format: binary
       security:
       - bearerAuth: []
   /pricelists/prices:
@@ -6566,13 +6566,13 @@ components:
           format: int32
           description: lock
           example: 0
-        opd:
+        male:
           type: boolean
         female:
           type: boolean
-        male:
-          type: boolean
         pharmacy:
+          type: boolean
+        opd:
           type: boolean
       required:
       - beds
@@ -7746,10 +7746,6 @@ components:
           description: The id of the medical
           example: 1
           maxLength: 5
-        prod_code:
-          type: string
-          description: The product code
-          example: PARA
         type:
           $ref: "#/components/schemas/MedicalTypeDTO"
           description: The medical type
@@ -7796,6 +7792,8 @@ components:
         deleted:
           type: string
           description: The if medical is deleted
+        prodCode:
+          type: string
     MalnutritionDTO:
       type: object
       properties:

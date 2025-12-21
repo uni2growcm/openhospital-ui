@@ -9,10 +9,9 @@ import { PATHS } from "consts";
 import { MedicalDTO } from "generated";
 import { useNavigationHandler, useTranslation } from "libraries/hooks";
 import { useMedicalTypes } from "libraries/hooks/api/useMedicalTypes";
-import { isEmpty } from "lodash";
-import React, { FormEvent, useCallback } from "react";
+import React, { useCallback } from "react";
 import { useForm, useWatch } from "react-hook-form";
-import { MedicalDTOSchema, getInitialValues } from "./consts";
+import { MedicalDTOSchema, MedicalErrorKey, getInitialValues } from "./consts";
 import "./styles.scss";
 import { PharmaceuticalFormProps, TFormValues } from "./types";
 
@@ -23,7 +22,7 @@ export function PharmaceuticalForm({
 }: PharmaceuticalFormProps) {
   const { t } = useTranslation();
 
-  const { control, formState } = useForm<TFormValues>({
+  const { control, handleSubmit, formState } = useForm<TFormValues>({
     defaultValues: getInitialValues(pharmaceutical),
     resolver: standardSchemaResolver(MedicalDTOSchema),
   });
@@ -37,9 +36,6 @@ export function PharmaceuticalForm({
         ...values,
         type: medicalTypes.find((type) => type.code === values.type),
         deleted: values.deleted ? "Y" : "N",
-        initialqty: 0,
-        inqty: 0,
-        outqty: 0,
       };
     },
   });
@@ -47,15 +43,27 @@ export function PharmaceuticalForm({
   const handleGoBack = useNavigationHandler(PATHS.pharmacy_pharmaceutical, {
     replace: true,
   });
+  const onValidSubmit = useCallback(
+    (values: TFormValues) => {
+      const payload: MedicalDTO & { ignoreSimilar?: boolean } = {
+        prodCode: values.prod_code,
+        description: values.description,
+        pcsperpck: values.pcsperpck,
+        minqty: values.minqty,
+        deleted: values.deleted ? "Y" : "N",
+        type: medicalTypes.find((t) => t.code === values.type),
+        ignoreSimilar: values.ignoreSimilar ?? false,
+        lots: [],
+      };
 
-  const handleSubmit = useCallback(
-    (event: FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      if (isEmpty(Object.keys(formState.errors))) {
-        onSubmit?.(values as MedicalDTO);
+      if (pharmaceutical?.code) {
+        payload.code = pharmaceutical.code;
+        payload.lock = values.lock;
       }
+
+      onSubmit?.(payload);
     },
-    [formState, values, onSubmit]
+    [onSubmit, pharmaceutical, medicalTypes]
   );
 
   return (
@@ -63,13 +71,19 @@ export function PharmaceuticalForm({
       <form
         data-cy="pharmaceutical-form"
         className="form-grid-layout gap-2 w-full"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onValidSubmit)}
       >
         <TextFormField
           type="string"
           label={t("pharmacy.form.fields.prodCode")}
           control={control}
-          name="prodCode"
+          name="prod_code"
+          error={!!formState.errors.prod_code}
+          helperText={
+            formState.errors.prod_code?.message
+              ? t(formState.errors.prod_code.message as MedicalErrorKey)
+              : undefined
+          }
         />
         <AutocompleteFormField
           label={t("pharmacy.form.fields.typeMedical")}
@@ -83,18 +97,38 @@ export function PharmaceuticalForm({
           label={t("pharmacy.form.fields.description")}
           control={control}
           name="description"
+          error={!!formState.errors.description}
+          helperText={
+            formState.errors.description?.message
+              ? t(formState.errors.description.message as MedicalErrorKey)
+              : undefined
+          }
         />
         <TextFormField
           type="number"
           label={t("pharmacy.form.fields.pcsperpck")}
           control={control}
           name="pcsperpck"
+          inputProps={{ min: 0 }}
+          error={!!formState.errors.pcsperpck}
+          helperText={
+            formState.errors.pcsperpck?.message
+              ? t(formState.errors.pcsperpck.message as MedicalErrorKey)
+              : undefined
+          }
         />
         <TextFormField
           type="number"
           label={t("pharmacy.form.fields.minqty")}
           control={control}
           name="minqty"
+          inputProps={{ min: 0 }}
+          error={!!formState.errors.minqty}
+          helperText={
+            formState.errors.minqty?.message
+              ? t(formState.errors.minqty.message as MedicalErrorKey)
+              : undefined
+          }
         />
         <div className="col-start-1 col-span-full"></div>
         <CheckboxFormField

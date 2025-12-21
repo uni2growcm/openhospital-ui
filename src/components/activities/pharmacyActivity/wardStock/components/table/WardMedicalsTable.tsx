@@ -26,7 +26,7 @@ export function WardMedicalsTable() {
     (state) =>
       state.pharmacy.wardMedicals.error?.message || t("errors.somethingwrong")
   ) as string;
-  
+
   const handleDischarge = useCallback(
     (row: any) => {
       const combinedId = `${row.code}-${row.wardCode}-${row.lotCode}`;
@@ -127,7 +127,7 @@ export function WardMedicalsTable() {
                   ...item,
                   code: item.id?.medical?.code ?? "",
                   pharmaceutical: item.id?.medical?.description ?? "",
-                  units: item.id?.medical?.prod_code ?? "",
+                  units: item.id?.medical?.prodCode ?? "",
                   quantity: (item.in_quantity ?? 0) - (item.out_quantity ?? 0),
                 }))}
                 manualFilter={false}

@@ -28,12 +28,6 @@ export interface MedicalDTO {
      */
     code?: number;
     /**
-     * The product code
-     * @type {string}
-     * @memberof MedicalDTO
-     */
-    prod_code?: string;
-    /**
      * The medical type
      * @type {MedicalTypeDTO}
      * @memberof MedicalDTO
@@ -93,4 +87,9 @@ export interface MedicalDTO {
      * @memberof MedicalDTO
      */
     deleted?: string;
+    /**
+     * @type {string}
+     * @memberof MedicalDTO
+     */
+    prodCode?: string;
 }

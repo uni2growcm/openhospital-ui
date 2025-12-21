@@ -62,20 +62,21 @@ export function UpdatePharmaceutical() {
   const handleGoBack = useNavigationHandler(PATHS.pharmacy_pharmaceutical, {
     replace: true,
   });
-
   const handleSubmit = useCallback(
     (data: MedicalDTO & { ignoreSimilar?: boolean }) => {
+      console.log("Submitting update with data:", data);
       dispatch(
         updateMedical({
           medicalDTO: {
             ...omit(data, ["ignoreSimilar"]),
             code: +id!,
+            lock: medical?.lock,
           },
           ignoreSimilar: data.ignoreSimilar,
         })
       );
     },
-    [dispatch]
+    [dispatch, id, medical]
   );
 
   const handleDialogActions = useCallback(() => {
