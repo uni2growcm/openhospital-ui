@@ -552,6 +552,20 @@
       "thisyear": "This Year",
       "lastyear": "Last Year"
     },
+    "months": {
+      "january": "January",
+      "february": "February",
+      "march": "March",
+      "april": "April",
+      "may": "May",
+      "june": "June",
+      "july": "July",
+      "august": "August",
+      "september": "September",
+      "october": "October",
+      "november": "November",
+      "december": "December"
+    },
     "continue": "Continue ?",
     "collapse_all": "Collapse All",
     "expand_all": "Expand All",
@@ -1297,7 +1311,7 @@
         "currentQuantity": "Current Quantity",
         "newQuantity": "New Quantity",
         "adjust": "Adjust",
-        "adjustQuantity":"Adjust quantity",
+        "adjustQuantity": "Adjust quantity",
         "currentQntyNonNegetive": "Current quantity must be non-negative",
         "newQntyNonNegetive": "New quantity must be non-negative"
       }
@@ -1347,7 +1361,22 @@
       "stockCardReport": "Stock card report",
       "addMedecine": "Add medicine",
       "order": "Order",
-      "expiring": "Expiring",
+      "expiring": {
+        "label": "Expiring",
+        "close": "Close",
+        "generate": "Generate",
+        "info": "Select a period",
+        "title": "Expiring report",
+        "period": "Period",
+        "month": "Month",
+        "options": {
+          "today": "Today",
+          "thismonth": "This month",
+          "nextmonth": "Next month",
+          "nexttwomonths": "Next two months",
+          "specificmonth": "Specific month"
+        }
+      },
       "amcReport": "AMC report",
       "movementType": {
         "charge": "Charge",
