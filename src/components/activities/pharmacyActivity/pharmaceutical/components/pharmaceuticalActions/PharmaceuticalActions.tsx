@@ -18,8 +18,8 @@ export default function PharmaceuticalActions() {
   };
 
   const handleGetExpiring = (period: string | null, month: string | null) => {
-    console.log(period);
-    console.log(month);
+    //TODO: implement export logic
+    setIsOpen(false);
   };
 
   return (

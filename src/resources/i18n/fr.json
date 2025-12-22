@@ -551,6 +551,20 @@
       "thisyear": "Cette année",
       "lastyear": "L'année dernière"
     },
+    "months": {
+      "january": "Janvier",
+      "february": "Fevrier",
+      "march": "Mars",
+      "april": "Avril",
+      "may": "Mai",
+      "june": "Juin",
+      "july": "Juillet",
+      "august": "Août",
+      "september": "Septembre",
+      "october": "Octobre",
+      "november": "Novembre",
+      "december": "Décembre"
+    },
     "continue": "Continuer ?",
     "collapse_all": "Réduire la visualisation",
     "expand_all": "Agrandir la visualisation",
@@ -1394,22 +1408,10 @@
         "month": "Mois",
         "options": {
           "today": "Aujourd'hui",
-          "thisMonth": " Ce mois",
-          "nextMonth": "Le mois prochain",
-          "nextTwoMonths": "Les deux prochains mois",
-          "specificMonth": "Mois spécifique",
-          "january": "Janvier",
-          "february": "Fevrier",
-          "march": "Mars",
-          "april": "Avril",
-          "may": "Mai",
-          "june": "Juin",
-          "july": "Juillet",
-          "august": "Août",
-          "september": "Septembre",
-          "october": "Octobre",
-          "november": "Novembre",
-          "december": "Décembre"
+          "thismonth": " Ce mois",
+          "nextmonth": "Le mois prochain",
+          "nexttwomonths": "Les deux prochains mois",
+          "specificmonth": "Mois spécifique"
         }
       }
     }

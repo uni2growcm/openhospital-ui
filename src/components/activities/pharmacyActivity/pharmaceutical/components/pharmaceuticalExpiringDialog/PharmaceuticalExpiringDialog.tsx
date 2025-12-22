@@ -3,97 +3,59 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "components/accessories/button/Button";
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./styles.scss";
+import {
+  ExperingPeriod,
+  ExpiringMonth,
+  PharmaceuticalExpiringDialogProps,
+} from "./type";
 
-const PharmaceuticalExpiringDialog: FunctionComponent<{
-  isOpen: boolean;
-  handleSecondaryButtonClick: () => void;
-  handlePrimaryButtonClick: (
-    period: string | null,
-    month: string | null
-  ) => void;
-}> = ({ isOpen, handlePrimaryButtonClick, handleSecondaryButtonClick }) => {
+const PharmaceuticalExpiringDialog: FunctionComponent<
+  PharmaceuticalExpiringDialogProps
+> = ({ isOpen, handlePrimaryButtonClick, handleSecondaryButtonClick }) => {
   const { t } = useTranslation();
 
   const [monthSelected, setMonthSelected] = useState<string | null>(null);
 
   const [periodSelected, setPeriodSelected] = useState<string | null>(null);
 
-  const periodOptions = [
-    {
-      label: t("pharmacy.stock.expiring.options.today"),
-      value: "TODAY",
-    },
-    {
-      label: t("pharmacy.stock.expiring.options.thisMonth"),
-      value: "THISMONTH",
-    },
-    {
-      label: t("pharmacy.stock.expiring.options.nextMonth"),
-      value: "NEXTMONTH",
-    },
-    {
-      label: t("pharmacy.stock.expiring.options.nextTwoMonths"),
-      value: "NEXTTWOMONTHs",
-    },
-    {
-      label: t("pharmacy.stock.expiring.options.specificMonth"),
-      value: "SPECIFICMONTH",
-    },
-  ];
-
-  const monthOptions = [
-    {
-      label: t("pharmacy.stock.expiring.options.january"),
-      value: "JANUARY",
-    },
-    {
-      label: t("pharmacy.stock.expiring.options.february"),
-      value: "FEBRUARY",
-    },
-    {
-      label: t("pharmacy.stock.expiring.options.march"),
-      value: "MARCH",
-    },
-    {
-      label: t("pharmacy.stock.expiring.options.april"),
-      value: "APRIL",
-    },
-    {
-      label: t("pharmacy.stock.expiring.options.may"),
-      value: "SPECIFICMONTH",
-    },
-    {
-      label: t("pharmacy.stock.expiring.options.june"),
-      value: "JUNE",
-    },
-    {
-      label: t("pharmacy.stock.expiring.options.july"),
-      value: "JULY",
-    },
-    {
-      label: t("pharmacy.stock.expiring.options.august"),
-      value: "AUGUST",
-    },
-    {
-      label: t("pharmacy.stock.expiring.options.september"),
-      value: "SEPTEMBER",
-    },
-    {
-      label: t("pharmacy.stock.expiring.options.october"),
-      value: "OCTOBER",
-    },
-    {
-      label: t("pharmacy.stock.expiring.options.november"),
-      value: "NOVEMBER",
-    },
-    {
-      label: t("pharmacy.stock.expiring.options.december"),
-      value: "DECEMBER",
-    },
-  ];
+  const periodOptions = useMemo(
+    () =>
+      [
+        ExperingPeriod.TODAY,
+        ExperingPeriod.THISMONTH,
+        ExperingPeriod.NEXTMONTH,
+        ExperingPeriod.NEXTTWOMONTHS,
+        ExperingPeriod.SPECIFICMONTH,
+      ].map((period) => ({
+        label: t(`pharmacy.stock.expiring.options.${period.toLowerCase()}`),
+        value: period,
+      })),
+    [t]
+  );
+  const monthOptions = useMemo(
+    () =>
+      [
+        ExpiringMonth.JANUARY,
+        ExpiringMonth.FEBRUARY,
+        ExpiringMonth.MARCH,
+        ExpiringMonth.APRIL,
+        ExpiringMonth.MAY,
+        ExpiringMonth.JUNE,
+        ExpiringMonth.JULY,
+        ExpiringMonth.AUGUST,
+        ExpiringMonth.SEPTEMBER,
+        ExpiringMonth.OCTOBER,
+        ExpiringMonth.NOVEMBER,
+        ExpiringMonth.DECEMBER,
+      ].map((month) => ({
+        label: t(`common.months.${month.toLowerCase()}`),
+        value: month,
+      })),
+    [t]
+  );
 
   const handleConfirm = () => {
     handlePrimaryButtonClick(periodSelected, monthSelected);
