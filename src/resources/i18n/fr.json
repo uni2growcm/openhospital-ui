@@ -551,6 +551,20 @@
       "thisyear": "Cette année",
       "lastyear": "L'année dernière"
     },
+    "months": {
+      "january": "Janvier",
+      "february": "Fevrier",
+      "march": "Mars",
+      "april": "Avril",
+      "may": "Mai",
+      "june": "Juin",
+      "july": "Juillet",
+      "august": "Août",
+      "september": "Septembre",
+      "october": "Octobre",
+      "november": "Novembre",
+      "december": "Décembre"
+    },
     "continue": "Continuer ?",
     "collapse_all": "Réduire la visualisation",
     "expand_all": "Agrandir la visualisation",
@@ -1310,27 +1324,6 @@
         "newQntyNonNegetive": "New quantity must be non-negative"
       }
     },
-    "lot": {
-      "labels": {
-        "existingLots": "Lots existants",
-        "newLot": "Nouveau lot",
-        "change-on-this": "Modifier ce lot",
-        "select-lot": "Sélectionner le lot",
-        "lots": "Lots",
-        "total": "Quantité totale en stock : <1>{{count}}</1>"
-      },
-      "fields": {
-        "code": "Code du lot",
-        "preparationDate": "Date de préparation",
-        "dueDate": "Date d’expiration",
-        "cost": "Coût par unité",
-        "quantity": "Quantité",
-        "ward": "Vers le service",
-        "mainStoreQuantity": "Quantité en magasin principal",
-        "wardsTotalQuantity": "Quantité totale dans les services",
-        "overallQuantity": "Quantité totale"
-      }
-    },
     "stock": {
       "refNo": "Ref",
       "lot": "Lot",
@@ -1355,7 +1348,6 @@
       "stockCardReport": "Rapport des fiches de stock",
       "addMedecine": "Ajouter un médicament",
       "order": "Commander",
-      "expiring": "Expirer",
       "amcReport": "Rapport AMC",
       "ward": {
         "lotNo": "Numéro de lot",
@@ -1418,6 +1410,22 @@
       "option": {
         "withLot": "Avec lot",
         "onlyQuantity": "Seulement la quantité"
+      },
+      "expiring": {
+        "label": "Expirer",
+        "close": "Fermer",
+        "generate": "Générer",
+        "info": "Sélectionner la période",
+        "title": "Rapport d'expiration",
+        "period": "Période",
+        "month": "Mois",
+        "options": {
+          "today": "Aujourd'hui",
+          "thismonth": " Ce mois",
+          "nextmonth": "Le mois prochain",
+          "nexttwomonths": "Les deux prochains mois",
+          "specificmonth": "Mois spécifique"
+        }
       }
     }
   }

@@ -33,7 +33,7 @@ export default function Pharmaceutical() {
     >
       <div className="pharmaceutical">
         <div data-cy="pharmaceutical-actions">
-          <PharmaceuticalActions />
+          <PharmaceuticalActions data-cy="pharmaceutical-actions" />
         </div>
 
         <div data-cy="pharmaceutical-table">

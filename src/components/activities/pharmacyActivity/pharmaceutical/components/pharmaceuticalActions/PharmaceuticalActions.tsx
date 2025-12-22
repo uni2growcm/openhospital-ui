@@ -12,10 +12,25 @@ import {
   printPharmaceuticalStockCardPdf,
   printPharmaceuticalStockPdf,
 } from "state/pharmacy";
+import PharmaceuticalExpiringDialog from "../pharmaceuticalExpiringDialog/PharmaceuticalExpiringDialog";
 import "./styles.scss";
 
 export default function PharmaceuticalActions() {
   const { t } = useTranslation();
+  const [isOpen, setIsOpen] = useState(false);
+  const handleOpenExpiringDialog = () => {
+    setIsOpen(true);
+  };
+
+  const handleCloseExpiringDialog = () => {
+    setIsOpen(false);
+  };
+
+  const handleGetExpiring = (period: string | null, month: string | null) => {
+    //TODO: implement export logic
+    setIsOpen(false);
+  };
+
   const dispatch = useAppDispatch();
   const [isPrint, setIsPrint] = useState<boolean>(false);
   const [isAMCReport, setIsAMCReport] = useState<boolean>(false);
@@ -78,7 +93,7 @@ export default function PharmaceuticalActions() {
   };
 
   return (
-    <div className="buttonSet">
+    <div className="buttonSet" data-cy="button-actions">
       <Button type="button" variant="outlined" color="inherit">
         {t("pharmacy.stock.exportList")}
       </Button>
@@ -109,6 +124,19 @@ export default function PharmaceuticalActions() {
       <Button type="button" variant="outlined" color="inherit">
         {t("pharmacy.stock.order")}
       </Button>
+      <div data-cy="expiring-button">
+        <Button
+          type="button"
+          variant="outlined"
+          color="inherit"
+          data-cy="expiring-button"
+          onClick={handleOpenExpiringDialog}
+        >
+          {t("pharmacy.stock.expiring.label")}
+        </Button>
+      </div>
+
+      <Button type="button" variant="outlined" color="inherit">
       <Button type="button" variant="outlined" color="inherit">
         {t("pharmacy.stock.expiring")}
       </Button>
@@ -129,6 +157,12 @@ export default function PharmaceuticalActions() {
           {t("pharmacy.stock.addMedecine")}
         </Button>
       </Link>
+
+      <PharmaceuticalExpiringDialog
+        isOpen={isOpen}
+        handlePrimaryButtonClick={handleGetExpiring}
+        handleSecondaryButtonClick={handleCloseExpiringDialog}
+      />
       <GetDownloadDateDialog
         isOpen={isPrint}
         title={t("pharmacy.selectReport").toUpperCase()}
