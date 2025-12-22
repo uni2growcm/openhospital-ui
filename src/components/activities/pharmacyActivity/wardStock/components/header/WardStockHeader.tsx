@@ -105,9 +105,7 @@ export const WardStockHeader = () => {
       )
         .unwrap()
         .then((result) => {
-          console.log(result);
           if (result instanceof Blob) {
-            console.log(result);
             downloadBlob(
               result,
               `pharmaceutical-stock-ward-${typeMed}-report-${wardCode}-${new Date().getTime()}.xlsx`
