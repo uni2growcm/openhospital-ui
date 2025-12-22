@@ -6,9 +6,11 @@ import {
   Edit,
   HighlightOff,
   InfoOutlined,
+  Logout,
   MonetizationOn,
   Print,
   Restore,
+  Undo,
 } from "@mui/icons-material";
 import {
   IconButton,
@@ -21,6 +23,7 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
+import TablePaginationActions from "@mui/material/TablePagination/TablePaginationActions";
 import TableRow from "@mui/material/TableRow";
 import { filterData } from "libraries/tableUtils";
 import React, {
@@ -44,7 +47,6 @@ import { FilterButton } from "./filter/FilterButton";
 import { TFilterValues } from "./filter/types";
 import "./styles.scss";
 import { IProps, TActions } from "./types";
-import TablePaginationActions from "@mui/material/TablePagination/TablePaginationActions";
 
 const Table: FunctionComponent<IProps> = ({
   rowData,
@@ -56,6 +58,8 @@ const Table: FunctionComponent<IProps> = ({
   columnsOrder,
   initialOrderBy,
   onEdit,
+  onDischarge,
+  onRectify,
   onDelete,
   onPrint,
   onPay,
@@ -81,7 +85,7 @@ const Table: FunctionComponent<IProps> = ({
   rowKey = "code",
   headerActions,
   labels,
-  adjustQuantity,
+  renderExtraContent,
 }) => {
   const { t } = useTranslation();
   const [order, setOrder] = React.useState<TOrder>("desc");
@@ -143,6 +147,38 @@ const Table: FunctionComponent<IProps> = ({
             }
           >
             <Edit />
+          </IconButton>
+        );
+      case "discharge":
+        return (
+          <IconButton
+            data-cy="table-discharge-action"
+            title={labels?.edit?.tooltip ?? "Discharge"}
+            size="small"
+            disabled={disableAction(row, "discharge")}
+            onClick={
+              disableAction(row, "discharge")
+                ? () => {}
+                : () => onDischarge && onDischarge(row)
+            }
+          >
+            <Logout sx={{ color: "black" }} />
+          </IconButton>
+        );
+      case "rectify":
+        return (
+          <IconButton
+            data-cy="table-rectify-action"
+            title={labels?.rectify?.tooltip ?? "Rectify Quantity"}
+            size="small"
+            disabled={disableAction(row, "rectify")}
+            onClick={
+              disableAction(row, "rectify")
+                ? () => {}
+                : () => onRectify && onRectify(row)
+            }
+          >
+            <Undo />
           </IconButton>
         );
       case "delete":
@@ -310,6 +346,8 @@ const Table: FunctionComponent<IProps> = ({
   const renderActions = (row: any) => {
     if (
       onEdit ||
+      onDischarge ||
+      onRectify ||
       onDelete ||
       onPrint ||
       onView ||
@@ -332,6 +370,14 @@ const Table: FunctionComponent<IProps> = ({
             : ""}
           {onEdit && (displayRowAction ? displayRowAction(row, "edit") : true)
             ? renderIcon("edit", row)
+            : ""}
+          {onDischarge &&
+          (displayRowAction ? displayRowAction(row, "discharge") : true)
+            ? renderIcon("discharge", row)
+            : ""}
+          {onRectify &&
+          (displayRowAction ? displayRowAction(row, "rectify") : true)
+            ? renderIcon("rectify", row)
             : ""}
           {onPrint && (displayRowAction ? displayRowAction(row, "print") : true)
             ? renderIcon("print", row)
@@ -493,7 +539,7 @@ const Table: FunctionComponent<IProps> = ({
                     expanded={expanded}
                     dateFields={dateFields}
                     detailsExcludedFields={detailsExcludedFields}
-                    adjustQuantity={adjustQuantity}
+                    renderExtraContent={renderExtraContent}
                   />
                 );
               })}

@@ -41,9 +41,25 @@ export interface PrintPharmaceuticalStockPdfRequest {
     filter?: string;
 }
 
-export interface PrintPharmaceuticalStockWardPdfRequest {
-    date: string;
+export interface PrintPharmaceuticalStockWardExcelRequest {
     wardCode: string;
+    dateFrom: string;
+    dateTo: string;
+    medicalCode?: number;
+    medicalTypeCode?: string;
+    sex?: string;
+    ageFrom?: number;
+    ageTo?: number;
+    weightFrom?: number;
+    weightTo?: number;
+    index?: number;
+}
+
+export interface PrintPharmaceuticalStockWardPdfRequest {
+    wardCode: string;
+    dateFrom?: string;
+    dateTo?: string;
+    stockWardReportModel?: PrintPharmaceuticalStockWardPdfStockWardReportModelEnum;
 }
 
 /**
@@ -201,19 +217,56 @@ export class ReportsApi extends BaseAPI {
 
     /**
      */
-    printPharmaceuticalStockWardPdf({ date, wardCode }: PrintPharmaceuticalStockWardPdfRequest): Observable<string>
-    printPharmaceuticalStockWardPdf({ date, wardCode }: PrintPharmaceuticalStockWardPdfRequest, opts?: OperationOpts): Observable<AjaxResponse<string>>
-    printPharmaceuticalStockWardPdf({ date, wardCode }: PrintPharmaceuticalStockWardPdfRequest, opts?: OperationOpts): Observable<string | AjaxResponse<string>> {
-        throwIfNullOrUndefined(date, 'date', 'printPharmaceuticalStockWardPdf');
+    printPharmaceuticalStockWardExcel({ wardCode, dateFrom, dateTo, medicalCode, medicalTypeCode, sex, ageFrom, ageTo, weightFrom, weightTo, index }: PrintPharmaceuticalStockWardExcelRequest): Observable<object>
+    printPharmaceuticalStockWardExcel({ wardCode, dateFrom, dateTo, medicalCode, medicalTypeCode, sex, ageFrom, ageTo, weightFrom, weightTo, index }: PrintPharmaceuticalStockWardExcelRequest, opts?: OperationOpts): Observable<AjaxResponse<object>>
+    printPharmaceuticalStockWardExcel({ wardCode, dateFrom, dateTo, medicalCode, medicalTypeCode, sex, ageFrom, ageTo, weightFrom, weightTo, index }: PrintPharmaceuticalStockWardExcelRequest, opts?: OperationOpts): Observable<object | AjaxResponse<object>> {
+        throwIfNullOrUndefined(wardCode, 'wardCode', 'printPharmaceuticalStockWardExcel');
+        throwIfNullOrUndefined(dateFrom, 'dateFrom', 'printPharmaceuticalStockWardExcel');
+        throwIfNullOrUndefined(dateTo, 'dateTo', 'printPharmaceuticalStockWardExcel');
+
+        const headers: HttpHeaders = {
+        };
+
+        const query: HttpQuery = { // required parameters are used directly since they are already checked by throwIfNullOrUndefined
+            'wardCode': wardCode,
+            'dateFrom': (dateFrom as any).toISOString(),
+            'dateTo': (dateTo as any).toISOString(),
+        };
+
+        if (medicalCode != null) { query['medicalCode'] = medicalCode; }
+        if (medicalTypeCode != null) { query['medicalTypeCode'] = medicalTypeCode; }
+        if (sex != null) { query['sex'] = sex; }
+        if (ageFrom != null) { query['ageFrom'] = ageFrom; }
+        if (ageTo != null) { query['ageTo'] = ageTo; }
+        if (weightFrom != null) { query['weightFrom'] = weightFrom; }
+        if (weightTo != null) { query['weightTo'] = weightTo; }
+        if (index != null) { query['index'] = index; }
+
+        return this.request<object>({
+            url: '/reports/pharmaceuticalStockWardExcel',
+            method: 'GET',
+            headers,
+            query,
+        }, opts?.responseOpts);
+    };
+
+    /**
+     */
+    printPharmaceuticalStockWardPdf({ wardCode, dateFrom, dateTo, stockWardReportModel }: PrintPharmaceuticalStockWardPdfRequest): Observable<string>
+    printPharmaceuticalStockWardPdf({ wardCode, dateFrom, dateTo, stockWardReportModel }: PrintPharmaceuticalStockWardPdfRequest, opts?: OperationOpts): Observable<AjaxResponse<string>>
+    printPharmaceuticalStockWardPdf({ wardCode, dateFrom, dateTo, stockWardReportModel }: PrintPharmaceuticalStockWardPdfRequest, opts?: OperationOpts): Observable<string | AjaxResponse<string>> {
         throwIfNullOrUndefined(wardCode, 'wardCode', 'printPharmaceuticalStockWardPdf');
 
         const headers: HttpHeaders = {
         };
 
         const query: HttpQuery = { // required parameters are used directly since they are already checked by throwIfNullOrUndefined
-            'date': (date as any).toISOString(),
             'wardCode': wardCode,
         };
+
+        if (dateFrom != null) { query['dateFrom'] = (dateFrom as any).toISOString(); }
+        if (dateTo != null) { query['dateTo'] = (dateTo as any).toISOString(); }
+        if (stockWardReportModel != null) { query['stockWardReportModel'] = stockWardReportModel; }
 
         return this.request<string>({
             url: '/reports/pharmaceuticalStockWard',
@@ -223,4 +276,14 @@ export class ReportsApi extends BaseAPI {
         }, opts?.responseOpts);
     };
 
+}
+
+/**
+ * @export
+ * @enum {string}
+ */
+export enum PrintPharmaceuticalStockWardPdfStockWardReportModelEnum {
+    Incoming = 'INCOMING',
+    Outcoming = 'OUTCOMING',
+    Drugs = 'DRUGS'
 }

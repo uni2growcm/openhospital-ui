@@ -13,26 +13,19 @@ export default function Pharmaceutical() {
     setBreadcrumbMap: (map: Record<string, string>) => void;
   }>();
 
-  const addBreadcrumb = () => {
+  useEffect(() => {
     setBreadcrumbMap({
-      ...breadcrumbMap,
+      [t("nav.pharmacy")]: PATHS.pharmacy,
       [t("pharmacy.labels.pharmaceutical-title")]:
         PATHS.pharmacy_pharmaceutical,
     });
-  };
-
-  const removeBreadcrumb = () => {
-    const updatedMap = { ...breadcrumbMap };
-    delete updatedMap[t("pharmacy.labels.pharmaceutical-title")];
-    setBreadcrumbMap(updatedMap);
-  };
-
-  useEffect(() => {
-    addBreadcrumb();
     return () => {
-      removeBreadcrumb();
+      setBreadcrumbMap({
+        [t("nav.pharmacy")]: PATHS.pharmacy,
+      });
     };
-  }, []);
+  }, [t, setBreadcrumbMap]);
+
   return (
     <PharmacyActivityContent
       data-cy="pharmaceutical"

@@ -5,8 +5,10 @@ import {
   MedicalStockMovementTypeApi,
   MedicalStockWardApi,
   MedicalTypesApi,
+  MedicalWardDTO,
   MedicalsApi,
   MovementDTO,
+  MovementWardDTO,
   NewMedicalRequest,
   NewMultipleChargingMovementsRequest,
   NewMultipleDischargingMovementsRequest,
@@ -171,20 +173,6 @@ export const updateMedical = createAsyncThunk(
   }
 );
 
-// export const dischargeMovements = createAsyncThunk(
-//   "pharmacy/dischargeMovements",
-//   async (payload: NewMultipleDischargingMovementsRequest, thunkApi) => {
-//     try {
-//       const result = await firstValueFrom(
-//         wrapper(() => api.newMultipleDischargingMovements(payload))
-//       );
-//       return result;
-//     } catch (error: any) {
-//       return thunkApi.rejectWithValue(error.response);
-//     }
-//   }
-// );
-
 export const dischargeMovements = createAsyncThunk<
   boolean, // type du retour
   { ref: string; movementDTO: MovementDTO[] }, // payload attendu
@@ -199,6 +187,24 @@ export const dischargeMovements = createAsyncThunk<
     const result = await firstValueFrom(
       wrapper(() => api.newMultipleDischargingMovements(request))
     );
+    return result;
+  } catch (error: any) {
+    return thunkApi.rejectWithValue(error.response);
+  }
+});
+
+export const createWardMovement = createAsyncThunk<
+  boolean,
+  MovementWardDTO,
+  { rejectValue: any }
+>("pharmacy/createWardMovement", async (movementWardDTO, thunkApi) => {
+  try {
+    const result = await firstValueFrom(
+      wrapper(
+        () => wardStockApi.newMovementWard({ movementWardDTO })
+      )
+    );
+
     return result;
   } catch (error: any) {
     return thunkApi.rejectWithValue(error.response);

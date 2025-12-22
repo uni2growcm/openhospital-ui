@@ -1,11 +1,15 @@
 import { CircularProgress } from "@mui/material";
+import Button from "components/accessories/button/Button";
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import Table from "components/accessories/table/Table";
 import { TFilterField } from "components/accessories/table/filter/types";
+import { AdjustQuantityForm } from "components/activities/pharmacyActivity/pharmaceuticalStock/components/forms/adjustQuantityForm/AdjustQuantityForm";
+import StockModal from "components/activities/pharmacyActivity/pharmaceuticalStock/components/modal/Modal";
+import { MovementDTO } from "generated";
 import { renderDateTime } from "libraries/formatUtils/dataFormatting";
 import { useTranslation } from "libraries/hooks";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { getMovements } from "state/pharmacy";
 
 export function StockTable() {
@@ -23,6 +27,11 @@ export function StockTable() {
     (state) =>
       state.pharmacy.getMovements.error?.message || t("errors.somethingwrong")
   ) as string;
+
+  const [openStockModal, setOpenStockModal] = useState<boolean>(false);
+  const [selectedMovement, setSelectedMovement] = useState<
+    MovementDTO | undefined
+  >();
 
   const labelData = {
     refNo: t("pharmacy.stock.refNo"),
@@ -91,6 +100,16 @@ export function StockTable() {
     }));
   }, [t, data]);
 
+  const handleAdjustClick = (movement: MovementDTO) => {
+    setSelectedMovement(movement);
+    setOpenStockModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenStockModal(false);
+    setSelectedMovement(undefined);
+  };
+
   useEffect(() => {
     dispatch(getMovements());
   }, [dispatch]);
@@ -113,7 +132,7 @@ export function StockTable() {
                 dateFields={dateFields}
                 showEmptyCell={false}
                 isCollapsabile={true}
-                detailColSpan={6}
+                detailColSpan={9}
                 filterColumns={filters}
                 rowKey="refNo"
                 rawData={(data ?? []).map((item) => ({
@@ -127,6 +146,17 @@ export function StockTable() {
                 adjustQuantity={(data ?? []).some(
                   (item) => item.type?.type === "+"
                 )}
+                renderExtraContent={(item) => (
+                  <Button
+                    className="discharge_button"
+                    type="button"
+                    variant="outlined"
+                    color="inherit"
+                    onClick={() => handleAdjustClick(item)}
+                  >
+                    Adjust Quantity
+                  </Button>
+                )}
               />
             );
           case "SUCCESS_EMPTY":
@@ -137,6 +167,14 @@ export function StockTable() {
             return <CircularProgress />;
         }
       })()}
+
+      <StockModal open={openStockModal} onClose={handleCloseModal}>
+        <AdjustQuantityForm
+          movement={selectedMovement}
+          onSubmit={handleCloseModal}
+          onCancel={handleCloseModal}
+        />
+      </StockModal>
     </div>
   );
 }

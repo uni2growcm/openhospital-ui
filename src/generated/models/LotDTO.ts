@@ -35,25 +35,25 @@ export interface LotDTO {
      */
     dueDate: string;
     /**
-     * The lot\'s code
+     * The lot\'s cost
      * @type {number}
      * @memberof LotDTO
      */
     cost?: number;
     /**
-     * The main store quantity
+     * The lot\'s main store quantity
      * @type {number}
      * @memberof LotDTO
      */
     mainStoreQuantity?: number;
     /**
-     * The ward store quantity
+     * The lot\'s ward total  quantity
      * @type {number}
      * @memberof LotDTO
      */
     wardsTotalQuantity?: number;
     /**
-     * The overall quantity
+     * The lot\'s overall quantity
      * @type {number}
      * @memberof LotDTO
      */

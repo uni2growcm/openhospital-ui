@@ -12,6 +12,8 @@ export interface IProps {
   initialOrderBy?: string;
   columnsOrder: Array<string>;
   onEdit?: (row: any) => void;
+  onRectify?: (row: any) => void;
+  onDischarge?: (row: any) => void;
   onDelete?: (row: any) => void;
   onPrint?: (row: any) => void;
   onView?: (row: any) => void;
@@ -33,6 +35,7 @@ export interface IProps {
   disableRowAction?: (row: any, action: TActions) => boolean;
   detailsExcludedFields?: string[];
   adjustQuantity?: boolean;
+  renderExtraContent?: (row: any) => React.ReactNode;
   /**
    * Column used for the filter. When this prop is provided, don't forget to provide also [rawData]
    */
@@ -82,10 +85,13 @@ export interface IRowProps {
   dateFields: Array<string>;
   detailsExcludedFields?: string[];
   adjustQuantity?: boolean;
+  renderExtraContent?: (row: any) => ReactNode;
 }
 
 export type TActions =
   | "edit"
+  | "rectify"
+  | "discharge"
   | "delete"
   | "view"
   | "print"
