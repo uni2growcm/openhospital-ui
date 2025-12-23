@@ -20,27 +20,27 @@ const BaseMedicalDTOSchema = z.object({
   deleted: z.boolean().default(false),
   ignoreSimilar: z.boolean().optional(),
 });
-export const MedicalDTOSchema = z.object({
-  code: z.number().optional(),
-  lock: z.number().optional(),
 
+export const MedicalDTOSchema = BaseMedicalDTOSchema.extend({
   prod_code: z
     .string()
     .min(1, { message: "pharmacy.form.errors.prodCodeRequired" }),
-  type: z.string().refine((v) => v && v.trim().length > 0, {
+
+  type: z.string().refine((v) => v.trim().length > 0, {
     message: "pharmacy.form.errors.typeRequired",
   }),
+
   description: z
     .string()
     .min(1, { message: "pharmacy.form.errors.descriptionRequired" }),
-  pcsperpck: z.number().refine((v) => v !== undefined && v > 0, {
+
+  pcsperpck: z.number().refine((v) => v > 0, {
     message: "pharmacy.form.errors.pcsperpckRequired",
   }),
-  minqty: z.number().refine((v) => v !== undefined && v >= 0, {
+
+  minqty: z.number().refine((v) => v >= 0, {
     message: "pharmacy.form.errors.minqtyRequired",
   }),
-  deleted: z.boolean().default(false),
-  ignoreSimilar: z.boolean().optional(),
 });
 
 export function getInitialValues(from?: MedicalDTO): Partial<TFormValues> {

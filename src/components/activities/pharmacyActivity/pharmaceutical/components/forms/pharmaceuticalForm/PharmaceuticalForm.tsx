@@ -10,7 +10,7 @@ import { MedicalDTO } from "generated";
 import { useNavigationHandler, useTranslation } from "libraries/hooks";
 import { useMedicalTypes } from "libraries/hooks/api/useMedicalTypes";
 import React, { useCallback } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { MedicalDTOSchema, MedicalErrorKey, getInitialValues } from "./consts";
 import "./styles.scss";
 import { PharmaceuticalFormProps, TFormValues } from "./types";
@@ -28,17 +28,6 @@ export function PharmaceuticalForm({
   });
 
   const { medicalTypes, options: medicalTypeOptions } = useMedicalTypes();
-
-  const values = useWatch({
-    control,
-    compute: (values) => {
-      return {
-        ...values,
-        type: medicalTypes.find((type) => type.code === values.type),
-        deleted: values.deleted ? "Y" : "N",
-      };
-    },
-  });
 
   const handleGoBack = useNavigationHandler(PATHS.pharmacy_pharmaceutical, {
     replace: true,
