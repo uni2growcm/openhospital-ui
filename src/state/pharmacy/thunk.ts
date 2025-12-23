@@ -13,6 +13,7 @@ import {
   NewMultipleChargingMovementsRequest,
   NewMultipleDischargingMovementsRequest,
   PrintPharmaceuticalAMCRequest,
+  PrintPharmaceuticalExpirationPdfRequest,
   PrintPharmaceuticalStockCardPdfRequest,
   PrintPharmaceuticalStockPdfRequest,
   PrintPharmaceuticalStockWardExcelRequest,
@@ -279,6 +280,29 @@ export const printPharmaceuticalAMCPdf = createAsyncThunk(
           apiReport.printPharmaceuticalAMC({
             date: isValid(date) ? date : new Date(),
           } as PrintPharmaceuticalAMCRequest)
+        )
+      );
+      return result;
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.response);
+    }
+  }
+);
+
+export const printPharmaceuticalExpirationPdf = createAsyncThunk(
+  "pharmacy/getPharmaceuticalExpirationPdfReport",
+  async (payload: PrintPharmaceuticalExpirationPdfRequest, thunkApi) => {
+    try {
+      const fromDate = payload.fromDate
+        ? parseISO(payload.fromDate)
+        : payload.fromDate;
+      const toDate = payload.toDate ? parseISO(payload.toDate) : payload.toDate;
+      const result = await firstValueFrom(
+        wrapper(() =>
+          apiReport.printPharmaceuticalExpirationPdf({
+            fromDate: isValid(fromDate) ? fromDate : new Date(),
+            toDate: isValid(toDate) ? toDate : new Date(),
+          } as PrintPharmaceuticalExpirationPdfRequest)
         )
       );
       return result;

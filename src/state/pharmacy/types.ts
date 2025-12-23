@@ -35,6 +35,7 @@ export type IPharmacyState = {
   printPharmaceuticalStockCardPdf: ApiResponse<Blob>;
   printPharmaceuticalAMCPdf: ApiResponse<Blob>;
   printPharmaceuticalStockWardExcel: ApiResponse<Blob>;
+  printPharmaceuticalExpirationPdf: ApiResponse<Blob>;
 };
 
 export type TWardStockFIlter = {

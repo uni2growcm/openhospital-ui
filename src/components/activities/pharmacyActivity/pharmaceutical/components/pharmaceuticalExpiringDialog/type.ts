@@ -1,9 +1,6 @@
 export type PharmaceuticalExpiringDialogProps = {
   isOpen: boolean;
-  handlePrimaryButtonClick: (
-    period: string | null,
-    month: string | null
-  ) => void;
+  handlePrimaryButtonClick: (period: string, month: string | null) => void;
   handleSecondaryButtonClick: () => void;
 };
 

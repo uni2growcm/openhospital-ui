@@ -78,6 +78,10 @@ export const pharmacySlice = createSlice({
       state.printPharmaceuticalStockWardExcel =
         initial.printPharmaceuticalStockWardExcel;
     },
+    resetPrintPharmaceuticalExpirationPdf: (state) => {
+      state.printPharmaceuticalExpirationPdf =
+        initial.printPharmaceuticalExpirationPdf;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -324,6 +328,32 @@ export const pharmacySlice = createSlice({
             action.payload
           );
         }
+      )
+      // Print pharmaceutical expiration report
+      .addCase(thunks.printPharmaceuticalExpirationPdf.pending, (state) => {
+        state.printPharmaceuticalExpirationPdf = ApiResponse.loading();
+      })
+      .addCase(
+        thunks.printPharmaceuticalExpirationPdf.fulfilled,
+        (state, action) => {
+          if (action.payload instanceof Blob) {
+            state.printPharmaceuticalExpirationPdf = ApiResponse.value(
+              action.payload
+            );
+          } else {
+            state.printPharmaceuticalExpirationPdf = ApiResponse.error(
+              action.payload
+            );
+          }
+        }
+      )
+      .addCase(
+        thunks.printPharmaceuticalExpirationPdf.rejected,
+        (state, action) => {
+          state.printPharmaceuticalExpirationPdf = ApiResponse.error(
+            action.payload
+          );
+        }
       );
   },
 });
@@ -350,4 +380,5 @@ export const {
   resetPrintPharmaceuticalStockCardPdf,
   resetPrintPharmaceuticalAMCPdf,
   resetPrintPharmaceuticalStockWardExcel,
+  resetPrintPharmaceuticalExpirationPdf,
 } = pharmacySlice.actions;
