@@ -27,12 +27,9 @@ const BaseMovementWardDTOSchema = z.object({
   weight: z.number().optional(),
   description: z.string().optional(),
   medical: z.any(),
-  quantity: z
-    .number()
-    .min(0.00000001, {
-      message:
-        "pharmacy.stock.ward.quantityGreaterThanZero" as QuantityErrorKey,
-    }),
+  quantity: z.number().min(0.00000001, {
+    message: "pharmacy.stock.ward.quantityGreaterThanZero" as QuantityErrorKey,
+  }),
   units: z.string().optional(),
   wardTo: z.any().optional(),
   wardFrom: z.object({ code: z.string() }).optional(),

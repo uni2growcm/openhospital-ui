@@ -6566,13 +6566,13 @@ components:
           format: int32
           description: lock
           example: 0
-        male:
-          type: boolean
-        female:
+        opd:
           type: boolean
         pharmacy:
           type: boolean
-        opd:
+        female:
+          type: boolean
+        male:
           type: boolean
       required:
       - beds
@@ -7746,6 +7746,10 @@ components:
           description: The id of the medical
           example: 1
           maxLength: 5
+        prodCode:
+          type: string
+          description: The product code
+          example: PARA
         type:
           $ref: "#/components/schemas/MedicalTypeDTO"
           description: The medical type
@@ -7792,8 +7796,6 @@ components:
         deleted:
           type: string
           description: The if medical is deleted
-        prodCode:
-          type: string
     MalnutritionDTO:
       type: object
       properties:
