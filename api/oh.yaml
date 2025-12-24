@@ -3849,11 +3849,11 @@ paths:
             application/pdf:
               schema:
                 type: string
-                format: byte
+                format: binary
             application/json:
               schema:
                 type: string
-                format: byte
+                format: binary
       security:
       - bearerAuth: []
   /reports/pharmaceuticalStockWard:
@@ -3896,7 +3896,7 @@ paths:
             application/json:
               schema:
                 type: string
-                format: byte
+                format: binary
       security:
       - bearerAuth: []
   /reports/pharmaceuticalStockWardExcel:
@@ -4024,7 +4024,7 @@ paths:
             application/json:
               schema:
                 type: string
-                format: byte
+                format: binary
       security:
       - bearerAuth: []
   /reports/pharmaceuticalOrder:
@@ -4067,7 +4067,7 @@ paths:
             application/json:
               schema:
                 type: string
-                format: byte
+                format: binary
       security:
       - bearerAuth: []
   /reports/pharmaceuticalAMC:
@@ -4089,7 +4089,7 @@ paths:
             application/json:
               schema:
                 type: string
-                format: byte
+                format: binary
       security:
       - bearerAuth: []
   /reports/exams-list:
@@ -4104,7 +4104,7 @@ paths:
             application/json:
               schema:
                 type: string
-                format: byte
+                format: binary
       security:
       - bearerAuth: []
   /reports/diseases-list:
@@ -4119,7 +4119,7 @@ paths:
             application/json:
               schema:
                 type: string
-                format: byte
+                format: binary
       security:
       - bearerAuth: []
   /pricelists/prices:
@@ -7306,11 +7306,11 @@ components:
           type: string
           description: "Flag record deleted, values are 'Y' OR 'N' "
           example: "N"
+        fhu:
+          type: string
         yprog:
           type: integer
           format: int32
-        fhu:
-          type: string
       required:
       - admDate
       - admitted
@@ -7746,7 +7746,7 @@ components:
           description: The id of the medical
           example: 1
           maxLength: 5
-        prod_code:
+        prodCode:
           type: string
           description: The product code
           example: PARA
