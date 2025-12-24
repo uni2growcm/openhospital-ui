@@ -19,7 +19,9 @@ const PharmaceuticalExpiringDialog: FunctionComponent<
 
   const [monthSelected, setMonthSelected] = useState<string | null>(null);
 
-  const [periodSelected, setPeriodSelected] = useState<string | null>(null);
+  const [periodSelected, setPeriodSelected] = useState<string>(
+    ExperingPeriod.TODAY
+  );
 
   const periodOptions = useMemo(
     () =>
@@ -96,7 +98,7 @@ const PharmaceuticalExpiringDialog: FunctionComponent<
                 />
               )}
               onChange={(event, value) => {
-                setPeriodSelected(value ? value.value : null);
+                setPeriodSelected(value ? value.value : ExperingPeriod.TODAY);
               }}
             />
           </div>

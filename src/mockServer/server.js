@@ -27,7 +27,9 @@ import { patientRoutes } from "./routes/patients";
 import { permissionRoutes } from "./routes/permission";
 import { pregnantTreatmentTypeRoutes } from "./routes/pregnantTreatmentType";
 import { pricesRoutes } from "./routes/prices";
+import { reportsRoutes } from "./routes/reports";
 import { settingsRoutes } from "./routes/settings";
+import { stockMedicalsRoutes } from "./routes/stockMedicals";
 import { stockMovementsRoutes } from "./routes/stockMovements";
 import { suppliersRoutes } from "./routes/suppliers";
 import { therapyRoutes } from "./routes/therapies";
@@ -37,7 +39,6 @@ import { vaccineRoutes } from "./routes/vaccine";
 import { vaccineTypesRoutes } from "./routes/vaccineTypes";
 import { visitRoutes } from "./routes/visits";
 import { wardsRoutes } from "./routes/wards";
-import { stockMedicalsRoutes } from "./routes/stockMedicals";
 
 export function makeServer() {
   Polly.register(XHRAdapter);
@@ -86,6 +87,7 @@ export function makeServer() {
     settingsRoutes(server);
     stockMovementsRoutes(server);
     stockMedicalsRoutes(server);
+    reportsRoutes(server);
   });
   return server;
 }

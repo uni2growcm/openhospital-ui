@@ -593,7 +593,8 @@
     "cancelMessage": "Are you sure to cancel this operation ? All unsaved data will be lost.",
     "back": "Back",
     "backToEdit": "No, keep editing",
-    "discardMessage": "Are you sure to discard this operation ? All unsaved data will be lost."
+    "discardMessage": "Are you sure to discard this operation ? All unsaved data will be lost.",
+    "print": "Imprimer"
   },
   "permission": {
     "denied": "Autorisation refusée",
@@ -1344,7 +1345,7 @@
       "stock": "Stock",
       "code": "Code",
       "pharmaceutical": "Médicament",
-      "stockCardReport": "Rapport de stock",
+      "stockCardReport": "Rapport des fiches de stock",
       "addMedecine": "Ajouter un médicament",
       "order": "Commander",
       "amcReport": "Rapport AMC",
@@ -1397,6 +1398,18 @@
         "dischargeMovementCreatedSuccessfully": "Mouvement de décharge créé avec succès !",
         "errorPatient": "Erreur lors de la recherche du patient",
         "movementCreated": "Mouvement créé"
+      },
+      "selectDate": "Sélectionnez une date",
+      "selectReport": "Impression du rapport",
+      "selectOption": "Sélectionnez une option",
+      "selectMedical": "Sélectionnez médicament",
+      "selectWard": "Selectionnez un pavillon",
+      "selectDateTo": "A",
+      "selectDateFrom": "De",
+      "errorMessageForm": "Ce champ est obligatoire",
+      "option": {
+        "withLot": "Avec lot",
+        "onlyQuantity": "Seulement la quantité"
       },
       "expiring": {
         "label": "Expirer",

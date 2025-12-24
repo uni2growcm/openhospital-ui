@@ -34,4 +34,10 @@ export const initial: IPharmacyState = {
   getMedicalWardByWardMedicalAndLot: new ApiResponse({
     status: "IDLE",
   }),
+  printPharmaceuticalStockWardPdf: new ApiResponse({ status: "IDLE" }),
+  printPharmaceuticalStockPdf: new ApiResponse({ status: "IDLE" }),
+  printPharmaceuticalStockCardPdf: new ApiResponse({ status: "IDLE" }),
+  printPharmaceuticalAMCPdf: new ApiResponse({ status: "IDLE" }),
+  printPharmaceuticalStockWardExcel: new ApiResponse({ status: "IDLE" }),
+  printPharmaceuticalExpirationPdf: new ApiResponse({ status: "IDLE" }),
 };

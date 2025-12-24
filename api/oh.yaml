@@ -3849,11 +3849,11 @@ paths:
             application/pdf:
               schema:
                 type: string
-                format: byte
+                format: binary
             application/json:
               schema:
                 type: string
-                format: byte
+                format: binary
       security:
       - bearerAuth: []
   /reports/pharmaceuticalStockWard:
@@ -3896,7 +3896,7 @@ paths:
             application/json:
               schema:
                 type: string
-                format: byte
+                format: binary
       security:
       - bearerAuth: []
   /reports/pharmaceuticalStockWardExcel:
@@ -3980,7 +3980,8 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                type: string
+                format: binary
       security:
       - bearerAuth: []
   /reports/pharmaceuticalStockCard:
@@ -4024,7 +4025,7 @@ paths:
             application/json:
               schema:
                 type: string
-                format: byte
+                format: binary
       security:
       - bearerAuth: []
   /reports/pharmaceuticalOrder:
@@ -4067,7 +4068,7 @@ paths:
             application/json:
               schema:
                 type: string
-                format: byte
+                format: binary
       security:
       - bearerAuth: []
   /reports/pharmaceuticalAMC:
@@ -4089,7 +4090,7 @@ paths:
             application/json:
               schema:
                 type: string
-                format: byte
+                format: binary
       security:
       - bearerAuth: []
   /reports/exams-list:
@@ -4104,7 +4105,7 @@ paths:
             application/json:
               schema:
                 type: string
-                format: byte
+                format: binary
       security:
       - bearerAuth: []
   /reports/diseases-list:
@@ -4119,7 +4120,7 @@ paths:
             application/json:
               schema:
                 type: string
-                format: byte
+                format: binary
       security:
       - bearerAuth: []
   /pricelists/prices:
@@ -6568,9 +6569,9 @@ components:
           example: 0
         opd:
           type: boolean
-        female:
-          type: boolean
         male:
+          type: boolean
+        female:
           type: boolean
         pharmacy:
           type: boolean
@@ -7306,11 +7307,11 @@ components:
           type: string
           description: "Flag record deleted, values are 'Y' OR 'N' "
           example: "N"
+        fhu:
+          type: string
         yprog:
           type: integer
           format: int32
-        fhu:
-          type: string
       required:
       - admDate
       - admitted
