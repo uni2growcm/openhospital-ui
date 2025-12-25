@@ -1314,6 +1314,13 @@
         "adjustQuantity": "Adjust quantity",
         "currentQntyNonNegetive": "Current quantity must be non-negative",
         "newQntyNonNegetive": "New quantity must be non-negative"
+      },
+      "errors": {
+        "prodCodeRequired": "Product code is required.",
+        "typeRequired": "Product type is required.",
+        "descriptionRequired": "Description is required.",
+        "pcsPerPackRequired": "Pieces per pack must be greater than 0.",
+        "minQtyRequired": "Critical level cannot be negative."
       }
     },
     "lot": {

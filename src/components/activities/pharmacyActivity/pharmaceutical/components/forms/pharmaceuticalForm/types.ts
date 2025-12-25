@@ -8,4 +8,5 @@ export type PharmaceuticalFormProps = {
   onSubmit: (values: MedicalDTO) => void;
   loading?: boolean;
   pharmaceutical?: MedicalDTO;
+  isEdit?: boolean;
 };

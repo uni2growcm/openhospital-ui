@@ -9,8 +9,7 @@ import { PATHS } from "consts";
 import { MedicalDTO } from "generated";
 import { useNavigationHandler, useTranslation } from "libraries/hooks";
 import { useMedicalTypes } from "libraries/hooks/api/useMedicalTypes";
-import { isEmpty } from "lodash";
-import React, { FormEvent, useCallback } from "react";
+import React, { useCallback } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { MedicalDTOSchema, getInitialValues } from "./consts";
 import "./styles.scss";
@@ -20,10 +19,15 @@ export function PharmaceuticalForm({
   pharmaceutical,
   loading,
   onSubmit,
+  isEdit,
 }: PharmaceuticalFormProps) {
   const { t } = useTranslation();
 
-  const { control, formState } = useForm<TFormValues>({
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<TFormValues>({
     defaultValues: getInitialValues(pharmaceutical),
     resolver: standardSchemaResolver(MedicalDTOSchema),
   });
@@ -48,28 +52,34 @@ export function PharmaceuticalForm({
     replace: true,
   });
 
-  const handleSubmit = useCallback(
-    (event: FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      if (isEmpty(Object.keys(formState.errors))) {
-        onSubmit?.(values as MedicalDTO);
-      }
+  const onValidSubmit = useCallback(
+    (data: TFormValues) => {
+      onSubmit?.(values as MedicalDTO);
     },
-    [formState, values, onSubmit]
+    [values, onSubmit]
   );
+
+  const getFieldError = (field: keyof TFormValues) => {
+    const error = errors[field]?.message;
+    if (!error) return undefined;
+    return t(error as any);
+  };
 
   return (
     <div className="pharmaceuticalForm">
       <form
         data-cy="pharmaceutical-form"
         className="form-grid-layout gap-2 w-full"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onValidSubmit)}
       >
         <TextFormField
           type="string"
           label={t("pharmacy.form.fields.prodCode")}
           control={control}
           name="prodCode"
+          disabled={isEdit}
+          error={!!errors.prodCode}
+          helperText={getFieldError("prodCode")}
         />
         <AutocompleteFormField
           label={t("pharmacy.form.fields.typeMedical")}
@@ -77,24 +87,33 @@ export function PharmaceuticalForm({
           name="type"
           options={medicalTypeOptions}
         />
+        {errors.type && (
+          <div className="form-error">{getFieldError("type")}</div>
+        )}
         <div className="col-start-1 col-span-full"></div>
         <TextFormField
           type="string"
           label={t("pharmacy.form.fields.description")}
           control={control}
           name="description"
+          error={!!errors.description}
+          helperText={getFieldError("description")}
         />
         <TextFormField
           type="number"
           label={t("pharmacy.form.fields.pcsperpck")}
           control={control}
           name="pcsperpck"
+          error={!!errors.pcsperpck}
+          helperText={getFieldError("pcsperpck")}
         />
         <TextFormField
           type="number"
           label={t("pharmacy.form.fields.minqty")}
           control={control}
           name="minqty"
+          error={!!errors.minqty}
+          helperText={getFieldError("minqty")}
         />
         <div className="col-start-1 col-span-full"></div>
         <CheckboxFormField

@@ -15,14 +15,13 @@ import { useTranslation } from "libraries/hooks";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { LocaleKey } from "resources/types";
 import { createWardMovement } from "state/pharmacy";
 import {
+  DestinationErrorKey,
+  TFormValues,
   createMovementWardDTOSchema,
   getInitialValues,
-  QuantityErrorKey,
-  TFormValues,
-  DestinationErrorKey,
-  LotErrorKey,
 } from "./const";
 import "./style.scss";
 import { DestinationType, IWardDischargeFormProps } from "./types";
@@ -160,7 +159,7 @@ export function WardDischargeForm({
     const error = errors.lot?.message;
     if (!error) return undefined;
 
-    const errorKey = error as LotErrorKey;
+    const errorKey = error as LocaleKey;
     return t(errorKey);
   };
 
@@ -180,7 +179,7 @@ export function WardDischargeForm({
   const getQuantityError = () => {
     const error = errors.quantity?.message;
     if (!error) return undefined;
-    const errorKey = error as QuantityErrorKey;
+    const errorKey = error as LocaleKey;
     if (errorKey === "pharmacy.stock.ward.quantityNotExceedoTtalStock") {
       return `${t(errorKey)} (${totalStock})`;
     }

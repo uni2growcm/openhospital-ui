@@ -116,6 +116,7 @@ export function UpdatePharmaceutical() {
             onSubmit={handleSubmit}
             loading={status === "LOADING"}
             pharmaceutical={medical}
+            isEdit
           />
         )}
         {status === "FAIL" && (
