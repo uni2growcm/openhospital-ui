@@ -30,6 +30,12 @@ export type IPharmacyState = {
   };
   createWardMovement: ApiResponse<boolean>;
   getMedicalWardByWardMedicalAndLot: ApiResponse<MedicalWardDTO>;
+  printPharmaceuticalStockWardPdf: ApiResponse<Blob>;
+  printPharmaceuticalStockPdf: ApiResponse<Blob>;
+  printPharmaceuticalStockCardPdf: ApiResponse<Blob>;
+  printPharmaceuticalAMCPdf: ApiResponse<Blob>;
+  printPharmaceuticalStockWardExcel: ApiResponse<Blob>;
+  printPharmaceuticalExpirationPdf: ApiResponse<Blob>;
 };
 
 export type TWardStockFIlter = {
