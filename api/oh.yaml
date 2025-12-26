@@ -3980,7 +3980,8 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                type: string
+                format: binary
       security:
       - bearerAuth: []
   /reports/pharmaceuticalStockCard:
@@ -6566,13 +6567,13 @@ components:
           format: int32
           description: lock
           example: 0
-        pharmacy:
+        opd:
           type: boolean
         male:
           type: boolean
         female:
           type: boolean
-        opd:
+        pharmacy:
           type: boolean
       required:
       - beds

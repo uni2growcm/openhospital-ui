@@ -223,9 +223,9 @@ export class ReportsApi extends BaseAPI {
 
     /**
      */
-    printPharmaceuticalStockWardExcel({ wardCode, dateFrom, dateTo, medicalCode, medicalTypeCode, sex, ageFrom, ageTo, weightFrom, weightTo, index }: PrintPharmaceuticalStockWardExcelRequest): Observable<object>
-    printPharmaceuticalStockWardExcel({ wardCode, dateFrom, dateTo, medicalCode, medicalTypeCode, sex, ageFrom, ageTo, weightFrom, weightTo, index }: PrintPharmaceuticalStockWardExcelRequest, opts?: OperationOpts): Observable<AjaxResponse<object>>
-    printPharmaceuticalStockWardExcel({ wardCode, dateFrom, dateTo, medicalCode, medicalTypeCode, sex, ageFrom, ageTo, weightFrom, weightTo, index }: PrintPharmaceuticalStockWardExcelRequest, opts?: OperationOpts): Observable<object | AjaxResponse<object>> {
+    printPharmaceuticalStockWardExcel({ wardCode, dateFrom, dateTo, medicalCode, medicalTypeCode, sex, ageFrom, ageTo, weightFrom, weightTo, index }: PrintPharmaceuticalStockWardExcelRequest): Observable<Blob>
+    printPharmaceuticalStockWardExcel({ wardCode, dateFrom, dateTo, medicalCode, medicalTypeCode, sex, ageFrom, ageTo, weightFrom, weightTo, index }: PrintPharmaceuticalStockWardExcelRequest, opts?: OperationOpts): Observable<AjaxResponse<Blob>>
+    printPharmaceuticalStockWardExcel({ wardCode, dateFrom, dateTo, medicalCode, medicalTypeCode, sex, ageFrom, ageTo, weightFrom, weightTo, index }: PrintPharmaceuticalStockWardExcelRequest, opts?: OperationOpts): Observable<Blob | AjaxResponse<Blob>> {
         throwIfNullOrUndefined(wardCode, 'wardCode', 'printPharmaceuticalStockWardExcel');
         throwIfNullOrUndefined(dateFrom, 'dateFrom', 'printPharmaceuticalStockWardExcel');
         throwIfNullOrUndefined(dateTo, 'dateTo', 'printPharmaceuticalStockWardExcel');
@@ -248,11 +248,12 @@ export class ReportsApi extends BaseAPI {
         if (weightTo != null) { query['weightTo'] = weightTo; }
         if (index != null) { query['index'] = index; }
 
-        return this.request<object>({
+        return this.request<Blob>({
             url: '/reports/pharmaceuticalStockWardExcel',
             method: 'GET',
             headers,
             query,
+            responseType: 'blob',
         }, opts?.responseOpts);
     };
 

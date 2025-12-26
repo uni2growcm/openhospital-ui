@@ -1,17 +1,24 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { isValid, parseISO } from "date-fns";
 import {
   GetMedicalRequest,
   GetMovementWardRequest,
   MedicalStockMovementTypeApi,
   MedicalStockWardApi,
   MedicalTypesApi,
-  MedicalWardDTO,
   MedicalsApi,
   MovementDTO,
   MovementWardDTO,
   NewMedicalRequest,
   NewMultipleChargingMovementsRequest,
   NewMultipleDischargingMovementsRequest,
+  PrintPharmaceuticalAMCRequest,
+  PrintPharmaceuticalExpirationPdfRequest,
+  PrintPharmaceuticalStockCardPdfRequest,
+  PrintPharmaceuticalStockPdfRequest,
+  PrintPharmaceuticalStockWardExcelRequest,
+  PrintPharmaceuticalStockWardPdfRequest,
+  ReportsApi,
   StockMovementsApi,
   UpdateMedicalRequest,
 } from "generated";
@@ -20,6 +27,7 @@ import { wrapper } from "libraries/apiUtils/wrapper";
 import { firstValueFrom } from "rxjs";
 
 const api = new StockMovementsApi(customConfiguration());
+const apiReport = new ReportsApi(customConfiguration());
 const movementTypeApi = new MedicalStockMovementTypeApi(customConfiguration());
 const wardStockApi = new MedicalStockWardApi(customConfiguration());
 const medicalApi = new MedicalsApi(customConfiguration());
@@ -193,6 +201,117 @@ export const dischargeMovements = createAsyncThunk<
   }
 });
 
+export const printPharmaceuticalStockWardPdf = createAsyncThunk(
+  "pharmacy/getPharmaceuticalStockWardPdfReport",
+  async (payload: PrintPharmaceuticalStockWardPdfRequest, thunkApi) => {
+    try {
+      const dateTo = payload.dateTo ? parseISO(payload.dateTo) : payload.dateTo;
+      const dateFrom = payload.dateFrom
+        ? parseISO(payload.dateFrom)
+        : payload.dateFrom;
+      const result = await firstValueFrom(
+        wrapper(() =>
+          apiReport.printPharmaceuticalStockWardPdf({
+            ...payload,
+            dateTo: isValid(dateTo) ? dateTo : new Date(),
+            dateFrom: isValid(dateFrom) ? dateFrom : new Date(),
+          } as PrintPharmaceuticalStockWardPdfRequest)
+        )
+      );
+      return result;
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.response);
+    }
+  }
+);
+
+export const printPharmaceuticalStockPdf = createAsyncThunk(
+  "pharmacy/getPharmaceuticalStockPdfReport",
+  async (payload: PrintPharmaceuticalStockPdfRequest, thunkApi) => {
+    try {
+      const date = payload.date ? parseISO(payload.date) : payload.date;
+      const result = await firstValueFrom(
+        wrapper(() =>
+          apiReport.printPharmaceuticalStockPdf({
+            ...payload,
+            date: isValid(date) ? date : new Date(),
+          } as PrintPharmaceuticalStockPdfRequest)
+        )
+      );
+      return result;
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.response);
+    }
+  }
+);
+
+export const printPharmaceuticalStockCardPdf = createAsyncThunk(
+  "pharmacy/getPharmaceuticalStockCardPdfReport",
+  async (payload: PrintPharmaceuticalStockCardPdfRequest, thunkApi) => {
+    try {
+      const dateTo = payload.dateTo ? parseISO(payload.dateTo) : payload.dateTo;
+      const dateFrom = payload.dateFrom
+        ? parseISO(payload.dateFrom)
+        : payload.dateFrom;
+
+      const result = await firstValueFrom(
+        wrapper(() =>
+          apiReport.printPharmaceuticalStockCardPdf({
+            ...payload,
+            dateTo: isValid(dateTo) ? dateTo : new Date(),
+            dateFrom: isValid(dateFrom) ? dateFrom : new Date(),
+          } as PrintPharmaceuticalStockCardPdfRequest)
+        )
+      );
+      return result;
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.response);
+    }
+  }
+);
+
+export const printPharmaceuticalAMCPdf = createAsyncThunk(
+  "pharmacy/getPharmaceuticalAMCPdfReport",
+  async (payload: PrintPharmaceuticalAMCRequest, thunkApi) => {
+    try {
+      const date = payload.date ? parseISO(payload.date) : payload.date;
+      const result = await firstValueFrom(
+        wrapper(() =>
+          apiReport.printPharmaceuticalAMC({
+            date: isValid(date) ? date : new Date(),
+          } as PrintPharmaceuticalAMCRequest)
+        )
+      );
+      return result;
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.response);
+    }
+  }
+);
+
+export const printPharmaceuticalExpirationPdf = createAsyncThunk(
+  "pharmacy/getPharmaceuticalExpirationPdfReport",
+  async (payload: PrintPharmaceuticalExpirationPdfRequest, thunkApi) => {
+    try {
+      const fromDate = payload.fromDate
+        ? parseISO(payload.fromDate)
+        : payload.fromDate;
+      const toDate = payload.toDate ? parseISO(payload.toDate) : payload.toDate;
+      const result = await firstValueFrom(
+        wrapper(() =>
+          apiReport.printPharmaceuticalExpirationPdf({
+            fromDate: isValid(fromDate) ? fromDate : new Date(),
+            toDate: isValid(toDate) ? toDate : new Date(),
+          } as PrintPharmaceuticalExpirationPdfRequest)
+        )
+      );
+      return result;
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.response);
+    }
+  }
+);
+
 export const createWardMovement = createAsyncThunk<
   boolean,
   MovementWardDTO,
@@ -200,9 +319,7 @@ export const createWardMovement = createAsyncThunk<
 >("pharmacy/createWardMovement", async (movementWardDTO, thunkApi) => {
   try {
     const result = await firstValueFrom(
-      wrapper(
-        () => wardStockApi.newMovementWard({ movementWardDTO })
-      )
+      wrapper(() => wardStockApi.newMovementWard({ movementWardDTO }))
     );
 
     return result;
@@ -210,3 +327,27 @@ export const createWardMovement = createAsyncThunk<
     return thunkApi.rejectWithValue(error.response);
   }
 });
+
+export const printPharmaceuticalStockWardExcel = createAsyncThunk(
+  "pharmacy/getPharmaceuticalStockWardExcelReport",
+  async (payload: PrintPharmaceuticalStockWardExcelRequest, thunkApi) => {
+    try {
+      const dateTo = payload.dateTo ? parseISO(payload.dateTo) : payload.dateTo;
+      const dateFrom = payload.dateFrom
+        ? parseISO(payload.dateFrom)
+        : payload.dateFrom;
+      const result = await firstValueFrom(
+        wrapper(() =>
+          apiReport.printPharmaceuticalStockWardExcel({
+            ...payload,
+            dateTo: isValid(dateTo) ? dateTo : new Date(),
+            dateFrom: isValid(dateFrom) ? dateFrom : new Date(),
+          } as PrintPharmaceuticalStockWardExcelRequest)
+        )
+      );
+      return result;
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.response);
+    }
+  }
+);
