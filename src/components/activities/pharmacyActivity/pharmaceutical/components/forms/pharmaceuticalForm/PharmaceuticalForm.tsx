@@ -59,6 +59,10 @@ export function PharmaceuticalForm({
     [values, onSubmit]
   );
 
+  const onInvalidSubmit = useCallback(() => {
+    onSubmit?.(values as MedicalDTO);
+  }, [values, onSubmit]);
+
   const getFieldError = (field: keyof TFormValues) => {
     const error = errors[field]?.message;
     if (!error) return undefined;
@@ -70,7 +74,7 @@ export function PharmaceuticalForm({
       <form
         data-cy="pharmaceutical-form"
         className="form-grid-layout gap-2 w-full"
-        onSubmit={handleSubmit(onValidSubmit)}
+        onSubmit={handleSubmit(onValidSubmit, onInvalidSubmit)}
       >
         <TextFormField
           type="string"
