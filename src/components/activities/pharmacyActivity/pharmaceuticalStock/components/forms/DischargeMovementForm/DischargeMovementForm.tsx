@@ -5,13 +5,14 @@ import {
   DateFormField,
   TextFormField,
 } from "components/accessories/forms";
-import { MedicalDTO, MovementDTO, WardDTO } from "generated";
+import { MedicalDTO, MovementDTO, StockMovementsApi, WardDTO } from "generated";
+import { customConfiguration } from "libraries/apiUtils/configuration";
 import { DATETIME_FORMAT } from "libraries/consts";
 import { useTranslation } from "libraries/hooks";
 import { useMedicals, useWards } from "libraries/hooks/api";
 import { useAppDispatch } from "libraries/hooks/redux";
 import { isEmpty } from "lodash";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { getWards } from "state/ward";
 import z from "zod";
@@ -28,11 +29,10 @@ export function DischargeMovementForm({
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
+  const [selectedMedicalWithLots, setSelectedMedicalWithLots] =
+    useState<MedicalDTO | null>(null);
 
-  const medicalFilter = useCallback(
-    (medical: MedicalDTO) => !!medical.lots?.length,
-    []
-  );
+  const medicalFilter = useCallback((medical: MedicalDTO) => true, []);
 
   const {
     medicals,
@@ -50,6 +50,8 @@ export function DischargeMovementForm({
       quantity: 0,
       refNo: "",
       lots: [],
+      wardTo: "",
+      date: new Date(),
     },
     resolver: standardSchemaResolver(MovementDTOSchema),
   });
@@ -64,14 +66,43 @@ export function DischargeMovementForm({
     },
   });
 
+  useEffect(() => {
+    if (!values.medical?.code) {
+      setSelectedMedicalWithLots(null);
+      return;
+    }
+
+    const api = new StockMovementsApi(customConfiguration());
+    const loadLots = async () => {
+      try {
+        const lots = await api
+          .getLotByMedical({ medCode: values.medical!.code! })
+          .toPromise();
+        setSelectedMedicalWithLots({
+          ...values.medical!,
+          lots: Array.isArray(lots) ? lots : [],
+        });
+      } catch (error) {
+        console.error("Error loading lots:", error);
+        setSelectedMedicalWithLots(values.medical || null);
+      }
+    };
+
+    loadLots();
+  }, [values.medical?.code]);
+
   const handleFormSubmit = useCallback(
     (data: TFormValues) => {
+      if (!data.wardTo) {
+        return;
+      }
+
       const filledLots =
         data.lots?.filter(
           (lot) => lot.ward && lot.quantity && lot.quantity > 0
         ) ?? [];
 
-      if (isEmpty(filledLots.length)) return;
+      if (isEmpty(filledLots)) return;
 
       const movements: MovementDTO[] = filledLots.map((lot) => ({
         medical: medicals.find((m) => m.code === data.medical)!,
@@ -90,23 +121,25 @@ export function DischargeMovementForm({
 
       onSubmit?.(movements);
     },
-    [onSubmit, medicals]
+    [onSubmit, medicals, wards]
   );
 
   useEffect(() => {
     setValue(
       "lots",
-      (values.medical?.lots ?? []).map((lot) => ({
-        ...lot,
+      (selectedMedicalWithLots?.lots ?? []).map((lot) => ({
+        code: lot.code,
         preparationDate: lot.preparationDate
           ? new Date(lot.preparationDate)
           : undefined,
         dueDate: lot.dueDate ? new Date(lot.dueDate) : undefined,
+        cost: lot.cost,
+        mainStoreQuantity: lot.mainStoreQuantity,
         ward: "",
         quantity: undefined,
       })) as z.infer<typeof LotDTOSchema>[]
     );
-  }, [values.medical, setValue]);
+  }, [selectedMedicalWithLots, setValue]);
 
   useEffect(() => {
     dispatch(getWards());
@@ -138,10 +171,19 @@ export function DischargeMovementForm({
           control={control}
           name="refNo"
         />
+        <AutocompleteFormField
+          control={control}
+          name="wardTo"
+          label={t("pharmacy.stock.ward.selectWard")}
+          options={wards.map((w) => ({
+            value: w.code ?? "",
+            label: w.description ?? "",
+          }))}
+        />
         <div className="col-start-1 col-span-full"></div>
-        {values.medical && (
+        {selectedMedicalWithLots && (
           <DischargeLotFormField
-            key={values.medical.code}
+            key={selectedMedicalWithLots.code}
             wards={wards}
             control={control}
           />

@@ -3,7 +3,6 @@ import InfoBox from "components/accessories/infoBox/InfoBox";
 import { PATHS } from "consts";
 import { MovementDTO } from "generated";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
-import { values } from "lodash";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useOutletContext } from "react-router";
@@ -56,7 +55,7 @@ export function DischargeMovement() {
     (values: MovementDTO[]) => {
       dispatch(dischargeMovements({ ref: "REF123", movementDTO: values }));
     },
-    [dispatch, values]
+    [dispatch]
   );
 
   const handleReset = useCallback(() => {
