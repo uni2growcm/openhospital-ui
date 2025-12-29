@@ -46,7 +46,6 @@ export const MovementDTOSchema = z.object({
   medical: z.number(),
   type: z.string(),
   ward: z.string().nullish(),
-  wardTo: z.string().min(1, "Ward destination is required"),
   lots: z.array(LotDTOSchema).nullish(),
   date: z.date(),
   quantity: z.number().nullish(),
@@ -63,7 +62,6 @@ export function getInitialValues(from?: MovementDTO): Partial<TFormValues> {
     quantity: from?.quantity,
     supplier: from?.supplier?.supId,
     refNo: from?.refNo ?? "",
-    wardTo: undefined,
     lots:
       from?.medical?.lots?.map((lot) => ({
         code: lot.code,

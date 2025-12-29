@@ -50,7 +50,6 @@ export function DischargeMovementForm({
       quantity: 0,
       refNo: "",
       lots: [],
-      wardTo: "",
       date: new Date(),
     },
     resolver: standardSchemaResolver(MovementDTOSchema),
@@ -66,17 +65,12 @@ export function DischargeMovementForm({
     },
   });
 
-  useEffect(() => {
-    if (!values.medical?.code) {
-      setSelectedMedicalWithLots(null);
-      return;
-    }
-
-    const api = new StockMovementsApi(customConfiguration());
-    const loadLots = async () => {
+  const loadLotsForMedical = useCallback(
+    async (medicalCode: number) => {
       try {
+        const api = new StockMovementsApi(customConfiguration());
         const lots = await api
-          .getLotByMedical({ medCode: values.medical!.code! })
+          .getLotByMedical({ medCode: medicalCode })
           .toPromise();
         setSelectedMedicalWithLots({
           ...values.medical!,
@@ -86,17 +80,21 @@ export function DischargeMovementForm({
         console.error("Error loading lots:", error);
         setSelectedMedicalWithLots(values.medical || null);
       }
-    };
+    },
+    [values.medical]
+  );
 
-    loadLots();
-  }, [values.medical?.code]);
+  useEffect(() => {
+    if (!values.medical?.code) {
+      setSelectedMedicalWithLots(null);
+      return;
+    }
+
+    loadLotsForMedical(values.medical.code);
+  }, [values.medical, loadLotsForMedical]);
 
   const handleFormSubmit = useCallback(
     (data: TFormValues) => {
-      if (!data.wardTo) {
-        return;
-      }
-
       const filledLots =
         data.lots?.filter(
           (lot) => lot.ward && lot.quantity && lot.quantity > 0
@@ -170,15 +168,6 @@ export function DischargeMovementForm({
           label={t("pharmacy.form.fields.refNo")}
           control={control}
           name="refNo"
-        />
-        <AutocompleteFormField
-          control={control}
-          name="wardTo"
-          label={t("pharmacy.stock.ward.selectWard")}
-          options={wards.map((w) => ({
-            value: w.code ?? "",
-            label: w.description ?? "",
-          }))}
         />
         <div className="col-start-1 col-span-full"></div>
         {selectedMedicalWithLots && (
