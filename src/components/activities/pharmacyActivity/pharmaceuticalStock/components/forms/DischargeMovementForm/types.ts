@@ -1,4 +1,9 @@
-import { MovementDTO, WardDTO } from "generated";
+import {
+  MedicalWardDTO,
+  MovementDTO,
+  MovementWardDTO,
+  WardDTO,
+} from "generated";
 import { Control } from "react-hook-form";
 import z from "zod";
 import { MovementDTOSchema } from "./consts";
@@ -16,3 +21,9 @@ export type DischargeLotFormFieldProps = {
   wards: WardDTO[];
   control: Control<TFormValues>;
 };
+
+export interface IWardDischargeFormProps {
+  destinationType: MedicalWardDTO;
+  onCancel: () => void;
+  onSubmit?: (values: MovementWardDTO) => void;
+}

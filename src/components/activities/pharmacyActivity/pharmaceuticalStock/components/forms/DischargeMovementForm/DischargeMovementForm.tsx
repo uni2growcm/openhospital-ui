@@ -5,13 +5,13 @@ import {
   DateFormField,
   TextFormField,
 } from "components/accessories/forms";
-import { MedicalDTO, MovementDTO, WardDTO } from "generated";
+import { MovementDTO, StockMovementsApi, WardDTO } from "generated";
+import { customConfiguration } from "libraries/apiUtils/configuration";
 import { DATETIME_FORMAT } from "libraries/consts";
 import { useTranslation } from "libraries/hooks";
 import { useMedicals, useWards } from "libraries/hooks/api";
-import { useAppDispatch } from "libraries/hooks/redux";
-import { isEmpty } from "lodash";
-import React, { useCallback, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { getWards } from "state/ward";
 import z from "zod";
@@ -28,19 +28,71 @@ export function DischargeMovementForm({
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
-
-  const medicalFilter = useCallback(
-    (medical: MedicalDTO) => !!medical.lots?.length,
-    []
+  const [medicalsWithLots, setMedicalsWithLots] = useState<Set<number>>(
+    new Set()
   );
 
-  const {
-    medicals,
-    options: medicalOptions,
-    selectMedical,
-  } = useMedicals(medicalFilter);
+  const { medicals, options: allMedicalOptions } = useMedicals();
+
+  console.log("All medicals:", medicals);
+  console.log("Medical options:", allMedicalOptions);
+  console.log("Medicals with lots:", medicalsWithLots);
+
+  // Filtrer les options pour ne montrer que ceux avec lots
+  const medicalOptions = useMemo(() => {
+    return allMedicalOptions.filter((option) =>
+      medicalsWithLots.has(option.value as number)
+    );
+  }, [allMedicalOptions, medicalsWithLots]);
+
+  const selectMedical = useCallback(
+    (code?: number) => medicals.find((m) => m.code === code),
+    [medicals]
+  );
+
+  // Charger les lots pour chaque medical et noter ceux qui en ont
+  useEffect(() => {
+    if (medicals.length === 0) {
+      return;
+    }
+
+    const api = new StockMovementsApi(customConfiguration());
+    const checkMedicalsWithLots = async () => {
+      const withLots = new Set<number>();
+      let successCount = 0;
+      let errorCount = 0;
+
+      for (const medical of medicals) {
+        if (medical.code) {
+          try {
+            console.log(`Loading lots for medical ${medical.code}...`);
+            const lotsResponse = await api
+              .getLotByMedical({ medCode: medical.code })
+              .toPromise();
+            const lots = Array.isArray(lotsResponse) ? lotsResponse : [];
+            console.log(`Medical ${medical.code}: ${lots.length} lots`);
+            if (lots && lots.length > 0) {
+              withLots.add(medical.code);
+              successCount++;
+            }
+          } catch (error) {
+            errorCount++;
+            console.log(`Error for medical ${medical.code}:`, error);
+          }
+        }
+      }
+      console.log(
+        `Summary: ${successCount} success, ${errorCount} errors, ${withLots.size} with lots`
+      );
+      console.log("Medicals with lots (codes):", Array.from(withLots));
+      setMedicalsWithLots(withLots);
+    };
+
+    checkMedicalsWithLots();
+  }, [medicals]);
 
   const wardFilter = useCallback((ward: WardDTO) => !!ward.pharmacy, []);
+  const wardsStatus = useAppSelector((s) => s.wards.allWards?.status);
 
   const { wards } = useWards(wardFilter);
 
@@ -50,35 +102,55 @@ export function DischargeMovementForm({
       quantity: 0,
       refNo: "",
       lots: [],
+      wardTo: "",
+      medical: 0,
+      date: new Date(),
     },
     resolver: standardSchemaResolver(MovementDTOSchema),
   });
 
   const values = useWatch({
     control,
-    compute: (values) => {
-      return {
-        ...values,
-        medical: selectMedical(values.medical),
-      };
-    },
   });
+
+  const selectedMedical = useMemo(
+    () => selectMedical(values.medical),
+    [values.medical, selectMedical]
+  );
+
+  const wardToOptions = useMemo(
+    () =>
+      wards.map((w) => ({
+        value: w.code ?? "",
+        label: w.description ?? "",
+        ...w,
+      })),
+    [wards]
+  );
 
   const handleFormSubmit = useCallback(
     (data: TFormValues) => {
-      const filledLots =
-        data.lots?.filter(
-          (lot) => lot.ward && lot.quantity && lot.quantity > 0
-        ) ?? [];
+      if (!data.wardTo) {
+        console.warn("No destination ward selected");
+        return;
+      }
 
-      if (isEmpty(filledLots.length)) return;
+      const filledLots =
+        data.lots?.filter((lot) => lot.quantity && lot.quantity > 0) ?? [];
+
+      if (filledLots.length === 0) {
+        console.warn("No lots with quantity");
+        return;
+      }
+
+      const destinationWard = wards.find((w) => w.code === data.wardTo);
 
       const movements: MovementDTO[] = filledLots.map((lot) => ({
         medical: medicals.find((m) => m.code === data.medical)!,
         type: { code: "discharge", description: "Discharge", type: "-" },
         date: data.date.toISOString(),
         quantity: lot.quantity!,
-        ward: wards.find((w) => w.code === lot.ward),
+        ward: destinationWard,
         lot: {
           code: lot.code,
           preparationDate: lot.preparationDate.toISOString(),
@@ -90,23 +162,24 @@ export function DischargeMovementForm({
 
       onSubmit?.(movements);
     },
-    [onSubmit, medicals]
+    [onSubmit, medicals, wards]
   );
 
   useEffect(() => {
     setValue(
       "lots",
-      (values.medical?.lots ?? []).map((lot) => ({
+      (selectedMedical?.lots ?? []).map((lot) => ({
         ...lot,
         preparationDate: lot.preparationDate
           ? new Date(lot.preparationDate)
           : undefined,
         dueDate: lot.dueDate ? new Date(lot.dueDate) : undefined,
+        mainStoreQuantity: lot.mainStoreQuantity,
         ward: "",
         quantity: undefined,
       })) as z.infer<typeof LotDTOSchema>[]
     );
-  }, [values.medical, setValue]);
+  }, [selectedMedical, setValue]);
 
   useEffect(() => {
     dispatch(getWards());
@@ -138,10 +211,19 @@ export function DischargeMovementForm({
           control={control}
           name="refNo"
         />
+
+        <AutocompleteFormField
+          control={control}
+          name="wardTo"
+          label={t("pharmacy.stock.ward.selectWard")}
+          options={wardToOptions}
+          isLoading={wardsStatus === "LOADING"}
+        />
+
         <div className="col-start-1 col-span-full"></div>
-        {values.medical && (
+        {selectedMedical && (
           <DischargeLotFormField
-            key={values.medical.code}
+            key={selectedMedical.code}
             wards={wards}
             control={control}
           />

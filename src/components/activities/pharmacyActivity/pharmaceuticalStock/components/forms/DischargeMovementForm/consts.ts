@@ -15,23 +15,6 @@ export const LotDTOSchema = z
     overallQuantity: z.number().optional(),
   })
   .superRefine((lot, ctx) => {
-    const hasWard = !!lot.ward;
-    const hasQuantity =
-      lot.quantity !== undefined && lot.quantity !== null && lot.quantity > 0;
-    if (hasWard && !hasQuantity) {
-      ctx.addIssue({
-        code: "custom",
-        path: ["quantity"],
-        message: "The quantity is required.",
-      });
-    }
-    if (!hasWard && hasQuantity) {
-      ctx.addIssue({
-        code: "custom",
-        path: ["ward"],
-        message: "The ward is required.",
-      });
-    }
     if (lot.quantity && lot.quantity > (lot.mainStoreQuantity ?? 0)) {
       ctx.addIssue({
         code: "custom",
@@ -46,6 +29,7 @@ export const MovementDTOSchema = z.object({
   medical: z.number(),
   type: z.string(),
   ward: z.string().nullish(),
+  wardTo: z.string().min(1, "Ward destination is required"),
   lots: z.array(LotDTOSchema).nullish(),
   date: z.date(),
   quantity: z.number().nullish(),
@@ -62,12 +46,14 @@ export function getInitialValues(from?: MovementDTO): Partial<TFormValues> {
     quantity: from?.quantity,
     supplier: from?.supplier?.supId,
     refNo: from?.refNo ?? "",
+    wardTo: "",
     lots:
       from?.medical?.lots?.map((lot) => ({
         code: lot.code,
         preparationDate: new Date(lot.preparationDate),
         dueDate: new Date(lot.dueDate),
         cost: lot.cost,
+        mainStoreQuantity: lot.mainStoreQuantity,
         ward: "",
         quantity: 0,
       })) ?? [],
