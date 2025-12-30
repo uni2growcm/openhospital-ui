@@ -123,13 +123,6 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
   });
 
   const { setFieldValue, resetForm, handleBlur } = formik;
-  const dateFieldHandleOnChange = useCallback(
-    (fieldName: string) => (value: any) => {
-      setFieldValue(fieldName, value);
-      formik.setFieldTouched(fieldName);
-    },
-    [formik, setFieldValue]
-  );
 
   const isValid = (fieldName: string): boolean => {
     return has(formik.touched, fieldName) && has(formik.errors, fieldName);
@@ -226,7 +219,7 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
           onSubmit={formik.handleSubmit}
         >
           <div className="row start-sm center-xs">
-           <div className="patientTriageForm__item">
+            <div className="patientTriageForm__item">
               <SelectField
                 fieldName="pex_type"
                 fieldValue={formik.values.pex_type}
@@ -251,9 +244,7 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
                 disabled={isLoading}
               />
             </div>
-          </div>
 
-          <div className="row start-sm center-xs">
             <div className="patientTriageForm__item">
               <TextField
                 field={formik.getFieldProps("pex_height")}
@@ -266,7 +257,9 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
                 disabled={isLoading}
               />
             </div>
+          </div>
 
+          <div className="row start-sm center-xs">
             <div className="patientTriageForm__item">
               <TextField
                 field={formik.getFieldProps("pex_weight")}
