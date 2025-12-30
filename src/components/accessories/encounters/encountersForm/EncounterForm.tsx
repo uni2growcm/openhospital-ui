@@ -18,7 +18,6 @@ import { EncounterProps } from "./types";
 import { useAppDispatch } from "libraries/hooks";
 import { getEncountersByPatient } from "state/encounter";
 import { PatientDTO } from "generated";
-import { exists } from "fs";
 
 const EncounterForm: FC<EncounterProps> = ({
   fields,
@@ -27,7 +26,6 @@ const EncounterForm: FC<EncounterProps> = ({
   creationMode,
   submitButtonLabel,
   resetButtonLabel,
-  isLoading,
   shouldResetForm,
   resetFormCallback,
 }) => {
