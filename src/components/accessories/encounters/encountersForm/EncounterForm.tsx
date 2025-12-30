@@ -113,6 +113,8 @@ const EncounterForm: FC<EncounterProps> = ({
          encounters?.length ?? 0
        );
 
+       console.log("Next encounter code: ", nextEncounterCode);
+
        formik.setFieldValue("code", nextEncounterCode);
      } catch {
        const nextEncounterCode = generateNextEncounterCode(patient, 0);
