@@ -103,24 +103,25 @@ const EncounterForm: FC<EncounterProps> = ({
    if (formik.values.code) return;
 
    const fetchEncounters = async () => {
-    try {
-      dispatch(getEncountersByPatient(patient?.code!))
-        .unwrap()
-        .then((encounters) => {
-          const nextEncounterCode = generateNextEncounterCode(
-            patient,
-            encounters?.length
-          );
-          formik.setFieldValue("code", nextEncounterCode);
-        });
-    } catch {
-      const nextEncounterCode = generateNextEncounterCode(patient);
-      formik.setFieldValue("code", nextEncounterCode);
-    }
+     try {
+       const encounters = await dispatch(
+         getEncountersByPatient(patient.code)
+       ).unwrap();
+
+       const nextEncounterCode = generateNextEncounterCode(
+         patient,
+         encounters?.length ?? 0
+       );
+
+       formik.setFieldValue("code", nextEncounterCode);
+     } catch {
+       const nextEncounterCode = generateNextEncounterCode(patient, 0);
+       formik.setFieldValue("code", nextEncounterCode);
+     }
    };
 
    fetchEncounters();
- }, [creationMode, patient?.code, dispatch]);
+ }, [creationMode, patient, formik.values.code, dispatch]);
 
   return (
     <>
