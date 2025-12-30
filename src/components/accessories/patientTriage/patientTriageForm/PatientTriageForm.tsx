@@ -18,7 +18,6 @@ import {
 } from "../../../../libraries/formDataHandling/functions";
 import Button from "../../button/Button";
 import ConfirmationDialog from "../../confirmationDialog/ConfirmationDialog";
-import DateField from "../../dateField/DateField";
 import SelectField from "../../selectField/SelectField";
 import TextField from "../../textField/TextField";
 import "./styles.scss";
@@ -38,15 +37,6 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
 }) => {
   const { t } = useTranslation();
   const validationSchema = object({
-    pex_date: string()
-      .required(t("common.required"))
-      .test({
-        name: "pex_ate",
-        message: t("common.invaliddate"),
-        test: function (value) {
-          return moment(value).isValid();
-        },
-      }),
     pex_temp: number()
       .min(30, t("common.greaterthan", { value: 30 }))
       .max(50, t("common.lessthan", { value: 50 })),
@@ -132,13 +122,6 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
   });
 
   const { setFieldValue, resetForm, handleBlur } = formik;
-  const dateFieldHandleOnChange = useCallback(
-    (fieldName: string) => (value: any) => {
-      setFieldValue(fieldName, value);
-      formik.setFieldTouched(fieldName);
-    },
-    [formik, setFieldValue]
-  );
 
   const isValid = (fieldName: string): boolean => {
     return has(formik.touched, fieldName) && has(formik.errors, fieldName);
@@ -236,21 +219,6 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
         >
           <div className="row start-sm center-xs">
             <div className="patientTriageForm__item">
-              <DateField
-                fieldName="pex_date"
-                fieldValue={formik.values.pex_date}
-                disableFuture={true}
-                theme="regular"
-                format="dd/MM/yyyy HH:mm"
-                isValid={isValid("pex_date")}
-                errorText={getErrorText("pex_date")}
-                label={t("examination.datetriage")}
-                onChange={dateFieldHandleOnChange("pex_date")}
-                disabled={isLoading}
-              />
-            </div>
-
-            <div className="patientTriageForm__item">
               <SelectField
                 fieldName="pex_type"
                 fieldValue={formik.values.pex_type}
@@ -275,9 +243,7 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
                 disabled={isLoading}
               />
             </div>
-          </div>
 
-          <div className="row start-sm center-xs">
             <div className="patientTriageForm__item">
               <TextField
                 field={formik.getFieldProps("pex_height")}
@@ -290,7 +256,9 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
                 disabled={isLoading}
               />
             </div>
+          </div>
 
+          <div className="row start-sm center-xs">
             <div className="patientTriageForm__item">
               <TextField
                 field={formik.getFieldProps("pex_weight")}
