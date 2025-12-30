@@ -105,7 +105,7 @@ const EncounterForm: FC<EncounterProps> = ({
    const fetchEncounters = async () => {
      try {
        const encounters = await dispatch(
-         getEncountersByPatient(patient.code)
+         getEncountersByPatient(patient?.code!)
        ).unwrap();
 
        const nextEncounterCode = generateNextEncounterCode(
