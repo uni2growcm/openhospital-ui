@@ -75,17 +75,15 @@ const EncounterForm: FC<EncounterProps> = ({
   }, [shouldResetForm, resetForm, resetFormCallback]);
 
   const getInitials = (firstName: string, secondName: string) => {
-    const firstInitials = firstName
-      .split(" ") // split by spaces
-      .map((word) => word.charAt(0).toUpperCase()) // take first letter
-      .join(""); // join all letters together
+    const extract = (name: string) =>
+      name
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean)
+        .map((word) => word[0].toUpperCase())
+        .join("");
 
-    const secondInitials = secondName
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase())
-      .join("");
-
-    return firstInitials + secondInitials;
+    return extract(firstName) + extract(secondName);
   };
 
  const generateNextEncounterCode = (
