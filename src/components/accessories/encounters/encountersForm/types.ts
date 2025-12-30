@@ -1,8 +1,9 @@
-import { EncounterDTO } from "generated";
+import { EncounterDTO, PatientDTO } from "generated";
 import { TFields } from "../../../../libraries/formDataHandling/types";
 
 interface IEncounterProps {
   fields: TFields<EncounterFormFieldName>;
+  patient?: PatientDTO | undefined;
   onSubmit: (adm: EncounterDTO) => void;
   creationMode: boolean;
   submitButtonLabel: string;

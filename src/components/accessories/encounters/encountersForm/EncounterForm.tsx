@@ -15,9 +15,13 @@ import {
 import Button from "../../button/Button";
 import "./styles.scss";
 import { EncounterProps } from "./types";
+import { useAppDispatch } from "libraries/hooks";
+import { getEncountersByPatient } from "state/encounter";
+import { PatientDTO } from "generated";
 
 const EncounterForm: FC<EncounterProps> = ({
   fields,
+  patient,
   onSubmit,
   creationMode,
   submitButtonLabel,
@@ -27,6 +31,8 @@ const EncounterForm: FC<EncounterProps> = ({
   resetFormCallback,
 }) => {
   const { t } = useTranslation();
+
+  const dispatch = useAppDispatch();
 
   const initialValues = getFromFields(fields, "value");
 
@@ -69,6 +75,46 @@ const EncounterForm: FC<EncounterProps> = ({
     }
   }, [shouldResetForm, resetForm, resetFormCallback]);
 
+ const generateNextEncounterCode = (
+   patient: PatientDTO,
+   allCodes: string[] = []
+ ): string => {
+   const initials =
+     patient.firstName.charAt(0).toUpperCase() +
+     patient.secondName.charAt(0).toUpperCase();
+   const base = `${initials}${patient.code}`;
+
+   const numbers = allCodes
+     .filter((code) => code.startsWith(base))
+     .map((code) => parseInt(code.substring(base.length), 10))
+     .filter((n) => !isNaN(n));
+
+   const nextNumber = numbers.length > 0 ? Math.max(...numbers) + 1 : 1;
+
+   return `${base}${nextNumber}`;
+ };
+
+ useEffect(() => {
+   if (!creationMode || !patient?.code) return;
+   if (formik.values.code) return;
+
+   const fetchEncounters = async () => {
+     try {
+       const encounters = await dispatch(
+         getEncountersByPatient(patient?.code!)
+       ).unwrap();
+       const allCodes = encounters?.map((e) => e.code) || [];
+       const nextCode = generateNextEncounterCode(patient, allCodes);
+       formik.setFieldValue("code", nextCode);
+     } catch {
+       const nextCode = generateNextEncounterCode(patient);
+       formik.setFieldValue("code", nextCode);
+     }
+   };
+
+   fetchEncounters();
+ }, [creationMode, patient?.code, dispatch]);
+
   return (
     <>
       <div className="patientEncounterForm">
@@ -107,7 +153,7 @@ const EncounterForm: FC<EncounterProps> = ({
                 errorText={getErrorText("code")}
                 onBlur={formik.handleBlur}
                 type="text"
-                disabled={isLoading}
+                disabled={true}
                 maxLength={50}
               />
             </div>
