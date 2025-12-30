@@ -18,6 +18,7 @@ import { EncounterProps } from "./types";
 import { useAppDispatch } from "libraries/hooks";
 import { getEncountersByPatient } from "state/encounter";
 import { PatientDTO } from "generated";
+import { exists } from "fs";
 
 const EncounterForm: FC<EncounterProps> = ({
   fields,
@@ -75,21 +76,28 @@ const EncounterForm: FC<EncounterProps> = ({
     }
   }, [shouldResetForm, resetForm, resetFormCallback]);
 
+  const getInitials = (firstName: string, secondName: string) => {
+    const firstInitials = firstName
+      .split(" ") // split by spaces
+      .map((word) => word.charAt(0).toUpperCase()) // take first letter
+      .join(""); // join all letters together
+
+    const secondInitials = secondName
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase())
+      .join("");
+
+    return firstInitials + secondInitials;
+  };
+
  const generateNextEncounterCode = (
    patient: PatientDTO,
-   allCodes: string[] = []
+   ExistingEncountersNumber: number = 0,
  ): string => {
-   const initials =
-     patient.firstName.charAt(0).toUpperCase() +
-     patient.secondName.charAt(0).toUpperCase();
+   const initials = getInitials(patient.firstName, patient.secondName);
    const base = `${initials}${patient.code}`;
 
-   const numbers = allCodes
-     .filter((code) => code.startsWith(base))
-     .map((code) => parseInt(code.substring(base.length), 10))
-     .filter((n) => !isNaN(n));
-
-   const nextNumber = numbers.length > 0 ? Math.max(...numbers) + 1 : 1;
+   const nextNumber = ExistingEncountersNumber > 0 ? ExistingEncountersNumber + 1 : 1;
 
    return `${base}${nextNumber}`;
  };
@@ -99,17 +107,20 @@ const EncounterForm: FC<EncounterProps> = ({
    if (formik.values.code) return;
 
    const fetchEncounters = async () => {
-     try {
-       const encounters = await dispatch(
-         getEncountersByPatient(patient?.code!)
-       ).unwrap();
-       const allCodes = encounters?.map((e) => e.code) || [];
-       const nextCode = generateNextEncounterCode(patient, allCodes);
-       formik.setFieldValue("code", nextCode);
-     } catch {
-       const nextCode = generateNextEncounterCode(patient);
-       formik.setFieldValue("code", nextCode);
-     }
+    try {
+      dispatch(getEncountersByPatient(patient?.code!))
+        .unwrap()
+        .then((encounters) => {
+          const nextEncounterCode = generateNextEncounterCode(
+            patient,
+            encounters?.length
+          );
+          formik.setFieldValue("code", nextEncounterCode);
+        });
+    } catch {
+      const nextEncounterCode = generateNextEncounterCode(patient);
+      formik.setFieldValue("code", nextEncounterCode);
+    }
    };
 
    fetchEncounters();
