@@ -99,6 +99,7 @@ models/PageLabWithRowsDTO.ts
 models/PageOpdDTO.ts
 models/PagePatientDTO.ts
 models/PagePatientExaminationDTO.ts
+models/PasswordDTO.ts
 models/Patient.ts
 models/PatientConsensusDTO.ts
 models/PatientDTO.ts

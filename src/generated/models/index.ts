@@ -47,6 +47,7 @@ export * from './PageLabWithRowsDTO';
 export * from './PageOpdDTO';
 export * from './PagePatientDTO';
 export * from './PagePatientExaminationDTO';
+export * from './PasswordDTO';
 export * from './Patient';
 export * from './PatientConsensusDTO';
 export * from './PatientDTO';
