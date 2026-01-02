@@ -572,6 +572,11 @@ const PatientDataForm: FunctionComponent<TProps> = ({
                   onBlur={formik.handleBlur}
                   type="number"
                   disabled={isLoading}
+                  required={
+                    ageType === "neonatalAge"
+                      ? FIELD_VALIDATION.REQUIRED
+                      : FIELD_VALIDATION.IDLE
+                  }
                 />
 
                 <TextField
@@ -583,6 +588,11 @@ const PatientDataForm: FunctionComponent<TProps> = ({
                   onBlur={formik.handleBlur}
                   type="number"
                   disabled={isLoading}
+                  required={
+                    ageType === "neonatalAge"
+                      ? FIELD_VALIDATION.REQUIRED
+                      : FIELD_VALIDATION.IDLE
+                  }
                 />
 
                 <TextField
@@ -594,6 +604,11 @@ const PatientDataForm: FunctionComponent<TProps> = ({
                   onBlur={formik.handleBlur}
                   type="number"
                   disabled={isLoading}
+                  required={
+                    ageType === "neonatalAge"
+                      ? FIELD_VALIDATION.REQUIRED
+                      : FIELD_VALIDATION.IDLE
+                  }
                 />
               </ButtonGroup>
             </div>
