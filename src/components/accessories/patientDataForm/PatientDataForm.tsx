@@ -153,7 +153,10 @@ const PatientDataForm: FunctionComponent<TProps> = ({
           birthDate: formattedValues.birthDate,
           agetype: formattedValues.agetype,
         },
-        allAgeTypes
+        allAgeTypes,
+        formattedValues.ageDays,
+        formattedValues.ageWeeks,
+        formattedValues.ageMonths
       );
       onSubmit({
         ...formattedValues,

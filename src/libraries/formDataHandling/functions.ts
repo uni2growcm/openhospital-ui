@@ -343,7 +343,10 @@ export const isFieldSuggested = (
 export const getBirthDateAndAge = (
   ageType: TAgeFieldName,
   values: TAgeType,
-  allAgeTypes?: AgeTypeDTO[] | undefined
+  allAgeTypes?: AgeTypeDTO[] | undefined,
+  ageDays?: number,
+  ageWeeks?: number,
+  ageMonths?: number
 ): { birthDate: string; age: number } => {
   let ageAndBirthDate: { birthDate: string; age: number };
 
@@ -389,6 +392,33 @@ export const getBirthDateAndAge = (
       ageAndBirthDate = {
         birthDate: birthdate.toISOString(),
         age: values.age ?? 0,
+      };
+      break;
+
+    case "neonatalAge":
+      let dateOfBirth = new Date();
+      if (ageDays) {
+        dateOfBirth = new Date(
+          dateOfBirth.setDate(dateOfBirth.getDate() - ageDays)
+        );
+      }
+      if (ageWeeks) {
+        dateOfBirth = new Date(
+          dateOfBirth.setDate(dateOfBirth.getDate() - ageWeeks * 7)
+        );
+      }
+      if (ageMonths) {
+        dateOfBirth = new Date(
+          dateOfBirth.setMonth(dateOfBirth.getMonth() - ageMonths)
+        );
+      }
+
+      let timeDifference = Math.abs(Date.now() - dateOfBirth.getTime());
+      let neonatalAge = Math.floor(timeDifference / (1000 * 3600 * 24));
+
+      ageAndBirthDate = {
+        birthDate: dateOfBirth.toISOString(),
+        age: neonatalAge,
       };
       break;
 
