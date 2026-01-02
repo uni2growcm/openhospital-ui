@@ -22,10 +22,6 @@ const auscultationOptions = Object.keys(
   .map((e) => ({ label: e.toLowerCase(), value: e.toLowerCase() }));
 
 export const initialFields: TFields<TPatientTriageFormFieldName> = {
-  pex_date: {
-    value: parseDateTime(new Date().toISOString(), false),
-    type: "date",
-  },
   pex_height: {
     value: "",
     type: "number",

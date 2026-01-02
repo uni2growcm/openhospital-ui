@@ -225,6 +225,7 @@ export const Encounters = () => {
         {showForm && (creationMode ? canCreate : canUpdate) && (
           <EncounterForm
             fields={fields}
+            patient={patient}
             onSubmit={onSubmit}
             creationMode={creationMode}
             submitButtonLabel={
