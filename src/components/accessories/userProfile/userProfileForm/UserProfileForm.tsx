@@ -38,6 +38,7 @@ export const UserProfileForm = ({
   hasSucceeded,
   hasFailed,
   error,
+  onSuccessConfirm,
   onSubmit,
 }: IUpdatePasswordProps) => {
   const { t } = useTranslation();
@@ -113,14 +114,7 @@ export const UserProfileForm = ({
 
   return (
     <div className="editUserForm">
-      <div className="userProfile__title">
-        {t("userProfile")}
-      </div>
-      <div className="editUserForm__header">
-        <div className="editUserForm__actions">
-          <DiscardButton />
-        </div>
-      </div>
+      <div className="userProfile__title">{t("userProfile")}</div>
 
       <form className="editUserForm__form" onSubmit={handleSubmit}>
         <div className="row start-sm center-xs">
@@ -215,13 +209,12 @@ export const UserProfileForm = ({
         )}
 
         <div className="editUserForm__buttonSet">
-          <Button
-            type="submit"
-            variant="contained"
-          >
+          <Button type="submit" variant="contained" disabled={isLoading}>
             {t("common.save")}
           </Button>
-          <ResetButton formik={formik as any} />
+          <Button type="button" variant="outlined" onClick={() => navigate(-1)}>
+            {t("common.cancel")}
+          </Button>
         </div>
       </form>
 
@@ -231,10 +224,8 @@ export const UserProfileForm = ({
         icon={checkIcon}
         info={t("user.updatedSuccessMessage")}
         primaryButtonLabel="Ok"
-        handlePrimaryButtonClick={() =>
-          navigate(PATHS.admin_users, { replace: true })
-        }
-        handleSecondaryButtonClick={() => {}}
+        handlePrimaryButtonClick={onSuccessConfirm}
+        handleSecondaryButtonClick={onSuccessConfirm}
       />
     </div>
   );

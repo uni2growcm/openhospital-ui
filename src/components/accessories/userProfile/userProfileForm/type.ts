@@ -12,4 +12,5 @@ export interface IUpdatePasswordProps {
   hasFailed: boolean;
   error: any;
   onSubmit: (values: IUpdatePasswordFormValues) => void;
+  onSuccessConfirm: () => void;
 }

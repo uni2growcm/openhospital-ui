@@ -17,7 +17,6 @@ interface IOwnProps {
 export type TProps = IOwnProps;
 
 export type TPatientTriageFormFieldName =
-  | "pex_date"
   | "pex_height"
   | "pex_weight"
   | "pex_temp"

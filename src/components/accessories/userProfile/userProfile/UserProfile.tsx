@@ -7,13 +7,19 @@ import AppHeader from "components/accessories/appHeader/AppHeader";
 import { useAppSelector } from "libraries/hooks/redux";
 import { useTranslation } from "react-i18next";
 import { UserProfileForm } from "../userProfileForm/UserProfileForm";
-import { updatePassword } from "state/users";
+import { updatePassword, updatePasswordReset } from "state/users";
+import { useLocation, useNavigate } from "react-router-dom";
 
- const appSelector = createSelector(
-   (state) => state.main.authentication.data,
-   (userCredentials) => ({ userCredentials })
- );
+const appSelector = createSelector(
+  (state) => state.main.authentication.data,
+  (userCredentials) => ({ userCredentials })
+);
+
 export const UserProfile = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const authData = useSelector(
     (state: IState) => state.main.authentication.data
   );
@@ -25,6 +31,8 @@ export const UserProfile = () => {
   const breadcrumbMap = {
     [t("nav.userProfile")]: "",
   };
+
+  const from = location.state?.from ?? -1;
 
   const { userCredentials } = useAppSelector(appSelector);
 
@@ -40,8 +48,6 @@ export const UserProfile = () => {
 
   const { isLoading, hasSucceeded, hasFailed, error } = updatePasswordState;
 
-  const dispatch = useDispatch();
-
   const handleSubmit = async (values: IUpdatePasswordFormValues) => {
     const passwordDTO = {
       username: values.username,
@@ -52,10 +58,14 @@ export const UserProfile = () => {
 
     try {
       await dispatch(updatePassword(passwordDTO) as any).unwrap();
-      console.log("Password updated successfully");
     } catch (err) {
       console.error("Password update failed", err);
     }
+  };
+
+  const handleSuccessConfirm = () => {
+    dispatch(updatePasswordReset());
+    navigate(from, { replace: true });
   };
 
   return (
@@ -72,6 +82,7 @@ export const UserProfile = () => {
         hasFailed={hasFailed}
         error={error}
         onSubmit={handleSubmit}
+        onSuccessConfirm={handleSuccessConfirm}
       />
     </div>
   );
