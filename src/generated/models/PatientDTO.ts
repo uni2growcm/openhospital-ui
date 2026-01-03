@@ -58,6 +58,24 @@ export interface PatientDTO {
      */
     agetype?: string;
     /**
+     * Number of days after the child\'s birth
+     * @type {number}
+     * @memberof PatientDTO
+     */
+    ageDays?: number;
+    /**
+     * Number of weeks after the child\'s birth
+     * @type {number}
+     * @memberof PatientDTO
+     */
+    ageWeeks?: number;
+    /**
+     * Number of months  after the child\'s birth
+     * @type {number}
+     * @memberof PatientDTO
+     */
+    ageMonths?: number;
+    /**
      * Sex
      * @type {string}
      * @memberof PatientDTO

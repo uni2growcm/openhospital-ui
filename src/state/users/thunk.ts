@@ -46,3 +46,11 @@ export const deleteUser = createAsyncThunk(
       .toPromise()
       .catch((error) => thunkApi.rejectWithValue(error.response))
 );
+
+export const updatePassword = createAsyncThunk(
+  "users/updatepassword",
+  async (passwordDTO: any, thunkApi) =>
+    wrapper(() => api.updatePassword({ passwordDTO }))
+      .toPromise()
+      .catch((error) => thunkApi.rejectWithValue(error.response))
+);

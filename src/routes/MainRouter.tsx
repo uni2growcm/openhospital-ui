@@ -22,6 +22,7 @@ import { withPermission } from "../libraries/permissionUtils/withPermission";
 import { getUserSettings } from "../state/main";
 import { AdminRoutes } from "./Admin";
 import { PatientsRoutes } from "./Patients/PatientsRoutes";
+import { UserProfile } from "components/accessories/userProfile/userProfile/UserProfile";
 
 export const MainRouter: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -54,6 +55,7 @@ export const MainRouter: React.FC = () => {
         <Route path="forgot" element={<ForgotActivity />} />
 
         <Route element={<Private />}>
+          <Route path={`${PATHS.user_profile}`} element={<UserProfile />} />
           <Route path={`${PATHS.dashboard}`} element={<Dashboard />} />
           <Route path={`${PATHS.visits}`} element={<VisitsActivity />} />
           <Route

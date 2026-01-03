@@ -53,7 +53,14 @@
     "validateUserName": "Vous devez spécifier un nom d'utilisateur",
     "validateUserNameRegex": "Caractères autorisés: lettres minuscules (abc), chiffres (123), point (.), tiret (-) et trait de soulignement (_)",
     "confirmUserDeletion": "Etes-vous sûr de vouloir supprimer l'utilisateur ?",
-    "confirmUserGroupDeletion": "Etes-vous sûr de vouloir supprimer le groupe d'utilisateurs ?"
+    "confirmUserGroupDeletion": "Etes-vous sûr de vouloir supprimer le groupe d'utilisateurs ?",
+    "oldPassword": "Ancien mot de passe",
+    "oldPasswordRequired": "Ancien mot de passe requis",
+    "newPasswordRequired": "Nouveau mot de passe requis",
+    "passwordTooShort": "Le mot de passe doit comporter au moins 5 caractères",
+    "passwordTooWeak": "Le mot de passe doit avoir au moins 1 lettre majuscule, 1 lettre minuscule, 1 chiffre",
+    "confirmPasswordRequired": "Confirmation du mot de passe requise",
+    "ConfirmPasswordMustMatch": "La confirmation du mot de passe doit correspondre"
   },
   "hospital": {
     "address": "Adresse",
@@ -512,8 +519,10 @@
     "hospital": "Hôpital",
     "encounters": "Rencontres",
     "conditioning": "Mise en condition",
-    "medicalHistory": "Antécédent médical"
+    "medicalHistory": "Antécédent médical",
+    "userProfile": "Profile de l'utilisateur"
   },
+  "userProfile": "Profile de l'utilisateur",
   "operation": {
     "newoperation": "Nouvelle opération",
     "editoperation": "Modifier une opération",

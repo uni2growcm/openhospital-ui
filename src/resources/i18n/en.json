@@ -85,7 +85,14 @@
     "validateUserName": "You need to specify a user name",
     "validateUserNameRegex": "Allowed characters: lowercase letters(abc), numbers(123), dot(.), dash (-) and underscore (_)",
     "confirmUserDeletion": "Are you sure you want to delete the user?",
-    "confirmUserGroupDeletion": "Are you sure you want to delete the user group ?"
+    "confirmUserGroupDeletion": "Are you sure you want to delete the user group ?",
+    "oldPassword": "Old Password",
+    "oldPasswordRequired": "Old password is required",
+    "newPasswordRequired": "New password is required",
+    "passwordTooShort": "Password must have at least 5 characters",
+    "passwordTooWeak": "Please password should have at least 1 upper case letter, 1 lower case letter, 1 numeric digit",
+    "confirmPasswordRequired": "Password Confirmation is required",
+    "ConfirmPasswordMustMatch": "Password Confirmation must match"
   },
   "hospital": {
     "address": "Address",
@@ -547,8 +554,10 @@
     "radiology": "Radiology",
     "encounters": "Consultations",
     "conditioning": "Conditioning",
-    "medicalHistory": "Medical History"
+    "medicalHistory": "Medical History",
+    "userProfile": "User Profile"
   },
+  "userProfile": "User Profile",
   "operation": {
     "newoperation": "New Operation",
     "editoperation": "Edit Operation",

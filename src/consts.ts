@@ -84,4 +84,5 @@ export const PATHS = {
   admin_age_types: "/admin/types/ages",
   admin_age_types_edit: "/admin/types/ages/edit",
   admin_settings: "/admin/settings",
+  user_profile: "/user-profile",
 };

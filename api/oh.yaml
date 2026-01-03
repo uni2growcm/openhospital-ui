@@ -7021,11 +7021,11 @@ components:
           format: int32
           description: lock
           example: 0
-        opd:
-          type: boolean
         female:
           type: boolean
         male:
+          type: boolean
+        opd:
           type: boolean
         pharmacy:
           type: boolean
@@ -7069,6 +7069,21 @@ components:
           type: string
           description: Age type
           example: null
+        ageDays:
+          type: integer
+          format: int32
+          description: Number of days after the child's birth
+          example: 12
+        ageWeeks:
+          type: integer
+          format: int32
+          description: Number of weeks after the child's birth
+          example: 3
+        ageMonths:
+          type: integer
+          format: int32
+          description: Number of months  after the child's birth
+          example: 8
         sex:
           type: string
           description: Sex
