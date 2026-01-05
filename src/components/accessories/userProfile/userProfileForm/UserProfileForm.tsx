@@ -94,7 +94,6 @@ export const UserProfileForm = ({
 
   useEffect(() => {
     if (username) {
-      console.log(username);
       dispatch(getUserById(username) as any);
     }
   }, [username, dispatch]);
