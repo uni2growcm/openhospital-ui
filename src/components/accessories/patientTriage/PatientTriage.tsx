@@ -169,13 +169,6 @@ const PatientTriage: FC = () => {
     }
     triage.patientCode = patientDataCode ?? -1;
 
-    const now = new Date();
-    const localISOString = new Date(
-      now.getTime() - now.getTimezoneOffset() * 60000
-    ).toISOString();
-
-    triage.pex_date = localISOString;
-
     if (triageToEdit.pex_ID) triage.pex_ID = triageToEdit.pex_ID;
     if (!creationMode && triageToEdit.pex_ID) {
       triage.lock = triageToEdit.lock;
