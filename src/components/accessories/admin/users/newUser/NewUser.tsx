@@ -2,12 +2,13 @@ import { Autocomplete } from "@mui/lab";
 import {
   FormControl,
   FormHelperText,
+  InputAdornment,
   TextField as MuiTextField,
 } from "@mui/material";
 import DiscardButton from "components/accessories/discardButton/DiscardButton";
 import { useFormik } from "formik";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
-import React, { ReactNode, useCallback, useEffect } from "react";
+import React, { ReactNode, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import checkIcon from "../../../../../assets/check-icon.png";
@@ -17,6 +18,7 @@ import TextField from "../../../textField/TextField";
 
 import { IState } from "../../../../../types";
 
+import { RemoveRedEye } from "@mui/icons-material";
 import Button from "components/accessories/button/Button";
 import CheckboxField from "components/accessories/checkboxField/CheckboxField";
 import ResetButton from "components/accessories/resetButton/resetButton";
@@ -42,6 +44,10 @@ export const NewUser = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+    useState(false);
 
   const create = useAppSelector((state) => state.users.create);
 
@@ -116,9 +122,20 @@ export const NewUser = () => {
               isValid={!!touched.passwd && !!errors.passwd}
               errorText={(touched.passwd && errors.passwd) || ""}
               onBlur={handleBlur}
-              type="password"
+              type={isPasswordVisible ? "text" : "password"}
               // this below prevents from saving the password on the computer
-              InputProps={{ autoComplete: "one-time-code" }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <div
+                      className="login__passwordToggler"
+                      onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+                    >
+                      <RemoveRedEye />
+                    </div>
+                  </InputAdornment>
+                ),
+              }}
             />
           </div>
           <div className="newUserForm__item halfWidth">
@@ -129,9 +146,22 @@ export const NewUser = () => {
               isValid={!!touched.passwd2 && !!errors.passwd2}
               errorText={(touched.passwd2 && errors.passwd2) || ""}
               onBlur={handleBlur}
-              type="password"
+              type={isConfirmPasswordVisible ? "text" : "password"}
               // this below prevents from saving the password on the computer
-              InputProps={{ autoComplete: "one-time-code" }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <div
+                      className="login__passwordToggler"
+                      onClick={() =>
+                        setIsConfirmPasswordVisible(!isConfirmPasswordVisible)
+                      }
+                    >
+                      <RemoveRedEye />
+                    </div>
+                  </InputAdornment>
+                ),
+              }}
             />
           </div>
           <hr />
