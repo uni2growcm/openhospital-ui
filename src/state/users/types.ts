@@ -7,4 +7,5 @@ export type IUserState = {
   create: ApiResponse<UserDTO>;
   update: ApiResponse<UserDTO>;
   delete: ApiResponse<void>;
+  updatePassword: ApiResponse<UserDTO>;
 };

@@ -1,7 +1,14 @@
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import HomeIcon from "@mui/icons-material/Home";
 import NavigateBefore from "@mui/icons-material/NavigateBefore";
-import { Tooltip, Typography } from "@mui/material";
+import {
+  Fade,
+  IconButton,
+  Menu,
+  MenuItem,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
@@ -18,12 +25,14 @@ import { usePermission } from "../../../libraries/permissionUtils/usePermission"
 import { getHospital } from "../../../state/hospital";
 import { setLogout } from "../../../state/main";
 import { IState } from "../../../types";
-import ConfirmationDialog from "../confirmationDialog/ConfirmationDialog";
 import OHFeedback from "../feedback/OHFeedback";
 import LangSwitcher from "../langSwitcher/LangSwitcher";
 import "./styles.scss";
 import { IOwnProps } from "./types";
 import { useEncountersEnabled } from "libraries/hooks";
+import { Person } from "@mui/icons-material";
+import { GridMenuIcon } from "@mui/x-data-grid";
+import ConfirmationDialog from "../confirmationDialog/ConfirmationDialog";
 
 const AppHeader: FunctionComponent<IOwnProps> = ({ breadcrumbMap }) => {
   const keys = Object.keys(breadcrumbMap);
@@ -62,6 +71,17 @@ const AppHeader: FunctionComponent<IOwnProps> = ({ breadcrumbMap }) => {
   const canAccessDashboard = usePermission("dashboard.access");
   const canAccessAdmin = usePermission("admin.access");
 
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <div
       data-cy={"app-header"}
@@ -76,13 +96,56 @@ const AppHeader: FunctionComponent<IOwnProps> = ({ breadcrumbMap }) => {
               &nbsp;
               <strong className="user-name">{username}</strong>
             </span>
-            <Tooltip title={t("login.signout")!} aria-label="sign out">
-              <ExitToAppIcon
-                className="userInfo__toolbar_icon"
-                id="signout_icon"
-                onClick={() => setOpenLogoutConfirmation(true)}
-              />
-            </Tooltip>
+            <IconButton
+              data-cy="user-menu-trigger"
+              sx={{ marginLeft: 2 }}
+              color="inherit"
+              onClick={handleOpenMenu}
+            >
+              <GridMenuIcon />
+            </IconButton>
+            <Menu
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleCloseMenu}
+              TransitionComponent={Fade}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+            >
+              <Tooltip title={t("userProfile")!} aria-label="User Profile">
+                <MenuItem
+                  data-cy="change-password-item"
+                  onClick={() => {
+                    handleCloseMenu();
+                    navigate(PATHS.user_profile);
+                  }}
+                  title={t("login.changePassword")}
+                >
+                  <Person />
+                </MenuItem>
+              </Tooltip>
+
+              <Tooltip title={t("login.signout")!} aria-label="sign out">
+                <MenuItem
+                  data-cy="logout-menu-item"
+                  onClick={() => {
+                    handleCloseMenu();
+                    setOpenLogoutConfirmation(true);
+                  }}
+                  title={t("login.signout")}
+                >
+                  <ExitToAppIcon
+                    className="userInfo__toolbar_icon"
+                  />
+                </MenuItem>
+              </Tooltip>
+            </Menu>
           </div>
           {showHelp && (
             <div className="appHeader__help" title="Help">

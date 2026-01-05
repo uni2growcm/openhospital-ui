@@ -16,6 +16,7 @@ import type { AjaxResponse } from 'rxjs/ajax';
 import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
 import type { OperationOpts, HttpHeaders, HttpQuery } from '../runtime';
 import type {
+    PasswordDTO,
     PermissionDTO,
     UserDTO,
     UserProfileDTO,
@@ -39,6 +40,10 @@ export interface NewUserRequest {
 
 export interface RetrievePermissionsByUsernameRequest {
     username: string;
+}
+
+export interface UpdatePasswordRequest {
+    passwordDTO: PasswordDTO;
 }
 
 export interface UpdateProfileRequest {
@@ -158,6 +163,25 @@ export class UsersApi extends BaseAPI {
             url: '/users/me',
             method: 'GET',
             headers,
+        }, opts?.responseOpts);
+    };
+
+    /**
+     */
+    updatePassword({ passwordDTO }: UpdatePasswordRequest): Observable<UserDTO>
+    updatePassword({ passwordDTO }: UpdatePasswordRequest, opts?: OperationOpts): Observable<AjaxResponse<UserDTO>>
+    updatePassword({ passwordDTO }: UpdatePasswordRequest, opts?: OperationOpts): Observable<UserDTO | AjaxResponse<UserDTO>> {
+        throwIfNullOrUndefined(passwordDTO, 'passwordDTO', 'updatePassword');
+
+        const headers: HttpHeaders = {
+            'Content-Type': 'application/json',
+        };
+
+        return this.request<UserDTO>({
+            url: '/users/updatepassword',
+            method: 'PUT',
+            headers,
+            body: passwordDTO,
         }, opts?.responseOpts);
     };
 

@@ -305,6 +305,26 @@ paths:
           description: No Content
       security:
       - bearerAuth: []
+  /users/updatepassword:
+    put:
+      tags:
+      - Users
+      operationId: updatePassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PasswordDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDTO"
+      security:
+      - bearerAuth: []
   /users/me:
     get:
       tags:
@@ -7001,13 +7021,13 @@ components:
           format: int32
           description: lock
           example: 0
-        opd:
+        pharmacy:
           type: boolean
         male:
           type: boolean
         female:
           type: boolean
-        pharmacy:
+        opd:
           type: boolean
       required:
       - beds
@@ -7052,17 +7072,17 @@ components:
         ageDays:
           type: integer
           format: int32
-          description: Age in days (used when ageUnit = DAY)
+          description: Number of days after the child's birth
           example: 12
         ageWeeks:
           type: integer
           format: int32
-          description: Age in weeks (used when ageUnit = WEEK)
+          description: Number of weeks after the child's birth
           example: 3
         ageMonths:
           type: integer
           format: int32
-          description: Age in months (used when ageUnit = MONTH)
+          description: Number of months  after the child's birth
           example: 8
         sex:
           type: string
@@ -7430,6 +7450,27 @@ components:
             $ref: "#/components/schemas/PermissionDTO"
       required:
       - code
+    PasswordDTO:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The name of the user whose password is to be changed
+          example: admin
+        oldPasswd:
+          type: string
+          description: The user's old password to changed
+          example: 21@U2g423
+          maxLength: 50
+        newPasswd:
+          type: string
+          description: The user's new password
+          example: new21@U2g423
+          maxLength: 50
+      required:
+      - newPasswd
+      - oldPasswd
+      - username
     UserProfileDTO:
       type: object
       properties:
@@ -7905,11 +7946,11 @@ components:
           description: physical exam made by doctor
           example: "The patient appears alert, oriented to person, place, and time,\
             \ and in no acute distress. Well-nourished and well-hydrated."
-        fhu:
-          type: string
         yprog:
           type: integer
           format: int32
+        fhu:
+          type: string
       required:
       - admDate
       - admitted

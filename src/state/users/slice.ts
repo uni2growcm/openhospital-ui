@@ -20,6 +20,9 @@ export const userSlice = createSlice({
     getUserByIdReset: (state) => {
       state.getById = initial.getById;
     },
+    updatePasswordReset: (state) => {
+      state.updatePassword = initial.updatePassword;
+    },
   },
   extraReducers: (builder) =>
     builder
@@ -74,6 +77,16 @@ export const userSlice = createSlice({
       })
       .addCase(thunks.deleteUser.rejected, (state, action) => {
         state.delete = ApiResponse.error(action.payload);
+      })
+      // Update Password
+      .addCase(thunks.updatePassword.pending, (state) => {
+        state.updatePassword = ApiResponse.loading();
+      })
+      .addCase(thunks.updatePassword.fulfilled, (state, action) => {
+        state.updatePassword.status = "SUCCESS";
+      })
+      .addCase(thunks.updatePassword.rejected, (state, action) => {
+        state.updatePassword = ApiResponse.error(action.payload);
       }),
 });
 
@@ -82,4 +95,5 @@ export const {
   updateUserReset,
   deleteUserReset,
   getUserByIdReset,
+  updatePasswordReset,
 } = userSlice.actions;

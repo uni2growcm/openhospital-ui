@@ -49,4 +49,32 @@ export const userRoutes = (server) => {
       res.status(200).json(req.body);
     });
   });
+  server.put("/updatepassword").intercept((req, res) => {
+    const { username, oldPasswd, newPasswd } = req.jsonBody;
+
+    const currentUser = "admin";
+
+    if (username !== currentUser) {
+      return res.status(403).json({
+        message: "You are not authorized to update this password.",
+      });
+    }
+
+    const user = usersDTO.find((u) => u.username === username);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    if (user.passwd !== oldPasswd) {
+      return res.status(400).json({ message: "Invalid old password" });
+    }
+
+    user.passwd = newPasswd;
+
+    return res.status(200).json({
+      userName: user.username,
+      passwd: null,
+    });
+  });
 };

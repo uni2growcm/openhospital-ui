@@ -58,19 +58,19 @@ export interface PatientDTO {
      */
     agetype?: string;
     /**
-     * Age in days (used when ageUnit = DAY)
+     * Number of days after the child\'s birth
      * @type {number}
      * @memberof PatientDTO
      */
     ageDays?: number;
     /**
-     * Age in weeks (used when ageUnit = WEEK)
+     * Number of weeks after the child\'s birth
      * @type {number}
      * @memberof PatientDTO
      */
     ageWeeks?: number;
     /**
-     * Age in months (used when ageUnit = MONTH)
+     * Number of months  after the child\'s birth
      * @type {number}
      * @memberof PatientDTO
      */
