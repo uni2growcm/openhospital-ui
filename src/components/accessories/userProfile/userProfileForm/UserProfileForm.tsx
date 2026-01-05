@@ -22,6 +22,7 @@ import { UserDTO } from "generated";
 import { useAppSelector } from "libraries/hooks";
 import { getUserById } from "state/users";
 import "./style.scss";
+import PasswordFormField from "components/accessories/PasswordFormField";
 
 type FormValues = {
   userGroupName: string;
@@ -150,40 +151,34 @@ export const UserProfileForm = ({
           </div>
 
           <div className="editUserForm__item halfWidth">
-            <TextField
+            <PasswordFormField
               data-cy="old-password"
               field={getFieldProps("oldPasswd")}
               label={t("user.oldPassword")}
-              type="password"
-              theme="regular"
               isValid={!!touched.oldPasswd && !!errors.oldPasswd}
-              errorText={(touched.oldPasswd && errors.oldPasswd) || ""}
+              error={touched.oldPasswd ? errors.oldPasswd : ""}
               onBlur={handleBlur}
             />
           </div>
 
           <div className="editUserForm__item halfWidth">
-            <TextField
+            <PasswordFormField
               data-cy="new-password"
               field={getFieldProps("passwd")}
               label={t("user.password")}
-              type="password"
-              theme="regular"
               isValid={!!touched.passwd && !!errors.passwd}
-              errorText={(touched.passwd && errors.passwd) || ""}
+              error={touched.passwd ? errors.passwd : ""}
               onBlur={handleBlur}
             />
           </div>
 
           <div className="editUserForm__item halfWidth">
-            <TextField
+            <PasswordFormField
               data-cy="confirm-password"
               field={getFieldProps("passwd2")}
               label={t("user.passwordRetype")}
-              type="password"
-              theme="regular"
               isValid={!!touched.passwd2 && !!errors.passwd2}
-              errorText={(touched.passwd2 && errors.passwd2) || ""}
+              error={touched.passwd2 ? errors.passwd2 : ""}
               onBlur={handleBlur}
             />
           </div>
