@@ -7946,11 +7946,11 @@ components:
           description: physical exam made by doctor
           example: "The patient appears alert, oriented to person, place, and time,\
             \ and in no acute distress. Well-nourished and well-hydrated."
-        fhu:
-          type: string
         yprog:
           type: integer
           format: int32
+        fhu:
+          type: string
       required:
       - admDate
       - admitted

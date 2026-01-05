@@ -231,6 +231,7 @@
     "agetype": "Age Type",
     "agerange": "Age Range",
     "age": "Age",
+    "neonatalage": "Neonatal age",
     "anamnesis": "Anamnesis",
     "allergies": "Allergies",
     "savechanges": "Save Changes",
@@ -254,6 +255,11 @@
       "d3": "Adolescents",
       "d4": "Adult",
       "d5": "Elderly"
+    },
+    "ageunits": {
+      "day": "Day(s)",
+      "week": "Week(s)",
+      "month": "Month(s)"
     },
     "operation": "Operation",
     "updated": "Patient updated",
