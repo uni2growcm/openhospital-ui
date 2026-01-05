@@ -10,7 +10,6 @@ import { DATETIME_FORMAT } from "libraries/consts";
 import { useTranslation } from "libraries/hooks";
 import { useMedicals, useWards } from "libraries/hooks/api";
 import { useAppDispatch } from "libraries/hooks/redux";
-import { isEmpty } from "lodash";
 import React, { useCallback, useEffect } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { getWards } from "state/ward";
@@ -70,8 +69,6 @@ export function DischargeMovementForm({
         data.lots?.filter(
           (lot) => lot.ward && lot.quantity && lot.quantity > 0
         ) ?? [];
-
-      if (isEmpty(filledLots.length)) return;
 
       const movements: MovementDTO[] = filledLots.map((lot) => ({
         medical: medicals.find((m) => m.code === data.medical)!,
