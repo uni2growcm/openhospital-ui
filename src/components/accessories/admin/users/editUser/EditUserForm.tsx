@@ -19,7 +19,7 @@ import ConfirmationDialog from "../../../confirmationDialog/ConfirmationDialog";
 import InfoBox from "../../../infoBox/InfoBox";
 import TextField from "../../../textField/TextField";
 
-import { RemoveRedEye } from "@mui/icons-material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import CheckboxField from "components/accessories/checkboxField/CheckboxField";
 import ResetButton from "components/accessories/resetButton/resetButton";
 import { PATHS } from "../../../../../consts";
@@ -153,7 +153,7 @@ export const EditUserForm = ({
                       className="login__passwordToggler"
                       onClick={() => setIsPasswordVisible(!isPasswordVisible)}
                     >
-                      <RemoveRedEye />
+                      {isPasswordVisible ? <VisibilityOff /> : <Visibility />}
                     </div>
                   </InputAdornment>
                 ),
@@ -179,7 +179,11 @@ export const EditUserForm = ({
                         setIsConfirmPasswordVisible(!isConfirmPasswordVisible)
                       }
                     >
-                      <RemoveRedEye />
+                      {isConfirmPasswordVisible ? (
+                        <VisibilityOff />
+                      ) : (
+                        <Visibility />
+                      )}
                     </div>
                   </InputAdornment>
                 ),

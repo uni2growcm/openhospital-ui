@@ -18,7 +18,7 @@ import TextField from "../../../textField/TextField";
 
 import { IState } from "../../../../../types";
 
-import { RemoveRedEye } from "@mui/icons-material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Button from "components/accessories/button/Button";
 import CheckboxField from "components/accessories/checkboxField/CheckboxField";
 import ResetButton from "components/accessories/resetButton/resetButton";
@@ -131,7 +131,7 @@ export const NewUser = () => {
                       className="login__passwordToggler"
                       onClick={() => setIsPasswordVisible(!isPasswordVisible)}
                     >
-                      <RemoveRedEye />
+                      {isPasswordVisible ? <VisibilityOff /> : <Visibility />}
                     </div>
                   </InputAdornment>
                 ),
@@ -157,7 +157,11 @@ export const NewUser = () => {
                         setIsConfirmPasswordVisible(!isConfirmPasswordVisible)
                       }
                     >
-                      <RemoveRedEye />
+                      {isConfirmPasswordVisible ? (
+                        <VisibilityOff />
+                      ) : (
+                        <Visibility />
+                      )}
                     </div>
                   </InputAdornment>
                 ),
