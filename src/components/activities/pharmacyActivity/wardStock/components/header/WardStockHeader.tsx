@@ -1,20 +1,33 @@
 import { MedicalServices } from "@mui/icons-material";
 import Button from "components/accessories/button/Button";
-import { WardDTO } from "generated";
+import GetDownloadDateDialog from "components/activities/pharmacyActivity/getDownloadDateDialog/GetDownloadDateDialog";
+import { PrintProperties } from "components/activities/pharmacyActivity/getDownloadDateDialog/types";
+import {
+  PrintPharmaceuticalStockWardPdfStockWardReportModelEnum,
+  WardDTO,
+} from "generated";
+import { downloadBlob } from "libraries/downloadUtils/downloardUtils";
+import { formatDateToCustomISO } from "libraries/formatUtils";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { updateWardStockFIilter } from "state/pharmacy";
+import {
+  printPharmaceuticalStockWardExcel,
+  printPharmaceuticalStockWardPdf,
+  updateWardStockFIilter,
+} from "state/pharmacy";
 import "./styles.scss";
 
 const types = ["outcoming", "incoming", "drugs"] as const;
 const actions = ["report", "excel"];
 
-type WardStockHeaderProps = {};
-
-export function WardStockHeader({}: WardStockHeaderProps) {
+export const WardStockHeader = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const [wardCode, setWardCode] = useState<string>("C");
+  const [typeMed, setTypeMed] = useState<string>("outcoming");
+  const [isPrint, setIsPrint] = useState<boolean>(false);
+  const [action, setAction] = useState<string>("report");
 
   const wards = useAppSelector(
     (state) => state.wards.allWards.data?.filter((ward) => ward.pharmacy) ?? []
@@ -25,6 +38,7 @@ export function WardStockHeader({}: WardStockHeaderProps) {
   const handleWardSelection = useCallback(
     (ward: WardDTO) => () => {
       dispatch(updateWardStockFIilter({ ...filter, ward }));
+      setWardCode(ward.code!);
     },
     [dispatch, filter]
   );
@@ -37,6 +51,7 @@ export function WardStockHeader({}: WardStockHeaderProps) {
           type: filter.type === type ? undefined : type,
         })
       );
+      setTypeMed(type);
     },
     [dispatch, filter]
   );
@@ -46,6 +61,60 @@ export function WardStockHeader({}: WardStockHeaderProps) {
       dispatch(updateWardStockFIilter({ ...filter, ward: wards[0] }));
     }
   }, [wards, filter, dispatch]);
+
+  const handleGetReport = (payload: PrintProperties) => {
+    if (action === "report") {
+      dispatch(
+        printPharmaceuticalStockWardPdf({
+          wardCode: wardCode.toUpperCase(),
+          dateFrom: payload.dateFrom
+            ? payload.dateFrom
+            : formatDateToCustomISO(new Date()),
+          dateTo: payload.dateTo
+            ? payload.dateTo
+            : formatDateToCustomISO(new Date()),
+          stockWardReportModel:
+            typeMed === "incoming"
+              ? PrintPharmaceuticalStockWardPdfStockWardReportModelEnum.Incoming
+              : typeMed === "outcoming"
+              ? PrintPharmaceuticalStockWardPdfStockWardReportModelEnum.Outcoming
+              : PrintPharmaceuticalStockWardPdfStockWardReportModelEnum.Drugs,
+        })
+      )
+        .unwrap()
+        .then((result) => {
+          if (result instanceof Blob)
+            downloadBlob(
+              result,
+              `pharmaceutical-stock-ward-${typeMed}-report-${wardCode}-${new Date().getTime()}.pdf`
+            );
+        });
+      setIsPrint(false);
+    } else {
+      dispatch(
+        printPharmaceuticalStockWardExcel({
+          wardCode: wardCode.toUpperCase(),
+          dateFrom: payload.dateFrom
+            ? payload.dateFrom
+            : formatDateToCustomISO(new Date()),
+          dateTo: payload.dateTo
+            ? payload.dateTo
+            : formatDateToCustomISO(new Date()),
+          index: typeMed === "incoming" ? 1 : typeMed === "outcoming" ? 0 : 2,
+        })
+      )
+        .unwrap()
+        .then((result) => {
+          if (result instanceof Blob) {
+            downloadBlob(
+              result,
+              `pharmaceutical-stock-ward-${typeMed}-report-${wardCode}-${new Date().getTime()}.xlsx`
+            );
+          }
+        });
+      setIsPrint(false);
+    }
+  };
 
   return (
     <div className="ward-stock-header">
@@ -93,11 +162,24 @@ export function WardStockHeader({}: WardStockHeaderProps) {
             type="button"
             variant={"outlined"}
             color="inherit"
+            onClick={() => {
+              setIsPrint(true);
+              setAction(action);
+            }}
           >
             {t(`pharmacy.stock.actions.${action}`)}
           </Button>
         ))}
       </div>
+      <GetDownloadDateDialog
+        isOpen={isPrint}
+        title={t("pharmacy.selectReport").toUpperCase()}
+        isStockWard={true}
+        primaryButtonLabel={t("common.print")}
+        secondaryButtonLabel={t("common.cancel")}
+        handlePrimaryButtonClick={handleGetReport}
+        handleSecondaryButtonClick={() => setIsPrint(false)}
+      />
     </div>
   );
-}
+};

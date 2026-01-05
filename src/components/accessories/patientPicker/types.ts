@@ -10,6 +10,7 @@ export interface IProps {
   onBlur: (e: React.FocusEvent<HTMLInputElement>, value: PatientDTO) => void;
   theme?: string;
   enableFocus?: boolean;
+  onSelect?: (patient: PatientDTO) => void;
 }
 export type TPatientSearchFormFieldName =
   | "id"

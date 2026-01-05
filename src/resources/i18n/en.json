@@ -552,6 +552,20 @@
       "thisyear": "This Year",
       "lastyear": "Last Year"
     },
+    "months": {
+      "january": "January",
+      "february": "February",
+      "march": "March",
+      "april": "April",
+      "may": "May",
+      "june": "June",
+      "july": "July",
+      "august": "August",
+      "september": "September",
+      "october": "October",
+      "november": "November",
+      "december": "December"
+    },
     "continue": "Continue ?",
     "collapse_all": "Collapse All",
     "expand_all": "Expand All",
@@ -580,7 +594,8 @@
     "cancelMessage": "Are you sure to cancel this operation ? All unsaved data will be lost.",
     "back": "Back",
     "backToEdit": "No, keep editing",
-    "discardMessage": "Are you sure to discard this operation ? All unsaved data will be lost."
+    "discardMessage": "Are you sure to discard this operation ? All unsaved data will be lost.",
+    "print": "Print"
   },
   "permission": {
     "denied": "Permission denied",
@@ -1233,6 +1248,7 @@
       "pharmaceutical": "Medical products",
       "pharmaceutical-stock": "Pharmaceutical stock",
       "ward-stock": "Ward stock",
+      "rectify-ward-stock": "Rectify Quantity",
       "charge-movement": "Charge movement",
       "discharge-movement": "Discharge movement",
       "discharge-movement-created": "Discharge movement created",
@@ -1271,6 +1287,10 @@
       "update-pharmaceutical-fail": {
         "title": "Pharamaceutical update failed",
         "description": "We were unable to update the pharmaceutical. Please try again or contact support."
+      },
+      "rectify-movement-success": {
+        "title": "Rectification completed successfully",
+        "description": "The stock rectification has been saved successfully."
       }
     },
     "form": {
@@ -1292,7 +1312,13 @@
         "pcsperpck": "Pieces per Packet",
         "minqty": "Critical level",
         "ignoreSimilar": "Ignore somilar",
-        "deleted": "Deleted"
+        "deleted": "Deleted",
+        "currentQuantity": "Current Quantity",
+        "newQuantity": "New Quantity",
+        "adjust": "Adjust",
+        "adjustQuantity": "Adjust quantity",
+        "currentQntyNonNegetive": "Current quantity must be non-negative",
+        "newQntyNonNegetive": "New quantity must be non-negative"
       }
     },
     "lot": {
@@ -1340,7 +1366,22 @@
       "stockCardReport": "Stock card report",
       "addMedecine": "Add medicine",
       "order": "Order",
-      "expiring": "Expiring",
+      "expiring": {
+        "label": "Expiring",
+        "close": "Close",
+        "generate": "Generate",
+        "info": "Select a period",
+        "title": "Expiring report",
+        "period": "Period",
+        "month": "Month",
+        "options": {
+          "today": "Today",
+          "thismonth": "This month",
+          "nextmonth": "Next month",
+          "nexttwomonths": "Next two months",
+          "specificmonth": "Specific month"
+        }
+      },
       "amcReport": "AMC report",
       "movementType": {
         "charge": "Charge",
@@ -1354,6 +1395,12 @@
         "excel": "Excel"
       },
       "ward": {
+        "lotNo": "Lot No.",
+        "inStock": "In Stock",
+        "chooseALot": "Choose Lot",
+        "newLot": "New Lot",
+        "reason": "Reason",
+        "actualQuantity": "Actual Quantity",
         "pharmaceutical": "Pharmaceutical",
         "patient": "Patient",
         "medical": "Medical",
@@ -1369,11 +1416,46 @@
         "age": "Age",
         "type": "Type",
         "recipient": "Recipient",
+        "SelectMedical": "Select Medical",
+        "pieces": "Pieces",
         "movementType": {
           "patient": "To patient",
-          "ward": "Internal"
-        }
+          "ward": "Internal use",
+          "toAnotherWard": "To another ward"
+        },
+        "dischargeMovement": "Discharge movement from ",
+        "destination": "Destination",
+        "toPatient": "To patient",
+        "internalUse": "Internal use",
+        "selectPatient": "Select a patient",
+        "selectWard": "Select a ward",
+        "totalStock": "Total stock",
+        "selectLot": "Select lot",
+        "quantityGreaterThanZero": "Quantity must be greater than zero",
+        "quantityNotExceedoTtalStock": "Quantity must not exceed total stock",
+        "loading": "Loading...",
+        "pleaseSelectLot": "Please select a lot",
+        "pleaseSelectPatient": "Please select a patient",
+        "pleaseSelectWard": "Please select a ward",
+        "failedTocreateDischargeMovement": "Failed to create dischargem movement. Please try again.",
+        "dischargeMovementCreatedSuccessfully": "Discharge movement created successfully !",
+        "errorPatient": "Error finding patient.",
+        "movementCreated": "Movement created",
+        "quantityMustBeDifferent": "The entered quantity must be different from the current quantity.",
+        "reasonRequired": "Please provide a reason for the rectification"
       }
+    },
+    "selectDate": "Select a date",
+    "selectReport": "Printing the report",
+    "selectOption": "Select an option",
+    "selectMedical": "Select Medical",
+    "selectWard": "Select ward",
+    "selectDateTo": "Date to",
+    "selectDateFrom": "Date From",
+    "errorMessageForm": "This field is required",
+    "option": {
+      "withLot": "With lot",
+      "onlyQuantity": "Only quantity"
     }
   }
 }
