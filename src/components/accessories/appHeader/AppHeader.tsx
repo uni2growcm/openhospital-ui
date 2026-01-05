@@ -97,6 +97,7 @@ const AppHeader: FunctionComponent<IOwnProps> = ({ breadcrumbMap }) => {
               <strong className="user-name">{username}</strong>
             </span>
             <IconButton
+              data-cy="user-menu-trigger"
               sx={{ marginLeft: 2 }}
               color="inherit"
               onClick={handleOpenMenu}
@@ -119,6 +120,7 @@ const AppHeader: FunctionComponent<IOwnProps> = ({ breadcrumbMap }) => {
             >
               <Tooltip title={t("userProfile")!} aria-label="User Profile">
                 <MenuItem
+                  data-cy="change-password-item"
                   onClick={() => {
                     handleCloseMenu();
                     navigate(PATHS.user_profile);
@@ -131,6 +133,7 @@ const AppHeader: FunctionComponent<IOwnProps> = ({ breadcrumbMap }) => {
 
               <Tooltip title={t("login.signout")!} aria-label="sign out">
                 <MenuItem
+                  data-cy="logout-menu-item"
                   onClick={() => {
                     handleCloseMenu();
                     setOpenLogoutConfirmation(true);
@@ -139,7 +142,6 @@ const AppHeader: FunctionComponent<IOwnProps> = ({ breadcrumbMap }) => {
                 >
                   <ExitToAppIcon
                     className="userInfo__toolbar_icon"
-                    id="signout_icon"
                   />
                 </MenuItem>
               </Tooltip>

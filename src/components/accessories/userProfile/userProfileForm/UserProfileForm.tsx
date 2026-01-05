@@ -151,6 +151,7 @@ export const UserProfileForm = ({
 
           <div className="editUserForm__item halfWidth">
             <TextField
+              data-cy="old-password"
               field={getFieldProps("oldPasswd")}
               label={t("user.oldPassword")}
               type="password"
@@ -163,6 +164,7 @@ export const UserProfileForm = ({
 
           <div className="editUserForm__item halfWidth">
             <TextField
+              data-cy="new-password"
               field={getFieldProps("passwd")}
               label={t("user.password")}
               type="password"
@@ -175,6 +177,7 @@ export const UserProfileForm = ({
 
           <div className="editUserForm__item halfWidth">
             <TextField
+              data-cy="confirm-password"
               field={getFieldProps("passwd2")}
               label={t("user.passwordRetype")}
               type="password"

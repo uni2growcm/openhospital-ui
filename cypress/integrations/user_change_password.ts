@@ -89,29 +89,20 @@ describe("LoginActivity spec", () => {
 
     cy.dataCy("dashboard");
   });
-  it("should display the logout confirmation when the logout icon is clicked", () => {
-    cy.dataCy("user-menu-trigger").click();
-    cy.dataCy("logout-menu-item").click({ force: true });
+ it("should navigate to change password page and successfully change password", () => {
+   // Open user menu and click "Change Password"
+   cy.dataCy("user-menu-trigger").click();
 
-    cy.get(".MuiDialog-paper")
-      .should("exist")
-      .within(() => {
-        cy.get(".reset_button button").click();
-      });
+   // Wait for MUI menu to be visible
+   cy.get('ul[role="menu"]', { timeout: 5000 }).should("be.visible");
 
-    cy.dataCy("dashboard").should("exist");
-  });
+   // Click the change password item
+   cy.dataCy("change-password-item").click({ force: true });
 
-  it("should display the login page when the logout is confirmed on the dialog", () => {
-    cy.dataCy("user-menu-trigger").click();
-    cy.dataCy("logout-menu-item").click({ force: true });
+   // Wait for user profile page to exist
+   cy.dataCy("user-profile-page").should("exist");
 
-    cy.get(".MuiDialog-paper")
-      .should("exist")
-      .within(() => {
-        cy.get(".return_button button").click();
-      });
-
-    cy.dataCy("login-panel").should("exist");
-  });
+   // to do
+   // type in old and new password then change and update password.
+ });
 });

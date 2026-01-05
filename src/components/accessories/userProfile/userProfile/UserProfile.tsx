@@ -69,7 +69,7 @@ export const UserProfile = () => {
   };
 
   return (
-    <div className="page-wrapper">
+    <div data-cy="user-profile-page" className="page-wrapper">
       <AppHeader
         userCredentials={userCredentials}
         breadcrumbMap={breadcrumbMap}
