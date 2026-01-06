@@ -3,26 +3,19 @@ import { z } from "zod";
 import { TFormValues } from "./types";
 
 export const MedicalDTOSchema = z.object({
-  prodCode: z.string().min(1, {
-    message: "pharmacy.form.errors.prodCodeRequired",
+  prodCode: z.string({
+    error: "code is required",
   }),
-
-  type: z.string().min(1, {
-    message: "pharmacy.form.errors.typeRequired",
+  type: z.string(),
+  description: z.string({
+    error: "description is required",
   }),
-
-  description: z.string().min(1, {
-    message: "pharmacy.form.errors.descriptionRequired",
+  pcsperpck: z.number({
+    error: "pieces per packet is required",
   }),
-
-  pcsperpck: z.coerce.number().min(1, {
-    message: "pharmacy.form.errors.pcsPerPackRequired",
+  minqty: z.number({
+    error: "critical level is required",
   }),
-
-  minqty: z.coerce.number().min(0, {
-    message: "pharmacy.form.errors.minQtyRequired",
-  }),
-
   deleted: z.boolean().default(false),
   initialqty: z.number().default(0),
   inqty: z.number().default(0),

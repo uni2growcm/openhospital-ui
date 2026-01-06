@@ -72,6 +72,7 @@ export function UpdatePharmaceutical() {
             code: +id!,
           },
           ignoreSimilar: data.ignoreSimilar,
+          
         })
       );
     },
@@ -116,7 +117,6 @@ export function UpdatePharmaceutical() {
             onSubmit={handleSubmit}
             loading={status === "LOADING"}
             pharmaceutical={medical}
-            isEdit
           />
         )}
         {status === "FAIL" && (
