@@ -3807,6 +3807,50 @@ paths:
                 type: boolean
       security:
       - bearerAuth: []
+  /reports/patientexamrequest/{patientId}:
+    get:
+      tags:
+      - Reports
+      operationId: printPatientExamRequestPdf
+      parameters:
+      - name: patientId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                format: byte
+      security:
+      - bearerAuth: []
+  /reports/patientexamination/{examinationId}:
+    get:
+      tags:
+      - Reports
+      operationId: printPatientExaminationPdf
+      parameters:
+      - name: examinationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                format: byte
+      security:
+      - bearerAuth: []
   /reports/exams-list:
     get:
       tags:
@@ -6281,13 +6325,13 @@ components:
           format: int32
           description: lock
           example: 0
-        female:
-          type: boolean
         male:
           type: boolean
-        opd:
+        female:
           type: boolean
         pharmacy:
+          type: boolean
+        opd:
           type: boolean
       required:
       - beds
@@ -7021,11 +7065,11 @@ components:
           type: string
           description: "Flag record deleted, values are 'Y' OR 'N' "
           example: "N"
+        fhu:
+          type: string
         yprog:
           type: integer
           format: int32
-        fhu:
-          type: string
       required:
       - admDate
       - admitted

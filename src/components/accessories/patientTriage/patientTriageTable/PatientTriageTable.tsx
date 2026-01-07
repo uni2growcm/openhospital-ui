@@ -10,16 +10,19 @@ import InfoBox from '../../infoBox/InfoBox';
 import Table from '../../table/Table';
 
 interface IOwnProps {
-	shouldUpdateTable: boolean;
-	handleDelete: (code: number | undefined) => void;
-	handleEdit: (row: PatientExaminationDTO) => void;
+  shouldUpdateTable: boolean;
+  handleDelete: (code: number | undefined) => void;
+  handleEdit: (row: PatientExaminationDTO) => void;
+  handlePrint: (examinationCode: number) => void;
 }
 
 const PatientTriageTable: FunctionComponent<IOwnProps> = ({
 	handleEdit: onEdit,
+  handlePrint: onPrint,
 }) => {
 	const { t } = useTranslation();
 	const canUpdate = usePermission('examinations.update');
+  const canPrint = usePermission("examinations.read");
 	const label = {
 		pex_ID: t('common.code'),
 		pex_date: t('examination.datetriage'),
@@ -129,6 +132,7 @@ const PatientTriageTable: FunctionComponent<IOwnProps> = ({
 								columnsOrder={order}
 								rowsPerPage={5}
 								onEdit={canUpdate ? handleEdit : undefined}
+                onPrint={canPrint ? onPrint : undefined}
 								isCollapsabile={true}
 								showEmptyCell={false}
 							/>

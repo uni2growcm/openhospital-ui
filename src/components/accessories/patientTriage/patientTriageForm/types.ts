@@ -10,6 +10,8 @@ interface IOwnProps {
 	creationMode: boolean;
 	shouldResetForm: boolean;
 	resetFormCallback: () => void;
+  saveAndPrint: () => void;
+  printButtonLabel: string;
 }
 
 export type TProps = IOwnProps;
