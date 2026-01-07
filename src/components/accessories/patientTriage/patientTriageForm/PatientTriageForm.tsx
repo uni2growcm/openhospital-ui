@@ -422,7 +422,6 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
                       : formattedValues.pex_bowel_desc,
                   } as any);
                 } else {
-                  // Mark all fields as touched to show errors
                   Object.keys(errors).forEach((key) => {
                     formik.setFieldTouched(key, true);
                   });
