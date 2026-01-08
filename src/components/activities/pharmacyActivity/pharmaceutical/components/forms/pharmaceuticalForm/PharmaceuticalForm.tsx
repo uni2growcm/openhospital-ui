@@ -31,9 +31,16 @@ export function PharmaceuticalForm({
 
   const values = useWatch({
     control,
-    compute: (values) => ({
-      ...values,
-    }),
+    compute: (values) => {
+      return {
+        ...values,
+        type: medicalTypes.find((type) => type.code === values.type),
+        deleted: values.deleted ? "Y" : "N",
+        initialqty: 0,
+        inqty: 0,
+        outqty: 0,
+      };
+    },
   });
 
   const handleGoBack = useNavigationHandler(PATHS.pharmacy_pharmaceutical, {
@@ -42,19 +49,14 @@ export function PharmaceuticalForm({
 
   const onValidSubmit = useCallback(
     (data: TFormValues) => {
-      const payload: MedicalDTO = {
+      const medicalDTO: MedicalDTO = {
         ...data,
-
-        type: medicalTypes.find((t) => t.code === data.type),
-        deleted: data.deleted ? "Y" : "N",
-        initialqty: data.initialqty ?? 0,
-        inqty: data.inqty ?? 0,
-        outqty: data.outqty ?? 0,
+        ...values,
       };
 
-      onSubmit?.(payload);
+      onSubmit(medicalDTO);
     },
-    [onSubmit, medicalTypes]
+    [values, onSubmit]
   );
 
   return (

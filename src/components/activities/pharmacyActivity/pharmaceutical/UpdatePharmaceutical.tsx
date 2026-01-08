@@ -72,7 +72,6 @@ export function UpdatePharmaceutical() {
             code: +id!,
           },
           ignoreSimilar: data.ignoreSimilar,
-          
         })
       );
     },
