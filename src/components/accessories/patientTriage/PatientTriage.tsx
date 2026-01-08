@@ -120,30 +120,50 @@ export const PatientTriage: FC = () => {
 
   const handleSaveAndPrint = async (triage: PatientExaminationDTO) => {
     if (!patientDataCode) return;
-    triage.patientCode = patientDataCode;
 
     try {
-      const saved = await dispatch(createExamination(triage)).unwrap();
+      const triageData = {
+        ...triage,
+        patientCode: patientDataCode,
+      };
 
+      let saved: PatientExaminationDTO;
+
+      if (creationMode) {
+        saved = await dispatch(createExamination(triageData)).unwrap();
+      } else {
+        if (!triageToEdit?.pex_ID) return;
+
+        saved = await dispatch(
+          updateExamination({
+            id: triageToEdit.pex_ID,
+            patientExaminationDTO: {
+              ...triageData,
+              pex_ID: triageToEdit.pex_ID,
+              lock: triageToEdit.lock,
+            },
+          })
+        ).unwrap();
+      }
+      
+      const reloaded = await dispatch(
+        getLastByPatientId(patientDataCode)
+      ).unwrap();
+
+      setTriageToEdit(reloaded);
       setShouldUpdateTable(true);
 
-      if (saved && saved.pex_ID) {
-        try {
-          const blob = await dispatch(printExamination(saved.pex_ID)).unwrap();
-          downloadBlob(
-            blob,
-            `patient-examination-${saved.pex_ID}-${Date.now()}.pdf`
-          );
-        } catch (printError) {
-          console.error("Print failed but triage was saved:", printError);
-        }
-      }
+      const blob = await dispatch(printExamination(reloaded.pex_ID!)).unwrap();
 
-      resetFormCallback();
+      downloadBlob(
+        blob,
+        `patient-examination-${reloaded.pex_ID}-${Date.now()}.pdf`
+      );
     } catch (e) {
-      console.error("Save and Print failed:", e);
+      console.error("Save & Print failed:", e);
     }
   };
+
 
   const resetFormCallback = () => {
     setShouldResetForm(false);

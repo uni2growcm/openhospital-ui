@@ -18,6 +18,7 @@ import {
 	formatAllFieldValues,
 	getFromFields,
 	parseDate,
+	parseDateTime,
 } from '../../../../libraries/formDataHandling/functions';
 import {
 	createLabRequest,
@@ -54,13 +55,9 @@ const ExamRequestForm: FC<ExamRequestProps> = ({
 		if (exams) {
 			return exams.map((item) => {
 				return {
-					value: item.code ?? '',
-					label:
-						(item.description &&
-							item.description?.length > 30 &&
-							`${item.description.slice(0, 30)}...`) ||
-						(item.description ?? ''),
-				};
+          value: item.code ?? "",
+          label: item.description ?? "",
+        };
 			});
 		} else return [];
 	};
@@ -107,7 +104,7 @@ const ExamRequestForm: FC<ExamRequestProps> = ({
 		lab.patName = `${patient?.firstName} ${patient?.secondName}`;
 		lab.sex = patient?.sex;
 		lab.age = patient?.age;
-		lab.labDate = parseDate(lab.labDate ?? new Date().toISOString());
+		lab.labDate = parseDateTime(lab.labDate ?? new Date().toISOString());
 		lab.registrationDate = parseDate(lab.registrationDate ?? '');
 		lab.inOutPatient = patientData?.status
 			? patientData.status === 'O'
