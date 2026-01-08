@@ -700,7 +700,8 @@
 			"open": "EN COURS",
 			"done": "TERMINÉ"
 		},
-		"previousentries": "Examen précédentes"
+		"previousentries": "Examen précédentes",
+    	"print_exam_request": "Imprimer les examens demandés"
 	},
 	"admission": {
 		"code": "Code d'admission",

@@ -68,15 +68,11 @@ export const printExamination = createAsyncThunk<
   { rejectValue: any }
 >("reports/patientexamination", async (examinationId, thunkApi) => {
   try {
-    const ajaxResponse = await firstValueFrom(
-      wrapper(() =>
-        apiReport.printPatientExaminationPdf({ examinationId }, {
-          responseType: "blob",
-        } as any)
-      )
+    const response = await firstValueFrom(
+      wrapper(() => apiReport.printPatientExaminationPdf({ examinationId }))
     );
 
-    return ajaxResponse.response as unknown as Blob;
+    return response as unknown as Blob;
   } catch (error: any) {
     return thunkApi.rejectWithValue(
       error?.response ?? { message: "Failed to print examination" }

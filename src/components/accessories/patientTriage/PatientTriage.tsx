@@ -125,18 +125,36 @@ export const PatientTriage: FC = () => {
     try {
       const saved = await dispatch(createExamination(triage)).unwrap();
 
-      if (saved.pex_ID) {
-        const blob = await dispatch(printExamination(saved.pex_ID)).unwrap();
-        downloadBlob(
-          blob,
-          `patient-examination-${saved.pex_ID}-${Date.now()}.pdf`
-        );
+      setShouldUpdateTable(true);
+
+      if (saved && saved.pex_ID) {
+        try {
+          const blob = await dispatch(printExamination(saved.pex_ID)).unwrap();
+          downloadBlob(
+            blob,
+            `patient-examination-${saved.pex_ID}-${Date.now()}.pdf`
+          );
+        } catch (printError) {
+          console.error("Print failed but triage was saved:", printError);
+        }
       }
 
-      resetFormCallback(); // close form/dialog
+      resetFormCallback();
     } catch (e) {
-      console.error(e);
+      console.error("Save and Print failed:", e);
     }
+  };
+
+  const resetFormCallback = () => {
+    setShouldResetForm(false);
+    setShouldUpdateTable(false);
+    dispatch(createExaminationReset());
+    dispatch(updateExaminationReset());
+    dispatch(deleteExaminationReset());
+    dispatch(printExaminationReset());
+    setCreationMode(true);
+    setActivityTransitionState("IDLE");
+    scrollToElement(null);
   };
 
   const onSubmit = (triage: PatientExaminationDTO) => {
@@ -154,21 +172,11 @@ export const PatientTriage: FC = () => {
     } else {
       dispatch(createExamination(triage));
     }
+    setShouldUpdateTable(true);
   };
 
   const handlePrint = () => {
     setActivityTransitionState("TO_RESET");
-  };
-
-  const resetFormCallback = () => {
-    setShouldResetForm(false);
-    setShouldUpdateTable(false);
-    dispatch(createExaminationReset());
-    dispatch(updateExaminationReset());
-    dispatch(deleteExaminationReset());
-    setCreationMode(true);
-    setActivityTransitionState("IDLE");
-    scrollToElement(null);
   };
 
   const onDelete = (code: number | undefined) => {

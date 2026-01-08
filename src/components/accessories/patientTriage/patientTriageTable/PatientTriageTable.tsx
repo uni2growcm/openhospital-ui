@@ -1,13 +1,13 @@
-import { CircularProgress } from '@mui/material';
-import { type FunctionComponent, useCallback, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
-import type { PatientExaminationDTO } from '../../../../generated';
-import { renderDate } from '../../../../libraries/formatUtils/dataFormatting';
-import { usePermission } from '../../../../libraries/permissionUtils/usePermission';
-import { examinationsByPatientId } from '../../../../state/examinations';
-import InfoBox from '../../infoBox/InfoBox';
-import Table from '../../table/Table';
+import { CircularProgress } from "@mui/material";
+import { type FunctionComponent, useCallback, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { useAppDispatch, useAppSelector } from "~/libraries/hooks/redux";
+import type { PatientExaminationDTO } from "../../../../generated";
+import { renderDate } from "../../../../libraries/formatUtils/dataFormatting";
+import { usePermission } from "../../../../libraries/permissionUtils/usePermission";
+import { examinationsByPatientId } from "../../../../state/examinations";
+import InfoBox from "../../infoBox/InfoBox";
+import Table from "../../table/Table";
 
 interface IOwnProps {
   shouldUpdateTable: boolean;
@@ -17,7 +17,8 @@ interface IOwnProps {
 }
 
 const PatientTriageTable: FunctionComponent<IOwnProps> = ({
-	handleEdit: onEdit,
+  shouldUpdateTable,
+  handleEdit: onEdit,
   handlePrint: onPrint,
 }) => {
 	const { t } = useTranslation();
@@ -45,108 +46,119 @@ const PatientTriageTable: FunctionComponent<IOwnProps> = ({
 	const order = ['pex_date'];
 	const dateFields = ['pex_date'];
 
-	const dispatch = useAppDispatch();
-	const data = useAppSelector((state) =>
-		state.examinations.examinationsByPatientId.data
-			? state.examinations.examinationsByPatientId.data
-			: [],
-	);
+  const dispatch = useAppDispatch();
+    const data = useAppSelector((state) =>
+		state.examinations.examinationsByPatientId.data ?? []
+  );
 
-	const patientCode = useAppSelector(
-		(state) => state.patients.selectedPatient.data?.code,
-	);
-	useEffect(() => {
-		dispatch(examinationsByPatientId(patientCode));
-	}, [dispatch, patientCode]);
+  const patientCode = useAppSelector(
+    (state) => state.patients.selectedPatient.data?.code
+  );
+  useEffect(() => {
+    if (patientCode) {
+      dispatch(examinationsByPatientId(patientCode));
+    }
+  }, [dispatch, patientCode]);
 
-	const handleEdit = useCallback(
-		(row: PatientExaminationDTO) => {
-			const pex = data.find((item) => item.pex_ID === row.pex_ID);
-			if (pex) {
-				onEdit(pex);
-			}
-		},
-		[data, onEdit],
-	);
+  useEffect(() => {
+    const fetchData = async () => {
+      if (patientCode) {
+        await dispatch(examinationsByPatientId(patientCode));
+      }
+    };
 
-	const formatDataToDisplay = (data: PatientExaminationDTO[]) => {
-		return data.map((item) => {
-			return {
-				pex_ID: item.pex_ID,
-				pex_height: item.pex_height,
-				pex_weight: item.pex_weight,
-				pex_ap_max: item.pex_ap_max,
-				pex_ap_min: item.pex_ap_min,
-				pex_rr: item.pex_rr,
-				pex_hgt: item.pex_hgt,
-				pex_hr: item.pex_hr,
-				pex_temp: item.pex_temp,
-				pex_sat: item.pex_sat,
-				pex_diuresis: item.pex_diuresis,
-				pex_diuresis_desc: item.pex_diuresis_desc
-					? t(`examination.${item.pex_diuresis_desc}`)
-					: '',
-				pex_bowel_desc: item.pex_bowel_desc
-					? t(`examination.${item.pex_bowel_desc}`)
-					: '',
-				pex_auscultation: item.pex_auscultation
-					? t(`examination.${item.pex_auscultation}`)
-					: '',
-				pex_date: item.pex_date ? renderDate(item.pex_date) : '',
-				date: item.pex_date,
-				pex_note: item.pex_note,
-			};
-		});
-	};
-	const triageStatus = useAppSelector(
-		(state) => state.examinations.examinationsByPatientId.status,
-	);
+    if (patientCode) {
+      fetchData();
+    }
+  }, [dispatch, patientCode, shouldUpdateTable]);
 
-	const errorMessage = useAppSelector(
-		(state) =>
-			state.examinations.examinationsByPatientId.error?.message ||
-			t('common.somethingwrong'),
-	) as string;
+  const handleEdit = useCallback(
+    (row: any) => {
+      const pex = data.find((item) => item.pex_ID === row.pex_ID);
+      if (pex) {
+        onEdit(pex);
+      }
+    },
+    [data, onEdit]
+  );
 
-	return (
-		<div className="patientTriageTable">
-			<h5>{t('examination.previousentries')}</h5>
-			{(() => {
-				switch (triageStatus) {
-					case 'FAIL':
-						return <InfoBox type="error" message={errorMessage} />;
-					case 'LOADING':
-						return (
-							<CircularProgress
-								style={{ marginLeft: '50%', position: 'relative' }}
-							/>
-						);
+  const formatDataToDisplay = (data: PatientExaminationDTO[]) => {
+    return data.map((item) => ({
+      pex_ID: item.pex_ID,
+      pex_height: item.pex_height,
+      pex_weight: item.pex_weight,
+      pex_ap_max: item.pex_ap_max,
+      pex_ap_min: item.pex_ap_min,
+      pex_rr: item.pex_rr,
+      pex_hgt: item.pex_hgt,
+      pex_hr: item.pex_hr,
+      pex_temp: item.pex_temp,
+      pex_sat: item.pex_sat,
+      pex_diuresis: item.pex_diuresis,
+      pex_diuresis_desc: item.pex_diuresis_desc
+        ? t(`examination.${item.pex_diuresis_desc}`)
+        : "",
+      pex_bowel_desc: item.pex_bowel_desc
+        ? t(`examination.${item.pex_bowel_desc}`)
+        : "",
+      pex_auscultation: item.pex_auscultation
+        ? t(`examination.${item.pex_auscultation}`)
+        : "",
+      pex_date: item.pex_date ? renderDate(item.pex_date) : "",
+      date: item.pex_date,
+      pex_note: item.pex_note,
+    }));
+  };
 
-					case 'SUCCESS':
-						return (
-							<Table
-								rowData={formatDataToDisplay(data)}
-								tableHeader={header}
-								dateFields={dateFields}
-								labelData={label}
-								columnsOrder={order}
-								rowsPerPage={5}
-								onEdit={canUpdate ? handleEdit : undefined}
-                onPrint={canPrint ? onPrint : undefined}
-								isCollapsabile={true}
-								showEmptyCell={false}
-							/>
-						);
+  const triageStatus = useAppSelector(
+    (state) => state.examinations.examinationsByPatientId.status
+  );
 
-					case 'SUCCESS_EMPTY':
-						return <InfoBox type="info" message={t('common.emptydata')} />;
+  const errorMessage = useAppSelector(
+    (state) =>
+      state.examinations.examinationsByPatientId.error?.message ||
+      t("common.somethingwrong")
+  ) as string;
 
-					default:
-						return;
-				}
-			})()}
-		</div>
-	);
+  return (
+    <div className="patientTriageTable">
+      <h5>{t("examination.previousentries")}</h5>
+      {(() => {
+        switch (triageStatus) {
+          case "FAIL":
+            return <InfoBox type="error" message={errorMessage} />;
+          case "LOADING":
+            return (
+              <CircularProgress
+                style={{ marginLeft: "50%", position: "relative" }}
+              />
+            );
+          case "SUCCESS":
+          case "IDLE":
+            return (
+              <Table
+                rowData={formatDataToDisplay(data)}
+                tableHeader={header}
+                dateFields={dateFields}
+                labelData={label}
+                columnsOrder={order}
+                rowsPerPage={5}
+                onEdit={canUpdate ? handleEdit : undefined}
+                onPrint={
+                  canPrint ? (row: any) => onPrint(row.pex_ID) : undefined
+                }
+                isCollapsabile={true}
+                showEmptyCell={false}
+              />
+            );
+          case "SUCCESS_EMPTY":
+            return <InfoBox type="info" message={t("common.emptydata")} />;
+          default:
+            return null;
+        }
+      })()}
+    </div>
+  );
 };
 
 export default PatientTriageTable;
