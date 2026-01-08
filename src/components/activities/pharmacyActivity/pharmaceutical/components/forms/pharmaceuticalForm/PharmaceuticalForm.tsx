@@ -98,7 +98,7 @@ export function PharmaceuticalForm({
         />
         <div className="col-start-1 col-span-full"></div>
         <CheckboxFormField
-          label={t("pharmacy.form.fields.deleted")}
+          label={t("pharmacy.form.fields.active")}
           control={control}
           name="deleted"
         />
