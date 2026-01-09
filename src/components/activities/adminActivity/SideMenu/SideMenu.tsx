@@ -9,6 +9,7 @@ import {
 	LocalHospitalSharp,
 	People,
 	SupervisedUserCircle,
+	Tune,
 } from '@mui/icons-material';
 import { type ReactNode, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -36,39 +37,43 @@ const SideMenu = () => {
 	);
 
 	const menuItems: { key: IAdminSection; icon: ReactNode }[] = [
-		{
-			key: 'wards',
-			icon: <AirlineSeatFlat fontSize="small" />,
-		},
-		{
-			key: 'diseases',
-			icon: <BlurCircular fontSize="small" />,
-		},
-		{
-			key: 'exams',
-			icon: <AssignmentInd fontSize="small" />,
-		},
-		{
-			key: 'operations',
-			icon: <Healing fontSize="small" />,
-		},
-		{
-			key: 'vaccines',
-			icon: <LocalDrink fontSize="small" />,
-		},
-		{
-			key: 'suppliers',
-			icon: <SupervisedUserCircle fontSize="small" />,
-		},
-		{
-			key: 'users',
-			icon: <People fontSize="small" />,
-		},
-		{
-			key: 'types',
-			icon: <GroupWork fontSize="small" />,
-		},
-	];
+    {
+      key: "wards",
+      icon: <AirlineSeatFlat fontSize="small" />,
+    },
+    {
+      key: "diseases",
+      icon: <BlurCircular fontSize="small" />,
+    },
+    {
+      key: "exams",
+      icon: <AssignmentInd fontSize="small" />,
+    },
+    {
+      key: "operations",
+      icon: <Healing fontSize="small" />,
+    },
+    {
+      key: "vaccines",
+      icon: <LocalDrink fontSize="small" />,
+    },
+    {
+      key: "suppliers",
+      icon: <SupervisedUserCircle fontSize="small" />,
+    },
+    {
+      key: "users",
+      icon: <People fontSize="small" />,
+    },
+    {
+      key: "settings",
+      icon: <Tune fontSize="small" />,
+    },
+    {
+      key: "types",
+      icon: <GroupWork fontSize="small" />,
+    },
+  ];
 
 	return (
 		<div data-cy="admin-side-menu" className={classes.menu}>
