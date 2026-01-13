@@ -1312,7 +1312,7 @@
         "pcsperpck": "Pieces per Packet",
         "minqty": "Critical level",
         "ignoreSimilar": "Ignore somilar",
-        "deleted": "Deleted",
+        "active": "Active",
         "currentQuantity": "Current Quantity",
         "newQuantity": "New Quantity",
         "adjust": "Adjust",
