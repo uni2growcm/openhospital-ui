@@ -1,10 +1,10 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import "../Settings.module.scss";
-import { SettingDTO, SettingDTOTypeEnum } from "~/generated";
+import Button from "~/components/accessories/button/Button";
 import { TFilterField } from "~/components/accessories/table/filter/types";
 import Table from "~/components/accessories/table/Table";
-import Button from "~/components/accessories/button/Button";
+import { SettingDTO, SettingDTOTypeEnum } from "~/generated";
+import classes from "./SettingsTable.module.scss";
 
 type IOwnProps = {
   items: SettingDTO[];
@@ -77,7 +77,7 @@ const SettingsTable: FC<IOwnProps> = ({
     });
   };
   return (
-    <div className="tableContainer">
+    <div className={classes.table}>
       <Table
         rowData={formatDataToDisplay(items ?? [])}
         tableHeader={headers}

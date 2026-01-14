@@ -1,8 +1,8 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { CustomDialog } from "~/components/accessories/customDialog/CustomDialog";
-import { SettingDTO } from "~/generated";
 import EditSettingForm from "./EditSettingForm";
+import { SettingDTO } from "~/generated";
+import { CustomDialog } from "~/components/accessories/customDialog/CustomDialog";
 
 type IOwnProps = {
   setting: SettingDTO;

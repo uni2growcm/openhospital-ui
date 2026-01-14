@@ -2,6 +2,7 @@ import { CircularProgress, Tab, Tabs } from "@mui/material";
 import React, { FC, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { AdminActivityContent } from "~/components/activities/adminActivity";
 import { SettingDTO } from "~/generated";
 import { useAppDispatch, useAppSelector } from "~/libraries/hooks/redux";
 import {
@@ -90,79 +91,101 @@ export const Settings = () => {
   };
 
   return (
-    <>
-      {settingsState.isLoading && (
-        <CircularProgress style={{ marginLeft: "50%", position: "relative" }} />
-      )}
-      {settingsState.error && (
-        <InfoBox type="error" message={settingsState.error?.message} />
-      )}
-      {resetAllState.hasFailed && (
-        <div className="info-box-container">
-          <InfoBox
-            type="error"
-            message={resetAllState.error?.message ?? t("common.somethingwrong")}
-          />
-        </div>
-      )}
-      {settingsState.hasSucceeded && (
-        <div className={classes.settings} data-cy="settings-table">
-          <Tabs
-            value={currentTab}
-            onChange={handleTabChange}
-            aria-label="settings"
-            variant="scrollable"
-            scrollButtons="auto"
-          >
-            {Object.keys(settingsByCategories).map((tab) => (
-              <Tab
-                label={t(`settings.categories.${tab}`)}
-                key={tab}
-                value={tab}
-              />
-            ))}
-          </Tabs>
+    <AdminActivityContent title={t("nav.settings")}>
+      <div className={classes.settings} data-cy="settings-table">
+        {(() => {
+          switch (settingsState.status) {
+            case "LOADING":
+              return (
+                <CircularProgress
+                  style={{ marginLeft: "50%", position: "relative" }}
+                />
+              );
+            case "FAIL":
+              return (
+                <InfoBox type="error" message={settingsState.error?.message} />
+              );
+            case "SUCCESS":
+              return (
+                <>
+                  <Tabs
+                    value={currentTab}
+                    onChange={handleTabChange}
+                    aria-label="settings"
+                    variant="standard"
+                    sx={{
+                      flexWrap: "wrap",
+                      "& .MuiTabs-flexContainer": {
+                        flexWrap: "wrap",
+                      },
+                    }}
+                  >
+                    {Object.keys(settingsByCategories).map((tab) => (
+                      <Tab
+                        label={t(`settings.categories.${tab}`)}
+                        key={tab}
+                        value={tab}
+                      />
+                    ))}
+                  </Tabs>
 
-          {Object.keys(settingsByCategories).map((tab) => (
-            <TabContent
-              current={currentTab}
-              tab={tab}
-              key={tab}
-              items={settingsByCategories[tab]}
-            />
-          ))}
+                  {Object.keys(settingsByCategories).map((tab) => (
+                    <TabContent
+                      current={currentTab}
+                      tab={tab}
+                      key={tab}
+                      items={settingsByCategories[tab]}
+                    />
+                  ))}
 
-          {setting && (
-            <EditSetting
-              onClose={handleCloseEditDialog}
-              onSucceed={handleEditSucceed}
-              open={editDialogOpen}
-              setting={setting}
-            />
-          )}
+                  {setting && (
+                    <EditSetting
+                      onClose={handleCloseEditDialog}
+                      onSucceed={handleEditSucceed}
+                      open={editDialogOpen}
+                      setting={setting}
+                    />
+                  )}
 
-          <ConfirmationDialog
-            isOpen={resetDialogOpen}
-            title={t("settings.resetAllSettings")}
-            info={t("settings.confirmresetall")}
-            icon={warningIcon}
-            primaryButtonLabel={t("common.ok")}
-            secondaryButtonLabel={t("common.discard")}
-            handlePrimaryButtonClick={handleResetAll}
-            handleSecondaryButtonClick={() => setResetDialogOpen(false)}
-          />
+                  <ConfirmationDialog
+                    isOpen={resetDialogOpen}
+                    title={t("settings.resetAllSettings")}
+                    info={t("settings.confirmresetall")}
+                    icon={warningIcon}
+                    primaryButtonLabel={t("common.ok")}
+                    secondaryButtonLabel={t("common.discard")}
+                    handlePrimaryButtonClick={handleResetAll}
+                    handleSecondaryButtonClick={() => setResetDialogOpen(false)}
+                  />
 
-          <ConfirmationDialog
-            isOpen={resetAllState.hasSucceeded}
-            title={t("settings.reset")}
-            icon={checkIcon}
-            info={t("settings.successfullyReset")}
-            primaryButtonLabel={t("common.ok")}
-            handlePrimaryButtonClick={handleResetSucceed}
-            handleSecondaryButtonClick={() => ({})}
-          />
-        </div>
-      )}
-    </>
+                  <ConfirmationDialog
+                    isOpen={resetAllState.hasSucceeded}
+                    title={t("settings.reset")}
+                    icon={checkIcon}
+                    info={t("settings.successfullyReset")}
+                    primaryButtonLabel={t("common.ok")}
+                    handlePrimaryButtonClick={handleResetSucceed}
+                    handleSecondaryButtonClick={() => ({})}
+                  />
+
+                  {resetAllState.hasFailed && (
+                    <div className="info-box-container">
+                      <InfoBox
+                        type="error"
+                        message={
+                          resetAllState.error?.message ??
+                          t("common.somethingwrong")
+                        }
+                      />
+                    </div>
+                  )}
+                </>
+              );
+            default:
+              return null;
+          }
+        })()}
+      </div>
+    </AdminActivityContent>
   );
 };

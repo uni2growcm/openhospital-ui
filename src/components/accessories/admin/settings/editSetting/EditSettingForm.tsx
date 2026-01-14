@@ -1,17 +1,18 @@
-import { Button } from "@mui/material";
+
 import { useFormik } from "formik";
-import { FC, useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { object, string } from "yup";
-import ConfirmationDialog from "~/components/accessories/confirmationDialog/ConfirmationDialog";
-import InfoBox from "~/components/accessories/infoBox/InfoBox";
-import SelectField from "~/components/accessories/selectField/SelectField";
-import TextField from "~/components/accessories/textField/TextField";
+import checkIcon from "../../../../../assets/check-icon.png";
+import "./styles.scss";
 import { SettingDTO, SettingDTOTypeEnum } from "~/generated";
 import { useAppDispatch, useAppSelector } from "~/libraries/hooks/redux";
 import { updateSetting, updateSettingReset } from "~/state/settings";
-import checkIcon from "../../../../../assets/check-icon.png";
-import "./styles.scss";
+import TextField from "~/components/accessories/textField/TextField";
+import SelectField from "~/components/accessories/selectField/SelectField";
+import InfoBox from "~/components/accessories/infoBox/InfoBox";
+import Button from "~/components/accessories/button/Button";
+import ConfirmationDialog from "~/components/accessories/confirmationDialog/ConfirmationDialog";
 
 type IOwnProps = {
   setting: SettingDTO;

@@ -3,18 +3,10 @@
 
 .settings {
   display: flex;
-  margin-top: 20px;
   flex-direction: column;
 }
+
 .actions {
   display: flex;
   justify-content: end;
-}
-.table {
-  display: grid;
-  margin-top: 50px;
-}
-
-.tableContainer {
-  margin-top: 20px;
 }
