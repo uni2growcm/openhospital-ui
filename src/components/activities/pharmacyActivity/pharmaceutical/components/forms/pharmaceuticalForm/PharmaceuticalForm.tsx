@@ -53,7 +53,6 @@ export function PharmaceuticalForm({
         ...data,
         ...values,
       };
-
       onSubmit(medicalDTO);
     },
     [values, onSubmit]

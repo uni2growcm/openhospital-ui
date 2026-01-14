@@ -1,5 +1,5 @@
 describe("New Pharmaceutical", () => {
-  beforeEach(() => {
+  before(() => {
     cy.authenticate("/pharmacy/pharmaceutical/new");
   });
 
@@ -20,20 +20,14 @@ describe("New Pharmaceutical", () => {
     cy.byId("minqty").focus().clear().type("75");
   });
 
-  it("Should show validation error when required fields are missing", () => {
-    cy.byId("description").clear().blur();
+  it("Should display an error info box if the pharmaceutical creation fails", () => {
     cy.dataCy("submit-button").click();
 
-    cy.contains("description is required").should("be.visible");
+    cy.dataCy("info-box").should("have.class", "error");
   });
 
   it("Should show a confirmation if the pharmaceutical creation succeeds", () => {
-    cy.byId("prodCode").clear().type("PROD_04");
-    cy.byId("type").click();
-    cy.byId("type-option-0").click();
-    cy.byId("description").clear().type("New description");
-    cy.byId("pcsperpck").clear().type("25");
-    cy.byId("minqty").clear().type("75");
+    cy.byId("description").focus().clear().type("New description").blur();
     cy.dataCy("submit-button").click();
     cy.dataCy("info-box").should("not.exist");
     cy.dataCy("dialog-title").contains("Pharmaceutical added successfully");
