@@ -50,7 +50,7 @@ export const MovementDTOSchema = z.object({
   date: z.date(),
   quantity: z.number().nullish(),
   supplier: z.number().nullish(),
-  refNo: z.string(),
+  refNo: z.string().min(1, { message: "reference number is required" }),
 });
 
 export function getInitialValues(from?: MovementDTO): Partial<TFormValues> {

@@ -32,10 +32,7 @@ export function DischargeMovementForm({
   const [selectedMedicalWithLots, setSelectedMedicalWithLots] =
     useState<MedicalDTO | null>(null);
 
-  const medicalFilter = useCallback(
-    (medical: MedicalDTO) => !!medical.lots?.length,
-    []
-  );
+  const medicalFilter = useCallback((medical: MedicalDTO) => true, []);
   const {
     medicals,
     options: medicalOptions,
