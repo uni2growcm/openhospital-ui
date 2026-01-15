@@ -32,8 +32,10 @@ export function DischargeMovementForm({
   const [selectedMedicalWithLots, setSelectedMedicalWithLots] =
     useState<MedicalDTO | null>(null);
 
-  const medicalFilter = useCallback((medical: MedicalDTO) => true, []);
-
+  const medicalFilter = useCallback(
+    (medical: MedicalDTO) => !!medical.lots?.length,
+    []
+  );
   const {
     medicals,
     options: medicalOptions,
@@ -72,9 +74,14 @@ export function DischargeMovementForm({
         const lots = await api
           .getLotByMedical({ medCode: medicalCode })
           .toPromise();
+
+        const validLots = (Array.isArray(lots) ? lots : []).filter(
+          (lot) => lot.mainStoreQuantity && lot.mainStoreQuantity > 0
+        );
+
         setSelectedMedicalWithLots({
           ...values.medical!,
-          lots: Array.isArray(lots) ? lots : [],
+          lots: validLots,
         });
       } catch (error) {
         console.error("Error loading lots:", error);
@@ -100,7 +107,10 @@ export function DischargeMovementForm({
           (lot) => lot.ward && lot.quantity && lot.quantity > 0
         ) ?? [];
 
-      if (isEmpty(filledLots)) return;
+      if (isEmpty(filledLots)) {
+        onSubmit?.([]);
+        return;
+      }
 
       const movements: MovementDTO[] = filledLots.map((lot) => ({
         medical: medicals.find((m) => m.code === data.medical)!,
