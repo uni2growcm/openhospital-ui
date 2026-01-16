@@ -4,29 +4,28 @@ import Table from "components/accessories/table/Table";
 import { TFilterField } from "components/accessories/table/filter/types";
 import { PATHS } from "consts";
 import { useTranslation } from "libraries/hooks";
-import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
+import { useWardMedicals } from "libraries/hooks/api";
+import { useAppDispatch } from "libraries/hooks/redux";
 import React, { useCallback, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router";
 import { getMovements } from "state/pharmacy";
 
-export function WardMedicalsTable() {
+interface WardMedicalsProps {
+  wardCode: string;
+}
+
+export function WardMedicalsTable({ wardCode }: WardMedicalsProps) {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
-  const filter = useAppSelector((state) => state.pharmacy.wardStock.filter);
 
-  const data = useAppSelector(
-    (state) => state.pharmacy.wardMedicals.data ?? []
-  );
+  const {
+    groupedMedicals: data,
+    errorMessage,
+    status,
+  } = useWardMedicals(wardCode);
 
-  const status = useAppSelector((state) => state.pharmacy.wardMedicals.status);
-
-  const errorMessage = useAppSelector(
-    (state) =>
-      state.pharmacy.wardMedicals.error?.message || t("errors.somethingwrong")
-  ) as string;
-  
   const handleDischarge = useCallback(
     (row: any) => {
       const combinedId = `${row.code}-${row.wardCode}-${row.lotCode}`;
@@ -80,14 +79,13 @@ export function WardMedicalsTable() {
 
   const formattedData = useMemo(() => {
     return data.map((item) => ({
-      code: item.id?.medical?.code ?? "",
-      lotCode: item.id?.lot?.code ?? "",
-      wardCode: item.id?.ward?.code ?? "",
-      pharmaceutical: item.id?.medical?.description ?? "",
+      ...item,
+      code: item.code ?? "",
+      wardCode,
+      pharmaceutical: item.description ?? "",
       units: "",
-      quantity: (item.in_quantity ?? 0) - (item.out_quantity ?? 0),
     }));
-  }, [data]);
+  }, [data, wardCode]);
 
   useEffect(() => {
     dispatch(getMovements());
@@ -123,13 +121,7 @@ export function WardMedicalsTable() {
                 dateFields={dateFields}
                 showEmptyCell={false}
                 filterColumns={filters}
-                rawData={(data ?? []).map((item) => ({
-                  ...item,
-                  code: item.id?.medical?.code ?? "",
-                  pharmaceutical: item.id?.medical?.description ?? "",
-                  units: item.id?.medical?.prod_code ?? "",
-                  quantity: (item.in_quantity ?? 0) - (item.out_quantity ?? 0),
-                }))}
+                rawData={data}
                 manualFilter={false}
                 onRectify={handleRectify}
                 onDischarge={(row) => handleDischarge(row)}
