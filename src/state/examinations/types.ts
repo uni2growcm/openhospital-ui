@@ -8,5 +8,5 @@ export type IExaminationsState = {
 	getLastByPatientId: ApiResponse<PatientExaminationDTO>;
 	examinationsByPatientId: ApiResponse<Array<PatientExaminationDTO>>;
 	deleteExamination: ApiResponse<null>;
-  printExamination: ApiResponse<Blob>;
+	printExamination: ApiResponse<Blob>;
 };

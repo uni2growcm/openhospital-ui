@@ -18,7 +18,7 @@ export const examinationSlice = createSlice({
 			state.deleteExamination = initial.deleteExamination;
 		},
 		printExaminationReset: (state) => {
-		state.printExamination = initial.printExamination;
+			state.printExamination = initial.printExamination;
 		},
 	},
 	extraReducers: (builder) =>
@@ -110,5 +110,5 @@ export const {
 	createExaminationReset,
 	updateExaminationReset,
 	deleteExaminationReset,
-  printExaminationReset,
+	printExaminationReset,
 } = examinationSlice.actions;

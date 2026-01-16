@@ -61,15 +61,15 @@ export const parseDate = (raw: string, withTimezone: boolean = true) => {
 };
 
 export const parseDateTime = (
-  raw: string,
-  withTimezone: boolean = true
+	raw: string,
+	withTimezone: boolean = true,
 ): string => {
-  if (!raw) return "";
-  const date = isNaN(+raw) ? new Date(raw) : new Date(+raw);
-  const adjustedDate = withTimezone
-    ? new Date(date.getTime() - date.getTimezoneOffset() * 60000)
-    : date;
-  return adjustedDate.toISOString();
+	if (!raw) return '';
+	const date = Number.isNaN(+raw) ? new Date(raw) : new Date(+raw);
+	const adjustedDate = withTimezone
+		? new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+		: date;
+	return adjustedDate.toISOString();
 };
 
 export const fixFilterDateFrom = (date: string | Date): string => {
