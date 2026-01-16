@@ -10,7 +10,6 @@ export const MovementDTOSchema = z.object({
   ward: z.string().optional(),
   lot: LotDTOSchema.optional(),
   date: z.date(),
-  quantity: z.number(),
   supplier: z.number().optional(),
   refNo: z.string(),
 });
@@ -29,7 +28,6 @@ export function getInitialValues(from?: MovementDTO): Partial<TFormValues> {
         }
       : undefined,
     date: from?.date ? new Date(from.date) : undefined,
-    quantity: from?.quantity,
     supplier: from?.supplier?.supId,
     refNo: from?.refNo,
   };

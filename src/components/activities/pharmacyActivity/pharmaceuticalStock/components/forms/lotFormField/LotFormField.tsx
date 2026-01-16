@@ -27,6 +27,8 @@ export function LotFormField<T extends Record<string, any>>({
   medical,
   name,
   showNewLotOption,
+  showMainStoreQuantity = false,
+  showWardQuantity = false,
 }: LotFormFieldProps<T>) {
   const { t } = useTranslation();
   const [newLot, setNewLot] = useState<LotDTO>({
@@ -166,22 +168,33 @@ export function LotFormField<T extends Record<string, any>>({
                   name={`${name}.cost` as Path<T>}
                   disabled={!isNewLotActive}
                 />
+                <TextFormField
+                  type="number"
+                  label={t("pharmacy.lot.fields.quantity")}
+                  control={control}
+                  name={`${name}.quantity` as Path<T>}
+                  disabled={!isNewLotActive}
+                />
               </>
             )}
-            <TextFormField
-              type="number"
-              label={t("pharmacy.lot.fields.mainStoreQuantity")}
-              control={control}
-              name={`${name}.mainStoreQuantity` as Path<T>}
-              disabled={!isNewLotActive}
-            />
-            <TextFormField
-              type="number"
-              label={t("pharmacy.lot.fields.wardsTotalQuantity")}
-              control={control}
-              name={`${name}.wardsTotalQuantity` as Path<T>}
-              disabled={!isNewLotActive}
-            />
+            {showMainStoreQuantity && (
+              <TextFormField
+                type="number"
+                label={t("pharmacy.lot.fields.mainStoreQuantity")}
+                control={control}
+                name={`${name}.mainStoreQuantity` as Path<T>}
+                disabled={!isNewLotActive}
+              />
+            )}
+            {showWardQuantity && (
+              <TextFormField
+                type="number"
+                label={t("pharmacy.lot.fields.wardsTotalQuantity")}
+                control={control}
+                name={`${name}.wardsTotalQuantity` as Path<T>}
+                disabled={!isNewLotActive}
+              />
+            )}
           </>
         )}
       />
