@@ -17,6 +17,7 @@ interface IOwnProps {
 }
 
 const PatientTriageTable: FunctionComponent<IOwnProps> = ({
+	shouldUpdateTable,
 	handleEdit: onEdit,
 	handlePrint: onPrint,
 }) => {
@@ -60,10 +61,10 @@ const PatientTriageTable: FunctionComponent<IOwnProps> = ({
 	}, [dispatch, patientCode]);
 
 	useEffect(() => {
-		if (patientCode) {
+		if (shouldUpdateTable && patientCode) {
 			dispatch(examinationsByPatientId(patientCode));
 		}
-	}, [dispatch, patientCode]);
+	}, [shouldUpdateTable, patientCode, dispatch]);
 
 	const handleEdit = useCallback(
 		(row: any) => {
