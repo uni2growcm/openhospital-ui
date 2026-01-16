@@ -12,3 +12,11 @@
     }
   }
 }
+
+  @media print {
+  .patientSummary,
+  .patientSummary * {
+    font-size: 20px !important;
+    color: #000 !important;
+  }
+}
