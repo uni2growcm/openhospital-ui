@@ -37,43 +37,43 @@ const SideMenu = () => {
 	);
 
 	const menuItems: { key: IAdminSection; icon: ReactNode }[] = [
-    {
-      key: "wards",
-      icon: <AirlineSeatFlat fontSize="small" />,
-    },
-    {
-      key: "diseases",
-      icon: <BlurCircular fontSize="small" />,
-    },
-    {
-      key: "exams",
-      icon: <AssignmentInd fontSize="small" />,
-    },
-    {
-      key: "operations",
-      icon: <Healing fontSize="small" />,
-    },
-    {
-      key: "vaccines",
-      icon: <LocalDrink fontSize="small" />,
-    },
-    {
-      key: "suppliers",
-      icon: <SupervisedUserCircle fontSize="small" />,
-    },
-    {
-      key: "users",
-      icon: <People fontSize="small" />,
-    },
-    {
-      key: "settings",
-      icon: <Tune fontSize="small" />,
-    },
-    {
-      key: "types",
-      icon: <GroupWork fontSize="small" />,
-    },
-  ];
+		{
+			key: 'wards',
+			icon: <AirlineSeatFlat fontSize="small" />,
+		},
+		{
+			key: 'diseases',
+			icon: <BlurCircular fontSize="small" />,
+		},
+		{
+			key: 'exams',
+			icon: <AssignmentInd fontSize="small" />,
+		},
+		{
+			key: 'operations',
+			icon: <Healing fontSize="small" />,
+		},
+		{
+			key: 'vaccines',
+			icon: <LocalDrink fontSize="small" />,
+		},
+		{
+			key: 'suppliers',
+			icon: <SupervisedUserCircle fontSize="small" />,
+		},
+		{
+			key: 'users',
+			icon: <People fontSize="small" />,
+		},
+		{
+			key: 'settings',
+			icon: <Tune fontSize="small" />,
+		},
+		{
+			key: 'types',
+			icon: <GroupWork fontSize="small" />,
+		},
+	];
 
 	return (
 		<div data-cy="admin-side-menu" className={classes.menu}>
@@ -93,10 +93,9 @@ const SideMenu = () => {
 			))}
 			<h6 className={classes.label}>{t('nav.hospital')}</h6>
 			<MenuItem
-				dataCy="hospital-infos"
+				data-cy="hospital-infos"
 				icon={<LocalHospitalSharp fontSize="small" />}
 				label={t(`nav.hospitalInfo`)}
-				onClick={() => {}}
 				expandedContent={
 					<div className={classes.hospitalData}>
 						{hospital.data &&
