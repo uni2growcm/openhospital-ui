@@ -7,7 +7,6 @@ export type TFormValues = z.infer<typeof MovementDTOSchema>;
 
 export type DisChargeMovementProps = {
   loading?: boolean;
-  movement?: MovementDTO;
   onSubmit: (values: MovementDTO[]) => void;
   onCancel: () => void;
 };

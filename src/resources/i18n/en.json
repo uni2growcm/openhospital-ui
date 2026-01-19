@@ -1344,6 +1344,9 @@
     },
     "stock": {
       "refNo": "Ref",
+      "origin": "Origin",
+      "user": "User",
+      "medicalType": "Medical Type",
       "lot": "Lot",
       "expDate": "Exp date",
       "type": "Type",

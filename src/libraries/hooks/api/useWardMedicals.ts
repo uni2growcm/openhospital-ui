@@ -15,16 +15,22 @@ export function useWardMedicals(wardCode: string) {
     status: state.pharmacy.wardMedicals.status,
   }));
 
-  const selectMedical = useCallback((code: number) => {
-    const matches = wardMedicals.filter(
-      (wardMedical) => wardMedical.id!.medical!.code === code
-    );
-    const medical = matches?.[0]?.id?.medical;
+  const selectMedical = useCallback(
+    (code: number) => {
+      const matches = wardMedicals.filter(
+        (wardMedical) => wardMedical.id!.medical!.code === code
+      );
+      const medical = matches?.[0]?.id?.medical;
 
-    return medical
-      ? { ...medical, lots: matches.map((wardMedical) => wardMedical.id!.lot) }
-      : null;
-  }, []);
+      return medical
+        ? {
+            ...medical,
+            lots: matches.map((wardMedical) => wardMedical.id!.lot),
+          }
+        : null;
+    },
+    [wardMedicals]
+  );
 
   const groupedMedicals = useMemo(() => {
     const grouped = wardMedicals.reduce((acc, current) => {
