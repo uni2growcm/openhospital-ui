@@ -9,26 +9,25 @@ import {
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import PatientPicker from "components/accessories/patientPicker/PatientPicker";
 import { LotFormField } from "components/activities/pharmacyActivity/pharmaceuticalStock/components/forms/lotFormField";
-import { MedicalDTO, MovementWardDTO } from "generated";
+import { MedicalDTO, MovementWardDTO, WardDTO } from "generated";
 import { DATETIME_FORMAT } from "libraries/consts";
 import { useTranslation } from "libraries/hooks";
-import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
+import { useWardOptions, useWards } from "libraries/hooks/api";
+import { useAppDispatch } from "libraries/hooks/redux";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { LocaleKey } from "resources/types";
 import { createWardMovement } from "state/pharmacy";
 import {
+  TFormValues,
   createMovementWardDTOSchema,
   getInitialValues,
-  QuantityErrorKey,
-  TFormValues,
-  DestinationErrorKey,
-  LotErrorKey,
 } from "./const";
 import "./style.scss";
 import { DestinationType, IWardDischargeFormProps } from "./types";
 
 export function WardDischargeForm({
-  wardMedical,
+  medical,
   onCancel,
   onSubmit,
 }: IWardDischargeFormProps) {
@@ -36,69 +35,47 @@ export function WardDischargeForm({
   const dispatch = useAppDispatch();
   const [destinationType, setDestinationType] =
     useState<DestinationType>("patient");
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [info, setInfo] = useState<{
     type: "info" | "error" | "success" | null;
     message: string;
   }>({ type: null, message: "" });
   const infoBoxRef = useRef<HTMLDivElement>(null);
 
-  const wards = useAppSelector((s) => s.wards.allWards?.data ?? []);
-  const wardsStatus = useAppSelector((s) => s.wards.allWards?.status);
-
-  const totalStock =
-    (wardMedical.in_quantity ?? 0) - (wardMedical.out_quantity ?? 0);
-
   const MovementWardDTOSchema = useMemo(
-    () => createMovementWardDTOSchema(totalStock, destinationType),
-    [totalStock, destinationType]
+    () =>
+      createMovementWardDTOSchema(medical.wardTotalQuantity, destinationType),
+    [medical.wardTotalQuantity, destinationType]
   );
 
   const {
     control,
     watch,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     getValues,
     setValue,
     trigger,
   } = useForm<TFormValues>({
     resolver: zodResolver(MovementWardDTOSchema),
-    defaultValues: getInitialValues(
-      wardMedical?.id?.medical,
-      wardMedical?.id?.ward
-    ),
+    defaultValues: getInitialValues(medical, medical.ward),
   });
 
   const formValues = watch();
 
-  const wardOptions = useMemo(
-    () =>
-      wards
-        .filter((w) => w.code !== wardMedical?.id?.ward?.code)
-        .map((w) => ({
-          value: w.code ?? "",
-          label: w.description ?? "",
-          ...w,
-        })),
-    [wards, wardMedical?.id?.ward?.code]
+  const wardFilter = useCallback(
+    (ward: WardDTO) => ward.code !== medical.ward.code,
+    [medical.ward]
   );
+
+  const { wards, status: wardsStatus, selectWard } = useWards(wardFilter);
+
+  const wardOptions = useWardOptions(wards);
 
   const submitWardMovement = useCallback(
     async (data: TFormValues) => {
-      if (!wardMedical?.id?.medical || !wardMedical?.id?.ward) {
-        setInfo({
-          type: "error",
-          message: t("pharmacy.stock.ward.failedTocreateDischargeMovement"),
-        });
-        return;
-      }
-
-      setIsSubmitting(true);
-
       try {
         const wardTo =
           destinationType === "ward"
-            ? wards.find((w) => w.code === formValues.wardTo?.code)
+            ? selectWard(formValues.wardTo?.code ?? "")
             : undefined;
         const patient =
           destinationType === "patient" ? formValues.patient : undefined;
@@ -111,7 +88,7 @@ export function WardDischargeForm({
             : t("pharmacy.stock.ward.movementType.ward");
 
         const payload: MovementWardDTO = {
-          ward: wardMedical.id.ward!,
+          ward: medical.ward!,
           date: (data.date as any).toISOString(),
           isPatient: destinationType === "patient",
           patient,
@@ -122,7 +99,7 @@ export function WardDischargeForm({
               ? data.weight ?? undefined
               : undefined,
           description: description ?? "",
-          medical: wardMedical.id.medical!,
+          medical: medical,
           quantity: data.quantity,
           units: t("pharmacy.stock.ward.pieces"),
           wardTo,
@@ -138,11 +115,9 @@ export function WardDischargeForm({
           type: "error",
           message: t("pharmacy.stock.ward.failedTocreateDischargeMovement"),
         });
-      } finally {
-        setIsSubmitting(false);
       }
     },
-    [wardMedical, wards, destinationType, formValues, t, onSubmit, dispatch]
+    [medical, selectWard, destinationType, formValues, t, onSubmit, dispatch]
   );
 
   const handleDischargeMovement = useCallback(async () => {
@@ -155,14 +130,6 @@ export function WardDischargeForm({
 
     await submitWardMovement(getValues());
   }, [getValues, submitWardMovement, trigger]);
-
-  const getLotError = () => {
-    const error = errors.lot?.message;
-    if (!error) return undefined;
-
-    const errorKey = error as LotErrorKey;
-    return t(errorKey);
-  };
 
   const onBlurCallback = useCallback(
     (fieldName: keyof TFormValues) =>
@@ -177,25 +144,13 @@ export function WardDischargeForm({
     [setValue, trigger]
   );
 
-  const getQuantityError = () => {
-    const error = errors.quantity?.message;
+  const getErrorMessage = (path: keyof TFormValues) => {
+    const error = errors[path]?.message;
     if (!error) return undefined;
-    const errorKey = error as QuantityErrorKey;
+    const errorKey = error as LocaleKey;
     if (errorKey === "pharmacy.stock.ward.quantityNotExceedoTtalStock") {
-      return `${t(errorKey)} (${totalStock})`;
+      return `${t(errorKey)} (${medical.wardTotalQuantity})`;
     }
-    return t(errorKey);
-  };
-
-  const getDestinationError = (key: "patient" | "wardTo") => {
-    const error = errors[key];
-    if (!error) return undefined;
-    const message = error.message;
-
-    if (!message) return undefined;
-
-    const errorKey = message as DestinationErrorKey;
-
     return t(errorKey);
   };
   return (
@@ -215,13 +170,13 @@ export function WardDischargeForm({
             label={t("pharmacy.stock.ward.pharmaceutical")}
             name="medical"
             disabled
-            value={wardMedical?.id?.medical?.description || ""}
+            value={medical?.description || ""}
           />
         </div>
       </div>
 
       <div className="wardDischargeForm__totalStock">
-        {t("pharmacy.stock.ward.totalStock")}: {totalStock}
+        {t("pharmacy.stock.ward.totalStock")}: {medical.wardTotalQuantity}
       </div>
 
       <div className="wardDischargeForm__section">
@@ -266,7 +221,7 @@ export function WardDischargeForm({
           label={t("pharmacy.stock.ward.selectPatient")}
           fieldValue={formValues.patient?.code ?? ""}
           isValid={!errors.patient}
-          errorText={getDestinationError("patient") || ""}
+          errorText={getErrorMessage("patient") || ""}
           onBlur={onBlurCallback("patient")}
         />
       )}
@@ -287,7 +242,7 @@ export function WardDischargeForm({
           label={t("pharmacy.stock.ward.quantity")}
           control={control}
           name="quantity"
-          helperText={getQuantityError()}
+          helperText={getErrorMessage("quantity")}
           error={!!errors.quantity}
         />
       </div>
@@ -295,12 +250,14 @@ export function WardDischargeForm({
       <div className="form-grid-layout gap-2 w-full">
         <LotFormField
           control={control}
-          medical={wardMedical?.id?.medical as MedicalDTO}
+          medical={medical as MedicalDTO}
           name="lot"
-          showNewLotOption={(wardMedical?.id?.medical?.lots ?? []).length === 0}
+          showNewLotOption={false}
         />
-        {getLotError() && (
-          <div className="lot-error col-span-full">{getLotError()}</div>
+        {getErrorMessage("lot") && (
+          <div className="lot-error col-span-full">
+            {getErrorMessage("lot")}
+          </div>
         )}
       </div>
 

@@ -3,10 +3,19 @@ import { useCallback, useEffect, useMemo } from "react";
 import { getWardMedicals } from "state/pharmacy";
 import { useAppDispatch, useAppSelector } from "../redux";
 import { useTranslation } from "../useTranslation";
+import { useMovements } from "./useMovements";
+
+export const computeInQuantity = (data: MedicalWardDTO[]) =>
+  data.reduce((acc, current) => acc + (current.in_quantity || 0), 0);
+
+export const computeOutQuantity = (data: MedicalWardDTO[]) =>
+  data.reduce((acc, current) => acc + (current.out_quantity || 0), 0);
 
 export function useWardMedicals(wardCode: string) {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
+
+  const { selectMedical: selectMedicalFromMain } = useMovements();
 
   const { wardMedicals, errorMessage, status } = useAppSelector((state) => ({
     wardMedicals: state.pharmacy.wardMedicals.data ?? [],
@@ -21,15 +30,28 @@ export function useWardMedicals(wardCode: string) {
         (wardMedical) => wardMedical.id!.medical!.code === code
       );
       const medical = matches?.[0]?.id?.medical;
+      const mainMedical = selectMedicalFromMain(medical?.code ?? 0);
 
-      return medical
-        ? {
-            ...medical,
-            lots: matches.map((wardMedical) => wardMedical.id!.lot),
-          }
-        : null;
+      if (!medical || !mainMedical) {
+        return null;
+      }
+
+      const inQuantity = computeInQuantity(matches);
+      const outQuantity = computeOutQuantity(matches);
+
+      const result = {
+        ...medical,
+
+        lots: mainMedical.lots,
+        inQuantity,
+        outQuantity,
+        wardTotalQuantity: inQuantity - outQuantity,
+        ward: wardMedicals[0].id!.ward!,
+      };
+
+      return result;
     },
-    [wardMedicals]
+    [wardMedicals, selectMedicalFromMain]
   );
 
   const medicals = useMemo(() => {

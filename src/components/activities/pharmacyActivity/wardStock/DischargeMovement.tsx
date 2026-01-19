@@ -1,7 +1,8 @@
 import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import { PATHS } from "consts";
-import { MedicalWardDTO, MovementWardDTO } from "generated";
+import { MovementWardDTO } from "generated";
+import { useWardMedicals } from "libraries/hooks/api";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, {
   useCallback,
@@ -31,15 +32,11 @@ export function WardDischargeMovement() {
   const wardCode = parts.shift();
   const lotCode = parts.join("-");
 
+  const { selectMedical } = useWardMedicals(wardCode || "0");
+
+  const medical = useMemo(() => selectMedical(+(medId ?? "0")), [medId]);
+
   const dispatch = useAppDispatch();
-  const wardMedical = useAppSelector((state) =>
-    state.pharmacy.wardMedicals.data?.find(
-      (item: MedicalWardDTO) =>
-        item?.id?.medical?.code === Number(medId) &&
-        item?.id?.ward?.code === wardCode &&
-        item?.id?.lot?.code === lotCode
-    )
-  );
 
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -113,13 +110,13 @@ export function WardDischargeMovement() {
     <PharmacyActivityContent
       data-cy="ward-discharge-movement"
       title={`${t("pharmacy.stock.ward.dischargeMovement")} (${
-        wardMedical?.id?.ward.description
+        medical?.ward.description
       })`}
     >
       <div className="discharge-movement">
-        {wardMedical && (
+        {medical && (
           <WardDischargeForm
-            wardMedical={wardMedical}
+            medical={medical as any}
             onSubmit={handleSubmit}
             onCancel={() => navigate(PATHS.pharmacy_ward_stock)}
           />

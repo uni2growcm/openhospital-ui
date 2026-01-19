@@ -173,14 +173,14 @@ export function LotFormField<T extends Record<string, any>>({
               label={t("pharmacy.lot.fields.mainStoreQuantity")}
               control={control}
               name={`${name}.mainStoreQuantity` as Path<T>}
-              disabled={!isNewLotActive}
+              disabled
             />
             <TextFormField
               type="number"
               label={t("pharmacy.lot.fields.wardsTotalQuantity")}
               control={control}
               name={`${name}.wardsTotalQuantity` as Path<T>}
-              disabled={!isNewLotActive}
+              disabled
             />
           </>
         )}
