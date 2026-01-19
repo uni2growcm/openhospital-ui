@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { isValid, parseISO } from "date-fns";
 import {
+  GetLotByMedicalRequest,
   GetMedicalRequest,
   GetMovementWardRequest,
   MedicalStockMovementTypeApi,
@@ -346,6 +347,17 @@ export const printPharmaceuticalStockWardExcel = createAsyncThunk(
         )
       );
       return result;
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.response);
+    }
+  }
+);
+
+export const getMedicalLots = createAsyncThunk(
+  "pharmacy/getMedicalLots",
+  async (payload: GetLotByMedicalRequest, thunkApi) => {
+    try {
+      return firstValueFrom(api.getLotByMedical(payload));
     } catch (error: any) {
       return thunkApi.rejectWithValue(error.response);
     }

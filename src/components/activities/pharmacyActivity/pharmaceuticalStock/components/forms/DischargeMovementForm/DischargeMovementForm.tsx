@@ -27,7 +27,7 @@ export function DischargeMovementForm({
 
   const dispatch = useAppDispatch();
 
-  const { selectMedical, groupedMedicals: medicals } = useMovements();
+  const { selectMedical, medicals } = useMovements();
 
   const wardFilter = useCallback((ward: WardDTO) => !!ward.pharmacy, []);
 
@@ -91,7 +91,6 @@ export function DischargeMovementForm({
         dueDate: lot.dueDate ? new Date(lot.dueDate) : undefined,
         ward: "",
         quantity: undefined,
-        mainStoreQuantity: lot.mainStoreQuantity,
       })) as z.infer<typeof LotDTOSchema>[]
     );
   }, [values.medical, setValue]);
@@ -130,7 +129,6 @@ export function DischargeMovementForm({
           />
         </div>
         <TextFormField
-          type="string"
           label={t("pharmacy.form.fields.refNo")}
           control={control}
           name="refNo"

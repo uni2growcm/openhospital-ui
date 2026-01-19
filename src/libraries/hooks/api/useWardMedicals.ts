@@ -32,7 +32,7 @@ export function useWardMedicals(wardCode: string) {
     [wardMedicals]
   );
 
-  const groupedMedicals = useMemo(() => {
+  const medicals = useMemo(() => {
     const grouped = wardMedicals.reduce((acc, current) => {
       const code = current.id!.medical!.code!;
       const values = acc[code] ?? [];
@@ -58,5 +58,5 @@ export function useWardMedicals(wardCode: string) {
     dispatch(getWardMedicals({ wardCode }));
   }, [wardCode, dispatch]);
 
-  return { wardMedicals, groupedMedicals, selectMedical, errorMessage, status };
+  return { wardMedicals, medicals, selectMedical, errorMessage, status };
 }

@@ -14,6 +14,7 @@ import { opdSlice } from "./opds";
 import { operationSlice } from "./operations";
 import { patientSlice } from "./patients";
 import { permissionSlice } from "./permissions";
+import { pharmacySlice } from "./pharmacy";
 import { priceSlice } from "./prices";
 import { summarySlice } from "./summary";
 import { supplierSlice } from "./suppliers";
@@ -26,7 +27,6 @@ import { userSlice } from "./users";
 import { vaccineSlice } from "./vaccines";
 import { visitSlice } from "./visits";
 import { wardSlice } from "./ward";
-import { pharmacySlice } from "./pharmacy";
 
 const reducer = combineReducers({
   main: mainSlice.reducer,

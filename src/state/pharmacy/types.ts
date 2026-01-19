@@ -1,4 +1,5 @@
 import {
+  LotDTO,
   MedicalDTO,
   MedicalTypeDTO,
   MedicalWardDTO,
@@ -28,6 +29,7 @@ export type IPharmacyState = {
   wardStock: {
     filter: TWardStockFIlter;
   };
+  medicalLots: ApiResponse<Array<LotDTO>>;
   createWardMovement: ApiResponse<boolean>;
   getMedicalWardByWardMedicalAndLot: ApiResponse<MedicalWardDTO>;
   printPharmaceuticalStockWardPdf: ApiResponse<Blob>;

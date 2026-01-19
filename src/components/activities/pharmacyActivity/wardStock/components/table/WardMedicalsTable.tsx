@@ -20,11 +20,7 @@ export function WardMedicalsTable({ wardCode }: WardMedicalsProps) {
 
   const dispatch = useAppDispatch();
 
-  const {
-    groupedMedicals: data,
-    errorMessage,
-    status,
-  } = useWardMedicals(wardCode);
+  const { medicals: data, errorMessage, status } = useWardMedicals(wardCode);
 
   const handleDischarge = useCallback(
     (row: any) => {
