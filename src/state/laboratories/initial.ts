@@ -13,4 +13,5 @@ export const initial: ILaboratoriesState = {
 	getLabByCode: new ApiResponse({ status: 'IDLE' }),
 	getLabWithRowsByCode: new ApiResponse({ status: 'IDLE' }),
 	searchLabs: new ApiResponse({ status: 'IDLE' }),
+	printExamRequest: new ApiResponse({ status: 'IDLE' }),
 };

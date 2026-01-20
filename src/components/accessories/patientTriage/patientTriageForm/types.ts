@@ -10,6 +10,8 @@ interface IOwnProps {
 	creationMode: boolean;
 	shouldResetForm: boolean;
 	resetFormCallback: () => void;
+	saveAndPrint: (examination: PatientExaminationDTO) => void;
+	printButtonLabel: string;
 }
 
 export type TProps = IOwnProps;

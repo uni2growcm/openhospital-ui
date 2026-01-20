@@ -577,10 +577,13 @@
 		"softDelete": "Marquer comme supprimé",
 		"softDeleteConfirmation": "Êtes-vous sûr de marquer cet élément comme supprimé ?",
 		"cancelMessage": "Are you sure to cancel this operation ? All unsaved data will be lost.",
-		"back": "Back",
-		"backToEdit": "No, keep editing",
-		"discardMessage": "Are you sure to discard this operation ? All unsaved data will be lost.",
-		"printData": "Imprimer les données"
+		"back": "Retour",
+		"backToEdit": "Non, continuer l'édition",
+		"discardMessage": "Êtes-vous sûr de vouloir abandonner cette opération ? Toutes les données non enregistrées seront perdues.",
+    "printData": "Imprimer les données",
+		"saveandprint": "Enregistrer et imprimer",
+		"updateandprint": "Mettre à jour et imprimer",
+		"failedtodownloadthereport": "Échec de téléchargement du rapport"
 	},
 	"permission": {
 		"denied": "Autorisation refusée",
@@ -699,7 +702,8 @@
 			"open": "EN COURS",
 			"done": "TERMINÉ"
 		},
-		"previousentries": "Examen précédentes"
+		"previousentries": "Examen précédentes",
+		"print_exam_request": "Imprimer les examens demandés"
 	},
 	"admission": {
 		"code": "Code d'admission",
