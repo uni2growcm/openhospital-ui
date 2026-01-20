@@ -1,63 +1,35 @@
-import { operationRowsDTO } from '../fixtures/operationRowsDTO';
+import { HttpResponse, http } from 'msw';
 import { operationsDTO } from '../fixtures/operationsDTO';
-import { badRequest, http } from '../utils';
+import { badRequest } from '../utils';
+
+type OperationPayload = {
+	code?: string;
+	remarks?: string;
+	id?: number;
+};
 
 export const operations = [
-	http.get('/operations', async ({ response }) => {
-		return response(200).json(operationsDTO);
-	}),
-	http.get('/operations/rows/search/admission', async ({ response }) => {
-		return response(200).json(operationRowsDTO);
-	}),
-	http.get('/operations/rows/search/patient', async ({ response }) => {
-		return response(200).json(operationRowsDTO);
-	}),
-	http.post('/operations/rows', async ({ request, response }) => {
-		const body = await request.json();
-		if (body.remarks === 'fail') {
-			return response.untyped(badRequest({}));
+	http.get('/operations', () =>
+		HttpResponse.json(operationsDTO, { status: 200 }),
+	),
+
+	http.post('/operations/rows', async ({ request }) => {
+		const body = (await request.json()) as OperationPayload | null;
+
+		if (body?.remarks === 'fail') {
+			return HttpResponse.json(badRequest({}), { status: 400 });
 		}
-		return response(201).json(body);
+
+		return HttpResponse.json(body, { status: 201 });
 	}),
-	http.put('/operations/rows', async ({ request, response }) => {
-		const body = await request.json();
-		if (body.remarks === 'fail') {
-			return response.untyped(badRequest({}));
+
+	http.put('/operations/rows', async ({ request }) => {
+		const body = (await request.json()) as OperationPayload | null;
+
+		if (body?.remarks === 'fail') {
+			return HttpResponse.json(badRequest({}), { status: 400 });
 		}
-		return response(200).json(body.id ?? 0);
-	}),
-	http.delete('/operations/rows/{code}', async ({ params, response }) => {
-		const code = params.code;
-		if (code === 'fail') {
-			return response.untyped(badRequest({}));
-		}
-		return response(200).json(true);
-	}),
-	http.post('/operations', async ({ request, response }) => {
-		const body = await request.json();
-		if (body.code === 'FAIL') {
-			return response.untyped(
-				badRequest({ message: 'Fail to create operation' }),
-			);
-		}
-		return response(201).json(body);
-	}),
-	http.put('/operations/{code}', async ({ request, response }) => {
-		const body = await request.json();
-		if (body.code === 'FAIL') {
-			return response.untyped(
-				badRequest({ message: 'Fail to update operation' }),
-			);
-		}
-		return response(200).json(body);
-	}),
-	http.delete('/operations/{code}', async ({ params, response }) => {
-		const code = params.code;
-		if (code === 'FAIL') {
-			return response.untyped(
-				badRequest({ message: 'Fail to update operation' }),
-			);
-		}
-		return response(200).json(true);
+
+		return HttpResponse.json(body?.id ?? 0, { status: 200 });
 	}),
 ];

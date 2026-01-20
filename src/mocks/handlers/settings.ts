@@ -1,13 +1,16 @@
+import { HttpResponse } from 'msw';
 import type { UserSettingDTO } from '~/generated';
 import { http } from '../utils';
 
 export const settings = [
-	http.get('/usersettings', async ({ response }) => {
-		return response(200).json([
-			{ id: 1, configName: 'landing', configValue: '/', user: 'john' },
-		]);
+	http.get('/usersettings', () => {
+		return HttpResponse.json(
+			[{ id: 1, configName: 'landing', configValue: '/', user: 'john' }],
+			{ status: 200 },
+		);
 	}),
-	http.get('/usersettings/{configName}', async ({ response, params }) => {
+
+	http.get('/usersettings/{configName}', ({ params }) => {
 		const setting =
 			params.configName === 'dashboard'
 				? {}
@@ -17,6 +20,7 @@ export const settings = [
 						configValue: 'DxD',
 						user: 'john',
 					};
-		return response(200).json(setting as UserSettingDTO);
+
+		return HttpResponse.json(setting as UserSettingDTO, { status: 200 });
 	}),
 ];

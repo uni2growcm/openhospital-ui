@@ -33,6 +33,8 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
 	submitButtonLabel,
 	resetButtonLabel,
 	isLoading,
+	saveAndPrint,
+	printButtonLabel,
 }) => {
 	const { t } = useTranslation();
 	const validationSchema = object({
@@ -390,6 +392,43 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
 					<div className="submit_button">
 						<Button type="submit" variant="contained" disabled={isLoading}>
 							{submitButtonLabel}
+						</Button>
+					</div>
+					<div className="submit_button">
+						<Button
+							type="button"
+							variant="contained"
+							disabled={isLoading}
+							onClick={async () => {
+								// Validate form before saving and printing
+								const errors = await formik.validateForm();
+								if (Object.keys(errors).length === 0) {
+									const formattedValues = formatAllFieldValues(
+										fields,
+										formik.values,
+									);
+									saveAndPrint?.({
+										...formattedValues,
+										pex_auscultation: isEmpty(formattedValues.pex_auscultation)
+											? null
+											: formattedValues.pex_auscultation,
+										pex_diuresis_desc: isEmpty(
+											formattedValues.pex_diuresis_desc,
+										)
+											? null
+											: formattedValues.pex_diuresis_desc,
+										pex_bowel_desc: isEmpty(formattedValues.pex_bowel_desc)
+											? null
+											: formattedValues.pex_bowel_desc,
+									} as any);
+								} else {
+									Object.keys(errors).forEach((key) => {
+										formik.setFieldTouched(key, true);
+									});
+								}
+							}}
+						>
+							{printButtonLabel}
 						</Button>
 					</div>
 					<div className="reset_button">

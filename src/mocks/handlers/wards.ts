@@ -1,26 +1,41 @@
+import { HttpResponse } from 'msw';
 import { wards } from '../fixtures/wardDTO';
-import { badRequest, http, noContent } from '../utils';
+import { badRequest, http } from '../utils';
+
+type WardBody = {
+	code?: string;
+};
 
 export const wardsHandlers = [
-	http.get('/wards', async ({ response }) => {
-		return response(200).json(wards);
+	http.get('/wards', () => {
+		return HttpResponse.json(wards, { status: 200 });
 	}),
-	http.post('/wards', async ({ request, response }) => {
-		const body = await request.json();
-		return body.code === 'FL'
-			? response.untyped(badRequest({ message: 'Fail to create ward' }))
-			: response(201).json(body);
+
+	http.post('/wards', async ({ request }) => {
+		const body = (await request.json()) as WardBody | null;
+
+		return body?.code === 'FL'
+			? HttpResponse.json(badRequest({ message: 'Fail to create ward' }), {
+					status: 400,
+				})
+			: HttpResponse.json(body, { status: 201 });
 	}),
-	http.put('/wards', async ({ request, response }) => {
-		const body = await request.json();
-		return body.code === 'FL'
-			? response.untyped(badRequest({ message: 'Fail to update ward' }))
-			: response(200).json(body);
+
+	http.put('/wards', async ({ request }) => {
+		const body = (await request.json()) as WardBody | null;
+
+		return body?.code === 'FL'
+			? HttpResponse.json(badRequest({ message: 'Fail to update ward' }), {
+					status: 400,
+				})
+			: HttpResponse.json(body, { status: 200 });
 	}),
-	http.delete('/wards/{code}', async ({ params, response }) => {
-		const code = params.code;
-		return code === 'FAIL'
-			? response.untyped(badRequest({ message: 'Fail to delete ward' }))
-			: response.untyped(noContent());
+
+	http.delete('/wards/{code}', ({ params }) => {
+		return params.code === 'FAIL'
+			? HttpResponse.json(badRequest({ message: 'Fail to delete ward' }), {
+					status: 400,
+				})
+			: new HttpResponse(null, { status: 204 });
 	}),
 ];

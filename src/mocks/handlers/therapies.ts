@@ -1,40 +1,62 @@
 import { format } from 'date-fns';
+import { HttpResponse } from 'msw';
 import { therapyRowDTO } from '../fixtures/therapyRowDTO';
-import { badRequest, http, noContent } from '../utils';
+import { badRequest, http } from '../utils';
+
+type TherapyBody = {
+	startDate?: number | string;
+	endDate?: number | string;
+	therapyID?: number | string;
+};
 
 export const therapies = [
-	http.post('/therapies', async ({ request, response }) => {
-		const body = await request.json();
+	http.post('/therapies', async ({ request }) => {
+		const body = (await request.json()) as TherapyBody | null;
+
+		if (!body || body.startDate === undefined || body.endDate === undefined) {
+			return HttpResponse.json(badRequest({}), { status: 400 });
+		}
+
 		body.startDate = format(new Date(+body.startDate), 'yyyy-MM-dd HH:mm:ss');
 		body.endDate = format(new Date(+body.endDate), 'yyyy-MM-dd HH:mm:ss');
+
 		if (body.therapyID?.toString() === '25') {
-			return response.untyped(badRequest({}));
+			return HttpResponse.json(badRequest({}), { status: 400 });
 		}
-		return response(201).json(body);
+
+		return HttpResponse.json(body, { status: 201 });
 	}),
-	http.post('/therapies/replace', async ({ request, response }) => {
-		const body = (await request.json())?.[0];
-		if (!body) {
-			return response.untyped(badRequest({ message: 'Invalid request body' }));
+
+	http.post('/therapies/replace', async ({ request }) => {
+		const body = (await request.json()) as unknown[];
+
+		const first = body?.[0];
+		if (!first) {
+			return HttpResponse.json(
+				badRequest({ message: 'Invalid request body' }),
+				{ status: 400 },
+			);
 		}
-		if (body.toString() === '42') {
-			return response.untyped(badRequest({}));
+
+		if (first.toString() === '42') {
+			return HttpResponse.json(badRequest({}), { status: 400 });
 		}
-		return response(201).json(body);
+
+		return HttpResponse.json(first, { status: 201 });
 	}),
-	http.get('/therapies/{code_patient}', async ({ params, response }) => {
-		const code = params.code_patient;
-		if (code === '10000') {
-			return response.untyped(badRequest({}));
+
+	http.get('/therapies/{code_patient}', ({ params }) => {
+		if (params.code_patient === '10000') {
+			return HttpResponse.json(badRequest({}), { status: 400 });
 		}
-		if (code === '21266') {
-			return response.untyped(noContent());
+
+		if (params.code_patient === '21266') {
+			return new HttpResponse(null, { status: 204 });
 		}
-		return response(200).json([
-			therapyRowDTO,
-			therapyRowDTO,
-			therapyRowDTO,
-			therapyRowDTO,
-		]);
+
+		return HttpResponse.json(
+			[therapyRowDTO, therapyRowDTO, therapyRowDTO, therapyRowDTO],
+			{ status: 200 },
+		);
 	}),
 ];

@@ -20,6 +20,17 @@
   .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] {
     padding: 12px !important;
   }
+
+  .MuiAutocomplete-paper {
+    .MuiAutocomplete-option {
+      white-space: normal;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      padding: 8px 12px !important;
+      min-height: auto;
+      height: auto;
+    }
+  }
 }
 
 .autocomplete__light {

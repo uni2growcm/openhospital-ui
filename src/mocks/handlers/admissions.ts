@@ -1,6 +1,7 @@
+import { HttpResponse } from 'msw';
 import type { AdmissionDTO } from '~/generated';
 import { admissionDTO } from '../fixtures/admissionDTO';
-import { badRequest, http, noContent } from '../utils';
+import { badRequest, http } from '../utils';
 
 const dischargeProps = {
 	disDate: '2021-08-27T10:19:44.000Z',
@@ -29,62 +30,102 @@ const admissions = [
 	},
 ];
 
+type AdmissionBody = {
+	admDate?: string;
+	note?: string;
+};
+
 export const admissionsHandlers = [
-	http.post('/admissions', async ({ request, response }) => {
-		const body = await request.json();
-		if (body.admDate === 'fail') {
-			return response.untyped(badRequest({ message: 'Request failed' }));
+	// CREATE
+	http.post('/admissions', async ({ request }) => {
+		const body = (await request.json()) as AdmissionBody | null;
+
+		if (body?.admDate === 'fail') {
+			return HttpResponse.json(badRequest({ message: 'Request failed' }), {
+				status: 400,
+			});
 		}
-		return response(201).json(body);
+
+		return HttpResponse.json(body, { status: 201 });
 	}),
-	http.put('/admissions', async ({ request, response }) => {
-		const body = await request.json();
-		if (body.note === 'fail') {
-			return response.untyped(badRequest({ message: 'Request failed' }));
+
+	// UPDATE
+	http.put('/admissions', async ({ request }) => {
+		const body = (await request.json()) as AdmissionBody | null;
+
+		if (body?.note === 'fail') {
+			return HttpResponse.json(badRequest({ message: 'Request failed' }), {
+				status: 400,
+			});
 		}
-		return response(200).json(body);
+
+		return HttpResponse.json(body, { status: 200 });
 	}),
-	http.get('/admissions', async ({ response }) => {
-		return response(200).json({
-			data: admissions as AdmissionDTO[],
-			pageInfo: {},
-		});
+
+	// LIST
+	http.get('/admissions', () => {
+		return HttpResponse.json(
+			{
+				data: admissions as AdmissionDTO[],
+				pageInfo: {},
+			},
+			{ status: 200 },
+		);
 	}),
-	http.get(
-		'/admissions/patient/{patientCode}',
-		async ({ params, response }) => {
-			const code = params.patientCode;
-			if (code === '10000') {
-				return response.untyped(badRequest({ message: 'Request failed' }));
-			}
-			if (code === '21266') {
-				return response.untyped(noContent());
-			}
-			return response(200).json(admissions as AdmissionDTO[]);
-		},
-	),
-	http.get('/admissions/current', async ({ query, response }) => {
-		const code = query.get('patientCode');
+
+	// BY PATIENT
+	http.get('/admissions/patient/{patientCode}', ({ params }) => {
+		if (params.patientCode === '10000') {
+			return HttpResponse.json(badRequest({ message: 'Request failed' }), {
+				status: 400,
+			});
+		}
+
+		if (params.patientCode === '21266') {
+			return new HttpResponse(null, { status: 204 });
+		}
+
+		return HttpResponse.json(admissions as AdmissionDTO[], { status: 200 });
+	}),
+
+	// CURRENT ADMISSION
+	http.get('/admissions/current', ({ request }) => {
+		const code = new URL(request.url).searchParams.get('patientCode');
+
 		if (code === '50') {
-			return response.untyped(badRequest({ message: 'Request failed' }));
+			return HttpResponse.json(badRequest({ message: 'Request failed' }), {
+				status: 400,
+			});
 		}
+
 		if (code === '21266') {
-			return response.untyped(noContent());
+			return new HttpResponse(null, { status: 204 });
 		}
-		return response(200).json({ ...admissionDTO, id: 0 });
+
+		return HttpResponse.json({ ...admissionDTO, id: 0 }, { status: 200 });
 	}),
-	http.post('/admissions/discharge', async ({ request, response }) => {
-		const body = await request.json();
-		if (body.note === 'fail') {
-			return response.untyped(badRequest({ message: 'Request failed' }));
+
+	// DISCHARGE
+	http.post('/admissions/discharge', async ({ request }) => {
+		const body = (await request.json()) as AdmissionBody | null;
+
+		if (body?.note === 'fail') {
+			return HttpResponse.json(badRequest({ message: 'Request failed' }), {
+				status: 400,
+			});
 		}
-		return response(200).json(true);
+
+		return HttpResponse.json(true, { status: 200 });
 	}),
-	http.get('/admissions/discharges', async ({ response }) => {
-		// Note: original code has req.jsonBody() but it's a GET, so no body. Assuming no fail case for GET.
-		return response(200).json({
-			data: admissions as AdmissionDTO[],
-			pageInfo: {},
-		});
+
+	// DISCHARGES LIST
+	http.get('/admissions/discharges', () => {
+		return HttpResponse.json(
+			{
+				data: admissions as AdmissionDTO[],
+				pageInfo: {},
+			},
+			{ status: 200 },
+		);
 	}),
 ];

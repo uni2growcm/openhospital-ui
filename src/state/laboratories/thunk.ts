@@ -6,11 +6,13 @@ import {
 	LaboratoriesApi,
 	type LaboratoryDTO,
 	type LabWithRowsDTO,
+	ReportsApi,
 	type UpdateLaboratoryRequest,
 } from '../../generated';
 import { customConfiguration } from '../../libraries/apiUtils/configuration';
 
 const api = new LaboratoriesApi(customConfiguration());
+const apiReport = new ReportsApi(customConfiguration());
 
 export const searchLabs = createAsyncThunk(
 	'laboratories/searchLabs',
@@ -123,4 +125,21 @@ export const cancelLab = createAsyncThunk(
 		firstValueFrom(
 			wrapper(() => api.deleteExamRequest({ code: code ?? -1 })),
 		).catch((error) => thunkApi.rejectWithValue(error.response)),
+);
+
+export const printExamRequests = createAsyncThunk<Blob, number | undefined>(
+	'reports/patientexamrequest',
+	async (patientId: number | undefined, thunkApi) =>
+		firstValueFrom(
+			wrapper(() =>
+				apiReport.printPatientExamRequestPdf({ patientId: patientId ?? -1 }),
+			),
+		)
+			.then((response) => {
+				// API now returns actual PDF binary data as Blob
+				return response as unknown as Blob;
+			})
+			.catch((error) => {
+				return thunkApi.rejectWithValue(error.response);
+			}),
 );

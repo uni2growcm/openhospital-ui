@@ -1,35 +1,54 @@
+import { HttpResponse } from 'msw';
 import { admissionTypesDTO } from '../fixtures/admissionsTypesDTO';
 import { badRequest, http } from '../utils';
 
+type AdmissionTypeBody = {
+	code?: string;
+};
+
 export const admissionTypes = [
-	http.get('/admissiontypes', async ({ response }) => {
-		return response(200).json(admissionTypesDTO);
+	// LIST
+	http.get('/admissiontypes', () => {
+		return HttpResponse.json(admissionTypesDTO, { status: 200 });
 	}),
-	http.post('/admissiontypes', async ({ request, response }) => {
-		const body = await request.json();
-		if (body.code === 'FAIL') {
-			return response.untyped(
+
+	// CREATE
+	http.post('/admissiontypes', async ({ request }) => {
+		const body = (await request.json()) as AdmissionTypeBody | null;
+
+		if (body?.code === 'FAIL') {
+			return HttpResponse.json(
 				badRequest({ message: 'Fail to create admission type' }),
+				{ status: 400 },
 			);
 		}
-		return response(201).json(body);
+
+		return HttpResponse.json(body, { status: 201 });
 	}),
-	http.put('/admissiontypes', async ({ request, response }) => {
-		const body = await request.json();
-		if (body.code === 'FAIL') {
-			return response.untyped(
+
+	// UPDATE
+	http.put('/admissiontypes', async ({ request }) => {
+		const body = (await request.json()) as AdmissionTypeBody | null;
+
+		if (body?.code === 'FAIL') {
+			return HttpResponse.json(
 				badRequest({ message: 'Fail to update admission type' }),
+				{ status: 400 },
 			);
 		}
-		return response(200).json(body);
+
+		return HttpResponse.json(body, { status: 200 });
 	}),
-	http.delete('/admissiontypes/{code}', async ({ params, response }) => {
-		const code = params.code;
-		if (code === 'FAIL') {
-			return response.untyped(
+
+	// DELETE
+	http.delete('/admissiontypes/{code}', ({ params }) => {
+		if (params.code === 'FAIL') {
+			return HttpResponse.json(
 				badRequest({ message: 'Fail to delete admission type' }),
+				{ status: 400 },
 			);
 		}
-		return response(200).json(true);
+
+		return HttpResponse.json(true, { status: 200 });
 	}),
 ];
