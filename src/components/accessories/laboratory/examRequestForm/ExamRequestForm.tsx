@@ -177,76 +177,76 @@ const ExamRequestForm: FC<ExamRequestProps> = ({
 	const isLoading = createLabRequestStatus === 'LOADING';
 
 	return (
-    <div className="patientExamRequestForm">
-      <h5 className="">{t("lab.examrequest")}</h5>
+		<div className="patientExamRequestForm">
+			<h5 className="">{t('lab.examrequest')}</h5>
 
-      <form
-        className="patientExamRequestForm__form"
-        onSubmit={formik.handleSubmit}
-      >
-        <div className="row start-sm center-xs">
-          {!patient && (
-            <div className="patientExamRequestForm__item exam-field col-5">
-              <PatientPicker
-                theme={"regular"}
-                fieldName="patientId"
-                initialValue={selectedPatient}
-                fieldValue={formik.values.patientId}
-                label={t("opd.patient")}
-                isValid={isValid("patientId")}
-                errorText={getErrorText("patientId")}
-                onBlur={onBlurCallback("patientId")}
-                enableFocus={false}
-              />
-            </div>
-          )}
+			<form
+				className="patientExamRequestForm__form"
+				onSubmit={formik.handleSubmit}
+			>
+				<div className="row start-sm center-xs">
+					{!patient && (
+						<div className="patientExamRequestForm__item exam-field col-5">
+							<PatientPicker
+								theme={'regular'}
+								fieldName="patientId"
+								initialValue={selectedPatient}
+								fieldValue={formik.values.patientId}
+								label={t('opd.patient')}
+								isValid={isValid('patientId')}
+								errorText={getErrorText('patientId')}
+								onBlur={onBlurCallback('patientId')}
+								enableFocus={false}
+							/>
+						</div>
+					)}
 
-          <div className="patientExamRequestForm__item col-5">
-            <AutocompleteField
-              fieldName="exam"
-              fieldValue={formik.values.exam}
-              label={t("lab.exam")}
-              isValid={isValid("exam")}
-              errorText={getErrorText("exam")}
-              onBlur={onBlurCallback("exam")}
-              options={examOptionsSelector(examList)}
-              isLoading={examsLoading}
-              disabled={isLoading}
-            />
-          </div>
+					<div className="patientExamRequestForm__item col-5">
+						<AutocompleteField
+							fieldName="exam"
+							fieldValue={formik.values.exam}
+							label={t('lab.exam')}
+							isValid={isValid('exam')}
+							errorText={getErrorText('exam')}
+							onBlur={onBlurCallback('exam')}
+							options={examOptionsSelector(examList)}
+							isLoading={examsLoading}
+							disabled={isLoading}
+						/>
+					</div>
 
-          <div className="patientExamRequestForm__item col-2">
-            <div className="submit_button">
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                disabled={isLoading}
-              >
-                {/* <ControlPoint style={{ marginRight: "5px" }} /> */}
-                {t("lab.examrequestbtn")}
-              </Button>
-            </div>
-          </div>
+					<div className="patientExamRequestForm__item col-2">
+						<div className="submit_button">
+							<Button
+								type="submit"
+								variant="contained"
+								color="primary"
+								disabled={isLoading}
+							>
+								{/* <ControlPoint style={{ marginRight: "5px" }} /> */}
+								{t('lab.examrequestbtn')}
+							</Button>
+						</div>
+					</div>
 
-          {createLabRequestStatus === "FAIL" && (
-            <div ref={infoBoxRef} className="info-box-container">
-              <InfoBox type="error" message={errorMessage} />
-            </div>
-          )}
-          <ConfirmationDialog
-            isOpen={createLabRequestStatus === "SUCCESS"}
-            title={t("lab.examrequest")}
-            icon={checkIcon}
-            info={t("lab.examrequestcreated")}
-            primaryButtonLabel="Ok"
-            handlePrimaryButtonClick={onClose}
-            handleSecondaryButtonClick={() => ({})}
-          />
-        </div>
-      </form>
-    </div>
-  );
+					{createLabRequestStatus === 'FAIL' && (
+						<div ref={infoBoxRef} className="info-box-container">
+							<InfoBox type="error" message={errorMessage} />
+						</div>
+					)}
+					<ConfirmationDialog
+						isOpen={createLabRequestStatus === 'SUCCESS'}
+						title={t('lab.examrequest')}
+						icon={checkIcon}
+						info={t('lab.examrequestcreated')}
+						primaryButtonLabel="Ok"
+						handlePrimaryButtonClick={onClose}
+						handleSecondaryButtonClick={() => ({})}
+					/>
+				</div>
+			</form>
+		</div>
+	);
 };
 
 export default ExamRequestForm;

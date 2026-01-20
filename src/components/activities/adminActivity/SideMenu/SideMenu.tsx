@@ -9,6 +9,7 @@ import {
 	LocalHospitalSharp,
 	People,
 	SupervisedUserCircle,
+	Tune,
 } from '@mui/icons-material';
 import { type ReactNode, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -63,6 +64,10 @@ const SideMenu = () => {
 		{
 			key: 'users',
 			icon: <People fontSize="small" />,
+		},
+		{
+			key: 'settings',
+			icon: <Tune fontSize="small" />,
 		},
 		{
 			key: 'types',

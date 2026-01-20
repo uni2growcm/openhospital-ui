@@ -1,34 +1,45 @@
+import { HttpResponse } from 'msw';
 import { permissionList } from '../fixtures/permissionList';
 import { userGroupsDTO } from '../fixtures/userGroupsDTO';
 import { usersDTO } from '../fixtures/usersDTO';
-import { badRequest, http, noContent } from '../utils';
+import { badRequest, http } from '../utils';
 
 export const users = [
-	http.get('/users/me', async ({ response }) => {
-		return response(200).json({
-			userName: 'admin',
-			permissions: permissionList,
-			userGroup: userGroupsDTO[0],
-		});
+	http.get('/users/me', () => {
+		return HttpResponse.json(
+			{
+				userName: 'admin',
+				permissions: permissionList,
+				userGroup: userGroupsDTO[0],
+			},
+			{ status: 200 },
+		);
 	}),
-	http.get('/users', async ({ response }) => {
-		return response(200).json(usersDTO);
+
+	http.get('/users', () => {
+		return HttpResponse.json(usersDTO, { status: 200 });
 	}),
-	http.get('/users/{username}', async ({ response }) => {
-		return response(200).json(usersDTO[0]);
+
+	http.get('/users/{username}', () => {
+		return HttpResponse.json(usersDTO[0], { status: 200 });
 	}),
-	http.post('/users', async ({ response }) => {
-		return response(201).json(usersDTO[0]);
+
+	http.post('/users', () => {
+		return HttpResponse.json(usersDTO[0], { status: 201 });
 	}),
-	http.put('/users/{username}', async ({ request, response }) => {
+
+	http.put('/users/{username}', async ({ request }) => {
 		const body = await request.json();
-		return response(200).json(body);
+		return HttpResponse.json(body, { status: 200 });
 	}),
-	http.delete('/users/{username}', async ({ params, response }) => {
-		const username = params.username;
-		if (username === 'FAIL') {
-			return response.untyped(badRequest({ message: 'Fail to delete user' }));
+
+	http.delete('/users/{username}', ({ params }) => {
+		if (params.username === 'FAIL') {
+			return HttpResponse.json(badRequest({ message: 'Fail to delete user' }), {
+				status: 400,
+			});
 		}
-		return response.untyped(noContent());
+
+		return new HttpResponse(null, { status: 204 });
 	}),
 ];

@@ -1,35 +1,42 @@
+import { HttpResponse } from 'msw';
 import { operationTypesDTO } from '../fixtures/operationTypeDTO';
 import { badRequest, http } from '../utils';
 
 export const operationTypes = [
-	http.get('/operationtypes', async ({ response }) => {
-		return response(200).json(operationTypesDTO);
-	}),
-	http.post('/operationtypes', async ({ request, response }) => {
-		const body = await request.json();
-		if (body.code === 'FAIL') {
-			return response.untyped(
+	http.get('/operationtypes', () =>
+		HttpResponse.json(operationTypesDTO, { status: 200 }),
+	),
+
+	http.post('/operationtypes', async ({ request }) => {
+		const body = (await request.json()) as { code?: string } | null;
+		if (body?.code === 'FAIL') {
+			return HttpResponse.json(
 				badRequest({ message: 'Fail to create operation type' }),
+				{ status: 400 },
 			);
 		}
-		return response(201).json(body);
+		return HttpResponse.json(body, { status: 201 });
 	}),
-	http.put('/operationtypes/{code}', async ({ request, response }) => {
-		const body = await request.json();
-		if (body.code === 'FAIL') {
-			return response.untyped(
+
+	http.put('/operationtypes/{code}', async ({ request }) => {
+		const body = (await request.json()) as { code?: string } | null;
+		if (body?.code === 'FAIL') {
+			return HttpResponse.json(
 				badRequest({ message: 'Fail to update operation type' }),
+				{ status: 400 },
 			);
 		}
-		return response(200).json(body);
+		return HttpResponse.json(body, { status: 200 });
 	}),
-	http.delete('/operationtypes/{code}', async ({ params, response }) => {
-		const code = params.code;
+
+	http.delete('/operationtypes/{code}', ({ params }) => {
+		const code = params.code ?? '';
 		if (code === 'FAIL') {
-			return response.untyped(
+			return HttpResponse.json(
 				badRequest({ message: 'Fail to delete operation type' }),
+				{ status: 400 },
 			);
 		}
-		return response(200).json(true);
+		return HttpResponse.json(true, { status: 200 });
 	}),
 ];

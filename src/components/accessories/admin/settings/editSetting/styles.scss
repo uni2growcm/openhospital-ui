@@ -1,0 +1,144 @@
+@import "../../../../../styles/variables";
+@import "../../../../../../node_modules/susy/sass/susy";
+
+.editSettingForm {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: 100%;
+
+  .formInsertMode {
+    margin: 0px 0px 20px;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 -15px;
+
+    @include susy-media($smartphone) {
+      margin: 0 -10px;
+    }
+  }
+
+  .editSettingForm__item {
+    display: flex;
+    flex-direction: column;
+    margin: 7px 0px;
+    padding: 0px 15px;
+    width: 50%;
+    box-sizing: border-box;
+
+    @include susy-media($narrow) {
+      padding: 0px 10px;
+    }
+    @include susy-media($tablet_land) {
+      padding: 0px 10px;
+    }
+    @include susy-media($medium-up) {
+      width: 25%;
+    }
+    @include susy-media($tablet_port) {
+      width: 50%;
+      padding: 0px 10px;
+    }
+    @include susy-media($smartphone) {
+      width: 100%;
+      padding: 0px 10px;
+    }
+
+    .textField,
+    .selectField {
+      width: 100%;
+    }
+
+    &.fullWidth {
+      width: 100%;
+    }
+
+    &.halfWidth {
+      width: 50%;
+
+      @include susy-media($tablet_port) {
+        width: 100%;
+      }
+
+      @include susy-media($smartphone) {
+        width: 100%;
+      }
+    }
+
+    &.thirdWidth {
+      width: 33.333%;
+
+      @include susy-media($tablet_land) {
+        width: 50%;
+      }
+
+      @include susy-media($tablet_port) {
+        width: 50%;
+      }
+
+      @include susy-media($smartphone) {
+        width: 100%;
+      }
+    }
+  }
+
+  .editSettingForm__form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .editSettingForm__buttonSet {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 25px;
+    padding: 0px 15px;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-end;
+
+    @include susy-media($smartphone_small) {
+      flex-direction: column-reverse;
+      padding: 0px 10px;
+      gap: 8px;
+    }
+
+    .submit_button,
+    .reset_button {
+      display: flex;
+      flex-direction: column;
+      min-width: 100px;
+
+      .MuiButton-label {
+        font-size: smaller;
+        letter-spacing: 1px;
+        font-weight: 600;
+      }
+
+      button {
+        @include susy-media($smartphone_small) {
+          width: 100%;
+          padding: 10px 16px;
+        }
+      }
+    }
+
+    .submit_button {
+      @include susy-media($smartphone_small) {
+        width: 100%;
+      }
+    }
+
+    .reset_button {
+      @include susy-media($smartphone_small) {
+        width: 100%;
+      }
+    }
+  }
+}

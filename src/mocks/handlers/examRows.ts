@@ -1,8 +1,8 @@
+import { HttpResponse, http } from 'msw';
 import { examRowsDTO } from '../fixtures/examRowsDTO';
-import { http } from '../utils';
 
 export const examRows = [
-	http.get('/examrows/byExamCode/{examCode}', async ({ response }) => {
-		return response(200).json(examRowsDTO);
+	http.get('/examrows/byExamCode/{examCode}', () => {
+		return HttpResponse.json(examRowsDTO, { status: 200 });
 	}),
 ];

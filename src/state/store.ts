@@ -15,6 +15,7 @@ import { operationSlice } from './operations';
 import { patientSlice } from './patients';
 import { permissionSlice } from './permissions';
 import { priceSlice } from './prices';
+import { settingsSlice } from './settings';
 import { summarySlice } from './summary';
 import { supplierSlice } from './suppliers';
 import { therapySlice } from './therapies';
@@ -43,6 +44,7 @@ const reducer = combineReducers({
 	bills: billSlice.reducer,
 	prices: priceSlice.reducer,
 	permissions: permissionSlice.reducer,
+	settings: settingsSlice.reducer,
 	visits: visitSlice.reducer,
 	operations: operationSlice.reducer,
 	diseaseTypes: diseaseTypeSlice.reducer,

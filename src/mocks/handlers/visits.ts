@@ -1,55 +1,60 @@
+import { HttpResponse } from 'msw';
 import visitDTO from '../fixtures/visitDTO';
-import { badRequest, http, noContent, notFound } from '../utils';
+import { badRequest, http, notFound } from '../utils';
+
+type VisitBody = {
+	duration?: number;
+	visitID?: number | string;
+};
 
 export const visits = [
-	http.post('/visits', async ({ request, response }) => {
-		const body = await request.json();
-		switch (body.duration) {
+	http.post('/visits', async ({ request }) => {
+		const body = (await request.json()) as VisitBody | null;
+
+		switch (body?.duration) {
 			case 100:
-				return response.untyped(
+				return HttpResponse.json(
 					badRequest({ message: 'Fail to create visit' }),
+					{ status: 400 },
 				);
 			case 30:
-				return response.untyped(noContent());
+				return new HttpResponse(null, { status: 204 });
 			default:
-				return response(201).json(body);
+				return HttpResponse.json(body, { status: 201 });
 		}
 	}),
-	http.put('/visits/{visitID}', async ({ request, response }) => {
-		const body = await request.json();
-		switch (body.duration) {
+
+	http.put('/visits/{visitID}', async ({ request }) => {
+		const body = (await request.json()) as VisitBody | null;
+
+		switch (body?.duration) {
 			case 100:
-				return response.untyped(
+				return HttpResponse.json(
 					badRequest({ message: 'Fail to update visit' }),
+					{ status: 400 },
 				);
 			case 30:
-				return response.untyped(notFound({ message: 'Visit not found' }));
+				return HttpResponse.json(notFound({ message: 'Visit not found' }), {
+					status: 404,
+				});
 			default:
-				return response(200).json(body);
+				return HttpResponse.json(body, { status: 200 });
 		}
 	}),
-	http.get('/visits/patient/{patID}', async ({ params, response }) => {
-		const code = params.patID; // assuming patID is used as code
-		switch (code) {
+
+	http.get('/visits/patient/{patID}', ({ params }) => {
+		switch (params.patID) {
 			case '1':
-				return response.untyped(badRequest({ message: 'Fail to get visits' }));
-			case '2':
-				return response.untyped(noContent());
-			default:
-				return response(200).json([visitDTO, visitDTO, visitDTO]);
-		}
-	}),
-	http.post('/visits', async ({ request, response }) => {
-		const body = await request.json();
-		switch (body.visitID?.toString()) {
-			case '0':
-				return response.untyped(
-					badRequest({ message: 'Fail to create visits' }),
+				return HttpResponse.json(
+					badRequest({ message: 'Fail to get visits' }),
+					{ status: 400 },
 				);
 			case '2':
-				return response.untyped(noContent());
+				return new HttpResponse(null, { status: 204 });
 			default:
-				return response(201).json(body);
+				return HttpResponse.json([visitDTO, visitDTO, visitDTO], {
+					status: 200,
+				});
 		}
 	}),
 ];

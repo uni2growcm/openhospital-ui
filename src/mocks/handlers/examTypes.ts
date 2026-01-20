@@ -1,35 +1,57 @@
+import { HttpResponse, http } from 'msw';
 import { examTypesDTO } from '../fixtures/examTypesDTO';
-import { badRequest, http } from '../utils';
+import { badRequest } from '../utils';
+
+type ExamTypePayload = {
+	code: string;
+};
 
 export const examTypes = [
-	http.get('/examtypes', async ({ response }) => {
-		return response(200).json(examTypesDTO);
+	http.get('/examtypes', () => {
+		return HttpResponse.json(examTypesDTO, { status: 200 });
 	}),
-	http.post('/examtypes', async ({ request, response }) => {
-		const body = await request.json();
-		if (body.code === 'FAIL') {
-			return response.untyped(
-				badRequest({ message: 'Fail to create exam type' }),
+
+	http.post('/examtypes', async ({ request }) => {
+		const body = (await request.json()) as ExamTypePayload | null;
+
+		if (!body?.code) {
+			return HttpResponse.json(
+				badRequest({ message: 'Invalid request body' }),
+				{ status: 400 },
 			);
 		}
-		return response(201).json(body);
+
+		return body.code === 'FAIL'
+			? HttpResponse.json(badRequest({ message: 'Fail to create exam type' }), {
+					status: 400,
+				})
+			: HttpResponse.json(body, { status: 201 });
 	}),
-	http.put('/examtypes/{code}', async ({ request, response }) => {
-		const body = await request.json();
-		if (body.code === 'FAIL') {
-			return response.untyped(
-				badRequest({ message: 'Fail to update exam type' }),
+
+	http.put('/examtypes/{code}', async ({ request }) => {
+		const body = (await request.json()) as ExamTypePayload | null;
+
+		if (!body?.code) {
+			return HttpResponse.json(
+				badRequest({ message: 'Invalid request body' }),
+				{ status: 400 },
 			);
 		}
-		return response(200).json(body);
+
+		return body.code === 'FAIL'
+			? HttpResponse.json(badRequest({ message: 'Fail to update exam type' }), {
+					status: 400,
+				})
+			: HttpResponse.json(body, { status: 200 });
 	}),
-	http.delete('/examtypes/{code}', async ({ params, response }) => {
-		const code = params.code;
-		if (code === 'FAIL') {
-			return response.untyped(
-				badRequest({ message: 'Fail to delete exam type' }),
-			);
-		}
-		return response(200).json(true);
+
+	http.delete('/examtypes/{code}', ({ params }) => {
+		const code = params.code as string;
+
+		return code === 'FAIL'
+			? HttpResponse.json(badRequest({ message: 'Fail to delete exam type' }), {
+					status: 400,
+				})
+			: HttpResponse.json(true, { status: 200 });
 	}),
 ];

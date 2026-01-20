@@ -1,35 +1,24 @@
+import { HttpResponse, http } from 'msw';
 import { medicalTypesDTO } from '../fixtures/medicalTypesDTO';
-import { badRequest, http } from '../utils';
+import { badRequest } from '../utils';
+
+type MedicalTypePayload = { code?: string };
 
 export const medicalTypes = [
-	http.get('/medicaltypes', async ({ response }) => {
-		return response(200).json(medicalTypesDTO);
-	}),
-	http.post('/medicaltypes', async ({ request, response }) => {
-		const body = await request.json();
-		if (body.code === 'FAIL') {
-			return response.untyped(
+	http.get('/medicaltypes', () =>
+		HttpResponse.json(medicalTypesDTO, { status: 200 }),
+	),
+
+	http.post('/medicaltypes', async ({ request }) => {
+		const body = (await request.json()) as MedicalTypePayload | null;
+
+		if (body?.code === 'FAIL') {
+			return HttpResponse.json(
 				badRequest({ message: 'Fail to create medical type' }),
+				{ status: 400 },
 			);
 		}
-		return response(201).json(body);
-	}),
-	http.put('/medicaltypes', async ({ request, response }) => {
-		const body = await request.json();
-		if (body.code === 'FAIL') {
-			return response.untyped(
-				badRequest({ message: 'Fail to update medical type' }),
-			);
-		}
-		return response(200).json(body);
-	}),
-	http.delete('/medicaltypes/{code}', async ({ params, response }) => {
-		const code = params.code;
-		if (code === 'FAIL') {
-			return response.untyped(
-				badRequest({ message: 'Fail to delete medical type' }),
-			);
-		}
-		return response(200).json(true);
+
+		return HttpResponse.json(body, { status: 201 });
 	}),
 ];

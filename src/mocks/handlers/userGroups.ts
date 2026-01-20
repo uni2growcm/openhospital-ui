@@ -1,14 +1,17 @@
+import { HttpResponse } from 'msw';
 import { userGroupsDTO } from '../fixtures/userGroupsDTO';
-import { http, noContent, notFound } from '../utils';
+import { http, notFound } from '../utils';
 
 export const userGroups = [
-	http.get('/usergroups', async ({ response }) => {
-		return response(200).json(userGroupsDTO);
+	http.get('/usergroups', () => {
+		return HttpResponse.json(userGroupsDTO, { status: 200 });
 	}),
-	http.get('/usergroups/{group_code}', async ({ params, response }) => {
+
+	http.get('/usergroups/{group_code}', ({ params }) => {
 		const group = userGroupsDTO.find(({ code }) => code === params.group_code);
+
 		if (!group) {
-			return response.untyped(
+			return HttpResponse.json(
 				notFound({
 					status: 'BAD_REQUEST',
 					message: 'User group not found.',
@@ -16,29 +19,30 @@ export const userGroups = [
 					timestamp: '2024-09-16T08:02:53.878312662',
 					description: null,
 				}),
+				{ status: 404 },
 			);
 		}
-		return response(200).json(group);
+
+		return HttpResponse.json(group, { status: 200 });
 	}),
-	http.delete(
-		'/usergroups/{group_code}/permissions/{id}',
-		async ({ response }) => {
-			return response.untyped(noContent());
-		},
-	),
-	http.post(
-		'/usergroups/{group_code}/permissions/{id}',
-		async ({ params, response }) => {
-			return response(201).json(+params.id);
-		},
-	),
-	http.post('/usergroups', async ({ response }) => {
-		return response(201).json(userGroupsDTO[0]);
+
+	http.delete('/usergroups/{group_code}/permissions/{id}', () => {
+		return new HttpResponse(null, { status: 204 });
 	}),
-	http.put('/usergroups/{group_code}', async ({ response }) => {
-		return response(200).json(userGroupsDTO[0]);
+
+	http.post('/usergroups/{group_code}/permissions/{id}', ({ params }) => {
+		return HttpResponse.json(Number(params.id), { status: 201 });
 	}),
-	http.delete('/usergroups/{group_code}', async ({ response }) => {
-		return response.untyped(noContent());
+
+	http.post('/usergroups', () => {
+		return HttpResponse.json(userGroupsDTO[0], { status: 201 });
+	}),
+
+	http.put('/usergroups/{group_code}', () => {
+		return HttpResponse.json(userGroupsDTO[0], { status: 200 });
+	}),
+
+	http.delete('/usergroups/{group_code}', () => {
+		return new HttpResponse(null, { status: 204 });
 	}),
 ];

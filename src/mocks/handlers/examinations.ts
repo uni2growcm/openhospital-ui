@@ -1,50 +1,55 @@
+import { HttpResponse, http } from 'msw';
 import { patientExaminationDTO } from '../fixtures/patientExaminationDTO';
-import { badRequest, http, noContent } from '../utils';
+import { badRequest, noContent } from '../utils';
+
+type ExaminationPayload = {
+	patientCode?: string;
+};
 
 export const examinations = [
-	http.post('/examinations', async ({ request, response }) => {
-		const body = await request.json();
-		if ((body.patientCode as any) === 'fail') {
-			return response.untyped(badRequest({}));
+	http.post('/examinations', async ({ request }) => {
+		const body = (await request.json()) as ExaminationPayload | null;
+
+		if (body?.patientCode === 'fail') {
+			return HttpResponse.json(badRequest({}), { status: 400 });
 		}
-		return response(201).json(body);
+
+		return HttpResponse.json(body, { status: 201 });
 	}),
-	http.put('/examinations/{id}', async ({ request, response }) => {
-		const body = await request.json();
-		if ((body.patientCode as any) === 'fail') {
-			return response.untyped(badRequest({}));
+
+	http.put('/examinations/{id}', async ({ request }) => {
+		const body = (await request.json()) as ExaminationPayload | null;
+
+		if (body?.patientCode === 'fail') {
+			return HttpResponse.json(badRequest({}), { status: 400 });
 		}
-		return response(200).json(body);
+
+		return HttpResponse.json(body, { status: 200 });
 	}),
-	http.get('/examinations/defaultPatientExamination', async ({ response }) => {
-		return response(200).json(patientExaminationDTO);
+
+	http.get('/examinations/defaultPatientExamination', () =>
+		HttpResponse.json(patientExaminationDTO, { status: 200 }),
+	),
+
+	http.get('/examinations/lastByPatientId/{patId}', ({ params }) => {
+		if (params.patId === '1') {
+			return HttpResponse.json(badRequest({}), { status: 400 });
+		}
+
+		return HttpResponse.json(patientExaminationDTO, { status: 200 });
 	}),
-	http.get(
-		'/examinations/lastByPatientId/{patId}',
-		async ({ params, response }) => {
-			const patId = params.patId;
-			if (patId === '1') {
-				return response.untyped(badRequest({}));
-			}
-			return response(200).json(patientExaminationDTO);
-		},
-	),
-	http.get(
-		'/examinations/byPatientId/{patId}',
-		async ({ params, response }) => {
-			const patId = params.patId;
-			if (patId === '1') {
-				return response.untyped(badRequest({}));
-			}
-			if (patId === '2') {
-				return response.untyped(noContent());
-			}
-			return response(200).json([
-				patientExaminationDTO,
-				patientExaminationDTO,
-				patientExaminationDTO,
-				patientExaminationDTO,
-			]);
-		},
-	),
+
+	http.get('/examinations/byPatientId/{patId}', ({ params }) => {
+		if (params.patId === '1') {
+			return HttpResponse.json(badRequest({}), { status: 400 });
+		}
+
+		if (params.patId === '2') {
+			return noContent();
+		}
+
+		return HttpResponse.json(Array(4).fill(patientExaminationDTO), {
+			status: 200,
+		});
+	}),
 ];

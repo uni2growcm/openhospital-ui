@@ -1,26 +1,45 @@
-import { HttpResponse } from 'msw';
+import { HttpResponse, http } from 'msw';
 import { hospitalDTO } from '../fixtures/hospitalDTO';
-import { badRequest, http, noContent } from '../utils';
+import { badRequest } from '../utils';
+
+type HospitalPayload = {
+	description: string;
+};
 
 export const hospitals = [
-	http.get('/hospitals', async ({ response }) => {
-		return response(200).json(hospitalDTO);
+	http.get('/hospitals', () => {
+		return HttpResponse.json(hospitalDTO, { status: 200 });
 	}),
-	http.get('/hospitals/{code}' as any, async ({ params, response }) => {
-		const code = params.code;
+
+	http.get('/hospitals/{code}', ({ params }) => {
+		const code = params.code as string;
+
 		if (code === '1') {
-			return response.untyped(badRequest({ message: 'Request failed' }));
+			return HttpResponse.json(badRequest({ message: 'Request failed' }), {
+				status: 400,
+			});
 		}
+
 		if (code === '2') {
-			return response.untyped(noContent());
+			return new HttpResponse(null, { status: 204 });
 		}
-		return response.untyped(HttpResponse.json(hospitalDTO));
+
+		return HttpResponse.json(hospitalDTO, { status: 200 });
 	}),
-	http.put('/hospitals/{code}', async ({ request, response }) => {
-		const body = await request.json();
-		if (body.description === 'FAIL') {
-			return response.untyped(badRequest({ message: 'Invalid payload' }));
+
+	http.put('/hospitals/{code}', async ({ request }) => {
+		const body = (await request.json()) as HospitalPayload | null;
+
+		if (!body?.description) {
+			return HttpResponse.json(badRequest({ message: 'Invalid payload' }), {
+				status: 400,
+			});
 		}
-		return response(200).json(body);
+
+		return body.description === 'FAIL'
+			? HttpResponse.json(badRequest({ message: 'Invalid payload' }), {
+					status: 400,
+				})
+			: HttpResponse.json(body, { status: 200 });
 	}),
 ];

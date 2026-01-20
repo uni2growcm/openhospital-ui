@@ -1,120 +1,88 @@
 import { isEmpty } from 'lodash';
-import { LaboratoryDTOStatusEnum } from '~/generated';
-import { laboratoryDTO } from '../fixtures/laboratoryDTO';
+import { HttpResponse, http } from 'msw';
 import { labWithRowsDTO } from '../fixtures/labWithRowsDTO';
 import { materialsDTO } from '../fixtures/materialsDTO';
-import { badRequest, http, noContent, notFound } from '../utils';
+import { badRequest, noContent, notFound } from '../utils';
+
+type LabPayload = {
+	laboratoryDTO?: {
+		note?: string;
+	};
+};
 
 export const laboratories = [
-	http.get(
-		'/laboratories/byPatientId/{patId}',
-		async ({ params, response }) => {
-			const patId = params.patId;
-			if (patId === '1000') {
-				return response.untyped(badRequest({ message: 'Request failed' }));
-			}
-			if (patId === '2000') {
-				return response.untyped(noContent());
-			}
-			return response(200).json(
-				labWithRowsDTO.filter(
-					(lab) =>
-						lab.laboratoryDTO?.status !== LaboratoryDTOStatusEnum.Open &&
-						lab.laboratoryDTO?.status !== LaboratoryDTOStatusEnum.Draft,
-				),
-			);
-		},
-	),
-	http.get(
-		'/laboratories/examRequest/patient/{patId}',
-		async ({ params, response }) => {
-			const patId = params.patId;
-			if (patId === '1000') {
-				return response.untyped(badRequest({ message: 'Request failed' }));
-			}
-			if (patId === '2000') {
-				return response.untyped(noContent());
-			}
-			return response(200).json(
-				laboratoryDTO.filter(
-					(lab) =>
-						lab.status === LaboratoryDTOStatusEnum.Open ||
-						lab.status === LaboratoryDTOStatusEnum.Draft,
-				),
-			);
-		},
-	),
-	http.get('/laboratories/exams/{code}', async ({ params, response }) => {
+	http.get('/laboratories/exams/{code}', ({ params }) => {
 		const code = params.code;
-		if (code === '1000') {
-			return response.untyped(badRequest({ message: 'Request failed' }));
+
+		if (!code) {
+			return HttpResponse.json(badRequest({ message: 'Invalid code' }), {
+				status: 400,
+			});
 		}
+
+		if (code === '1000') {
+			return HttpResponse.json(badRequest({ message: 'Request failed' }), {
+				status: 400,
+			});
+		}
+
 		if (code === '2000') {
-			return response.untyped(noContent());
+			return noContent();
 		}
-		const lab = labWithRowsDTO.find((e) => e.laboratoryDTO?.code === +code);
-		if (isEmpty(lab)) {
-			return response.untyped(notFound({ message: 'Not found' }));
+
+		const lab = labWithRowsDTO.find(
+			(e) => e.laboratoryDTO?.code === Number(code),
+		);
+
+		if (!lab || isEmpty(lab)) {
+			return HttpResponse.json(notFound({ message: 'Not found' }), {
+				status: 404,
+			});
 		}
-		return response(200).json(lab);
+
+		return HttpResponse.json(lab, { status: 200 });
 	}),
-	http.get('/laboratories/exams', async ({ query, response }) => {
-		const code = query.get('patientCode');
-		if (code === '1000') {
-			return response.untyped(badRequest({ message: 'Request failed' }));
+
+	http.get('/laboratories/exams', ({ request }) => {
+		const url = new URL(request.url);
+		const patientCode = url.searchParams.get('patientCode');
+		const page = Number(url.searchParams.get('page') ?? 0);
+
+		if (patientCode === '1000') {
+			return HttpResponse.json(badRequest({ message: 'Request failed' }), {
+				status: 400,
+			});
 		}
-		if (code === '200000') {
-			return response.untyped(noContent());
+
+		if (patientCode === '200000') {
+			return noContent();
 		}
-		const page = query.get('page');
-		const pageNum = page ? parseInt(page, 10) : 0;
-		return response(200).json({
-			data: labWithRowsDTO,
-			pageInfo: {
-				totalPages: 8,
-				page: pageNum,
+
+		return HttpResponse.json(
+			{
+				data: labWithRowsDTO,
+				pageInfo: {
+					totalPages: 8,
+					page,
+				},
 			},
-		});
+			{ status: 200 },
+		);
 	}),
-	http.post('/laboratories', async ({ request, response }) => {
-		const body = await request.json();
-		if (body.laboratoryDTO?.note === 'ERROR') {
-			return response.untyped(badRequest({ message: 'Request failed' }));
+
+	http.post('/laboratories', async ({ request }) => {
+		const body = (await request.json()) as LabPayload | null;
+
+		if (body?.laboratoryDTO?.note === 'ERROR') {
+			return HttpResponse.json(badRequest({ message: 'Request failed' }), {
+				status: 400,
+			});
 		}
-		return response(201).json(true);
+
+		return HttpResponse.json(true, { status: 201 });
 	}),
-	http.post('/laboratories/examRequest', async ({ response }) => {
-		return response(201).json(true);
-	}),
-	http.delete('/laboratories/{code}', async ({ params, response }) => {
-		const code = params.code;
-		if (code === '-1') {
-			return response.untyped(badRequest({ message: 'Request failed' }));
-		}
-		return response.untyped(noContent());
-	}),
-	http.put('/laboratories/{code}', async ({ params, response }) => {
-		const code = params.code;
-		if (code === '-1') {
-			return response.untyped(badRequest({ message: 'Request failed' }));
-		}
-		return response(200).json(true);
-	}),
-	http.get('/laboratories/materials', async ({ response }) => {
-		return response(200).json(materialsDTO);
-	}),
-	http.get('/laboratories/{code}', async ({ params, response }) => {
-		const code = params.code;
-		if (code === '1000') {
-			return response.untyped(badRequest({ message: 'Request failed' }));
-		}
-		if (code === '2000') {
-			return response.untyped(noContent());
-		}
-		const lab = laboratoryDTO.find((e) => e.code === +code);
-		if (isEmpty(lab)) {
-			return response.untyped(notFound({ message: 'Exam lab not found' }));
-		}
-		return response(200).json(lab);
-	}),
+
+	http.get('/laboratories/materials', () =>
+		HttpResponse.json(materialsDTO, { status: 200 }),
+	),
 ];
