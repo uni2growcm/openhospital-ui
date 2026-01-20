@@ -24,13 +24,10 @@ import { WardDischargeForm } from "./components/dischargeMovementForm/DischargeM
 import { DisChargeMovementTransitionState } from "./types";
 
 export function WardDischargeMovement() {
-  const { id = "" } = useParams();
+  const params = useParams();
 
-  const parts = id.split("-");
-
-  const medId = parts.shift();
-  const wardCode = parts.shift();
-  const lotCode = parts.join("-");
+  const medId = params["medical"];
+  const wardCode = params["ward"];
 
   const { selectMedical } = useWardMedicals(wardCode || "0");
 
@@ -82,7 +79,9 @@ export function WardDischargeMovement() {
 
   const handleSubmit = useCallback(
     (payload: MovementWardDTO) => {
-      dispatch(createWardMovement(payload));
+      dispatch(
+        createWardMovement({ ...payload, isPatient: !!payload.patient })
+      );
     },
     [dispatch]
   );

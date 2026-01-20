@@ -70,7 +70,7 @@ export function getInitialValues(
     code: undefined,
     ward: ward ? { code: ward.code ?? "" } : undefined,
     date: new Date(),
-    isPatient: true,
+    isPatient: false,
     patient: undefined,
     age: undefined,
     weight: undefined,
@@ -79,7 +79,6 @@ export function getInitialValues(
     quantity: 0,
     units: medical?.prod_code ?? "",
     wardTo: undefined,
-    wardFrom: ward ? { code: ward.code ?? "" } : undefined,
     lot: undefined,
   };
 }

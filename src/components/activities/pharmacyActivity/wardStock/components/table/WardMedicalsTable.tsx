@@ -24,9 +24,11 @@ export function WardMedicalsTable({ wardCode }: WardMedicalsProps) {
 
   const handleDischarge = useCallback(
     (row: any) => {
-      const combinedId = `${row.code}-${row.wardCode}-${row.lotCode}`;
-
-      navigate(PATHS.pharmacy_ward_stock_discharge.replace(":id", combinedId));
+      navigate(
+        PATHS.pharmacy_ward_stock_discharge
+          .replace(":ward", row.wardCode)
+          .replace(":medical", row.code)
+      );
     },
     [navigate]
   );

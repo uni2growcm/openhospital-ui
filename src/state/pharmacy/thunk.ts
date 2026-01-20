@@ -68,8 +68,8 @@ export const getWardMovements = createAsyncThunk(
         wrapper(() =>
           wardStockApi.getMovementWard({
             ...payload,
-            from: payload.to ?? new Date("2010-12-25T10:30:00Z"),
-            to: payload.from ?? new Date(),
+            from: payload.to,
+            to: payload.from,
           } as any as GetMovementWardRequest)
         )
       );

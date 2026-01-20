@@ -38,11 +38,22 @@ export function useWardMedicals(wardCode: string) {
 
       const inQuantity = computeInQuantity(matches);
       const outQuantity = computeOutQuantity(matches);
-
       const result = {
         ...medical,
+        lots: matches
+          .map((wardMedical) => {
+            const lot = wardMedical.id?.lot;
 
-        lots: mainMedical.lots,
+            return lot
+              ? {
+                  ...lot,
+                  wardsTotalQuantity:
+                    (wardMedical.in_quantity || 0) -
+                    (wardMedical.out_quantity || 0),
+                }
+              : null;
+          })
+          .filter(Boolean) as LotDTO[],
         inQuantity,
         outQuantity,
         wardTotalQuantity: inQuantity - outQuantity,

@@ -17,7 +17,6 @@ import { useAppDispatch } from "libraries/hooks/redux";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { LocaleKey } from "resources/types";
-import { createWardMovement } from "state/pharmacy";
 import {
   TFormValues,
   createMovementWardDTOSchema,
@@ -106,8 +105,6 @@ export function WardDischargeForm({
           wardFrom: undefined,
           lot: formValues.lot,
         };
-
-        await dispatch(createWardMovement(payload)).unwrap();
         onSubmit?.(payload);
       } catch (err) {
         console.error("Error creating ward movement:", err);
@@ -117,7 +114,7 @@ export function WardDischargeForm({
         });
       }
     },
-    [medical, selectWard, destinationType, formValues, t, onSubmit, dispatch]
+    [medical, selectWard, destinationType, formValues, t, onSubmit]
   );
 
   const handleDischargeMovement = useCallback(async () => {
@@ -252,7 +249,9 @@ export function WardDischargeForm({
           control={control}
           medical={medical as MedicalDTO}
           name="lot"
+          showMainStoreQuantity={false}
           showNewLotOption={false}
+          showWardTotalQuantity
         />
         {getErrorMessage("lot") && (
           <div className="lot-error col-span-full">
