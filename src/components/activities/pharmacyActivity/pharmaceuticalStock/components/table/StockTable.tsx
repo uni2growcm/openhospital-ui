@@ -10,7 +10,7 @@ import { renderDateTime } from "libraries/formatUtils/dataFormatting";
 import { useTranslation } from "libraries/hooks";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useEffect, useMemo, useState } from "react";
-import { getMovements } from "state/pharmacy";
+import { getMovements, getMovementsWard } from "state/pharmacy";
 
 export function StockTable() {
   const { t } = useTranslation();

@@ -112,6 +112,18 @@ export const pharmacySlice = createSlice({
       .addCase(thunks.getMovements.rejected, (state, action) => {
         state.getMovements = ApiResponse.error(action.payload);
       })
+      // get movements ward list
+      .addCase(thunks.getMovementsWard.pending, (state) => {
+        state.getMovementsWard = ApiResponse.loading();
+      })
+      .addCase(thunks.getMovementsWard.fulfilled, (state, action) => {
+        state.getMovementsWard = isEmpty(action.payload)
+          ? ApiResponse.empty()
+          : ApiResponse.value(action.payload);
+      })
+      .addCase(thunks.getMovementsWard.rejected, (state, action) => {
+        state.getMovementsWard = ApiResponse.error(action.payload);
+      })
       // get ward movements list
       .addCase(thunks.getWardMovements.pending, (state) => {
         state.wardMovements = ApiResponse.loading();

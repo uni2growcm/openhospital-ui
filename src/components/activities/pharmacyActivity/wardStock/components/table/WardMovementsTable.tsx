@@ -6,7 +6,9 @@ import { renderDateTime } from "libraries/formatUtils/dataFormatting";
 import { useTranslation } from "libraries/hooks";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useEffect, useMemo } from "react";
-import { getMovements } from "state/pharmacy";
+import {
+  getMovementsWard,
+} from "state/pharmacy";
 
 export function WardMovementsTable() {
   const { t } = useTranslation();
@@ -17,6 +19,10 @@ export function WardMovementsTable() {
 
   const data = useAppSelector(
     (state) => state.pharmacy.wardMovements.data ?? []
+  );
+
+  const dataIncoming = useAppSelector(
+    (state) => state.pharmacy.getMovementsWard.data ?? []
   );
 
   const status = useAppSelector((state) => state.pharmacy.wardMovements.status);
@@ -101,14 +107,23 @@ export function WardMovementsTable() {
     [t]
   );
 
+  const fulldata: any[] = [...dataIncoming, ...data];
+
   const formattedData = useMemo(() => {
-    return data
-      .filter(
-        (item) =>
-          !filter.type ||
-          (filter.type === "incoming" ? item.wardTo : item.wardFrom)?.code ===
-            filter.ward?.code
-      )
+    return fulldata
+      .filter((item) => {
+      if (!filter.type) return true;
+      if (filter.type === "incoming") {
+        return item.type?.code === "discharge" && item.ward?.code === filter.ward?.code;
+      }
+      if (filter.type === "outcoming") {
+        return (
+          item.ward?.code === filter.ward?.code && 
+          item.type?.code !== "discharge"
+        );
+      }
+      return false;
+    })
       .map((item) => ({
         recipient:
           (item.patient
@@ -132,11 +147,11 @@ export function WardMovementsTable() {
           }`
         ),
       }));
-  }, [data, filter, t]);
+  }, [fulldata, filter, t]);
 
   useEffect(() => {
-    dispatch(getMovements());
-  }, [dispatch]);
+    dispatch(getMovementsWard({ wardId: filter.ward?.code ?? "" }));
+  }, [dispatch, filter.ward?.code]);
 
   return (
     <div data-cy="ward-movements-table">
@@ -158,7 +173,7 @@ export function WardMovementsTable() {
                 isCollapsabile={true}
                 detailColSpan={6}
                 filterColumns={filters}
-                rawData={(data ?? []).map((item) => ({
+                rawData={(fulldata ?? []).map((item) => ({
                   ...item,
                   type: item.patient ? "patient" : "ward",
                   pharmaceutical: item.medical?.description ?? "",

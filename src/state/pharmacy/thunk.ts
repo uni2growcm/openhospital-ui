@@ -4,6 +4,7 @@ import {
   GetLotByMedicalRequest,
   GetMedicalRequest,
   GetMovementWardRequest,
+  GetMovements3Request,
   MedicalStockMovementTypeApi,
   MedicalStockWardApi,
   MedicalTypesApi,
@@ -39,6 +40,22 @@ export const getMovements = createAsyncThunk(
   async (_, thunkApi) => {
     try {
       const result = await firstValueFrom(wrapper(() => api.getMovements()));
+      return result;
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.response);
+    }
+  }
+);
+
+export const getMovementsWard = createAsyncThunk(
+  "pharmacy/getMovementsWard",
+  async (payload: { wardId: string; from?: Date; to?: Date }, thunkApi) => {
+    try {
+      const result = await firstValueFrom(wrapper(() => api.getMovements7({
+        ...payload,
+        from: payload.from ? payload.from : new Date("2010-12-25T10:30:00Z"),
+        to: payload.to ? payload.to : new Date(),
+      } as any as GetMovements3Request)));
       return result;
     } catch (error: any) {
       return thunkApi.rejectWithValue(error.response);
