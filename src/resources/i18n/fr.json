@@ -580,6 +580,7 @@
 		"back": "Retour",
 		"backToEdit": "Non, continuer l'édition",
 		"discardMessage": "Êtes-vous sûr de vouloir abandonner cette opération ? Toutes les données non enregistrées seront perdues.",
+    "printData": "Imprimer les données",
 		"saveandprint": "Enregistrer et imprimer",
 		"updateandprint": "Mettre à jour et imprimer",
 		"failedtodownloadthereport": "Échec de téléchargement du rapport"
