@@ -13,13 +13,17 @@ interface IOwnProps {
 	shouldUpdateTable: boolean;
 	handleDelete: (code: number | undefined) => void;
 	handleEdit: (row: PatientExaminationDTO) => void;
+	handlePrint: (examinationCode: number) => void;
 }
 
 const PatientTriageTable: FunctionComponent<IOwnProps> = ({
+	shouldUpdateTable,
 	handleEdit: onEdit,
+	handlePrint: onPrint,
 }) => {
 	const { t } = useTranslation();
 	const canUpdate = usePermission('examinations.update');
+	const canPrint = usePermission('examinations.read');
 	const label = {
 		pex_ID: t('common.code'),
 		pex_date: t('examination.datetriage'),
@@ -43,21 +47,27 @@ const PatientTriageTable: FunctionComponent<IOwnProps> = ({
 	const dateFields = ['pex_date'];
 
 	const dispatch = useAppDispatch();
-	const data = useAppSelector((state) =>
-		state.examinations.examinationsByPatientId.data
-			? state.examinations.examinationsByPatientId.data
-			: [],
+	const data = useAppSelector(
+		(state) => state.examinations.examinationsByPatientId.data ?? [],
 	);
 
 	const patientCode = useAppSelector(
 		(state) => state.patients.selectedPatient.data?.code,
 	);
 	useEffect(() => {
-		dispatch(examinationsByPatientId(patientCode));
+		if (patientCode) {
+			dispatch(examinationsByPatientId(patientCode));
+		}
 	}, [dispatch, patientCode]);
 
+	useEffect(() => {
+		if (shouldUpdateTable && patientCode) {
+			dispatch(examinationsByPatientId(patientCode));
+		}
+	}, [shouldUpdateTable, patientCode, dispatch]);
+
 	const handleEdit = useCallback(
-		(row: PatientExaminationDTO) => {
+		(row: any) => {
 			const pex = data.find((item) => item.pex_ID === row.pex_ID);
 			if (pex) {
 				onEdit(pex);
@@ -67,34 +77,33 @@ const PatientTriageTable: FunctionComponent<IOwnProps> = ({
 	);
 
 	const formatDataToDisplay = (data: PatientExaminationDTO[]) => {
-		return data.map((item) => {
-			return {
-				pex_ID: item.pex_ID,
-				pex_height: item.pex_height,
-				pex_weight: item.pex_weight,
-				pex_ap_max: item.pex_ap_max,
-				pex_ap_min: item.pex_ap_min,
-				pex_rr: item.pex_rr,
-				pex_hgt: item.pex_hgt,
-				pex_hr: item.pex_hr,
-				pex_temp: item.pex_temp,
-				pex_sat: item.pex_sat,
-				pex_diuresis: item.pex_diuresis,
-				pex_diuresis_desc: item.pex_diuresis_desc
-					? t(`examination.${item.pex_diuresis_desc}`)
-					: '',
-				pex_bowel_desc: item.pex_bowel_desc
-					? t(`examination.${item.pex_bowel_desc}`)
-					: '',
-				pex_auscultation: item.pex_auscultation
-					? t(`examination.${item.pex_auscultation}`)
-					: '',
-				pex_date: item.pex_date ? renderDate(item.pex_date) : '',
-				date: item.pex_date,
-				pex_note: item.pex_note,
-			};
-		});
+		return data.map((item) => ({
+			pex_ID: item.pex_ID,
+			pex_height: item.pex_height,
+			pex_weight: item.pex_weight,
+			pex_ap_max: item.pex_ap_max,
+			pex_ap_min: item.pex_ap_min,
+			pex_rr: item.pex_rr,
+			pex_hgt: item.pex_hgt,
+			pex_hr: item.pex_hr,
+			pex_temp: item.pex_temp,
+			pex_sat: item.pex_sat,
+			pex_diuresis: item.pex_diuresis,
+			pex_diuresis_desc: item.pex_diuresis_desc
+				? t(`examination.${item.pex_diuresis_desc}`)
+				: '',
+			pex_bowel_desc: item.pex_bowel_desc
+				? t(`examination.${item.pex_bowel_desc}`)
+				: '',
+			pex_auscultation: item.pex_auscultation
+				? t(`examination.${item.pex_auscultation}`)
+				: '',
+			pex_date: item.pex_date ? renderDate(item.pex_date) : '',
+			date: item.pex_date,
+			pex_note: item.pex_note,
+		}));
 	};
+
 	const triageStatus = useAppSelector(
 		(state) => state.examinations.examinationsByPatientId.status,
 	);
@@ -118,8 +127,8 @@ const PatientTriageTable: FunctionComponent<IOwnProps> = ({
 								style={{ marginLeft: '50%', position: 'relative' }}
 							/>
 						);
-
 					case 'SUCCESS':
+					case 'IDLE':
 						return (
 							<Table
 								rowData={formatDataToDisplay(data)}
@@ -129,16 +138,17 @@ const PatientTriageTable: FunctionComponent<IOwnProps> = ({
 								columnsOrder={order}
 								rowsPerPage={5}
 								onEdit={canUpdate ? handleEdit : undefined}
+								onPrint={
+									canPrint ? (row: any) => onPrint(row.pex_ID) : undefined
+								}
 								isCollapsabile={true}
 								showEmptyCell={false}
 							/>
 						);
-
 					case 'SUCCESS_EMPTY':
 						return <InfoBox type="info" message={t('common.emptydata')} />;
-
 					default:
-						return;
+						return null;
 				}
 			})()}
 		</div>

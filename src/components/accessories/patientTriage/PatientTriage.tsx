@@ -1,6 +1,7 @@
 import { type FC, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import PatientDetailsActivityContent from '~/components/activities/patientDetailsActivityContent/PatientDetailsActivityContent';
+import { downloadBlob } from '~/libraries/downloadUtils/downloadUtils';
 import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
 import checkIcon from '../../../assets/check-icon.png';
 import type { PatientExaminationDTO } from '../../../generated';
@@ -14,6 +15,8 @@ import {
 	deleteExaminationReset,
 	getDefaultPatientExamination,
 	getLastByPatientId,
+	printExamination,
+	printExaminationReset,
 	updateExamination,
 	updateExaminationReset,
 } from '../../../state/examinations';
@@ -69,6 +72,7 @@ export const PatientTriage: FC = () => {
 			state.examinations.createExamination.error?.message ||
 			state.examinations.updateExamination.error?.message ||
 			state.examinations.deleteExamination.error?.message ||
+			state.examinations.printExamination.error?.message ||
 			t('common.somethingwrong'),
 	) as string;
 
@@ -92,6 +96,7 @@ export const PatientTriage: FC = () => {
 		dispatch(createExaminationReset());
 		dispatch(updateExaminationReset());
 		dispatch(deleteExaminationReset());
+		dispatch(printExaminationReset());
 		setCreationMode(true);
 	}, [dispatch]);
 
@@ -100,6 +105,7 @@ export const PatientTriage: FC = () => {
 			dispatch(createExaminationReset());
 			dispatch(updateExaminationReset());
 			dispatch(deleteExaminationReset());
+			dispatch(printExaminationReset());
 			setShouldResetForm(true);
 			setShouldUpdateTable(true);
 		}
@@ -111,6 +117,66 @@ export const PatientTriage: FC = () => {
 			dispatch(getDefaultPatientExamination(patientDataCode));
 		}
 	}, [dispatch, patientDataCode]);
+
+	const handleSaveAndPrint = async (triage: PatientExaminationDTO) => {
+		if (!patientDataCode) return;
+
+		try {
+			const triageData = {
+				...triage,
+				patientCode: patientDataCode,
+			};
+
+			if (creationMode) {
+				await dispatch(createExamination(triageData)).unwrap();
+			} else {
+				if (!triageToEdit?.pex_ID) return;
+
+				await dispatch(
+					updateExamination({
+						id: triageToEdit.pex_ID,
+						patientExaminationDTO: {
+							...triageData,
+							pex_ID: triageToEdit.pex_ID,
+							lock: triageToEdit.lock,
+						},
+					}),
+				).unwrap();
+			}
+
+			const reloaded = await dispatch(
+				getLastByPatientId(patientDataCode),
+			).unwrap();
+
+			setTriageToEdit(reloaded);
+			setShouldUpdateTable(true);
+
+			if (!reloaded.pex_ID) {
+				return;
+			}
+
+			const blob = await dispatch(printExamination(reloaded.pex_ID)).unwrap();
+
+			downloadBlob(
+				blob,
+				`patient-examination-${reloaded.pex_ID}-${Date.now()}.pdf`,
+			);
+		} catch (e) {
+			console.error('Save & Print failed:', e);
+		}
+	};
+
+	const resetFormCallback = () => {
+		setShouldResetForm(false);
+		setShouldUpdateTable(false);
+		dispatch(createExaminationReset());
+		dispatch(updateExaminationReset());
+		dispatch(deleteExaminationReset());
+		dispatch(printExaminationReset());
+		setCreationMode(true);
+		setActivityTransitionState('IDLE');
+		scrollToElement(null);
+	};
 
 	const onSubmit = (triage: PatientExaminationDTO) => {
 		setShouldResetForm(false);
@@ -127,17 +193,11 @@ export const PatientTriage: FC = () => {
 		} else {
 			dispatch(createExamination(triage));
 		}
+		setShouldUpdateTable(true);
 	};
 
-	const resetFormCallback = () => {
-		setShouldResetForm(false);
-		setShouldUpdateTable(false);
-		dispatch(createExaminationReset());
-		dispatch(updateExaminationReset());
-		dispatch(deleteExaminationReset());
-		setCreationMode(true);
-		setActivityTransitionState('IDLE');
-		scrollToElement(null);
+	const handlePrint = () => {
+		setActivityTransitionState('TO_RESET');
 	};
 
 	const onDelete = (code: number | undefined) => {
@@ -151,6 +211,30 @@ export const PatientTriage: FC = () => {
 		setTriageToEdit(row);
 		setCreationMode(false);
 		scrollToElement(null);
+	};
+
+	const printExaminationStatus = useAppSelector(
+		(state) => state.examinations.printExamination.status,
+	);
+
+	const printExaminationErrorMessage = useAppSelector(
+		(state) =>
+			state.examinations.printExamination.error?.message ||
+			t('common.failedtodownloadthereport'),
+	) as string;
+
+	const onPrint = (row: PatientExaminationDTO | number) => {
+		const examinationId = typeof row === 'number' ? row : row.pex_ID;
+		if (!examinationId) return;
+
+		dispatch(printExamination(examinationId))
+			.unwrap()
+			.then((blob) => {
+				downloadBlob(blob, `patient-examination-${examinationId}.pdf`);
+			})
+			.catch((error) => {
+				console.error('Print failed:', error);
+			});
 	};
 
 	return (
@@ -187,6 +271,14 @@ export const PatientTriage: FC = () => {
 							creationMode ? t('common.savetriage') : t('common.update')
 						}
 						resetButtonLabel={t('common.reset')}
+						printButtonLabel={
+							creationMode
+								? t('common.saveandprint')
+								: t('common.updateandprint')
+						}
+						saveAndPrint={(examination) => {
+							handleSaveAndPrint(examination);
+						}}
 						shouldResetForm={shouldResetForm}
 						resetFormCallback={resetFormCallback}
 						isLoading={status === 'LOADING'}
@@ -194,6 +286,11 @@ export const PatientTriage: FC = () => {
 					{(status === 'FAIL' || deleteStatus === 'FAIL') && (
 						<div ref={infoBoxRef}>
 							<InfoBox type="error" message={errorMessage} />
+						</div>
+					)}
+					{printExaminationStatus === 'FAIL' && (
+						<div ref={infoBoxRef}>
+							<InfoBox type="error" message={printExaminationErrorMessage} />
 						</div>
 					)}
 					<ConfirmationDialog
@@ -208,9 +305,7 @@ export const PatientTriage: FC = () => {
 								: t('examination.updatesuccess', { code: triageToEdit.pex_ID })
 						}
 						primaryButtonLabel="Ok"
-						handlePrimaryButtonClick={() =>
-							setActivityTransitionState('TO_RESET')
-						}
+						handlePrimaryButtonClick={handlePrint}
 						handleSecondaryButtonClick={() => ({})}
 					/>
 				</Permission>
@@ -220,6 +315,7 @@ export const PatientTriage: FC = () => {
 						handleDelete={onDelete}
 						handleEdit={onEdit}
 						shouldUpdateTable={shouldUpdateTable}
+						handlePrint={onPrint}
 					/>
 				</Permission>
 

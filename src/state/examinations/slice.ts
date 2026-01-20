@@ -17,6 +17,9 @@ export const examinationSlice = createSlice({
 		deleteExaminationReset: (state) => {
 			state.deleteExamination = initial.deleteExamination;
 		},
+		printExaminationReset: (state) => {
+			state.printExamination = initial.printExamination;
+		},
 	},
 	extraReducers: (builder) =>
 		builder
@@ -80,7 +83,7 @@ export const examinationSlice = createSlice({
 			.addCase(thunks.updateExamination.rejected, (state, action) => {
 				state.updateExamination = ApiResponse.error(action.payload);
 			})
-			// Update Examination
+			// Delete Examination
 			.addCase(thunks.deleteExamination.pending, (state) => {
 				state.deleteExamination = ApiResponse.loading();
 			})
@@ -90,6 +93,16 @@ export const examinationSlice = createSlice({
 			})
 			.addCase(thunks.deleteExamination.rejected, (state, action) => {
 				state.deleteExamination = ApiResponse.error(action.payload);
+			})
+			// Print Examination
+			.addCase(thunks.printExamination.pending, (state) => {
+				state.printExamination = ApiResponse.loading();
+			})
+			.addCase(thunks.printExamination.fulfilled, (state, action) => {
+				state.printExamination = ApiResponse.value(action.payload);
+			})
+			.addCase(thunks.printExamination.rejected, (state, action) => {
+				state.printExamination = ApiResponse.error(action.payload);
 			}),
 });
 
@@ -97,4 +110,5 @@ export const {
 	createExaminationReset,
 	updateExaminationReset,
 	deleteExaminationReset,
+	printExaminationReset,
 } = examinationSlice.actions;

@@ -1,10 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { firstValueFrom } from 'rxjs';
 import { wrapper } from '~/libraries/apiUtils/wrapper';
-import { ExaminationsApi, type PatientExaminationDTO } from '../../generated';
+import {
+	ExaminationsApi,
+	type PatientExaminationDTO,
+	ReportsApi,
+} from '../../generated';
 import { customConfiguration } from '../../libraries/apiUtils/configuration';
 
 const api = new ExaminationsApi(customConfiguration());
+const apiReport = new ReportsApi(customConfiguration());
 
 export const examinationsByPatientId = createAsyncThunk(
 	'examinations/examinationsByPatientId',
@@ -56,3 +61,21 @@ export const deleteExamination = createAsyncThunk(
 	async (_id: number, thunkApi) =>
 		thunkApi.rejectWithValue({ message: 'Delete api not yet available !!!' }),
 );
+
+export const printExamination = createAsyncThunk<
+	Blob,
+	number,
+	{ rejectValue: any }
+>('reports/patientexamination', async (examinationId, thunkApi) => {
+	try {
+		const response = await firstValueFrom(
+			wrapper(() => apiReport.printPatientExaminationPdf({ examinationId })),
+		);
+
+		return response as unknown as Blob;
+	} catch (error: any) {
+		return thunkApi.rejectWithValue(
+			error?.response ?? { message: 'Failed to print examination' },
+		);
+	}
+});
