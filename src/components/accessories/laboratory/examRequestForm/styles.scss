@@ -63,10 +63,15 @@
     }
   }
 
+  .patientExamRequestForm__item .exam-field {
+    flex: 1;
+    max-width: none;
+  }
+
   .submit_button {
-    margin-top: 8px;  
+    margin-top: 8px;
     .MuiButton-label {
-      padding: 5px;      
+      padding: 5px;
       font-size: smaller;
       letter-spacing: 1px;
       font-weight: 600;
@@ -85,7 +90,7 @@
     margin-top: 5px !important;
     width: 100%;
     line-break: anywhere;
-    .infoBox h5{
+    .infoBox h5 {
       line-break: anywhere;
     }
   }
