@@ -219,7 +219,8 @@
 		"created": "Patient created",
 		"updatesuccessful": "The patient was edit successfully.",
 		"createother": "Add Another Patient",
-		"status": "Status"
+		"status": "Status",
+		"radiology": "Radiology"
 	},
 	"opd": {
 		"newopd": "Create new OPD Visit",
@@ -417,7 +418,8 @@
 		"types": "Manage Types",
 		"hospitalInfo": "Hospital Info",
 		"hospital": "Hospital",
-		"settings": "Settings"
+		"settings": "Settings",
+		"radiology": "Radiology"
 	},
 	"operation": {
 		"newoperation": "New Operation",
@@ -1261,6 +1263,20 @@
 			"imaging": "Imaging",
 			"reports": "Reports",
 			"integration": "Integration"
+		}
+	},
+	"radiology": {
+		"studies": {
+			"summary": "{count, plural, =0 {There are <0>not</0> studies for this patient} =1 {There is <0>1</0> study for this patient} other {There are <0>#</0> studies for this patient}}",
+			"last": "Latest study: {value}",
+			"date": "Date",
+			"title": "Title",
+			"series": "Series",
+			"viewSeries": "View series",
+			"institution": "Institution Name",
+			"referrencingPhysician": "Referrencing Physician",
+			"time": "Study Time",
+			"lastUpdate": "Last Update"
 		}
 	}
 }

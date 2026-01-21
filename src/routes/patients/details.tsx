@@ -1,5 +1,6 @@
 import { Navigate } from 'react-router';
 import PatientDetailsActivity from '~/components/activities/patientDetailsActivity/PatientDetailsActivity';
+import { PATIENT_RADIOLOGY_ROUTES } from './details_radiology';
 
 export const PATIENT_DETAILS_ROUTES = [
 	{
@@ -65,6 +66,10 @@ export const PATIENT_DETAILS_ROUTES = [
 					Component: module.NotFound,
 				}),
 			),
+	},
+	{
+		path: 'radiology',
+		children: PATIENT_RADIOLOGY_ROUTES,
 	},
 ];
 
