@@ -13,7 +13,10 @@ describe("Discharge movement", () => {
     cy.byId("date").focus().type("031120251200").blur();
     cy.byId("medical").focus().type("Para");
     cy.byId("medical-option-0").click();
-    cy.byId("refNo").focus().type("449").blur();
+    cy.byId("refNo").focus().type("0").blur();
+    cy.byId(`"lots.0.ward"`).focus().type("fem");
+    cy.byId(`"lots.0.ward-option-0"`).click();
+    cy.byId(`"lots.0.quantity"`).focus().clear().type("3").blur();
   });
 
   it("Should display an error info box if the movement discharging fails", () => {
@@ -21,16 +24,8 @@ describe("Discharge movement", () => {
     cy.dataCy("info-box").should("have.class", "error");
   });
 
-  it("Should complete discharge movement form", () => {
-    cy.byId(`"lots.0.ward"`).focus().type("fem");
-    cy.byId(`"lots.0.ward-option-0"`).click();
-    cy.byId(`"lots.0.quantity"`).focus().clear().type("3").blur();
-    cy.byId(`"lots.1.ward"`).focus().type("chi");
-    cy.byId(`"lots.1.ward-option-0"`).click();
-    cy.byId(`"lots.1.quantity"`).focus().clear().type("6").blur();
-  });
-
   it("Should show a confirmation dialog if the movement discharging succeeds", () => {
+    cy.byId("refNo").focus().clear().type("449").blur();
     cy.dataCy("submit-button").click();
     cy.dataCy("info-box").should("not.exist");
     cy.dataCy("dialog-title").contains("Discharge movement created");

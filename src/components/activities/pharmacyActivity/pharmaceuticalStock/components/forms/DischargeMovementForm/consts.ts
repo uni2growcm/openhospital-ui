@@ -43,7 +43,7 @@ export const LotDTOSchema = z
 
 export const MovementDTOSchema = z.object({
   code: z.number().nullish(),
-  medical: z.number(),
+  medical: z.coerce.number(),
   type: z.string(),
   ward: z.string().nullish(),
   lots: z.array(LotDTOSchema).nullish(),
