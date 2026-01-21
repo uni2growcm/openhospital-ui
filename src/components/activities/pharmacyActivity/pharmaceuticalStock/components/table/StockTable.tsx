@@ -38,6 +38,9 @@ export function StockTable() {
     lot: t("pharmacy.stock.lot"),
     expDate: t("pharmacy.stock.expDate"),
     type: t("pharmacy.stock.type"),
+    origin: t("pharmacy.stock.origin"),
+    user: t("pharmacy.stock.user"),
+    medicalType: t("pharmacy.stock.medicalType"),
     quantity: t("pharmacy.stock.quantity"),
     medical: t("pharmacy.stock.medical"),
     cost: t("pharmacy.stock.cost"),
@@ -97,6 +100,9 @@ export function StockTable() {
       cost: item.lot?.cost,
       total: item.lot?.cost ? item.lot.cost * item.quantity : "",
       prepDate: renderDateTime(item.lot?.preparationDate),
+      origin: item.supplier?.supName || "",
+      user: "",
+      medicalType: item.medical.type?.description || "",
     }));
   }, [t, data]);
 
