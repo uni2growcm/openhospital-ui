@@ -1,6 +1,11 @@
-import { MedicalWardDTO, MovementWardDTO } from "generated";
+import { MedicalDTO, MovementWardDTO, WardDTO } from "generated";
 export interface IWardDischargeFormProps {
-  wardMedical:MedicalWardDTO;
+  medical: MedicalDTO & {
+    ward: WardDTO;
+    inQuantity: number;
+    outQuantity: number;
+    wardTotalQuantity: number;
+  };
   onCancel: () => void;
   onSubmit?: (values: MovementWardDTO) => void;
 }

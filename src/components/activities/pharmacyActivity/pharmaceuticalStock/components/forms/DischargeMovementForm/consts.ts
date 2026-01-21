@@ -1,4 +1,4 @@
-import { MovementDTO } from "generated";
+import { MedicalDTO } from "generated";
 import { z } from "zod";
 import { TFormValues } from "./types";
 
@@ -43,33 +43,30 @@ export const LotDTOSchema = z
 
 export const MovementDTOSchema = z.object({
   code: z.number().nullish(),
-  medical: z.number(),
+  medical: z.coerce.number(),
   type: z.string(),
   ward: z.string().nullish(),
   lots: z.array(LotDTOSchema).nullish(),
   date: z.date(),
   quantity: z.number().nullish(),
   supplier: z.number().nullish(),
-  refNo: z.string(),
+  refNo: z.string().min(1),
 });
 
-export function getInitialValues(from?: MovementDTO): Partial<TFormValues> {
+export function getInitialValues(from?: MedicalDTO): Partial<TFormValues> {
   return {
     code: from?.code,
-    medical: from?.medical?.code,
+    medical: from?.code,
     type: from?.type?.code,
-    date: from?.date ? new Date(from.date) : undefined,
-    quantity: from?.quantity,
-    supplier: from?.supplier?.supId,
-    refNo: from?.refNo ?? "",
     lots:
-      from?.medical?.lots?.map((lot) => ({
+      from?.lots?.map((lot) => ({
         code: lot.code,
         preparationDate: new Date(lot.preparationDate),
         dueDate: new Date(lot.dueDate),
         cost: lot.cost,
         ward: "",
         quantity: 0,
+        mainStoreQuantity: lot.mainStoreQuantity,
       })) ?? [],
   };
 }

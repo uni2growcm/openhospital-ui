@@ -66,7 +66,7 @@ export function WardStock() {
       <div className="ward-stock">
         <WardStockHeader />
         {filter.type === "drugs" ? (
-          <WardMedicalsTable />
+          filter.ward?.code && <WardMedicalsTable wardCode={filter.ward.code} />
         ) : (
           <WardMovementsTable />
         )}

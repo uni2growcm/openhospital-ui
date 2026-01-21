@@ -27,8 +27,8 @@ export function LotFormField<T extends Record<string, any>>({
   medical,
   name,
   showNewLotOption,
-  showMainStoreQuantity = false,
-  showWardQuantity = false,
+  showMainStoreQuantity = true,
+  showWardTotalQuantity,
 }: LotFormFieldProps<T>) {
   const { t } = useTranslation();
   const [newLot, setNewLot] = useState<LotDTO>({
@@ -126,6 +126,22 @@ export function LotFormField<T extends Record<string, any>>({
                   sx={{ marginTop: 1 }}
                   disabled
                 />
+                {showMainStoreQuantity && (
+                  <TextField
+                    value={lot.mainStoreQuantity}
+                    label={t("pharmacy.lot.fields.mainStoreQuantity")}
+                    name={`${name}.mainStoreQuantity` as Path<T>}
+                    disabled
+                  />
+                )}
+                {showWardTotalQuantity && (
+                  <TextField
+                    value={lot.wardsTotalQuantity}
+                    label={t("pharmacy.lot.fields.wardsTotalQuantity")}
+                    name={`${name}.wardsTotalQuantity` as Path<T>}
+                    disabled
+                  />
+                )}
               </Fragment>
             ))}
 
@@ -176,24 +192,6 @@ export function LotFormField<T extends Record<string, any>>({
                   disabled={!isNewLotActive}
                 />
               </>
-            )}
-            {showMainStoreQuantity && (
-              <TextFormField
-                type="number"
-                label={t("pharmacy.lot.fields.mainStoreQuantity")}
-                control={control}
-                name={`${name}.mainStoreQuantity` as Path<T>}
-                disabled={!isNewLotActive}
-              />
-            )}
-            {showWardQuantity && (
-              <TextFormField
-                type="number"
-                label={t("pharmacy.lot.fields.wardsTotalQuantity")}
-                control={control}
-                name={`${name}.wardsTotalQuantity` as Path<T>}
-                disabled={!isNewLotActive}
-              />
             )}
           </>
         )}

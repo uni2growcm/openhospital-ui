@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { isValid, parseISO } from "date-fns";
 import {
+  GetLotByMedicalRequest,
   GetMedicalRequest,
   GetMovementWardRequest,
   MedicalStockMovementTypeApi,
@@ -67,8 +68,8 @@ export const getWardMovements = createAsyncThunk(
         wrapper(() =>
           wardStockApi.getMovementWard({
             ...payload,
-            from: payload.to ?? new Date("2010-12-25T10:30:00Z"),
-            to: payload.from ?? new Date(),
+            from: payload.to,
+            to: payload.from,
           } as any as GetMovementWardRequest)
         )
       );
@@ -346,6 +347,17 @@ export const printPharmaceuticalStockWardExcel = createAsyncThunk(
         )
       );
       return result;
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.response);
+    }
+  }
+);
+
+export const getMedicalLots = createAsyncThunk(
+  "pharmacy/getMedicalLots",
+  async (payload: GetLotByMedicalRequest, thunkApi) => {
+    try {
+      return firstValueFrom(api.getLotByMedical(payload));
     } catch (error: any) {
       return thunkApi.rejectWithValue(error.response);
     }
