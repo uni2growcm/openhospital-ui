@@ -29,7 +29,9 @@ export function DischargeMovement() {
   );
 
   const errorMessage = useAppSelector(
-    (state) => state.pharmacy.dischargeMovements.error?.message
+    (state) =>
+      state.pharmacy.dischargeMovements.error?.message ??
+      t("pharmacy.messages.discharge-movement-fail.description")
   ) as string;
 
   const { breadcrumbMap, setBreadcrumbMap } = useOutletContext<{

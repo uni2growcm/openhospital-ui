@@ -31,8 +31,8 @@ export interface GetMedicalsWardRequest {
 
 export interface GetMovementWardRequest {
     wardCode: string;
-    from: string;
-    to: string;
+    from?: string;
+    to?: string;
 }
 
 export interface GetWardMovementsToWardRequest {
@@ -96,16 +96,14 @@ export class MedicalStockWardApi extends BaseAPI {
     getMovementWard({ wardCode, from, to }: GetMovementWardRequest, opts?: OperationOpts): Observable<AjaxResponse<Array<MovementWardDTO>>>
     getMovementWard({ wardCode, from, to }: GetMovementWardRequest, opts?: OperationOpts): Observable<Array<MovementWardDTO> | AjaxResponse<Array<MovementWardDTO>>> {
         throwIfNullOrUndefined(wardCode, 'wardCode', 'getMovementWard');
-        throwIfNullOrUndefined(from, 'from', 'getMovementWard');
-        throwIfNullOrUndefined(to, 'to', 'getMovementWard');
 
         const headers: HttpHeaders = {
         };
 
-        const query: HttpQuery = { // required parameters are used directly since they are already checked by throwIfNullOrUndefined
-            'from': (from as any).toISOString().split('T')[0],
-            'to': (to as any).toISOString().split('T')[0],
-        };
+        const query: HttpQuery = {};
+
+        if (from != null) { query['from'] = (from as any).toISOString().split('T')[0]; }
+        if (to != null) { query['to'] = (to as any).toISOString().split('T')[0]; }
 
         return this.request<Array<MovementWardDTO>>({
             url: '/medicalstockward/movements/{ward_code}'.replace('{ward_code}', encodeURI(wardCode)),

@@ -60,6 +60,9 @@ export const pharmacySlice = createSlice({
     resetCreateWardMovement: (state) => {
       state.createWardMovement = initial.createWardMovement;
     },
+    resetGetMedicalLots: (state) => {
+      state.medicalLots = initial.medicalLots;
+    },
     resetPrintPharmaceuticalStockWardPdf: (state) => {
       state.printPharmaceuticalStockWardPdf =
         initial.printPharmaceuticalStockWardPdf;
@@ -215,6 +218,16 @@ export const pharmacySlice = createSlice({
       })
       .addCase(thunks.createWardMovement.rejected, (state, action) => {
         state.createWardMovement = ApiResponse.error(action.payload);
+      })
+      // Get Medical Lots
+      .addCase(thunks.getMedicalLots.pending, (state) => {
+        state.medicalLots = ApiResponse.loading();
+      })
+      .addCase(thunks.getMedicalLots.fulfilled, (state, action) => {
+        state.medicalLots = ApiResponse.value(action.payload);
+      })
+      .addCase(thunks.getMedicalLots.rejected, (state, action) => {
+        state.medicalLots = ApiResponse.error(action.payload);
       })
       // Print pharmaceutical stock ward pdf report
       .addCase(thunks.printPharmaceuticalStockWardPdf.pending, (state) => {

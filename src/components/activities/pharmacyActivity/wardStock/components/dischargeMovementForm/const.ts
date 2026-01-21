@@ -2,12 +2,6 @@ import { MedicalDTO, WardDTO } from "generated";
 import { z } from "zod";
 import { DestinationType } from "./types";
 
-export type DestinationErrorKey =
-  | "pharmacy.stock.ward.pleaseSelectPatient"
-  | "pharmacy.stock.ward.pleaseSelectWard";
-
-export type MovementWardErrorKey = DestinationErrorKey;
-
 const BaseMovementWardDTOSchema = z.object({
   code: z.number().optional(),
   ward: z.object({ code: z.string() }).optional(),
@@ -45,7 +39,7 @@ export function createMovementWardDTOSchema(
     (data) =>
       destinationType !== "ward" || (destinationType === "ward" && data.wardTo),
     {
-      message: "pharmacy.stock.ward.pleaseSelectWard" as DestinationErrorKey,
+      message: "pharmacy.stock.ward.pleaseSelectWard",
       path: ["wardTo"],
     }
   );
@@ -55,7 +49,7 @@ export function createMovementWardDTOSchema(
       destinationType !== "patient" ||
       (destinationType === "patient" && data.patient?.code),
     {
-      message: "pharmacy.stock.ward.pleaseSelectPatient" as DestinationErrorKey,
+      message: "pharmacy.stock.ward.pleaseSelectPatient",
       path: ["patient"],
     }
   );
@@ -76,7 +70,7 @@ export function getInitialValues(
     code: undefined,
     ward: ward ? { code: ward.code ?? "" } : undefined,
     date: new Date(),
-    isPatient: true,
+    isPatient: false,
     patient: undefined,
     age: undefined,
     weight: undefined,
@@ -85,7 +79,6 @@ export function getInitialValues(
     quantity: 0,
     units: medical?.prodCode ?? "",
     wardTo: undefined,
-    wardFrom: ward ? { code: ward.code ?? "" } : undefined,
     lot: undefined,
   };
 }

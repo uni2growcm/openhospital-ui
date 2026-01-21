@@ -4882,13 +4882,13 @@ paths:
           type: string
       - name: from
         in: query
-        required: true
+        required: false
         schema:
           type: string
           format: date
       - name: to
         in: query
-        required: true
+        required: false
         schema:
           type: string
           format: date
@@ -6567,13 +6567,13 @@ components:
           format: int32
           description: lock
           example: 0
-        pharmacy:
-          type: boolean
-        male:
+        opd:
           type: boolean
         female:
           type: boolean
-        opd:
+        male:
+          type: boolean
+        pharmacy:
           type: boolean
       required:
       - beds

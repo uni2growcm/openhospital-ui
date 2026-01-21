@@ -11,6 +11,8 @@ export function useWards(perdicate?: WardPredicate) {
     )
   );
 
+  const status = useAppSelector((state) => state.wards.allWards.status);
+
   const options = useMemo(
     () =>
       wards.map((ward) => ({
@@ -25,7 +27,7 @@ export function useWards(perdicate?: WardPredicate) {
     [wards]
   );
 
-  return { wards, options, selectWard };
+  return { wards, options, selectWard, status };
 }
 
 export function useWardOptions(wards: WardDTO[]) {

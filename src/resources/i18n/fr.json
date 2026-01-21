@@ -1331,6 +1331,24 @@
         "minQtyRequired": "Le seuil critique ne peut pas être négatif."
       }
     },
+    "messages": {
+      "charge-movement-success": {
+        "title": "Mouvement de charge réussie",
+        "description": "Le mouvement de charge a été enregistré avec succès."
+      },
+      "charge-movement-fail": {
+        "title": "Échec du mouvement de charge",
+        "description": "Nous n'avons pas pu enregistrer le mouvement de charge. Veuillez réessayer ou contacter le service d'assistance."
+      },
+      "discharge-movement-fail": {
+        "title": "Échec du mouvement de décharge",
+        "description": "Nous n'avons pas pu enregistrer le mouvement de décharge. Veuillez réessayer ou contacter le service d'assistance."
+      },
+      "new-pharmaceutical-success": {
+        "title": "Pharmaceutical added successfully",
+        "description": "The pharmaceutical has been added successfully."
+      }
+    },
     "stock": {
       "refNo": "Ref",
       "lot": "Lot",

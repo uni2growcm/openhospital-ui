@@ -18,6 +18,17 @@ export const stockMovementsRoutes = (server) => {
           break;
       }
     });
+    server.post("/discharge").intercept((req, res) => {
+      const body = req.jsonBody();
+      switch (body[0].refNo) {
+        case "0":
+          res.status(400);
+          break;
+        default:
+          res.status(201).json(true);
+          break;
+      }
+    });
   });
   server.namespace("/medicalstockward", () => {
     server.get("/:code").intercept((req, res) => {

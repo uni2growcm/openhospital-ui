@@ -1268,6 +1268,10 @@
         "title": "Charge Movement Failed",
         "description": "We were unable to save the charge movement. Please try again or contact support."
       },
+      "discharge-movement-fail": {
+        "title": "Discharge Movement Failed",
+        "description": "We were unable to save the discharge movement. Please try again or contact support."
+      },
       "new-pharmaceutical-success": {
         "title": "Pharmaceutical added successfully",
         "description": "The pharmaceutical has been added successfully."
@@ -1308,7 +1312,7 @@
         "pcsperpck": "Pieces per Packet",
         "minqty": "Critical level",
         "ignoreSimilar": "Ignore somilar",
-        "deleted": "Deleted",
+        "active": "Active",
         "currentQuantity": "Current Quantity",
         "newQuantity": "New Quantity",
         "adjust": "Adjust",
@@ -1347,6 +1351,9 @@
     },
     "stock": {
       "refNo": "Ref",
+      "origin": "Origin",
+      "user": "User",
+      "medicalType": "Medical Type",
       "lot": "Lot",
       "expDate": "Exp date",
       "type": "Type",

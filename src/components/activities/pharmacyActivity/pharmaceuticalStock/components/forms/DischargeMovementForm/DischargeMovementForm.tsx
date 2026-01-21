@@ -5,13 +5,12 @@ import {
   DateFormField,
   TextFormField,
 } from "components/accessories/forms";
-import { MedicalDTO, MovementDTO, WardDTO } from "generated";
+import { MovementDTO, WardDTO } from "generated";
 import { DATETIME_FORMAT } from "libraries/consts";
 import { useTranslation } from "libraries/hooks";
-import { useMedicals, useWards } from "libraries/hooks/api";
+import { useMovements, useWards } from "libraries/hooks/api";
 import { useAppDispatch } from "libraries/hooks/redux";
-import { isEmpty } from "lodash";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { getWards } from "state/ward";
 import z from "zod";
@@ -21,7 +20,6 @@ import "./styles.scss";
 import { DisChargeMovementProps, TFormValues } from "./types";
 
 export function DischargeMovementForm({
-  movement,
   onSubmit,
   onCancel,
 }: DisChargeMovementProps) {
@@ -29,16 +27,7 @@ export function DischargeMovementForm({
 
   const dispatch = useAppDispatch();
 
-  const medicalFilter = useCallback(
-    (medical: MedicalDTO) => !!medical.lots?.length,
-    []
-  );
-
-  const {
-    medicals,
-    options: medicalOptions,
-    selectMedical,
-  } = useMedicals(medicalFilter);
+  const { selectMedical, medicals } = useMovements();
 
   const wardFilter = useCallback((ward: WardDTO) => !!ward.pharmacy, []);
 
@@ -59,7 +48,7 @@ export function DischargeMovementForm({
     compute: (values) => {
       return {
         ...values,
-        medical: selectMedical(values.medical),
+        medical: selectMedical(+values.medical),
       };
     },
   });
@@ -70,8 +59,6 @@ export function DischargeMovementForm({
         data.lots?.filter(
           (lot) => lot.ward && lot.quantity && lot.quantity > 0
         ) ?? [];
-
-      if (isEmpty(filledLots.length)) return;
 
       const movements: MovementDTO[] = filledLots.map((lot) => ({
         medical: medicals.find((m) => m.code === data.medical)!,
@@ -108,6 +95,15 @@ export function DischargeMovementForm({
     );
   }, [values.medical, setValue]);
 
+  const medicalOptions = useMemo(
+    () =>
+      medicals.map((medical) => ({
+        value: medical.code?.toString() || "",
+        label: medical.description || "",
+      })),
+    [medicals]
+  );
+
   useEffect(() => {
     dispatch(getWards());
   }, [dispatch]);
@@ -133,7 +129,6 @@ export function DischargeMovementForm({
           />
         </div>
         <TextFormField
-          type="string"
           label={t("pharmacy.form.fields.refNo")}
           control={control}
           name="refNo"

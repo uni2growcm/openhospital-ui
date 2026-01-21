@@ -1,11 +1,9 @@
-import { TextField } from "@mui/material";
-import DateField from "components/accessories/dateField/DateField";
 import {
   AutocompleteFormField,
+  DateFormField,
   TextFormField,
 } from "components/accessories/forms";
 import { DATETIME_FORMAT } from "libraries/consts";
-import { safeFormatToISO } from "libraries/formatUtils";
 import { useTranslation } from "libraries/hooks";
 import { useWardOptions } from "libraries/hooks/api";
 import { isEmpty } from "lodash";
@@ -15,8 +13,8 @@ import { Trans } from "react-i18next";
 import { DischargeLotFormFieldProps } from "./types";
 
 export function DischargeLotFormField({
-  wards,
   control,
+  wards,
 }: DischargeLotFormFieldProps) {
   const { t } = useTranslation();
 
@@ -56,33 +54,27 @@ export function DischargeLotFormField({
         const wardValue = lotsValues?.[index]?.ward;
         return (
           <Fragment key={lot.code}>
-            <TextField
-              value={lot.code}
+            <TextFormField
               label={t("pharmacy.lot.fields.code")}
-              name={`lots.${index}.preparationDate`}
+              control={control}
+              name={`lots.${index}.code`}
               sx={{ marginTop: 1 }}
               disabled
             />
 
-            <DateField
+            <DateFormField
               format={DATETIME_FORMAT}
-              fieldValue={safeFormatToISO(lot.preparationDate) ?? ""}
               label={t("pharmacy.lot.fields.preparationDate")}
-              fieldName={`lots.${index}.preparationDate`}
-              isValid={true}
-              errorText=""
-              onChange={() => {}}
+              control={control}
+              name={`lots.${index}.preparationDate`}
               disabled
             />
 
-            <DateField
+            <DateFormField
               format={DATETIME_FORMAT}
-              fieldValue={safeFormatToISO(lot.dueDate) ?? ""}
               label={t("pharmacy.lot.fields.dueDate")}
-              fieldName={`lots.${index}.dueDate`}
-              isValid={true}
-              errorText=""
-              onChange={() => {}}
+              control={control}
+              name={`lots.${index}.dueDate`}
               disabled
             />
 
@@ -100,9 +92,9 @@ export function DischargeLotFormField({
               name={`lots.${index}.ward`}
               options={wardOptions}
             />
-            <TextField
-              value={lot.cost}
+            <TextFormField
               label={t("pharmacy.lot.fields.cost")}
+              control={control}
               name={`lots.${index}.cost`}
               sx={{ marginTop: 1 }}
               disabled

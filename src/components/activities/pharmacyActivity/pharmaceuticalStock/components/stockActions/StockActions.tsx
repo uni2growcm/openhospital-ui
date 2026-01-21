@@ -59,6 +59,7 @@ export function StockActions() {
         <Button
           type="button"
           variant="contained"
+          dataCy="discharge-button"
           className="discharge_button"
           startIcon={<LogoutIcon sx={{ transform: "rotate(90deg)" }} />}
         >
