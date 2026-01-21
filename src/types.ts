@@ -14,6 +14,7 @@ import type { IOperationState } from './state/operations/types';
 import type { IPatientsState } from './state/patients/types';
 import type { IPermissionsState } from './state/permissions/types';
 import type { IPricesState } from './state/prices/types';
+import type { ISettingsState } from './state/settings';
 import type { ISummaryState } from './state/summary/types';
 import type { ISupplierState } from './state/suppliers/types';
 import type { ITherapiesState } from './state/therapies/types';
@@ -54,6 +55,7 @@ export interface IState {
 	types: ITypesState;
 	suppliers: ISupplierState;
 	permissions: IPermissionsState;
+	settings: ISettingsState;
 }
 
 export enum FIELD_VALIDATION {
@@ -230,4 +232,5 @@ export type TPermission =
 	| 'laboratories.access'
 	| 'patients.access'
 	| 'opds.access'
-	| 'admin.access';
+	| 'admin.access'
+	| 'radiology.read';

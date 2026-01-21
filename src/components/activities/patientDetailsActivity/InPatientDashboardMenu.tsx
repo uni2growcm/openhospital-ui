@@ -16,6 +16,7 @@ import { PATHS } from '~/consts';
 import Arrow from '../../../assets/arrow-w.svg';
 import { Permission } from '../../../libraries/permissionUtils/Permission';
 import './styles.scss';
+import { usePermission } from '~/libraries/permissionUtils/usePermission';
 import type { IUserSection } from './types';
 
 interface IOwnProps {
@@ -32,6 +33,8 @@ const InPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
 	const { id } = useParams();
 
 	const navigate = useNavigate();
+
+	const canReadRadiology = usePermission('radiology.read');
 
 	const isActive = (value: string) => {
 		return value === userSection ? 'active' : 'default';
@@ -164,6 +167,21 @@ const InPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
 				<span>{t('nav.userclinic')}</span>
 				<img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
 			</div>
+			{canReadRadiology && (
+				<div
+					className={
+						'align__element patientDetails__main_menu__item ' +
+						isActive('radiology')
+					}
+					onClick={() => {
+						changeUserSection('radiology');
+					}}
+				>
+					<Healing fontSize="small" style={{ color: 'white' }} />
+					<span>{t('nav.radiology')}</span>
+					<img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
+				</div>
+			)}
 		</div>
 	);
 };

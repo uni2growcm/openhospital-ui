@@ -219,7 +219,8 @@
 		"created": "Patient créé",
 		"updatesuccessful": "Le patient a été modifié avec succès.",
 		"createother": "Ajouter un autre patient",
-		"status": "État de santé"
+		"status": "État de santé",
+		"radiology": "Radiologie"
 	},
 	"opd": {
 		"newopd": "Créer une nouvelle visite OPD",
@@ -417,7 +418,8 @@
 		"types": "Gérer les types",
 		"hospitalInfo": "Informations sur l'hôpital",
 		"hospital": "Hôpital",
-		"settings": "Paramètres"
+		"settings": "Paramètres",
+		"radiology": "Radiologie"
 	},
 	"operation": {
 		"newoperation": "Nouvelle opération",
@@ -1261,6 +1263,20 @@
 			"imaging": "Imagerie",
 			"reports": "Rapports",
 			"integration": "Intégration"
+		}
+	},
+	"radiology": {
+		"studies": {
+			"summary": "{count, plural, =0 {Il n'y a <0>aucune</0> étude pour ce patient} =1 {Il y a <0>1</0> étude pour ce patient} other {Il y a <0>#</0> études pour ce patient}}",
+			"last": "Dernière étude: {value}",
+			"date": "Date",
+			"title": "Titre",
+			"series": "Séries",
+			"viewSeries": "Voir les séries",
+			"institution": "Nom de l'institution",
+			"referrencingPhysician": "Médecin référent",
+			"time": "Temps d'étude",
+			"lastUpdate": "Dernière mise à jour"
 		}
 	}
 }

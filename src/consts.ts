@@ -81,4 +81,8 @@ export const PATHS = {
 	admin_age_types: '/admin/types/ages',
 	admin_age_types_edit: '/admin/types/ages/edit',
 	admin_settings: '/admin/settings',
+	patient_radiology: '/patients/details/:id/radiology',
+	patient_radiology_studies: '/patients/details/:id/radiology/studies',
+	patient_radiology_series:
+		'/patients/details/:id/radiology/studies/:studyId/series',
 };

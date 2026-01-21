@@ -13,6 +13,7 @@ import { useNavigate, useParams } from 'react-router';
 import { PATHS } from '~/consts';
 import Arrow from '../../../assets/arrow-w.svg';
 import './styles.scss';
+import { usePermission } from '~/libraries/permissionUtils/usePermission';
 import type { IUserSection } from './types';
 
 interface IOwnProps {
@@ -29,19 +30,41 @@ const OutPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
 
 	const navigate = useNavigate();
 
+	const canReadRadiology = usePermission('radiology.read');
+
 	const isActive = (value: string) => {
 		return value === userSection ? 'active' : 'default';
 	};
 
+	// const changeUserSection = useCallback(
+	// 	(section: IUserSection) => {
+	// 		setUserSection(section);
+	// 		navigate(
+	// 			`${PATHS.patients_details_id.replace(':id', id ?? '')}/${section}`,
+	// 			{
+	// 				replace: true,
+	// 			},
+	// 		);
+	// 	},
+	// 	[navigate, setUserSection, id],
+	// );
+
 	const changeUserSection = useCallback(
 		(section: IUserSection) => {
+			if (!id) return;
+
 			setUserSection(section);
-			navigate(
-				`${PATHS.patients_details_id.replace(':id', id ?? '')}/${section}`,
-				{
+
+			if (section === 'radiology') {
+				navigate(PATHS.patient_radiology_studies.replace(':id', id), {
 					replace: true,
-				},
-			);
+				});
+				return;
+			}
+
+			navigate(`${PATHS.patients_details_id.replace(':id', id)}/${section}`, {
+				replace: true,
+			});
 		},
 		[navigate, setUserSection, id],
 	);
@@ -130,6 +153,21 @@ const OutPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
 				<span>{t('nav.userclinic')}</span>
 				<img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
 			</div>
+			{canReadRadiology && (
+				<div
+					className={
+						'align__element patientDetails__main_menu__item ' +
+						isActive('radiology')
+					}
+					onClick={() => {
+						changeUserSection('radiology');
+					}}
+				>
+					<Healing fontSize="small" style={{ color: 'white' }} />
+					<span>{t('nav.radiology')}</span>
+					<img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
+				</div>
+			)}
 		</div>
 	);
 };
