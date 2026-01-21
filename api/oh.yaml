@@ -6573,7 +6573,7 @@ components:
           type: boolean
         male:
           type: boolean
-        opd:
+        female:
           type: boolean
       required:
       - beds
