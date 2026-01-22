@@ -102,13 +102,6 @@ export function ChargeMovementForm({
         />
         <TextFormField
           type="number"
-          label={t("pharmacy.form.fields.quantity")}
-          control={control}
-          name="quantity"
-          className="col-start-1"
-        />
-        <TextFormField
-          type="number"
           label={t("pharmacy.form.fields.refNo")}
           control={control}
           name="refNo"
@@ -119,7 +112,7 @@ export function ChargeMovementForm({
             control={control}
             medical={formatedValues.medical}
             name="lot"
-            showNewLotOption= {true}
+            showNewLotOption={true}
           />
         )}
         <div className="col-start-1 col-span-full"></div>
