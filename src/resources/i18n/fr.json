@@ -1322,6 +1322,13 @@
         "adjustQuantity": "Ajuster la quantité",
         "currentQntyNonNegetive": "Current quantity must be non-negative",
         "newQntyNonNegetive": "New quantity must be non-negative"
+      },
+      "errors": {
+        "prodCodeRequired": "Le code du produit est obligatoire.",
+        "typeRequired": "Le type de produit est obligatoire.",
+        "descriptionRequired": "La description est obligatoire.",
+        "pcsPerPackRequired": "Le nombre de pièces par paquet doit être supérieur à 0.",
+        "minQtyRequired": "Le seuil critique ne peut pas être négatif."
       }
     },
     "messages": {

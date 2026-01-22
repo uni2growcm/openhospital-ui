@@ -1,4 +1,5 @@
 import { TextField, TextFieldProps } from "@mui/material";
+import { useTranslation } from "libraries/hooks";
 import React, { ChangeEvent, useCallback } from "react";
 import {
   Control,
@@ -6,6 +7,7 @@ import {
   ControllerRenderProps,
   Path,
 } from "react-hook-form";
+import { LocaleKey } from "resources/types";
 
 export type TextFormFieldProps<T extends Record<string, any>> = {
   control: Control<T>;
@@ -17,6 +19,13 @@ export function TextFormField<T extends Record<string, any>>({
   control,
   ...props
 }: TextFormFieldProps<T>) {
+  const { t } = useTranslation();
+  const getHelperText = useCallback(
+    (key?: string) => {
+      return props.helperText ?? (key ? t(key as LocaleKey) : undefined);
+    },
+    [t, props.helperText]
+  );
   const handleChange = useCallback(
     (field: ControllerRenderProps<T, Path<T>>) =>
       (event: ChangeEvent<HTMLInputElement>) => {
@@ -41,8 +50,8 @@ export function TextFormField<T extends Record<string, any>>({
           name={field.name}
           disabled={props.disabled ?? field.disabled}
           onBlur={props.onBlur ?? field.onBlur}
-          error={props.error ?? fieldState.invalid}
-          helperText={props.helperText ?? fieldState.error?.message}
+          error={fieldState.invalid}
+          helperText={getHelperText(fieldState.error?.message)}
           sx={{ marginTop: 1 }}
         />
       )}

@@ -21,13 +21,14 @@ export const MedicalDTOSchema = z.object({
   inqty: z.number().default(0),
   outqty: z.number().default(0),
   ignoreSimilar: z.boolean().optional(),
+  lock: z.number().optional(),
 });
 
 export function getInitialValues(from?: MedicalDTO): Partial<TFormValues> {
   if (!from) return {};
 
   return {
-    prodCode: from.prod_code,
+    prodCode: from.prodCode,
     description: from.description,
     type: from?.type?.code,
     initialqty: from.initialqty || 0,
@@ -36,5 +37,6 @@ export function getInitialValues(from?: MedicalDTO): Partial<TFormValues> {
     outqty: from.outqty || 0,
     minqty: from.minqty || 0,
     deleted: from.deleted === "N",
+    lock: from.lock || 0,
   };
 }

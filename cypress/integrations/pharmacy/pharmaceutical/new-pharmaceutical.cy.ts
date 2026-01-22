@@ -1,5 +1,5 @@
 describe("New Pharmaceutical", () => {
-  beforeEach(() => {
+  before(() => {
     cy.authenticate("/pharmacy/pharmaceutical/new");
   });
 
@@ -27,9 +27,6 @@ describe("New Pharmaceutical", () => {
   });
 
   it("Should show a confirmation if the pharmaceutical creation succeeds", () => {
-    cy.byId("prodCode").focus().clear().type("PROD_04");
-    cy.byId("type").focus().clear().type("Labora");
-    cy.byId("type-option-0").click();
     cy.byId("description").focus().clear().type("New description").blur();
     cy.dataCy("submit-button").click();
     cy.dataCy("info-box").should("not.exist");

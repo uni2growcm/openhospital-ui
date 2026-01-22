@@ -4,7 +4,7 @@ import { LOTS } from "./lots";
 export const MEDICALS: MedicalDTO[] = [
   {
     code: 1,
-    prod_code: "PARA500",
+    prodCode: "PARA500",
     description: "Paracetamol 500mg tablets",
     type: { code: "DRUG", description: "Pharmaceutical" },
     initialqty: 2000,
@@ -16,7 +16,7 @@ export const MEDICALS: MedicalDTO[] = [
   },
   {
     code: 2,
-    prod_code: "AMOX250",
+    prodCode: "AMOX250",
     description: "Amoxicillin 250mg capsules",
     type: { code: "DRUG", description: "Pharmaceutical" },
     initialqty: 1500,
@@ -28,7 +28,7 @@ export const MEDICALS: MedicalDTO[] = [
   },
   {
     code: 3,
-    prod_code: "COTTON01",
+    prodCode: "COTTON01",
     description: "Sterile cotton rolls",
     type: { code: "EQUIP", description: "Medical Equipment" },
     initialqty: 800,
@@ -40,7 +40,7 @@ export const MEDICALS: MedicalDTO[] = [
   },
   {
     code: 4,
-    prod_code: "VACC001",
+    prodCode: "VACC001",
     description: "Polio vaccines (10-dose vials)",
     type: { code: "DRUG", description: "Pharmaceutical" },
     initialqty: 500,
@@ -52,7 +52,7 @@ export const MEDICALS: MedicalDTO[] = [
   },
   {
     code: 5,
-    prod_code: "KITMAT01",
+    prodCode: "KITMAT01",
     description: "Maternity delivery kits",
     type: { code: "EQUIP", description: "Medical Supply" },
     initialqty: 300,

@@ -36,7 +36,12 @@ export const medicalRoutes = (server) => {
         const body =
           typeof req.body === "string" ? JSON.parse(req.body) : req.body;
 
-        if (!body || !body.prodCode || !body.description) {
+        if (
+          !body ||
+          !body.prodCode ||
+          !body.description ||
+          body.description.includes("fail")
+        ) {
           return res.status(400).json({ message: "Invalid data" });
         }
 

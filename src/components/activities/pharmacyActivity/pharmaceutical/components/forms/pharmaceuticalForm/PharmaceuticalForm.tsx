@@ -9,8 +9,7 @@ import { PATHS } from "consts";
 import { MedicalDTO } from "generated";
 import { useNavigationHandler, useTranslation } from "libraries/hooks";
 import { useMedicalTypes } from "libraries/hooks/api/useMedicalTypes";
-import { isEmpty } from "lodash";
-import React, { FormEvent, useCallback } from "react";
+import React, { useCallback } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { MedicalDTOSchema, getInitialValues } from "./consts";
 import "./styles.scss";
@@ -23,7 +22,7 @@ export function PharmaceuticalForm({
 }: PharmaceuticalFormProps) {
   const { t } = useTranslation();
 
-  const { control, formState } = useForm<TFormValues>({
+  const { control, handleSubmit } = useForm<TFormValues>({
     defaultValues: getInitialValues(pharmaceutical),
     resolver: standardSchemaResolver(MedicalDTOSchema),
   });
@@ -48,14 +47,15 @@ export function PharmaceuticalForm({
     replace: true,
   });
 
-  const handleSubmit = useCallback(
-    (event: FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      if (isEmpty(Object.keys(formState.errors))) {
-        onSubmit?.(values as MedicalDTO);
-      }
+  const onValidSubmit = useCallback(
+    (data: TFormValues) => {
+      const medicalDTO: MedicalDTO = {
+        ...data,
+        ...values,
+      };
+      onSubmit(medicalDTO);
     },
-    [formState, values, onSubmit]
+    [values, onSubmit]
   );
 
   return (
@@ -63,13 +63,14 @@ export function PharmaceuticalForm({
       <form
         data-cy="pharmaceutical-form"
         className="form-grid-layout gap-2 w-full"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onValidSubmit)}
       >
         <TextFormField
           type="string"
           label={t("pharmacy.form.fields.prodCode")}
           control={control}
           name="prodCode"
+          disabled={!!pharmaceutical}
         />
         <AutocompleteFormField
           label={t("pharmacy.form.fields.typeMedical")}

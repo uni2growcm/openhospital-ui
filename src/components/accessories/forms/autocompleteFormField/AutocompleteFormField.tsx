@@ -7,6 +7,7 @@ import {
   Path,
 } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { LocaleKey } from "resources/types";
 
 export type AutocompleteFormFieldProps<T extends Record<string, any>> = {
   control: Control<T>;
@@ -23,6 +24,12 @@ export function AutocompleteFormField<T extends Record<string, any>>({
 }: AutocompleteFormFieldProps<T>) {
   const { t } = useTranslation();
 
+  const getErrorText = useCallback(
+    (key?: string) => {
+      return key ? t(key as LocaleKey) : "";
+    },
+    [t]
+  );
   const handleChange = useCallback(
     (field: ControllerRenderProps<T, Path<T>>) => (_: object, value: any) => {
       field.onChange(value?.value);
@@ -48,7 +55,7 @@ export function AutocompleteFormField<T extends Record<string, any>>({
             fieldValue={field.value ?? ""}
             disabled={props.disabled ?? field.disabled}
             onBlur={field.onBlur}
-            errorText={translatedError}
+            errorText={getErrorText(fieldState.error?.message)}
             isValid={!fieldState.invalid}
             onChange={handleChange(field)}
           />

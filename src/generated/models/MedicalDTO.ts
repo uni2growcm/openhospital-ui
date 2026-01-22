@@ -32,7 +32,7 @@ export interface MedicalDTO {
      * @type {string}
      * @memberof MedicalDTO
      */
-    prod_code?: string;
+    prodCode?: string;
     /**
      * The medical type
      * @type {MedicalTypeDTO}
