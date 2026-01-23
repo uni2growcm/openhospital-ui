@@ -7,6 +7,7 @@ export const initial: IPharmacyState = {
   movementTypes: new ApiResponse({ status: "IDLE", data: [] }),
   getMovements: new ApiResponse({ status: "IDLE", data: [] }),
   getMovementsWard: new ApiResponse({ status: "IDLE", data: [] }),
+  getWardMovementsToWard: new ApiResponse({ status: "IDLE", data: [] }),
   createMovement: new ApiResponse({ status: "IDLE" }),
   updateMovement: new ApiResponse({ status: "IDLE" }),
   deleteMovement: new ApiResponse({ status: "IDLE" }),

@@ -148,4 +148,14 @@ export const WARD_MOVEMENTS: MovementWardDTO[] = [
     wardFrom: wards.find((w) => w.code === "M")!,
     fullPatient: patients[2],
   },
+  {
+  code: 14,
+  ward: wards.find((w) => w.code === "F")!,
+  date: "2025-10-09",
+  description: "Incoming supplies from central pharmacy",
+  quantity: 50,
+  units: "boxes",
+  medical: MEDICALS[0],
+  wardTo: wards.find((w) => w.code === "F")!,
+},
 ];

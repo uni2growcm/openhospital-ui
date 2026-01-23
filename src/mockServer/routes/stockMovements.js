@@ -51,6 +51,25 @@ export const stockMovementsRoutes = (server) => {
           )
         );
     });
+    server.get("/to/:target_ward_code").intercept((req, res) => {
+      const targetWardCode = req.params.target_ward_code;
+      const from = req.query.from;
+      const to = req.query.to;
+
+      const filteredMovements = WARD_MOVEMENTS.filter((movement) => {
+        const movementDate = new Date(movement.date);
+        const fromDate = new Date(from);
+        const toDate = new Date(to);
+
+        return (
+          movement.wardTo?.code === targetWardCode &&
+          movementDate >= fromDate &&
+          movementDate <= toDate
+        );
+      });
+
+      res.status(200).json(filteredMovements);
+    });
   });
   server.post("/medicalstockward/movements").intercept((req, res) => {
     const body = req.jsonBody();
@@ -86,4 +105,29 @@ export const stockMovementsRoutes = (server) => {
 
     res.status(201).json(true);
   });
+
+  server.namespace("/medicalstockmovements", () => {
+    server.get("/filter/v1").intercept((req, res) => {
+      const wardId = req.query.ward_id;
+      const from = new Date("2010-12-25T10:30:00Z");
+      const to = req.query.to;
+
+      const filteredMovements = WARD_MOVEMENTS.filter((movement) => {
+        const movementDate = new Date(movement.date);
+        const fromDate = from;
+        const toDate = new Date(to);
+        const data = (
+          (movement.ward?.code === wardId ||
+            movement.wardFrom?.code === wardId ||
+            movement.wardTo?.code === wardId) &&
+          movementDate >= fromDate &&
+          movementDate <= toDate
+        );
+        return data;
+      });
+
+      res.status(200).json(filteredMovements);
+    });
+  });
+
 };

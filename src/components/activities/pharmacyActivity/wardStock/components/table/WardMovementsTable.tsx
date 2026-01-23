@@ -2,13 +2,12 @@ import { CircularProgress } from "@mui/material";
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import Table from "components/accessories/table/Table";
 import { TFilterField } from "components/accessories/table/filter/types";
+import { MovementDTO } from "generated";
 import { renderDateTime } from "libraries/formatUtils/dataFormatting";
 import { useTranslation } from "libraries/hooks";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useEffect, useMemo } from "react";
-import {
-  getMovementsWard,
-} from "state/pharmacy";
+import { getMovementsWard, getWardMovementsToWard } from "state/pharmacy";
 
 export function WardMovementsTable() {
   const { t } = useTranslation();
@@ -16,14 +15,6 @@ export function WardMovementsTable() {
   const dispatch = useAppDispatch();
 
   const filter = useAppSelector((state) => state.pharmacy.wardStock.filter);
-
-  const data = useAppSelector(
-    (state) => state.pharmacy.wardMovements.data ?? []
-  );
-
-  const dataIncoming = useAppSelector(
-    (state) => state.pharmacy.getMovementsWard.data ?? []
-  );
 
   const status = useAppSelector((state) => state.pharmacy.wardMovements.status);
 
@@ -107,50 +98,68 @@ export function WardMovementsTable() {
     [t]
   );
 
-  const fulldata: any[] = [...dataIncoming, ...data];
+  const listMovementWard = useAppSelector(
+    (state) => state.pharmacy.wardMovements.data ?? []
+  );
+  const listMovementWardToWard = useAppSelector(
+    (state) => state.pharmacy.getWardMovementsToWard.data ?? []
+  );
+  const listMovement = useAppSelector(
+    (state) => state.pharmacy.getMovementsWard.data ?? []
+  );
+
+  const incomingData = useMemo(() => {
+    const incomesFromCentral = listMovement.filter(
+      (mov) =>
+        mov.ward?.description !== null && mov.ward?.code === filter.ward?.code
+    );
+    const incomesFromOtherWards = listMovementWardToWard.filter(
+      (mov) => mov.wardTo?.code === filter.ward?.code
+    );
+    return [...incomesFromCentral, ...incomesFromOtherWards];
+  }, [listMovement, listMovementWardToWard, filter.ward?.code]);
+
+  const outgoingData = useMemo(() => {
+    return listMovementWard.filter((item) => item.wardFrom == null);
+  }, [listMovementWard, filter.ward?.code]);
+
+  const allData: any[] = [...incomingData, ...outgoingData];
+
+  const selectedData = useMemo(() => {
+    if (filter.type === "incoming") return incomingData;
+    if (filter.type === "outcoming") return outgoingData;
+    return allData;
+  }, [incomingData, outgoingData, allData, filter.type]);
 
   const formattedData = useMemo(() => {
-    return fulldata
-      .filter((item) => {
-      if (!filter.type) return true;
-      if (filter.type === "incoming") {
-        return item.type?.code === "discharge" && item.ward?.code === filter.ward?.code;
-      }
-      if (filter.type === "outcoming") {
-        return (
-          item.ward?.code === filter.ward?.code && 
-          item.type?.code !== "discharge"
-        );
-      }
-      return false;
-    })
-      .map((item) => ({
-        recipient:
-          (item.patient
-            ? `${item?.fullPatient?.firstName} ${item?.fullPatient?.secondName}`
-            : item.wardTo?.description) ?? "",
-        patient: item?.fullPatient?.name ?? "",
-        pharmaceutical: item.medical?.description ?? "",
-        wardFrom: item.wardFrom?.description ?? "",
-        wardTo: item.wardTo?.description ?? "",
-        date: renderDateTime(item.date),
-        code: item.code ?? "",
-        units: item.units ?? "",
-        description: item.description,
-        quantity: item.quantity,
-        ward: item.ward?.description ?? "",
-        weight: item.weight ?? "",
-        age: item.age ?? "",
-        type: t(
-          `pharmacy.stock.ward.movementType.${
-            item.patient ? "patient" : "ward"
-          }`
-        ),
-      }));
-  }, [fulldata, filter, t]);
+    return selectedData.map((item) => ({
+      recipient:
+        (item.patient
+          ? `${item?.fullPatient?.firstName} ${item?.fullPatient?.secondName}`
+          : item.wardTo?.description) ?? "",
+      patient: item?.fullPatient?.name ?? "",
+      pharmaceutical: item.medical?.description ?? "",
+      wardFrom: item.wardFrom?.description ?? "",
+      wardTo: item.wardTo?.description ?? "",
+      date: renderDateTime(item.date),
+      code: item.code ?? "",
+      units: item.units ?? "",
+      description: item.description,
+      quantity: item.quantity,
+      ward: item.ward?.description ?? "",
+      weight: item.weight ?? "",
+      age: item.age ?? "",
+      type: t(
+        `pharmacy.stock.ward.movementType.${item.patient ? "patient" : "ward"}`
+      ),
+    }));
+  }, [selectedData, filter, t]);
 
   useEffect(() => {
     dispatch(getMovementsWard({ wardId: filter.ward?.code ?? "" }));
+    dispatch(
+      getWardMovementsToWard({ targetWardCode: filter.ward?.code ?? "" })
+    );
   }, [dispatch, filter.ward?.code]);
 
   return (
@@ -173,7 +182,7 @@ export function WardMovementsTable() {
                 isCollapsabile={true}
                 detailColSpan={6}
                 filterColumns={filters}
-                rawData={(fulldata ?? []).map((item) => ({
+                rawData={(allData ?? []).map((item) => ({
                   ...item,
                   type: item.patient ? "patient" : "ward",
                   pharmaceutical: item.medical?.description ?? "",

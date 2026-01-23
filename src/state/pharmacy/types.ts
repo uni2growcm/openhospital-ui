@@ -15,6 +15,7 @@ export type IPharmacyState = {
   wardMedicals: ApiResponse<MedicalWardDTO[]>;
   getMovements: ApiResponse<Array<MovementDTO>>;
   getMovementsWard: ApiResponse<Array<MovementDTO>>;
+  getWardMovementsToWard: ApiResponse<Array<MovementWardDTO>>
   movementTypes: ApiResponse<Array<MovementTypeDTO>>;
   createMovement: ApiResponse<MovementDTO>;
   updateMovement: ApiResponse<MovementDTO>;

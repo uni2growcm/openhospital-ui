@@ -101,7 +101,6 @@ export function ChargeMovementForm({
           className="col-start-1"
         />
         <TextFormField
-          type="number"
           label={t("pharmacy.form.fields.refNo")}
           control={control}
           name="refNo"
