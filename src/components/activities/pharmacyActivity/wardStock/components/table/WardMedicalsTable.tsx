@@ -3,6 +3,7 @@ import InfoBox from "components/accessories/infoBox/InfoBox";
 import Table from "components/accessories/table/Table";
 import { TFilterField } from "components/accessories/table/filter/types";
 import { PATHS } from "consts";
+import { MedicalWardDTO } from "generated";
 import { useTranslation } from "libraries/hooks";
 import { useWardMedicals } from "libraries/hooks/api";
 import { useAppDispatch } from "libraries/hooks/redux";
@@ -12,9 +13,10 @@ import { getMovements } from "state/pharmacy";
 
 interface WardMedicalsProps {
   wardCode: string;
+  onRectify?: (medical: MedicalWardDTO) => void;
 }
 
-export function WardMedicalsTable({ wardCode }: WardMedicalsProps) {
+export function WardMedicalsTable({ wardCode, onRectify }: WardMedicalsProps) {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -89,18 +91,6 @@ export function WardMedicalsTable({ wardCode }: WardMedicalsProps) {
     dispatch(getMovements());
   }, [dispatch]);
 
-  const handleRectify = useCallback(
-    (medical: any) => {
-      navigate(
-        PATHS.pharmacy_ward_stock_rectify
-          .replace(":medCode", medical.code.toString() ?? "")
-          .replace(":wardCode", medical.wardCode ?? "")
-          .replace(":lotCode", medical.lotCode ?? "")
-      );
-    },
-    [navigate]
-  );
-
   return (
     <div data-cy="ward-movements-table">
       {(() => {
@@ -121,7 +111,7 @@ export function WardMedicalsTable({ wardCode }: WardMedicalsProps) {
                 filterColumns={filters}
                 rawData={data}
                 manualFilter={false}
-                onRectify={handleRectify}
+                onRectify={onRectify}
                 onDischarge={(row) => handleDischarge(row)}
               />
             );

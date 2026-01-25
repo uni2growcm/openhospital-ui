@@ -1,4 +1,3 @@
-import { MedicalWardDTO } from "generated";
 import { z } from "zod";
 import { TFormValues } from "./types";
 
@@ -49,14 +48,15 @@ export const MedicalWardDTOSchema = (() => {
   return schema;
 })();
 
-export function getInitialValues(from?: MedicalWardDTO): Partial<TFormValues> {
+export function getInitialValues(from?: any): Partial<TFormValues> {
   if (!from) return {};
-  const actualQuantity = (from.in_quantity ?? 0) - (from.out_quantity ?? 0);
+
   return {
-    actualQuantity,
+    actualQuantity: from.quantity ?? 0,
     quantity: 0,
-    medical: from.id!.medical?.code,
-    ward: from.id!.ward?.code,
-    lot: from.id!.lot?.code,
+    medical: from.code,
+    ward: from.wardCode,
+    lot: from.lots?.[0]?.code,
+    reason: "",
   };
 }
