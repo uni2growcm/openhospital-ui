@@ -1398,6 +1398,7 @@
         "recipient": "Destinataire",
         "SelectMedical": "Sélectionner un médicament",
         "pieces": "pièces",
+        "Rectifywardstock": "Rectifier le stock du pavillon",
         "movementType": {
           "patient": "Vers un patient",
           "ward": "Usage interne",

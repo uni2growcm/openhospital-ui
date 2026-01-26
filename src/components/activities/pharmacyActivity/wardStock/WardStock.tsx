@@ -1,6 +1,7 @@
 import { PATHS } from "consts";
+import { MedicalWardDTO } from "generated";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useOutletContext } from "react-router";
 import { getWardMedicals, getWardMovements } from "state/pharmacy";
@@ -11,11 +12,14 @@ import {
   WardMovementsTable,
   WardStockHeader,
 } from "./components";
+import RectifyQuantityModal from "./components/modal/RectifyQuantityModal";
 import "./styles.scss";
 
 export function WardStock() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const [openRectify, setOpenRectify] = useState(false);
+  const [selectedMedical, setSelectedMedical] = useState<MedicalWardDTO>();
 
   const { breadcrumbMap, setBreadcrumbMap } = useOutletContext<{
     breadcrumbMap: Record<string, string>;
@@ -36,6 +40,11 @@ export function WardStock() {
   };
 
   const filter = useAppSelector((state) => state.pharmacy.wardStock.filter);
+
+  const handleOpenRectifyModal = (medical: MedicalWardDTO) => {
+    setSelectedMedical(medical);
+    setOpenRectify(true);
+  };
 
   useEffect(() => {
     addBreadcrumb();
@@ -66,11 +75,21 @@ export function WardStock() {
       <div className="ward-stock">
         <WardStockHeader />
         {filter.type === "drugs" ? (
-          filter.ward?.code && <WardMedicalsTable wardCode={filter.ward.code} />
+          filter.ward?.code && (
+            <WardMedicalsTable
+              wardCode={filter.ward.code}
+              onRectify={handleOpenRectifyModal}
+            />
+          )
         ) : (
           <WardMovementsTable />
         )}
       </div>
+      <RectifyQuantityModal
+        open={openRectify}
+        pharmaceutical={selectedMedical}
+        onClose={() => setOpenRectify(false)}
+      />
     </PharmacyActivityContent>
   );
 }

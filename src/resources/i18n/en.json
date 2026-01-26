@@ -1428,6 +1428,7 @@
         "recipient": "Recipient",
         "SelectMedical": "Select Medical",
         "pieces": "Pieces",
+        "Rectifywardstock": "Rectify ward stock",
         "movementType": {
           "patient": "To patient",
           "ward": "Internal use",

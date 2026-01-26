@@ -1,4 +1,4 @@
-import { LotDTO, MedicalWardDTO, MovementDTO, MovementWardDTO } from "generated";
+import { MedicalWardDTO, MovementWardDTO } from "generated";
 import z from "zod";
 import { MedicalWardDTOSchema } from "./consts";
 
@@ -8,4 +8,5 @@ export type PharmaceuticalStockFormProps = {
   onSubmit: (values: MovementWardDTO) => void;
   loading?: boolean;
   pharmaceutical?: MedicalWardDTO;
+  onClose?: () => void;
 };
