@@ -355,8 +355,8 @@ export class StockMovementsApi extends BaseAPI {
 
         const query: HttpQuery = { // required parameters are used directly since they are already checked by throwIfNullOrUndefined
             'ward_id': wardId,
-            'from': (from as any).toISOString(),
-            'to': (to as any).toISOString(),
+            'from': (from as any).toISOString().split('T')[0],
+            'to': (to as any).toISOString().split('T')[0],
         };
 
         return this.request<Array<MovementDTO>>({

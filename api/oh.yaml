@@ -4919,13 +4919,13 @@ paths:
         required: true
         schema:
           type: string
-          format: date-time
+          format: date
       - name: to
         in: query
         required: true
         schema:
           type: string
-          format: date-time
+          format: date
       responses:
         "200":
           description: OK
@@ -5115,13 +5115,13 @@ paths:
         required: true
         schema:
           type: string
-          format: date-time
+          format: date
       - name: to
         in: query
         required: true
         schema:
           type: string
-          format: date-time
+          format: date
       responses:
         "200":
           description: OK

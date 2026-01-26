@@ -15,7 +15,7 @@ describe("PharmacyActivity spec", () => {
     cy.dataCy("ward-movements-table")
       .find("table tbody tr")
       .then(($rows) => {
-        expect($rows.length).equal(12);
+        expect($rows.length).equal(18);
       });
   });
 
@@ -24,7 +24,7 @@ describe("PharmacyActivity spec", () => {
     cy.dataCy("ward-movements-table")
       .find("table tbody tr")
       .then(($rows) => {
-        expect($rows.length).equal(4);
+        expect($rows.length).equal(16);
       });
   });
   it("should show female ward outgoing movements", () => {
@@ -32,7 +32,7 @@ describe("PharmacyActivity spec", () => {
     cy.dataCy("ward-movements-table")
       .find("table tbody tr")
       .then(($rows) => {
-        expect($rows.length).equal(8);
+        expect($rows.length).equal(2);
       });
   });
 });
