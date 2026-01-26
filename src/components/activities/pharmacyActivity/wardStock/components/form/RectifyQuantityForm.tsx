@@ -57,15 +57,25 @@ function RectifyQuantityForm({
 
   const onValidSubmit = useCallback(
     (values: TFormValues) => {
+      if (!selectedMedical?.id?.ward || !selectedMedical?.id?.medical) {
+        return;
+      }
+
+      const actualQty = values.actualQuantity;
+      const newQty = values.quantity;
+      const movementQty = actualQty - newQty;
+
+      if (movementQty === 0) return;
+
       const payload: MovementWardDTO = {
-        ward: selectedMedical?.id?.ward,
-        medical: selectedMedical?.id?.medical,
+        ward: selectedMedical.id.ward,
+        medical: selectedMedical.id.medical,
+        lot: selectedMedical.id.lot,
         date: new Date().toISOString(),
         description: values.reason || "",
-        quantity: values.quantity,
+        quantity: movementQty,
         units: t("pharmacy.stock.ward.pieces"),
-        lot: selectedMedical?.id?.lot,
-      } as MovementWardDTO;
+      };
 
       onSubmit?.(payload);
     },
