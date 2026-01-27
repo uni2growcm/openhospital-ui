@@ -1432,9 +1432,13 @@
         "movementType": {
           "patient": "To patient",
           "ward": "Internal use",
-          "toAnotherWard": "To another ward"
+          "toAnotherWard": "To another ward",
+          "fromAnotherWard": "From another ward",
+          "charge": "Charge"
         },
         "dischargeMovement": "Discharge movement from ",
+        "discharge": "Discharge",
+        "charge": "Charge",
         "destination": "Destination",
         "toPatient": "To patient",
         "internalUse": "Internal use",

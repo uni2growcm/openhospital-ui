@@ -2,7 +2,6 @@ import { CircularProgress } from "@mui/material";
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import Table from "components/accessories/table/Table";
 import { TFilterField } from "components/accessories/table/filter/types";
-import { MovementDTO } from "generated";
 import { renderDateTime } from "libraries/formatUtils/dataFormatting";
 import { useTranslation } from "libraries/hooks";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
@@ -86,6 +85,14 @@ export function WardMovementsTable() {
               label: t("pharmacy.stock.ward.movementType.ward"),
               value: "ward",
             },
+            {
+              label: t("pharmacy.stock.ward.discharge"),
+              value: "discharge",
+            },
+            {
+              label: t("pharmacy.stock.ward.charge"),
+              value: "charge",
+            },
           ],
         },
         { key: "date", label: t("pharmacy.stock.ward.date"), type: "date" },
@@ -132,28 +139,34 @@ export function WardMovementsTable() {
   }, [incomingData, outgoingData, allData, filter.type]);
 
   const formattedData = useMemo(() => {
-    return selectedData.map((item) => ({
-      recipient:
-        (item.patient
-          ? `${item?.fullPatient?.firstName} ${item?.fullPatient?.secondName}`
-          : item.wardTo?.description) ?? "",
-      patient: item?.fullPatient?.name ?? "",
-      pharmaceutical: item.medical?.description ?? "",
-      wardFrom: item.wardFrom?.description ?? "",
-      wardTo: item.wardTo?.description ?? "",
-      date: renderDateTime(item.date),
-      code: item.code ?? "",
-      units: item.units ?? "",
-      description: item.description,
-      quantity: item.quantity,
-      ward: item.ward?.description ?? "",
-      weight: item.weight ?? "",
-      age: item.age ?? "",
-      type: t(
-        `pharmacy.stock.ward.movementType.${item.patient ? "patient" : "ward"}`
-      ),
-    }));
-  }, [selectedData, filter, t]);
+    return selectedData.map((item) => {
+      let movementKey = "ward";
+      if (item.patient) movementKey = "patient";
+      if (item.wardTo && item.wardTo.code === filter.ward?.code)
+        movementKey = "fromAnotherWard";
+      else if (item.wardTo) movementKey = "toAnotherWard";
+      else if (item.ward.code === filter.ward?.code && item.type?.type === "-")
+        movementKey = "charge";
+
+      return {
+        recipient:
+          (item.patient ? item.description : item.wardTo?.description) ?? "",
+        patient: item.fullPatient?.name ?? "",
+        pharmaceutical: item.medical?.description ?? "",
+        wardFrom: item.wardFrom?.description ?? "",
+        wardTo: item.wardTo?.description ?? "",
+        date: renderDateTime(item.date),
+        code: item.code ?? "",
+        units: item.units ?? "",
+        description: item.description,
+        quantity: item.quantity,
+        ward: item.ward?.description ?? "",
+        weight: item.weight ?? "",
+        age: item.age ?? "",
+        type: t(`pharmacy.stock.ward.movementType.${movementKey}` as never),
+      };
+    });
+  }, [selectedData, t, filter.ward?.code]);
 
   useEffect(() => {
     dispatch(getMovementsWard({ wardId: filter.ward?.code ?? "" }));
@@ -175,7 +188,7 @@ export function WardMovementsTable() {
                 tableHeader={tableHeader}
                 rowsPerPage={10}
                 columnsOrder={order}
-                initialOrderBy="quantity"
+                initialOrderBy="date"
                 rowData={formattedData}
                 dateFields={dateFields}
                 showEmptyCell={false}

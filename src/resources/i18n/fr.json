@@ -1402,9 +1402,13 @@
         "movementType": {
           "patient": "Vers un patient",
           "ward": "Usage interne",
-          "toAnotherWard": "Vers un autre pavillon"
+          "toAnotherWard": "Vers un autre pavillon",
+          "fromAnotherWard": "Depuis un autre pavillon",
+          "charge": "Charge"
         },
         "dischargeMovement": "Mouvement de décharge depuis ",
+        "discharge": "Décharge",
+        "charge": "Charge",
         "destination": "Destination",
         "toPatient": "Vers un patient",
         "internalUse": "Usage interne",
