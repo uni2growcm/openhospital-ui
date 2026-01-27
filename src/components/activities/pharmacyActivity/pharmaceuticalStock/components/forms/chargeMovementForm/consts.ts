@@ -8,16 +8,17 @@ export const MovementDTOSchema = z.object({
   medical: z.number(),
   type: z.string().optional(),
   ward: z.string().optional(),
-  lot: LotDTOSchema.optional(),
+  lot: LotDTOSchema,
   date: z.date(),
   supplier: z.number().optional(),
   refNo: z.string(),
+  quantity: z.number()
 });
 
 export function getInitialValues(from?: MovementDTO): Partial<TFormValues> {
   return {
     code: from?.code,
-    medical: from?.medical?.code,
+    medical: from?.medical.code,
     type: from?.type?.code,
     ward: from?.ward?.code,
     lot: from?.lot
@@ -30,5 +31,6 @@ export function getInitialValues(from?: MovementDTO): Partial<TFormValues> {
     date: from?.date ? new Date(from.date) : undefined,
     supplier: from?.supplier?.supId,
     refNo: from?.refNo,
+    quantity: from?.quantity,
   };
 }

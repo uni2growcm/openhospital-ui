@@ -29,6 +29,7 @@ export function LotFormField<T extends Record<string, any>>({
   showNewLotOption,
   showMainStoreQuantity = true,
   showWardTotalQuantity,
+  hideQty,
 }: LotFormFieldProps<T>) {
   const { t } = useTranslation();
   const [newLot, setNewLot] = useState<LotDTO>({
@@ -184,13 +185,15 @@ export function LotFormField<T extends Record<string, any>>({
                   name={`${name}.cost` as Path<T>}
                   disabled={!isNewLotActive}
                 />
-                <TextFormField
-                  type="number"
-                  label={t("pharmacy.lot.fields.quantity")}
-                  control={control}
-                  name={`${name}.quantity` as Path<T>}
-                  disabled={!isNewLotActive}
-                />
+                {!hideQty && (
+                  <TextFormField
+                    type="number"
+                    label={t("pharmacy.lot.fields.quantity")}
+                    control={control}
+                    name={`${name}.quantity` as Path<T>}
+                    disabled={!isNewLotActive}
+                  />
+                )}
               </>
             )}
           </>

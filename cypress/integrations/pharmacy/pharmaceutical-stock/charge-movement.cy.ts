@@ -9,16 +9,18 @@ describe("Charge movement", () => {
     cy.dataCy("charge-movement").should("exist");
   });
 
-  it("Should fill charege movement form", () => {
+  it("Should fill charge movement form", () => {
     cy.byId("date").focus().type("031120251200").blur();
+    cy.byId("refNo").focus().blur();
     cy.byId("medical").focus().type("Para");
     cy.byId("medical-option-0").click();
-    cy.byId("refNo").focus().blur();
+    cy.byId("supplier").focus().type("East");
+    cy.byId("supplier-option-0").click();
+    cy.byId('"quantity"').focus().type("12").blur();
     cy.byId('"lot.code"').focus().type("128").blur();
     cy.byId('"lot.preparationDate"').focus().type("030820251200").blur();
     cy.byId('"lot.dueDate"').focus().type("030820281200").blur();
     cy.byId('"lot.cost"').focus().type("64").blur();
-    cy.byId('"lot.quantity"').focus().type("12").blur();
   });
 
   it("Should display an error info box if the movement charging fails", () => {
