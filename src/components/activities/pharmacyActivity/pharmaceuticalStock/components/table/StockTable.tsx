@@ -95,6 +95,7 @@ export function StockTable() {
           item.type?.type === "+" ? "charge" : "discharge"
         }`
       ),
+      date: item.date,
       quantity: item.quantity,
       medical: item.medical?.description,
       cost: item.lot?.cost,
@@ -133,7 +134,7 @@ export function StockTable() {
                 tableHeader={tableHeader}
                 rowsPerPage={10}
                 columnsOrder={order}
-                initialOrderBy="quantity"
+                initialOrderBy="date"
                 rowData={formattedData}
                 dateFields={dateFields}
                 showEmptyCell={false}
