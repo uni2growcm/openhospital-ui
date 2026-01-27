@@ -28,7 +28,7 @@ export function getInitialValues(from?: MovementDTO): Partial<TFormValues> {
           dueDate: new Date(from.lot.dueDate),
         }
       : undefined,
-    date: from?.date ? new Date(from.date) : undefined,
+    date: from?.date ? new Date(from.date) : new Date(),
     supplier: from?.supplier?.supId,
     refNo: from?.refNo,
     quantity: from?.quantity,
