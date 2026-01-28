@@ -35,11 +35,13 @@ function RectifyQuantityForm({
   });
 
   const medicalOptions = useMemo(() => {
-    if (!pharmaceutical?.id?.medical) return [];
+    if (!(pharmaceutical as any)?.description) return [];
     return [
       {
-        label: pharmaceutical.id.medical.description,
-        value: pharmaceutical.id.medical.code,
+        label: (pharmaceutical as any)?.description,
+        value: `${(pharmaceutical as any)?.code} - ${
+          (pharmaceutical as any)?.description
+        }`,
       },
     ];
   }, [pharmaceutical]);

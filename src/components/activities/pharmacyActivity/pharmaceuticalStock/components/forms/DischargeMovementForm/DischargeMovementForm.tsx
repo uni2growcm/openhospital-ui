@@ -35,6 +35,7 @@ export function DischargeMovementForm({
 
   const { control, handleSubmit, setValue } = useForm<TFormValues>({
     defaultValues: {
+      date: new Date(),
       type: "",
       quantity: 0,
       refNo: "",
