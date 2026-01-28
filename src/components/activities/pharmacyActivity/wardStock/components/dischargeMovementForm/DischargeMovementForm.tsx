@@ -74,7 +74,7 @@ export function WardDischargeForm({
       try {
         const wardTo =
           destinationType === "ward"
-            ? selectWard(formValues.wardTo  ?? "")
+            ? selectWard(formValues.wardTo ?? "")
             : undefined;
 
         const patient =
