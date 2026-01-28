@@ -8,4 +8,5 @@ export type LotFormFieldProps<T extends Record<string, any>> = {
   showNewLotOption?: boolean;
   showMainStoreQuantity?: boolean;
   showWardTotalQuantity?: boolean;
+  hideQty?: boolean;
 };
