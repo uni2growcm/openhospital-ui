@@ -102,7 +102,6 @@ export function WardDischargeForm({
           wardFrom: undefined,
           lot: formValues.lot,
         };
-        console.log("PAYLOAD", payload);
         onSubmit?.(payload);
       } catch (err) {
         console.error("Error creating ward movement:", err);
