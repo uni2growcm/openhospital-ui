@@ -85,14 +85,6 @@ export function WardMovementsTable() {
               label: t("pharmacy.stock.ward.movementType.ward"),
               value: "ward",
             },
-            {
-              label: t("pharmacy.stock.ward.discharge"),
-              value: "discharge",
-            },
-            {
-              label: t("pharmacy.stock.ward.charge"),
-              value: "charge",
-            },
           ],
         },
         { key: "date", label: t("pharmacy.stock.ward.date"), type: "date" },
@@ -142,11 +134,16 @@ export function WardMovementsTable() {
     return selectedData.map((item) => {
       let movementKey = "ward";
       if (item.patient) movementKey = "patient";
-      if (item.wardTo && item.wardTo.code === filter.ward?.code)
+      else if (item.wardTo && item.wardTo.code === filter.ward?.code)
         movementKey = "fromAnotherWard";
       else if (item.wardTo) movementKey = "toAnotherWard";
       else if (item.ward.code === filter.ward?.code && item.type?.type === "-")
         movementKey = "charge";
+      else if (
+        !item?.description.toLowerCase().includes("internal") &&
+        !item?.description.toLowerCase().includes("use")
+      )
+        movementKey = "rectify";
 
       return {
         recipient:
@@ -163,7 +160,10 @@ export function WardMovementsTable() {
         ward: item.ward?.description ?? "",
         weight: item.weight ?? "",
         age: item.age ?? "",
-        type: t(`pharmacy.stock.ward.movementType.${movementKey}` as never),
+        type:
+          movementKey === "charge"
+            ? item?.refNo
+            : t(`pharmacy.stock.ward.movementType.${movementKey}` as never),
       };
     });
   }, [selectedData, t, filter.ward?.code]);

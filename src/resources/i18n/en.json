@@ -1434,11 +1434,10 @@
           "ward": "Internal use",
           "toAnotherWard": "To another ward",
           "fromAnotherWard": "From another ward",
-          "charge": "Charge"
+          "charge": "Charge",
+          "rectify": "Rectify"
         },
         "dischargeMovement": "Discharge movement from ",
-        "discharge": "Discharge",
-        "charge": "Charge",
         "destination": "Destination",
         "toPatient": "To patient",
         "internalUse": "Internal use",

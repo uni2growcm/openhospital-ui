@@ -1404,11 +1404,10 @@
           "ward": "Usage interne",
           "toAnotherWard": "Vers un autre pavillon",
           "fromAnotherWard": "Depuis un autre pavillon",
-          "charge": "Charge"
+          "charge": "Charge",
+          "rectify": "Rectifier"
         },
         "dischargeMovement": "Mouvement de décharge depuis ",
-        "discharge": "Décharge",
-        "charge": "Charge",
         "destination": "Destination",
         "toPatient": "Vers un patient",
         "internalUse": "Usage interne",
