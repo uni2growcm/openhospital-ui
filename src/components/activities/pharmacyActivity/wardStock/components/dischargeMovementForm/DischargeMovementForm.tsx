@@ -74,8 +74,9 @@ export function WardDischargeForm({
       try {
         const wardTo =
           destinationType === "ward"
-            ? selectWard(formValues.wardTo?.code ?? "")
+            ? selectWard(formValues.wardTo ?? "")
             : undefined;
+
         const patient =
           destinationType === "patient" ? formValues.patient : undefined;
 
@@ -83,7 +84,7 @@ export function WardDischargeForm({
           destinationType === "patient"
             ? `${patient?.firstName || ""} ${patient?.secondName || ""}`
             : destinationType === "ward"
-            ? `${formValues.wardTo}` || ""
+            ? `${wardTo?.description}` || ""
             : t("pharmacy.stock.ward.movementType.ward");
 
         const payload: MovementWardDTO = {
@@ -91,12 +92,8 @@ export function WardDischargeForm({
           date: (data.date as any).toISOString(),
           isPatient: destinationType === "patient",
           patient,
-          age:
-            destinationType === "patient" ? data.age ?? undefined : undefined,
-          weight:
-            destinationType === "patient"
-              ? data.weight ?? undefined
-              : undefined,
+          age: formValues.patient?.age,
+          weight: formValues.patient?.weight,
           description: description ?? "",
           medical: medical,
           quantity: data.quantity,

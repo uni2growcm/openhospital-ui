@@ -77,6 +77,9 @@ export const getWardMovementsToWard = createAsyncThunk(
     thunkApi
   ) => {
     try {
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+
       const result = await firstValueFrom(
         wrapper(() =>
           wardStockApi.getWardMovementsToWard({
@@ -84,7 +87,7 @@ export const getWardMovementsToWard = createAsyncThunk(
             from: payload.from
               ? payload.from
               : new Date("2010-12-25T10:30:00Z"),
-            to: payload.to ? payload.to : new Date(),
+            to: payload.to ? payload.to : tomorrow,
           } as any as GetWardMovementsToWardRequest)
         )
       );
