@@ -6,22 +6,30 @@ import {
   TextFormField,
 } from "components/accessories/forms";
 import { PATHS } from "consts";
-import { MovementDTO } from "generated";
+import { MedicalDTO, MovementDTO } from "generated";
 import { DATETIME_FORMAT } from "libraries/consts";
 import { safeFormatToISO } from "libraries/formatUtils";
 import { useNavigationHandler, useTranslation } from "libraries/hooks";
 import {
+  lotsSelector,
   useMedicals,
   useMovementTypes,
   useSuppliers,
 } from "libraries/hooks/api";
 import { isEmpty } from "lodash";
-import React, { FormEvent, useCallback, useMemo } from "react";
+import React, {
+  FormEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+} from "react";
 import { useForm } from "react-hook-form";
 import { LotFormField } from "../lotFormField";
 import { MovementDTOSchema, getInitialValues } from "./consts";
 import "./styles.scss";
 import { ChargeMovementProps, TFormValues } from "./types";
+import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
+import { getMedicalLots } from "state/pharmacy";
 
 export function ChargeMovementForm({
   movement,
@@ -33,9 +41,12 @@ export function ChargeMovementForm({
   const { options: medicalOptions, selectMedical } = useMedicals();
   const { options: supplierOptions, selectSupplier } = useSuppliers();
 
+  const dispatch = useAppDispatch();
+  const lots = useAppSelector(lotsSelector);
+
   const { selectMovementType } = useMovementTypes();
 
-  const { control, watch, formState } = useForm<TFormValues>({
+  const { control, watch, formState, setValue } = useForm<TFormValues>({
     defaultValues: getInitialValues(movement),
     resolver: standardSchemaResolver(MovementDTOSchema),
   });
@@ -77,6 +88,25 @@ export function ChargeMovementForm({
     }
   );
 
+  useEffect(() => {
+    if (formatedValues.medical?.code) {
+      dispatch(getMedicalLots({ medCode: formatedValues.medical.code }));
+    }
+  }, [formatedValues.medical, dispatch]);
+
+  const medicalId = values.medical;
+
+  const selectedMedical = useMemo(() => {
+    if (!values.medical) return;
+    const medicalBase = selectMedical(values.medical);
+    if (!medicalBase) return;
+
+    return {
+      ...medicalBase,
+      lots: lots
+    };
+  }, [values.medical, lots, selectMedical]);
+
   return (
     <div className="chargeMovementForm">
       <form className="form-grid-layout gap-2 w-full" onSubmit={handleSubmit}>
@@ -86,12 +116,17 @@ export function ChargeMovementForm({
           control={control}
           name="date"
         />
+        <TextFormField
+          label={t("pharmacy.form.fields.refNo")}
+          control={control}
+          name="refNo"
+        />
         <AutocompleteFormField
           label={t("pharmacy.form.fields.medical")}
           control={control}
           name="medical"
           options={medicalOptions}
-          className="col-start-1"
+          className="col-span-full"
         />
         <AutocompleteFormField
           label={t("pharmacy.form.fields.supplier")}
@@ -101,17 +136,19 @@ export function ChargeMovementForm({
           className="col-start-1"
         />
         <TextFormField
-          label={t("pharmacy.form.fields.refNo")}
+          type='number'
+          label={t("pharmacy.form.fields.quantity")}
           control={control}
-          name="refNo"
+          name="quantity"
         />
         <div className="col-start-1 col-span-full"></div>
-        {formatedValues.medical && (
+        {selectedMedical && (
           <LotFormField
             control={control}
-            medical={formatedValues.medical}
+            medical={selectedMedical}
             name="lot"
             showNewLotOption={true}
+            hideQty
           />
         )}
         <div className="col-start-1 col-span-full"></div>
