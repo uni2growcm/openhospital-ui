@@ -1434,7 +1434,6 @@
           "ward": "Internal use",
           "toAnotherWard": "To another ward",
           "fromAnotherWard": "From another ward",
-          "charge": "Charge",
           "rectify": "Rectify"
         },
         "dischargeMovement": "Discharge movement from ",
