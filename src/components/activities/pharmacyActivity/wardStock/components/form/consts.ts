@@ -10,7 +10,7 @@ export type ReasonErrorKey = "pharmacy.stock.ward.reasonRequired";
 export type MedicalWardErrorKey = QuantityErrorKey | ReasonErrorKey;
 
 const BaseMedicalWardDTOSchema = z.object({
-  medical: z.number().nullish(),
+  medical: z.string().nullish(),
   ward: z.string().nullish(),
   lot: z.string().optional(),
 
@@ -54,7 +54,7 @@ export function getInitialValues(from?: any): Partial<TFormValues> {
   return {
     actualQuantity: from.quantity ?? 0,
     quantity: 0,
-    medical: from.code,
+    medical: `${from.code} - ${from.description}`,
     ward: from.wardCode,
     lot: from.lots?.[0]?.code,
     reason: "",
