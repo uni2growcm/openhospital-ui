@@ -144,7 +144,7 @@ export const LaboratoryDetails: FC = () => {
                     {lab?.exam?.description ?? ""}
                   </div>
                 </div>
-                {lab?.exam?.procedure === 1 && (
+                {(lab?.exam?.procedure === 1 || lab?.exam?.procedure === 3) && (
                   <div className="labDetails__content__item">
                     <div className="labDetails__content__item__label">
                       {t("lab.result")}:

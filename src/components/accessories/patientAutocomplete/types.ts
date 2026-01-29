@@ -19,4 +19,6 @@ export type TFieldName =
   | "firstName"
   | "secondName"
   | "birthDate"
-  | "address";
+  | "address"
+  | "city"
+  | "age";

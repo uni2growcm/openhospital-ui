@@ -202,7 +202,7 @@ const ExamRequestForm: FC<ExamRequestProps> = ({
               </div>
             )}
 
-            <div className="patientExamRequestForm__item col-5">
+            <div className="patientExamRequestForm__item exam-field col-5">
               <AutocompleteField
                 fieldName="exam"
                 fieldValue={formik.values.exam}
