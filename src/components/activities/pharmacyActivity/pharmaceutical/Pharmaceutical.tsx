@@ -6,7 +6,7 @@ import { useOutletContext } from "react-router";
 import { PharmacyActivityContent } from "../PharmacyActivityContent";
 import PharmaceuticalActions from "./components/pharmaceuticalActions/PharmaceuticalActions";
 import PharmaceuticalTable from "./components/pharmaceuticalTable/PharmaceuticalTable";
-import MedicalDetailsActivity from "./medicalDetails/MedicalDetailsActivity";
+import MedicalDetailsActivity from "./components/medicalDetails/MedicalDetailsActivity";
 
 export default function Pharmaceutical() {
   const { t } = useTranslation();

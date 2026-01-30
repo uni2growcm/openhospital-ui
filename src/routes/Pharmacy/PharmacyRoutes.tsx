@@ -6,7 +6,7 @@ import {
   PharmacyStock,
   WardStock,
 } from "components/activities/pharmacyActivity";
-import MedicalDetailsActivity from "components/activities/pharmacyActivity/pharmaceutical/medicalDetails/MedicalDetailsActivity";
+import MedicalDetailsActivity from "components/activities/pharmacyActivity/pharmaceutical/components/medicalDetails/MedicalDetailsActivity";
 import { NewPharmaceutical } from "components/activities/pharmacyActivity/pharmaceutical/NewPharmaceutical";
 import Pharmaceutical from "components/activities/pharmacyActivity/pharmaceutical/Pharmaceutical";
 import { UpdatePharmaceutical } from "components/activities/pharmacyActivity/pharmaceutical/UpdatePharmaceutical";
