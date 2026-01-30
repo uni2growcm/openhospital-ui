@@ -10,8 +10,13 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { getMedicals } from "state/pharmacy";
 
-export default function PharmaceuticalTable() {
+interface PharmaceuticalTableProps {
+  onSelectMedical?: (medical: MedicalDTO) => void;
+}
+
+export default function PharmaceuticalTable(props: PharmaceuticalTableProps) {
   const { t } = useTranslation();
+  const { onSelectMedical } = props;
 
   const navigate = useNavigate();
 
@@ -102,6 +107,7 @@ export default function PharmaceuticalTable() {
         amc: item.outqty,
         lots: item.lots,
         expDate: nearestExpiration,
+        medicalData: item,
       };
     });
   }, [data]);
@@ -116,6 +122,22 @@ export default function PharmaceuticalTable() {
       );
     },
     [navigate]
+  );
+
+  const handleView = useCallback(
+    (row: any) => {
+      if (onSelectMedical && row.medicalData) {
+        onSelectMedical(row.medicalData);
+      } else {
+        navigate(
+          PATHS.pharmacy_pharmaceutical_detail.replace(
+            ":id",
+            row.code?.toString() ?? ""
+          )
+        );
+      }
+    },
+    [navigate, onSelectMedical]
   );
 
   useEffect(() => {
@@ -145,6 +167,7 @@ export default function PharmaceuticalTable() {
                 rowKey="pharmaceutical"
                 manualFilter={false}
                 onEdit={handleEdit}
+                onView={handleView}
               />
             );
           case "SUCCESS_EMPTY":

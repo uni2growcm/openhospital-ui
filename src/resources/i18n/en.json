@@ -1466,6 +1466,37 @@
     "selectDateTo": "Date to",
     "selectDateFrom": "Date From",
     "errorMessageForm": "This field is required",
+    "medicalDetails": {
+      "title": "Medical Details",
+      "status": "Status",
+      "available": "Available",
+      "piecesPerPack": "Pieces x Pack",
+      "criticalLevel": "Critical level",
+      "code": "Code",
+      "mainMenu": "Menu",
+      "overview": "Overview",
+      "back": "Back",
+      "edit": "Edit",
+      "pharmacy": "Pharmacy",
+      "wards": "Wards",
+      "pharmaceuticalStock": "Pharmaceutical stock",
+      "lotsExpiringThisMonth": "Lots Expiring This Month",
+      "amc": "AMC",
+      "stockInInternalMedicine": "Stock in Internal medicine",
+      "stockInMaternity": "Stock in Maternity",
+      "stockInNursery": "Stock in Nursery",
+      "stockInSurgery": "Stock in Surgery",
+      "menu": {
+        "pharmacyStock": "Pharmacy Stock",
+        "availableStock": "Available Stock",
+        "expiringSoon": "Expiring Soon",
+        "wardDistribution": "Ward Distribution",
+        "internalMedicine": "Internal Medicine",
+        "maternity": "Maternity",
+        "nursery": "Nursery",
+        "surgery": "Surgery"
+      }
+    },
     "option": {
       "withLot": "With lot",
       "onlyQuantity": "Only quantity"

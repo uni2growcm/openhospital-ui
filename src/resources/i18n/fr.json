@@ -1455,6 +1455,37 @@
           "specificmonth": "Mois spécifique"
         }
       }
+    },
+    "medicalDetails": {
+      "title": "Détails du produit",
+      "status": "Statut",
+      "available": "Disponible",
+      "piecesPerPack": "Unités x Paquet",
+      "criticalLevel": "Niveau critique",
+      "code": "Code",
+      "mainMenu": "Menu",
+      "overview": "Aperçu",
+      "back": "Retour",
+      "edit": "Modifier",
+      "pharmacy": "Pharmacie",
+      "wards": "Services",
+      "pharmaceuticalStock": "Stock pharmaceutique",
+      "lotsExpiringThisMonth": "Lots expirés ce mois",
+      "amc": "AMC",
+      "stockInInternalMedicine": "Stock en médecine interne",
+      "stockInMaternity": "Stock en maternité",
+      "stockInNursery": "Stock en nurserie",
+      "stockInSurgery": "Stock en chirurgie",
+      "menu": {
+        "pharmacyStock": "Stock des pharmacies",
+        "availableStock": "Stock disponible",
+        "expiringSoon": "Expire bientôt",
+        "wardDistribution": "Distribution dans les services",
+        "internalMedicine": "Médecine interne",
+        "maternity": "Maternité",
+        "nursery": "Pédiatrie",
+        "surgery": "Chirurgie"
+      }
     }
   }
 }
