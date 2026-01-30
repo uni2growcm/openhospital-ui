@@ -5,13 +5,6 @@
   background-color: $c-color-secondary;
   padding: 20px;
 
-  &__loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 60vh;
-  }
-
   &__container {
     display: flex;
     gap: 20px;
@@ -42,6 +35,28 @@
     background-color: lighten($c-gray, 5%);
     padding: 15px;
     border-radius: 6px;
+  }
+  &__sidebar__button {
+    margin-top: auto;
+    padding: 0 20px 20px;
+    width: 100%;
+
+    button {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+
+      span {
+        font-size: 0.7rem;
+        color: $c-white;
+      }
+
+      svg {
+        font-size: 0.925rem;
+      }
+    }
   }
 
   &__sidebar__type {
@@ -140,57 +155,6 @@
     letter-spacing: 0.6px;
   }
 
-  &__cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-
-    @include susy-media($tablet_land) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @include susy-media($tablet_port) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @include susy-media($smartphone) {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  &__card {
-    background-color: #f5f5f5;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-
-  &__card__content {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    flex: 1;
-    margin: 20px 0 20px 20px;
-  }
-
-  &__card__label {
-    color: $c-grey-medium;
-    // text-transform: uppercase;
-    letter-spacing: 0.4px;
-    font-weight: 600;
-    display: flex;
-    gap: 10px;
-  }
-
-  &__card__value {
-    color: $c-black;
-    font-size: 2rem;
-    font-weight: 400;
-    line-height: 1.2;
-  }
-
   &_status_wrapper {
     display: flex;
     color: $c-white;
@@ -218,34 +182,6 @@
     }
     h6 {
       margin: 0px;
-    }
-  }
-
-  &__card__icon {
-    color: $c-grey-medium;
-    display: flex;
-    justify-content: center;
-    cursor: pointer;
-    transition: color 0.2s ease;
-    // background-color: #aaaa;
-    height: 100%;
-    align-items: end;
-
-    div {
-      padding: 5px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 6px 0 6px 0;
-      background-color: #aaaa;
-    }
-
-    &:hover {
-      color: $c-black;
-    }
-
-    svg {
-      font-size: 2rem;
     }
   }
 }

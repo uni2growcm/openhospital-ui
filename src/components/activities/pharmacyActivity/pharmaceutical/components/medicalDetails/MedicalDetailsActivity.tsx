@@ -1,17 +1,11 @@
-import {
-  CallMade,
-  Edit,
-  KeyboardArrowRight,
-  TrendingDown,
-  TrendingUp,
-} from "@mui/icons-material";
-import { CircularProgress } from "@mui/material";
+import { Edit, KeyboardArrowRight } from "@mui/icons-material";
 import Button from "components/accessories/button/Button";
 import { PATHS } from "consts";
 import { MedicalDTO } from "generated";
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+import MedicalItemCard from "../medicalItemCard/MedicalItemCard";
 import { getPharmacyData, getWardsData } from "./consts";
 import "./styles.scss";
 
@@ -25,21 +19,11 @@ const MedicalDetailsActivity = ({
   onClose,
 }: MedicalDetailsActivityProps) => {
   const { t } = useTranslation();
-  const [isLoading] = useState(false);
-
   const navigate = useNavigate();
 
   const handleEdit = useCallback(() => {
     navigate(`${PATHS.pharmacy_pharmaceutical}/${medical?.code}/update`);
   }, [navigate, medical?.code]);
-
-  if (isLoading) {
-    return (
-      <div className="medicalDetails__loading">
-        <CircularProgress />
-      </div>
-    );
-  }
 
   if (!medical) {
     return null;
@@ -119,63 +103,15 @@ const MedicalDetailsActivity = ({
         </div>
 
         <div className="medicalDetails__content">
-          <div className="medicalDetails__section">
-            <h5 className="medicalDetails__section__title">
-              {t("pharmacy.medicalDetails.pharmacy")}
-            </h5>
-            <div className="medicalDetails__cards">
-              {pharmacyData.map((item, index) => (
-                <div key={index} className="medicalDetails__card">
-                  <div className="medicalDetails__card__content">
-                    <div className="medicalDetails__card__label">
-                      {t(item.title)}
-                      {item.icon && item.icon === "up" && (
-                        <TrendingUp fontSize="small" className="icon-up" />
-                      )}
-                      {item.icon && item.icon === "down" && (
-                        <TrendingDown fontSize="small" className="icon-down" />
-                      )}
-                    </div>
-                    <div className="medicalDetails__card__value">
-                      {item.value}
-                    </div>
-                  </div>
-                  {!item.removeIcon && (
-                    <div className="medicalDetails__card__icon">
-                      <div>
-                        <CallMade fontSize="small" />
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
+          <MedicalItemCard
+            title="pharmacy.medicalDetails.pharmacy"
+            items={pharmacyData}
+          />
 
-          <div className="medicalDetails__section">
-            <h5 className="medicalDetails__section__title">
-              {t("pharmacy.medicalDetails.wards")}
-            </h5>
-            <div className="medicalDetails__cards">
-              {wardsData.map((item, index) => (
-                <div key={index} className="medicalDetails__card">
-                  <div className="medicalDetails__card__content">
-                    <div className="medicalDetails__card__label">
-                      {t(item.title)}
-                    </div>
-                    <div className="medicalDetails__card__value">
-                      {item.value}
-                    </div>
-                  </div>
-                  <div className="medicalDetails__card__icon ">
-                    <div>
-                      <CallMade fontSize="small" />
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <MedicalItemCard
+            title="pharmacy.medicalDetails.wards"
+            items={wardsData}
+          />
         </div>
       </div>
     </div>
