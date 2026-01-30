@@ -1291,9 +1291,17 @@
         "title": "Pharmaceutique mis à jour avec succès",
         "description": "Le produit pharmaceutique a été mis à jour avec succès."
       },
+      "delete-pharmaceutical-success": {
+        "title": "Medicamenté supprimé avec succès",
+        "description": "Le produit pharmaceutique a été mis à jour avec succès."
+      },
       "update-pharmaceutical-fail": {
         "title": "Échec de la mise à jour du pharmaceutique",
         "description": "Impossible de mettre à jour le produit pharmaceutique. Veuillez réessayer ou contacter le support."
+      },
+      "discharge-movement-fail": {
+        "title": "Échec du mouvement de décharge",
+        "description": "Nous n'avons pas pu enregistrer le mouvement de décharge. Veuillez réessayer ou contacter le service d'assistance."
       }
     },
     "form": {
@@ -1329,24 +1337,6 @@
         "descriptionRequired": "La description est obligatoire.",
         "pcsPerPackRequired": "Le nombre de pièces par paquet doit être supérieur à 0.",
         "minQtyRequired": "Le seuil critique ne peut pas être négatif."
-      }
-    },
-    "messages": {
-      "charge-movement-success": {
-        "title": "Mouvement de charge réussie",
-        "description": "Le mouvement de charge a été enregistré avec succès."
-      },
-      "charge-movement-fail": {
-        "title": "Échec du mouvement de charge",
-        "description": "Nous n'avons pas pu enregistrer le mouvement de charge. Veuillez réessayer ou contacter le service d'assistance."
-      },
-      "discharge-movement-fail": {
-        "title": "Échec du mouvement de décharge",
-        "description": "Nous n'avons pas pu enregistrer le mouvement de décharge. Veuillez réessayer ou contacter le service d'assistance."
-      },
-      "new-pharmaceutical-success": {
-        "title": "Pharmaceutical added successfully",
-        "description": "The pharmaceutical has been added successfully."
       }
     },
     "stock": {
