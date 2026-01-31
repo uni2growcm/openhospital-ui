@@ -1,36 +1,67 @@
-import { Edit, KeyboardArrowRight } from "@mui/icons-material";
+import { Edit, KeyboardArrowRight, Menu } from "@mui/icons-material";
 import Button from "components/accessories/button/Button";
 import { PATHS } from "consts";
-import { MedicalDTO } from "generated";
-import React, { useCallback } from "react";
+import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
+import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
+import { useNavigate, useOutletContext, useParams } from "react-router";
+import { getMedical } from "state/pharmacy";
+import { getWards } from "state/ward";
 import MedicalItemCard from "../medicalItemCard/MedicalItemCard";
-import { getPharmacyData, getWardsData } from "./consts";
+import { getPharmacyData } from "./consts";
 import "./styles.scss";
 
-interface MedicalDetailsActivityProps {
-  medical?: MedicalDTO;
-  onClose?: () => void;
-}
-
-const MedicalDetailsActivity = ({
-  medical,
-  onClose,
-}: MedicalDetailsActivityProps) => {
+const MedicalDetailsActivity = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  const { breadcrumbMap, setBreadcrumbMap } = useOutletContext<{
+    breadcrumbMap: Record<string, string>;
+    setBreadcrumbMap: (map: Record<string, string | undefined>) => void;
+  }>();
 
   const handleEdit = useCallback(() => {
-    navigate(`${PATHS.pharmacy_pharmaceutical}/${medical?.code}/update`);
-  }, [navigate, medical?.code]);
+    if (id) {
+      navigate(`${PATHS.pharmacy_pharmaceutical}/${id}/update`);
+    }
+  }, [navigate, id]);
 
-  if (!medical) {
-    return null;
-  }
+  const dispatch = useAppDispatch();
+  const medical = useAppSelector((state) => state.pharmacy.getMedical.data);
 
+  const addBreadcrumb = useCallback(() => {
+    setBreadcrumbMap({
+      [t("nav.pharmacy")]: PATHS.pharmacy,
+      [t("pharmacy.labels.pharmaceutical-title")]:
+        PATHS.pharmacy_pharmaceutical,
+      [t("pharmacy.labels.details-pharmaceutical-title")]:
+        PATHS.pharmacy_pharmaceutical_detail.replace(":id", id ?? ""),
+    });
+  }, [id, t, setBreadcrumbMap]);
+
+  const removeBreadcrumb = useCallback(() => {
+    setBreadcrumbMap({
+      [t("nav.pharmacy")]: PATHS.pharmacy,
+      [t("pharmacy.labels.pharmaceutical-title")]:
+        PATHS.pharmacy_pharmaceutical,
+    });
+  }, [t, setBreadcrumbMap]);
+
+  useEffect(() => {
+    addBreadcrumb();
+    return removeBreadcrumb;
+  }, [addBreadcrumb, removeBreadcrumb]);
+
+  useEffect(() => {
+    dispatch(getMedical({ code: parseInt(id || "0") }));
+    dispatch(getWards());
+  }, [dispatch, id]);
+
+  const wards = useAppSelector((state) => state.wards.allWards.data || []);
+
+  if (!medical) return;
   const pharmacyData = getPharmacyData(medical);
-  const wardsData = getWardsData(medical);
 
   return (
     <div data-cy="medical-details" className="medicalDetails">
@@ -47,7 +78,10 @@ const MedicalDetailsActivity = ({
             </div>
           </div>
 
-          <div className="medicalDetails__sidebar__button">
+          <div
+            data-cy="medical-edit-button"
+            className="medicalDetails__sidebar__button"
+          >
             <Button variant="contained" color="primary" onClick={handleEdit}>
               <Edit fontSize="small" />
               <span>{t("pharmacy.medicalDetails.edit")}</span>
@@ -57,7 +91,10 @@ const MedicalDetailsActivity = ({
           <div className="medicalDetails__sidebar__info">
             <div className="medicalDetails__sidebar__item">
               <div className="medicalDetails_status_wrapper medicalDetails_status_in">
-                <h6 className="medicalDetails__sidebar__item__label">
+                <h6
+                  data-cy="medical-status"
+                  className="medicalDetails__sidebar__item__label"
+                >
                   {t("pharmacy.medicalDetails.status")}:{" "}
                   <span className="medicalDetails__sidebar__item__value">
                     {t("pharmacy.medicalDetails.available")}
@@ -67,7 +104,10 @@ const MedicalDetailsActivity = ({
             </div>
 
             <div className="medicalDetails__sidebar__item">
-              <span className="medicalDetails__sidebar__item__label">
+              <span
+                data-cy="medical-pcsperpck"
+                className="medicalDetails__sidebar__item__label"
+              >
                 {t("pharmacy.medicalDetails.piecesPerPack")}
               </span>
               <span className="medicalDetails__sidebar__item__value">
@@ -76,7 +116,10 @@ const MedicalDetailsActivity = ({
             </div>
 
             <div className="medicalDetails__sidebar__item">
-              <span className="medicalDetails__sidebar__item__label">
+              <span
+                data-cy="medical-minqty"
+                className="medicalDetails__sidebar__item__label"
+              >
                 {t("pharmacy.medicalDetails.criticalLevel")}
               </span>
               <span className="medicalDetails__sidebar__item__value">
@@ -85,7 +128,10 @@ const MedicalDetailsActivity = ({
             </div>
 
             <div className="medicalDetails__sidebar__item">
-              <span className="medicalDetails__sidebar__item__label">
+              <span
+                data-cy="medical-code"
+                className="medicalDetails__sidebar__item__label"
+              >
                 {t("pharmacy.medicalDetails.code")}
               </span>
               <span className="medicalDetails__sidebar__item__value">
@@ -96,7 +142,9 @@ const MedicalDetailsActivity = ({
 
           <div className="medicalDetails__sidebar__menu">
             <div className="medicalDetails__sidebar__menu__item">
-              <span>≡ {t("pharmacy.medicalDetails.overview")}</span>
+              <span className="flex gap-1">
+                <Menu /> {t("pharmacy.medicalDetails.overview")}
+              </span>
               <KeyboardArrowRight fontSize="small" />
             </div>
           </div>
@@ -110,7 +158,10 @@ const MedicalDetailsActivity = ({
 
           <MedicalItemCard
             title="pharmacy.medicalDetails.wards"
-            items={wardsData}
+            items={wards.map((ward) => ({
+              title: ward.description,
+              value: Math.floor((medical?.inqty ?? 0) / wards.length),
+            }))}
           />
         </div>
       </div>

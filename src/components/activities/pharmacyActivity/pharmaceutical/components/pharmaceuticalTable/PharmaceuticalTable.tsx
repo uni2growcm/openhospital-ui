@@ -10,13 +10,8 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { getMedicals } from "state/pharmacy";
 
-interface PharmaceuticalTableProps {
-  onSelectMedical?: (medical: MedicalDTO) => void;
-}
-
-export default function PharmaceuticalTable(props: PharmaceuticalTableProps) {
+export default function PharmaceuticalTable() {
   const { t } = useTranslation();
-  const { onSelectMedical } = props;
 
   const navigate = useNavigate();
 
@@ -126,9 +121,7 @@ export default function PharmaceuticalTable(props: PharmaceuticalTableProps) {
 
   const handleView = useCallback(
     (row: any) => {
-      if (onSelectMedical && row.medicalData) {
-        onSelectMedical(row.medicalData);
-      } else {
+      if (row.medicalData) {
         navigate(
           PATHS.pharmacy_pharmaceutical_detail.replace(
             ":id",
@@ -137,7 +130,7 @@ export default function PharmaceuticalTable(props: PharmaceuticalTableProps) {
         );
       }
     },
-    [navigate, onSelectMedical]
+    [navigate]
   );
 
   useEffect(() => {

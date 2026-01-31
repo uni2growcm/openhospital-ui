@@ -1256,6 +1256,7 @@
       "ok": "OK",
       "new-pharmaceutical-title": "New pharmaceutical",
       "update-pharmaceutical-title": "Update pharmaceutical",
+      "details-pharmaceutical-title": "Pharmaceutical details",
       "pharmaceutical-created": "Pharmaceutical created",
       "pharmaceutical-add-another": "Add another pharmaceutical"
     },

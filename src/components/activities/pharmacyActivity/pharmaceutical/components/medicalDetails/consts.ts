@@ -1,13 +1,23 @@
+import { MedicalDTO } from "generated";
 import { MedicalItemData } from "./types";
 
-export const getPharmacyData = (medical: any): MedicalItemData[] => [
+export const getPharmacyData = (medical: MedicalDTO): MedicalItemData[] => [
   {
     title: "pharmacy.medicalDetails.pharmaceuticalStock",
-    value: medical?.initialqty ?? 0,
+    value: medical?.inqty ?? 0,
   },
   {
     title: "pharmacy.medicalDetails.lotsExpiringThisMonth",
-    value: medical?.lots?.length ?? 0,
+    value:
+      medical?.lots?.filter((lot) => {
+        if (!lot.dueDate) return false;
+        const dueDate = new Date(lot.dueDate);
+        const now = new Date();
+        return (
+          dueDate.getFullYear() === now.getFullYear() &&
+          dueDate.getMonth() === now.getMonth()
+        );
+      }).length ?? 0,
   },
   {
     title: "pharmacy.medicalDetails.criticalLevel",
@@ -18,24 +28,5 @@ export const getPharmacyData = (medical: any): MedicalItemData[] => [
     title: "pharmacy.medicalDetails.amc",
     value: medical?.outqty ?? 0,
     icon: "up",
-  },
-];
-
-export const getWardsData = (medical: any): MedicalItemData[] => [
-  {
-    title: "pharmacy.medicalDetails.stockInInternalMedicine",
-    value: Math.floor((medical?.inqty ?? 0) * 0.3),
-  },
-  {
-    title: "pharmacy.medicalDetails.stockInMaternity",
-    value: Math.floor((medical?.inqty ?? 0) * 0.25),
-  },
-  {
-    title: "pharmacy.medicalDetails.stockInNursery",
-    value: Math.floor((medical?.inqty ?? 0) * 0.2),
-  },
-  {
-    title: "pharmacy.medicalDetails.stockInSurgery",
-    value: Math.floor((medical?.inqty ?? 0) * 0.25),
   },
 ];

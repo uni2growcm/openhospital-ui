@@ -1247,7 +1247,8 @@
       "pharmaceutical": "Produits médicaux",
       "pharmaceutical-stock": "Stock pharmaceutique",
       "ward-stock": "Stock du pavillon",
-      "rectify-ward-stock": "Rectifier la quantité"
+      "rectify-ward-stock": "Rectifier la quantité",
+      "details-pharmaceutical-title": "Détails du médicament"
     },
     "lot": {
       "labels": {

@@ -1,18 +1,14 @@
 import { PATHS } from "consts";
-import { MedicalDTO } from "generated";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useOutletContext } from "react-router";
 import { PharmacyActivityContent } from "../PharmacyActivityContent";
 import PharmaceuticalActions from "./components/pharmaceuticalActions/PharmaceuticalActions";
 import PharmaceuticalTable from "./components/pharmaceuticalTable/PharmaceuticalTable";
-import MedicalDetailsActivity from "./components/medicalDetails/MedicalDetailsActivity";
 
 export default function Pharmaceutical() {
   const { t } = useTranslation();
-  const [selectedMedical, setSelectedMedical] = useState<MedicalDTO | null>(
-    null
-  );
+
   const { setBreadcrumbMap } = useOutletContext<{
     breadcrumbMap: Record<string, string>;
     setBreadcrumbMap: (map: Record<string, string>) => void;
@@ -31,15 +27,6 @@ export default function Pharmaceutical() {
     };
   }, [t, setBreadcrumbMap]);
 
-  if (selectedMedical) {
-    return (
-      <MedicalDetailsActivity
-        medical={selectedMedical}
-        onClose={() => setSelectedMedical(null)}
-      />
-    );
-  }
-
   return (
     <PharmacyActivityContent
       data-cy="pharmaceutical"
@@ -51,7 +38,7 @@ export default function Pharmaceutical() {
         </div>
 
         <div data-cy="pharmaceutical-table">
-          <PharmaceuticalTable onSelectMedical={setSelectedMedical} />
+          <PharmaceuticalTable />
         </div>
       </div>
     </PharmacyActivityContent>

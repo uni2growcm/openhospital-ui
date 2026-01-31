@@ -16,7 +16,7 @@ const MedicalItemCard = ({ title, items }: MedicalItemCardProps) => {
     <div className="medicalItem">
       <h5 className="medicalItem__title">{t(title)}</h5>
 
-      <div className="medicalItem__cards">
+      <div data-cy="medical-item-card" className="medicalItem__cards">
         {items.map((item, index) => (
           <div key={index} className="medicalItem__card">
             <div className="medicalItem__card__content">
@@ -36,7 +36,9 @@ const MedicalItemCard = ({ title, items }: MedicalItemCardProps) => {
 
             {!item.removeIcon && (
               <div className="medicalItem__card__icon">
-                <CallMade fontSize="small" />
+                <div>
+                  <CallMade fontSize="small" />
+                </div>
               </div>
             )}
           </div>
