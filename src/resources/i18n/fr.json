@@ -1292,8 +1292,8 @@
         "description": "Le produit pharmaceutique a été mis à jour avec succès."
       },
       "delete-pharmaceutical-success": {
-        "title": "Medicamenté supprimé avec succès",
-        "description": "Le produit pharmaceutique a été mis à jour avec succès."
+        "title": "Medicament supprimé avec succès",
+        "description": "Le produit pharmaceutique a été supprimé avec succès."
       },
       "update-pharmaceutical-fail": {
         "title": "Échec de la mise à jour du pharmaceutique",
