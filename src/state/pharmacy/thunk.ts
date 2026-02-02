@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { isValid, parseISO } from "date-fns";
 import {
+  GetCurrentQuantityInWardRequest,
   GetLotByMedicalRequest,
   GetMedicalRequest,
   GetMovementWardRequest,
@@ -141,6 +142,22 @@ export const getWardMedicals = createAsyncThunk(
           wardStockApi.getMedicalsWard({
             wardCode,
           })
+        )
+      );
+      return result;
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.response);
+    }
+  }
+);
+
+export const getCurrentQuantityInWard = createAsyncThunk(
+  "pharmacy/getCurrentQuantityInWard",
+  async (payload: GetCurrentQuantityInWardRequest, thunkApi) => {
+    try {
+      const result = await firstValueFrom(
+        wrapper(() =>
+          wardStockApi.getCurrentQuantityInWard(payload)
         )
       );
       return result;

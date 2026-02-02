@@ -172,6 +172,23 @@ export const pharmacySlice = createSlice({
       .addCase(thunks.getWardMedicals.rejected, (state, action) => {
         state.wardMedicals = ApiResponse.error(action.payload);
       })
+      // get current quantity of medical in ward
+      .addCase(thunks.getCurrentQuantityInWard.pending, (state, action) => {
+        const wardCode = action.meta.arg.wardCode;
+        state.getCurrentQuantityInWard[wardCode] = ApiResponse.loading();
+      })
+      .addCase(thunks.getCurrentQuantityInWard.fulfilled, (state, action) => {
+        const wardCode = action.meta.arg.wardCode;
+        state.getCurrentQuantityInWard[wardCode] = ApiResponse.value(
+          action.payload
+        );
+      })
+      .addCase(thunks.getCurrentQuantityInWard.rejected, (state, action) => {
+        const wardCode = action.meta.arg.wardCode;
+        state.getCurrentQuantityInWard[wardCode] = ApiResponse.error(
+          action.payload
+        );
+      })
       // Charge movements
       .addCase(thunks.chargeMovements.pending, (state) => {
         state.chargeMovements = ApiResponse.loading();

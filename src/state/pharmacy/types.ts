@@ -13,6 +13,7 @@ import { ApiResponse } from "state/types";
 export type IPharmacyState = {
   wardMovements: ApiResponse<MovementWardDTO[]>;
   wardMedicals: ApiResponse<MedicalWardDTO[]>;
+  getCurrentQuantityInWard: Record<string, ApiResponse<number> | undefined>;
   getMovements: ApiResponse<Array<MovementDTO>>;
   getMovementsWard: ApiResponse<Array<MovementDTO>>;
   getWardMovementsToWard: ApiResponse<Array<MovementWardDTO>>
