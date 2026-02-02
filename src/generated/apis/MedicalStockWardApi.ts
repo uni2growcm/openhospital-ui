@@ -17,8 +17,13 @@ import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
 import type { OperationOpts, HttpHeaders, HttpQuery } from '../runtime';
 import type {
     MedicalWardDTO,
+    MedicalWardQuantityDTO,
     MovementWardDTO,
 } from '../models';
+
+export interface GetCurrentQuantityInAllWardsRequest {
+    medId: number;
+}
 
 export interface GetCurrentQuantityInWardRequest {
     wardCode: string;
@@ -49,6 +54,28 @@ export interface NewMovementWardRequest {
  * no description
  */
 export class MedicalStockWardApi extends BaseAPI {
+
+    /**
+     */
+    getCurrentQuantityInAllWards({ medId }: GetCurrentQuantityInAllWardsRequest): Observable<Array<MedicalWardQuantityDTO>>
+    getCurrentQuantityInAllWards({ medId }: GetCurrentQuantityInAllWardsRequest, opts?: OperationOpts): Observable<AjaxResponse<Array<MedicalWardQuantityDTO>>>
+    getCurrentQuantityInAllWards({ medId }: GetCurrentQuantityInAllWardsRequest, opts?: OperationOpts): Observable<Array<MedicalWardQuantityDTO> | AjaxResponse<Array<MedicalWardQuantityDTO>>> {
+        throwIfNullOrUndefined(medId, 'medId', 'getCurrentQuantityInAllWards');
+
+        const headers: HttpHeaders = {
+        };
+
+        const query: HttpQuery = { // required parameters are used directly since they are already checked by throwIfNullOrUndefined
+            'med_id': medId,
+        };
+
+        return this.request<Array<MedicalWardQuantityDTO>>({
+            url: '/medicalstockward/current-all-wards',
+            method: 'GET',
+            headers,
+            query,
+        }, opts?.responseOpts);
+    };
 
     /**
      */

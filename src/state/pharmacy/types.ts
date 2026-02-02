@@ -3,6 +3,7 @@ import {
   MedicalDTO,
   MedicalTypeDTO,
   MedicalWardDTO,
+  MedicalWardQuantityDTO,
   MovementDTO,
   MovementTypeDTO,
   MovementWardDTO,
@@ -14,6 +15,7 @@ export type IPharmacyState = {
   wardMovements: ApiResponse<MovementWardDTO[]>;
   wardMedicals: ApiResponse<MedicalWardDTO[]>;
   getCurrentQuantityInWard: Record<string, ApiResponse<number> | undefined>;
+  getCurrentQuantityInAllWards: ApiResponse<MedicalWardQuantityDTO[]>;
   getMovements: ApiResponse<Array<MovementDTO>>;
   getMovementsWard: ApiResponse<Array<MovementDTO>>;
   getWardMovementsToWard: ApiResponse<Array<MovementWardDTO>>

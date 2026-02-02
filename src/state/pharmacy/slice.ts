@@ -189,6 +189,16 @@ export const pharmacySlice = createSlice({
           action.payload
         );
       })
+      // get current quantity of medical in all wards
+      .addCase(thunks.getCurrentQuantityInAllWards.pending, (state) => {
+        state.getCurrentQuantityInAllWards = ApiResponse.loading();
+      })
+      .addCase(thunks.getCurrentQuantityInAllWards.fulfilled, (state, action) => {
+        state.getCurrentQuantityInAllWards = ApiResponse.value(action.payload);
+      })
+      .addCase(thunks.getCurrentQuantityInAllWards.rejected, (state, action) => {
+        state.getCurrentQuantityInAllWards = ApiResponse.error(action.payload);
+      })
       // Charge movements
       .addCase(thunks.chargeMovements.pending, (state) => {
         state.chargeMovements = ApiResponse.loading();
