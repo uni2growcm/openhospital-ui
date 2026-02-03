@@ -15,5 +15,8 @@ export const reportsRoutes = (server) => {
     server.get("/pharmaceuticalExpiration").intercept((req, res) => {
       res.status(200).json(new Blob());
     });
+    server.get("/pharmaceuticalOrder").intercept((req, res) => {
+      res.status(200).json(new Blob());
+    });
   });
 };
