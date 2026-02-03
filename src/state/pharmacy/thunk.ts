@@ -357,6 +357,22 @@ export const printPharmaceuticalStockCardPdf = createAsyncThunk(
   }
 );
 
+export const printPharmaceuticalOrderPdf = createAsyncThunk(
+  "pharmacy/getPharmaceuticalOrderPdfReport",
+  async(_, thunkApi) => {
+    try {
+      const result = await firstValueFrom(
+        wrapper(() => apiReport.printPharmaceuticalOrderPdf())
+      )
+      console.log("RESULT", result)
+      return result;
+    } catch (error: any) {
+      console.log("ERROR", error);
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+)
+
 export const printPharmaceuticalAMCPdf = createAsyncThunk(
   "pharmacy/getPharmaceuticalAMCPdfReport",
   async (payload: PrintPharmaceuticalAMCRequest, thunkApi) => {

@@ -4040,7 +4040,7 @@ paths:
             application/json:
               schema:
                 type: string
-                format: byte
+                format: binary
       security:
       - bearerAuth: []
   /reports/pharmaceuticalExpiration:

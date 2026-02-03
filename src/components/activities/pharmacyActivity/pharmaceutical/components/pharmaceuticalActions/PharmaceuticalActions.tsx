@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import {
   printPharmaceuticalAMCPdf,
   printPharmaceuticalExpirationPdf,
+  printPharmaceuticalOrderPdf,
   printPharmaceuticalStockCardPdf,
   printPharmaceuticalStockPdf,
 } from "state/pharmacy";
@@ -167,6 +168,20 @@ export default function PharmaceuticalActions() {
     setIsPrint(false);
   };
 
+  const handleGetOrderReport = () => {
+    console.log("ORDER")
+    dispatch(
+      printPharmaceuticalOrderPdf()
+    ).unwrap()
+    .then((result) => {
+      if (result instanceof  Blob)
+        downloadBlob(
+          result,
+          `Pharmaceutical-order-report-${new Date().getTime()}.pdf`
+        );
+    })
+  }
+
   const handleGetAMCReport = (payload: PrintProperties) => {
     dispatch(
       printPharmaceuticalAMCPdf({
@@ -231,7 +246,13 @@ export default function PharmaceuticalActions() {
       >
         {t("pharmacy.stock.stockCardReport")}
       </Button>
-      <Button type="button" variant="outlined" color="inherit">
+      <Button
+        type="button"
+        variant="outlined"
+        color="inherit"
+        data-cy="order-button"
+        onClick={handleGetOrderReport}
+      >
         {t("pharmacy.stock.order")}
       </Button>
       <div data-cy="expiring-button">
