@@ -11,7 +11,7 @@ import MedicalItemCard from "../medicalItemCard/MedicalItemCard";
 import { getPharmacyData } from "./consts";
 import "./styles.scss";
 
-const MedicalDetailsActivity = () => {
+const MedicalDetails = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -151,13 +151,15 @@ const MedicalDetailsActivity = () => {
         </div>
 
         <div className="medicalDetails__content">
-          <MedicalItemCard
-            title="pharmacy.medicalDetails.pharmacy"
-            items={pharmacyData}
-          />
+          <h5 className="medicalDetails__title">
+            {t("pharmacy.medicalDetails.pharmacy")}
+          </h5>
+          <MedicalItemCard items={pharmacyData} />
 
+          <h5 className="medicalDetails__title">
+            {t("pharmacy.medicalDetails.wards")}
+          </h5>
           <MedicalItemCard
-            title="pharmacy.medicalDetails.wards"
             items={wards.map((ward) => ({
               title: ward.description,
               value: Math.floor((medical?.inqty ?? 0) / wards.length),
@@ -169,4 +171,4 @@ const MedicalDetailsActivity = () => {
   );
 };
 
-export default MedicalDetailsActivity;
+export default MedicalDetails;

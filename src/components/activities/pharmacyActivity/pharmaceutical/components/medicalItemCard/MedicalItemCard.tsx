@@ -5,17 +5,14 @@ import type { MedicalItemData } from "../medicalDetails/types";
 import "./styles.scss";
 
 interface MedicalItemCardProps {
-  title: string;
   items: MedicalItemData[];
 }
 
-const MedicalItemCard = ({ title, items }: MedicalItemCardProps) => {
+const MedicalItemCard = ({ items }: MedicalItemCardProps) => {
   const { t } = useTranslation();
 
   return (
     <div className="medicalItem">
-      <h5 className="medicalItem__title">{t(title)}</h5>
-
       <div data-cy="medical-item-card" className="medicalItem__cards">
         {items.map((item, index) => (
           <div key={index} className="medicalItem__card">

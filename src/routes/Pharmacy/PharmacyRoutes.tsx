@@ -6,7 +6,7 @@ import {
   PharmacyStock,
   WardStock,
 } from "components/activities/pharmacyActivity";
-import MedicalDetailsActivity from "components/activities/pharmacyActivity/pharmaceutical/components/medicalDetails/MedicalDetailsActivity";
+import MedicalDetails from "components/activities/pharmacyActivity/pharmaceutical/components/medicalDetails/MedicalDetails";
 import { NewPharmaceutical } from "components/activities/pharmacyActivity/pharmaceutical/NewPharmaceutical";
 import Pharmaceutical from "components/activities/pharmacyActivity/pharmaceutical/Pharmaceutical";
 import { UpdatePharmaceutical } from "components/activities/pharmacyActivity/pharmaceutical/UpdatePharmaceutical";
@@ -54,7 +54,7 @@ const routes: { element: ReactNode; path: string }[] = [
   },
   {
     path: getPath(PATHS.pharmacy_pharmaceutical_detail),
-    element: <MedicalDetailsActivity />,
+    element: <MedicalDetails />,
   },
   {
     path: getPath(PATHS.pharmacy_ward_stock_rectify),

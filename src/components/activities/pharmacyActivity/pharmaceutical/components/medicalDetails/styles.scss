@@ -5,6 +5,15 @@
   background-color: $c-color-secondary;
   padding: 20px;
 
+  &__title {
+    color: $c-grey-medium;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin: 0;
+  }
+
   &__container {
     display: flex;
     gap: 20px;
