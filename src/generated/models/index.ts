@@ -27,6 +27,7 @@ export * from './MedicalDTO';
 export * from './MedicalTypeDTO';
 export * from './MedicalWardDTO';
 export * from './MedicalWardIdDTO';
+export * from './MedicalWardQuantityDTO';
 export * from './MovementDTO';
 export * from './MovementTypeDTO';
 export * from './MovementWardDTO';

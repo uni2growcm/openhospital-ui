@@ -4869,6 +4869,29 @@ paths:
                   $ref: "#/components/schemas/MedicalWardDTO"
       security:
       - bearerAuth: []
+  /medicalstockward/{medicalId}/ward-quantities:
+    get:
+      tags:
+      - Medical Stock Ward
+      operationId: getCurrentQuantityInAllWards
+      parameters:
+      - name: medicalId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalWardQuantityDTO"
+      security:
+      - bearerAuth: []
   /medicalstockward/movements/{ward_code}:
     get:
       tags:
@@ -6569,9 +6592,9 @@ components:
           example: 0
         opd:
           type: boolean
-        female:
-          type: boolean
         male:
+          type: boolean
+        female:
           type: boolean
         pharmacy:
           type: boolean
@@ -8708,6 +8731,23 @@ components:
           description: The medical lot
       required:
       - medical
+      - ward
+    MedicalWardQuantityDTO:
+      type: object
+      properties:
+        ward:
+          $ref: "#/components/schemas/WardDTO"
+          description: The ward
+        medical:
+          $ref: "#/components/schemas/MedicalDTO"
+          description: The medical
+        quantity:
+          type: integer
+          format: int32
+          description: The medical quantity in the ward
+      required:
+      - medical
+      - quantity
       - ward
     PageLabWithRowsDTO:
       type: object

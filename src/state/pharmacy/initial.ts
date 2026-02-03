@@ -4,6 +4,8 @@ import { IPharmacyState } from "./types";
 export const initial: IPharmacyState = {
   wardMovements: new ApiResponse({ status: "IDLE", data: [] }),
   wardMedicals: new ApiResponse({ status: "IDLE", data: [] }),
+  getCurrentQuantityInWard: {} as Record<string, ApiResponse<number> | undefined>,
+  getCurrentQuantityInAllWards: new ApiResponse({ status: "IDLE", data: [] }),
   movementTypes: new ApiResponse({ status: "IDLE", data: [] }),
   getMovements: new ApiResponse({ status: "IDLE", data: [] }),
   getMovementsWard: new ApiResponse({ status: "IDLE", data: [] }),
