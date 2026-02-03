@@ -154,17 +154,22 @@ const MedicalDetails = () => {
           <h5 className="medicalDetails__title">
             {t("pharmacy.medicalDetails.pharmacy")}
           </h5>
-          <MedicalItemCard items={pharmacyData} />
+          {pharmacyData.map((item) => (
+            <MedicalItemCard key={item.title} item={item} />
+          ))}
 
           <h5 className="medicalDetails__title">
             {t("pharmacy.medicalDetails.wards")}
           </h5>
-          <MedicalItemCard
-            items={wards.map((ward) => ({
-              title: ward.description,
-              value: Math.floor((medical?.inqty ?? 0) / wards.length),
-            }))}
-          />
+          {wards.map((ward) => (
+            <MedicalItemCard
+              key={ward.code}
+              item={{
+                title: ward.description,
+                value: Math.floor((medical?.inqty ?? 0) / wards.length),
+              }}
+            />
+          ))}
         </div>
       </div>
     </div>
