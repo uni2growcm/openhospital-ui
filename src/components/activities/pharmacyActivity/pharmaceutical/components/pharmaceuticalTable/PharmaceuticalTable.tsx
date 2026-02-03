@@ -10,7 +10,11 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { getMedicals } from "state/pharmacy";
 
-export default function PharmaceuticalTable() {
+interface PharmaceuticalTableProps {
+  onDataChange: (data: any[]) => void;
+}
+
+export default function PharmaceuticalTable({ onDataChange }: PharmaceuticalTableProps) {
   const { t } = useTranslation();
 
   const navigate = useNavigate();
@@ -145,6 +149,7 @@ export default function PharmaceuticalTable() {
                 rowKey="pharmaceutical"
                 manualFilter={false}
                 onEdit={handleEdit}
+                onFilteredDataChange={onDataChange}
               />
             );
           case "SUCCESS_EMPTY":

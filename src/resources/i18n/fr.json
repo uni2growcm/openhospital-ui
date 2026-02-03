@@ -1362,6 +1362,10 @@
       "discharge": "Décharge",
       "charge": "Charge",
       "exportList": "Liste d'exportation",
+      "noPageToExport": {
+        "title": "Aucune page a exporter",
+        "description": "Le document n'a aucune page."
+      },
       "stockReport": "Rapport de stock",
       "adjustQuantity": "Ajuster la quantité",
       "criticalValue": "Valeur critique",
