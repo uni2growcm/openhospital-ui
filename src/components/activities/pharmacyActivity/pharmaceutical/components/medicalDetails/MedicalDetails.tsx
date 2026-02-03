@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useOutletContext, useParams } from "react-router";
-import { getMedical } from "state/pharmacy";
+import { getCurrentQuantityInAllWards, getMedical } from "state/pharmacy";
 import { getWards } from "state/ward";
 import MedicalItemCard from "../medicalItemCard/MedicalItemCard";
 import { getPharmacyData } from "./consts";
@@ -58,7 +58,21 @@ const MedicalDetails = () => {
     dispatch(getWards());
   }, [dispatch, id]);
 
-  const wards = useAppSelector((state) => state.wards.allWards.data || []);
+  const wardQties = useAppSelector(
+    (state) => state.pharmacy.getCurrentQuantityInAllWards.data || []
+  );
+
+  console.log("WARD QTIES", wardQties);
+
+  useEffect(() => {
+    if (!medical) return;
+
+    dispatch(
+      getCurrentQuantityInAllWards({
+        medicalId: medical.code ?? 0,
+      })
+    );
+  }, [dispatch, medical]);
 
   if (!medical) return;
   const pharmacyData = getPharmacyData(medical);
@@ -154,22 +168,27 @@ const MedicalDetails = () => {
           <h5 className="medicalDetails__title">
             {t("pharmacy.medicalDetails.pharmacy")}
           </h5>
-          {pharmacyData.map((item) => (
-            <MedicalItemCard key={item.title} item={item} />
-          ))}
+          <div data-cy="medical-item-card" className="medicalItem__cards">
+            {pharmacyData.map((item) => (
+              <MedicalItemCard key={item.title} item={item} />
+            ))}
+          </div>
 
           <h5 className="medicalDetails__title">
             {t("pharmacy.medicalDetails.wards")}
           </h5>
-          {wards.map((ward) => (
-            <MedicalItemCard
-              key={ward.code}
-              item={{
-                title: ward.description,
-                value: Math.floor((medical?.inqty ?? 0) / wards.length),
-              }}
-            />
-          ))}
+
+          <div data-cy="medical-item-card" className="medicalItem__cards">
+            {wardQties.map((wardQty) => (
+              <MedicalItemCard
+                key={wardQty.medical.code}
+                item={{
+                  title: wardQty.ward.description,
+                  value: wardQty.quantity,
+                }}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
