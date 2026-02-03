@@ -4869,6 +4869,29 @@ paths:
                   $ref: "#/components/schemas/MedicalWardDTO"
       security:
       - bearerAuth: []
+  /medicalstockward/{medicalId}/ward-quantities:
+    get:
+      tags:
+      - Medical Stock Ward
+      operationId: getCurrentQuantityInAllWards
+      parameters:
+      - name: medicalId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalWardQuantityDTO"
+      security:
+      - bearerAuth: []
   /medicalstockward/movements/{ward_code}:
     get:
       tags:
@@ -4962,29 +4985,6 @@ paths:
               schema:
                 type: integer
                 format: int32
-      security:
-      - bearerAuth: []
-  /medicalstockward/current-all-wards:
-    get:
-      tags:
-      - Medical Stock Ward
-      operationId: getCurrentQuantityInAllWards
-      parameters:
-      - name: med_id
-        in: query
-        required: true
-        schema:
-          type: integer
-          format: int32
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/MedicalWardQuantityDTO"
       security:
       - bearerAuth: []
   /medicalstockmovements:
@@ -6592,9 +6592,9 @@ components:
           example: 0
         opd:
           type: boolean
-        female:
-          type: boolean
         male:
+          type: boolean
+        female:
           type: boolean
         pharmacy:
           type: boolean

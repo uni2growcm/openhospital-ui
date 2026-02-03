@@ -22,7 +22,7 @@ import type {
 } from '../models';
 
 export interface GetCurrentQuantityInAllWardsRequest {
-    medId: number;
+    medicalId: number;
 }
 
 export interface GetCurrentQuantityInWardRequest {
@@ -57,23 +57,18 @@ export class MedicalStockWardApi extends BaseAPI {
 
     /**
      */
-    getCurrentQuantityInAllWards({ medId }: GetCurrentQuantityInAllWardsRequest): Observable<Array<MedicalWardQuantityDTO>>
-    getCurrentQuantityInAllWards({ medId }: GetCurrentQuantityInAllWardsRequest, opts?: OperationOpts): Observable<AjaxResponse<Array<MedicalWardQuantityDTO>>>
-    getCurrentQuantityInAllWards({ medId }: GetCurrentQuantityInAllWardsRequest, opts?: OperationOpts): Observable<Array<MedicalWardQuantityDTO> | AjaxResponse<Array<MedicalWardQuantityDTO>>> {
-        throwIfNullOrUndefined(medId, 'medId', 'getCurrentQuantityInAllWards');
+    getCurrentQuantityInAllWards({ medicalId }: GetCurrentQuantityInAllWardsRequest): Observable<Array<MedicalWardQuantityDTO>>
+    getCurrentQuantityInAllWards({ medicalId }: GetCurrentQuantityInAllWardsRequest, opts?: OperationOpts): Observable<AjaxResponse<Array<MedicalWardQuantityDTO>>>
+    getCurrentQuantityInAllWards({ medicalId }: GetCurrentQuantityInAllWardsRequest, opts?: OperationOpts): Observable<Array<MedicalWardQuantityDTO> | AjaxResponse<Array<MedicalWardQuantityDTO>>> {
+        throwIfNullOrUndefined(medicalId, 'medicalId', 'getCurrentQuantityInAllWards');
 
         const headers: HttpHeaders = {
         };
 
-        const query: HttpQuery = { // required parameters are used directly since they are already checked by throwIfNullOrUndefined
-            'med_id': medId,
-        };
-
         return this.request<Array<MedicalWardQuantityDTO>>({
-            url: '/medicalstockward/current-all-wards',
+            url: '/medicalstockward/{medicalId}/ward-quantities'.replace('{medicalId}', encodeURI(medicalId)),
             method: 'GET',
             headers,
-            query,
         }, opts?.responseOpts);
     };
 

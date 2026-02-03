@@ -177,8 +177,10 @@ export const getCurrentQuantityInAllWards = createAsyncThunk(
           wardStockApi.getCurrentQuantityInAllWards(payload)
         )
       );
+      console.log(result)
       return result;
     } catch (error: any) {
+      console.log("ERROR", error)
       return thunkApi.rejectWithValue(error.response);
     }
   }
