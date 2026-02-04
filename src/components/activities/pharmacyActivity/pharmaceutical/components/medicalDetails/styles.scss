@@ -130,17 +130,21 @@
     border-top: 1px solid lighten($c-gray, 5%);
   }
 
-  &__sidebar__menu__item {
+  .medicalDetails__sidebar__menu__item {
+    width: calc(100% + 40px);
+    margin-left: -20px;
+    margin-right: -20px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: $c-white;
-    padding: 12px;
-    background-color: #5e5e5e;
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
-    font-weight: bold;
 
+    padding: 14px 20px;
+    background-color: #5e5e5e;
+    color: $c-white;
+    font-weight: 700;
+
+    border-radius: 0;
     &:hover {
       background-color: lighten($c-gray, 8%);
     }
