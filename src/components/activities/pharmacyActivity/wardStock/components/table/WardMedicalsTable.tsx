@@ -7,9 +7,11 @@ import { MedicalWardDTO } from "generated";
 import { useTranslation } from "libraries/hooks";
 import { useWardMedicals } from "libraries/hooks/api";
 import { useAppDispatch } from "libraries/hooks/redux";
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
-import { getMovements } from "state/pharmacy";
+import { getMovements, printPharmaceuticalStockCardPdf } from "state/pharmacy";
+import GetDownloadDateDialog from "components/activities/pharmacyActivity/getDownloadDateDialog/GetDownloadDateDialog";
+import { downloadBlob } from "libraries/downloadUtils/downloardUtils";
 
 interface WardMedicalsProps {
   wardCode: string;
@@ -91,6 +93,31 @@ export function WardMedicalsTable({ wardCode, onRectify }: WardMedicalsProps) {
     dispatch(getMovements());
   }, [dispatch]);
 
+  const [selectedRow, setSelectedRow] = useState<any>(null);
+
+  const handlePrintStockCardReport = (dates: any) => {
+    console.log("SELECTED ROW", selectedRow);
+    console.log("DATES", dates);
+    dispatch(
+      printPharmaceuticalStockCardPdf({
+        wardCode: wardCode,
+        medicalCode: selectedRow.code,
+        dateFrom: dates.dateFrom,
+        dateTo: dates.dateTo,
+        exportFileName: "WardStockCardReport",
+      })
+    )
+      .unwrap()
+      .then((result) => {
+        if (result instanceof Blob)
+          downloadBlob(
+            result,
+            `ward-stock-card-report-${new Date().getTime()}.pdf`
+          );
+        setSelectedRow(null);
+      });
+  };
+
   return (
     <div data-cy="ward-movements-table">
       {(() => {
@@ -113,6 +140,7 @@ export function WardMedicalsTable({ wardCode, onRectify }: WardMedicalsProps) {
                 manualFilter={false}
                 onRectify={onRectify}
                 onDischarge={(row) => handleDischarge(row)}
+                onPrintStockCard={(row) => setSelectedRow(row)}
               />
             );
           case "SUCCESS_EMPTY":
@@ -123,6 +151,15 @@ export function WardMedicalsTable({ wardCode, onRectify }: WardMedicalsProps) {
             return <CircularProgress />;
         }
       })()}
+      <GetDownloadDateDialog
+        isOpen={selectedRow !== null}
+        title={t("pharmacy.selectReport").toUpperCase()}
+        isStockWard={true}
+        primaryButtonLabel={t("common.print")}
+        secondaryButtonLabel={t("common.cancel")}
+        handlePrimaryButtonClick={handlePrintStockCardReport}
+        handleSecondaryButtonClick={() => setSelectedRow(null)}
+      />
     </div>
   );
 }

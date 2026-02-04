@@ -30,7 +30,7 @@ export interface PrintPharmaceuticalStockCardPdfRequest {
     dateFrom: string;
     dateTo: string;
     medicalCode: number;
-    wardCode: string;
+    wardCode?: string;
 }
 
 export interface PrintPharmaceuticalStockPdfRequest {
@@ -171,7 +171,6 @@ export class ReportsApi extends BaseAPI {
         throwIfNullOrUndefined(dateFrom, 'dateFrom', 'printPharmaceuticalStockCardPdf');
         throwIfNullOrUndefined(dateTo, 'dateTo', 'printPharmaceuticalStockCardPdf');
         throwIfNullOrUndefined(medicalCode, 'medicalCode', 'printPharmaceuticalStockCardPdf');
-        throwIfNullOrUndefined(wardCode, 'wardCode', 'printPharmaceuticalStockCardPdf');
 
         const headers: HttpHeaders = {
         };
@@ -181,8 +180,9 @@ export class ReportsApi extends BaseAPI {
             'dateFrom': (dateFrom as any).toISOString(),
             'dateTo': (dateTo as any).toISOString(),
             'medicalCode': medicalCode,
-            'wardCode': wardCode,
         };
+
+        if (wardCode != null) { query['wardCode'] = wardCode; }
 
         return this.request<Blob>({
             url: '/reports/pharmaceuticalStockCard',

@@ -6,6 +6,7 @@ import {
   Edit,
   HighlightOff,
   InfoOutlined,
+  InventoryOutlined,
   Logout,
   MonetizationOn,
   Print,
@@ -62,6 +63,7 @@ const Table: FunctionComponent<IProps> = ({
   onRectify,
   onDelete,
   onPrint,
+  onPrintStockCard,
   onPay,
   onView,
   onAdd,
@@ -164,6 +166,22 @@ const Table: FunctionComponent<IProps> = ({
             }
           >
             <Logout sx={{ color: "black" }} />
+          </IconButton>
+        );
+      case "print-stock-card":
+        return (
+          <IconButton
+            data-cy="table-print-stock-card-action"
+            size="small"
+            title={labels?.["print-stock-card"]?.tooltip ?? "Print Stock Card"}
+            disabled={disableAction(row, "print-stock-card")}
+            onClick={
+              disableAction(row, "print-stock-card")
+                ? () => {}
+                : () => onPrintStockCard && onPrintStockCard(row)
+            }
+          >
+            <InventoryOutlined color="secondary" />
           </IconButton>
         );
       case "rectify":
@@ -351,6 +369,7 @@ const Table: FunctionComponent<IProps> = ({
       onRectify ||
       onDelete ||
       onPrint ||
+      onPrintStockCard ||
       onView ||
       onCancel ||
       onRestore ||
@@ -375,6 +394,10 @@ const Table: FunctionComponent<IProps> = ({
           {onDischarge &&
           (displayRowAction ? displayRowAction(row, "discharge") : true)
             ? renderIcon("discharge", row)
+            : ""}
+          {onPrintStockCard &&
+          (displayRowAction ? displayRowAction(row, "print-stock-card") : true)
+            ? renderIcon("print-stock-card", row)
             : ""}
           {onRectify &&
           (displayRowAction ? displayRowAction(row, "rectify") : true)

@@ -16,6 +16,7 @@ export interface IProps {
   onDischarge?: (row: any) => void;
   onDelete?: (row: any) => void;
   onPrint?: (row: any) => void;
+  onPrintStockCard?: (row: any) => void;
   onView?: (row: any) => void;
   onAdd?: (row: any) => void;
   onRestore?: (row: any) => void;
@@ -96,6 +97,7 @@ export type TActions =
   | "delete"
   | "view"
   | "print"
+  | "print-stock-card"
   | "pay"
   | "close"
   | "cancel"
