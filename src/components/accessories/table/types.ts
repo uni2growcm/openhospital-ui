@@ -36,6 +36,7 @@ export interface IProps {
   detailsExcludedFields?: string[];
   adjustQuantity?: boolean;
   renderExtraContent?: (row: any) => React.ReactNode;
+  onFilteredDataChange?: (data: any[]) => void;
   /**
    * Column used for the filter. When this prop is provided, don't forget to provide also [rawData]
    */

@@ -13,7 +13,11 @@ import { getMedicals } from "state/pharmacy";
 import checkIcon from "assets/check-icon.png";
 import { deleteMedical } from "state/medicals";
 
-export default function PharmaceuticalTable() {
+interface PharmaceuticalTableProps {
+  onDataChange: (data: any[]) => void;
+}
+
+export default function PharmaceuticalTable({ onDataChange }: PharmaceuticalTableProps) {
   const { t } = useTranslation();
 
   const navigate = useNavigate();
@@ -169,6 +173,7 @@ export default function PharmaceuticalTable() {
                 manualFilter={false}
                 onDelete={handleDelete}
                 onEdit={handleEdit}
+                onFilteredDataChange={onDataChange}
               />
             );
           case "SUCCESS_EMPTY":
