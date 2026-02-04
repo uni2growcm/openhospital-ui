@@ -8,7 +8,8 @@ import PharmaceuticalTable from "./components/pharmaceuticalTable/Pharmaceutical
 
 export default function Pharmaceutical() {
   const { t } = useTranslation();
-  const { breadcrumbMap, setBreadcrumbMap } = useOutletContext<{
+
+  const { setBreadcrumbMap } = useOutletContext<{
     breadcrumbMap: Record<string, string>;
     setBreadcrumbMap: (map: Record<string, string>) => void;
   }>();

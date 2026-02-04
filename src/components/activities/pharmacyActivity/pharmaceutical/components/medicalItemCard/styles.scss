@@ -1,0 +1,90 @@
+@import "../../../../../../styles/variables";
+@import "../../../../../../../node_modules/susy/sass/susy";
+
+.medicalItem {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  &__title {
+    color: $c-grey-medium;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin: 0;
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+
+    @include susy-media($tablet_land) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include susy-media($smartphone) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__card {
+    background-color: #f2f2f2;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 2px 2px 2px 2px;
+    box-sizing: border-box;
+    height: 145px;
+    width: 200px;
+  }
+
+  &__card__content {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 20px;
+    flex: 1;
+  }
+
+  &__card__label {
+    color: #3a3737;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  &__card__value {
+    color: $c-black;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  &__card__icon {
+    display: flex;
+    align-items: flex-end;
+    color: #3a3737;
+
+    div {
+      padding: 5px;
+      background-color: #d7d7d7;
+      border-radius: 6px 0 6px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    svg {
+      font-size: 2rem;
+    }
+
+    &:hover {
+      color: $c-black;
+    }
+  }
+}

@@ -230,7 +230,7 @@ const Table: FunctionComponent<IProps> = ({
                 : () => onView && onView(row)
             }
           >
-            <InfoOutlined color="primary" titleAccess={"View Details"} />
+            <InfoOutlined titleAccess={"View Details"} />
           </IconButton>
         );
       case "pay":

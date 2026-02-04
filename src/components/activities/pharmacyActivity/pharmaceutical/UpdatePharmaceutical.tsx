@@ -38,7 +38,7 @@ export function UpdatePharmaceutical() {
       [t("pharmacy.labels.update-pharmaceutical-title")]:
         PATHS.pharmacy_pharmaceutical_update.replace(":id", id ?? ""),
     });
-  }, [id, t, breadcrumbMap]);
+  }, [id, t, breadcrumbMap, setBreadcrumbMap]);
 
   const removeBreadcrumb = useCallback(() => {
     setBreadcrumbMap({
@@ -47,7 +47,7 @@ export function UpdatePharmaceutical() {
       [t("pharmacy.labels.update-pharmaceutical-title")]:
         PATHS.pharmacy_pharmaceutical_update.replace(":id", id ?? ""),
     });
-  }, [t, breadcrumbMap]);
+  }, [id, t, breadcrumbMap, setBreadcrumbMap]);
 
   const status = useAppSelector((state) => state.pharmacy.updateMedical.status);
 
@@ -75,7 +75,7 @@ export function UpdatePharmaceutical() {
         })
       );
     },
-    [dispatch]
+    [dispatch, id]
   );
 
   const handleDialogActions = useCallback(() => {
@@ -83,12 +83,12 @@ export function UpdatePharmaceutical() {
     if (status === "SUCCESS") {
       handleGoBack();
     }
-  }, [dispatch, handleGoBack]);
+  }, [dispatch, handleGoBack, status]);
 
   useEffect(() => {
     addBreadcrumb();
     return removeBreadcrumb;
-  }, [breadcrumbMap]);
+  }, [addBreadcrumb, removeBreadcrumb]);
 
   useEffect(() => {
     dispatch(getMedical({ code: +(id ?? "0") }));

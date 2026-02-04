@@ -1,4 +1,5 @@
 import { CircularProgress } from "@mui/material";
+import checkIcon from "assets/check-icon.png";
 import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import Table from "components/accessories/table/Table";
@@ -9,15 +10,16 @@ import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import { getMedicals } from "state/pharmacy";
-import checkIcon from "assets/check-icon.png";
 import { deleteMedical } from "state/medicals";
+import { getMedicals } from "state/pharmacy";
 
 interface PharmaceuticalTableProps {
   onDataChange: (data: any[]) => void;
 }
 
-export default function PharmaceuticalTable({ onDataChange }: PharmaceuticalTableProps) {
+export default function PharmaceuticalTable({
+  onDataChange,
+}: PharmaceuticalTableProps) {
   const { t } = useTranslation();
 
   const navigate = useNavigate();
@@ -109,6 +111,7 @@ export default function PharmaceuticalTable({ onDataChange }: PharmaceuticalTabl
         amc: item.outqty,
         lots: item.lots,
         expDate: nearestExpiration,
+        medicalData: item,
       };
     });
   }, [data]);
@@ -145,6 +148,20 @@ export default function PharmaceuticalTable({ onDataChange }: PharmaceuticalTabl
     [navigate]
   );
 
+  const handleView = useCallback(
+    (row: any) => {
+      if (row.medicalData) {
+        navigate(
+          PATHS.pharmacy_pharmaceutical_detail.replace(
+            ":id",
+            row.code?.toString() ?? ""
+          )
+        );
+      }
+    },
+    [navigate]
+  );
+
   useEffect(() => {
     dispatch(getMedicals());
   }, [dispatch]);
@@ -173,6 +190,7 @@ export default function PharmaceuticalTable({ onDataChange }: PharmaceuticalTabl
                 manualFilter={false}
                 onDelete={handleDelete}
                 onEdit={handleEdit}
+                onView={handleView}
                 onFilteredDataChange={onDataChange}
               />
             );

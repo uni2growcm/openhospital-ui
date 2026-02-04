@@ -91,6 +91,7 @@ export const PATHS = {
     "/pharmacy/ward-stock/:medCode/:wardCode/:lotCode/rectify",
   pharmacy_pharmaceutical: "/pharmacy/pharmaceutical",
   pharmacy_pharmaceutical_new: "/pharmacy/pharmaceutical/new",
+  pharmacy_pharmaceutical_detail: "/pharmacy/pharmaceutical/:id/details",
   pharmacy_pharmaceutical_update: "/pharmacy/pharmaceutical/:id/update",
   pharmacy_ward_stock_discharge:
     "/pharmacy/ward-stock/:ward/medicals/:medical/discharge-movement",
