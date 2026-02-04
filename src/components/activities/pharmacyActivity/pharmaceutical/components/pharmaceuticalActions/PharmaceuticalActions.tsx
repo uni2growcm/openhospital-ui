@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import {
   printPharmaceuticalAMCPdf,
   printPharmaceuticalExpirationPdf,
+  printPharmaceuticalOrderPdf,
   printPharmaceuticalStockCardPdf,
   printPharmaceuticalStockPdf,
 } from "state/pharmacy";
@@ -19,8 +20,17 @@ import {
   ExpiringMonth,
 } from "../pharmaceuticalExpiringDialog/type";
 import "./styles.scss";
+import warningIcon from "../../../../../../assets/warning-icon.png";
+import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
+import * as XLSX from 'xlsx';
 
-export default function PharmaceuticalActions() {
+interface PharmaceuticalActionsProps {
+  dataToExport: any[];
+}
+
+export default function PharmaceuticalActions({
+  dataToExport,
+}: PharmaceuticalActionsProps) {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const handleOpenExpiringDialog = () => {
@@ -145,6 +155,40 @@ export default function PharmaceuticalActions() {
   const [isPrint, setIsPrint] = useState<boolean>(false);
   const [isAMCReport, setIsAMCReport] = useState<boolean>(false);
   const [isPrincipalStock, setIsPrincipalStock] = useState<boolean>(false);
+  const [noPageToExport, setNoPageToExport] = useState<boolean>(false);
+
+  const handlePrintExportListExcel = () => {
+    if (!dataToExport) return;
+    if (dataToExport.length === 0) {
+      setNoPageToExport(true);
+      return;
+    }
+    const excelRows = dataToExport.map((item) => ({
+      [t("pharmacy.stock.pharmaceutical")]: item.pharmaceutical,
+      [t("pharmacy.stock.type")]: item.type,
+      [t("pharmacy.stock.code")]: item.code,
+      [t("pharmacy.stock.pcsperpck")]: item.pcsperpck,
+      [t("pharmacy.stock.stock")]: item.stock,
+      [t("pharmacy.stock.criticalValue")]: item.criticalValue,
+      [t("pharmacy.stock.amc")]: item.amc,
+    }));
+    
+    const worksheet = XLSX.utils.json_to_sheet(excelRows);
+
+    const date = new Date().getTime();
+
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(
+      workbook,
+      worksheet,
+      `Stock-${date}`
+    );
+
+    const dateStr = new Date().toISOString().split("T")[0];
+    const fileName = `Export_Pharmacy_${dateStr}_${date}.xlsx`;
+
+    XLSX.writeFile(workbook, fileName);
+  };
 
   const handleGetStockCardReport = (payload: PrintProperties) => {
     dispatch(
@@ -165,6 +209,18 @@ export default function PharmaceuticalActions() {
           );
       });
     setIsPrint(false);
+  };
+
+  const handleGetOrderReport = () => {
+    dispatch(printPharmaceuticalOrderPdf())
+      .unwrap()
+      .then((result) => {
+        if (result instanceof Blob)
+          downloadBlob(
+            result,
+            `Pharmaceutical-order-report-${new Date().getTime()}.pdf`
+          );
+      });
   };
 
   const handleGetAMCReport = (payload: PrintProperties) => {
@@ -204,7 +260,13 @@ export default function PharmaceuticalActions() {
 
   return (
     <div className="buttonSet" data-cy="button-actions">
-      <Button type="button" variant="outlined" color="inherit">
+      <Button
+        type="button"
+        variant="outlined"
+        color="inherit"
+        data-cy="export-list-button"
+        onClick={handlePrintExportListExcel}
+      >
         {t("pharmacy.stock.exportList")}
       </Button>
       <Button
@@ -231,7 +293,13 @@ export default function PharmaceuticalActions() {
       >
         {t("pharmacy.stock.stockCardReport")}
       </Button>
-      <Button type="button" variant="outlined" color="inherit">
+      <Button
+        type="button"
+        variant="outlined"
+        color="inherit"
+        data-cy="order-button"
+        onClick={handleGetOrderReport}
+      >
         {t("pharmacy.stock.order")}
       </Button>
       <div data-cy="expiring-button">
@@ -284,6 +352,15 @@ export default function PharmaceuticalActions() {
             : handleGetStockCardReport
         }
         handleSecondaryButtonClick={() => setIsPrint(false)}
+      />
+      <ConfirmationDialog
+        isOpen={noPageToExport}
+        title={t("pharmacy.stock.noPageToExport.title")}
+        info={t("pharmacy.stock.noPageToExport.description")}
+        icon={warningIcon}
+        primaryButtonLabel={t("common.ok")}
+        handlePrimaryButtonClick={() => setNoPageToExport(false)}
+        handleSecondaryButtonClick={() => {}}
       />
     </div>
   );

@@ -26,6 +26,8 @@ export default function Pharmaceutical() {
       });
     };
   }, [t, setBreadcrumbMap]);
+  
+  const [dataToExport, setDataToExport] = React.useState<any[]>([]);
 
   return (
     <PharmacyActivityContent
@@ -34,11 +36,11 @@ export default function Pharmaceutical() {
     >
       <div className="pharmaceutical">
         <div data-cy="pharmaceutical-actions">
-          <PharmaceuticalActions data-cy="pharmaceutical-actions" />
+          <PharmaceuticalActions data-cy="pharmaceutical-actions" dataToExport={dataToExport} />
         </div>
 
         <div data-cy="pharmaceutical-table">
-          <PharmaceuticalTable />
+          <PharmaceuticalTable onDataChange={setDataToExport} />
         </div>
       </div>
     </PharmacyActivityContent>

@@ -1,16 +1,25 @@
 import { CircularProgress } from "@mui/material";
+import checkIcon from "assets/check-icon.png";
+import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import Table from "components/accessories/table/Table";
 import { TFilterField } from "components/accessories/table/filter/types";
 import { PATHS } from "consts";
 import { MedicalDTO } from "generated";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+import { deleteMedical } from "state/medicals";
 import { getMedicals } from "state/pharmacy";
 
-export default function PharmaceuticalTable() {
+interface PharmaceuticalTableProps {
+  onDataChange: (data: any[]) => void;
+}
+
+export default function PharmaceuticalTable({
+  onDataChange,
+}: PharmaceuticalTableProps) {
   const { t } = useTranslation();
 
   const navigate = useNavigate();
@@ -107,6 +116,26 @@ export default function PharmaceuticalTable() {
     });
   }, [data]);
 
+  const deletedStautus = useAppSelector(
+    (state) => state.medicals.delete.status
+  );
+  const [openConfirmDialog, setOpenConfirmDialog] = useState<boolean>(false);
+
+  const handleDelete = useCallback(
+    (medical: MedicalDTO) => {
+      dispatch(deleteMedical(medical.code ?? 0))
+        .unwrap()
+        .then(() => setOpenConfirmDialog(true));
+    },
+    [dispatch]
+  );
+  const handleDialogActions = useCallback(() => {
+    dispatch(getMedicals());
+    if (deletedStautus === "SUCCESS") {
+      setOpenConfirmDialog(false);
+    }
+  }, [dispatch, deletedStautus]);
+
   const handleEdit = useCallback(
     (medical: MedicalDTO) => {
       navigate(
@@ -159,8 +188,10 @@ export default function PharmaceuticalTable() {
                 filterColumns={filters}
                 rowKey="pharmaceutical"
                 manualFilter={false}
+                onDelete={handleDelete}
                 onEdit={handleEdit}
                 onView={handleView}
+                onFilteredDataChange={onDataChange}
               />
             );
           case "SUCCESS_EMPTY":
@@ -171,6 +202,16 @@ export default function PharmaceuticalTable() {
             return <CircularProgress />;
         }
       })()}
+
+      <ConfirmationDialog
+        isOpen={openConfirmDialog}
+        title={t("pharmacy.messages.delete-pharmaceutical-success.title")}
+        icon={checkIcon}
+        info={t("pharmacy.messages.delete-pharmaceutical-success.description")}
+        primaryButtonLabel="OK"
+        handlePrimaryButtonClick={handleDialogActions}
+        handleSecondaryButtonClick={handleDialogActions}
+      />
     </div>
   );
 }

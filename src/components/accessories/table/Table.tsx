@@ -86,6 +86,7 @@ const Table: FunctionComponent<IProps> = ({
   headerActions,
   labels,
   renderExtraContent,
+  onFilteredDataChange,
 }) => {
   const { t } = useTranslation();
   const [order, setOrder] = React.useState<TOrder>("desc");
@@ -444,6 +445,12 @@ const Table: FunctionComponent<IProps> = ({
       ),
     [filterColumns, filters, manualFilter, rowData]
   );
+  
+  useEffect(() => {
+    if (onFilteredDataChange) {
+      onFilteredDataChange(filteredData);
+    }
+  }, [filteredData, onFilteredDataChange]);
 
   useEffect(() => {
     if (onFilterChange && !manualFilter) {

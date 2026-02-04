@@ -40,6 +40,7 @@ export type IPharmacyState = {
   printPharmaceuticalStockWardPdf: ApiResponse<Blob>;
   printPharmaceuticalStockPdf: ApiResponse<Blob>;
   printPharmaceuticalStockCardPdf: ApiResponse<Blob>;
+  printPharmaceuticalOrderPdf: ApiResponse<Blob>;
   printPharmaceuticalAMCPdf: ApiResponse<Blob>;
   printPharmaceuticalStockWardExcel: ApiResponse<Blob>;
   printPharmaceuticalExpirationPdf: ApiResponse<Blob>;

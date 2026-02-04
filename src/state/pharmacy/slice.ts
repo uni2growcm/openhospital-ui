@@ -353,6 +353,16 @@ export const pharmacySlice = createSlice({
           );
         }
       )
+      // Print pharmaceutical order pdf report
+      .addCase(thunks.printPharmaceuticalOrderPdf.pending, (state) => {
+        state.printPharmaceuticalOrderPdf = ApiResponse.loading();
+      })
+      .addCase(thunks.printPharmaceuticalOrderPdf.fulfilled, (state, action) => {
+        state.printPharmaceuticalOrderPdf = ApiResponse.value(action.payload as Blob);
+      })
+      .addCase(thunks.printPharmaceuticalOrderPdf.rejected, (state, action) => {
+        state.printPharmaceuticalOrderPdf = ApiResponse.error(action.payload);
+      })
       // Print pharmaceutical AMC pdf report
       .addCase(thunks.printPharmaceuticalAMCPdf.pending, (state) => {
         state.printPharmaceuticalAMCPdf = ApiResponse.loading();

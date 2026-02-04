@@ -148,16 +148,17 @@ export class ReportsApi extends BaseAPI {
 
     /**
      */
-    printPharmaceuticalOrderPdf(): Observable<string>
-    printPharmaceuticalOrderPdf(opts?: OperationOpts): Observable<AjaxResponse<string>>
-    printPharmaceuticalOrderPdf(opts?: OperationOpts): Observable<string | AjaxResponse<string>> {
+    printPharmaceuticalOrderPdf(): Observable<Blob>
+    printPharmaceuticalOrderPdf(opts?: OperationOpts): Observable<AjaxResponse<Blob>>
+    printPharmaceuticalOrderPdf(opts?: OperationOpts): Observable<Blob | AjaxResponse<Blob>> {
         const headers: HttpHeaders = {
         };
 
-        return this.request<string>({
+        return this.request<Blob>({
             url: '/reports/pharmaceuticalOrder',
             method: 'GET',
             headers,
+            responseType: 'blob',
         }, opts?.responseOpts);
     };
 

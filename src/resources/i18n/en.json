@@ -1285,6 +1285,10 @@
         "title": "Pharmaceutical updated successfully",
         "description": "The pharmaceutical has been updated successfully."
       },
+      "delete-pharmaceutical-success": {
+        "title": "Pharmaceutical deleted successfully",
+        "description": "The pharmaceutical has been deleted successfully."
+      },
       "update-pharmaceutical-fail": {
         "title": "Pharamaceutical update failed",
         "description": "We were unable to update the pharmaceutical. Please try again or contact support."
@@ -1366,6 +1370,10 @@
       "discharge": "Discharge",
       "charge": "Charge",
       "exportList": "Export list",
+      "noPageToExport": {
+        "title": "No page to export",
+        "description": "The document has no page."
+      },
       "stockReport": "Stock report",
       "adjustQuantity": "Adjust quantity",
       "criticalValue": "Critical value",
