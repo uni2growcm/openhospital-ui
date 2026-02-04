@@ -30,11 +30,15 @@
   }
 
   &__card {
-    background-color: #f5f5f5;
+    background-color: #f2f2f2;
     border-radius: 6px;
     display: flex;
     justify-content: space-between;
     align-items: stretch;
+    padding: 2px 2px 2px 2px;
+    box-sizing: border-box;
+    height: 145px;
+    width: 200px;
   }
 
   &__card__content {
@@ -46,7 +50,7 @@
   }
 
   &__card__label {
-    color: $c-grey-medium;
+    color: #3a3737;
     font-weight: 600;
     letter-spacing: 0.4px;
     display: flex;
@@ -64,12 +68,11 @@
   &__card__icon {
     display: flex;
     align-items: flex-end;
-    color: $c-grey-medium;
-    cursor: pointer;
+    color: #3a3737;
 
     div {
       padding: 5px;
-      background-color: #aaaa;
+      background-color: #d7d7d7;
       border-radius: 6px 0 6px 0;
       display: flex;
       align-items: center;

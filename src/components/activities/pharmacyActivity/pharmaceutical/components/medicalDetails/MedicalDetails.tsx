@@ -1,4 +1,5 @@
-import { Edit, KeyboardArrowRight, Menu } from "@mui/icons-material";
+import { Edit, KeyboardArrowRight } from "@mui/icons-material";
+import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import Button from "components/accessories/button/Button";
 import { PATHS } from "consts";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
@@ -62,8 +63,6 @@ const MedicalDetails = () => {
     (state) => state.pharmacy.getCurrentQuantityInAllWards.data || []
   );
 
-  console.log("WARD QTIES", wardQties);
-
   useEffect(() => {
     if (!medical) return;
 
@@ -87,7 +86,7 @@ const MedicalDetails = () => {
             </div>
             <div className="medicalDetails__sidebar__name">
               {medical.prodCode && medical.description
-                ? `${medical.description} ${medical.prodCode}`
+                ? `${medical.description}`
                 : medical.description || "Medical"}
             </div>
           </div>
@@ -157,7 +156,8 @@ const MedicalDetails = () => {
           <div className="medicalDetails__sidebar__menu">
             <div className="medicalDetails__sidebar__menu__item">
               <span className="flex gap-1">
-                <Menu /> {t("pharmacy.medicalDetails.overview")}
+                <DashboardOutlinedIcon fontSize="small" />{" "}
+                {t("pharmacy.medicalDetails.overview")}
               </span>
               <KeyboardArrowRight fontSize="small" />
             </div>
