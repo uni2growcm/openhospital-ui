@@ -197,7 +197,6 @@ export default function PharmaceuticalActions({
         dateTo: payload.dateTo!,
         exportFileName: "StockCardReport",
         medicalCode: payload.medCode!,
-        wardCode: payload.wardCode!,
       })
     )
       .unwrap()

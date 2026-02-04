@@ -10,7 +10,6 @@ import moment from "moment";
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { getMedicals } from "state/pharmacy";
-import { getWards } from "state/ward";
 import "./styles.scss";
 import { IProps, PrintProperties } from "./types";
 
@@ -36,16 +35,11 @@ const GetDownloadDateDialog: FunctionComponent<
   const [dateTo, setDateTo] = useState<string>();
   const [dateFrom, setDateFrom] = useState<string>();
   const [medCode, setMedCode] = useState<number>();
-  const [wardCode, setWardCode] = useState<string>();
-  const [errorWard, setErrorWard] = useState(false);
   const [errorMedical, setErrorMedical] = useState(false);
 
   const [option, setOption] = useState<string | null>(null);
   const medicalsData = useAppSelector((state) =>
     state.pharmacy.getMedicals.data ? state.pharmacy.getMedicals.data : []
-  );
-  const wardsData = useAppSelector((state) =>
-    state.wards.allWards.data ? state.wards.allWards.data : []
   );
 
   const renderOptions = (data: (WardDTO | MedicalDTO)[] | undefined) => {
@@ -97,10 +91,8 @@ const GetDownloadDateDialog: FunctionComponent<
           dateTo ? dateTo : moment(new Date()).format("YYYY-MM-DDTHH:mm:ss")
         );
         if (isStockCard) {
-          setErrorWard(false);
           setErrorMedical(false);
           dispatch(getMedicals());
-          dispatch(getWards());
         }
       } else {
         setDate(date ? date : moment(new Date()).format("YYYY-MM-DDTHH:mm:ss"));
@@ -124,15 +116,13 @@ const GetDownloadDateDialog: FunctionComponent<
         dateFrom: dateFrom,
       });
     } else if (isStockCard) {
-      if (!wardCode || !medCode) {
-        setErrorWard(!wardCode);
+      if (!medCode) {
         setErrorMedical(!medCode);
       } else {
         handlePrimaryButtonClick({
           dateTo: dateTo,
           dateFrom: dateFrom,
           medCode: medCode,
-          wardCode: wardCode,
         });
         handleSecondaryButtonClick();
       }
@@ -269,29 +259,6 @@ const GetDownloadDateDialog: FunctionComponent<
                   onChange={(event, value) => {
                     setMedCode(value ? Number(value.value) : undefined);
                     setErrorMedical(false);
-                  }}
-                />
-              </div>
-              <div className="dialog__dateField">
-                <Autocomplete
-                  id="optionsWard"
-                  disablePortal
-                  options={renderOptions(wardsData)}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label={t("pharmacy.selectWard")}
-                      data-cy="optionsWard"
-                      name="optionsWard"
-                      error={errorWard}
-                      helperText={
-                        errorWard ? t("pharmacy.errorMessageForm") : ""
-                      }
-                    />
-                  )}
-                  onChange={(event, value) => {
-                    setWardCode(value ? value.value : undefined);
-                    setErrorWard(false);
                   }}
                 />
               </div>
