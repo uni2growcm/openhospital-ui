@@ -1,4 +1,3 @@
-import { Link } from "@mui/material";
 import Button from "components/accessories/button/Button";
 import GetDownloadDateDialog from "components/activities/pharmacyActivity/getDownloadDateDialog/GetDownloadDateDialog";
 import { PrintProperties } from "components/activities/pharmacyActivity/getDownloadDateDialog/types";
@@ -23,6 +22,7 @@ import "./styles.scss";
 import warningIcon from "../../../../../../assets/warning-icon.png";
 import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
 import * as XLSX from 'xlsx';
+import { Link } from "react-router-dom";
 
 interface PharmaceuticalActionsProps {
   dataToExport: any[];
@@ -326,7 +326,7 @@ export default function PharmaceuticalActions({
       >
         {t("pharmacy.stock.amcReport")}
       </Button>
-      <Link href={PATHS.pharmacy_pharmaceutical_new}>
+      <Link to={PATHS.pharmacy_pharmaceutical_new}>
         <Button type="button" variant="contained" color="primary">
           {t("pharmacy.stock.addMedecine")}
         </Button>

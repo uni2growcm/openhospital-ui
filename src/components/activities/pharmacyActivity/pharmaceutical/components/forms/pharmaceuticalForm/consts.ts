@@ -3,7 +3,7 @@ import { z } from "zod";
 import { TFormValues } from "./types";
 
 export const MedicalDTOSchema = z.object({
-  prodCode: z.string({
+  prodCode: z.number({
     error: "code is required",
   }),
   type: z.string(),
@@ -28,7 +28,7 @@ export function getInitialValues(from?: MedicalDTO): Partial<TFormValues> {
   if (!from) return {};
 
   return {
-    prodCode: from.prodCode,
+    prodCode: +(from.code || 0),
     description: from.description,
     type: from?.type?.code,
     initialqty: from.initialqty || 0,
