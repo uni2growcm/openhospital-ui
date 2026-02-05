@@ -96,8 +96,6 @@ export function WardMedicalsTable({ wardCode, onRectify }: WardMedicalsProps) {
   const [selectedRow, setSelectedRow] = useState<any>(null);
 
   const handlePrintStockCardReport = (dates: any) => {
-    console.log("SELECTED ROW", selectedRow);
-    console.log("DATES", dates);
     dispatch(
       printPharmaceuticalStockCardPdf({
         wardCode: wardCode,
