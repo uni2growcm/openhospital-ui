@@ -40,10 +40,7 @@ export function PharmaceuticalForm({
       const medicalDTO: MedicalDTO = {
         ...data,
         type: selectedType,
-        deleted: data.deleted ? "Y" : "N", 
-        initialqty: 0,
-        inqty: 0,
-        outqty: 0,
+        deleted: data.deleted ? "N" : "Y", 
         prodCode: data.prodCode + "",
       };
       onSubmit(medicalDTO);

@@ -106,7 +106,7 @@ export default function PharmaceuticalTable({
         type: item.type?.description,
         code: item.code,
         pcsperpck: item.pcsperpck,
-        stock: item.inqty,
+        stock: (item.initialqty || 0) + (item.inqty || 0) - (item.outqty || 0),
         criticalValue: item.minqty,
         amc: item.outqty,
         lots: item.lots,
