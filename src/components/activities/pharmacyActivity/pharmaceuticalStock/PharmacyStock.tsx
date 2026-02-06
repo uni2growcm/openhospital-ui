@@ -27,14 +27,16 @@ export function PharmacyStock() {
     };
   }, [t, setBreadcrumbMap]);
 
+  const [dataToExport, setDataToExport] = React.useState<any[]>([]);
+
   return (
     <PharmacyActivityContent
       data-cy="pharmaceutical-stock"
       title={t("pharmacy.labels.pharmaceutical-stock")}
     >
       <div className="pharmaceutical-stock">
-        <StockActions />
-        <StockTable />
+        <StockActions dataToExport={dataToExport} />
+        <StockTable onDataChange={setDataToExport} />
       </div>
     </PharmacyActivityContent>
   );
