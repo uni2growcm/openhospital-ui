@@ -40,7 +40,7 @@ export const MEDICALS: MedicalDTO[] = [
   },
   {
     code: 4,
-    prodCode: "VACC001",
+    prodCode: "1001",
     description: "Polio vaccines (10-dose vials)",
     type: { code: "DRUG", description: "Pharmaceutical" },
     initialqty: 500,
