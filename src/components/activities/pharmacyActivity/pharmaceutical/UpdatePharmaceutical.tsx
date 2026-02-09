@@ -33,12 +33,13 @@ export function UpdatePharmaceutical() {
 
   const addBreadcrumb = useCallback(() => {
     setBreadcrumbMap({
-      ...breadcrumbMap,
-      [t("pharmacy.labels.pharmaceutical")]: PATHS.pharmacy_pharmaceutical,
+      [t("nav.pharmacy")]: PATHS.pharmacy,
+      [t("pharmacy.labels.pharmaceutical-title")]:
+        PATHS.pharmacy_pharmaceutical,
       [t("pharmacy.labels.update-pharmaceutical-title")]:
         PATHS.pharmacy_pharmaceutical_update.replace(":id", id ?? ""),
     });
-  }, [id, t, breadcrumbMap, setBreadcrumbMap]);
+  }, [id, t, setBreadcrumbMap]);
 
   const removeBreadcrumb = useCallback(() => {
     setBreadcrumbMap({
