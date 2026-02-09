@@ -10,9 +10,13 @@ import { renderDateTime } from "libraries/formatUtils/dataFormatting";
 import { useTranslation } from "libraries/hooks";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useEffect, useMemo, useState } from "react";
-import { getMovements, getMovementsWard } from "state/pharmacy";
+import { getMovements } from "state/pharmacy";
 
-export function StockTable() {
+export function StockTable({
+  onDataChange,
+}: {
+  onDataChange: (data: any[]) => void;
+}) {
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
@@ -153,6 +157,7 @@ export function StockTable() {
                 adjustQuantity={(data ?? []).some(
                   (item) => item.type?.type === "+"
                 )}
+                onFilteredDataChange={onDataChange}
                 renderExtraContent={(item) => (
                   <Button
                     className="discharge_button"

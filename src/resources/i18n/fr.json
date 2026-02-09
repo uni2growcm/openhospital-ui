@@ -1247,7 +1247,8 @@
       "pharmaceutical": "Produits médicaux",
       "pharmaceutical-stock": "Stock pharmaceutique",
       "ward-stock": "Stock du pavillon",
-      "rectify-ward-stock": "Rectifier la quantité"
+      "rectify-ward-stock": "Rectifier la quantité",
+      "details-pharmaceutical-title": "Détails du médicament"
     },
     "lot": {
       "labels": {
@@ -1291,9 +1292,17 @@
         "title": "Pharmaceutique mis à jour avec succès",
         "description": "Le produit pharmaceutique a été mis à jour avec succès."
       },
+      "delete-pharmaceutical-success": {
+        "title": "Medicament supprimé avec succès",
+        "description": "Le produit pharmaceutique a été supprimé avec succès."
+      },
       "update-pharmaceutical-fail": {
         "title": "Échec de la mise à jour du pharmaceutique",
         "description": "Impossible de mettre à jour le produit pharmaceutique. Veuillez réessayer ou contacter le support."
+      },
+      "discharge-movement-fail": {
+        "title": "Échec du mouvement de décharge",
+        "description": "Nous n'avons pas pu enregistrer le mouvement de décharge. Veuillez réessayer ou contacter le service d'assistance."
       }
     },
     "form": {
@@ -1331,24 +1340,6 @@
         "minQtyRequired": "Le seuil critique ne peut pas être négatif."
       }
     },
-    "messages": {
-      "charge-movement-success": {
-        "title": "Mouvement de charge réussie",
-        "description": "Le mouvement de charge a été enregistré avec succès."
-      },
-      "charge-movement-fail": {
-        "title": "Échec du mouvement de charge",
-        "description": "Nous n'avons pas pu enregistrer le mouvement de charge. Veuillez réessayer ou contacter le service d'assistance."
-      },
-      "discharge-movement-fail": {
-        "title": "Échec du mouvement de décharge",
-        "description": "Nous n'avons pas pu enregistrer le mouvement de décharge. Veuillez réessayer ou contacter le service d'assistance."
-      },
-      "new-pharmaceutical-success": {
-        "title": "Pharmaceutical added successfully",
-        "description": "The pharmaceutical has been added successfully."
-      }
-    },
     "stock": {
       "refNo": "Ref",
       "lot": "Lot",
@@ -1362,6 +1353,10 @@
       "discharge": "Décharge",
       "charge": "Charge",
       "exportList": "Liste d'exportation",
+      "noPageToExport": {
+        "title": "Aucune page a exporter",
+        "description": "Le document n'a aucune page."
+      },
       "stockReport": "Rapport de stock",
       "adjustQuantity": "Ajuster la quantité",
       "criticalValue": "Valeur critique",
@@ -1454,6 +1449,37 @@
           "nexttwomonths": "Les deux prochains mois",
           "specificmonth": "Mois spécifique"
         }
+      }
+    },
+    "medicalDetails": {
+      "title": "Détails du produit",
+      "status": "Statut",
+      "available": "Disponible",
+      "piecesPerPack": "Unités x Paquet",
+      "criticalLevel": "Niveau critique",
+      "code": "Code",
+      "mainMenu": "Menu",
+      "overview": "Aperçu",
+      "back": "Retour",
+      "edit": "Modifier",
+      "pharmacy": "Pharmacie",
+      "wards": "Services",
+      "pharmaceuticalStock": "Stock pharmaceutique",
+      "lotsExpiringThisMonth": "Lots expirés ce mois",
+      "amc": "AMC",
+      "stockInInternalMedicine": "Stock en médecine interne",
+      "stockInMaternity": "Stock en maternité",
+      "stockInNursery": "Stock en nurserie",
+      "stockInSurgery": "Stock en chirurgie",
+      "menu": {
+        "pharmacyStock": "Stock des pharmacies",
+        "availableStock": "Stock disponible",
+        "expiringSoon": "Expire bientôt",
+        "wardDistribution": "Distribution dans les services",
+        "internalMedicine": "Médecine interne",
+        "maternity": "Maternité",
+        "nursery": "Pédiatrie",
+        "surgery": "Chirurgie"
       }
     }
   }

@@ -8,7 +8,8 @@ import PharmaceuticalTable from "./components/pharmaceuticalTable/Pharmaceutical
 
 export default function Pharmaceutical() {
   const { t } = useTranslation();
-  const { breadcrumbMap, setBreadcrumbMap } = useOutletContext<{
+
+  const { setBreadcrumbMap } = useOutletContext<{
     breadcrumbMap: Record<string, string>;
     setBreadcrumbMap: (map: Record<string, string>) => void;
   }>();
@@ -25,6 +26,8 @@ export default function Pharmaceutical() {
       });
     };
   }, [t, setBreadcrumbMap]);
+  
+  const [dataToExport, setDataToExport] = React.useState<any[]>([]);
 
   return (
     <PharmacyActivityContent
@@ -33,11 +36,11 @@ export default function Pharmaceutical() {
     >
       <div className="pharmaceutical">
         <div data-cy="pharmaceutical-actions">
-          <PharmaceuticalActions data-cy="pharmaceutical-actions" />
+          <PharmaceuticalActions data-cy="pharmaceutical-actions" dataToExport={dataToExport} />
         </div>
 
         <div data-cy="pharmaceutical-table">
-          <PharmaceuticalTable />
+          <PharmaceuticalTable onDataChange={setDataToExport} />
         </div>
       </div>
     </PharmacyActivityContent>

@@ -172,6 +172,33 @@ export const pharmacySlice = createSlice({
       .addCase(thunks.getWardMedicals.rejected, (state, action) => {
         state.wardMedicals = ApiResponse.error(action.payload);
       })
+      // get current quantity of medical in ward
+      .addCase(thunks.getCurrentQuantityInWard.pending, (state, action) => {
+        const wardCode = action.meta.arg.wardCode;
+        state.getCurrentQuantityInWard[wardCode] = ApiResponse.loading();
+      })
+      .addCase(thunks.getCurrentQuantityInWard.fulfilled, (state, action) => {
+        const wardCode = action.meta.arg.wardCode;
+        state.getCurrentQuantityInWard[wardCode] = ApiResponse.value(
+          action.payload
+        );
+      })
+      .addCase(thunks.getCurrentQuantityInWard.rejected, (state, action) => {
+        const wardCode = action.meta.arg.wardCode;
+        state.getCurrentQuantityInWard[wardCode] = ApiResponse.error(
+          action.payload
+        );
+      })
+      // get current quantity of medical in all wards
+      .addCase(thunks.getCurrentQuantityInAllWards.pending, (state) => {
+        state.getCurrentQuantityInAllWards = ApiResponse.loading();
+      })
+      .addCase(thunks.getCurrentQuantityInAllWards.fulfilled, (state, action) => {
+        state.getCurrentQuantityInAllWards = ApiResponse.value(action.payload);
+      })
+      .addCase(thunks.getCurrentQuantityInAllWards.rejected, (state, action) => {
+        state.getCurrentQuantityInAllWards = ApiResponse.error(action.payload);
+      })
       // Charge movements
       .addCase(thunks.chargeMovements.pending, (state) => {
         state.chargeMovements = ApiResponse.loading();
@@ -326,6 +353,16 @@ export const pharmacySlice = createSlice({
           );
         }
       )
+      // Print pharmaceutical order pdf report
+      .addCase(thunks.printPharmaceuticalOrderPdf.pending, (state) => {
+        state.printPharmaceuticalOrderPdf = ApiResponse.loading();
+      })
+      .addCase(thunks.printPharmaceuticalOrderPdf.fulfilled, (state, action) => {
+        state.printPharmaceuticalOrderPdf = ApiResponse.value(action.payload as Blob);
+      })
+      .addCase(thunks.printPharmaceuticalOrderPdf.rejected, (state, action) => {
+        state.printPharmaceuticalOrderPdf = ApiResponse.error(action.payload);
+      })
       // Print pharmaceutical AMC pdf report
       .addCase(thunks.printPharmaceuticalAMCPdf.pending, (state) => {
         state.printPharmaceuticalAMCPdf = ApiResponse.loading();

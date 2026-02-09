@@ -10,7 +10,7 @@ import { MedicalDTO } from "generated";
 import { useNavigationHandler, useTranslation } from "libraries/hooks";
 import { useMedicalTypes } from "libraries/hooks/api/useMedicalTypes";
 import React, { useCallback } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { MedicalDTOSchema, getInitialValues } from "./consts";
 import "./styles.scss";
 import { PharmaceuticalFormProps, TFormValues } from "./types";
@@ -29,33 +29,23 @@ export function PharmaceuticalForm({
 
   const { medicalTypes, options: medicalTypeOptions } = useMedicalTypes();
 
-  const values = useWatch({
-    control,
-    compute: (values) => {
-      return {
-        ...values,
-        type: medicalTypes.find((type) => type.code === values.type),
-        deleted: values.deleted ? "Y" : "N",
-        initialqty: 0,
-        inqty: 0,
-        outqty: 0,
-      };
-    },
-  });
-
   const handleGoBack = useNavigationHandler(PATHS.pharmacy_pharmaceutical, {
     replace: true,
   });
 
   const onValidSubmit = useCallback(
     (data: TFormValues) => {
+      const selectedType = medicalTypes.find((type) => type.code === data.type);
+
       const medicalDTO: MedicalDTO = {
         ...data,
-        ...values,
+        type: selectedType,
+        deleted: data.deleted ? "N" : "Y", 
+        prodCode: data.prodCode + "",
       };
       onSubmit(medicalDTO);
     },
-    [values, onSubmit]
+    [medicalTypes, onSubmit]
   );
 
   return (
@@ -66,7 +56,7 @@ export function PharmaceuticalForm({
         onSubmit={handleSubmit(onValidSubmit)}
       >
         <TextFormField
-          type="string"
+          type="number"
           label={t("pharmacy.form.fields.prodCode")}
           control={control}
           name="prodCode"

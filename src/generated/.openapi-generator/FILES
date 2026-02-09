@@ -74,6 +74,7 @@ models/MedicalDTO.ts
 models/MedicalTypeDTO.ts
 models/MedicalWardDTO.ts
 models/MedicalWardIdDTO.ts
+models/MedicalWardQuantityDTO.ts
 models/MovementDTO.ts
 models/MovementTypeDTO.ts
 models/MovementWardDTO.ts

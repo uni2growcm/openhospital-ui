@@ -1,6 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { isValid, parseISO } from "date-fns";
 import {
+  GetCurrentQuantityInAllWardsRequest,
+  GetCurrentQuantityInWardRequest,
   GetLotByMedicalRequest,
   GetMedicalRequest,
   GetMovementWardRequest,
@@ -141,6 +143,38 @@ export const getWardMedicals = createAsyncThunk(
           wardStockApi.getMedicalsWard({
             wardCode,
           })
+        )
+      );
+      return result;
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.response);
+    }
+  }
+);
+
+export const getCurrentQuantityInWard = createAsyncThunk(
+  "pharmacy/getCurrentQuantityInWard",
+  async (payload: GetCurrentQuantityInWardRequest, thunkApi) => {
+    try {
+      const result = await firstValueFrom(
+        wrapper(() =>
+          wardStockApi.getCurrentQuantityInWard(payload)
+        )
+      );
+      return result;
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.response);
+    }
+  }
+);
+
+export const getCurrentQuantityInAllWards = createAsyncThunk(
+  "pharmacy/getCurrentQuantityInAllWards",
+  async (payload: GetCurrentQuantityInAllWardsRequest, thunkApi) => {
+    try {
+      const result = await firstValueFrom(
+        wrapper(() =>
+          wardStockApi.getCurrentQuantityInAllWards(payload)
         )
       );
       return result;
@@ -322,6 +356,20 @@ export const printPharmaceuticalStockCardPdf = createAsyncThunk(
     }
   }
 );
+
+export const printPharmaceuticalOrderPdf = createAsyncThunk(
+  "pharmacy/getPharmaceuticalOrderPdfReport",
+  async(_, thunkApi) => {
+    try {
+      const result = await firstValueFrom(
+        wrapper(() => apiReport.printPharmaceuticalOrderPdf())
+      )
+      return result;
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+)
 
 export const printPharmaceuticalAMCPdf = createAsyncThunk(
   "pharmacy/getPharmaceuticalAMCPdfReport",

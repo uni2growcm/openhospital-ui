@@ -6,6 +6,7 @@ import {
   Edit,
   HighlightOff,
   InfoOutlined,
+  InventoryOutlined,
   Logout,
   MonetizationOn,
   Print,
@@ -62,6 +63,7 @@ const Table: FunctionComponent<IProps> = ({
   onRectify,
   onDelete,
   onPrint,
+  onPrintStockCard,
   onPay,
   onView,
   onAdd,
@@ -86,6 +88,7 @@ const Table: FunctionComponent<IProps> = ({
   headerActions,
   labels,
   renderExtraContent,
+  onFilteredDataChange,
 }) => {
   const { t } = useTranslation();
   const [order, setOrder] = React.useState<TOrder>("desc");
@@ -165,6 +168,22 @@ const Table: FunctionComponent<IProps> = ({
             <Logout sx={{ color: "black" }} />
           </IconButton>
         );
+      case "print-stock-card":
+        return (
+          <IconButton
+            data-cy="table-print-stock-card-action"
+            size="small"
+            title={labels?.["print-stock-card"]?.tooltip ?? "Print Stock Card"}
+            disabled={disableAction(row, "print-stock-card")}
+            onClick={
+              disableAction(row, "print-stock-card")
+                ? () => {}
+                : () => onPrintStockCard && onPrintStockCard(row)
+            }
+          >
+            <InventoryOutlined color="secondary" />
+          </IconButton>
+        );
       case "rectify":
         return (
           <IconButton
@@ -229,7 +248,7 @@ const Table: FunctionComponent<IProps> = ({
                 : () => onView && onView(row)
             }
           >
-            <InfoOutlined color="primary" titleAccess={"View Details"} />
+            <InfoOutlined titleAccess={"View Details"} />
           </IconButton>
         );
       case "pay":
@@ -350,6 +369,7 @@ const Table: FunctionComponent<IProps> = ({
       onRectify ||
       onDelete ||
       onPrint ||
+      onPrintStockCard ||
       onView ||
       onCancel ||
       onRestore ||
@@ -374,6 +394,10 @@ const Table: FunctionComponent<IProps> = ({
           {onDischarge &&
           (displayRowAction ? displayRowAction(row, "discharge") : true)
             ? renderIcon("discharge", row)
+            : ""}
+          {onPrintStockCard &&
+          (displayRowAction ? displayRowAction(row, "print-stock-card") : true)
+            ? renderIcon("print-stock-card", row)
             : ""}
           {onRectify &&
           (displayRowAction ? displayRowAction(row, "rectify") : true)
@@ -444,6 +468,12 @@ const Table: FunctionComponent<IProps> = ({
       ),
     [filterColumns, filters, manualFilter, rowData]
   );
+  
+  useEffect(() => {
+    if (onFilteredDataChange) {
+      onFilteredDataChange(filteredData);
+    }
+  }, [filteredData, onFilteredDataChange]);
 
   useEffect(() => {
     if (onFilterChange && !manualFilter) {
