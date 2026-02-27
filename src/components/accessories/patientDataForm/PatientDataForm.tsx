@@ -841,7 +841,6 @@ const PatientDataForm: FunctionComponent<TProps> = ({
                   ? FIELD_VALIDATION.SUGGESTED
                   : FIELD_VALIDATION.IDLE
               }
-              maxLength={65535}
             />
           </div>
         </div>

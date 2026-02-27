@@ -334,7 +334,6 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
                   onBlur={formik.handleBlur}
                   rows={1}
                   disabled={isLoading}
-                  maxLength={2000}
                 />
               </div>
               <div className="fullWidth currentAdmissionForm__item">
@@ -349,7 +348,6 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
                   onBlur={formik.handleBlur}
                   rows={5}
                   disabled={isLoading}
-                  maxLength={2000}
                 />
               </div>
               <div className="fullWidth currentAdmissionForm__item">
@@ -364,7 +362,6 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
                   onBlur={formik.handleBlur}
                   rows={3}
                   disabled={isLoading}
-                  maxLength={2000}
                 />
               </div>
               <div className="fullWidth currentAdmissionForm__item">
@@ -379,7 +376,6 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
                   onBlur={formik.handleBlur}
                   rows={3}
                   disabled={isLoading}
-                  maxLength={2000}
                 />
               </div>
               <div className="fullWidth currentAdmissionForm__item">
@@ -394,7 +390,6 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
                   onBlur={formik.handleBlur}
                   rows={10}
                   disabled={isLoading}
-                  maxLength={10000}
                 />
               </div>
               <div className="fullWidth currentAdmissionForm__item">

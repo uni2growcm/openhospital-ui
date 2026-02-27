@@ -18,7 +18,6 @@ import {
 } from "../../../state/admissions";
 import { IState } from "../../../types";
 import ConfirmationDialog from "../confirmationDialog/ConfirmationDialog";
-import { CurrentAdmission } from "../currentAdmission/CurrentAdmission";
 import CloseEncounterDialog from "../encounters/closeEncounterDialog/CloseEncounterDialog";
 import InfoBox from "../infoBox/InfoBox";
 import DischargeForm from "./dischargeForm/DischargeForm";
@@ -166,7 +165,7 @@ const PatientDischarge: FC = () => {
     <div className="patientAdmission">
       {currentAdmissionStatus === "SUCCESS" && !encounter?.closedAt && (
         <>
-          <CurrentAdmission />
+          {/* <CurrentAdmission /> */}
           <DischargeForm
             fields={fields}
             onSubmit={onSubmit}
