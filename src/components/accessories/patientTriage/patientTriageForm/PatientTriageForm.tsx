@@ -199,7 +199,6 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
     { id: "IPT < -3", label: "IPT < -3" },
     { id: "IPT entre -3 et -2", label: "IPT entre -3 et -2" },
     { id: "IPT entre -2 et -1", label: "IPT entre -2 et -1" },
-    { id: "IPT entre -2 et -1", label: "IPT entre -2 et -1" },
     { id: "IPT entre -1 et 0", label: "IPT entre -1 et 0" },
     { id: "IPT entre 0 et 1", label: "IPT entre 0 et 1" },
     { id: "IPT entre 1 et 2", label: "IPT entre 1 et 2" },
