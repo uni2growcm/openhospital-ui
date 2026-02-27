@@ -343,7 +343,8 @@ export const isFieldSuggested = (
 export const getBirthDateAndAge = (
   ageType: TAgeFieldName,
   values: TAgeType,
-  allAgeTypes?: AgeTypeDTO[] | undefined,
+  allAgeTypes?: AgeTypeDTO[],
+  ageYears?: number,
   ageDays?: number,
   ageWeeks?: number,
   ageMonths?: number
@@ -351,82 +352,139 @@ export const getBirthDateAndAge = (
   let ageAndBirthDate: { birthDate: string; age: number };
 
   switch (ageType) {
-    case "agetype":
-      let selectedAgeType = allAgeTypes?.find(
-        (at, i) => at.code === values.agetype
+    case "agetype": {
+      const selectedAgeType = allAgeTypes?.find(
+        (at) => at.code === values.agetype
       );
 
-      if (selectedAgeType !== undefined) {
-        let averageAge = Math.round(
-          selectedAgeType.from && selectedAgeType.to
-            ? (selectedAgeType.from + selectedAgeType.to) / 2
-            : 0
+      let baseAge = 0;
+      const birthDate = new Date();
+
+      if (
+        selectedAgeType?.from != null &&
+        selectedAgeType?.to != null
+      ) {
+        baseAge = Math.round(
+          (selectedAgeType.from + selectedAgeType.to) / 2
         );
-
-        let birthDate = new Date();
-        birthDate.setFullYear(birthDate.getFullYear() - averageAge);
-
-        ageAndBirthDate = {
-          birthDate: birthDate.toISOString(),
-          age: averageAge,
-        };
-      } else {
-        ageAndBirthDate = { birthDate: new Date().toISOString(), age: 0 };
+        birthDate.setFullYear(birthDate.getFullYear() - baseAge);
       }
-      break;
 
-    case "birthDate":
-      let birthDate = values.birthDate
+      // if extra unit components are provided, apply them on top of the base age
+      if (ageYears != null) {
+        birthDate.setFullYear(birthDate.getFullYear() - ageYears);
+      }
+      if (ageMonths != null) {
+        birthDate.setMonth(birthDate.getMonth() - ageMonths);
+      }
+      if (ageWeeks != null) {
+        birthDate.setDate(birthDate.getDate() - ageWeeks * 7);
+      }
+      if (ageDays != null) {
+        birthDate.setDate(birthDate.getDate() - ageDays);
+      }
+
+      const timeDiff = Date.now() - birthDate.getTime();
+      const calculatedAge =
+        timeDiff > 0
+          ? Math.floor(timeDiff / (1000 * 3600 * 24 * 365.25))
+          : 0;
+
+      ageAndBirthDate = {
+        birthDate: birthDate.toISOString(),
+        age: calculatedAge,
+      };
+      break;
+    }
+
+    case "birthDate": {
+      const birthDate = values.birthDate
         ? new Date(values.birthDate)
         : new Date();
-      let timeDiff = Math.abs(Date.now() - birthDate.getTime());
-      let age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
 
-      ageAndBirthDate = { birthDate: birthDate.toISOString(), age: age };
-      break;
-
-    case "age":
-      let birthdate = new Date();
-      birthdate.setFullYear(birthdate.getFullYear() - (values.age ?? 0));
+      const timeDiff = Date.now() - birthDate.getTime();
+      const age =
+        timeDiff > 0
+          ? Math.floor(timeDiff / (1000 * 3600 * 24 * 365.25))
+          : 0;
 
       ageAndBirthDate = {
-        birthDate: birthdate.toISOString(),
-        age: values.age ?? 0,
+        birthDate: birthDate.toISOString(),
+        age,
       };
       break;
+    }
 
-    case "neonatalAge":
-      let dateOfBirth = new Date();
-      if (ageDays) {
-        dateOfBirth = new Date(
-          dateOfBirth.setDate(dateOfBirth.getDate() - ageDays)
-        );
+    case "age": {
+      const birthDate = new Date();
+      // subtract each component in turn if provided, giving precedence to the finest
+      // granularity.  Users may supply multiple units (years+months+weeks+days) so
+      // we apply all of them rather than stopping at the first non-null value.
+      if (ageYears != null) {
+        birthDate.setFullYear(birthDate.getFullYear() - ageYears);
       }
-      if (ageWeeks) {
-        dateOfBirth = new Date(
-          dateOfBirth.setDate(dateOfBirth.getDate() - ageWeeks * 7)
-        );
+      if (ageMonths != null) {
+        birthDate.setMonth(birthDate.getMonth() - ageMonths);
       }
-      if (ageMonths) {
-        dateOfBirth = new Date(
-          dateOfBirth.setMonth(dateOfBirth.getMonth() - ageMonths)
-        );
+      if (ageWeeks != null) {
+        birthDate.setDate(birthDate.getDate() - ageWeeks * 7);
       }
-
-      let timeDifference = Math.abs(Date.now() - dateOfBirth.getTime());
-      let neonatalAge = Math.floor(timeDifference / (1000 * 3600 * 24));
+      if (ageDays != null) {
+        birthDate.setDate(birthDate.getDate() - ageDays);
+      }
+      // if no explicit components were given, fall back to the simple age field
+      if (
+        ageYears == null &&
+        ageMonths == null &&
+        ageWeeks == null &&
+        ageDays == null &&
+        values.age != null
+      ) {
+        birthDate.setFullYear(birthDate.getFullYear() - values.age);
+      }
+      const timeDiff = Date.now() - birthDate.getTime();
+      const calculatedAge =
+        timeDiff > 0
+          ? Math.floor(timeDiff / (1000 * 3600 * 24 * 365.25))
+          : 0;
 
       ageAndBirthDate = {
-        birthDate: dateOfBirth.toISOString(),
-        age: neonatalAge,
+        birthDate: birthDate.toISOString(),
+        age: calculatedAge,
       };
       break;
+    }
 
     default:
-      // return current date if unable to determine the selected age type
-      ageAndBirthDate = { birthDate: new Date().toISOString(), age: 0 };
-      break;
+      ageAndBirthDate = {
+        birthDate: new Date().toISOString(),
+        age: 0,
+      };
   }
 
   return ageAndBirthDate;
+};
+
+export const getAgeComponentsFromBirthDate = (
+  birthDate: string
+): { ageYears: number; ageMonths: number; ageWeeks: number; ageDays: number } => {
+  if (!birthDate || !moment(birthDate).isValid()) {
+    return { ageYears: 0, ageMonths: 0, ageWeeks: 0, ageDays: 0 };
+  }
+
+  const birthMoment = moment(birthDate);
+  const today = moment();
+
+  const ageYears = today.diff(birthMoment, "years");
+  birthMoment.add(ageYears, "years");
+
+  const ageMonths = today.diff(birthMoment, "months");
+  birthMoment.add(ageMonths, "months");
+
+  const ageWeeks = today.diff(birthMoment, "weeks");
+  birthMoment.add(ageWeeks, "weeks");
+
+  const ageDays = today.diff(birthMoment, "days");
+
+  return { ageYears, ageMonths, ageWeeks, ageDays };
 };

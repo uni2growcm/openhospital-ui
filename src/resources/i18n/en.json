@@ -231,7 +231,6 @@
     "agetype": "Age Type",
     "agerange": "Age Range",
     "age": "Age",
-    "neonatalage": "Neonatal age",
     "anamnesis": "Anamnesis",
     "allergies": "Allergies",
     "savechanges": "Save Changes",
@@ -257,6 +256,7 @@
       "d5": "Elderly"
     },
     "ageunits": {
+      "year": "Year(s)",
       "day": "Day(s)",
       "week": "Week(s)",
       "month": "Month(s)"

@@ -20,6 +20,7 @@ import warningIcon from "../../../assets/warning-icon.png";
 import { formCustomization } from "../../../customization/formCustomization";
 import {
   formatAllFieldValues,
+  getAgeComponentsFromBirthDate,
   getBirthDateAndAge,
   getFromFields,
   isFieldSuggested,
@@ -68,6 +69,18 @@ const PatientDataForm: FunctionComponent<TProps> = ({
         ageType === "age"
           ? number().required(t("common.required")).min(0).max(200)
           : string(),
+      ageDays:
+        ageType === "age"
+          ? number().required(t("common.required")).min(0).max(200)
+          : string(),
+      ageWeeks:
+        ageType === "age"
+          ? number().required(t("common.required")).min(0).max(200)
+          : string(),
+      ageMonths:
+        ageType === "age"
+          ? number().required(t("common.required")).min(0).max(200)
+          : string(),
       agetype:
         ageType === "agetype"
           ? string().required(t("common.required"))
@@ -83,18 +96,6 @@ const PatientDataForm: FunctionComponent<TProps> = ({
                   return moment(value).isValid();
                 },
               })
-          : string(),
-      ageDays:
-        ageType === "neonatalAge"
-          ? number().required(t("common.required")).min(0).max(200)
-          : string(),
-      ageWeeks:
-        ageType === "neonatalAge"
-          ? number().required(t("common.required")).min(0).max(200)
-          : string(),
-      ageMonths:
-        ageType === "neonatalAge"
-          ? number().required(t("common.required")).min(0).max(200)
           : string(),
       sex: string().required(t("common.required")),
       telephone: string().matches(
@@ -137,7 +138,6 @@ const PatientDataForm: FunctionComponent<TProps> = ({
     { value: "age", label: t("patient.age") },
     { value: "agetype", label: t("patient.agetype") },
     { value: "birthDate", label: t("patient.birthdate") },
-    { value: "neonatalAge", label: t("patient.neonatalage") },
   ];
 
   const formik = useFormik({
@@ -154,9 +154,10 @@ const PatientDataForm: FunctionComponent<TProps> = ({
           agetype: formattedValues.agetype,
         },
         allAgeTypes,
-        formattedValues.ageDays,
-        formattedValues.ageWeeks,
-        formattedValues.ageMonths
+        values.age,
+        values.ageDays,
+        values.ageWeeks,
+        values.ageMonths
       );
       onSubmit({
         ...formattedValues,
@@ -250,6 +251,17 @@ const PatientDataForm: FunctionComponent<TProps> = ({
     dispatch(getEthnics());
     dispatch(getCommunes());
   }, [dispatch, shouldResetForm]);
+
+  useEffect(() => {
+    if (ageType === "age" && formik.values.birthDate) {
+      const { ageYears, ageMonths, ageWeeks, ageDays } =
+        getAgeComponentsFromBirthDate(formik.values.birthDate);
+      formik.setFieldValue("ageYears", ageYears);
+      formik.setFieldValue("ageMonths", ageMonths);
+      formik.setFieldValue("ageWeeks", ageWeeks);
+      formik.setFieldValue("ageDays", ageDays);
+    }
+  }, [ageType, formik.values.birthDate]);
 
   useEffect(() => {
     return () => {
@@ -519,21 +531,73 @@ const PatientDataForm: FunctionComponent<TProps> = ({
           )}
           {ageType === "age" && (
             <div className="patientDataForm__item">
-              <TextField
-                field={formik.getFieldProps("age")}
-                theme="regular"
-                label={t("patient.age")}
-                isValid={isValid("age")}
-                errorText={getErrorText("age")}
-                onBlur={formik.handleBlur}
-                disabled={isLoading}
-                type="number"
-                required={
-                  isFieldSuggested(formCustomization, "age")
-                    ? FIELD_VALIDATION.SUGGESTED
-                    : FIELD_VALIDATION.REQUIRED
-                }
-              />
+               <ButtonGroup
+                aria-label="Age unit group"
+              >
+                <TextField
+                  field={formik.getFieldProps("ageDays")}
+                  theme="regular"
+                  label={t("patient.ageunits.day")}
+                  isValid={isValid("ageDays")}
+                  errorText={getErrorText("ageDays")}
+                  onBlur={formik.handleBlur}
+                  type="number"
+                  disabled={isLoading}
+                  required={
+                    ageType === "age"
+                      ? FIELD_VALIDATION.REQUIRED
+                      : FIELD_VALIDATION.IDLE
+                  }
+                />
+
+                <TextField
+                  field={formik.getFieldProps("ageWeeks")}
+                  theme="regular"
+                  label={t("patient.ageunits.week")}
+                  isValid={isValid("ageWeeks")}
+                  errorText={getErrorText("ageWeeks")}
+                  onBlur={formik.handleBlur}
+                  type="number"
+                  disabled={isLoading}
+                  required={
+                    ageType === "age"
+                      ? FIELD_VALIDATION.REQUIRED
+                      : FIELD_VALIDATION.IDLE
+                  }
+                />
+
+                <TextField
+                  field={formik.getFieldProps("ageMonths")}
+                  theme="regular"
+                  label={t("patient.ageunits.month")}
+                  isValid={isValid("ageMonths")}
+                  errorText={getErrorText("ageMonths")}
+                  onBlur={formik.handleBlur}
+                  type="number"
+                  disabled={isLoading}
+                  required={
+                    ageType === "age"
+                      ? FIELD_VALIDATION.REQUIRED
+                      : FIELD_VALIDATION.IDLE
+                  }
+                />
+
+                <TextField
+                  field={formik.getFieldProps("age")}
+                  theme="regular"
+                  label={t("patient.ageunits.year")}
+                  isValid={isValid("age")}
+                  errorText={getErrorText("age")}
+                  onBlur={formik.handleBlur}
+                  disabled={isLoading}
+                  type="number"
+                  required={
+                    ageType === "age"
+                      ? FIELD_VALIDATION.REQUIRED
+                      : FIELD_VALIDATION.IDLE
+                  }
+                />
+              </ButtonGroup>
             </div>
           )}
           {ageType === "birthDate" && (
@@ -557,63 +621,6 @@ const PatientDataForm: FunctionComponent<TProps> = ({
               />
             </div>
           )}
-          {ageType === "neonatalAge" && (
-            <div className="patientDataForm__item">
-              <ButtonGroup
-                className="patientDataForm__neonatalAgeFields"
-                aria-label="Age unit group"
-              >
-                <TextField
-                  field={formik.getFieldProps("ageDays")}
-                  theme="regular"
-                  label={t("patient.ageunits.day")}
-                  isValid={isValid("ageDays")}
-                  errorText={getErrorText("ageDays")}
-                  onBlur={formik.handleBlur}
-                  type="number"
-                  disabled={isLoading}
-                  required={
-                    ageType === "neonatalAge"
-                      ? FIELD_VALIDATION.REQUIRED
-                      : FIELD_VALIDATION.IDLE
-                  }
-                />
-
-                <TextField
-                  field={formik.getFieldProps("ageWeeks")}
-                  theme="regular"
-                  label={t("patient.ageunits.week")}
-                  isValid={isValid("ageWeeks")}
-                  errorText={getErrorText("ageWeeks")}
-                  onBlur={formik.handleBlur}
-                  type="number"
-                  disabled={isLoading}
-                  required={
-                    ageType === "neonatalAge"
-                      ? FIELD_VALIDATION.REQUIRED
-                      : FIELD_VALIDATION.IDLE
-                  }
-                />
-
-                <TextField
-                  field={formik.getFieldProps("ageMonths")}
-                  theme="regular"
-                  label={t("patient.ageunits.month")}
-                  isValid={isValid("ageMonths")}
-                  errorText={getErrorText("ageMonths")}
-                  onBlur={formik.handleBlur}
-                  type="number"
-                  disabled={isLoading}
-                  required={
-                    ageType === "neonatalAge"
-                      ? FIELD_VALIDATION.REQUIRED
-                      : FIELD_VALIDATION.IDLE
-                  }
-                />
-              </ButtonGroup>
-            </div>
-          )}
-
           <div className="patientDataForm__item">
             <SelectField
               fieldName="bloodType"
