@@ -301,7 +301,8 @@
       "noSchooling": "No schooling",
       "primary": "Primary",
       "secondary": "Secondary",
-      "higherEducation": "Higher education"
+      "higherEducation": "Higher education",
+      "illiterate": "Illiterate"
     },
     "motherSchoolingLevel": "Mother's educational level",
     "fatherSchoolingLevel": "Father's educational level"

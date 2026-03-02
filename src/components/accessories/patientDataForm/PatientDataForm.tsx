@@ -239,6 +239,10 @@ const PatientDataForm: FunctionComponent<TProps> = ({
       value: "Higher education",
       label: t("patient.schoolingLevel.higherEducation"),
     },
+     {
+      value: "Illiterate",
+      label: t("patient.schoolingLevel.illiterate"),
+    },
   ];
 
   const handleResetConfirmation = () => {

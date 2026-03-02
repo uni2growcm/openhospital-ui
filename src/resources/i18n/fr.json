@@ -268,7 +268,8 @@
       "noSchooling": "Non scolairsé",
       "primary": "Primaire",
       "secondary": "Secondaire",
-      "higherEducation": "Enseignement supérieur"
+      "higherEducation": "Enseignement supérieur",
+      "illiterate": "Analphabète"
     },
     "motherSchoolingLevel": "Niveau scolaire de la mère",
     "fatherSchoolingLevel": "Niveau scolaire de la père"
