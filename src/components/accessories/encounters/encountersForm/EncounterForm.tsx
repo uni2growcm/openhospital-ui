@@ -2,9 +2,12 @@ import ConfirmationDialog from "components/accessories/confirmationDialog/Confir
 import DateField from "components/accessories/dateField/DateField";
 import TextField from "components/accessories/textField/TextField";
 import { useFormik } from "formik";
+import { PatientDTO } from "generated";
+import { useAppDispatch } from "libraries/hooks";
 import { get, has } from "lodash";
 import React, { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { getEncountersByPatient } from "state/encounter";
 import * as Yup from "yup";
 import { object, string } from "yup";
 import warningIcon from "../../../../assets/warning-icon.png";
@@ -15,9 +18,6 @@ import {
 import Button from "../../button/Button";
 import "./styles.scss";
 import { EncounterProps } from "./types";
-import { useAppDispatch } from "libraries/hooks";
-import { getEncountersByPatient } from "state/encounter";
-import { PatientDTO } from "generated";
 
 const EncounterForm: FC<EncounterProps> = ({
   fields,
@@ -121,7 +121,7 @@ const EncounterForm: FC<EncounterProps> = ({
    };
 
    fetchEncounters();
- }, [creationMode, patient, formik.values.code, dispatch]);
+}, [creationMode, patient?.code, formik.values.code, dispatch, fields]);
 
   return (
     <>
