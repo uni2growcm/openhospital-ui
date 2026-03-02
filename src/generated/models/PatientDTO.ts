@@ -187,6 +187,12 @@ export interface PatientDTO {
      * @memberof PatientDTO
      */
     consensusServiceFlag?: boolean;
+    /**
+     * the source from which the patient was updated
+     * @type {string}
+     * @memberof PatientDTO
+     */
+    updatedFrom?: string;
 }
 
 /**

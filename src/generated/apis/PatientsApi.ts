@@ -66,6 +66,11 @@ export interface UpdatePatientRequest {
     patientDTO: PatientDTO;
 }
 
+export interface UpdatePatientPatchRequest {
+    code: number;
+    patientDTO?: PatientDTO;
+}
+
 /**
  * no description
  */
@@ -284,6 +289,25 @@ export class PatientsApi extends BaseAPI {
         return this.request<PatientDTO>({
             url: '/patients/{code}'.replace('{code}', encodeURI(code)),
             method: 'PUT',
+            headers,
+            body: patientDTO,
+        }, opts?.responseOpts);
+    };
+
+    /**
+     */
+    updatePatientPatch({ code, patientDTO }: UpdatePatientPatchRequest): Observable<PatientDTO>
+    updatePatientPatch({ code, patientDTO }: UpdatePatientPatchRequest, opts?: OperationOpts): Observable<AjaxResponse<PatientDTO>>
+    updatePatientPatch({ code, patientDTO }: UpdatePatientPatchRequest, opts?: OperationOpts): Observable<PatientDTO | AjaxResponse<PatientDTO>> {
+        throwIfNullOrUndefined(code, 'code', 'updatePatientPatch');
+
+        const headers: HttpHeaders = {
+            'Content-Type': 'application/json',
+        };
+
+        return this.request<PatientDTO>({
+            url: '/patients/{code}'.replace('{code}', encodeURI(code)),
+            method: 'PATCH',
             headers,
             body: patientDTO,
         }, opts?.responseOpts);
