@@ -78,9 +78,11 @@ const EditPatientActivity = () => {
             code: patient?.data?.code,
             allergies: patient.data?.allergies,
             anamnesis: patient.data?.anamnesis,
+            updatedFrom: "OH",
           },
         })
       );
+      console.log("updatePatientValues", updatePatientValues);
   };
 
   const [activityTransitionState, setActivityTransitionState] =
