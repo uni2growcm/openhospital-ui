@@ -411,7 +411,6 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
               onBlur={formik.handleBlur}
               rows={3}
               disabled={isLoading}
-              maxLength={2000}
             />
           </div>
         </div>

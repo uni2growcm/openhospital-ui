@@ -492,8 +492,8 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
                   errorText={getErrorText("pex_note")}
                   onBlur={formik.handleBlur}
                   multiline
+                  rows={5}
                   disabled={isLoading}
-                  maxLength={65535}
                 />
               </div>
             </div>

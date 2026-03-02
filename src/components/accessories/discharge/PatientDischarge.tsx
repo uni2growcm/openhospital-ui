@@ -18,7 +18,6 @@ import {
 } from "../../../state/admissions";
 import { IState } from "../../../types";
 import ConfirmationDialog from "../confirmationDialog/ConfirmationDialog";
-import { CurrentAdmission } from "../currentAdmission/CurrentAdmission";
 import CloseEncounterDialog from "../encounters/closeEncounterDialog/CloseEncounterDialog";
 import InfoBox from "../infoBox/InfoBox";
 import DischargeForm from "./dischargeForm/DischargeForm";
@@ -165,19 +164,16 @@ const PatientDischarge: FC = () => {
   return (
     <div className="patientAdmission">
       {currentAdmissionStatus === "SUCCESS" && !encounter?.closedAt && (
-        <>
-          <CurrentAdmission />
-          <DischargeForm
-            fields={fields}
-            onSubmit={onSubmit}
-            submitButtonLabel={t("common.save")}
-            resetButtonLabel={t("common.reset")}
-            shouldResetForm={shouldResetForm}
-            resetFormCallback={resetFormCallback}
-            isLoading={dischargeStatus === "LOADING"}
-            admission={currentAdmission}
-          />
-        </>
+        <DischargeForm
+          fields={fields}
+          onSubmit={onSubmit}
+          submitButtonLabel={t("common.save")}
+          resetButtonLabel={t("common.reset")}
+          shouldResetForm={shouldResetForm}
+          resetFormCallback={resetFormCallback}
+          isLoading={dischargeStatus === "LOADING"}
+          admission={currentAdmission}
+        />
       )}
       {currentAdmissionStatus === "SUCCESS_EMPTY" && (
         <div ref={infoBoxRef} className="info-box-container">
