@@ -3,6 +3,7 @@ apis/AdmissionTypesApi.ts
 apis/AdmissionsApi.ts
 apis/AgeTypesApi.ts
 apis/BillsApi.ts
+apis/CommunesApi.ts
 apis/ConditioningsApi.ts
 apis/DeliveryResultTypeApi.ts
 apis/DeliveryTypeApi.ts
@@ -10,6 +11,7 @@ apis/DischargeTypeApi.ts
 apis/DiseaseTypesApi.ts
 apis/DiseasesApi.ts
 apis/EncounterApi.ts
+apis/EthnicsApi.ts
 apis/ExamRowsApi.ts
 apis/ExamTypesApi.ts
 apis/ExaminationsApi.ts
@@ -23,6 +25,7 @@ apis/MedicalStockMovementTypeApi.ts
 apis/MedicalStockWardApi.ts
 apis/MedicalTypesApi.ts
 apis/MedicalsApi.ts
+apis/OccupationsApi.ts
 apis/OpdsApi.ts
 apis/OperationsApi.ts
 apis/OperationsTypesApi.ts
@@ -41,6 +44,7 @@ apis/SettingsApi.ts
 apis/StockMovementsApi.ts
 apis/SuppliersApi.ts
 apis/TherapiesApi.ts
+apis/TownsApi.ts
 apis/UserGroupsApi.ts
 apis/UserSettingsApi.ts
 apis/UsersApi.ts
@@ -57,6 +61,7 @@ models/AgeTypeDTO.ts
 models/BillDTO.ts
 models/BillItemsDTO.ts
 models/BillPaymentsDTO.ts
+models/CommuneDTO.ts
 models/ConditioningDTO.ts
 models/DeliveryResultTypeDTO.ts
 models/DeliveryTypeDTO.ts
@@ -64,6 +69,7 @@ models/DischargeTypeDTO.ts
 models/DiseaseDTO.ts
 models/DiseaseTypeDTO.ts
 models/EncounterDTO.ts
+models/EthnicDTO.ts
 models/ExamDTO.ts
 models/ExamRowDTO.ts
 models/ExamTypeDTO.ts
@@ -88,6 +94,7 @@ models/MedicalWardIdDTO.ts
 models/MovementDTO.ts
 models/MovementTypeDTO.ts
 models/MovementWardDTO.ts
+models/OccupationDTO.ts
 models/OpdDTO.ts
 models/OpdWithOperationRowDTO.ts
 models/OperationDTO.ts
@@ -120,6 +127,7 @@ models/SupplierDTO.ts
 models/TherapyDTO.ts
 models/TherapyRowDTO.ts
 models/TokenRefreshRequest.ts
+models/TownDTO.ts
 models/UpdateSettingDTO.ts
 models/UserDTO.ts
 models/UserGroupDTO.ts
