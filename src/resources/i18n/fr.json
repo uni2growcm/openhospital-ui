@@ -937,7 +937,8 @@
     "preAssessment": "Bilan avant admission",
     "entryReason": "Motif d'entrée",
     "transportation": "Moyen de transport",
-    "physicalExam": "Examen physique"
+    "physicalExam": "Examen physique",
+    "courseOfAction": "Conduite à tenir"
   },
   "bill": {
     "title": "Bienvenue dans la facturation",

@@ -140,6 +140,7 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
       formattedValues.qualifiedAgent = isQualifiedAgentChecked ? true : false;
       formattedValues.transportation = formik.values.transportation;
       formattedValues.physicalExam = formik.values.physicalExam;
+      formattedValues.courseOfAction = formik.values.courseOfAction;
       onSubmit({
         ...currentAdmission,
         ...formattedValues,
@@ -241,18 +242,6 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
             />
           </div>
           <div className="currentAdmissionForm__item">
-            <TextField
-              field={formik.getFieldProps("fhu")}
-              theme="regular"
-              label={t("admission.fhu")}
-              isValid={isValid("fhu")}
-              errorText={getErrorText("fhu")}
-              onBlur={formik.handleBlur}
-              type="text"
-              disabled={isLoading}
-            />
-          </div>
-          <div className="currentAdmissionForm__item">
             <DateField
               fieldName="admDate"
               fieldValue={formik.values.admDate}
@@ -276,6 +265,18 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
               onBlur={onBlurCallback("admType")}
               options={renderOptions(admissionTypes)}
               loading={admTypeStatus === "LOADING"}
+              disabled={isLoading}
+            />
+          </div>
+          <div className="currentAdmissionForm__item">
+            <TextField
+              field={formik.getFieldProps("fhu")}
+              theme="regular"
+              label={t("admission.fhu")}
+              isValid={isValid("fhu")}
+              errorText={getErrorText("fhu")}
+              onBlur={formik.handleBlur}
+              type="text"
               disabled={isLoading}
             />
           </div>
@@ -402,6 +403,20 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
                   onBlur={onBlurCallback("diseaseIn")}
                   options={renderOptions(diagnosisInList)}
                   loading={diagnosisInStatus === "LOADING"}
+                  disabled={isLoading}
+                />
+              </div>
+              <div className="fullWidth currentAdmissionForm__item">
+                <TextField
+                  field={formik.getFieldProps("courseOfAction")}
+                  theme="regular"
+                  label={t("admission.courseOfAction")}
+                  multiline={true}
+                  type="text"
+                  isValid={isValid("courseOfAction")}
+                  errorText={getErrorText("courseOfAction")}
+                  onBlur={formik.handleBlur}
+                  rows={3}
                   disabled={isLoading}
                 />
               </div>

@@ -109,6 +109,10 @@ export const useFields = (
       value: admission?.physicalExam ?? "",
       type: "text",
     },
+    courseOfAction: {
+      value: admission?.courseOfAction ?? "",
+      type: "text",
+    },
   };
 
   return fields;
