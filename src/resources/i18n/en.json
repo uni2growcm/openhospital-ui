@@ -222,7 +222,7 @@
     "telephone": "Telephone",
     "titleedit": "Edit Patient",
     "personaldata": "Personal Data",
-    "parentslivetoghether": "Parents live together",
+    "parentslivetoghether": "Parents' marital status",
     "insertdataofnewpatient": "Insert data of new Patient",
     "admissions": "Admissions",
     "code": "Code",
@@ -231,7 +231,6 @@
     "agetype": "Age Type",
     "agerange": "Age Range",
     "age": "Age",
-    "neonatalage": "Neonatal age",
     "anamnesis": "Anamnesis",
     "allergies": "Allergies",
     "savechanges": "Save Changes",
@@ -244,7 +243,7 @@
     "therapy": "Therapy",
     "triage": "Triage",
     "summary": "Summary",
-    "discharge": "Discharge",
+    "discharge": "Point of exit",
     "visits": "Visits",
     "encounterdata": "Consultation Data",
     "encounterinfo": "Consultation Information",
@@ -257,6 +256,7 @@
       "d5": "Elderly"
     },
     "ageunits": {
+      "year": "Year(s)",
       "day": "Day(s)",
       "week": "Week(s)",
       "month": "Month(s)"
@@ -301,7 +301,8 @@
       "noSchooling": "No schooling",
       "primary": "Primary",
       "secondary": "Secondary",
-      "higherEducation": "Higher education"
+      "higherEducation": "Higher education",
+      "illiterate": "Illiterate"
     },
     "motherSchoolingLevel": "Mother's educational level",
     "fatherSchoolingLevel": "Father's educational level"
@@ -475,10 +476,10 @@
     "bronchial": "Bronchial",
     "previousentries": "Previous Triages",
     "bodymassindex": "Body mass index (kg/m²)",
-    "branchialperimeter": "Branchial perimeter (cm)",
+    "branchialperimeter": "Branchial perimeter (mm)",
     "type": {
-      "admission": "Admission",
-      "followUp": "Follow-up"
+      "admission": "Admission measurement",
+      "followUp": "Hospitalization measurement"
     },
     "examinationType": "Exam Type",
     "ipt": "Weight height index (WHI)",
@@ -738,7 +739,7 @@
       "siblingRank": "Sibling Rank",
       "pregnancyTerm": "Pregnancy Term",
       "pregnancy": "Pregnancy",
-      "deliveryMode": "Mode",
+      "deliveryMode": "Mode of delivery",
       "apgarScore": "APGAR",
       "birthWeight": "Birth Weight",
       "vaccinationStatus": "Vaccination Status",
@@ -951,10 +952,10 @@
     "newadmission": "New admission",
     "editadmission": "Edit admission",
     "diseaseIn": "Diagnosis In",
-    "ward": "Ward",
+    "ward": "Services",
     "transUnit": "Trans Unit",
-    "fhu": "From Health Unit",
-    "disType": "Discharge Type",
+    "fhu": "Patient referral center",
+    "disType": "Exit Type",
     "disDate": "Discharge Date and Hour",
     "bedDays": "Bed Days",
     "diseaseOut1": "Diagnosis Out 1",
@@ -970,7 +971,7 @@
     "nocurrentadmission": "There is no current admission for the patient. You should admit the patient first",
     "noteaddedwithsuccess": "Admission Note added successfully",
     "noteadded": "Note saved",
-    "anamnesis": "Anamnesis",
+    "anamnesis": "Patient discharge Treatment",
     "validatelastdate": "should be greater or equal to admission date {admDate}",
     "currentadmissionexists": "The patient has an ongoing admission dating from {date}. Discharge him first.",
     "patientnotadmitted": "No current admission found !",

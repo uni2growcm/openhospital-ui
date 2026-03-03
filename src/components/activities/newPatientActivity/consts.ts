@@ -100,15 +100,15 @@ export const initialFields: TFields<TPatientDataFormFieldName> = {
     type: "number",
   },
   ageDays: {
-    value: "",
+    value: "0",
     type: "number",
   },
   ageWeeks: {
-    value: "",
+    value: "0",
     type: "number",
   },
   ageMonths: {
-    value: "",
+    value: "0",
     type: "number",
   },
   agetype: {
