@@ -199,7 +199,6 @@
     "agetype": "Type d'âge",
     "agerange": "Tranche d'âge",
     "age": "Age",
-    "neonatalage": "Âge néonatal",
     "anamnesis": "Anamnèse",
     "allergies": "Allergies",
     "savechanges": "Enregistrer les modifications",
@@ -225,6 +224,7 @@
       "d5": "Personne âgée"
     },
     "ageunits": {
+      "year": "Année(s)",
       "day": "Jour(s)",
       "week": "Semaine(s)",
       "month": "Mois"
@@ -268,7 +268,8 @@
       "noSchooling": "Non scolairsé",
       "primary": "Primaire",
       "secondary": "Secondaire",
-      "higherEducation": "Enseignement supérieur"
+      "higherEducation": "Enseignement supérieur",
+      "illiterate": "Analphabète"
     },
     "motherSchoolingLevel": "Niveau scolaire de la mère",
     "fatherSchoolingLevel": "Niveau scolaire de la père"
