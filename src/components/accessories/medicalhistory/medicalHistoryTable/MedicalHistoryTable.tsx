@@ -5,6 +5,8 @@ import {
   renderDateTime,
 } from "libraries/formatUtils/dataFormatting";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
+import { useVaccinationStateNoPev } from "libraries/hooks/useVaccinationStateNoPev";
+import { useVaccinationStatePev } from "libraries/hooks/useVaccinationStatePev";
 import React, { FunctionComponent, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";
@@ -115,6 +117,10 @@ const MedicalHistoryTable: FunctionComponent<IOwnProps> = ({
     (state) => state.patients.selectedPatient.data?.code
   );
 
+  const { formatValues: formatVaccinationStatePev } = useVaccinationStatePev();
+  const { formatValues: formatVaccinationStateNoPev } =
+    useVaccinationStateNoPev();
+
   useEffect(() => {
     if (shouldUpdateTable || patientCode || code) {
       code
@@ -136,8 +142,12 @@ const MedicalHistoryTable: FunctionComponent<IOwnProps> = ({
         reasonMode: item.reasonMode ?? "",
         apgarScore: item.apgarScore ?? "",
         birthWeight: item.birthWeight ?? "",
-        vaccinationStatePev: item.vaccinationStatePev ?? "",
-        vaccinationStateNoPev: item.vaccinationStateNoPev ?? "",
+        vaccinationStatePev: formatVaccinationStatePev(
+          item.vaccinationStatePev
+        ).join(", "),
+        vaccinationStateNoPev: formatVaccinationStateNoPev(
+          item.vaccinationStateNoPev
+        ).join(", "),
         antiMalarialProphylaxisVap: item.antiMalarialProphylaxisVap ?? "",
         antiMalarialProphylaxisMilda: item.antiMalarialProphylaxisMilda ?? "",
         antiMalarialProphylaxisOthers: item.antiMalarialProphylaxisOthers ?? "",
@@ -145,7 +155,7 @@ const MedicalHistoryTable: FunctionComponent<IOwnProps> = ({
           ? t("common.yes")
           : t("common.no"),
         surgicalProcedureCondition: item.surgicalProcedureCondition ?? "",
-        surgicalProcedureType: item.vaccinationStatePev ?? "",
+        surgicalProcedureType: item.surgicalProcedureType ?? "",
         surgicalProcedureDate: item.surgicalProcedureDate
           ? renderDateTime(item.surgicalProcedureDate)
           : "",

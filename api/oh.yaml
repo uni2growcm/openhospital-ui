@@ -7021,13 +7021,13 @@ components:
           format: int32
           description: lock
           example: 0
-        pharmacy:
-          type: boolean
-        male:
+        opd:
           type: boolean
         female:
           type: boolean
-        opd:
+        male:
+          type: boolean
+        pharmacy:
           type: boolean
       required:
       - beds
@@ -8435,13 +8435,23 @@ components:
           description: Birth weight of the patient (kg)
           example: 3.2
         vaccinationStatePev:
-          type: string
-          description: Vaccination state for PEV vaccines
-          example: Up to date
+          type: array
+          description: "Vaccination state for PEV vaccines. Stored as a list of descriptors\
+            \ (e.g., Polio 0,  BCG)."
+          example:
+          - ' Polio 0'
+          - ' BCG'
+          items:
+            type: string
         vaccinationStateNoPev:
-          type: string
-          description: Vaccination state for non-PEV vaccines
-          example: BCG pending
+          type: array
+          description: "Vaccination state for non-PEV vaccines. Stored as a list of\
+            \ descriptors (e.g., Polio 0,  BCG)."
+          example:
+          - ' Polio 0'
+          - ' BCG'
+          items:
+            type: string
         antiMalarialProphylaxisMilda:
           type: string
           description: Use of Milda for anti-malarial prophylaxis

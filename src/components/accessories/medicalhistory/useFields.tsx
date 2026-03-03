@@ -43,12 +43,12 @@ export const useFields = (medicalhistory?: MedicalHistoryDTO) => {
       type: "number",
     },
     vaccinationStatePev: {
-      value: medicalhistory?.vaccinationStatePev ?? "",
-      type: "text",
+      value: medicalhistory?.vaccinationStatePev ?? [],
+      type: "array",
     },
     vaccinationStateNoPev: {
-      value: medicalhistory?.vaccinationStateNoPev ?? "",
-      type: "text",
+      value: medicalhistory?.vaccinationStateNoPev ?? [],
+      type: "array",
     },
     antiMalarialProphylaxisVap: {
       value: medicalhistory?.antiMalarialProphylaxisVap ?? "",

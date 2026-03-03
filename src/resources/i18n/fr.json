@@ -762,7 +762,19 @@
     "updatesuccess": "Antécédent médical mis à jour avec succès",
     "id": "ID",
     "previousentries": "Antécédents médicaux  précédents",
-    "performedAt": "Date et Heure"
+    "performedAt": "Date et Heure",
+    "vaccinationStatePev": {
+      "bcg": "BCG",
+      "polio_0": "Polio 0",
+      "penta_1_pcv_polio_1": "Penta 1 + PCV + Polio 1",
+      "rota_1": "Rota 1",
+      "penta_2_pcv_polio_2": "Penta 2 + PCV + Polio 2",
+      "rota_2": "Rota 2",
+      "penta_3_pcv_polio_3": "Penta 3 + PCV + Polio 3",
+      "rota_3": "Rota 3",
+      "rr": "RR",
+      "vaa": "VAA"
+    }
   },
 
   "permission": {
