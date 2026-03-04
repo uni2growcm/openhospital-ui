@@ -1,7 +1,10 @@
+import { Autocomplete } from "components/accessories/autocomplete";
 import AutocompleteField from "components/accessories/autocompleteField/AutocompleteField";
 import CheckboxField from "components/accessories/checkboxField/CheckboxField";
 import DateField from "components/accessories/dateField/DateField";
 import { useFormik } from "formik";
+import { useVaccinationStateNoPev } from "libraries/hooks/useVaccinationStateNoPev";
+import { useVaccinationStatePev } from "libraries/hooks/useVaccinationStatePev";
 import { get, has } from "lodash";
 import React, { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -138,6 +141,9 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
     [formik, setFieldValue]
   );
 
+  const { options: vaccinationStatePevOptions } = useVaccinationStatePev();
+  const { options: vaccinationStateNoPevOptions } = useVaccinationStateNoPev();
+
   const handleSurgicalProcedureChecked = () => {
     setIsSurgicalProcedureChecked(!isSurgicalProcedureChecked);
   };
@@ -238,16 +244,16 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
       : "";
   };
 
-    const deliveryModeOption = [
-      {
-        value: "vaginaldelivery",
-        label: t("medicalHistory.physiological.vaginaldelivery"),
-      },
-      {
-        value: "cesarian",
-        label: t("medicalHistory.physiological.cesarian"),
-      },
-    ];
+  const deliveryModeOption = [
+    {
+      value: "vaginaldelivery",
+      label: t("medicalHistory.physiological.vaginaldelivery"),
+    },
+    {
+      value: "cesarian",
+      label: t("medicalHistory.physiological.cesarian"),
+    },
+  ];
 
   return (
     <>
@@ -414,25 +420,35 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
               />
             </div>
             <div className="fullWidth medicalHistoryForm__item">
-              <TextField
+              <Autocomplete
+                id="vaccinationStatePev"
+                multiple
+                freeSolo
+                value={formik.values.vaccinationStatePev}
+                options={vaccinationStatePevOptions}
+                onChange={(_, value) => {
+                  formik.setFieldValue("vaccinationStatePev", value);
+                }}
                 label={t("medicalHistory.physiological.vaccinationStatePev")}
-                field={formik.getFieldProps("vaccinationStatePev")}
-                theme="regular"
-                isValid={isValid("vaccinationStatePev")}
-                errorText={getErrorText("vaccinationStatePev")}
-                onBlur={formik.handleBlur}
-                disabled={isLoading}
+                placeholder={t(
+                  "medicalHistory.physiological.vaccinationStatePev"
+                )}
               />
             </div>
             <div className="fullWidth medicalHistoryForm__item">
-              <TextField
+              <Autocomplete
+                id="vaccinationStateNoPev"
+                multiple
+                freeSolo
+                value={formik.values.vaccinationStateNoPev}
+                options={vaccinationStateNoPevOptions}
+                onChange={(_, value) => {
+                  formik.setFieldValue("vaccinationStateNoPev", value);
+                }}
                 label={t("medicalHistory.physiological.vaccinationStateNoPev")}
-                field={formik.getFieldProps("vaccinationStateNoPev")}
-                theme="regular"
-                isValid={isValid("vaccinationStateNoPev")}
-                errorText={getErrorText("vaccinationStateNoPev")}
-                onBlur={formik.handleBlur}
-                disabled={isLoading}
+                placeholder={t(
+                  "medicalHistory.physiological.vaccinationStateNoPev"
+                )}
               />
             </div>
             <div className="fullWidth medicalHistoryForm__item">
