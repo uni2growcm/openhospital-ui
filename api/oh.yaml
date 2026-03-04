@@ -473,6 +473,73 @@ paths:
                   $ref: "#/components/schemas/PermissionDTO"
       security:
       - bearerAuth: []
+  /towns/{id}:
+    get:
+      tags:
+      - Towns
+      operationId: getTownById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TownDTO"
+      security:
+      - bearerAuth: []
+    put:
+      tags:
+      - Towns
+      operationId: updateTown
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TownDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TownDTO"
+      security:
+      - bearerAuth: []
+    delete:
+      tags:
+      - Towns
+      operationId: deleteTown
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+      security:
+      - bearerAuth: []
   /suppliers:
     get:
       tags:
@@ -1083,6 +1150,73 @@ paths:
                 $ref: "#/components/schemas/OpdWithOperationRowDTO"
       security:
       - bearerAuth: []
+  /occupations/{id}:
+    get:
+      tags:
+      - Occupations
+      operationId: getOccupationById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OccupationDTO"
+      security:
+      - bearerAuth: []
+    put:
+      tags:
+      - Occupations
+      operationId: updateOccupation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OccupationDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OccupationDTO"
+      security:
+      - bearerAuth: []
+    delete:
+      tags:
+      - Occupations
+      operationId: deleteOccupation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+      security:
+      - bearerAuth: []
   /medstockmovementtypes:
     get:
       tags:
@@ -1651,6 +1785,73 @@ paths:
                 $ref: "#/components/schemas/PatientExaminationDTO"
       security:
       - bearerAuth: []
+  /ethnics/{id}:
+    get:
+      tags:
+      - Ethnics
+      operationId: getEthnicById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EthnicDTO"
+      security:
+      - bearerAuth: []
+    put:
+      tags:
+      - Ethnics
+      operationId: updateEthnic
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EthnicDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EthnicDTO"
+      security:
+      - bearerAuth: []
+    delete:
+      tags:
+      - Ethnics
+      operationId: deleteEthnic
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+      security:
+      - bearerAuth: []
   /diseasetypes:
     get:
       tags:
@@ -1931,6 +2132,73 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ConditioningDTO"
+      security:
+      - bearerAuth: []
+  /communes/{id}:
+    get:
+      tags:
+      - Communes
+      operationId: getCommuneById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommuneDTO"
+      security:
+      - bearerAuth: []
+    put:
+      tags:
+      - Communes
+      operationId: updateCommune
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CommuneDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommuneDTO"
+      security:
+      - bearerAuth: []
+    delete:
+      tags:
+      - Communes
+      operationId: deleteCommune
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
       security:
       - bearerAuth: []
   /bills/{id}:
@@ -2378,6 +2646,41 @@ paths:
       responses:
         "204":
           description: No Content
+      security:
+      - bearerAuth: []
+  /towns:
+    get:
+      tags:
+      - Towns
+      operationId: getTowns
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TownDTO"
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - Towns
+      operationId: newTown
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TownDTO"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TownDTO"
       security:
       - bearerAuth: []
   /therapies:
@@ -2965,6 +3268,41 @@ paths:
                 $ref: "#/components/schemas/OpdWithOperationRowDTO"
       security:
       - bearerAuth: []
+  /occupations:
+    get:
+      tags:
+      - Occupations
+      operationId: getOccupations
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OccupationDTO"
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - Occupations
+      operationId: newOccupation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OccupationDTO"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OccupationDTO"
+      security:
+      - bearerAuth: []
   /medicalstockward/movements:
     post:
       tags:
@@ -3294,6 +3632,41 @@ paths:
                 $ref: "#/components/schemas/PatientExaminationDTO"
       security:
       - bearerAuth: []
+  /ethnics:
+    get:
+      tags:
+      - Ethnics
+      operationId: getEthnics
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EthnicDTO"
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - Ethnics
+      operationId: newEthnic
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EthnicDTO"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EthnicDTO"
+      security:
+      - bearerAuth: []
   /encounters:
     post:
       tags:
@@ -3332,6 +3705,41 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ConditioningDTO"
+      security:
+      - bearerAuth: []
+  /communes:
+    get:
+      tags:
+      - Communes
+      operationId: getCommunes
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CommuneDTO"
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - Communes
+      operationId: newCommune
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CommuneDTO"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommuneDTO"
       security:
       - bearerAuth: []
   /bills:
@@ -7021,11 +7429,11 @@ components:
           format: int32
           description: lock
           example: 0
-        pharmacy:
+        female:
           type: boolean
         male:
           type: boolean
-        female:
+        pharmacy:
           type: boolean
         opd:
           type: boolean
@@ -7494,6 +7902,21 @@ components:
           items:
             type: integer
             format: int32
+    TownDTO:
+      type: object
+      description: Class representing a town
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: id of the town
+          example: 1
+        name:
+          type: string
+          description: name of the town
+          example: Cotonou
+      required:
+      - name
     SupplierDTO:
       type: object
       properties:
@@ -7946,11 +8369,11 @@ components:
           description: physical exam made by doctor
           example: "The patient appears alert, oriented to person, place, and time,\
             \ and in no acute distress. Well-nourished and well-hydrated."
+        fhu:
+          type: string
         yprog:
           type: integer
           format: int32
-        fhu:
-          type: string
       required:
       - admDate
       - admitted
@@ -8301,6 +8724,21 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/OperationRowDTO"
+    OccupationDTO:
+      type: object
+      description: Class representing a Occupation
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: id of the occupation
+          example: 1
+        name:
+          type: string
+          description: name of the occupation
+          example: Infirmier
+      required:
+      - name
     MovementTypeDTO:
       type: object
       properties:
@@ -8435,13 +8873,23 @@ components:
           description: Birth weight of the patient (kg)
           example: 3.2
         vaccinationStatePev:
-          type: string
-          description: Vaccination state for PEV vaccines
-          example: Up to date
+          type: array
+          description: "Vaccination state for PEV vaccines. Stored as a list of descriptors\
+            \ (e.g., Polio 0,  BCG)."
+          example:
+          - ' Polio 0'
+          - ' BCG'
+          items:
+            type: string
         vaccinationStateNoPev:
-          type: string
-          description: Vaccination state for non-PEV vaccines
-          example: BCG pending
+          type: array
+          description: "Vaccination state for non-PEV vaccines. Stored as a list of\
+            \ descriptors (e.g., Polio 0,  BCG)."
+          example:
+          - ' Polio 0'
+          - ' BCG'
+          items:
+            type: string
         antiMalarialProphylaxisMilda:
           type: string
           description: Use of Milda for anti-malarial prophylaxis
@@ -8920,6 +9368,21 @@ components:
       - patientCode
       - pex_date
       - pex_type
+    EthnicDTO:
+      type: object
+      description: Class representing a ethnic
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: id of the ethnic
+          example: 1
+        name:
+          type: string
+          description: name of the ethnic
+          example: Adja
+      required:
+      - name
     ConditioningDTO:
       type: object
       properties:
@@ -9018,6 +9481,21 @@ components:
       - patient
       - performedAt
       - performedBy
+    CommuneDTO:
+      type: object
+      description: Class representing a commune
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: id of the commune
+          example: 1
+        name:
+          type: string
+          description: name of the commune
+          example: Dassa
+      required:
+      - name
     BillItemsDTO:
       type: object
       description: Class representing a billItem
