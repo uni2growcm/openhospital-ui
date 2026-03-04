@@ -17,7 +17,7 @@ export const initialFields: TFields<ConditioningFormFieldName> = {
   },
   ventilation: {
     value: "",
-    type: "number",
+    type: "boolean",
   },
   oxygenDebit: {
     value: "",
@@ -37,7 +37,7 @@ export const initialFields: TFields<ConditioningFormFieldName> = {
   },
   sngNumber: {
     value: "",
-    type: "text",
+    type: "boolean",
   },
   others: {
     value: "",
@@ -67,5 +67,9 @@ export const initialFields: TFields<ConditioningFormFieldName> = {
   hivTest: {
     value: "",
     type: "text",
+  },
+  reheating: {
+    value: "",
+    type: "boolean",
   },
 };

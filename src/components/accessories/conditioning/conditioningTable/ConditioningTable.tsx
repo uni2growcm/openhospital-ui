@@ -40,6 +40,7 @@ const ConditioningTable: FunctionComponent<IOwnProps> = ({
     diazepamDose: t("conditioning.diazepamDose"),
     bolusSsVolume: t("conditioning.bolusSsVolume"),
     sngNumber: t("conditioning.sngNumber"),
+    reheating: t("conditioning.reheating"),
     others: t("conditioning.others"),
     cpap: t("conditioning.cpap"),
     hivTest: t("conditioning.hivTest"),
@@ -89,12 +90,13 @@ const ConditioningTable: FunctionComponent<IOwnProps> = ({
         cpap: item.cpap ? t("common.yes") : t("common.no"),
         malaria: item.malaria ?? "",
         hivTest: item.hivTest ?? "",
-        ventilation: item.ventilation ?? "",
+        ventilation: item.ventilation ? t("common.yes") : t("common.no"),
         oxygenDebit: item.oxygenDebit ?? "",
         sgVolume: item.sgVolume ?? "",
         diazepamDose: item.diazepamDose ?? "",
         bolusSsVolume: item.bolusSsVolume ?? "",
-        sngNumber: item.sngNumber ?? "",
+        sngNumber: item.sngNumber ? t("common.yes") : t("common.no"),
+        reheating: item.reheating ? t("common.yes") : t("common.no"),
         others: item.others ?? "",
         conditionAtAdmission: formatConditions(item.conditionAtAdmission).join(
           ", "

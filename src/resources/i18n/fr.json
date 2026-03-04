@@ -1454,12 +1454,12 @@
     "title": "Mise en condition",
     "aspiration": "Aspiration",
     "mce": "MCE (mn)",
-    "ventilation": "Ventilation  (mn)",
+    "ventilation": "Ventilation",
     "oxygenDebit": "Oxygène  (mn)",
     "sgVolume": "SG 10% or 30% (cc) ",
     "diazepamDose": "Diazépam (mg)",
     "bolusSsVolume": "Bolus SS (CC)",
-    "sngNumber": "Numéro SNG",
+    "sngNumber": "SNG",
     "performedAt": "Date et heure de la MCE",
     "others": "Autres",
     "cpap": "CPAP",
@@ -1485,6 +1485,9 @@
     "indeterminate": "Indéterminé",
     "hivTest": "Test du VIH",
     "performedBy": "Effectué par l'utilisateur",
-    "notAvailable": "Non disponible"
+    "notAvailable": "Non disponible",
+    "tdr": "Tests de diagnostic rapide",
+    "othersconditioning": "Mise en condition",
+    "reheating": "Rechauffage"
   }
 }

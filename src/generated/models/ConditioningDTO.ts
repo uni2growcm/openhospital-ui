@@ -41,10 +41,10 @@ export interface ConditioningDTO {
     mce?: number;
     /**
      * Conditioning ventilation duration
-     * @type {number}
+     * @type {boolean}
      * @memberof ConditioningDTO
      */
-    ventilation?: number;
+    ventilation?: boolean;
     /**
      * Oxygen debit
      * @type {number}
@@ -71,10 +71,16 @@ export interface ConditioningDTO {
     bolusSsVolume?: number;
     /**
      * Conditioning sng number
-     * @type {string}
+     * @type {boolean}
      * @memberof ConditioningDTO
      */
-    sngNumber?: string;
+    sngNumber?: boolean;
+    /**
+     * Conditioning reheating
+     * @type {boolean}
+     * @memberof ConditioningDTO
+     */
+    reheating?: boolean;
     /**
      * Conditioning others
      * @type {string}
