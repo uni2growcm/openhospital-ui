@@ -450,7 +450,9 @@
     },
     "examinationType": "Type de paramètre",
     "ipt": "Indice poid taille(IPT)",
-    "headcircumference": "Périmetre cranien"
+    "headcircumference": "Périmetre cranien",
+    "physiologicalconstants": "Constantes physiologiques",
+    "anthropometricconstants": "Constantes anthropométriques"
   },
   "encounter": {
     "code": "Code de la consultation",
