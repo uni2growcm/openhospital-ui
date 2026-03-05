@@ -483,9 +483,7 @@
     },
     "examinationType": "Exam Type",
     "ipt": "Weight height index (WHI)",
-    "headcircumference": "Head circumference",
-    "physiologicalconstants": "Physiological constants",
-    "anthropometricconstants": "Anthropometric constants"
+    "headcircumference": "Head circumference"
   },
   "encounter": {
     "code": "Consultation code",
