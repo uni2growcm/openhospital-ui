@@ -37,12 +37,12 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
   const validationSchema = yup.object({
     aspiration: yup.boolean(),
     mce: yup.number().nullable(),
-    ventilation: yup.number().nullable(),
+    ventilation: yup.boolean(),
     oxygenDebit: yup.number().nullable(),
     sgVolume: yup.number().nullable(),
     diazepamDose: yup.number().nullable(),
     bolusSsVolume: yup.number().nullable(),
-    sngNumber: yup.string().nullable(),
+    sngNumber: yup.boolean(),
     others: yup.string().nullable(),
     cpap: yup.boolean(),
     malaria: yup.string().nullable(),
@@ -50,6 +50,7 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
     bloodGlucoseLevel: yup.number().nullable(),
     performedBy: yup.string().nullable(),
     performedAt: yup.date().required(t("common.required")),
+    reheating: yup.boolean(),
   });
 
   const initialValues = getFromFields(fields, "value");
@@ -77,8 +78,11 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
     } else return [];
   };
 
-  const [isAspirationChecked, setIsAspirationCheckedChecked] = useState(false);
+  const [isAspirationChecked, setIsAspirationChecked] = useState(false);
   const [isCpapChecked, setIsCpapChecked] = useState(false);
+  const [isVentilationChecked, setIsVentilationChecked] = useState(false);
+  const [isSngNumberChecked, setIsSngNumberChecked] = useState(false);
+  const [isReheatingChecked, setIsReheatingChecked] = useState(false);
 
   const formik = useFormik({
     initialValues,
@@ -90,10 +94,16 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
         ...formattedValues,
         aspiration: isAspirationChecked,
         cpap: isCpapChecked,
+        ventilation: isVentilationChecked,
+        reheating: isReheatingChecked,
+        sngNumber: isSngNumberChecked,
       };
       onSubmit(conditioningToSave as any);
-      setIsAspirationCheckedChecked(false);
+      setIsAspirationChecked(false);
       setIsCpapChecked(false);
+      setIsVentilationChecked(false);
+      setIsReheatingChecked(false);
+      setIsSngNumberChecked(false);
     },
   });
 
@@ -145,17 +155,32 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
   const handleResetConfirmation = () => {
     setOpenResetConfirmation(false);
     formik.resetForm();
-    setIsAspirationCheckedChecked(false);
+    setIsAspirationChecked(false);
     setIsCpapChecked(false);
+    setIsVentilationChecked(false);
+    setIsReheatingChecked(false);
+    setIsSngNumberChecked(false);
     resetFormCallback();
   };
 
   const handleAspirationChecked = () => {
-    setIsAspirationCheckedChecked(!isAspirationChecked);
+    setIsAspirationChecked(!isAspirationChecked);
   };
 
   const handleCpapChecked = () => {
     setIsCpapChecked(!isCpapChecked);
+  };
+
+  const handleVentilationChecked = () => {
+    setIsVentilationChecked(!isVentilationChecked);
+  };
+
+  const handleReheatingChecked = () => {
+    setIsReheatingChecked(!isReheatingChecked);
+  };
+
+  const handleSngNumberChecked = () => {
+    setIsSngNumberChecked(!isSngNumberChecked);
   };
 
   const usersStatus = useAppSelector(
@@ -188,10 +213,15 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
 
   useEffect(() => {
     if (!creationMode) {
-      setIsAspirationCheckedChecked(
+      setIsAspirationChecked(
         formik.values.aspiration === "true" ? true : false
       );
       setIsCpapChecked(formik.values.cpap === "true" ? true : false);
+      setIsVentilationChecked(
+        formik.values.ventilation === "true" ? true : false
+      );
+      setIsReheatingChecked(formik.values.reheating === "true" ? true : false);
+      setIsSngNumberChecked(formik.values.sngNumber === "true" ? true : false);
     }
   }, [creationMode, formik.values.aspiration, formik.values.cpap]);
 
@@ -247,6 +277,9 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
               placeholder={t("conditioning.conditionAtAdmission.label")}
             />
           </div>
+        </div>
+        <h3 className="formInsertMode">{t("conditioning.tdr")}</h3>
+        <div className="row start-sm center-xs bottom-sm">
           <div className="conditioningForm__item">
             <AutocompleteField
               fieldName="malaria"
@@ -299,6 +332,20 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
               disabled={isLoading}
             />
           </div>
+        </div>
+
+        <h3 className="formInsertMode">
+          {t("conditioning.othersconditioning")}
+        </h3>
+        <div className="row start-sm center-xs bottom-sm">
+          <div className="fullWidth conditioningForm__item">
+            <CheckboxField
+              fieldName="aspiration"
+              label={t("conditioning.aspiration")}
+              checked={isAspirationChecked}
+              onChange={handleAspirationChecked}
+            />
+          </div>
           <div className="conditioningForm__item">
             <TextField
               label={t("conditioning.sgVolume")}
@@ -310,7 +357,28 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
               disabled={isLoading}
             />
           </div>
-
+          <div className="conditioningForm__item">
+            <TextField
+              label={t("conditioning.diazepamDose")}
+              field={formik.getFieldProps("diazepamDose")}
+              theme="regular"
+              isValid={isValid("diazepamDose")}
+              errorText={getErrorText("diazepamDose")}
+              onBlur={formik.handleBlur}
+              disabled={isLoading}
+            />
+          </div>
+          <div className="conditioningForm__item">
+            <TextField
+              label={t("conditioning.oxygenDebit")}
+              field={formik.getFieldProps("oxygenDebit")}
+              theme="regular"
+              isValid={isValid("oxygenDebit")}
+              errorText={getErrorText("oxygenDebit")}
+              onBlur={formik.handleBlur}
+              disabled={isLoading}
+            />
+          </div>
           <div className="conditioningForm__item">
             <TextField
               label={t("conditioning.bolusSsVolume")}
@@ -323,27 +391,7 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
             />
           </div>
 
-          <div className="conditioningForm__item">
-            <TextField
-              label={t("conditioning.diazepamDose")}
-              field={formik.getFieldProps("diazepamDose")}
-              theme="regular"
-              isValid={isValid("diazepamDose")}
-              errorText={getErrorText("diazepamDose")}
-              onBlur={formik.handleBlur}
-              disabled={isLoading}
-            />
-          </div>
-
-          <div className="conditioningForm__item">
-            <CheckboxField
-              fieldName="aspiration"
-              label={t("conditioning.aspiration")}
-              checked={isAspirationChecked}
-              onChange={handleAspirationChecked}
-            />
-          </div>
-          <div className="conditioningForm__item">
+          <div className="fullWidth conditioningForm__item">
             <CheckboxField
               fieldName="cpap"
               label={t("conditioning.cpap")}
@@ -351,7 +399,7 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
               onChange={handleCpapChecked}
             />
           </div>
-          <div className="conditioningForm__item">
+          <div className="fullWidth conditioningForm__item">
             <TextField
               label={t("conditioning.mce")}
               field={formik.getFieldProps("mce")}
@@ -362,41 +410,31 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
               disabled={isLoading}
             />
           </div>
-
-          <div className="conditioningForm__item">
-            <TextField
-              label={t("conditioning.ventilation")}
-              field={formik.getFieldProps("ventilation")}
-              theme="regular"
-              isValid={isValid("ventilation")}
-              errorText={getErrorText("ventilation")}
-              onBlur={formik.handleBlur}
-              disabled={isLoading}
-            />
-          </div>
-
-          <div className="conditioningForm__item">
-            <TextField
-              label={t("conditioning.oxygenDebit")}
-              field={formik.getFieldProps("oxygenDebit")}
-              theme="regular"
-              isValid={isValid("oxygenDebit")}
-              errorText={getErrorText("oxygenDebit")}
-              onBlur={formik.handleBlur}
-              disabled={isLoading}
-            />
-          </div>
-
-          <div className="conditioningForm__item">
-            <TextField
-              label={t("conditioning.sngNumber")}
-              field={formik.getFieldProps("sngNumber")}
-              theme="regular"
-              isValid={isValid("sngNumber")}
-              errorText={getErrorText("sngNumber")}
-              onBlur={formik.handleBlur}
-              disabled={isLoading}
-            />
+          <div className="conditioningForm__supplementRow">
+            <div className="conditioningForm__item">
+              <CheckboxField
+                fieldName="ventilation"
+                label={t("conditioning.ventilation")}
+                checked={isVentilationChecked}
+                onChange={handleVentilationChecked}
+              />
+            </div>
+            <div className="conditioningForm__item">
+              <CheckboxField
+                fieldName="sngNumber"
+                label={t("conditioning.sngNumber")}
+                checked={isSngNumberChecked}
+                onChange={handleSngNumberChecked}
+              />
+            </div>
+            <div className="conditioningForm__item">
+              <CheckboxField
+                fieldName="reheating"
+                label={t("conditioning.reheating")}
+                checked={isReheatingChecked}
+                onChange={handleReheatingChecked}
+              />
+            </div>
           </div>
 
           <div className="fullWidth conditioningForm__item">

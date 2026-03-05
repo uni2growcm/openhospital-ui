@@ -7429,11 +7429,11 @@ components:
           format: int32
           description: lock
           example: 0
-        female:
+        pharmacy:
           type: boolean
         male:
           type: boolean
-        pharmacy:
+        female:
           type: boolean
         opd:
           type: boolean
@@ -8369,11 +8369,15 @@ components:
           description: physical exam made by doctor
           example: "The patient appears alert, oriented to person, place, and time,\
             \ and in no acute distress. Well-nourished and well-hydrated."
-        fhu:
+        courseOfAction:
           type: string
+          description: course of action prescribed by the doctor
+          example: Probabilistic antibiotic therapy with amoxicillin for 7 days.
         yprog:
           type: integer
           format: int32
+        fhu:
+          type: string
       required:
       - admDate
       - admitted
@@ -9401,10 +9405,9 @@ components:
           description: Conditioning mce duration
           example: 4
         ventilation:
-          type: integer
-          format: int32
+          type: boolean
           description: Conditioning ventilation duration
-          example: 2
+          example: true
         oxygenDebit:
           type: number
           format: double
@@ -9426,9 +9429,13 @@ components:
           description: 'Bolus volume '
           example: 3
         sngNumber:
-          type: string
+          type: boolean
           description: Conditioning sng number
-          example: 3434634
+          example: true
+        reheating:
+          type: boolean
+          description: Conditioning reheating
+          example: true
         others:
           type: string
           description: Conditioning others
