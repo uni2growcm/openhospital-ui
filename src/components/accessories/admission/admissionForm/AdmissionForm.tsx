@@ -200,6 +200,7 @@ const AdmissionForm: FC<AdmissionProps> = ({
     qualifiedAgent: boolean().nullable(),
     transportation: string(),
     physicalExam: string(),
+    courseOfAction: string(),
   });
 
   const formik = useFormik({
@@ -383,22 +384,6 @@ const AdmissionForm: FC<AdmissionProps> = ({
               />
             </div>
             <div className="patientAdmissionForm__item">
-              <TextField
-                field={formik.getFieldProps("fhu")}
-                theme="regular"
-                label={t("admission.fhu")}
-                isValid={isValid("fhu")}
-                errorText={getErrorText("fhu")}
-                onBlur={formik.handleBlur}
-                type="text"
-                disabled={isLoading}
-                maxLength={50}
-              />
-            </div>
-          </div>
-
-          <div className="row start-sm center-xs">
-            <div className="patientAdmissionForm__item">
               <DateField
                 fieldName="admDate"
                 fieldValue={formik.values.admDate}
@@ -412,6 +397,9 @@ const AdmissionForm: FC<AdmissionProps> = ({
                 disabled={isLoading}
               />
             </div>
+          </div>
+
+          <div className="row start-sm center-xs">
             <div className="patientAdmissionForm__item">
               <AutocompleteField
                 fieldName="admType"
@@ -423,6 +411,19 @@ const AdmissionForm: FC<AdmissionProps> = ({
                 options={renderOptions(admissionTypes)}
                 loading={admTypeStatus === "LOADING"}
                 disabled={isLoading}
+              />
+            </div>
+            <div className="patientAdmissionForm__item">
+              <TextField
+                field={formik.getFieldProps("fhu")}
+                theme="regular"
+                label={t("admission.fhu")}
+                isValid={isValid("fhu")}
+                errorText={getErrorText("fhu")}
+                onBlur={formik.handleBlur}
+                type="text"
+                disabled={isLoading}
+                maxLength={50}
               />
             </div>
           </div>
@@ -668,6 +669,20 @@ const AdmissionForm: FC<AdmissionProps> = ({
                     onBlur={onBlurCallback("diseaseIn")}
                     options={renderOptions(diagnosisInList)}
                     loading={diagnosisInStatus === "LOADING"}
+                    disabled={isLoading}
+                  />
+                </div>
+                <div className="fullWidth patientAdmissionForm__item">
+                  <TextField
+                    field={formik.getFieldProps("courseOfAction")}
+                    theme="regular"
+                    label={t("admission.courseOfAction")}
+                    multiline={true}
+                    type="text"
+                    isValid={isValid("courseOfAction")}
+                    errorText={getErrorText("courseOfAction")}
+                    onBlur={formik.handleBlur}
+                    rows={3}
                     disabled={isLoading}
                   />
                 </div>
