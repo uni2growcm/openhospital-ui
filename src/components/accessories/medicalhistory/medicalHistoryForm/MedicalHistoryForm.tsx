@@ -3,6 +3,7 @@ import AutocompleteField from "components/accessories/autocompleteField/Autocomp
 import CheckboxField from "components/accessories/checkboxField/CheckboxField";
 import DateField from "components/accessories/dateField/DateField";
 import { useFormik } from "formik";
+import { getLocalISOString } from "libraries/formatUtils/dataFormatting";
 import { useVaccinationStateNoPev } from "libraries/hooks/useVaccinationStateNoPev";
 import { useVaccinationStatePev } from "libraries/hooks/useVaccinationStatePev";
 import { get, has } from "lodash";
@@ -93,6 +94,7 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
   const [isVitASupplementChecked, setIsVitASupplementChecked] = useState(false);
   const [isSickleCellChecked, setIsSickleCellChecked] = useState(false);
   const [isHemolysisChecked, setIsHemolysisChecked] = useState(false);
+  const [performedAt, setPerformedAt] = useState();
   const formik = useFormik({
     initialValues,
     validationSchema,
@@ -101,6 +103,9 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
       const formattedValues = formatAllFieldValues(fields, values);
       const medicalHistoryToSave: any = {
         ...formattedValues,
+        performedAt: getLocalISOString(
+          performedAt ? new Date(performedAt) : new Date()
+        ),
         ironSupplement: isIronSupplementChecked ? true : false,
         folicAcidSupplement: isFolicAcidSupplementChecked ? true : false,
         vitASupplement: isVitASupplementChecked ? true : false,
@@ -120,6 +125,7 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
         diversification: values.diversification,
         siblings: values.siblings,
       };
+
       onSubmit(medicalHistoryToSave);
       setIsIronSupplementChecked(false);
       setIsFolicAcidSupplementChecked(false);
@@ -218,6 +224,8 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
       setIsSurgicalProcedureChecked(
         formik.values.surgicalProcedure === "true" ? true : false
       );
+
+      setPerformedAt(formik.values.performedAt);
     }
   }, [
     creationMode,
@@ -229,6 +237,7 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
     formik.values.sickleCell,
     formik.values.deParasitization,
     formik.values.surgicalProcedure,
+    formik.values.performedAt,
   ]);
 
   useEffect(() => {
@@ -255,14 +264,28 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
     },
   ];
 
+  const vpaOptions = [
+    {
+      value: "VAP 1",
+      label: t("medicalHistory.physiological.vap1"),
+    },
+    {
+      value: "VAP 2",
+      label: t("medicalHistory.physiological.vap2"),
+    },
+    {
+      value: "VAP 3",
+      label: t("medicalHistory.physiological.vap3"),
+    },
+    {
+      value: "NO",
+      label: t("common.no"),
+    },
+  ];
+
   return (
     <>
       <div className="medicalHistoryForm">
-        <h5 className="formInsertMode">
-          {creationMode
-            ? t("medicalHistory.newmedicalHistory")
-            : t("medicalHistory.editmedicalHistory")}
-        </h5>
         <h3 className="formInsertMode">
           {t("medicalHistory.physiological.title")}
         </h3>
@@ -270,21 +293,19 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
           className="medicalHistoryForm__form"
           onSubmit={formik.handleSubmit}
         >
+          <h4 className="formInsertMode fullWidth">
+            {t("medicalHistory.physiological.pregnancyAndDelivery")}
+          </h4>
           <div className="row start-sm center-xs bottom-sm">
-            <div className="medicalHistoryForm__item">
-              <DateField
-                fieldName="performedAt"
-                fieldValue={formik.values.performedAt}
-                disableFuture={true}
+            <div className=" medicalHistoryForm__item">
+              <TextField
+                label={t("medicalHistory.physiological.pregnancy")}
+                field={formik.getFieldProps("pregnancy")}
                 theme="regular"
-                format="dd/MM/yyyy HH:mm"
-                isValid={isValid("performedAt")}
-                errorText={getErrorText("performedAt")}
-                label={t("medicalHistory.performedAt")}
-                onChange={(performedAt: Date | null) =>
-                  formik.setFieldValue("performedAt", performedAt)
-                }
-                disabled={false}
+                isValid={isValid("pregnancy")}
+                errorText={getErrorText("pregnancy")}
+                onBlur={formik.handleBlur}
+                disabled={isLoading}
               />
             </div>
             <div className="medicalHistoryForm__item">
@@ -298,115 +319,129 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
                 disabled={isLoading}
               />
             </div>
-            <h4 className="formInsertMode">
-              {t("medicalHistory.physiological.pregnancyAndDelivery")}
-            </h4>
-            <div className="row start-sm center-xs bottom-sm">
-              <div className="fullWidth medicalHistoryForm__item">
-                <TextField
-                  label={t("medicalHistory.physiological.pregnancy")}
-                  field={formik.getFieldProps("pregnancy")}
-                  theme="regular"
-                  isValid={isValid("pregnancy")}
-                  errorText={getErrorText("pregnancy")}
-                  onBlur={formik.handleBlur}
-                  disabled={isLoading}
-                />
-              </div>
-              <div className="medicalHistoryForm__item">
-                <TextField
-                  label={t("medicalHistory.physiological.pregnancyTerm")}
-                  field={formik.getFieldProps("termPregnancy")}
-                  theme="regular"
-                  isValid={isValid("termPregnancy")}
-                  errorText={getErrorText("termPregnancy")}
-                  onBlur={formik.handleBlur}
-                  disabled={isLoading}
-                />
-              </div>
-              <div className="medicalHistoryForm__item">
-                <AutocompleteField
-                  fieldName="deliveryMode"
-                  fieldValue={formik.values.deliveryMode}
-                  label={t("medicalHistory.physiological.deliveryMode")}
-                  isValid={isValid("deliveryMode")}
-                  errorText={getErrorText("deliveryMode")}
-                  onBlur={formik.handleBlur}
-                  onChange={(event, value) => {
-                    formik.setFieldValue("deliveryMode", value?.value || "");
-                    const isCesarian = !!value && value.value === "cesarian";
-                    setIsCesarianMode(isCesarian);
-                    if (!isCesarian) {
-                      formik.setFieldValue("reasonMode", "");
-                    }
-                  }}
-                  options={deliveryModeOption}
-                  disabled={isLoading}
-                />
-              </div>
-              {isCesarianMode && (
-                <div className="medicalHistoryForm__item">
-                  <TextField
-                    label={t("medicalHistory.physiological.reasonMode")}
-                    field={formik.getFieldProps("reasonMode")}
-                    theme="regular"
-                    isValid={isValid("reasonMode")}
-                    errorText={getErrorText("reasonMode")}
-                    onBlur={formik.handleBlur}
-                    disabled={isLoading}
-                  />
-                </div>
-              )}
-              <div className="medicalHistoryForm__item">
-                <TextField
-                  label={t("medicalHistory.physiological.apgarScore")}
-                  field={formik.getFieldProps("apgarScore")}
-                  theme="regular"
-                  isValid={isValid("apgarScore")}
-                  errorText={getErrorText("apgarScore")}
-                  onBlur={formik.handleBlur}
-                  disabled={isLoading}
-                />
-              </div>
-              <div className="medicalHistoryForm__item">
-                <TextField
-                  label={t("medicalHistory.physiological.birthWeight")}
-                  field={formik.getFieldProps("birthWeight")}
-                  theme="regular"
-                  isValid={isValid("birthWeight")}
-                  errorText={getErrorText("birthWeight")}
-                  onBlur={formik.handleBlur}
-                  disabled={isLoading}
-                />
-              </div>
-            </div>
-            <div className="fullWidth medicalHistoryForm__item">
+
+            <div className="medicalHistoryForm__item">
               <TextField
-                label={t(
-                  "medicalHistory.physiological.antiMalarialProphylaxisVap"
-                )}
-                field={formik.getFieldProps("antiMalarialProphylaxisVap")}
+                label={t("medicalHistory.physiological.pregnancyTerm")}
+                field={formik.getFieldProps("termPregnancy")}
                 theme="regular"
-                isValid={isValid("antiMalarialProphylaxisVap")}
-                errorText={getErrorText("antiMalarialProphylaxisVap")}
+                isValid={isValid("termPregnancy")}
+                errorText={getErrorText("termPregnancy")}
                 onBlur={formik.handleBlur}
                 disabled={isLoading}
               />
             </div>
-            <div className="fullWidth medicalHistoryForm__item">
+            <div className="medicalHistoryForm__item">
+              <AutocompleteField
+                fieldName="deliveryMode"
+                fieldValue={formik.values.deliveryMode}
+                label={t("medicalHistory.physiological.deliveryMode")}
+                isValid={isValid("deliveryMode")}
+                errorText={getErrorText("deliveryMode")}
+                onBlur={formik.handleBlur}
+                onChange={(event, value) => {
+                  formik.setFieldValue("deliveryMode", value?.value || "");
+                  const isCesarian = !!value && value.value === "cesarian";
+                  setIsCesarianMode(isCesarian);
+                  if (!isCesarian) {
+                    formik.setFieldValue("reasonMode", "");
+                  }
+                }}
+                options={deliveryModeOption}
+                disabled={isLoading}
+              />
+            </div>
+            {isCesarianMode && (
+              <div className="medicalHistoryForm__item">
+                <TextField
+                  label={t("medicalHistory.physiological.reasonMode")}
+                  field={formik.getFieldProps("reasonMode")}
+                  theme="regular"
+                  isValid={isValid("reasonMode")}
+                  errorText={getErrorText("reasonMode")}
+                  onBlur={formik.handleBlur}
+                  disabled={isLoading}
+                />
+              </div>
+            )}
+            <div className="medicalHistoryForm__item">
               <TextField
+                label={t("medicalHistory.physiological.apgarScore")}
+                field={formik.getFieldProps("apgarScore")}
+                theme="regular"
+                isValid={isValid("apgarScore")}
+                errorText={getErrorText("apgarScore")}
+                onBlur={formik.handleBlur}
+                disabled={isLoading}
+              />
+            </div>
+            <div className="medicalHistoryForm__item">
+              <TextField
+                label={t("medicalHistory.physiological.birthWeight")}
+                field={formik.getFieldProps("birthWeight")}
+                theme="regular"
+                isValid={isValid("birthWeight")}
+                errorText={getErrorText("birthWeight")}
+                onBlur={formik.handleBlur}
+                disabled={isLoading}
+              />
+            </div>
+          </div>
+
+          <h4 className="formInsertMode">
+            {t("medicalHistory.physiological.antiMalarialProphylaxis")}
+          </h4>
+          <div className="row start-sm center-xs bottom-sm">
+            <div className="medicalHistoryForm__item">
+              <AutocompleteField
+                fieldName="antiMalarialProphylaxisMilda"
+                fieldValue={formik.values.antiMalarialProphylaxisMilda}
                 label={t(
                   "medicalHistory.physiological.antiMalarialProphylaxisMilda"
                 )}
-                field={formik.getFieldProps("antiMalarialProphylaxisMilda")}
-                theme="regular"
                 isValid={isValid("antiMalarialProphylaxisMilda")}
                 errorText={getErrorText("antiMalarialProphylaxisMilda")}
                 onBlur={formik.handleBlur}
+                onChange={(event, value) => {
+                  formik.setFieldValue(
+                    "antiMalarialProphylaxisMilda",
+                    value?.value || ""
+                  );
+                }}
+                options={[
+                  {
+                    value: "YES",
+                    label: t("common.yes"),
+                  },
+                  {
+                    value: "NO",
+                    label: t("common.no"),
+                  },
+                ]}
                 disabled={isLoading}
               />
             </div>
-            <div className="fullWidth medicalHistoryForm__item">
+            <div className=" medicalHistoryForm__item">
+              <AutocompleteField
+                fieldName="antiMalarialProphylaxisVap"
+                fieldValue={formik.values.antiMalarialProphylaxisVap}
+                label={t(
+                  "medicalHistory.physiological.antiMalarialProphylaxisVap"
+                )}
+                isValid={isValid("antiMalarialProphylaxisVap")}
+                errorText={getErrorText("antiMalarialProphylaxisVap")}
+                onBlur={formik.handleBlur}
+                onChange={(event, value) => {
+                  formik.setFieldValue(
+                    "antiMalarialProphylaxisVap",
+                    value?.value || ""
+                  );
+                }}
+                options={vpaOptions}
+                disabled={isLoading}
+              />
+            </div>
+            <div className="medicalHistoryForm__item">
               <TextField
                 label={t(
                   "medicalHistory.physiological.antiMalarialProphylaxisOthers"
@@ -419,6 +454,11 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
                 disabled={isLoading}
               />
             </div>
+          </div>
+          <h4 className="formInsertMode">
+            {t("medicalHistory.physiological.vaccinalState")}
+          </h4>
+          <div className="row start-sm center-xs bottom-sm">
             <div className="fullWidth medicalHistoryForm__item">
               <Autocomplete
                 id="vaccinationStatePev"
@@ -451,6 +491,11 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
                 )}
               />
             </div>
+          </div>
+          <h4 className="formInsertMode">
+            {t("medicalHistory.physiological.diet")}
+          </h4>
+          <div className="row start-sm center-xs bottom-sm">
             <div className="fullWidth medicalHistoryForm__item">
               <TextField
                 field={{
@@ -562,6 +607,32 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
           <h3 className="formInsertMode">
             {t("medicalHistory.personalPathological.title")}
           </h3>
+          <div className="row start-sm center-xs bottom-sm">
+            <div className="fullWidth medicalHistoryForm__item">
+              <TextField
+                label={t("medicalHistory.personalPathological.neonatalPeriod")}
+                field={formik.getFieldProps("neonatalPeriod")}
+                theme="regular"
+                isValid={isValid("neonatalPeriod")}
+                errorText={getErrorText("neonatalPeriod")}
+                onBlur={formik.handleBlur}
+                disabled={isLoading}
+              />
+            </div>
+            <div className="fullWidth medicalHistoryForm__item">
+              <TextField
+                label={t(
+                  "medicalHistory.personalPathological.previousHospitalization"
+                )}
+                field={formik.getFieldProps("previousHospitalization")}
+                theme="regular"
+                isValid={isValid("previousHospitalization")}
+                errorText={getErrorText("previousHospitalization")}
+                onBlur={formik.handleBlur}
+                disabled={isLoading}
+              />
+            </div>
+          </div>
           {isTransfusionChecked && (
             <div className="row start-sm center-xs bottom-sm">
               <div className="medicalHistoryForm__item">
@@ -620,30 +691,7 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
                 disabled={isLoading}
               />
             </div>
-            <div className="fullWidth medicalHistoryForm__item">
-              <TextField
-                label={t("medicalHistory.personalPathological.neonatalPeriod")}
-                field={formik.getFieldProps("neonatalPeriod")}
-                theme="regular"
-                isValid={isValid("neonatalPeriod")}
-                errorText={getErrorText("neonatalPeriod")}
-                onBlur={formik.handleBlur}
-                disabled={isLoading}
-              />
-            </div>
-            <div className="fullWidth medicalHistoryForm__item">
-              <TextField
-                label={t(
-                  "medicalHistory.personalPathological.previousHospitalization"
-                )}
-                field={formik.getFieldProps("previousHospitalization")}
-                theme="regular"
-                isValid={isValid("previousHospitalization")}
-                errorText={getErrorText("previousHospitalization")}
-                onBlur={formik.handleBlur}
-                disabled={isLoading}
-              />
-            </div>
+
             <div className="medicalHistoryForm__item">
               <CheckboxField
                 fieldName="surgicalProcedure"
@@ -654,54 +702,55 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
                 onChange={handleSurgicalProcedureChecked}
               />
             </div>
+          </div>
+          <div className="row start-sm center-xs bottom-sm">
             {isSurgicalProcedureChecked && (
-              <div className="fullWidth medicalHistoryForm__item">
-                <TextField
-                  label={t(
-                    "medicalHistory.personalPathological.surgicalProcedureCondition"
-                  )}
-                  field={formik.getFieldProps("surgicalProcedureCondition")}
-                  theme="regular"
-                  isValid={isValid("surgicalProcedureCondition")}
-                  errorText={getErrorText("surgicalProcedureCondition")}
-                  onBlur={formik.handleBlur}
-                  disabled={isLoading}
-                />
-              </div>
+              <>
+                <div className="medicalHistoryForm__item">
+                  <DateField
+                    fieldName="surgicalProcedureDate"
+                    fieldValue={formik.values.surgicalProcedureDate}
+                    disableFuture={true}
+                    theme="regular"
+                    format="dd/MM/yyyy HH:mm"
+                    isValid={isValid("surgicalProcedureDate")}
+                    errorText={getErrorText("surgicalProcedureDate")}
+                    label={t(
+                      "medicalHistory.personalPathological.surgicalProcedureDate"
+                    )}
+                    onChange={dateFieldHandleOnChange("surgicalProcedureDate")}
+                    disabled={isLoading}
+                  />
+                </div>
+                <div className="fullWidth medicalHistoryForm__item">
+                  <TextField
+                    label={t(
+                      "medicalHistory.personalPathological.surgicalProcedureCondition"
+                    )}
+                    field={formik.getFieldProps("surgicalProcedureCondition")}
+                    theme="regular"
+                    isValid={isValid("surgicalProcedureCondition")}
+                    errorText={getErrorText("surgicalProcedureCondition")}
+                    onBlur={formik.handleBlur}
+                    disabled={isLoading}
+                  />
+                </div>
+                <div className="fullWidth medicalHistoryForm__item">
+                  <TextField
+                    label={t(
+                      "medicalHistory.personalPathological.surgicalProcedureType"
+                    )}
+                    field={formik.getFieldProps("surgicalProcedureType")}
+                    theme="regular"
+                    isValid={isValid("surgicalProcedureType")}
+                    errorText={getErrorText("surgicalProcedureType")}
+                    onBlur={formik.handleBlur}
+                    disabled={isLoading}
+                  />
+                </div>
+              </>
             )}
-            {isSurgicalProcedureChecked && (
-              <div className="fullWidth medicalHistoryForm__item">
-                <TextField
-                  label={t(
-                    "medicalHistory.personalPathological.surgicalProcedureType"
-                  )}
-                  field={formik.getFieldProps("surgicalProcedureType")}
-                  theme="regular"
-                  isValid={isValid("surgicalProcedureType")}
-                  errorText={getErrorText("surgicalProcedureType")}
-                  onBlur={formik.handleBlur}
-                  disabled={isLoading}
-                />
-              </div>
-            )}
-            {isSurgicalProcedureChecked && (
-              <div className="medicalHistoryForm__item">
-                <DateField
-                  fieldName="surgicalProcedureDate"
-                  fieldValue={formik.values.surgicalProcedureDate}
-                  disableFuture={true}
-                  theme="regular"
-                  format="dd/MM/yyyy HH:mm"
-                  isValid={isValid("surgicalProcedureDate")}
-                  errorText={getErrorText("surgicalProcedureDate")}
-                  label={t(
-                    "medicalHistory.personalPathological.surgicalProcedureDate"
-                  )}
-                  onChange={dateFieldHandleOnChange("surgicalProcedureDate")}
-                  disabled={isLoading}
-                />
-              </div>
-            )}
+
             <div className="fullWidth medicalHistoryForm__item">
               <TextField
                 field={formik.getFieldProps("otherPersonalPathologies")}
