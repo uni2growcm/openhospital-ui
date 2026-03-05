@@ -256,6 +256,12 @@ export interface AdmissionDTO {
      */
     physicalExam?: string;
     /**
+     * course of action prescribed by the doctor
+     * @type {string}
+     * @memberof AdmissionDTO
+     */
+    courseOfAction?: string;
+    /**
      * @type {number}
      * @memberof AdmissionDTO
      */

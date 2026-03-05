@@ -76,17 +76,17 @@ export interface MedicalHistoryDTO {
      */
     birthWeight?: number;
     /**
-     * Vaccination state for PEV vaccines
-     * @type {string}
+     * Vaccination state for PEV vaccines. Stored as a list of descriptors (e.g., Polio 0,  BCG).
+     * @type {Array<string>}
      * @memberof MedicalHistoryDTO
      */
-    vaccinationStatePev?: string;
+    vaccinationStatePev?: Array<string>;
     /**
-     * Vaccination state for non-PEV vaccines
-     * @type {string}
+     * Vaccination state for non-PEV vaccines. Stored as a list of descriptors (e.g., Polio 0,  BCG).
+     * @type {Array<string>}
      * @memberof MedicalHistoryDTO
      */
-    vaccinationStateNoPev?: string;
+    vaccinationStateNoPev?: Array<string>;
     /**
      * Use of Milda for anti-malarial prophylaxis
      * @type {string}

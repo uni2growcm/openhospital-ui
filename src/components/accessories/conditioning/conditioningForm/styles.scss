@@ -87,3 +87,16 @@
     }
   }
 }
+
+.conditioningForm__supplementRow .conditioningForm__item {
+  width: 100%;
+  flex: 1 1 0;
+  white-space: nowrap;
+}
+
+.conditioningForm__supplementRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+}

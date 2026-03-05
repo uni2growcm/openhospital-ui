@@ -36,12 +36,12 @@ export const initialFields: TFields<MedicalHistoryFormFieldName> = {
     type: "number",
   },
   vaccinationStatePev: {
-    value: "",
-    type: "text",
+    value: [],
+    type: "array",
   },
   vaccinationStateNoPev: {
-    value: "",
-    type: "text",
+    value: [],
+    type: "array",
   },
   antiMalarialProphylaxisVap: {
     value: "",
