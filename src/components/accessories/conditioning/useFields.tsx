@@ -20,8 +20,8 @@ export const useFields = (conditioning?: ConditioningDTO) => {
       type: "number",
     },
     ventilation: {
-      value: conditioning?.ventilation?.toString() ?? "",
-      type: "number",
+      value: conditioning?.ventilation ? "true" : "false",
+      type: "boolean",
     },
     oxygenDebit: {
       value: conditioning?.oxygenDebit?.toString() ?? "",
@@ -40,8 +40,8 @@ export const useFields = (conditioning?: ConditioningDTO) => {
       type: "number",
     },
     sngNumber: {
-      value: conditioning?.sngNumber ?? "",
-      type: "text",
+      value: conditioning?.sngNumber ? "true" : "false",
+      type: "boolean",
     },
     others: {
       value: conditioning?.others ?? "",
@@ -70,6 +70,10 @@ export const useFields = (conditioning?: ConditioningDTO) => {
     performedBy: {
       value: conditioning?.performedBy?.userName ?? "",
       type: "text",
+    },
+    reheating: {
+      value: conditioning?.reheating ? "true" : "false",
+      type: "boolean",
     },
   };
 

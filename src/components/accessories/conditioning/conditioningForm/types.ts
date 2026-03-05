@@ -30,4 +30,5 @@ export type ConditioningFormFieldName =
   | "malaria"
   | "hivTest"
   | "bloodGlucoseLevel"
-  | "performedBy";
+  | "performedBy"
+  | "reheating";
