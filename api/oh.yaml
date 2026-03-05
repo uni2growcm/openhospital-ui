@@ -7429,11 +7429,11 @@ components:
           format: int32
           description: lock
           example: 0
-        female:
+        pharmacy:
           type: boolean
         male:
           type: boolean
-        pharmacy:
+        female:
           type: boolean
         opd:
           type: boolean
@@ -8369,11 +8369,15 @@ components:
           description: physical exam made by doctor
           example: "The patient appears alert, oriented to person, place, and time,\
             \ and in no acute distress. Well-nourished and well-hydrated."
-        fhu:
+        courseOfAction:
           type: string
+          description: course of action prescribed by the doctor
+          example: Probabilistic antibiotic therapy with amoxicillin for 7 days.
         yprog:
           type: integer
           format: int32
+        fhu:
+          type: string
       required:
       - admDate
       - admitted
