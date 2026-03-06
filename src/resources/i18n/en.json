@@ -316,7 +316,7 @@
     "laboratory": "Laboratory",
     "operation": "Operation",
     "admission": "Admission",
-    "discharge": "Discharge",
+    "discharge": "Point of exits",
     "clinic": "Clinic",
     "conditioning": "Conditioning",
     "radiology": "Radiology",
@@ -998,7 +998,8 @@
     "entryReason": "Entry reason",
     "transportation": "Transportation",
     "physicalExam": "Physical exam",
-    "courseOfAction": "Course of action"
+    "courseOfAction": "Course of action",
+    "nextAppointment": "Next appointment"
   },
   "bill": {
     "title": "Welcome to Billing",

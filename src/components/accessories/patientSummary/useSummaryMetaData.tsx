@@ -24,6 +24,7 @@ const useSummaryMetaData = () => {
     diseaseOut1: t("admission.diseaseOut1"),
     diseaseOut2: t("admission.diseaseOut2"),
     diseaseOut3: t("admission.diseaseOut3"),
+    nextAppointment: t("admission.nextAppointment"),
     operation: t("operation.operation"),
     transUnits: t("operation.transUnits"),
     remarks: t("operation.remarks"),

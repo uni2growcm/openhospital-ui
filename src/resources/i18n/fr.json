@@ -501,7 +501,7 @@
     "patientdashboard": "Tableau de bord du patient",
     "encounter_dashboard": "Tableau de bord de la consultation",
     "admission": "Admission",
-    "discharge": "Décharge",
+    "discharge": "Point de sortie",
     "surgicalrecord": "Dossier chirurgical",
     "note": "Remarque",
     "exams": "Examens",
@@ -952,7 +952,8 @@
     "entryReason": "Motif d'entrée",
     "transportation": "Moyen de transport",
     "physicalExam": "Examen physique",
-    "courseOfAction": "Conduite à tenir"
+    "courseOfAction": "Conduite à tenir",
+    "nextAppointment": "Prochain rendez-vous"
   },
   "bill": {
     "title": "Bienvenue dans la facturation",

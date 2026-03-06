@@ -113,6 +113,10 @@ export const useFields = (
       value: admission?.courseOfAction ?? "",
       type: "text",
     },
+    nextAppointment: {
+      value: admission?.nextAppointment ?? "",
+      type: "date",
+    },
   };
 
   return fields;
