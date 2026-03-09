@@ -19,6 +19,15 @@ import {
   Operations,
 } from "../../components/accessories/admin/operations";
 import {
+  ReferenceData,
+} from "../../components/accessories/admin/referenceData";
+import {
+  EditCommune,
+  EditEthnic,
+  EditOccupation,
+  EditTown,
+} from "../../components/accessories/admin/referenceData";
+import {
   EditSupplier,
   NewSupplier,
   Suppliers,
@@ -73,6 +82,87 @@ export const AdminRoutes = () => {
           <AdminActivityContent
             title={t("ward.editWard")}
             children={<EditWard />}
+          />
+        ),
+      },
+      {
+        path: getPath(PATHS.admin_reference_data),
+        element: (
+          <AdminActivityContent
+            title={t("nav.referenceData")}
+            children={<ReferenceData />}
+          />
+        ),
+      },
+      {
+        path: getPath(PATHS.admin_towns_new),
+        element: (
+          <AdminActivityContent
+            title={t("common.addTown")}
+            children={<EditTown />}
+          />
+        ),
+      },
+      {
+        path: getPath(PATHS.admin_towns_edit),
+        element: (
+          <AdminActivityContent
+            title={t("town.editTown")}
+            children={<EditTown />}
+          />
+        ),
+      },
+      {
+        path: getPath(PATHS.admin_communes_new),
+        element: (
+          <AdminActivityContent
+            title={t("common.addCommune")}
+            children={<EditCommune />}
+          />
+        ),
+      },
+      {
+        path: getPath(PATHS.admin_communes_edit),
+        element: (
+          <AdminActivityContent
+            title={t("commune.editCommune")}
+            children={<EditCommune />}
+          />
+        ),
+      },
+      {
+        path: getPath(PATHS.admin_ethnics_new),
+        element: (
+          <AdminActivityContent
+            title={t("common.addEthnic")}
+            children={<EditEthnic />}
+          />
+        ),
+      },
+      {
+        path: getPath(PATHS.admin_ethnics_edit),
+        element: (
+          <AdminActivityContent
+            title={t("ethnic.editEthnic")}
+            children={<EditEthnic />}
+          />
+        ),
+      },
+      {
+        path: getPath(PATHS.admin_occupations_new),
+        element: (
+          <AdminActivityContent
+            title={t("common.addOccupation")}
+            children={<EditOccupation />}
+          />
+        ),
+      },
+      {
+        path: getPath(PATHS.admin_occupations_edit),
+        element: (
+          <AdminActivityContent
+            title={t("occupation.editOccupation")}
+            children={<EditOccupation />}
           />
         ),
       },

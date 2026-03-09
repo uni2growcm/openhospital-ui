@@ -527,7 +527,60 @@
     "encounters": "Consultations",
     "conditioning": "Mise en condition",
     "medicalHistory": "Antécédent médical",
+    "referenceData": "Données de référence",
     "userProfile": "Profile de l'utilisateur"
+  },
+  "town": {
+    "id": "ID",
+    "name": "Nom",
+    "confirmDeletion": "Êtes-vous sûr de vouloir supprimer cette ville ?",
+    "edittown": "Modifier la ville",
+    "newtown": "Nouvelle ville",
+    "updated": "Ville mise à jour",
+    "updatedsuccessfully": "La ville a été mise à jour avec succès.",
+    "created": "Ville créée",
+    "createdsuccessfully": "La ville a été créée avec succès.",
+    "nameisrequired": "Le nom est requis",
+    "nameshouldnotexceed": "Le nom ne doit pas dépasser 100 caractères"
+  },
+  "occupation": {
+    "id": "ID",
+    "name": "Nom",
+    "confirmDeletion": "Êtes-vous sûr de vouloir supprimer cette profession ?",
+    "editoccupation": "Modifier la profession",
+    "newoccupation": "Nouvelle profession",
+    "updated": "Profession mise à jour",
+    "updatedsuccessfully": "La profession a été mise à jour avec succès.",
+    "created": "Profession créée",
+    "createdsuccessfully": "La profession a été créée avec succès.",
+    "nameisrequired": "Le nom est requis",
+    "nameshouldnotexceed": "Le nom ne doit pas dépasser 100 caractères"
+  },
+  "ethnic": {
+    "id": "ID",
+    "name": "Nom",
+    "confirmDeletion": "Êtes-vous sûr de vouloir supprimer ce groupe ethnique ?",
+    "editethnic": "Modifier le groupe ethnique",
+    "newethnic": "Nouveau groupe ethnique",
+    "updated": "Groupe ethnique mis à jour",
+    "updatedsuccessfully": "Le groupe ethnique a été mis à jour avec succès.",
+    "created": "Groupe ethnique créé",
+    "createdsuccessfully": "Le groupe ethnique a été créé avec succès.",
+    "nameisrequired": "Le nom est requis",
+    "nameshouldnotexceed": "Le nom ne doit pas dépasser 100 caractères"
+  },
+  "commune": {
+    "id": "ID",
+    "name": "Nom",
+    "confirmDeletion": "Êtes-vous sûr de vouloir supprimer cette commune ?",
+    "editcommune": "Modifier la commune",
+    "newcommune": "Nouvelle commune",
+    "updated": "Commune mise à jour",
+    "updatedsuccessfully": "La commune a été mise à jour avec succès.",
+    "created": "Commune créée",
+    "createdsuccessfully": "La commune a été créée avec succès.",
+    "nameisrequired": "Le nom est requis",
+    "nameshouldnotexceed": "Le nom ne doit pas dépasser 100 caractères"
   },
   "userProfile": "Profile de l'utilisateur",
   "operation": {
@@ -695,7 +748,15 @@
     "backToEdit": "Non, continuez à modifier.",
     "discardMessage": "Êtes-vous sûr de vouloir rejeter cette opération ? Toutes les données non enregistrées seront perdues.",
     "printData": "Imprimer les données",
-    "failedtodownloadthereport": "Échec de téléchargement du rapport"
+    "failedtodownloadthereport": "Échec de téléchargement du rapport",
+    "communes": "Communes",
+    "ethnics": "Ethnies",
+    "towns": "Villes",
+    "occupations": "Professions",
+    "addCommune": "Ajouter une commune",
+    "addEthnic": "Ajouter une ethnie",
+    "addTown": "Ajouter une ville",
+    "addOccupation": "Ajouter une profession"
   },
 
   "medicalHistory": {

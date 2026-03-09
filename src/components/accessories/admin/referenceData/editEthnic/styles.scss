@@ -1,0 +1,66 @@
+@import "../../../../../styles/variables";
+@import "../../../../../../node_modules/susy/sass/susy";
+
+.ethnic-form-container {
+  width: 100%;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+  }
+
+  .editEthnicForm__actions {
+    display: flex;
+    justify-content: flex-start;
+
+    .MuiButton-label {
+      font-size: smaller;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    button {
+      @include susy-media($smartphone_small) {
+        width: 100%;
+      }
+    }
+  }
+
+  .editEthnicForm__item {
+    width: 100%;
+    padding: 0 15px;
+
+    .textField {
+      width: 100%;
+    }
+  }
+
+  .submit_button,
+  .reset_button {
+    display: inline-flex;
+  }
+
+  .form-button {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 0 15px;
+
+    .MuiButton-label {
+      font-size: smaller;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    @include susy-media($smartphone_small) {
+      flex-direction: column;
+
+      button {
+        width: 100%;
+        margin-top: 10px;
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+export { EthnicsTable } from "./EthnicTable";

@@ -1,0 +1,9 @@
+export { CommunesTable } from "./communeTable";
+export { EditCommune } from "./editCommune";
+export { EditEthnic } from "./editEthnic";
+export { EditOccupation } from "./editOccupation";
+export { EditTown } from "./editTown";
+export { EthnicsTable } from "./ethnicTable";
+export { OccupationsTable } from "./occupationTable";
+export { ReferenceData } from "./ReferenceData";
+export { TownsTable } from "./townTable";

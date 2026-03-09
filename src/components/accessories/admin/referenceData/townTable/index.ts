@@ -1,0 +1,1 @@
+export { TownsTable } from "./TownsTable";

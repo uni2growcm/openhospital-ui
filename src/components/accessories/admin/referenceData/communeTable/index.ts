@@ -1,0 +1,1 @@
+export { CommunesTable } from "./CommuneTable";
