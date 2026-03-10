@@ -84,7 +84,10 @@ const InPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
             }
             onClick={() => changeUserSection("conditioning")}
           >
-            <VaccinesIcon fontSize="small" style={{ color: "white" }} />
+            <FormatListBulletedIcon
+              fontSize="small"
+              style={{ color: "white" }}
+            />
             <span>{t("nav.conditioning")}:</span>
             <img src={Arrow} className="icon_toggle" alt="Accordion toggle" />
           </div>
@@ -132,10 +135,7 @@ const InPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
             className={"patientDetails__main_menu__item " + isActive("care")}
             onClick={() => changeUserSection("care")}
           >
-            <FormatListBulletedIcon
-              fontSize="small"
-              style={{ color: "white" }}
-            />
+            <VaccinesIcon fontSize="small" style={{ color: "white" }} />
             <span>{t("nav.care")}:</span>
             <img src={Arrow} className="icon_toggle" alt="Accordion toggle" />
           </div>

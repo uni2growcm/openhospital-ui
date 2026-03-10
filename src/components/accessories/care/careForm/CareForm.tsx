@@ -40,10 +40,6 @@ const CareForm: FC<CareFormProps> = ({
 
   const initialValues = getFromFields(fields, "value");
 
-  // const userName = useAppSelector(
-  //   (state: IState) => state.main.authentication.data?.username
-  // );
-
   const dispatch = useAppDispatch();
 
   const usersList = useAppSelector(
@@ -64,19 +60,6 @@ const CareForm: FC<CareFormProps> = ({
   });
 
   const { resetForm, setFieldValue, handleBlur } = formik;
-
-  // const onBlurCallback = useCallback(
-  //   (fieldName: string) =>
-  //     (e: React.FocusEvent<HTMLInputElement>, value: any | undefined) => {
-  //       handleBlur(e);
-  //       if (value && typeof value === "object" && "value" in value) {
-  //         setFieldValue(fieldName, value.value);
-  //       } else {
-  //         setFieldValue(fieldName, value || "");
-  //       }
-  //     },
-  //   [handleBlur, setFieldValue]
-  // );
 
   const dateFieldHandleOnChange = useCallback(
     (fieldName: string) => (value: any) => {
