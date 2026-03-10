@@ -305,7 +305,8 @@
       "illiterate": "Illiterate"
     },
     "motherSchoolingLevel": "Mother's educational level",
-    "fatherSchoolingLevel": "Father's educational level"
+    "fatherSchoolingLevel": "Father's educational level",
+    "care": "Care"
   },
   "encounters": {
     "admissions": "Admissions",
@@ -564,7 +565,8 @@
     "encounters": "Consultations",
     "conditioning": "Conditioning",
     "medicalHistory": "Medical History",
-    "userProfile": "User Profile"
+    "userProfile": "User Profile",
+    "care": "Soins"
   },
   "userProfile": "User Profile",
   "operation": {
@@ -1552,5 +1554,18 @@
     "tdr": "Rapid diagnostic tests",
     "othersconditioning": "Conditioning",
     "reheating": "Reheating"
+  },
+  "care": {
+    "id": "ID",
+    "note": "Remarks",
+    "observation": "Observation",
+    "plannedCare": "Planned Care",
+    "team": "Care teams",
+    "careDate": "Date of care",
+    "created": "Care created",
+    "updated": "Care updated",
+    "createsuccess": "Care created successfully",
+    "updatesuccess": "Care updated successfully",
+    "previousentries": "Previous Cares"
   }
 }

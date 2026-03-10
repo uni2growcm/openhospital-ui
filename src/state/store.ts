@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { admissionSlice } from "./admissions";
 import { billSlice } from "./bills";
+import { careSlice } from "./care";
 import { conditioningSlice } from "./conditionings";
 import { dashboardSlice } from "./dashboard";
 import { diseaseSlice } from "./diseases";
@@ -65,6 +66,7 @@ const reducer = combineReducers({
   encounters: encounterSlice.reducer,
   conditioning: conditioningSlice.reducer,
   medicalhistory: medicalHistorySlice.reducer,
+  care: careSlice.reducer,
 });
 
 export const store = configureStore({

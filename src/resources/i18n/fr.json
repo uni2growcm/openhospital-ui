@@ -272,7 +272,8 @@
       "illiterate": "Analphabète"
     },
     "motherSchoolingLevel": "Niveau scolaire de la mère",
-    "fatherSchoolingLevel": "Niveau scolaire de la père"
+    "fatherSchoolingLevel": "Niveau scolaire de la père",
+    "care": "Soins"
   },
   "encounters": {
     "admissions": "Admissions",
@@ -529,7 +530,8 @@
     "encounters": "Consultations",
     "conditioning": "Mise en condition",
     "medicalHistory": "Antécédent médical",
-    "userProfile": "Profile de l'utilisateur"
+    "userProfile": "Profile de l'utilisateur",
+    "care": "Soins"
   },
   "userProfile": "Profile de l'utilisateur",
   "operation": {
@@ -1504,5 +1506,18 @@
     "tdr": "Tests de diagnostic rapide",
     "othersconditioning": "Mise en condition",
     "reheating": "Rechauffage"
+  },
+  "care": {
+    "id": "ID",
+    "note": "Remarques",
+    "observation": "Observation",
+    "plannedCare": "Soins planifiés",
+    "team": "Équipes de soins",
+    "careDate": "Date de soins",
+    "created": "Soins créés",
+    "updated": "Soins mis à jour",
+    "createsuccess": "Soins créés avec succès",
+    "updatesuccess": "Soins mis à jour avec succès",
+    "previousentries": "Soins précédentes"
   }
 }

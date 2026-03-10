@@ -13,4 +13,5 @@ export type TUserSection =
   | "discharge"
   | "clinic"
   | "conditioning"
-  | "radiology";
+  | "radiology"
+  | "care";

@@ -1,3 +1,4 @@
+import Care from "components/accessories/care/Care";
 import Conditioning from "components/accessories/conditioning/Conditioning";
 import { Encounters } from "components/accessories/encounters/Encounters";
 import MedicalHistory from "components/accessories/medicalhistory/MedicalHistory";
@@ -100,6 +101,15 @@ export const PatientDetailsRoutes: FC<{
                 title={t("patient.medicalHistory")}
                 content={MedicalHistory}
               />
+            }
+          />
+        )}
+
+        {encountersEnabled && (
+          <Route
+            path="care"
+            element={
+              <PatientDetailsContent title={t("patient.care")} content={Care} />
             }
           />
         )}
