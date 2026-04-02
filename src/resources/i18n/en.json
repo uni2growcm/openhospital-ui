@@ -1278,5 +1278,10 @@
 			"time": "Study Time",
 			"lastUpdate": "Last Update"
 		}
+	},
+	"plugins": {
+		"buttons": {
+			"menu": "Plugins"
+		}
 	}
 }
