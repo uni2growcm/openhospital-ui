@@ -11,9 +11,10 @@ import { type FunctionComponent, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router';
 import { PATHS } from '~/consts';
+import { usePermission } from '~/libraries/permissionUtils/usePermission';
+import { usePluginsContext } from '~/plugins';
 import Arrow from '../../../assets/arrow-w.svg';
 import './styles.scss';
-import { usePermission } from '~/libraries/permissionUtils/usePermission';
 import type { IUserSection } from './types';
 
 interface IOwnProps {
@@ -29,6 +30,8 @@ const OutPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
 	const { id } = useParams();
 
 	const navigate = useNavigate();
+
+	const { remotes } = usePluginsContext();
 
 	const canReadRadiology = usePermission('radiology.read');
 
@@ -168,6 +171,24 @@ const OutPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
 					<img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
 				</div>
 			)}
+			{remotes
+				.filter((remote) => remote.location === 'patient')
+				.map((remote) => (
+					<div
+						key={remote.name}
+						className={
+							'align__element patientDetails__main_menu__item ' +
+							isActive(remote.name)
+						}
+						onClick={() => {
+							changeUserSection(remote.name as IUserSection);
+						}}
+					>
+						<Healing fontSize="small" style={{ color: 'white' }} />
+						<span>{remote.label}</span>
+						<img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
+					</div>
+				))}
 		</div>
 	);
 };

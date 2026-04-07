@@ -9147,6 +9147,9 @@ components:
           type: string
         location:
           type: string
+          enum:
+          - main
+          - patient
         styles:
           type: string
       required:
