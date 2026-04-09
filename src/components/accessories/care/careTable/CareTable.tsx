@@ -19,7 +19,7 @@ interface IOwnProps {
 
 const CareTable: FunctionComponent<IOwnProps> = ({
   shouldUpdateTable,
-  handleEdit,
+  handleEdit, 
 }) => {
   const { t } = useTranslation();
   const canUpdate = usePermission("conditionings.update");
