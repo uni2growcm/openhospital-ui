@@ -8,6 +8,7 @@ export type IUserSection =
 	| 'laboratory'
 	| 'operation'
 	| 'admission'
-	| 'discharge'
+	| 's'
 	| 'clinic'
-	| 'radiology';
+	| 'radiology'
+	| 'analysis';

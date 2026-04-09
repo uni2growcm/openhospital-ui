@@ -220,7 +220,8 @@
 		"updatesuccessful": "Le patient a été modifié avec succès.",
 		"createother": "Ajouter un autre patient",
 		"status": "État de santé",
-		"radiology": "Radiologie"
+		"radiology": "Radiologie",
+		"analysis": "Analyses de laboratoire"
 	},
 	"opd": {
 		"newopd": "Créer une nouvelle visite OPD",
@@ -419,7 +420,8 @@
 		"hospitalInfo": "Informations sur l'hôpital",
 		"hospital": "Hôpital",
 		"settings": "Paramètres",
-		"radiology": "Radiologie"
+		"radiology": "Radiologie",
+		"analysis": "Analyses de laboratoire"
 	},
 	"operation": {
 		"newoperation": "Nouvelle opération",
@@ -1278,5 +1280,15 @@
 			"time": "Temps d'étude",
 			"lastUpdate": "Dernière mise à jour"
 		}
+	},
+	"analysis": {
+		"id_rec": "ID",
+		"type_rec": "Type d'analyse",
+		"date_prescr": "Date de l'analyse",
+		"analysis": "Analyse",
+		"rec_num": "Numéro de l'enregistrement",
+		"variable": "Variable",
+		"result": "Résultat",
+		"previousentries": "Analyses précédentes"
 	}
 }
