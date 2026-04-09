@@ -1,5 +1,5 @@
 import type { IAdmissionsState } from './state/admissions/types';
-import { IAnalysisState } from './state/analysis';
+import type { IAnalysisState } from './state/analysis';
 import type { IBillsState } from './state/bills/types';
 import type { IDashboardState } from './state/dashboard/types';
 import type { IDiseaseState } from './state/diseases/types';
