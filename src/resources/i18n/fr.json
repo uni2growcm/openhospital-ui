@@ -220,7 +220,8 @@
 		"updatesuccessful": "Le patient a été modifié avec succès.",
 		"createother": "Ajouter un autre patient",
 		"status": "État de santé",
-		"radiology": "Radiologie"
+		"radiology": "Radiologie",
+		"labbookid": "ID de labBook"
 	},
 	"opd": {
 		"newopd": "Créer une nouvelle visite OPD",

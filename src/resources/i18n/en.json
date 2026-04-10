@@ -220,7 +220,8 @@
 		"updatesuccessful": "The patient was edit successfully.",
 		"createother": "Add Another Patient",
 		"status": "Status",
-		"radiology": "Radiology"
+		"radiology": "Radiology",
+		"labbookid": "LabBook ID"
 	},
 	"opd": {
 		"newopd": "Create new OPD Visit",
