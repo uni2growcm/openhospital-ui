@@ -6508,11 +6508,11 @@ components:
           format: int32
           description: lock
           example: 0
+        opd:
+          type: boolean
         male:
           type: boolean
         female:
-          type: boolean
-        opd:
           type: boolean
         pharmacy:
           type: boolean
@@ -6530,6 +6530,11 @@ components:
           type: integer
           format: int32
           readOnly: true
+        labBookId:
+          type: integer
+          format: int32
+          description: Code of the Patient in labBook software
+          example: 1
         firstName:
           type: string
           description: First name of the patient
