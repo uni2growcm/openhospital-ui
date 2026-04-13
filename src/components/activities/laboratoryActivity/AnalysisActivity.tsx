@@ -17,12 +17,10 @@ export const AnalysisActivity: FC = () => {
 		if (location.pathname.includes('new'))
 			return {
 				[t('nav.analysis')]: PATHS.analysis,
-				[t('nav.newanalysis')]: PATHS.analysis_new,
 			};
 		if (location.pathname.includes('edit'))
 			return {
 				[t('nav.analysis')]: PATHS.analysis,
-				[t('nav.editanalysis')]: `${PATHS.analysis_edit}`,
 			};
 		return {
 			[t('nav.analysis')]: PATHS.analysis,
