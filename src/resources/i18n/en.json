@@ -1291,6 +1291,7 @@
 		"variable": "Variable",
 		"result": "Result",
 		"previousentries": "Previous Analyses",
-		"print": "Print all analysis reports"
+		"print": "Print all analysis reports",
+		"printerror": "Printing of the analysis results failed"
 	}
 }

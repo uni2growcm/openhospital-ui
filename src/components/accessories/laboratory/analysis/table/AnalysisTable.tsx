@@ -1,16 +1,15 @@
 import { CircularProgress } from '@mui/material';
-import { type FunctionComponent, useEffect } from 'react';
+import { type FunctionComponent, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 import InfoBox from '~/components/accessories/infoBox/InfoBox';
-import type { AnalysisResponse } from '~/generated';
+import Table from '~/components/accessories/table/Table';
 import type { PatientHistoricResponse } from '~/generated/models/PatientHistoricResponse';
 import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
 import { getPatientAnalysis } from '~/state/analysis';
 import { getPatient } from '~/state/patients';
 import type { IState } from '~/types';
 import { renderDateTime } from '../../../../../libraries/formatUtils/dataFormatting';
-import Table from '../../../table/Table';
 
 interface IOwnProps {
 	handlePrint: (row: any) => void;
@@ -40,7 +39,8 @@ const AnalysisTable: FunctionComponent<IOwnProps> = ({ handlePrint }) => {
 	);
 
 	const data = useAppSelector(
-		(state) => state.analysis.getPatientAnalysis.data ?? [],
+		(state) =>
+			(state.analysis.getPatientAnalysis.data ?? {}) as PatientHistoricResponse,
 	);
 
 	useEffect(() => {
@@ -55,13 +55,8 @@ const AnalysisTable: FunctionComponent<IOwnProps> = ({ handlePrint }) => {
 		}
 	}, [dispatch, patient]);
 
-	const formatDataToDisplay = (data: PatientHistoricResponse) => {
-		if (data === undefined || data === null) {
-			return [];
-		}
-
-		const datas: AnalysisResponse[] = data.analyzes ?? [];
-		return datas.map((item) => {
+	const formatDataToDisplay = useMemo(() => {
+		return (data.analyzes ?? []).map((item) => {
 			return {
 				id_rec: item.id_rec ?? 0,
 				type_rec: item.type_rec ?? '',
@@ -72,7 +67,7 @@ const AnalysisTable: FunctionComponent<IOwnProps> = ({ handlePrint }) => {
 				result: item.result ?? '',
 			};
 		});
-	};
+	}, [data]);
 
 	const analysisStatus = useAppSelector(
 		(state) => state.analysis.getPatientAnalysis.status,
@@ -101,7 +96,7 @@ const AnalysisTable: FunctionComponent<IOwnProps> = ({ handlePrint }) => {
 					case 'IDLE':
 						return (
 							<Table
-								rowData={formatDataToDisplay(data as PatientHistoricResponse)}
+								rowData={formatDataToDisplay}
 								dateFields={dateFields}
 								tableHeader={header}
 								labelData={label}

@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { type FC, useEffect } from 'react';
+import { type FC, useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 import PatientDetailsActivityContent from '~/components/activities/patientDetailsActivityContent/PatientDetailsActivityContent';
@@ -12,13 +12,16 @@ import type {
 	PatientHistoricResponse,
 	ReportGroupedRequest,
 } from '../../../../generated';
-import AnalysisTable from './analysisTable/AnalysisTable';
 import './styles.scss';
+import InfoBox from '../../infoBox/InfoBox';
+import AnalysisTable from './table/AnalysisTable';
 
 export const Analysis: FC = () => {
 	const { t } = useTranslation();
 	const dispatch = useAppDispatch();
 	const { id } = useParams();
+	const [isPrintError, setIsPrintError] = useState<boolean>(false);
+	const infoBoxRef = useRef<HTMLDivElement>(null);
 	const data = useAppSelector(
 		(state) => state.analysis.getPatientAnalysis.data ?? [],
 	);
@@ -29,7 +32,7 @@ export const Analysis: FC = () => {
 
 	useEffect(() => {
 		if (id) {
-			dispatch(getPatient(id ?? ''));
+			dispatch(getPatient(id));
 		}
 	}, [id, dispatch]);
 
@@ -39,44 +42,54 @@ export const Analysis: FC = () => {
 		}
 	}, [dispatch, patient]);
 
-	const handlePrint = (row: any) => {
-		const analysisId = typeof row === 'number' ? row : row.id_rec;
-		if (!analysisId) return;
+	const handlePrint = useCallback(
+		(row: any) => {
+			setIsPrintError(false);
+			const analysisId = typeof row === 'number' ? row : row.id_rec;
+			if (!analysisId) return;
 
-		const reportGroupedRequest: ReportGroupedRequest = {
-			l_id_rec_vld: [analysisId],
-			filename: `patient-analysis-${analysisId}-${Date.now()}.pdf`,
-		} as ReportGroupedRequest;
-		dispatch(printPatientAnalysis(reportGroupedRequest))
-			.unwrap()
-			.then((blob) => {
-				downloadBlob(
-					blob,
-					`patient-analysis-${id}-${analysisId}-${Date.now()}.pdf`,
-				);
-			})
-			.catch((error) => {
-				console.error('Print failed:', error);
-			});
-	};
-
-	const handlePrintAllAnalysis = (data: PatientHistoricResponse) => {
-		if (data) {
-			const analysisIdlist = data.analyzes?.map((analyze) => analyze.id_rec);
 			const reportGroupedRequest: ReportGroupedRequest = {
-				l_id_rec_vld: analysisIdlist,
-				filename: `patient-analysis-${id}-${Date.now()}.pdf`,
+				l_id_rec_vld: [analysisId],
+				filename: `patient-analysis-${analysisId}-${Date.now()}.pdf`,
 			} as ReportGroupedRequest;
+
 			dispatch(printPatientAnalysis(reportGroupedRequest))
 				.unwrap()
 				.then((blob) => {
-					downloadBlob(blob, `patient-analysis-${id}-${Date.now()}.pdf`);
+					downloadBlob(
+						blob,
+						`patient-analysis-${id}-${analysisId}-${Date.now()}.pdf`,
+					);
 				})
-				.catch((error) => {
-					console.error('Print failed:', error);
+				.catch(() => {
+					setIsPrintError(true);
 				});
-		}
-	};
+		},
+		[id, dispatch],
+	);
+
+	const handlePrintAllAnalysis = useCallback(
+		(data: PatientHistoricResponse) => {
+			setIsPrintError(false);
+			if (data) {
+				const analysisIdlist = data.analyzes?.map((analyze) => analyze.id_rec);
+				const reportGroupedRequest: ReportGroupedRequest = {
+					l_id_rec_vld: analysisIdlist,
+					filename: `patient-analysis-${id}-${Date.now()}.pdf`,
+				} as ReportGroupedRequest;
+
+				dispatch(printPatientAnalysis(reportGroupedRequest))
+					.unwrap()
+					.then((blob) => {
+						downloadBlob(blob, `patient-analysis-${id}-${Date.now()}.pdf`);
+					})
+					.catch(() => {
+						setIsPrintError(true);
+					});
+			}
+		},
+		[id, dispatch],
+	);
 
 	return (
 		<PatientDetailsActivityContent title={t('patient.analysis')}>
@@ -93,6 +106,11 @@ export const Analysis: FC = () => {
 					</Button>
 				</div>
 				<AnalysisTable handlePrint={handlePrint} />
+				{isPrintError && (
+					<div ref={infoBoxRef} className="info-box-container">
+						<InfoBox type="error" message={t('analysis.printerror')} />
+					</div>
+				)}
 			</div>
 		</PatientDetailsActivityContent>
 	);
