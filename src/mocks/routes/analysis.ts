@@ -1,9 +1,9 @@
 import type { PollyServer } from '@pollyjs/core';
 import { analysisDTO } from '../fixtures/analysisDTO';
 
-export const admissionRoutes = (server: PollyServer) => {
-	server.namespace('/admissions', () => {
-		server.get('/patient/:patientCode').intercept((req, res) => {
+export const analysisRoutes = (server: PollyServer) => {
+	server.namespace('/labbook', () => {
+		server.get('/patients/:id/analysis').intercept((req, res) => {
 			const code = req.query.patientCode;
 			switch (code) {
 				case '10000':
@@ -15,6 +15,9 @@ export const admissionRoutes = (server: PollyServer) => {
 				default:
 					res.status(200).json(analysisDTO);
 			}
+		});
+		server.post('/reports/grouped/download').intercept((_req, res) => {
+			res.status(200);
 		});
 	});
 };

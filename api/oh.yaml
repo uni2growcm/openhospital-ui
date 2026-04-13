@@ -3055,6 +3055,27 @@ paths:
                 type: boolean
       security:
       - bearerAuth: []
+  /labbook/reports/grouped/download:
+    post:
+      tags:
+      - Labbook
+      operationId: generateReportGrouped
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReportGroupedRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: binary
+      security:
+      - bearerAuth: []
   /examtypes:
     get:
       tags:
@@ -5371,6 +5392,27 @@ paths:
                   $ref: "#/components/schemas/LabWithRowsDTO"
       security:
       - bearerAuth: []
+  /labbook/patients/{id}/analysis:
+    get:
+      tags:
+      - Labbook
+      operationId: getPatientAnalysis
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatientHistoricResponse"
+      security:
+      - bearerAuth: []
   /hospitals:
     get:
       tags:
@@ -6508,11 +6550,11 @@ components:
           format: int32
           description: lock
           example: 0
-        male:
+        opd:
           type: boolean
         female:
           type: boolean
-        opd:
+        male:
           type: boolean
         pharmacy:
           type: boolean
@@ -6530,6 +6572,11 @@ components:
           type: integer
           format: int32
           readOnly: true
+        labBookId:
+          type: integer
+          format: int32
+          description: Code of the Patient in labBook software
+          example: 1
         firstName:
           type: string
           description: First name of the patient
@@ -7318,11 +7365,11 @@ components:
           type: string
           description: "Flag record deleted, values are 'Y' OR 'N' "
           example: "N"
+        fhu:
+          type: string
         yprog:
           type: integer
           format: int32
-        fhu:
-          type: string
       required:
       - admDate
       - admitted
@@ -8517,6 +8564,16 @@ components:
       - quantity
       - units
       - ward
+    ReportGroupedRequest:
+      type: object
+      properties:
+        l_id_rec_vld:
+          type: array
+          items:
+            type: integer
+            format: int32
+        filename:
+          type: string
     ExamRowDTO:
       type: object
       properties:
@@ -8846,6 +8903,103 @@ components:
             $ref: "#/components/schemas/LabWithRowsDTO"
         pageInfo:
           $ref: "#/components/schemas/PageInfoDTO"
+    AnalysisResponse:
+      type: object
+      properties:
+        id_rec:
+          type: integer
+          format: int32
+        type_rec:
+          type: string
+        date_prescr:
+          type: string
+        analysis:
+          type: string
+        rec_num:
+          type: string
+        variable:
+          type: string
+        result:
+          type: string
+    LabbookRawPatient:
+      type: object
+      properties:
+        id_data:
+          type: integer
+          format: int32
+        id_user:
+          type: integer
+          format: int32
+        pat_ano:
+          type: integer
+          format: int32
+        pat_code:
+          type: string
+        pat_code_lab:
+          type: string
+        pat_name:
+          type: string
+        pat_firstname:
+          type: string
+        pat_birth:
+          type: string
+          format: date
+        pat_sex:
+          type: integer
+          format: int32
+        pat_address:
+          type: string
+        pat_zipcode:
+          type: string
+        pat_city:
+          type: string
+        pat_phone1:
+          type: string
+        pat_phone2:
+          type: string
+        pat_profession:
+          type: string
+        pat_maiden:
+          type: string
+        pat_district:
+          type: string
+        pat_pbox:
+          type: string
+        pat_birth_approx:
+          type: integer
+          format: int32
+        pat_age:
+          type: integer
+          format: int32
+        pat_age_unit:
+          type: integer
+          format: int32
+        pat_email:
+          type: string
+        pat_agreement:
+          type: string
+        pat_midname:
+          type: string
+        pat_nationality:
+          type: integer
+          format: int32
+        pat_resident:
+          type: string
+        pat_blood_group:
+          type: integer
+          format: int32
+        pat_blood_rhesus:
+          type: integer
+          format: int32
+    PatientHistoricResponse:
+      type: object
+      properties:
+        patient:
+          $ref: "#/components/schemas/LabbookRawPatient"
+        analyzes:
+          type: array
+          items:
+            $ref: "#/components/schemas/AnalysisResponse"
     PagePatientExaminationDTO:
       type: object
       properties:

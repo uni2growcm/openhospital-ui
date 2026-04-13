@@ -19,8 +19,6 @@ export const PATHS = {
 	laboratory_new: '/laboratory/new',
 	laboratory_edit: '/laboratory/:id/edit',
 	analysis: '/analysis',
-	analysis_new: '/analysis/new',
-	analysis_edit: '/analysis/:id/edit',
 	dashboard: '/dashboard',
 	admin: '/admin',
 	admin_types_base: '/admin/types',

@@ -1289,6 +1289,7 @@
 		"rec_num": "Numéro de l'enregistrement",
 		"variable": "Variable",
 		"result": "Résultat",
-		"previousentries": "Analyses précédentes"
+		"previousentries": "Analyses précédentes",
+		"print": "Imprimer tous les rapports d'analyse"
 	}
 }

@@ -1,10 +1,14 @@
-import { type FunctionComponent, useState } from 'react';
+import { CircularProgress } from '@mui/material';
+import { type FunctionComponent, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-	type AnalysisDTO,
-	type AnalysisItemDTO,
-	analysisDTO,
-} from '~/mocks/fixtures/analysisDTO';
+import { useParams } from 'react-router';
+import InfoBox from '~/components/accessories/infoBox/InfoBox';
+import type { AnalysisResponse } from '~/generated';
+import type { PatientHistoricResponse } from '~/generated/models/PatientHistoricResponse';
+import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
+import { getPatientAnalysis } from '~/state/analysis';
+import { getPatient } from '~/state/patients';
+import type { IState } from '~/types';
 import { renderDateTime } from '../../../../../libraries/formatUtils/dataFormatting';
 import Table from '../../../table/Table';
 
@@ -14,7 +18,8 @@ interface IOwnProps {
 
 const AnalysisTable: FunctionComponent<IOwnProps> = ({ handlePrint }) => {
 	const { t } = useTranslation();
-	const [data] = useState<AnalysisDTO>(analysisDTO);
+	const dispatch = useAppDispatch();
+	const { id } = useParams();
 
 	const header = ['id_rec', 'date_prescr'];
 	const dateFields = ['date_prescr'];
@@ -30,8 +35,33 @@ const AnalysisTable: FunctionComponent<IOwnProps> = ({ handlePrint }) => {
 	};
 	const order = ['id_rec', 'date_prescr'];
 
-	const formatDataToDisplay = (data: AnalysisItemDTO[]) => {
-		return data.map((item) => {
+	const patient = useAppSelector(
+		(state: IState) => state.patients.selectedPatient.data,
+	);
+
+	const data = useAppSelector(
+		(state) => state.analysis.getPatientAnalysis.data ?? [],
+	);
+
+	useEffect(() => {
+		if (id) {
+			dispatch(getPatient(id ?? ''));
+		}
+	}, [id, dispatch]);
+
+	useEffect(() => {
+		if (patient?.labBookId) {
+			dispatch(getPatientAnalysis({ id: patient.labBookId }));
+		}
+	}, [dispatch, patient]);
+
+	const formatDataToDisplay = (data: PatientHistoricResponse) => {
+		if (data === undefined || data === null) {
+			return [];
+		}
+
+		const datas: AnalysisResponse[] = data.analyzes ?? [];
+		return datas.map((item) => {
 			return {
 				id_rec: item.id_rec ?? 0,
 				type_rec: item.type_rec ?? '',
@@ -44,21 +74,51 @@ const AnalysisTable: FunctionComponent<IOwnProps> = ({ handlePrint }) => {
 		});
 	};
 
+	const analysisStatus = useAppSelector(
+		(state) => state.analysis.getPatientAnalysis.status,
+	);
+
+	const errorMessage = useAppSelector(
+		(state) =>
+			state.analysis.getPatientAnalysis.error?.message ||
+			t('common.somethingwrong'),
+	) as string;
+
 	return (
 		<div className="patientAnalysisTable">
 			<h5>{t('analysis.previousentries')}</h5>
-			<Table
-				rowData={formatDataToDisplay(data.analyzes)}
-				dateFields={dateFields}
-				tableHeader={header}
-				labelData={label}
-				columnsOrder={order}
-				rowsPerPage={5}
-				isCollapsabile={true}
-				onPrint={handlePrint}
-				initialOrderBy="disDate"
-				showEmptyCell={false}
-			/>
+			{(() => {
+				switch (analysisStatus) {
+					case 'FAIL':
+						return <InfoBox type="error" message={errorMessage} />;
+					case 'LOADING':
+						return (
+							<CircularProgress
+								style={{ marginLeft: '50%', position: 'relative' }}
+							/>
+						);
+					case 'SUCCESS':
+					case 'IDLE':
+						return (
+							<Table
+								rowData={formatDataToDisplay(data as PatientHistoricResponse)}
+								dateFields={dateFields}
+								tableHeader={header}
+								labelData={label}
+								columnsOrder={order}
+								rowsPerPage={5}
+								isCollapsabile={true}
+								onPrint={handlePrint}
+								initialOrderBy="id_rec"
+								showEmptyCell={false}
+							/>
+						);
+					case 'SUCCESS_EMPTY':
+						return <InfoBox type="info" message={t('common.emptydata')} />;
+					default:
+						return null;
+				}
+			})()}
 		</div>
 	);
 };

@@ -1,6 +1,7 @@
-import type { AnalysisDTO } from '~/mocks/fixtures/analysisDTO';
+import type { PatientHistoricResponse } from '~/generated';
 import type { ApiResponse } from '../types';
 
 export type IAnalysisState = {
-	getPatientAnalysis: ApiResponse<AnalysisDTO>;
+	getPatientAnalysis: ApiResponse<PatientHistoricResponse>;
+	printPatientAnalysis: ApiResponse<Blob>;
 };

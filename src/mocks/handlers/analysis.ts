@@ -5,7 +5,7 @@ import { badRequest, http } from '../utils';
 const analysis = analysisDTO;
 
 export const analysisHandlers = [
-	http.get('/labbook/patient/{patientCode}/analysis', ({ params }) => {
+	http.get('/labbook/patients/{id}/analysis', ({ params }) => {
 		if (params.patientCode === '10000') {
 			return HttpResponse.json(badRequest({ message: 'Request failed' }), {
 				status: 400,
@@ -17,5 +17,9 @@ export const analysisHandlers = [
 		}
 
 		return HttpResponse.json(analysis, { status: 200 });
+	}),
+
+	http.get('/labbook/reports/grouped/download', () => {
+		return HttpResponse.json({ status: 200 });
 	}),
 ];

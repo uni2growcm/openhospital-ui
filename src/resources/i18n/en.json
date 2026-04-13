@@ -421,7 +421,7 @@
 		"hospital": "Hospital",
 		"settings": "Settings",
 		"radiology": "Radiology",
-		"Analysis": "Laboratory Analysis"
+		"analysis": "Laboratory Analysis"
 	},
 	"operation": {
 		"newoperation": "New Operation",
@@ -1289,6 +1289,7 @@
 		"rec_num": "Record Number",
 		"variable": "Variable",
 		"result": "Result",
-		"previousentries": "Previous Analyses"
+		"previousentries": "Previous Analyses",
+		"print": "Print all analysis reports"
 	}
 }
