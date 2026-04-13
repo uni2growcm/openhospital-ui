@@ -6577,6 +6577,11 @@ components:
           format: int32
           description: Code of the Patient in labBook software
           example: 1
+        labBookId:
+          type: integer
+          format: int32
+          description: Code of the Patient in labBook software
+          example: 1
         firstName:
           type: string
           description: First name of the patient

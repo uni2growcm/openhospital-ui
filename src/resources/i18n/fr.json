@@ -221,6 +221,7 @@
 		"createother": "Ajouter un autre patient",
 		"status": "État de santé",
 		"radiology": "Radiologie",
+		"labbookid": "ID de labBook",
 		"analysis": "Analyses de laboratoire"
 	},
 	"opd": {
