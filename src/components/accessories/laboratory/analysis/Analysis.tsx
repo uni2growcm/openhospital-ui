@@ -8,8 +8,8 @@ import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
 import { getPatientAnalysis, printPatientAnalysis } from '~/state/analysis';
 import { getPatient } from '~/state/patients/thunk';
 import type { IState } from '~/types';
-import type { 
-  LabbookPatientHistoricDTO,
+import type {
+	LabbookPatientHistoricDTO,
 	ReportGroupedRequest,
 } from '../../../../generated';
 import './styles.scss';
@@ -65,7 +65,7 @@ export const Analysis: FC = () => {
 					setIsPrintError(true);
 				});
 		},
-		[id],
+		[id, dispatch],
 	);
 
 	const handlePrintAllAnalysis = useCallback(
@@ -88,32 +88,32 @@ export const Analysis: FC = () => {
 					});
 			}
 		},
-		[id],
+		[id, dispatch],
 	);
 
 	return (
-    <PatientDetailsActivityContent title={t("patient.analysis")}>
-      <div className="patientAnalysis">
-        <div className="submit_button">
-          <Button
-            type="submit"
-            variant="contained"
-            onClick={() =>
-              handlePrintAllAnalysis(data as LabbookPatientHistoricDTO)
-            }
-          >
-            {t("analysis.print")}
-          </Button>
-        </div>
-        <AnalysisTable handlePrint={handlePrint} />
-        {isPrintError && (
-          <div ref={infoBoxRef} className="info-box-container">
-            <InfoBox type="error" message={t("analysis.printerror")} />
-          </div>
-        )}
-      </div>
-    </PatientDetailsActivityContent>
-  );
+		<PatientDetailsActivityContent title={t('patient.analysis')}>
+			<div className="patientAnalysis">
+				<div className="submit_button">
+					<Button
+						type="submit"
+						variant="contained"
+						onClick={() =>
+							handlePrintAllAnalysis(data as LabbookPatientHistoricDTO)
+						}
+					>
+						{t('analysis.print')}
+					</Button>
+				</div>
+				<AnalysisTable handlePrint={handlePrint} />
+				{isPrintError && (
+					<div ref={infoBoxRef} className="info-box-container">
+						<InfoBox type="error" message={t('analysis.printerror')} />
+					</div>
+				)}
+			</div>
+		</PatientDetailsActivityContent>
+	);
 };
 
 export default Analysis;
