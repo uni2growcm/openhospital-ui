@@ -5410,7 +5410,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PatientHistoricResponse"
+                $ref: "#/components/schemas/LabbookPatientHistoricDTO"
       security:
       - bearerAuth: []
   /hospitals:
@@ -6550,13 +6550,13 @@ components:
           format: int32
           description: lock
           example: 0
-        opd:
+        pharmacy:
           type: boolean
         female:
           type: boolean
         male:
           type: boolean
-        pharmacy:
+        opd:
           type: boolean
       required:
       - beds
@@ -8903,103 +8903,103 @@ components:
             $ref: "#/components/schemas/LabWithRowsDTO"
         pageInfo:
           $ref: "#/components/schemas/PageInfoDTO"
-    AnalysisResponse:
+    LabbookAnalysisDTO:
       type: object
       properties:
-        id_rec:
+        id:
           type: integer
           format: int32
-        type_rec:
+        recordType:
           type: string
-        date_prescr:
+        prescriptionDate:
           type: string
         analysis:
           type: string
-        rec_num:
+        recordNumber:
           type: string
         variable:
           type: string
         result:
           type: string
-    LabbookRawPatient:
-      type: object
-      properties:
-        id_data:
-          type: integer
-          format: int32
-        id_user:
-          type: integer
-          format: int32
-        pat_ano:
-          type: integer
-          format: int32
-        pat_code:
-          type: string
-        pat_code_lab:
-          type: string
-        pat_name:
-          type: string
-        pat_firstname:
-          type: string
-        pat_birth:
-          type: string
-          format: date
-        pat_sex:
-          type: integer
-          format: int32
-        pat_address:
-          type: string
-        pat_zipcode:
-          type: string
-        pat_city:
-          type: string
-        pat_phone1:
-          type: string
-        pat_phone2:
-          type: string
-        pat_profession:
-          type: string
-        pat_maiden:
-          type: string
-        pat_district:
-          type: string
-        pat_pbox:
-          type: string
-        pat_birth_approx:
-          type: integer
-          format: int32
-        pat_age:
-          type: integer
-          format: int32
-        pat_age_unit:
-          type: integer
-          format: int32
-        pat_email:
-          type: string
-        pat_agreement:
-          type: string
-        pat_midname:
-          type: string
-        pat_nationality:
-          type: integer
-          format: int32
-        pat_resident:
-          type: string
-        pat_blood_group:
-          type: integer
-          format: int32
-        pat_blood_rhesus:
-          type: integer
-          format: int32
-    PatientHistoricResponse:
+    LabbookPatientHistoricDTO:
       type: object
       properties:
         patient:
-          $ref: "#/components/schemas/LabbookRawPatient"
+          $ref: "#/components/schemas/LabbookRawPatientDTO"
         analyzes:
           type: array
           items:
-            $ref: "#/components/schemas/AnalysisResponse"
+            $ref: "#/components/schemas/LabbookAnalysisDTO"
+    LabbookRawPatientDTO:
+      type: object
+      properties:
+        idData:
+          type: integer
+          format: int32
+        idUser:
+          type: integer
+          format: int32
+        ano:
+          type: integer
+          format: int32
+        code:
+          type: string
+        codeLab:
+          type: string
+        name:
+          type: string
+        firstname:
+          type: string
+        birth:
+          type: string
+          format: date
+        sex:
+          type: integer
+          format: int32
+        address:
+          type: string
+        zipcode:
+          type: string
+        city:
+          type: string
+        phone1:
+          type: string
+        phone2:
+          type: string
+        profession:
+          type: string
+        maiden:
+          type: string
+        district:
+          type: string
+        pbox:
+          type: string
+        birthApprox:
+          type: integer
+          format: int32
+        age:
+          type: integer
+          format: int32
+        ageUnit:
+          type: integer
+          format: int32
+        email:
+          type: string
+        agreement:
+          type: string
+        midname:
+          type: string
+        nationality:
+          type: integer
+          format: int32
+        resident:
+          type: string
+        bloodGroup:
+          type: integer
+          format: int32
+        bloodRhesus:
+          type: integer
+          format: int32
     PagePatientExaminationDTO:
       type: object
       properties:

@@ -6,16 +6,15 @@ const analysis = analysisDTO;
 
 export const analysisHandlers = [
 	http.get('/labbook/patients/{id}/analysis', ({ params }) => {
-		if (params.patientCode === '10000') {
+		if (params.id === '10000') {
 			return HttpResponse.json(badRequest({ message: 'Request failed' }), {
 				status: 400,
 			});
 		}
 
-		if (params.patientCode === '21266') {
+		if (params.id === '21266') {
 			return new HttpResponse(null, { status: 204 });
 		}
-
 		return HttpResponse.json(analysis, { status: 200 });
 	}),
 

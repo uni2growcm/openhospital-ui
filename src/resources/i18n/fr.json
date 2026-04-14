@@ -1283,11 +1283,11 @@
 		}
 	},
 	"analysis": {
-		"id_rec": "ID",
-		"type_rec": "Type d'analyse",
-		"date_prescr": "Date de l'analyse",
+		"id": "ID",
+		"recordType": "Type d'analyse",
+		"prescriptionDate": "Date de l'analyse",
 		"analysis": "Analyse",
-		"rec_num": "Numéro de l'enregistrement",
+		"recordNumber": "Numéro de l'enregistrement",
 		"variable": "Variable",
 		"result": "Résultat",
 		"previousentries": "Analyses précédentes",

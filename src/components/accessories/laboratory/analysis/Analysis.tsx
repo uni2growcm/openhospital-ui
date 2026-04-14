@@ -8,8 +8,8 @@ import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
 import { getPatientAnalysis, printPatientAnalysis } from '~/state/analysis';
 import { getPatient } from '~/state/patients/thunk';
 import type { IState } from '~/types';
-import type {
-	PatientHistoricResponse,
+import type { 
+  LabbookPatientHistoricDTO,
 	ReportGroupedRequest,
 } from '../../../../generated';
 import './styles.scss';
@@ -45,7 +45,7 @@ export const Analysis: FC = () => {
 	const handlePrint = useCallback(
 		(row: any) => {
 			setIsPrintError(false);
-			const analysisId = typeof row === 'number' ? row : row.id_rec;
+			const analysisId = typeof row === 'number' ? row : row.id;
 			if (!analysisId) return;
 
 			const reportGroupedRequest: ReportGroupedRequest = {
@@ -65,14 +65,14 @@ export const Analysis: FC = () => {
 					setIsPrintError(true);
 				});
 		},
-		[id, dispatch],
+		[id],
 	);
 
 	const handlePrintAllAnalysis = useCallback(
-		(data: PatientHistoricResponse) => {
+		(data: LabbookPatientHistoricDTO) => {
 			setIsPrintError(false);
 			if (data) {
-				const analysisIdlist = data.analyzes?.map((analyze) => analyze.id_rec);
+				const analysisIdlist = data.analyzes?.map((analyze) => analyze.id);
 				const reportGroupedRequest: ReportGroupedRequest = {
 					l_id_rec_vld: analysisIdlist,
 					filename: `patient-analysis-${id}-${Date.now()}.pdf`,
@@ -88,32 +88,32 @@ export const Analysis: FC = () => {
 					});
 			}
 		},
-		[id, dispatch],
+		[id],
 	);
 
 	return (
-		<PatientDetailsActivityContent title={t('patient.analysis')}>
-			<div className="patientAnalysis">
-				<div className="submit_button">
-					<Button
-						type="submit"
-						variant="contained"
-						onClick={() =>
-							handlePrintAllAnalysis(data as PatientHistoricResponse)
-						}
-					>
-						{t('analysis.print')}
-					</Button>
-				</div>
-				<AnalysisTable handlePrint={handlePrint} />
-				{isPrintError && (
-					<div ref={infoBoxRef} className="info-box-container">
-						<InfoBox type="error" message={t('analysis.printerror')} />
-					</div>
-				)}
-			</div>
-		</PatientDetailsActivityContent>
-	);
+    <PatientDetailsActivityContent title={t("patient.analysis")}>
+      <div className="patientAnalysis">
+        <div className="submit_button">
+          <Button
+            type="submit"
+            variant="contained"
+            onClick={() =>
+              handlePrintAllAnalysis(data as LabbookPatientHistoricDTO)
+            }
+          >
+            {t("analysis.print")}
+          </Button>
+        </div>
+        <AnalysisTable handlePrint={handlePrint} />
+        {isPrintError && (
+          <div ref={infoBoxRef} className="info-box-container">
+            <InfoBox type="error" message={t("analysis.printerror")} />
+          </div>
+        )}
+      </div>
+    </PatientDetailsActivityContent>
+  );
 };
 
 export default Analysis;

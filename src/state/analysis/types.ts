@@ -1,7 +1,7 @@
-import type { PatientHistoricResponse } from '~/generated';
+import type { LabbookPatientHistoricDTO } from '~/generated';
 import type { ApiResponse } from '../types';
 
 export type IAnalysisState = {
-	getPatientAnalysis: ApiResponse<PatientHistoricResponse>;
+	getPatientAnalysis: ApiResponse<LabbookPatientHistoricDTO>;
 	printPatientAnalysis: ApiResponse<Blob>;
 };

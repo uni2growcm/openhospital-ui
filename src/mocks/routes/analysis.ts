@@ -4,7 +4,7 @@ import { analysisDTO } from '../fixtures/analysisDTO';
 export const analysisRoutes = (server: PollyServer) => {
 	server.namespace('/labbook', () => {
 		server.get('/patients/:id/analysis').intercept((req, res) => {
-			const code = req.query.patientCode;
+			const code = req.query.id;
 			switch (code) {
 				case '10000':
 					res.status(400);
