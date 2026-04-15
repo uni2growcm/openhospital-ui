@@ -5,8 +5,13 @@ export { http };
 
 export async function enableMocking() {
 	if (import.meta.env.VITE_USE_MOCK_API !== 'true') {
+		console.warn(
+			'Mocking is disabled. Set VITE_USE_MOCK_API to true to enable it.',
+		);
 		return;
 	}
+
+	console.info('Enabling API mocking');
 
 	makeServer();
 }
