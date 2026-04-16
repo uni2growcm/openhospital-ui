@@ -17,11 +17,11 @@ import { PATHS } from '~/consts';
 import Arrow from '../../../assets/arrow-w.svg';
 import { Permission } from '../../../libraries/permissionUtils/Permission';
 import './styles.scss';
-import { usePermission } from '~/libraries/permissionUtils/usePermission';
-import type { IUserSection } from './types';
 import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
+import { usePermission } from '~/libraries/permissionUtils/usePermission';
 import { getPatient } from '~/state/patients/thunk';
-import { IState } from '~/types';
+import type { IState } from '~/types';
+import type { IUserSection } from './types';
 
 interface IOwnProps {
 	setUserSection: React.Dispatch<React.SetStateAction<IUserSection>>;
