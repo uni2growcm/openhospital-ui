@@ -8,7 +8,12 @@ import {
 	Pageview,
 } from '@mui/icons-material';
 import type React from 'react';
-import { type FunctionComponent, useCallback, useEffect } from 'react';
+import {
+	type FunctionComponent,
+	useCallback,
+	useEffect,
+	useState,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router';
 import { PATHS } from '~/consts';
@@ -35,6 +40,10 @@ const OutPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
 	const navigate = useNavigate();
 
 	const dispatch = useAppDispatch();
+
+	const [enabledMock] = useState<boolean>(
+		import.meta.env.VITE_USE_MOCK_API === 'true',
+	);
 
 	const canReadRadiology = usePermission('radiology.read');
 
@@ -80,10 +89,12 @@ const OutPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
 	);
 
 	useEffect(() => {
-		if (id) {
-			dispatch(getPatient(id));
+		if (!enabledMock) {
+			if (id) {
+				dispatch(getPatient(id));
+			}
 		}
-	}, [id, dispatch]);
+	}, [id, dispatch, enabledMock]);
 
 	return (
 		<div
@@ -144,7 +155,7 @@ const OutPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
 				<img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
 			</div>
 
-			{patient?.labBookId && (
+			{(patient?.labBookId || enabledMock) && (
 				<div
 					className={
 						'align__element patientDetails__main_menu__item ' +
