@@ -10,7 +10,7 @@ import {
 	SettingsApplications,
 } from '@mui/icons-material';
 import type React from 'react';
-import { type FunctionComponent, useCallback } from 'react';
+import { type FunctionComponent, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router';
 import { PATHS } from '~/consts';
@@ -19,6 +19,9 @@ import { Permission } from '../../../libraries/permissionUtils/Permission';
 import './styles.scss';
 import { usePermission } from '~/libraries/permissionUtils/usePermission';
 import type { IUserSection } from './types';
+import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
+import { getPatient } from '~/state/patients/thunk';
+import { IState } from '~/types';
 
 interface IOwnProps {
 	setUserSection: React.Dispatch<React.SetStateAction<IUserSection>>;
@@ -34,6 +37,8 @@ const InPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
 	const { id } = useParams();
 
 	const navigate = useNavigate();
+
+	const dispatch = useAppDispatch();
 
 	const canReadRadiology = usePermission('radiology.read');
 
@@ -53,6 +58,16 @@ const InPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
 		},
 		[navigate, setUserSection, id],
 	);
+
+	const patient = useAppSelector(
+		(state: IState) => state.patients.selectedPatient.data,
+	);
+
+	useEffect(() => {
+		if (id) {
+			dispatch(getPatient(id));
+		}
+	}, [id, dispatch]);
 
 	return (
 		<div
@@ -113,19 +128,21 @@ const InPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
 				<img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
 			</div>
 
-			<div
-				className={
-					'align__element patientDetails__main_menu__item ' +
-					isActive('analysis')
-				}
-				onClick={() => {
-					changeUserSection('analysis');
-				}}
-			>
-				<ManageHistory fontSize="small" style={{ color: 'white' }} />
-				<span>{t('nav.analysis')}:</span>
-				<img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
-			</div>
+			{patient?.labBookId && (
+				<div
+					className={
+						'align__element patientDetails__main_menu__item ' +
+						isActive('analysis')
+					}
+					onClick={() => {
+						changeUserSection('analysis');
+					}}
+				>
+					<ManageHistory fontSize="small" style={{ color: 'white' }} />
+					<span>{t('nav.analysis')}:</span>
+					<img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
+				</div>
+			)}
 
 			{false && (
 				<div
