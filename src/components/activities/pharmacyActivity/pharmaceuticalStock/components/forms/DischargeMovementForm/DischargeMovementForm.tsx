@@ -7,7 +7,6 @@ import {
   DateFormField,
   TextFormField,
 } from "~/components/accessories/forms";
-import { LotDTO, MovementDTO, WardDTO } from "~/generated";
 import { DATETIME_FORMAT } from "~/libraries/consts";
 import { useTranslation } from "~/libraries/hooks";
 import { useMovements, useWards } from "~/libraries/hooks/api";
@@ -17,6 +16,7 @@ import { DischargeLotFormField } from "./DischargeLotFormField";
 import { MovementDTOSchema } from "./consts";
 import "./styles.scss";
 import { DisChargeMovementProps, TFormValues } from "./types";
+import { LotDTO, MovementDTO, WardDTO } from "~/generated";
 
 export function DischargeMovementForm({
   onSubmit,
@@ -30,7 +30,6 @@ export function DischargeMovementForm({
   const wardFilter = useCallback((ward: WardDTO) => !!ward.pharmacy, []);
   const { wards } = useWards(wardFilter);
 
-  // ✅ FORM SETUP
   const { control, handleSubmit, setValue } = useForm<TFormValues>({
     resolver: zodResolver(MovementDTOSchema),
     defaultValues: {
@@ -44,13 +43,10 @@ export function DischargeMovementForm({
     },
   });
 
-  // ✅ WATCH FORM VALUES (NO TYPE MUTATION)
   const values = useWatch({ control });
 
-  // ✅ DERIVED DATA (SAFE)
   const selectedMedical = selectMedical(values.medical ?? 0);
 
-  // ✅ SUBMIT HANDLER
   const handleFormSubmit: SubmitHandler<TFormValues> = useCallback(
     (data) => {
       const filledLots =
@@ -95,7 +91,6 @@ export function DischargeMovementForm({
   );
 }, [selectedMedical, setValue]);
 
-  // ✅ OPTIONS
   const medicalOptions = useMemo(
     () =>
       medicals.map((medical) => ({
