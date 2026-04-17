@@ -30,10 +30,10 @@ export const EditCommuneForm = ({
   const [showDialog, setShowDialog] = useState(false);
 
   const validationSchema = Yup.object({
-  name: Yup.string()
-    .required(t("commune.nameisrequired"))
-    .max(100, t("commune.nameshouldnotexceed")),
-});
+    name: Yup.string()
+      .required(t("commune.nameisrequired"))
+      .max(100, t("commune.nameshouldnotexceed")),
+  });
 
   useEffect(() => {
     if (hasSucceeded) {
@@ -68,9 +68,9 @@ export const EditCommuneForm = ({
         />
       )}
 
-       <div className="editCommuneForm__actions">
-          <DiscardButton />
-        </div>
+      <div className="editCommuneForm__actions">
+        <DiscardButton />
+      </div>
 
       <form onSubmit={formik.handleSubmit}>
         <div className="editCommuneForm__item textfield fullwidth">   
@@ -86,7 +86,7 @@ export const EditCommuneForm = ({
           />
         </div>
       
-       <div className="form-button">
+        <div className="form-button">
           <Button
             type="submit"
             variant="contained"

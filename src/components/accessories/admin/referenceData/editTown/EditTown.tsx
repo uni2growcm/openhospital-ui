@@ -37,7 +37,7 @@ export const EditTown = () => {
     (state) => state.towns.update
   );
 
-  const getTown = useAppSelector((state) => state.towns.getById);
+  const townRes = useAppSelector((state) => state.towns.getById);
 
   useEffect(() => {
     if (id) {
@@ -52,14 +52,14 @@ export const EditTown = () => {
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (getTown.hasSucceeded) {
-      if (getTown.data) {
-        setTown(getTown.data);
+    if (townRes.hasSucceeded) {
+      if (townRes.data) {
+        setTown(townRes.data);
       } else {
         setTownNotFound(true);
       }
     }
-  }, [getTown.hasSucceeded, getTown.data]);
+  }, [townRes.hasSucceeded, townRes.data]);
 
   const handleSubmit = (town: TownDTO) => {
     if (isEdit) {
@@ -79,30 +79,28 @@ export const EditTown = () => {
   const failed = isEdit ? hasFailed : createState.hasFailed;
   const errorObj = isEdit ? error : createState.error;
 
-  if (isEdit && (getTown.isLoading || !town)) {
-    return (
-      <CircularProgress style={{ marginLeft: "50%", position: "relative" }} />
-    );
-  }
-
   return (
-    <EditTownForm
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-      isLoading={loading}
-      hasSucceeded={succeeded}
-      hasFailed={failed}
-      error={errorObj}
-      title={isEdit ? t("town.edittown") : t("town.newtown")}
-      successTitle={
-        isEdit ? t("town.updated") : t("town.created")
-      }
-      successInfo={
-        isEdit
-          ? t("town.updatedsuccessfully")
-          : t("town.createdsuccessfully")
-      }
-      onSuccess={handleSuccess}
-    />
+    <div>
+      {isEdit && (townRes.isLoading || !town) ? (
+        <CircularProgress style={{ marginLeft: "50%", position: "relative" }} />
+      ) : (
+        <EditTownForm
+          initialValues={initialValues}
+          onSubmit={handleSubmit}
+          isLoading={loading}
+          hasSucceeded={succeeded}
+          hasFailed={failed}
+          error={errorObj}
+          title={isEdit ? t("town.edittown") : t("town.newtown")}
+          successTitle={isEdit ? t("town.updated") : t("town.created")}
+          successInfo={
+            isEdit
+              ? t("town.updatedsuccessfully")
+              : t("town.createdsuccessfully")
+          }
+          onSuccess={handleSuccess}
+        />
+      )}
+    </div>
   );
 };

@@ -1,7 +1,6 @@
 import { CircularProgress } from "@mui/material";
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
-
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import {
   deleteOccupation,
@@ -9,17 +8,16 @@ import {
   getOccupations,
   updateOccupationReset,
 } from "state/occupation";
-
 import { OccupationDTO } from "generated";
 import { scrollToElement } from "libraries/uiUtils/scrollToElement";
-
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import Table from "components/accessories/table/Table";
-
-import classes from "./OccupationTable.module.scss";
 import { IProps } from "./types";
 
-export const OccupationsTable = ({ headerActions, onEdit }: IProps) => {
+export const OccupationsTable: React.FC<IProps> = ({
+  headerActions,
+  onEdit,
+}) => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const infoBoxRef = useRef<HTMLDivElement>(null);
@@ -90,61 +88,53 @@ export const OccupationsTable = ({ headerActions, onEdit }: IProps) => {
     ? deleteState.error?.message
     : updateState.error?.message;
 
-  if (status === "LOADING") {
-    return (
-      <div className={classes.table}>
-        <CircularProgress style={{ marginLeft: "50%" }} />
-      </div>
-    );
-  }
+  return (
+    <div>
+      {(() => {
+        switch (status) {
+          case "LOADING":
+            return <CircularProgress style={{ marginLeft: "50%" }} />;
 
-  if (status === "FAIL") {
-    return (
-      <div className={classes.table}>
-        <InfoBox type="error" message={error?.message} />
-      </div>
-    );
-  }
+          case "FAIL":
+            return <InfoBox type="error" message={error?.message} />;
 
-  if (status === "SUCCESS_EMPTY") {
-    return (
-      <div className={classes.table}>
-        <InfoBox type="info" message={t("common.emptydata")} />
-      </div>
-    );
-  }
+          case "SUCCESS_EMPTY":
+            return <InfoBox type="info" message={t("common.emptydata")} />;
 
-  if (status === "SUCCESS") {
-    return (
-      <div className={classes.table}>
-        {(deleteState.hasFailed || updateState.hasFailed) && (
-          <div ref={infoBoxRef} className="info-box-container">
-            <InfoBox type="error" message={t(actionErrorMessage)} />
-          </div>
-        )}
+          case "SUCCESS":
+            return (
+              <div>
+                {(deleteState.hasFailed || updateState.hasFailed) && (
+                  <div ref={infoBoxRef} className="info-box-container">
+                    <InfoBox type="error" message={t(actionErrorMessage)} />
+                  </div>
+                )}
 
-         <Table
-          rowData={rowData}
-          tableHeader={header}
-          labelData={label}
-          columnsOrder={order}
-          rowsPerPage={15}
-          manualFilter={false}
-          isCollapsabile={false}
-          rawData={(rowData ?? []).map((occupation) => ({
-            ...occupation
-          }))}
-          rowKey="userName"
-          headerActions={headerActions}
-          onEdit={onEdit}
-          onDelete={handleDelete}
-          labels={{
-            delete: { message: t("occupation.confirmDeletion") },
-          }}
-        />
-      </div>
-    );
-  }
-
-  return null;
+                <Table
+                  rowData={rowData}
+                  tableHeader={header}
+                  labelData={label}
+                  columnsOrder={order}
+                  rowsPerPage={15}
+                  manualFilter={false}
+                  isCollapsabile={false}
+                  rawData={(rowData ?? []).map((occupation) => ({
+                    ...occupation,
+                  }))}
+                  rowKey="userName"
+                  headerActions={headerActions}
+                  onEdit={onEdit}
+                  onDelete={handleDelete}
+                  labels={{
+                    delete: { message: t("occupation.confirmDeletion") },
+                  }}
+                />
+              </div>
+            );
+          default:
+            return null;
+        }
+      })()}
+    </div>
+  );
 };

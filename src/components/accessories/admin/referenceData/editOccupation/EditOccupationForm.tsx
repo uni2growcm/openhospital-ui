@@ -30,10 +30,10 @@ export const EditOccupationForm = ({
   const [showDialog, setShowDialog] = useState(false);
 
   const validationSchema = Yup.object({
-  name: Yup.string()
-    .required(t("occupation.nameisrequired"))
-    .max(100, t("occupation.nameshouldnotexceed")),
-});
+    name: Yup.string()
+      .required(t("occupation.nameisrequired"))
+      .max(100, t("occupation.nameshouldnotexceed")),
+  });
 
   useEffect(() => {
     if (hasSucceeded) {

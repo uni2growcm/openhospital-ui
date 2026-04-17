@@ -2,12 +2,9 @@ import { Tab, Tabs } from "@mui/material";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
-
 import { useAppDispatch } from "libraries/hooks/redux";
 import Button from "../../button/Button";
-
 import { PATHS } from "consts";
-
 import { CommunesTable } from "./communeTable";
 import { EthnicsTable } from "./ethnicTable";
 import { OccupationsTable } from "./occupationTable";

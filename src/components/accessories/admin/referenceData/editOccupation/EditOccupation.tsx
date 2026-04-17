@@ -36,7 +36,7 @@ export const EditOccupation = () => {
   );
   const createState = useAppSelector((state) => state.occupations.create);
 
-  const getOccupation = useAppSelector((state) => state.occupations.getById);
+  const occupationRes = useAppSelector((state) => state.occupations.getById);
 
   useEffect(() => {
     if (id) {
@@ -51,14 +51,14 @@ export const EditOccupation = () => {
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (getOccupation.hasSucceeded) {
-      if (getOccupation.data) {
-        setOccupation(getOccupation.data);
+    if (occupationRes.hasSucceeded) {
+      if (occupationRes.data) {
+        setOccupation(occupationRes.data);
       } else {
         setOccupationNotFound(true);
       }
     }
-  }, [getOccupation.hasSucceeded, getOccupation.data]);
+  }, [occupationRes.hasSucceeded, occupationRes.data]);
 
   const handleSubmit = (occupation: OccupationDTO) => {
     if (isEdit) {
@@ -77,30 +77,34 @@ export const EditOccupation = () => {
   const failed = isEdit ? hasFailed : createState.hasFailed;
   const errorObj = isEdit ? error : createState.error;
 
-  if (isEdit && (getOccupation.isLoading || !occupation)) {
-    return (
-      <CircularProgress style={{ marginLeft: "50%", position: "relative" }} />
-    );
-  }
-
   return (
-    <EditOccupationForm
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-      isLoading={loading}
-      hasSucceeded={succeeded}
-      hasFailed={failed}
-      error={errorObj}
-      title={isEdit ? t("occupation.editoccupation") : t("occupation.newoccupation")}
-      successTitle={
-        isEdit ? t("occupation.updated") : t("occupation.created")
-      }
-      successInfo={
-        isEdit
-          ? t("occupation.updatedsuccessfully")
-          : t("occupation.createdsuccessfully")
-      }
-      onSuccess={handleSuccess}
-    />
+    <div>
+      {isEdit && (occupationRes.isLoading || !occupation) ? (
+        <CircularProgress style={{ marginLeft: "50%", position: "relative" }} />
+      ) : (
+        <EditOccupationForm
+          initialValues={initialValues}
+          onSubmit={handleSubmit}
+          isLoading={loading}
+          hasSucceeded={succeeded}
+          hasFailed={failed}
+          error={errorObj}
+          title={
+            isEdit
+              ? t("occupation.editoccupation")
+              : t("occupation.newoccupation")
+          }
+          successTitle={
+            isEdit ? t("occupation.updated") : t("occupation.created")
+          }
+          successInfo={
+            isEdit
+              ? t("occupation.updatedsuccessfully")
+              : t("occupation.createdsuccessfully")
+          }
+          onSuccess={handleSuccess}
+        />
+      )}
+    </div>
   );
 };

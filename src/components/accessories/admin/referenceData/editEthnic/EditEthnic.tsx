@@ -36,7 +36,7 @@ export const EditEthnic = () => {
   );
   const createState = useAppSelector((state) => state.ethnics.create);
 
-  const getEthnic = useAppSelector((state) => state.ethnics.getById);
+  const ethnicRes = useAppSelector((state) => state.ethnics.getById);
 
   useEffect(() => {
     if (id) {
@@ -51,14 +51,14 @@ export const EditEthnic = () => {
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (getEthnic.hasSucceeded) {
-      if (getEthnic.data) {
-        setEthnic(getEthnic.data);
+    if (ethnicRes.hasSucceeded) {
+      if (ethnicRes.data) {
+        setEthnic(ethnicRes.data);
       } else {
         setEthnicNotFound(true);
       }
     }
-  }, [getEthnic.hasSucceeded, getEthnic.data]);
+  }, [ethnicRes.hasSucceeded, ethnicRes.data]);
 
   const handleSubmit = (ethnic: EthnicDTO) => {
     if (isEdit) {
@@ -77,30 +77,28 @@ export const EditEthnic = () => {
   const failed = isEdit ? hasFailed : createState.hasFailed;
   const errorObj = isEdit ? error : createState.error;
 
-  if (isEdit && (getEthnic.isLoading || !ethnic)) {
-    return (
-      <CircularProgress style={{ marginLeft: "50%", position: "relative" }} />
-    );
-  }
-
   return (
-    <EditEthnicForm
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-      isLoading={loading}
-      hasSucceeded={succeeded}
-      hasFailed={failed}
-      error={errorObj}
-      title={isEdit ? t("ethnic.editethnic") : t("ethnic.newethnic")}
-      successTitle={
-        isEdit ? t("ethnic.updated") : t("ethnic.created")
-      }
-      successInfo={
-        isEdit
-          ? t("ethnic.updatedsuccessfully")
-          : t("ethnic.createdsuccessfully")
-      }
-      onSuccess={handleSuccess}
-    />
+    <div>
+      {isEdit && (ethnicRes.isLoading || !ethnic) ? (
+        <CircularProgress style={{ marginLeft: "50%", position: "relative" }} />
+      ) : (
+        <EditEthnicForm
+          initialValues={initialValues}
+          onSubmit={handleSubmit}
+          isLoading={loading}
+          hasSucceeded={succeeded}
+          hasFailed={failed}
+          error={errorObj}
+          title={isEdit ? t("ethnic.editethnic") : t("ethnic.newethnic")}
+          successTitle={isEdit ? t("ethnic.updated") : t("ethnic.created")}
+          successInfo={
+            isEdit
+              ? t("ethnic.updatedsuccessfully")
+              : t("ethnic.createdsuccessfully")
+          }
+          onSuccess={handleSuccess}
+        />
+      )}
+    </div>
   );
 };

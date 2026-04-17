@@ -2,9 +2,9 @@ import { CommuneDTO } from "generated";
 import { ApiResponse } from "state/types";
 
 export type ICommuneState = {
-  communeList: ApiResponse<Array<CommuneDTO>>;
-  getById: ApiResponse<CommuneDTO>;
-  create: ApiResponse<CommuneDTO>;
-  update: ApiResponse<CommuneDTO>;
-  delete: ApiResponse<CommuneDTO>;
+  getCommunes: ApiResponse<Array<CommuneDTO>>;
+  getCommuneById: ApiResponse<CommuneDTO>;
+  createCommune: ApiResponse<CommuneDTO>;
+  updateCommune: ApiResponse<CommuneDTO>;
+  deleteCommune: ApiResponse<CommuneDTO>;
 };

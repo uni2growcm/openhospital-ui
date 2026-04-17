@@ -7,12 +7,12 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router";
 import { Navigate } from "react-router-dom";
 import {
-    createCommune,
-    createCommuneReset,
-    getCommuneById,
-    getCommuneByIdReset,
-    updateCommune,
-    updateCommuneReset,
+  createCommune,
+  createCommuneReset,
+  getCommuneById,
+  getCommuneByIdReset,
+  updateCommune,
+  updateCommuneReset,
 } from "state/commune";
 import { EditCommuneForm } from "./EditCommuneForm";
 
@@ -32,15 +32,12 @@ export const EditCommune = () => {
   };
 
   const { isLoading, hasSucceeded, hasFailed, error } = useAppSelector(
-    (state) => state.communes.update
+    (state) => state.communes.updateCommune
   );
-  const createState = useAppSelector((state) => state.communes.create);
+  const createState = useAppSelector((state) => state.communes.createCommune);
 
-  const getCommune = useAppSelector((state) => state.communes.getById);
+  const communeRes = useAppSelector((state) => state.communes.getCommuneById);
 
-  /**
-   * Load commune
-   */
   useEffect(() => {
     if (id) {
       dispatch(getCommuneById(Number(id)));
@@ -53,18 +50,15 @@ export const EditCommune = () => {
     };
   }, [dispatch, id]);
 
-  /**
-   * Set commune after fetch
-   */
   useEffect(() => {
-    if (getCommune.hasSucceeded) {
-      if (getCommune.data) {
-        setCommune(getCommune.data);
+    if (communeRes.hasSucceeded) {
+      if (communeRes.data) {
+        setCommune(communeRes.data);
       } else {
         setCommuneNotFound(true);
       }
     }
-  }, [getCommune.hasSucceeded, getCommune.data]);
+  }, [communeRes.hasSucceeded, communeRes.data]);
 
   const handleSubmit = (values: CommuneDTO) => {
     if (isEdit) {
@@ -76,36 +70,35 @@ export const EditCommune = () => {
 
   if (communeNotFound) return <Navigate to={PATHS.admin} />;
 
-  const initialValues: CommuneDTO = commune || ({ id: 0, name: "" } as CommuneDTO);
+  const initialValues: CommuneDTO =
+    commune || ({ id: 0, name: "" } as CommuneDTO);
 
   const loading = isEdit ? isLoading : createState.isLoading;
   const succeeded = isEdit ? hasSucceeded : createState.hasSucceeded;
   const failed = isEdit ? hasFailed : createState.hasFailed;
   const errorObj = isEdit ? error : createState.error;
 
-  if (isEdit && (getCommune.isLoading || !commune)) {
-    return (
-      <CircularProgress style={{ marginLeft: "50%", position: "relative" }} />
-    );
-  }
-
   return (
-    <EditCommuneForm
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-      isLoading={loading}
-      hasSucceeded={succeeded}
-      hasFailed={failed}
-      error={errorObj}
-      successTitle={
-        isEdit ? t("commune.updated") : t("commune.created")
-      }
-      successInfo={
-        isEdit
-          ? t("commune.updatedsuccessfully")
-          : t("commune.createdsuccessfully")
-      }
-      onSuccess={handleSuccess}
-    />
+    <div>
+      {isEdit && (communeRes.isLoading || !commune) ? (
+        <CircularProgress style={{ marginLeft: "50%", position: "relative" }} />
+      ) : (
+        <EditCommuneForm
+          initialValues={initialValues}
+          onSubmit={handleSubmit}
+          isLoading={loading}
+          hasSucceeded={succeeded}
+          hasFailed={failed}
+          error={errorObj}
+          successTitle={isEdit ? t("commune.updated") : t("commune.created")}
+          successInfo={
+            isEdit
+              ? t("commune.updatedsuccessfully")
+              : t("commune.createdsuccessfully")
+          }
+          onSuccess={handleSuccess}
+        />
+      )}
+    </div>
   );
 };

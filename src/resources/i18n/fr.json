@@ -560,7 +560,7 @@
     "id": "ID",
     "name": "Nom",
     "confirmDeletion": "Êtes-vous sûr de vouloir supprimer ce groupe ethnique ?",
-    "editethnic": "Modifier le groupe ethnique",
+    "editEthnic": "Modifier le groupe ethnique",
     "newethnic": "Nouveau groupe ethnique",
     "updated": "Groupe ethnique mis à jour",
     "updatedsuccessfully": "Le groupe ethnique a été mis à jour avec succès.",

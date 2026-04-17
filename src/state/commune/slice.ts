@@ -9,71 +9,71 @@ export const communeSlice = createSlice({
   initialState: initial,
   reducers: {
     createCommuneReset: (state) => {
-      state.create = initial.create;
+      state.createCommune = initial.createCommune;
     },
     updateCommuneReset: (state) => {
-      state.update = initial.update;
+      state.updateCommune = initial.updateCommune;
     },
     deleteCommuneReset: (state) => {
-      state.delete = initial.delete;
+      state.deleteCommune = initial.deleteCommune;
     },
     getCommuneByIdReset: (state) => {
-      state.getById = initial.getById;
+      state.getCommuneById = initial.getCommuneById;
     },
   },
   extraReducers: (builder) =>
     builder
       // Get Communes
       .addCase(thunks.getCommunes.pending, (state) => {
-        state.communeList = ApiResponse.loading();
+        state.getCommunes = ApiResponse.loading();
       })
       .addCase(thunks.getCommunes.fulfilled, (state, action) => {
-        state.communeList = isEmpty(action.payload)
+        state.getCommunes = isEmpty(action.payload)
           ? ApiResponse.empty()
           : ApiResponse.value(action.payload);
       })
       .addCase(thunks.getCommunes.rejected, (state, action) => {
-        state.communeList = ApiResponse.error(action.payload);
+        state.getCommunes = ApiResponse.error(action.payload);
       })
       // Get Commune by id
       .addCase(thunks.getCommuneById.pending, (state) => {
-        state.getById = ApiResponse.loading();
+        state.getCommuneById = ApiResponse.loading();
       })
       .addCase(thunks.getCommuneById.fulfilled, (state, action) => {
-        state.getById = ApiResponse.value(action.payload);
+        state.getCommuneById = ApiResponse.value(action.payload);
       })
       .addCase(thunks.getCommuneById.rejected, (state, action) => {
-        state.getById = ApiResponse.error(action.payload);
+        state.getCommuneById = ApiResponse.error(action.payload);
       })
       // Create Commune
       .addCase(thunks.createCommune.pending, (state) => {
-        state.create = ApiResponse.loading();
+        state.createCommune = ApiResponse.loading();
       })
       .addCase(thunks.createCommune.fulfilled, (state, action) => {
-        state.create = ApiResponse.value(action.payload);
+        state.createCommune = ApiResponse.value(action.payload);
       })
       .addCase(thunks.createCommune.rejected, (state, action) => {
-        state.create = ApiResponse.error(action.payload);
+        state.createCommune = ApiResponse.error(action.payload);
       })
       // Update Commune
       .addCase(thunks.updateCommune.pending, (state) => {
-        state.update = ApiResponse.loading();
+        state.updateCommune = ApiResponse.loading();
       })
       .addCase(thunks.updateCommune.fulfilled, (state, action) => {
-        state.update = ApiResponse.value(action.payload);
+        state.updateCommune = ApiResponse.value(action.payload);
       })
       .addCase(thunks.updateCommune.rejected, (state, action) => {
-        state.update = ApiResponse.error(action.payload);
+        state.updateCommune = ApiResponse.error(action.payload);
       })
       // Delete Commune
       .addCase(thunks.deleteCommune.pending, (state) => {
-        state.delete = ApiResponse.loading();
+        state.deleteCommune = ApiResponse.loading();
       })
       .addCase(thunks.deleteCommune.fulfilled, (state, action) => {
-        state.delete.status = "SUCCESS";
+        state.deleteCommune.status = "SUCCESS";
       })
       .addCase(thunks.deleteCommune.rejected, (state, action) => {
-        state.delete = ApiResponse.error(action.payload);
+        state.deleteCommune = ApiResponse.error(action.payload);
       }),
 });
 

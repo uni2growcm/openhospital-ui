@@ -1,11 +1,14 @@
-import { ApiResponse } from "state/types";
 import { CommuneDTO } from "generated";
+import { ApiResponse } from "state/types";
 import { ICommuneState } from "./types";
 
 export const initial: ICommuneState = {
-  communeList: new ApiResponse({ status: "IDLE", data: new Array<CommuneDTO>() }),
-  getById: new ApiResponse({ status: "IDLE" }),
-  create: new ApiResponse({ status: "IDLE" }),
-  update: new ApiResponse({ status: "IDLE" }),
-  delete: new ApiResponse({ status: "IDLE" }),
+  getCommunes: new ApiResponse({
+    status: "IDLE",
+    data: new Array<CommuneDTO>(),
+  }),
+  getCommuneById: new ApiResponse({ status: "IDLE" }),
+  createCommune: new ApiResponse({ status: "IDLE" }),
+  updateCommune: new ApiResponse({ status: "IDLE" }),
+  deleteCommune: new ApiResponse({ status: "IDLE" }),
 };

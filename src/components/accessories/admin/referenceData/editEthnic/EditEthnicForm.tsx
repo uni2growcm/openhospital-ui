@@ -30,10 +30,10 @@ export const EditEthnicForm = ({
   const [showDialog, setShowDialog] = useState(false);
 
   const validationSchema = Yup.object({
-  name: Yup.string()
-    .required(t("ethnic.nameisrequired"))
-    .max(100, t("ethnic.nameshouldnotexceed")),
-});
+    name: Yup.string()
+      .required(t("ethnic.nameisrequired"))
+      .max(100, t("ethnic.nameshouldnotexceed")),
+  });
 
   useEffect(() => {
     if (hasSucceeded) {
@@ -68,9 +68,9 @@ export const EditEthnicForm = ({
         />
       )}
 
-       <div className="editEthnicForm__actions">
-          <DiscardButton />
-        </div>
+      <div className="editEthnicForm__actions">
+        <DiscardButton />
+      </div>
 
       <form onSubmit={formik.handleSubmit}>
         <div className="editEthnicForm__item textfield fullwidth">   

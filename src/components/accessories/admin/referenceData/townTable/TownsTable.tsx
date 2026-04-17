@@ -1,7 +1,6 @@
 import { CircularProgress } from "@mui/material";
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
-
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import {
   deleteTown,
@@ -9,22 +8,20 @@ import {
   getTowns,
   updateTownReset,
 } from "state/town";
-
 import { TownDTO } from "generated";
 import { scrollToElement } from "libraries/uiUtils/scrollToElement";
-
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import Table from "components/accessories/table/Table";
-
-import classes from "./TownsTable.module.scss";
 import { IProps } from "./types";
 
-export const TownsTable = ({ headerActions, onEdit }: IProps) => {
+export const TownsTable: React.FC<IProps> = ({ headerActions, onEdit }) => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const infoBoxRef = useRef<HTMLDivElement>(null);
 
-  const { data, status, error } = useAppSelector((state) => state.towns.townList);
+  const { data, status, error } = useAppSelector(
+    (state) => state.towns.townList
+  );
   const deleteState = useAppSelector((state) => state.towns.delete);
   const updateState = useAppSelector((state) => state.towns.update);
 
@@ -87,59 +84,51 @@ export const TownsTable = ({ headerActions, onEdit }: IProps) => {
     ? deleteState.error?.message
     : updateState.error?.message;
 
-  if (status === "LOADING") {
-    return (
-      <div className={classes.table}>
-        <CircularProgress style={{ marginLeft: "50%" }} />
-      </div>
-    );
-  }
+  return (
+    <div>
+      {(() => {
+        switch (status) {
+          case "LOADING":
+            return <CircularProgress style={{ marginLeft: "50%" }} />;
 
-  if (status === "FAIL") {
-    return (
-      <div className={classes.table}>
-        <InfoBox type="error" message={error?.message} />
-      </div>
-    );
-  }
+          case "FAIL":
+            return <InfoBox type="error" message={error?.message} />;
 
-  if (status === "SUCCESS_EMPTY") {
-    return (
-      <div className={classes.table}>
-        <InfoBox type="info" message={t("common.emptydata")} />
-      </div>
-    );
-  }
+          case "SUCCESS_EMPTY":
+            return <InfoBox type="info" message={t("common.emptydata")} />;
 
-  if (status === "SUCCESS") {
-    return (
-      <div className={classes.table}>
-        {(deleteState.hasFailed || updateState.hasFailed) && (
-          <div ref={infoBoxRef} className="info-box-container">
-            <InfoBox type="error" message={t(actionErrorMessage)} />
-          </div>
-        )}
+          case "SUCCESS":
+            return (
+              <div>
+                {(deleteState.hasFailed || updateState.hasFailed) && (
+                  <div ref={infoBoxRef} className="info-box-container">
+                    <InfoBox type="error" message={t(actionErrorMessage)} />
+                  </div>
+                )}
 
-        <Table
-          rowData={rowData}
-          rawData={data}
-          tableHeader={header}
-          columnsOrder={order}
-          labelData={label}
-          rowsPerPage={15}
-          manualFilter={false}
-          isCollapsabile={false}
-          onEdit={onEdit}
-          onDelete={handleDelete}
-          rowKey="id"
-          headerActions={headerActions}
-          labels={{
-            delete: { message: t("town.confirmDeletion") },
-          }}
-        />
-      </div>
-    );
-  }
-
-  return null;
+                <Table
+                  rowData={rowData}
+                  rawData={data}
+                  tableHeader={header}
+                  columnsOrder={order}
+                  labelData={label}
+                  rowsPerPage={15}
+                  manualFilter={false}
+                  isCollapsabile={false}
+                  onEdit={onEdit}
+                  onDelete={handleDelete}
+                  rowKey="id"
+                  headerActions={headerActions}
+                  labels={{
+                    delete: { message: t("town.confirmDeletion") },
+                  }}
+                />
+              </div>
+            );
+          default:
+            return null;
+        }
+      })()}
+    </div>
+  );
 };

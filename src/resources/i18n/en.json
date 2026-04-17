@@ -773,7 +773,7 @@
     "id": "ID",
     "name": "Name",
     "confirmDeletion": "Are you sure you want to delete this ethnic group?",
-    "editethnic": "Edit Ethnic",
+    "editEthnic": "Edit Ethnic",
     "newethnic": "New Ethnic",
     "updated": "Ethnic Updated",
     "updatedsuccessfully": "Ethnic has been updated successfully.",

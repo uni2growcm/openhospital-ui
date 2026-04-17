@@ -30,10 +30,10 @@ export const EditTownForm = ({
   const [showDialog, setShowDialog] = useState(false);
 
   const validationSchema = Yup.object({
-  name: Yup.string()
-    .required(t("town.nameisrequired"))
-    .max(100, t("town.nameshouldnotexceed")),
-});
+    name: Yup.string()
+      .required(t("town.nameisrequired"))
+      .max(100, t("town.nameshouldnotexceed")),
+  });
 
   useEffect(() => {
     if (hasSucceeded) {
