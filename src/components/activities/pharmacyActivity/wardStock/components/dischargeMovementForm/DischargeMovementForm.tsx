@@ -1,22 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormControlLabel, Radio, RadioGroup, TextField } from "@mui/material";
-import Button from "components/accessories/button/Button";
-import {
-  AutocompleteFormField,
-  DateFormField,
-  TextFormField,
-} from "components/accessories/forms";
-import InfoBox from "components/accessories/infoBox/InfoBox";
-import PatientPicker from "components/accessories/patientPicker/PatientPicker";
-import { LotFormField } from "components/activities/pharmacyActivity/pharmaceuticalStock/components/forms/lotFormField";
-import { MedicalDTO, MovementWardDTO, WardDTO } from "generated";
-import { DATETIME_FORMAT } from "libraries/consts";
-import { useTranslation } from "libraries/hooks";
-import { useWardOptions, useWards } from "libraries/hooks/api";
-import { useAppDispatch } from "libraries/hooks/redux";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { LocaleKey } from "resources/types";
 import {
   TFormValues,
   createMovementWardDTOSchema,
@@ -24,6 +9,17 @@ import {
 } from "./const";
 import "./style.scss";
 import { DestinationType, IWardDischargeFormProps } from "./types";
+import { useTranslation } from "~/libraries/hooks";
+import { useAppDispatch } from "~/libraries/hooks/redux";
+import { MedicalDTO, MovementWardDTO, WardDTO } from "~/generated";
+import { useWardOptions, useWards } from "~/libraries/hooks/api";
+import { LocaleKey } from "~/resources";
+import { DATETIME_FORMAT } from "~/libraries/consts";
+import { AutocompleteFormField, DateFormField, TextFormField } from "~/components/accessories/forms";
+import PatientPicker from "~/components/accessories/patientPicker/PatientPicker";
+import InfoBox from "~/components/accessories/infoBox/InfoBox";
+import Button from "~/components/accessories/button/Button";
+import { LotFormField } from "../../../pharmaceuticalStock/components/forms/lotFormField";
 
 export function WardDischargeForm({
   medical,
@@ -264,10 +260,11 @@ export function WardDischargeForm({
       )}
 
       <div className="wardDischargeForm__actions">
-        <Button variant="outlined" onClick={onCancel}>
+        <Button type="button" variant="outlined" onClick={onCancel}>
           {t("common.discard")}
         </Button>
         <Button
+          type="submit"
           variant="contained"
           onClick={handleDischargeMovement}
           disabled={isSubmitting}

@@ -1,9 +1,3 @@
-import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
-import InfoBox from "components/accessories/infoBox/InfoBox";
-import { PATHS } from "consts";
-import { MovementWardDTO } from "generated";
-import { useWardMedicals } from "libraries/hooks/api";
-import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, {
   useCallback,
   useEffect,
@@ -13,15 +7,17 @@ import React, {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useOutletContext, useParams } from "react-router";
-import {
-  createMovementReset,
-  createWardMovement,
-  resetCreateWardMovement,
-} from "state/pharmacy";
 import checkIcon from "../../../../assets/check-icon.png";
 import { PharmacyActivityContent } from "../PharmacyActivityContent";
 import { WardDischargeForm } from "./components/dischargeMovementForm/DischargeMovementForm";
 import { DisChargeMovementTransitionState } from "./types";
+import { useWardMedicals } from "~/libraries/hooks/api";
+import { useAppDispatch, useAppSelector } from "~/libraries/hooks/redux";
+import { PATHS } from "~/consts";
+import { MovementWardDTO } from "~/generated";
+import { createMovementReset, createWardMovement, resetCreateWardMovement } from "~/state/pharmacy";
+import ConfirmationDialog from "~/components/accessories/confirmationDialog/ConfirmationDialog";
+import InfoBox from "~/components/accessories/infoBox/InfoBox";
 
 export function WardDischargeMovement() {
   const params = useParams();

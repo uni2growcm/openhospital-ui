@@ -1,4 +1,3 @@
-import { useAppSelector } from "libraries/hooks/redux";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router";
@@ -6,6 +5,7 @@ import { PATHS } from "../../../consts";
 import AppHeader from "../../accessories/appHeader/AppHeader";
 import Footer from "../../accessories/footer/Footer";
 import "./styles.scss";
+import { useAppSelector } from "~/libraries/hooks/redux";
 
 export function PharmacyActivity() {
   const { t } = useTranslation();

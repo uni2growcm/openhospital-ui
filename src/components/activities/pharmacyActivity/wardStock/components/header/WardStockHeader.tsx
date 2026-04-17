@@ -1,22 +1,15 @@
 import { MedicalServices } from "@mui/icons-material";
-import Button from "components/accessories/button/Button";
-import GetDownloadDateDialog from "components/activities/pharmacyActivity/getDownloadDateDialog/GetDownloadDateDialog";
-import { PrintProperties } from "components/activities/pharmacyActivity/getDownloadDateDialog/types";
-import {
-  PrintPharmaceuticalStockWardPdfStockWardReportModelEnum,
-  WardDTO,
-} from "generated";
-import { downloadBlob } from "libraries/downloadUtils/downloardUtils";
-import { formatDateToCustomISO } from "libraries/formatUtils";
-import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  printPharmaceuticalStockWardExcel,
-  printPharmaceuticalStockWardPdf,
-  updateWardStockFIilter,
-} from "state/pharmacy";
 import "./styles.scss";
+import { useAppDispatch, useAppSelector } from "~/libraries/hooks/redux";
+import { printPharmaceuticalStockWardExcel, printPharmaceuticalStockWardPdf, updateWardStockFIilter } from "~/state/pharmacy";
+import { PrintProperties } from "../../../getDownloadDateDialog/types";
+import { formatDateToCustomISO } from "~/libraries/formatUtils";
+import { PrintPharmaceuticalStockWardPdfStockWardReportModelEnum, WardDTO } from "~/generated";
+import { downloadBlob } from "~/libraries/downloadUtils/downloadUtils";
+import Button from "~/components/accessories/button/Button";
+import GetDownloadDateDialog from "../../../getDownloadDateDialog/GetDownloadDateDialog";
 
 const types = ["outcoming", "incoming", "drugs"] as const;
 const actions = ["report", "excel"];
@@ -121,6 +114,7 @@ export const WardStockHeader = () => {
       <div className="ward-stock-wards">
         {wards.map((ward) => (
           <Button
+            type="button"
             key={ward.code}
             color={filter.ward?.code === ward.code ? "primary" : "inherit"}
             variant={"contained"}

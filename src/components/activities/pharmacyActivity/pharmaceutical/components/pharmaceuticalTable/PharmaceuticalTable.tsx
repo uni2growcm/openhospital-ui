@@ -1,17 +1,17 @@
 import { CircularProgress } from "@mui/material";
-import checkIcon from "assets/check-icon.png";
-import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
-import InfoBox from "components/accessories/infoBox/InfoBox";
-import Table from "components/accessories/table/Table";
-import { TFilterField } from "components/accessories/table/filter/types";
-import { PATHS } from "consts";
-import { MedicalDTO } from "generated";
-import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
+import checkIcon from "~/assets/check-icon.png";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import { deleteMedical } from "state/medicals";
-import { getMedicals } from "state/pharmacy";
+import ConfirmationDialog from "~/components/accessories/confirmationDialog/ConfirmationDialog";
+import InfoBox from "~/components/accessories/infoBox/InfoBox";
+import { TFilterField } from "~/components/accessories/table/filter/types";
+import Table from "~/components/accessories/table/Table";
+import { PATHS } from "~/consts";
+import { MedicalDTO } from "~/generated";
+import { useAppDispatch, useAppSelector } from "~/libraries/hooks/redux";
+import { deleteMedical } from "~/state/medicals";
+import { getMedicals } from "~/state/pharmacy";
 
 interface PharmaceuticalTableProps {
   onDataChange: (data: any[]) => void;

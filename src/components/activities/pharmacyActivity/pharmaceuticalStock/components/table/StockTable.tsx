@@ -1,16 +1,16 @@
 import { CircularProgress } from "@mui/material";
-import Button from "components/accessories/button/Button";
-import InfoBox from "components/accessories/infoBox/InfoBox";
-import Table from "components/accessories/table/Table";
-import { TFilterField } from "components/accessories/table/filter/types";
-import { AdjustQuantityForm } from "components/activities/pharmacyActivity/pharmaceuticalStock/components/forms/adjustQuantityForm/AdjustQuantityForm";
-import StockModal from "components/activities/pharmacyActivity/pharmaceuticalStock/components/modal/Modal";
-import { MovementDTO } from "generated";
-import { renderDateTime } from "libraries/formatUtils/dataFormatting";
-import { useTranslation } from "libraries/hooks";
-import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useEffect, useMemo, useState } from "react";
-import { getMovements } from "state/pharmacy";
+import Button from "~/components/accessories/button/Button";
+import InfoBox from "~/components/accessories/infoBox/InfoBox";
+import { TFilterField } from "~/components/accessories/table/filter/types";
+import Table from "~/components/accessories/table/Table";
+import { MovementDTO } from "~/generated";
+import { renderDateTime } from "~/libraries/formatUtils";
+import { useTranslation } from "~/libraries/hooks";
+import { useAppDispatch, useAppSelector } from "~/libraries/hooks/redux";
+import { getMovements } from "~/state/pharmacy";
+import StockModal from "../modal/Modal";
+import { AdjustQuantityForm } from "../forms/adjustQuantityForm/AdjustQuantityForm";
 
 export function StockTable({
   onDataChange,
@@ -93,7 +93,7 @@ export function StockTable({
     return data.map((item) => ({
       refNo: item.refNo,
       lot: item.lot?.code,
-      expDate: renderDateTime(item.lot?.dueDate),
+      expDate: renderDateTime(item.lot?.dueDate ?? ""),
       type: t(
         `pharmacy.stock.movementType.${
           item.type?.type === "+" ? "charge" : "discharge"
@@ -104,7 +104,7 @@ export function StockTable({
       medical: item.medical?.description,
       cost: item.lot?.cost,
       total: item.lot?.cost ? item.lot.cost * item.quantity : "",
-      prepDate: renderDateTime(item.lot?.preparationDate),
+      prepDate: renderDateTime(item.lot?.preparationDate ?? ""),
       origin: item.supplier?.supName || "",
       user: "",
       medicalType: item.medical.type?.description || "",

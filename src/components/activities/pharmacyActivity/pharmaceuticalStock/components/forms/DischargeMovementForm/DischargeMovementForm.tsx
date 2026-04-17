@@ -1,21 +1,20 @@
-import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
-import Button from "components/accessories/button/Button";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useCallback, useEffect, useMemo } from "react";
+import { SubmitHandler, useForm, useWatch } from "react-hook-form";
+import Button from "~/components/accessories/button/Button";
 import {
   AutocompleteFormField,
   DateFormField,
   TextFormField,
-} from "components/accessories/forms";
-import { MovementDTO, WardDTO } from "generated";
-import { DATETIME_FORMAT } from "libraries/consts";
-import { useTranslation } from "libraries/hooks";
-import { useMovements, useWards } from "libraries/hooks/api";
-import { useAppDispatch } from "libraries/hooks/redux";
-import React, { useCallback, useEffect, useMemo } from "react";
-import { useForm, useWatch } from "react-hook-form";
-import { getWards } from "state/ward";
-import z from "zod";
+} from "~/components/accessories/forms";
+import { LotDTO, MovementDTO, WardDTO } from "~/generated";
+import { DATETIME_FORMAT } from "~/libraries/consts";
+import { useTranslation } from "~/libraries/hooks";
+import { useMovements, useWards } from "~/libraries/hooks/api";
+import { useAppDispatch } from "~/libraries/hooks/redux";
+import { getWards } from "~/state/wards";
 import { DischargeLotFormField } from "./DischargeLotFormField";
-import { LotDTOSchema, MovementDTOSchema } from "./consts";
+import { MovementDTOSchema } from "./consts";
 import "./styles.scss";
 import { DisChargeMovementProps, TFormValues } from "./types";
 
@@ -24,38 +23,36 @@ export function DischargeMovementForm({
   onCancel,
 }: DisChargeMovementProps) {
   const { t } = useTranslation();
-
   const dispatch = useAppDispatch();
 
   const { selectMedical, medicals } = useMovements();
 
   const wardFilter = useCallback((ward: WardDTO) => !!ward.pharmacy, []);
-
   const { wards } = useWards(wardFilter);
 
+  // ✅ FORM SETUP
   const { control, handleSubmit, setValue } = useForm<TFormValues>({
+    resolver: zodResolver(MovementDTOSchema),
     defaultValues: {
       date: new Date(),
+      medical: 0,
       type: "",
+      ward: "",
       quantity: 0,
       refNo: "",
       lots: [],
     },
-    resolver: standardSchemaResolver(MovementDTOSchema),
   });
 
-  const values = useWatch({
-    control,
-    compute: (values) => {
-      return {
-        ...values,
-        medical: selectMedical(+values.medical),
-      };
-    },
-  });
+  // ✅ WATCH FORM VALUES (NO TYPE MUTATION)
+  const values = useWatch({ control });
 
-  const handleFormSubmit = useCallback(
-    (data: TFormValues) => {
+  // ✅ DERIVED DATA (SAFE)
+  const selectedMedical = selectMedical(values.medical ?? 0);
+
+  // ✅ SUBMIT HANDLER
+  const handleFormSubmit: SubmitHandler<TFormValues> = useCallback(
+    (data) => {
       const filledLots =
         data.lots?.filter(
           (lot) => lot.ward && lot.quantity && lot.quantity > 0
@@ -78,24 +75,27 @@ export function DischargeMovementForm({
 
       onSubmit?.(movements);
     },
-    [onSubmit, medicals]
+    [onSubmit, medicals, wards]
   );
 
   useEffect(() => {
-    setValue(
-      "lots",
-      (values.medical?.lots ?? []).map((lot) => ({
-        ...lot,
-        preparationDate: lot.preparationDate
-          ? new Date(lot.preparationDate)
-          : undefined,
-        dueDate: lot.dueDate ? new Date(lot.dueDate) : undefined,
-        ward: "",
-        quantity: undefined,
-      })) as z.infer<typeof LotDTOSchema>[]
-    );
-  }, [values.medical, setValue]);
+  setValue(
+    "lots",
+    (selectedMedical?.lots ?? []).map((lot: LotDTO) => ({
+      ...lot,
+      preparationDate: lot.preparationDate
+        ? new Date(lot.preparationDate)
+        : new Date(),
+      dueDate: lot.dueDate
+        ? new Date(lot.dueDate)
+        : new Date(),
+      ward: "",
+      quantity: undefined,
+    }))
+  );
+}, [selectedMedical, setValue]);
 
+  // ✅ OPTIONS
   const medicalOptions = useMemo(
     () =>
       medicals.map((medical) => ({
@@ -105,6 +105,7 @@ export function DischargeMovementForm({
     [medicals]
   );
 
+  // ✅ FETCH WARDS
   useEffect(() => {
     dispatch(getWards());
   }, [dispatch]);
@@ -112,7 +113,7 @@ export function DischargeMovementForm({
   return (
     <div className="dischargeMovementForm">
       <form
-        className="form-grid-layout  gap-2 w-full"
+        className="form-grid-layout gap-2 w-full"
         onSubmit={handleSubmit(handleFormSubmit)}
       >
         <DateFormField
@@ -121,6 +122,7 @@ export function DischargeMovementForm({
           control={control}
           name="date"
         />
+
         <div className="col-span-full">
           <AutocompleteFormField
             label={t("pharmacy.form.fields.medical")}
@@ -129,23 +131,28 @@ export function DischargeMovementForm({
             options={medicalOptions}
           />
         </div>
+
         <TextFormField
           label={t("pharmacy.form.fields.refNo")}
           control={control}
           name="refNo"
         />
-        <div className="col-start-1 col-span-full"></div>
-        {values.medical && (
+
+        <div className="col-span-full" />
+
+        {selectedMedical && (
           <DischargeLotFormField
-            key={values.medical.code}
+            key={selectedMedical.code}
             wards={wards}
             control={control}
           />
         )}
+
         <div className="col-span-full flex gap-2 justify-end">
           <Button type="reset" dataCy="reset-button" onClick={onCancel}>
             {t("pharmacy.form.fields.cancel")}
           </Button>
+
           <Button variant="contained" dataCy="submit-button" type="submit">
             {t("pharmacy.form.fields.discharge")}
           </Button>

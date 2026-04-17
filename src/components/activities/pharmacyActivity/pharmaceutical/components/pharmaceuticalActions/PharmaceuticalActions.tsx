@@ -1,28 +1,22 @@
-import Button from "components/accessories/button/Button";
-import GetDownloadDateDialog from "components/activities/pharmacyActivity/getDownloadDateDialog/GetDownloadDateDialog";
-import { PrintProperties } from "components/activities/pharmacyActivity/getDownloadDateDialog/types";
-import { PATHS } from "consts";
-import { downloadBlob } from "libraries/downloadUtils/downloardUtils";
-import { useAppDispatch } from "libraries/hooks/redux";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  printPharmaceuticalAMCPdf,
-  printPharmaceuticalExpirationPdf,
-  printPharmaceuticalOrderPdf,
-  printPharmaceuticalStockCardPdf,
-  printPharmaceuticalStockPdf,
-} from "state/pharmacy";
+import { Link } from "react-router-dom";
+import { downloadBlob } from "~/libraries/downloadUtils/downloadUtils";
+import { useAppDispatch } from "~/libraries/hooks/redux";
+import { printPharmaceuticalAMCPdf, printPharmaceuticalExpirationPdf, printPharmaceuticalOrderPdf, printPharmaceuticalStockCardPdf, printPharmaceuticalStockPdf } from "~/state/pharmacy";
+import warningIcon from "../../../../../../assets/warning-icon.png";
 import PharmaceuticalExpiringDialog from "../pharmaceuticalExpiringDialog/PharmaceuticalExpiringDialog";
 import {
   ExperingPeriod,
   ExpiringMonth,
 } from "../pharmaceuticalExpiringDialog/type";
 import "./styles.scss";
-import warningIcon from "../../../../../../assets/warning-icon.png";
-import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
+import { PrintProperties } from "../../../getDownloadDateDialog/types";
+import Button from "~/components/accessories/button/Button";
+import { PATHS } from "~/consts";
+import GetDownloadDateDialog from "../../../getDownloadDateDialog/GetDownloadDateDialog";
+import ConfirmationDialog from "~/components/accessories/confirmationDialog/ConfirmationDialog";
 import * as XLSX from 'xlsx';
-import { Link } from "react-router-dom";
 
 interface PharmaceuticalActionsProps {
   dataToExport: any[];

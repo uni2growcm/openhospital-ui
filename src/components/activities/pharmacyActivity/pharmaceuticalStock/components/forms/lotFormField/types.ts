@@ -1,5 +1,5 @@
-import { MedicalDTO } from "generated";
 import { Control, Path } from "react-hook-form";
+import { MedicalDTO } from "~/generated";
 
 export type LotFormFieldProps<T extends Record<string, any>> = {
   medical: MedicalDTO;

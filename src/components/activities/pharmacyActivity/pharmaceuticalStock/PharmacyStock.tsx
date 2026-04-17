@@ -1,10 +1,10 @@
-import { PATHS } from "consts";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useOutletContext } from "react-router";
 import { PharmacyActivityContent } from "../PharmacyActivityContent";
 import { StockActions, StockTable } from "./components";
 import "./styles.scss";
+import { PATHS } from "~/consts";
 
 export function PharmacyStock() {
   const { t } = useTranslation();

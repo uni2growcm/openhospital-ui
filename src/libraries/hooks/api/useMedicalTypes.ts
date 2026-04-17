@@ -1,14 +1,15 @@
 import { useCallback, useMemo } from "react";
 import { useAppSelector } from "../redux";
+import { MedicalTypeDTO } from "~/generated";
 
 export function useMedicalTypes() {
   const medicalTypes = useAppSelector(
-    (state) => state.pharmacy.getMedicalTypes.data ?? []
+    (state): MedicalTypeDTO[] => state.pharmacy.getMedicalTypes.data ?? []
   );
 
   const options = useMemo(
     () =>
-      medicalTypes.map((medicalType) => ({
+      medicalTypes.map((medicalType: MedicalTypeDTO) => ({
         label: medicalType.description ?? "",
         value: medicalType.code ?? "",
       })),
@@ -17,7 +18,7 @@ export function useMedicalTypes() {
 
   const selectMedicalType = useCallback(
     (code?: string) =>
-      medicalTypes.find((medicalType) => medicalType.code === code),
+      medicalTypes.find((medicalType: MedicalTypeDTO) => medicalType.code === code),
     [medicalTypes]
   );
 

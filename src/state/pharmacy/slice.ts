@@ -1,9 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { isEmpty } from "lodash";
-import { ApiResponse } from "state/types";
 import { initial } from "./initial";
 import * as thunks from "./thunk";
 import { TWardStockFIlter } from "./types";
+import { ApiResponse } from "../types";
 
 export const pharmacySlice = createSlice({
   name: "pharmacy",

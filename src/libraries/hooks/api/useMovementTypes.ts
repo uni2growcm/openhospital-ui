@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo } from "react";
-import { getMovementTypes } from "state/pharmacy";
 import { useAppDispatch, useAppSelector } from "../redux";
+import { getMovementTypes } from "~/state/pharmacy";
 
 export function useMovementTypes() {
   const dispatch = useAppDispatch();

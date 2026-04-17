@@ -1,16 +1,13 @@
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
-import Button from "components/accessories/button/Button";
-import {
-  AutocompleteFormField,
-  TextFormField,
-} from "components/accessories/forms";
-import { CheckboxFormField } from "components/accessories/forms/CheckboxFormField/CheckboxFormField";
-import { PATHS } from "consts";
-import { MedicalDTO } from "generated";
-import { useNavigationHandler, useTranslation } from "libraries/hooks";
-import { useMedicalTypes } from "libraries/hooks/api/useMedicalTypes";
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { useForm } from "react-hook-form";
+import Button from "~/components/accessories/button/Button";
+import { AutocompleteFormField, TextFormField } from "~/components/accessories/forms";
+import { CheckboxFormField } from "~/components/accessories/forms/CheckboxFormField/CheckboxFormField";
+import { PATHS } from "~/consts";
+import { MedicalDTO } from "~/generated";
+import { useNavigationHandler, useTranslation } from "~/libraries/hooks";
+import { useMedicalTypes } from "~/libraries/hooks/api/useMedicalTypes";
 import { MedicalDTOSchema, getInitialValues } from "./consts";
 import "./styles.scss";
 import { PharmaceuticalFormProps, TFormValues } from "./types";

@@ -1,6 +1,6 @@
-import { MedicalDTO } from "generated";
 import { z } from "zod";
 import { TFormValues } from "./types";
+import { MedicalDTO } from "~/generated";
 
 export const MedicalDTOSchema = z.object({
   prodCode: z.number({
@@ -16,10 +16,10 @@ export const MedicalDTOSchema = z.object({
   minqty: z.number({
     error: "critical level is required",
   }),
-  deleted: z.boolean().default(false),
-  initialqty: z.number().default(0),
-  inqty: z.number().default(0),
-  outqty: z.number().default(0),
+  deleted: z.boolean(),
+  initialqty: z.number(),
+  inqty: z.number(),
+  outqty: z.number(),
   ignoreSimilar: z.boolean().optional(),
   lock: z.number().optional(),
 });

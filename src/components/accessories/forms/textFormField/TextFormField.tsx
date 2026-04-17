@@ -1,13 +1,8 @@
 import { TextField, TextFieldProps } from "@mui/material";
-import { useTranslation } from "libraries/hooks";
-import React, { ChangeEvent, useCallback } from "react";
-import {
-  Control,
-  Controller,
-  ControllerRenderProps,
-  Path,
-} from "react-hook-form";
-import { LocaleKey } from "resources/types";
+import { ChangeEvent, useCallback } from "react";
+import { Control, Controller, ControllerRenderProps, Path } from "react-hook-form";
+import { useTranslation } from "~/libraries/hooks";
+import { LocaleKey } from "~/resources";
 
 export type TextFormFieldProps<T extends Record<string, any>> = {
   control: Control<T>;

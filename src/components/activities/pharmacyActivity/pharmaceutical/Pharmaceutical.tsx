@@ -1,10 +1,10 @@
-import { PATHS } from "consts";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useOutletContext } from "react-router";
 import { PharmacyActivityContent } from "../PharmacyActivityContent";
 import PharmaceuticalActions from "./components/pharmaceuticalActions/PharmaceuticalActions";
 import PharmaceuticalTable from "./components/pharmaceuticalTable/PharmaceuticalTable";
+import { PATHS } from "~/consts";
 
 export default function Pharmaceutical() {
   const { t } = useTranslation();

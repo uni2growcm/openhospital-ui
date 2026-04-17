@@ -1,23 +1,17 @@
-import checkIcon from "assets/check-icon.png";
-import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
-import InfoBox from "components/accessories/infoBox/InfoBox";
-import { PATHS } from "consts";
-import { MedicalDTO } from "generated";
-import { useNavigationHandler, useTranslation } from "libraries/hooks";
-import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
+import checkIcon from "~/assets/check-icon.png";
 import { omit } from "lodash";
 import React, { useCallback, useEffect, useRef } from "react";
 import { Navigate, useOutletContext, useParams } from "react-router";
-import {
-  getMedical,
-  getMedicalTypes,
-  resetNewMedical,
-  resetUpdateMedical,
-  updateMedical,
-} from "state/pharmacy";
 import { PharmacyActivityContent } from "../PharmacyActivityContent";
 import { PharmaceuticalForm } from "./components/forms/pharmaceuticalForm/PharmaceuticalForm";
 import "./styles.scss";
+import { useNavigationHandler, useTranslation } from "~/libraries/hooks";
+import { useAppDispatch, useAppSelector } from "~/libraries/hooks/redux";
+import { PATHS } from "~/consts";
+import { MedicalDTO } from "~/generated";
+import { getMedical, getMedicalTypes, resetNewMedical, resetUpdateMedical, updateMedical } from "~/state/pharmacy";
+import InfoBox from "~/components/accessories/infoBox/InfoBox";
+import ConfirmationDialog from "~/components/accessories/confirmationDialog/ConfirmationDialog";
 
 export function UpdatePharmaceutical() {
   const { t } = useTranslation();

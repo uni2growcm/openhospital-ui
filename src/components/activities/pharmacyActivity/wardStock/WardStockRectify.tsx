@@ -1,15 +1,14 @@
-import checkIcon from "assets/check-icon.png";
-import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
-import { PATHS } from "consts";
-import { MedicalWardDTO, MovementWardDTO } from "generated";
-import { useNavigationHandler, useTranslation } from "libraries/hooks";
-import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
+import checkIcon from "~/assets/check-icon.png";
 import React, { useCallback, useEffect } from "react";
 import { useOutletContext, useParams } from "react-router";
-import { getMedicals } from "state/medicals";
-import { createWardMovement, resetCreateWardMovement } from "state/pharmacy";
 import { PharmacyActivityContent } from "../PharmacyActivityContent";
 import RectifyQuantityForm from "./components/form/RectifyQuantityForm";
+import { useNavigationHandler, useTranslation } from "~/libraries/hooks";
+import { useAppDispatch, useAppSelector } from "~/libraries/hooks/redux";
+import { createWardMovement, getMedicals, resetCreateWardMovement } from "~/state/pharmacy";
+import { PATHS } from "~/consts";
+import { MedicalWardDTO, MovementWardDTO } from "~/generated";
+import ConfirmationDialog from "~/components/accessories/confirmationDialog/ConfirmationDialog";
 
 const WardStockRectify: React.FC = () => {
   const { t } = useTranslation();
@@ -19,7 +18,8 @@ const WardStockRectify: React.FC = () => {
     (state) => state.pharmacy.createWardMovement.status
   );
 
-  const handleGoBack = useNavigationHandler(PATHS.pharmacy_ward_stock, {
+  const handleGoBack = useNavigationHandler(PATHS
+    .pharmacy_ward_stock, {
     replace: true,
   });
 

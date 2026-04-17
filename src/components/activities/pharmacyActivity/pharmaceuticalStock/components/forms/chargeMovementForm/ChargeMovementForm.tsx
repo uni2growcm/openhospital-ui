@@ -1,21 +1,4 @@
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
-import Button from "components/accessories/button/Button";
-import {
-  AutocompleteFormField,
-  DateFormField,
-  TextFormField,
-} from "components/accessories/forms";
-import { PATHS } from "consts";
-import { MedicalDTO, MovementDTO } from "generated";
-import { DATETIME_FORMAT } from "libraries/consts";
-import { safeFormatToISO } from "libraries/formatUtils";
-import { useNavigationHandler, useTranslation } from "libraries/hooks";
-import {
-  lotsSelector,
-  useMedicals,
-  useMovementTypes,
-  useSuppliers,
-} from "libraries/hooks/api";
 import { isEmpty } from "lodash";
 import React, {
   FormEvent,
@@ -28,8 +11,16 @@ import { LotFormField } from "../lotFormField";
 import { MovementDTOSchema, getInitialValues } from "./consts";
 import "./styles.scss";
 import { ChargeMovementProps, TFormValues } from "./types";
-import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
-import { getMedicalLots } from "state/pharmacy";
+import { useNavigationHandler, useTranslation } from "~/libraries/hooks";
+import { lotsSelector, useMedicals, useMovementTypes, useSuppliers } from "~/libraries/hooks/api";
+import { useAppDispatch, useAppSelector } from "~/libraries/hooks/redux";
+import { safeFormatToISO } from "~/libraries/formatUtils";
+import { MovementDTO } from "~/generated";
+import { PATHS } from "~/consts";
+import { getMedicalLots } from "~/state/pharmacy";
+import { AutocompleteFormField, DateFormField, TextFormField } from "~/components/accessories/forms";
+import Button from "~/components/accessories/button/Button";
+import { DATETIME_FORMAT } from "~/libraries/consts";
 
 export function ChargeMovementForm({
   movement,

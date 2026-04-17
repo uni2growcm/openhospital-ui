@@ -1,9 +1,9 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { LotDTO } from "generated";
 import { useEffect } from "react";
-import { getMedicalLots } from "state/pharmacy";
-import { RootState } from "state/types";
 import { useAppDispatch, useAppSelector } from "../redux";
+import { LotDTO } from "~/generated";
+import { RootState } from "~/state/types";
+import { getMedicalLots } from "~/state/pharmacy";
 
 const EMPTY_LOTS: LotDTO[] = [];
 

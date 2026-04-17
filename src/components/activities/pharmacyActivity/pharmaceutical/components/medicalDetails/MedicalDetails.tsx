@@ -1,13 +1,14 @@
 import { Edit, KeyboardArrowRight } from "@mui/icons-material";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
-import Button from "components/accessories/button/Button";
-import { PATHS } from "consts";
-import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
-import React, { useCallback, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useOutletContext, useParams } from "react-router";
-import { getCurrentQuantityInAllWards, getMedical } from "state/pharmacy";
-import { getWards } from "state/ward";
+import Button from "~/components/accessories/button/Button";
+import { PATHS } from "~/consts";
+import { MedicalWardQuantityDTO } from "~/generated";
+import { useAppDispatch, useAppSelector } from "~/libraries/hooks/redux";
+import { getCurrentQuantityInAllWards, getMedical } from "~/state/pharmacy";
+import { getWards } from "~/state/wards";
 import MedicalItemCard from "../medicalItemCard/MedicalItemCard";
 import { getPharmacyData } from "./consts";
 import "./styles.scss";
@@ -59,7 +60,7 @@ const MedicalDetails = () => {
     dispatch(getWards());
   }, [dispatch, id]);
 
-  const wardQties = useAppSelector(
+  const wardQties: MedicalWardQuantityDTO[] = useAppSelector(
     (state) => state.pharmacy.getCurrentQuantityInAllWards.data || []
   );
 
@@ -95,7 +96,7 @@ const MedicalDetails = () => {
             data-cy="medical-edit-button"
             className="medicalDetails__sidebar__button"
           >
-            <Button variant="contained" color="primary" onClick={handleEdit}>
+            <Button variant="contained" color="primary" type="button" onClick={handleEdit}>
               <Edit fontSize="small" />
               <span>{t("pharmacy.medicalDetails.edit")}</span>
             </Button>

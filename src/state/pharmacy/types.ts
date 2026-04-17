@@ -1,15 +1,5 @@
-import {
-  LotDTO,
-  MedicalDTO,
-  MedicalTypeDTO,
-  MedicalWardDTO,
-  MedicalWardQuantityDTO,
-  MovementDTO,
-  MovementTypeDTO,
-  MovementWardDTO,
-  WardDTO,
-} from "generated";
-import { ApiResponse } from "state/types";
+import { LotDTO, MedicalDTO, MedicalTypeDTO, MedicalWardDTO, MedicalWardQuantityDTO, MovementDTO, MovementTypeDTO, MovementWardDTO, WardDTO } from "~/generated";
+import { ApiResponse } from "../types";
 
 export type IPharmacyState = {
   wardMovements: ApiResponse<MovementWardDTO[]>;

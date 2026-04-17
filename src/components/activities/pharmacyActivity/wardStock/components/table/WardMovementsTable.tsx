@@ -1,12 +1,12 @@
 import { CircularProgress } from "@mui/material";
-import InfoBox from "components/accessories/infoBox/InfoBox";
-import Table from "components/accessories/table/Table";
-import { TFilterField } from "components/accessories/table/filter/types";
-import { renderDateTime } from "libraries/formatUtils/dataFormatting";
-import { useTranslation } from "libraries/hooks";
-import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useEffect, useMemo } from "react";
-import { getMovementsWard, getWardMovementsToWard } from "state/pharmacy";
+import InfoBox from "~/components/accessories/infoBox/InfoBox";
+import { TFilterField } from "~/components/accessories/table/filter/types";
+import Table from "~/components/accessories/table/Table";
+import { renderDateTime } from "~/libraries/formatUtils";
+import { useTranslation } from "~/libraries/hooks";
+import { useAppDispatch, useAppSelector } from "~/libraries/hooks/redux";
+import { getMovementsWard, getWardMovementsToWard } from "~/state/pharmacy";
 
 export function WardMovementsTable() {
   const { t } = useTranslation();

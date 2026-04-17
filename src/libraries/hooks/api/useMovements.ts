@@ -1,8 +1,8 @@
-import { LotDTO, MovementDTO } from "generated";
 import { useCallback, useEffect, useMemo } from "react";
-import { getMovements } from "state/pharmacy";
-import { useAppDispatch, useAppSelector } from "../redux";
 import { useTranslation } from "../useTranslation";
+import { LotDTO, MovementDTO } from "~/generated";
+import { getMovements } from "~/state/pharmacy";
+import { useAppDispatch, useAppSelector } from "../redux";
 
 function computeQuantityForType(movements: MovementDTO[], type: "+" | "-") {
   return movements

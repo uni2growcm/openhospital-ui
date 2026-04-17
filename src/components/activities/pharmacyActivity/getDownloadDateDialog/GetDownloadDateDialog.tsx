@@ -2,16 +2,16 @@ import { Autocomplete, TextField } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import Button from "components/accessories/button/Button";
-import DateField from "components/accessories/dateField/DateField";
-import { MedicalDTO, WardDTO } from "generated";
-import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import moment from "moment";
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getMedicals } from "state/pharmacy";
 import "./styles.scss";
 import { IProps, PrintProperties } from "./types";
+import { useAppDispatch, useAppSelector } from "~/libraries/hooks/redux";
+import { MedicalDTO, WardDTO } from "~/generated";
+import { getMedicals } from "~/state/pharmacy";
+import DateField from "~/components/accessories/dateField/DateField";
+import Button from "~/components/accessories/button/Button";
 
 const GetDownloadDateDialog: FunctionComponent<
   IProps & {

@@ -1,17 +1,17 @@
 import { CircularProgress } from "@mui/material";
-import InfoBox from "components/accessories/infoBox/InfoBox";
-import Table from "components/accessories/table/Table";
-import { TFilterField } from "components/accessories/table/filter/types";
-import { PATHS } from "consts";
-import { MedicalWardDTO } from "generated";
-import { useTranslation } from "libraries/hooks";
-import { useWardMedicals } from "libraries/hooks/api";
-import { useAppDispatch } from "libraries/hooks/redux";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
-import { getMovements, printPharmaceuticalStockCardPdf } from "state/pharmacy";
-import GetDownloadDateDialog from "components/activities/pharmacyActivity/getDownloadDateDialog/GetDownloadDateDialog";
-import { downloadBlob } from "libraries/downloadUtils/downloardUtils";
+import InfoBox from "~/components/accessories/infoBox/InfoBox";
+import { TFilterField } from "~/components/accessories/table/filter/types";
+import Table from "~/components/accessories/table/Table";
+import { PATHS } from "~/consts";
+import { MedicalWardDTO } from "~/generated";
+import { downloadBlob } from "~/libraries/downloadUtils/downloadUtils";
+import { useTranslation } from "~/libraries/hooks";
+import { useWardMedicals } from "~/libraries/hooks/api";
+import { useAppDispatch } from "~/libraries/hooks/redux";
+import { getMovements, printPharmaceuticalStockCardPdf } from "~/state/pharmacy";
+import GetDownloadDateDialog from "../../../getDownloadDateDialog/GetDownloadDateDialog";
 
 interface WardMedicalsProps {
   wardCode: string;

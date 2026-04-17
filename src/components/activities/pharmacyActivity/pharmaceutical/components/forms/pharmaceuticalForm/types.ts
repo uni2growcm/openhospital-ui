@@ -1,5 +1,5 @@
-import { MedicalDTO } from "generated";
-import z from "zod";
+import { z } from "zod";
+import { MedicalDTO } from "~/generated";
 import { MedicalDTOSchema } from "./consts";
 
 export type TFormValues = z.infer<typeof MedicalDTOSchema>;

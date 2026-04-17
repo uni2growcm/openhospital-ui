@@ -1,19 +1,18 @@
-import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
-import InfoBox from "components/accessories/infoBox/InfoBox";
-import { PATHS } from "consts";
-import { MovementDTO } from "generated";
-import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import { values } from "lodash";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useOutletContext } from "react-router";
-import { getMedicals } from "state/medicals";
-import { dischargeMovements, resetDischargeMovements } from "state/pharmacy";
 import checkIcon from "../../../../assets/check-icon.png";
 import { PharmacyActivityContent } from "../PharmacyActivityContent";
 import { DischargeMovementForm } from "./components/forms/DischargeMovementForm/DischargeMovementForm";
 import "./styles.scss";
 import { DisChargeMovementTransitionState } from "./types";
+import { useAppDispatch, useAppSelector } from "~/libraries/hooks/redux";
+import { PATHS } from "~/consts";
+import { MovementDTO } from "~/generated";
+import { dischargeMovements, getMedicals, resetDischargeMovements } from "~/state/pharmacy";
+import ConfirmationDialog from "~/components/accessories/confirmationDialog/ConfirmationDialog";
+import InfoBox from "~/components/accessories/infoBox/InfoBox";
 
 export function DischargeMovement() {
   const { t } = useTranslation();

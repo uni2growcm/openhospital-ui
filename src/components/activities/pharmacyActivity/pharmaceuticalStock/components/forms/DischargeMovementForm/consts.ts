@@ -1,5 +1,5 @@
-import { MedicalDTO } from "generated";
 import { z } from "zod";
+import { MedicalDTO } from "~/generated";
 import { TFormValues } from "./types";
 
 export const LotDTOSchema = z
@@ -41,17 +41,17 @@ export const LotDTOSchema = z
     }
   });
 
-export const MovementDTOSchema = z.object({
-  code: z.number().nullish(),
-  medical: z.coerce.number(),
-  type: z.string(),
-  ward: z.string().nullish(),
-  lots: z.array(LotDTOSchema).nullish(),
-  date: z.date(),
-  quantity: z.number().nullish(),
-  supplier: z.number().nullish(),
-  refNo: z.string().min(1),
-});
+  export const MovementDTOSchema = z.object({
+    code: z.number(),
+    medical: z.number(),
+    type: z.string(),
+    ward: z.string(),
+    lots: z.array(LotDTOSchema),
+    date: z.date(),
+    quantity: z.number(),
+    supplier: z.number(),
+    refNo: z.string(),
+  });
 
 export function getInitialValues(from?: MedicalDTO): Partial<TFormValues> {
   return {

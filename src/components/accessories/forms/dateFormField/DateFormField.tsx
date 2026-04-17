@@ -1,4 +1,4 @@
-import DateField from "components/accessories/dateField/DateField";
+import DateField from "~/components/accessories/dateField/DateField";
 import { isValid } from "date-fns";
 import React, { ComponentProps } from "react";
 import { Control, Controller, Path } from "react-hook-form";

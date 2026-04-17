@@ -514,6 +514,32 @@ paths:
                 $ref: "#/components/schemas/SupplierDTO"
       security:
       - bearerAuth: []
+  /settings/{code}:
+    put:
+      tags:
+      - Settings
+      operationId: updateSetting
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSettingDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SettingDTO"
+      security:
+      - bearerAuth: []
   /pricesothers/{id}:
     put:
       tags:
@@ -2501,6 +2527,20 @@ paths:
                 type: boolean
       security:
       - bearerAuth: []
+  /settings/reset:
+    post:
+      tags:
+      - Settings
+      operationId: resetAllSettings
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+      security:
+      - bearerAuth: []
   /pricesothers:
     get:
       tags:
@@ -3807,6 +3847,63 @@ paths:
                 type: boolean
       security:
       - bearerAuth: []
+  /settings:
+    get:
+      tags:
+      - Settings
+      operationId: getAllSettings
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SettingDTO"
+      security:
+      - bearerAuth: []
+  /settings/{id}:
+    get:
+      tags:
+      - Settings
+      operationId: getSettingById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SettingDTO"
+      security:
+      - bearerAuth: []
+  /settings/code/{code}:
+    get:
+      tags:
+      - Settings
+      operationId: getSettingByCode
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SettingDTO"
+      security:
+      - bearerAuth: []
   /reports/pharmaceuticalStock:
     get:
       tags:
@@ -4093,6 +4190,50 @@ paths:
                 format: binary
       security:
       - bearerAuth: []
+  /reports/patientexamrequest/{patientId}:
+    get:
+      tags:
+      - Reports
+      operationId: printPatientExamRequestPdf
+      parameters:
+      - name: patientId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                format: binary
+      security:
+      - bearerAuth: []
+  /reports/patientexamination/{examinationId}:
+    get:
+      tags:
+      - Reports
+      operationId: printPatientExaminationPdf
+      parameters:
+      - name: examinationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                format: binary
+      security:
+      - bearerAuth: []
   /reports/exams-list:
     get:
       tags:
@@ -4121,6 +4262,92 @@ paths:
               schema:
                 type: string
                 format: binary
+      security:
+      - bearerAuth: []
+  /radiology/studies/{id}/series:
+    get:
+      tags:
+      - Radiology
+      operationId: getStudySeriesById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SeriesResponse"
+      security:
+      - bearerAuth: []
+  /radiology/series/{id}/instances:
+    get:
+      tags:
+      - Radiology
+      operationId: getSeriesInstancesById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/InstanceResponse"
+      security:
+      - bearerAuth: []
+  /radiology/patients/{id}/studies:
+    get:
+      tags:
+      - Radiology
+      operationId: getPatientStudiesById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StudyResponse"
+      security:
+      - bearerAuth: []
+  /radiology/instances/{id}/preview:
+    get:
+      tags:
+      - Radiology
+      operationId: getInstancePreview
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstancePreviewDTO"
       security:
       - bearerAuth: []
   /pricelists/prices:
@@ -7024,6 +7251,76 @@ components:
       required:
       - supId
       - supName
+    UpdateSettingDTO:
+      type: object
+      properties:
+        value:
+          type: string
+          description: The value of the setting
+          example: "FALSE"
+    SettingDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Setting ID
+          example: 1
+        code:
+          type: string
+          description: Setting code
+          example: AUTOMATICLOT_IN
+          maxLength: 50
+        category:
+          type: string
+          description: Setting category
+          enum:
+          - general
+          - telemetry
+          - security
+          - imaging
+          - accounting
+          - reports
+          - pharmacy
+          - gui
+          - application
+          - integration
+          example: application
+        type:
+          type: string
+          description: value type
+          enum:
+          - bool
+          - number
+          - text
+          - select
+          example: bool
+        valueOptions:
+          type: string
+          description: Comma-separated list of possible values
+          maxLength: 500
+        defaultValue:
+          type: string
+          description: Default value
+          example: "TRUE"
+        value:
+          type: string
+          description: The value of the setting
+          example: "FALSE"
+        description:
+          type: string
+          description: Description
+          maxLength: 500
+        needRestart:
+          type: boolean
+          description: Whether the app needs restart after the setting has been modified
+          example: true
+      required:
+      - category
+      - code
+      - defaultValue
+      - id
+      - type
     PricesOthersDTO:
       type: object
       description: Class representing a price others
@@ -8611,6 +8908,157 @@ components:
       required:
       - password
       - username
+    Series:
+      type: object
+      properties:
+        bodyPartExamined:
+          type: string
+        imageOrientationPatient:
+          type: string
+        manufacturer:
+          type: string
+        modality:
+          type: string
+        operatorsName:
+          type: string
+        protocolName:
+          type: string
+        seriesDescription:
+          type: string
+        instanceUID:
+          type: string
+        number:
+          type: string
+        stationName:
+          type: string
+    SeriesResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        objectType:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+        lastUpdate:
+          type: string
+        series:
+          $ref: "#/components/schemas/Series"
+        parentStudyId:
+          type: string
+        instancesIds:
+          type: array
+          items:
+            type: string
+        expectedNumberOfInstances:
+          type: string
+        status:
+          type: string
+        stable:
+          type: boolean
+    Instance:
+      type: object
+      properties:
+        acquisitionNumber:
+          type: string
+        imageOrientationPatient:
+          type: string
+        imagePositionPatient:
+          type: string
+        creationDate:
+          type: string
+        creationTime:
+          type: string
+        instanceNumber:
+          type: string
+        instanceUID:
+          type: string
+    InstanceResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        fileSize:
+          type: integer
+          format: int32
+        fileUuid:
+          type: string
+        indexInSeries:
+          type: integer
+          format: int32
+        labels:
+          type: array
+          items:
+            type: string
+        instance:
+          $ref: "#/components/schemas/Instance"
+        parentSeriesId:
+          type: string
+        objectType:
+          type: string
+    Patient:
+      type: object
+      properties:
+        birthDate:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        sex:
+          type: string
+    Study:
+      type: object
+      properties:
+        accessionNumber:
+          type: string
+        institutionName:
+          type: string
+        referringPhysicianName:
+          type: string
+        date:
+          type: string
+        time:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        instanceUID:
+          type: string
+    StudyResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        objectType:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+        lastUpdate:
+          type: string
+        study:
+          $ref: "#/components/schemas/Study"
+        parentPatientId:
+          type: string
+        patient:
+          $ref: "#/components/schemas/Patient"
+        seriesIds:
+          type: array
+          items:
+            type: string
+        stable:
+          type: boolean
+    InstancePreviewDTO:
+      type: object
+      properties:
+        data:
+          type: string
+          description: Base64 representation of the instance preview
     PriceDTO:
       type: object
       description: Class representing a prices

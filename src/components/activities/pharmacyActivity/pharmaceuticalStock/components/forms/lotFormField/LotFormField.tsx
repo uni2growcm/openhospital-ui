@@ -1,11 +1,5 @@
 import { FormControlLabel, Radio, TextField } from "@mui/material";
-import DateField from "components/accessories/dateField/DateField";
-import { DateFormField, TextFormField } from "components/accessories/forms";
 import { parseISO } from "date-fns";
-import { LotDTO } from "generated";
-import { DATETIME_FORMAT } from "libraries/consts";
-import { safeFormatToISO } from "libraries/formatUtils";
-import { useTranslation } from "libraries/hooks";
 import { isEmpty } from "lodash";
 import React, {
   Fragment,
@@ -21,6 +15,12 @@ import {
   useWatch,
 } from "react-hook-form";
 import { LotFormFieldProps } from "./types";
+import { useTranslation } from "~/libraries/hooks";
+import { LotDTO } from "~/generated";
+import { safeFormatToISO } from "~/libraries/formatUtils";
+import { DATETIME_FORMAT } from "~/libraries/consts";
+import DateField from "~/components/accessories/dateField/DateField";
+import { DateFormField, TextFormField } from "~/components/accessories/forms";
 
 export function LotFormField<T extends Record<string, any>>({
   control,
@@ -42,7 +42,7 @@ export function LotFormField<T extends Record<string, any>>({
   const value = useWatch({ control, name });
 
   const isNewLotActive = useMemo(
-    () => !medical.lots?.some((lot) => lot.code === value?.code),
+    () => !medical.lots?.some((lot: LotDTO) => lot.code === value?.code),
     [value, medical]
   );
 
@@ -60,7 +60,7 @@ export function LotFormField<T extends Record<string, any>>({
   );
 
   useEffect(() => {
-    if (value && !medical.lots?.some((lot) => lot.code === value?.code)) {
+    if (value && !medical.lots?.some((lot: LotDTO) => lot.code === value?.code)) {
       setNewLot({
         ...value,
         preparationDate: safeFormatToISO(value?.preparationDate) ?? "",
@@ -84,7 +84,7 @@ export function LotFormField<T extends Record<string, any>>({
         name={name}
         render={({ field }) => (
           <>
-            {(medical.lots ?? []).map((lot, index) => (
+            {(medical.lots ?? []).map((lot: LotDTO, index: number) => (
               <Fragment key={lot.code}>
                 <FormControlLabel
                   value={lot.code}

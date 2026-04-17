@@ -1,4 +1,4 @@
-import { AutocompleteField } from "components/accessories/autocompleteField";
+
 import React, { ComponentProps, useCallback } from "react";
 import {
   Control,
@@ -7,7 +7,8 @@ import {
   Path,
 } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { LocaleKey } from "resources/types";
+import AutocompleteField from "../../autocompleteField/AutocompleteField";
+import { LocaleKey } from "~/resources";
 
 export type AutocompleteFormFieldProps<T extends Record<string, any>> = {
   control: Control<T>;

@@ -1,11 +1,6 @@
-import { PATHS } from "consts";
-import { MedicalWardDTO } from "generated";
-import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useOutletContext } from "react-router";
-import { getWardMedicals, getWardMovements } from "state/pharmacy";
-import { getWards } from "state/ward";
 import { PharmacyActivityContent } from "../PharmacyActivityContent";
 import {
   WardMedicalsTable,
@@ -14,6 +9,11 @@ import {
 } from "./components";
 import RectifyQuantityModal from "./components/modal/RectifyQuantityModal";
 import "./styles.scss";
+import { useAppDispatch, useAppSelector } from "~/libraries/hooks/redux";
+import { MedicalWardDTO } from "~/generated";
+import { PATHS } from "~/consts";
+import { getWards } from "~/state/wards";
+import { getWardMedicals, getWardMovements } from "~/state/pharmacy";
 
 export function WardStock() {
   const { t } = useTranslation();

@@ -1,12 +1,12 @@
 import { Backdrop, Box, Fade, Modal, Typography } from "@mui/material";
-import { MovementWardDTO } from "generated";
-import { useTranslation } from "libraries/hooks";
-import { useAppDispatch } from "libraries/hooks/redux";
 import React, { useCallback } from "react";
-import { createWardMovement, getWardMedicals } from "state/pharmacy";
 import RectifyQuantityForm from "../form/RectifyQuantityForm";
 import "./styles.scss";
-import { RectifyQuantityModalProps } from "./types";
+import { useAppDispatch } from "~/libraries/hooks/redux";
+import { useTranslation } from "~/libraries/hooks";
+import { type MovementWardDTO } from "~/generated";
+import { createWardMovement, getWardMedicals } from "~/state/pharmacy";
+import { type RectifyQuantityModalProps } from "./types";
 
 const RectifyQuantityModal: React.FC<RectifyQuantityModalProps> = ({
   open,

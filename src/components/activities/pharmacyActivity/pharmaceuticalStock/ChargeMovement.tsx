@@ -1,18 +1,17 @@
-import checkIcon from "assets/check-icon.png";
-import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
-import InfoBox from "components/accessories/infoBox/InfoBox";
-import { PATHS } from "consts";
-import { MovementDTO } from "generated";
-import { useNavigationHandler, useTranslation } from "libraries/hooks";
-import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
+import checkIcon from "~/assets/check-icon.png";
 import React, { useCallback, useEffect, useRef } from "react";
 import { useOutletContext } from "react-router";
-import { getMedicals } from "state/medicals";
-import { chargeMovements, resetChargeMovements } from "state/pharmacy";
-import { getSuppliers } from "state/suppliers";
 import { PharmacyActivityContent } from "../PharmacyActivityContent";
 import { ChargeMovementForm } from "./components/forms";
 import "./styles.scss";
+import { PATHS } from "~/consts";
+import { useAppDispatch, useAppSelector } from "~/libraries/hooks/redux";
+import { useNavigationHandler, useTranslation } from "~/libraries/hooks";
+import { MovementDTO } from "~/generated";
+import { chargeMovements, getMedicals, resetChargeMovements } from "~/state/pharmacy";
+import { getSuppliers } from "~/state/suppliers";
+import InfoBox from "~/components/accessories/infoBox/InfoBox";
+import ConfirmationDialog from "~/components/accessories/confirmationDialog/ConfirmationDialog";
 
 export function ChargeMovement() {
   const { t } = useTranslation();

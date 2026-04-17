@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { TFilterField, TFilterValues } from "./filter/types";
+import type { ReactNode } from 'react';
+import type { TFilterField, TFilterValues } from './filter/types';
 
 export interface IProps {
   rowData: Array<Record<string, any>>;
@@ -69,6 +69,11 @@ export interface IProps {
   labels?: Partial<
     Record<TActions, { title?: string; message?: string; tooltip?: string }>
   >;
+  renderCustomActions?: (row: any) => React.ReactNode;
+  customRenderDetails?: (row: any) => React.ReactNode;
+  hideHeader?: boolean;
+  hidePaginator?: boolean;
+  isExpanded?: boolean;
 }
 
 export interface IRowProps {
@@ -88,6 +93,7 @@ export interface IRowProps {
   detailsExcludedFields?: string[];
   adjustQuantity?: boolean;
   renderExtraContent?: (row: any) => ReactNode;
+  customRenderDetails?: any;
 }
 
 export type TActions =

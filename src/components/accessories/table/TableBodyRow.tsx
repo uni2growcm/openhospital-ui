@@ -2,12 +2,12 @@ import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import { Collapse, IconButton } from "@mui/material";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import CellContent from "components/activities/pharmacyActivity/pharmaceutical/components/PharmacyCellContent/CellContent";
 import _ from "lodash";
 import React, { FunctionComponent, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import "./styles.scss";
 import { IRowProps } from "./types";
+import CellContent from "~/components/activities/pharmacyActivity/pharmaceutical/components/PharmacyCellContent/CellContent";
 
 const TableBodyRow: FunctionComponent<IRowProps> = ({
   row,
@@ -29,9 +29,9 @@ const TableBodyRow: FunctionComponent<IRowProps> = ({
   const [open, setOpen] = React.useState(false);
   const { t } = useTranslation();
 
-  useEffect(() => {
-    setOpen(expanded ?? false);
-  }, [expanded]);
+	useEffect(() => {
+		setOpen(expanded ?? false);
+	}, [expanded]);
 
   const getRowClass = () => {
     if (row.stock === 0) return "row-zero-stock";

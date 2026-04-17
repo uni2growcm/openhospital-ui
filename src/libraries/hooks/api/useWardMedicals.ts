@@ -1,9 +1,9 @@
-import { LotDTO, MedicalWardDTO } from "generated";
 import { useCallback, useEffect, useMemo } from "react";
-import { getWardMedicals } from "state/pharmacy";
-import { useAppDispatch, useAppSelector } from "../redux";
 import { useTranslation } from "../useTranslation";
 import { useMovements } from "./useMovements";
+import { LotDTO, MedicalWardDTO } from "~/generated";
+import { useAppDispatch, useAppSelector } from "../redux";
+import { getWardMedicals } from "~/state/pharmacy";
 
 export const computeInQuantity = (data: MedicalWardDTO[]) =>
   data.reduce((acc, current) => acc + (current.in_quantity || 0), 0);

@@ -1,4 +1,4 @@
-import SelectField from "components/accessories/selectField/SelectField";
+import SelectField from "~/components/accessories/selectField/SelectField";
 import React, { ComponentProps } from "react";
 import { Control, Controller, Path } from "react-hook-form";
 

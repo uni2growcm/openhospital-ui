@@ -2,7 +2,6 @@ import { Autocomplete, TextField } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import Button from "components/accessories/button/Button";
 import React, { FunctionComponent, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./styles.scss";
@@ -11,6 +10,7 @@ import {
   ExpiringMonth,
   PharmaceuticalExpiringDialogProps,
 } from "./type";
+import Button from "~/components/accessories/button/Button";
 
 const PharmaceuticalExpiringDialog: FunctionComponent<
   PharmaceuticalExpiringDialogProps

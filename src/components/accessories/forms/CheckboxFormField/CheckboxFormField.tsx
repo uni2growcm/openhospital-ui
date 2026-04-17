@@ -1,6 +1,6 @@
-import CheckboxField from "components/accessories/checkboxField/CheckboxField";
 import React from "react";
 import { Control, Controller, Path } from "react-hook-form";
+import CheckboxField from "../../checkboxField/CheckboxField";
 
 export type CheckboxFormFieldProps<T extends Record<string, any>> = {
   control: Control<T>;

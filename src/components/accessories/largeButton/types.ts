@@ -1,5 +1,5 @@
-import { ButtonProps } from "@mui/material";
+import type { PropsWithChildren } from 'react';
 
-export interface IProps extends ButtonProps {
-  handleClick: () => void;
+export interface IProps extends PropsWithChildren {
+	handleClick: () => void;
 }

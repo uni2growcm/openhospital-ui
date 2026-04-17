@@ -1,18 +1,18 @@
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import LogoutIcon from "@mui/icons-material/Logout";
-import Button from "components/accessories/button/Button";
-import GetDownloadDateDialog from "components/activities/pharmacyActivity/getDownloadDateDialog/GetDownloadDateDialog";
-import { PrintProperties } from "components/activities/pharmacyActivity/getDownloadDateDialog/types";
-import { downloadBlob } from "libraries/downloadUtils/downloardUtils";
-import { useAppDispatch } from "libraries/hooks/redux";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { printPharmaceuticalStockPdf } from "state/pharmacy";
-import "./styles.scss";
-import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
-import warningIcon from "../../../../../../assets/warning-icon.png";
 import * as XLSX from "xlsx";
+import Button from "~/components/accessories/button/Button";
+import ConfirmationDialog from "~/components/accessories/confirmationDialog/ConfirmationDialog";
+import { downloadBlob } from "~/libraries/downloadUtils/downloadUtils";
+import { useAppDispatch } from "~/libraries/hooks/redux";
+import { printPharmaceuticalStockPdf } from "~/state/pharmacy";
+import warningIcon from "../../../../../../assets/warning-icon.png";
+import GetDownloadDateDialog from "../../../getDownloadDateDialog/GetDownloadDateDialog";
+import { PrintProperties } from "../../../getDownloadDateDialog/types";
+import "./styles.scss";
 
 export function StockActions({ dataToExport }: { dataToExport: any[] }) {
   const { t } = useTranslation();

@@ -1,16 +1,12 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
-import Button from "components/accessories/button/Button";
-import {
-  AutocompleteFormField,
-  TextFormField,
-} from "components/accessories/forms";
-import { MedicalWardDTO, MovementWardDTO } from "generated";
-import { useTranslation } from "libraries/hooks";
-import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import { useForm } from "react-hook-form";
-import { getMedicals } from "state/medicals";
+import Button from "~/components/accessories/button/Button";
+import { AutocompleteFormField, TextFormField } from "~/components/accessories/forms";
+import { MedicalWardDTO, MovementWardDTO } from "~/generated";
+import { useTranslation } from "~/libraries/hooks";
+import { useAppDispatch, useAppSelector } from "~/libraries/hooks/redux";
 import {
   MedicalWardDTOSchema,
   QuantityErrorKey,
@@ -19,6 +15,7 @@ import {
 } from "./consts";
 import "./styles.scss";
 import { PharmaceuticalStockFormProps, TFormValues } from "./types";
+import { getMedicals } from "~/state/pharmacy";
 
 function RectifyQuantityForm({
   pharmaceutical,
@@ -85,7 +82,7 @@ function RectifyQuantityForm({
   );
 
   useEffect(() => {
-    dispatch(getMedicals);
+    dispatch(getMedicals());
   }, [dispatch]);
 
   return (

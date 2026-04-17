@@ -1,12 +1,12 @@
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
-import Button from "components/accessories/button/Button";
-import { TextFormField } from "components/accessories/forms";
-import { useTranslation } from "libraries/hooks";
 import React, { FormEvent, useCallback, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { getAdjustQuantitySchema, getInitialValues } from "./consts";
 import "./style.scss";
 import { AdjustQuantityFormProps, TFormValues } from "./types";
+import { useTranslation } from "~/libraries/hooks";
+import { TextFormField } from "~/components/accessories/forms";
+import Button from "~/components/accessories/button/Button";
 
 export function AdjustQuantityForm({
   loading,

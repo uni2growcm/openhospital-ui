@@ -1,4 +1,4 @@
-import { MedicalDTO } from "generated";
+import { MedicalDTO } from "~/generated";
 import { MedicalItemDataprops } from "./types";
 
 export const getPharmacyData = (

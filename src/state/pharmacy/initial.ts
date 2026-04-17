@@ -1,4 +1,4 @@
-import { ApiResponse } from "state/types";
+import { ApiResponse } from "../types";
 import { IPharmacyState } from "./types";
 
 export const initial: IPharmacyState = {

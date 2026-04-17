@@ -3,12 +3,13 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import LargeButton from "../../accessories/largeButton/LargeButton";
+import { PATHS } from "../../../consts";
 import { PharmacyActivityContent } from "./PharmacyActivityContent";
 
 const actions = [
-  { icon: Medication, key: "pharmaceutical" },
-  { icon: MedicalServices, key: "pharmaceutical-stock" },
-  { icon: SyncAlt, key: "ward-stock" },
+  { icon: Medication, key: "pharmaceutical", path: PATHS.pharmacy_pharmaceutical },
+  { icon: MedicalServices, key: "pharmaceutical-stock", path: PATHS.pharmacy_pharmaceuticalstock },
+  { icon: SyncAlt, key: "ward-stock", path: PATHS.pharmacy_ward_stock },
 ];
 
 export function Home() {
@@ -22,7 +23,7 @@ export function Home() {
           <LargeButton
             key={action.key}
             handleClick={() => {
-              navigate(action.key);
+              navigate(action.path);
             }}
             data-cy={action.key}
           >
