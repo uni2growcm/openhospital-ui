@@ -29,6 +29,13 @@ export const PATIENT_DETAILS_ROUTES = [
 			),
 	},
 	{
+		path: 'analysis',
+		lazy: async () =>
+			import('../../components/accessories/laboratory/analysis/Analysis').then(
+				(module) => ({ Component: module.Analysis }),
+			),
+	},
+	{
 		path: 'triage',
 		lazy: async () =>
 			import('../../components/accessories/patientTriage/PatientTriage').then(

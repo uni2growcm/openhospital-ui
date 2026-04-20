@@ -2,6 +2,7 @@ import type { setupWorker } from 'msw/browser';
 import { admissionsHandlers } from './admissions';
 import { admissionTypes } from './admissionTypes';
 import { ageTypes } from './ageTypes';
+import { analysisHandlers } from './analysis';
 import { auth } from './auth';
 import { bills } from './bills';
 import { deliveryResultTypes } from './deliveryResultTypes';
@@ -71,4 +72,5 @@ export const handlers: Parameters<typeof setupWorker> = [
 	...vaccineTypes,
 	...visits,
 	...wardsHandlers,
+	...analysisHandlers,
 ];

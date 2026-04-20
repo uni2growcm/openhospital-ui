@@ -81,7 +81,7 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 			labBookId: number()
 				.typeError(t('common.incorrectformat'))
 				.transform((value, originalValue) =>
-					originalValue === '' ? null : value
+					originalValue === '' ? null : value,
 				)
 				.integer(t('common.incorrectformat'))
 				.positive(t('common.incorrectformat'))

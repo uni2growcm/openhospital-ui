@@ -221,7 +221,8 @@
 		"createother": "Ajouter un autre patient",
 		"status": "État de santé",
 		"radiology": "Radiologie",
-		"labbookid": "ID de labBook"
+		"labbookid": "ID de labBook",
+		"analysis": "Analyses de laboratoire"
 	},
 	"opd": {
 		"newopd": "Créer une nouvelle visite OPD",
@@ -420,7 +421,8 @@
 		"hospitalInfo": "Informations sur l'hôpital",
 		"hospital": "Hôpital",
 		"settings": "Paramètres",
-		"radiology": "Radiologie"
+		"radiology": "Radiologie",
+		"analysis": "Analyses de laboratoire"
 	},
 	"operation": {
 		"newoperation": "Nouvelle opération",
@@ -1279,5 +1281,17 @@
 			"time": "Temps d'étude",
 			"lastUpdate": "Dernière mise à jour"
 		}
+	},
+	"analysis": {
+		"id": "ID",
+		"recordType": "Type d'analyse",
+		"prescriptionDate": "Date de l'analyse",
+		"analysis": "Analyse",
+		"recordNumber": "Numéro de l'enregistrement",
+		"variable": "Variable",
+		"result": "Résultat",
+		"previousentries": "Analyses précédentes",
+		"print": "Imprimer tous les rapports d'analyse",
+		"printerror": "L'impression des resultats d'analyse a échoué"
 	}
 }
