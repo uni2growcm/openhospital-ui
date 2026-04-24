@@ -17,6 +17,7 @@ import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
 import type { OperationOpts, HttpHeaders } from '../runtime';
 import type {
     AdmissionDTO,
+    CareDTO,
     ConditioningDTO,
     EncounterDTO,
     LaboratoryDTO,
@@ -30,6 +31,10 @@ export interface CreateEncounterRequest {
 }
 
 export interface GetAdmissionsByEncounterRequest {
+    code: string;
+}
+
+export interface GetCareByPatientEncounterRequest {
     code: string;
 }
 
@@ -106,6 +111,23 @@ export class EncounterApi extends BaseAPI {
 
         return this.request<Array<AdmissionDTO>>({
             url: '/encounters/{code}/admissions'.replace('{code}', encodeURI(code)),
+            method: 'GET',
+            headers,
+        }, opts?.responseOpts);
+    };
+
+    /**
+     */
+    getCareByPatientEncounter({ code }: GetCareByPatientEncounterRequest): Observable<Array<CareDTO>>
+    getCareByPatientEncounter({ code }: GetCareByPatientEncounterRequest, opts?: OperationOpts): Observable<AjaxResponse<Array<CareDTO>>>
+    getCareByPatientEncounter({ code }: GetCareByPatientEncounterRequest, opts?: OperationOpts): Observable<Array<CareDTO> | AjaxResponse<Array<CareDTO>>> {
+        throwIfNullOrUndefined(code, 'code', 'getCareByPatientEncounter');
+
+        const headers: HttpHeaders = {
+        };
+
+        return this.request<Array<CareDTO>>({
+            url: '/encounters/{code}/cares'.replace('{code}', encodeURI(code)),
             method: 'GET',
             headers,
         }, opts?.responseOpts);

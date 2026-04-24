@@ -272,7 +272,8 @@
       "illiterate": "Analphabète"
     },
     "motherSchoolingLevel": "Niveau scolaire de la mère",
-    "fatherSchoolingLevel": "Niveau scolaire de la père"
+    "fatherSchoolingLevel": "Niveau scolaire de la père",
+    "care": "Soins"
   },
   "encounters": {
     "admissions": "Admissions",
@@ -529,7 +530,8 @@
     "encounters": "Consultations",
     "conditioning": "Mise en condition",
     "medicalHistory": "Antécédent médical",
-    "userProfile": "Profile de l'utilisateur"
+    "userProfile": "Profile de l'utilisateur",
+    "care": "Soins"
   },
   "userProfile": "Profile de l'utilisateur",
   "operation": {
@@ -723,14 +725,19 @@
       "deParasitization": "Déparasitage",
       "psychomotorDevelopment": "Développement psychomoteur",
       "somaticGrowth": "Croissance somatique",
-      "Supplement": "supplémentation ",
+      "Supplement": "Supplémentation ",
       "ironSupplement": "fer",
       "folicAcidSupplement": "acide folique ",
       "vitASupplement": " Vitamine A ",
       "otherSupplements": "Autre supplémentation",
       "vaginaldelivery": "Voie basse",
       "cesarian": "Césarienne",
-      "reasonMode": "Motif de la césarienne"
+      "reasonMode": "Motif de la césarienne",
+      "vap1": "VAP 1",
+      "vap2": "VAP 2",
+      "vap3": "VAP 3",
+      "antiMalarialProphylaxis": "Prophylaxie anti-palustre",
+      "vaccinalState": "État vaccinal "
     },
     "personalPathological": {
       "title": "Antécédents pathologiques (Personnel)",
@@ -1505,5 +1512,18 @@
     "tdr": "Tests de diagnostic rapide",
     "othersconditioning": "Mise en condition",
     "reheating": "Rechauffage"
+  },
+  "care": {
+    "id": "ID",
+    "note": "Remarques",
+    "observation": "Observation",
+    "plannedCare": "Soins planifiés",
+    "team": "Équipes de soins",
+    "careDate": "Date de soins",
+    "created": "Soins créés",
+    "updated": "Soins mis à jour",
+    "createsuccess": "Soins créés avec succès",
+    "updatesuccess": "Soins mis à jour avec succès",
+    "previousentries": "Soins précédentes"
   }
 }

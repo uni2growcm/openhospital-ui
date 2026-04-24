@@ -1,3 +1,4 @@
+import Care from "components/accessories/care/Care";
 import Conditioning from "components/accessories/conditioning/Conditioning";
 import MedicalHistory from "components/accessories/medicalhistory/MedicalHistory";
 import { Radiology, Series, Studies } from "components/accessories/radiology";
@@ -6,6 +7,7 @@ import DischargeDetailsActivityContent from "components/activities/patientDetail
 import VisitDetailsActivityContent from "components/activities/patientDetailsActivityContent/VisitDetailsActivityContent";
 import { PatientEncounterActivityContent } from "components/activities/patientEncounterActivity";
 import PatientEncounterActivity from "components/activities/patientEncounterActivity/PatientEncounterActivity";
+import { useEncountersEnabled } from "libraries/hooks";
 import { withPermission } from "libraries/permissionUtils/withPermission";
 import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -17,7 +19,6 @@ import PatientSummary from "../../components/accessories/patientSummary/PatientS
 import PatientTherapy from "../../components/accessories/patientTherapy/PatientTherapy";
 import PatientTriage from "../../components/accessories/patientTriage/PatientTriage";
 import NotFound from "../../components/activities/notFound/NotFound";
-import { useEncountersEnabled } from "libraries/hooks";
 
 export const PatientsEncounterRoutes: FC = () => {
   const { t } = useTranslation();
@@ -80,7 +81,18 @@ export const PatientsEncounterRoutes: FC = () => {
             />
           }
         />
-        {!encountersEnabled && <Route path="visits" element={<VisitDetailsActivityContent />} />}
+        <Route
+          path="care"
+          element={
+            <PatientEncounterActivityContent
+              title={t("patient.care")}
+              content={Care}
+            />
+          }
+        />
+        {!encountersEnabled && (
+          <Route path="visits" element={<VisitDetailsActivityContent />} />
+        )}
         <Route
           path="laboratory"
           element={
