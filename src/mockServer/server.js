@@ -36,6 +36,7 @@ import { vaccineRoutes } from "./routes/vaccine";
 import { vaccineTypesRoutes } from "./routes/vaccineTypes";
 import { visitRoutes } from "./routes/visits";
 import { wardsRoutes } from "./routes/wards";
+import { careRoutes } from "./routes/care";
 
 export function makeServer() {
   Polly.register(XHRAdapter);
@@ -82,6 +83,7 @@ export function makeServer() {
     permissionRoutes(server);
     labExamRequestRoutes(server);
     settingsRoutes(server);
+    careRoutes(server);
   });
   return server;
 }

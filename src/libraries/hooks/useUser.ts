@@ -28,8 +28,6 @@ export function useUser(usersList?: UserDTO[] | undefined) {
     []
   );
 
-  console.log(options);
-
   const formatValues = useCallback(
     (values?: string[]) => {
       return (
