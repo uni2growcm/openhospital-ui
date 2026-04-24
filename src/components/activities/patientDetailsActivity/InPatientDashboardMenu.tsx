@@ -11,6 +11,7 @@ import {
   SettingsApplications,
 } from "@mui/icons-material";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import VaccinesIcon from "@mui/icons-material/Vaccines";
 import { useEncountersEnabled } from "libraries/hooks";
 import { usePermission } from "libraries/permissionUtils/usePermission";
 import React, { FunctionComponent, useCallback } from "react";
@@ -124,6 +125,18 @@ const InPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
           >
             <HistoryEdu fontSize="small" style={{ color: "white" }} />
             <span>{t("nav.medicalHistory")}:</span>
+            <img src={Arrow} className="icon_toggle" alt="Accordion toggle" />
+          </div>
+        )}
+      </Permission>
+      <Permission require="care.access">
+        {encountersEnabled && (
+          <div
+            className={"patientDetails__main_menu__item " + isActive("care")}
+            onClick={() => changeUserSection("care")}
+          >
+            <VaccinesIcon fontSize="small" style={{ color: "white" }} />
+            <span>{t("nav.care")}:</span>
             <img src={Arrow} className="icon_toggle" alt="Accordion toggle" />
           </div>
         )}

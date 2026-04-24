@@ -89,6 +89,14 @@ export const getEncounterConditionings = createAsyncThunk(
     ).catch((error) => thunkApi.rejectWithValue(error.response))
 );
 
+export const getEncounterCares = createAsyncThunk(
+  "encounters/GET_ENCOUNTER_CARES",
+  async (payload: { code: string }, thunkApi) =>
+    firstValueFrom(wrapper(() => api.getCareByPatientEncounter(payload))).catch(
+      (error) => thunkApi.rejectWithValue(error.response)
+    )
+);
+
 export const printEncounter = createAsyncThunk(
   "encounters/PRINT_ENCOUNTER_REPORT",
   async (payload: { encounterCode: string }, thunkApi) =>
