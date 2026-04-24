@@ -29,6 +29,10 @@ import { IUserState } from "./state/users/types";
 import { IVaccineState } from "./state/vaccines/types";
 import { IVisitState } from "./state/visits/types";
 import { IWardState } from "./state/ward/types";
+import { ITownState } from "state/town";
+import { ICommuneState } from "state/commune";
+import { IOccupationState } from "state/occupation";
+import { IEthnicState } from "state/ethnic";
 
 export interface IState {
   main: IMainState;
@@ -62,6 +66,10 @@ export interface IState {
   encounters: IEncountersState;
   conditioning: IConditioningsState;
   medicalhistory: IMedicalHistoryState;
+  towns: ITownState;
+  communes: ICommuneState;
+  occupations: IOccupationState;
+  ethnics: IEthnicState;
 }
 
 export enum FIELD_VALIDATION {

@@ -32,6 +32,10 @@ import { userSlice } from "./users";
 import { vaccineSlice } from "./vaccines";
 import { visitSlice } from "./visits";
 import { wardSlice } from "./ward";
+import { townSlice } from "./town";
+import { occupationSlice } from "./occupation";
+import { ethnicSlice } from "./ethnic";
+import { communeSlice } from "./commune";
 
 const reducer = combineReducers({
   main: mainSlice.reducer,
@@ -67,6 +71,10 @@ const reducer = combineReducers({
   conditioning: conditioningSlice.reducer,
   medicalhistory: medicalHistorySlice.reducer,
   care: careSlice.reducer,
+  towns: townSlice.reducer,
+  occupations: occupationSlice.reducer,
+  ethnics: ethnicSlice.reducer,
+  communes: communeSlice.reducer,
 });
 
 export const store = configureStore({

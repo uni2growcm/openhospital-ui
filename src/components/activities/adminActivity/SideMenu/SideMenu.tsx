@@ -7,6 +7,7 @@ import {
   Healing,
   LocalDrink,
   LocalHospitalSharp,
+  LocationCity,
   People,
   SupervisedUserCircle,
   Tune,
@@ -30,48 +31,66 @@ const SideMenu = () => {
   const hospital = useAppSelector((state) => state.hospital.getHospital);
 
   const changeAdminSection = useCallback(
-    (section: IAdminSection) => {
-      navigate(`${section}`);
+    (section: IAdminSection, path?: string) => {
+      if (path) {
+        navigate(path);
+      } else {
+        navigate(`${section}`);
+      }
     },
     [navigate]
   );
 
-  const menuItems: { key: IAdminSection; icon: ReactNode }[] = [
+  const menuItems: { key: IAdminSection; icon: ReactNode; path?: string }[] = [
     {
       key: "wards",
       icon: <AirlineSeatFlat fontSize="small" />,
+      path: PATHS.admin_wards,
     },
     {
       key: "diseases",
       icon: <BlurCircular fontSize="small" />,
+      path: PATHS.admin_diseases,
     },
     {
       key: "exams",
       icon: <AssignmentInd fontSize="small" />,
+      path: PATHS.admin_exams,
     },
     {
       key: "operations",
       icon: <Healing fontSize="small" />,
+      path: PATHS.admin_operations,
     },
     {
       key: "vaccines",
       icon: <LocalDrink fontSize="small" />,
+      path: PATHS.admin_vaccines,
     },
     {
       key: "suppliers",
       icon: <SupervisedUserCircle fontSize="small" />,
+      path: PATHS.admin_suppliers,
+    },
+    {
+      key: "referenceData",
+      icon: <LocationCity fontSize="small" />,
+      path: PATHS.admin_reference_data,
     },
     {
       key: "users",
       icon: <People fontSize="small" />,
+      path: PATHS.admin_users,
     },
     {
       key: "settings",
       icon: <Tune fontSize="small" />,
+      path: PATHS.admin_settings,
     },
     {
       key: "types",
       icon: <GroupWork fontSize="small" />,
+      path: PATHS.admin_types,
     },
   ];
 
@@ -82,11 +101,15 @@ const SideMenu = () => {
           key={item.key}
           icon={item.icon}
           label={t(`nav.${item.key}`)}
-          selected={location.pathname
-            .slice(location.pathname.lastIndexOf("admin") + 6)
-            .startsWith(item.key)}
+          selected={
+            item.path
+              ? location.pathname.startsWith(item.path)
+              : location.pathname
+                  .slice(location.pathname.lastIndexOf("admin") + 6)
+                  .startsWith(item.key)
+          }
           onClick={() => {
-            changeAdminSection(item.key);
+            changeAdminSection(item.key, item.path);
           }}
           trailingIcon={<ArrowForwardIosRounded fontSize="small" />}
         />
