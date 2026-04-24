@@ -305,7 +305,8 @@
       "illiterate": "Illiterate"
     },
     "motherSchoolingLevel": "Mother's educational level",
-    "fatherSchoolingLevel": "Father's educational level"
+    "fatherSchoolingLevel": "Father's educational level",
+    "care": "Care"
   },
   "encounters": {
     "admissions": "Admissions",
@@ -316,7 +317,7 @@
     "laboratory": "Laboratory",
     "operation": "Operation",
     "admission": "Admission",
-    "discharge": "Discharge",
+    "discharge": "Point of exits",
     "clinic": "Clinic",
     "conditioning": "Conditioning",
     "radiology": "Radiology",
@@ -483,7 +484,9 @@
     },
     "examinationType": "Exam Type",
     "ipt": "Weight height index (WHI)",
-    "headcircumference": "Head circumference"
+    "headcircumference": "Head circumference",
+    "physiologicalconstants": "Physiological constants",
+    "anthropometricconstants": "Anthropometric constants"
   },
   "encounter": {
     "code": "Consultation code",
@@ -562,8 +565,9 @@
     "encounters": "Consultations",
     "conditioning": "Conditioning",
     "medicalHistory": "Medical History",
-    "referenceData": "Reference Data",
-    "userProfile": "User Profile"
+    "userProfile": "User Profile",
+    "care": "Care",
+    "referenceData": "Reference Data"
   },
   "userProfile": "User Profile",
   "operation": {
@@ -827,7 +831,12 @@
       "otherSupplements": "Other Supplementation",
       "vaginaldelivery": "Vaginal delivery",
       "cesarian": "Cesarian",
-      "reasonMode": "Cesarian reason"
+      "reasonMode": "Cesarian reason",
+      "vap1": "VAP 1",
+      "vap2": "VAP 2",
+      "vap3": "VAP 3",
+      "antiMalarialProphylaxis": "Anti-malarial prophylaxis",
+      "vaccinalState": "Vaccinal state"
     },
     "personalPathological": {
       "title": "Pathological History (Personal)",
@@ -1060,7 +1069,9 @@
     "preAssessment": "Pre-admission assessment",
     "entryReason": "Entry reason",
     "transportation": "Transportation",
-    "physicalExam": "Physical exam"
+    "physicalExam": "Physical exam",
+    "courseOfAction": "Course of action",
+    "nextAppointment": "Next appointment"
   },
   "bill": {
     "title": "Welcome to Billing",
@@ -1614,5 +1625,18 @@
     "tdr": "Rapid diagnostic tests",
     "othersconditioning": "Conditioning",
     "reheating": "Reheating"
+  },
+  "care": {
+    "id": "ID",
+    "note": "Remarks",
+    "observation": "Observation",
+    "plannedCare": "Planned Care",
+    "team": "Care teams",
+    "careDate": "Date of care",
+    "created": "Care created",
+    "updated": "Care updated",
+    "createsuccess": "Care created successfully",
+    "updatesuccess": "Care updated successfully",
+    "previousentries": "Previous Cares"
   }
 }

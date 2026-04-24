@@ -1,5 +1,8 @@
 import { AdmissionDTO } from "../../../generated";
-import { differenceInDays } from "../../../libraries/formDataHandling/functions";
+import {
+  differenceInDays,
+  parseDateTime,
+} from "../../../libraries/formDataHandling/functions";
 import { TFields } from "../../../libraries/formDataHandling/types";
 import { initialFields } from "./consts";
 import { DischargeFormFieldName } from "./dischargeForm/types";
@@ -29,6 +32,10 @@ export const useFields = (admission?: AdmissionDTO) => {
     anamnesis: {
       value: admission?.anamnesis ?? "",
       type: "text",
+    },
+    nextAppointment: {
+      value: parseDateTime(admission?.nextAppointment?.toString()!, false),
+      type: "date",
     },
   };
 

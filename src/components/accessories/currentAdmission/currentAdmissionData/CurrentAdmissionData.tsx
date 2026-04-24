@@ -117,6 +117,12 @@ export const CurrentAdmissionData: FunctionComponent<IOwnProps> = ({
             <p className="item_content">{admission.physicalExam}</p>
           </div>
         )}
+        {!isEmpty(admission?.courseOfAction) && (
+          <div className="fullWidth currentAdmissionData__item">
+            <span className="item_label">{t("admission.courseOfAction")}</span>
+            <p className="item_content">{admission.courseOfAction}</p>
+          </div>
+        )}
       </div>
     </div>
   );

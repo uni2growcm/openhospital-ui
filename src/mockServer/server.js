@@ -36,6 +36,7 @@ import { vaccineRoutes } from "./routes/vaccine";
 import { vaccineTypesRoutes } from "./routes/vaccineTypes";
 import { visitRoutes } from "./routes/visits";
 import { wardsRoutes } from "./routes/wards";
+import { careRoutes } from "./routes/care";
 import { ethnicRoutes } from "./routes/ethnic";
 import { communeRoutes } from "./routes/commune";
 import { cityRoutes } from "./routes/city";
@@ -86,6 +87,7 @@ export function makeServer() {
     permissionRoutes(server);
     labExamRequestRoutes(server);
     settingsRoutes(server);
+    careRoutes(server);
     ethnicRoutes(server);
     communeRoutes(server)
     cityRoutes(server);

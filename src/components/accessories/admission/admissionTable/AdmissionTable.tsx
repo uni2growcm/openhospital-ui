@@ -49,6 +49,8 @@ const PatientAdmissionTable: FunctionComponent<IOwnProps> = ({
     referenceSheet: t("patient.referenceSheet"),
     qualifiedAgent: t("patient.qualifiedAgent"),
     physicalExam: t("admission.physicalExam"),
+    courseOfAction: t("admission.courseOfAction"),
+    nextAppointment: t("admission.nextAppointment"),
   };
   const order = ["admDate", "disDate"];
 
@@ -106,6 +108,10 @@ const PatientAdmissionTable: FunctionComponent<IOwnProps> = ({
         referenceSheet: item.referenceSheet ? t("common.yes") : t("common.no"),
         qualifiedAgent: item.qualifiedAgent ? t("common.yes") : t("common.no"),
         physicalExam: item.physicalExam ?? "",
+        courseOfAction: item.courseOfAction ?? "",
+        nextAppointment: item.nextAppointment
+          ? renderDateTime(item.nextAppointment)
+          : "",
       };
     });
   };

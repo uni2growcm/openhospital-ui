@@ -272,7 +272,8 @@
       "illiterate": "Analphabète"
     },
     "motherSchoolingLevel": "Niveau scolaire de la mère",
-    "fatherSchoolingLevel": "Niveau scolaire de la père"
+    "fatherSchoolingLevel": "Niveau scolaire de la père",
+    "care": "Soins"
   },
   "encounters": {
     "admissions": "Admissions",
@@ -450,7 +451,9 @@
     },
     "examinationType": "Type de paramètre",
     "ipt": "Indice poid taille(IPT)",
-    "headcircumference": "Périmetre cranien"
+    "headcircumference": "Périmetre cranien",
+    "physiologicalconstants": "Constantes physiologiques",
+    "anthropometricconstants": "Constantes anthropométriques"
   },
   "encounter": {
     "code": "Code de la consultation",
@@ -499,7 +502,7 @@
     "patientdashboard": "Tableau de bord du patient",
     "encounter_dashboard": "Tableau de bord de la consultation",
     "admission": "Admission",
-    "discharge": "Décharge",
+    "discharge": "Point de sortie",
     "surgicalrecord": "Dossier chirurgical",
     "note": "Remarque",
     "exams": "Examens",
@@ -527,8 +530,9 @@
     "encounters": "Consultations",
     "conditioning": "Mise en condition",
     "medicalHistory": "Antécédent médical",
-    "referenceData": "Données de référence",
-    "userProfile": "Profile de l'utilisateur"
+    "userProfile": "Profile de l'utilisateur",
+    "care": "Soins",
+    "referenceData": "Données de référence"
   },
   "town": {
     "id": "ID",
@@ -782,14 +786,19 @@
       "deParasitization": "Déparasitage",
       "psychomotorDevelopment": "Développement psychomoteur",
       "somaticGrowth": "Croissance somatique",
-      "Supplement": "supplémentation ",
+      "Supplement": "Supplémentation ",
       "ironSupplement": "fer",
       "folicAcidSupplement": "acide folique ",
       "vitASupplement": " Vitamine A ",
       "otherSupplements": "Autre supplémentation",
       "vaginaldelivery": "Voie basse",
       "cesarian": "Césarienne",
-      "reasonMode": "Motif de la césarienne"
+      "reasonMode": "Motif de la césarienne",
+      "vap1": "VAP 1",
+      "vap2": "VAP 2",
+      "vap3": "VAP 3",
+      "antiMalarialProphylaxis": "Prophylaxie anti-palustre",
+      "vaccinalState": "État vaccinal "
     },
     "personalPathological": {
       "title": "Antécédents pathologiques (Personnel)",
@@ -1010,7 +1019,9 @@
     "preAssessment": "Bilan avant admission",
     "entryReason": "Motif d'entrée",
     "transportation": "Moyen de transport",
-    "physicalExam": "Examen physique"
+    "physicalExam": "Examen physique",
+    "courseOfAction": "Conduite à tenir",
+    "nextAppointment": "Prochain rendez-vous"
   },
   "bill": {
     "title": "Bienvenue dans la facturation",
@@ -1562,5 +1573,18 @@
     "tdr": "Tests de diagnostic rapide",
     "othersconditioning": "Mise en condition",
     "reheating": "Rechauffage"
+  },
+  "care": {
+    "id": "ID",
+    "note": "Remarques",
+    "observation": "Observation",
+    "plannedCare": "Soins planifiés",
+    "team": "Équipes de soins",
+    "careDate": "Date de soins",
+    "created": "Soins créés",
+    "updated": "Soins mis à jour",
+    "createsuccess": "Soins créés avec succès",
+    "updatesuccess": "Soins mis à jour avec succès",
+    "previousentries": "Soins précédentes"
   }
 }

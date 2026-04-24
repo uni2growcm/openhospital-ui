@@ -3,6 +3,7 @@ apis/AdmissionTypesApi.ts
 apis/AdmissionsApi.ts
 apis/AgeTypesApi.ts
 apis/BillsApi.ts
+apis/CaresApi.ts
 apis/CommunesApi.ts
 apis/ConditioningsApi.ts
 apis/DeliveryResultTypeApi.ts
@@ -61,6 +62,7 @@ models/AgeTypeDTO.ts
 models/BillDTO.ts
 models/BillItemsDTO.ts
 models/BillPaymentsDTO.ts
+models/CareDTO.ts
 models/CommuneDTO.ts
 models/ConditioningDTO.ts
 models/DeliveryResultTypeDTO.ts

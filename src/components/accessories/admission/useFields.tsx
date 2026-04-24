@@ -109,6 +109,14 @@ export const useFields = (
       value: admission?.physicalExam ?? "",
       type: "text",
     },
+    courseOfAction: {
+      value: admission?.courseOfAction ?? "",
+      type: "text",
+    },
+    nextAppointment: {
+      value: admission?.nextAppointment ?? "",
+      type: "date",
+    },
   };
 
   return fields;

@@ -142,6 +142,7 @@ const PatientAdmission: FC = () => {
           diseaseOut1: adm.diseaseOut1,
           diseaseOut2: adm.diseaseOut2,
           diseaseOut3: adm.diseaseOut3,
+          nextAppointment: adm.nextAppointment,
         };
       }
       dispatch(updateAdmission(admissionToSave));

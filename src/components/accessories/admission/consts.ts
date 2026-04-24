@@ -101,4 +101,12 @@ export const initialFields: TFields<AdmissionFormFieldName> = {
     value: "",
     type: "text",
   },
+  courseOfAction: {
+    value: "",
+    type: "text",
+  },
+  nextAppointment: {
+    value: "",
+    type: "date",
+  },
 };

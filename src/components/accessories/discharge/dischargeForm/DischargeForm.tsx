@@ -114,6 +114,7 @@ const DischargeForm: FC<DischargeProps> = ({
         );
       },
     }),
+    nextAppointment: string(),
   });
 
   const formik = useFormik({
@@ -134,6 +135,7 @@ const DischargeForm: FC<DischargeProps> = ({
       formattedValues.disType = dischargeTypes?.find(
         (item) => item.code === formattedValues.disType
       );
+      console.log(formattedValues);
 
       onSubmit(formattedValues as any);
     },
@@ -304,6 +306,20 @@ const DischargeForm: FC<DischargeProps> = ({
                 errorText={getErrorText("anamnesis")}
                 onBlur={formik.handleBlur}
                 rows={5}
+                disabled={isLoading}
+              />
+            </div>
+            <div className="fullWidth patientAdmissionForm__item">
+              <DateField
+                fieldName="nextAppointment"
+                fieldValue={formik.values.nextAppointment}
+                disableFuture={false}
+                theme="regular"
+                format="dd/MM/yyyy HH:mm"
+                isValid={isValid("nextAppointment")}
+                errorText={getErrorText("nextAppointment")}
+                label={t("admission.nextAppointment")}
+                onChange={dateFieldHandleOnChange("nextAppointment")}
                 disabled={isLoading}
               />
             </div>

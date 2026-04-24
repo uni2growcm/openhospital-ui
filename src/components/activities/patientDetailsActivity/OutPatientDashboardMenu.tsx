@@ -9,6 +9,7 @@ import {
   Pageview,
 } from "@mui/icons-material";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import VaccinesIcon from "@mui/icons-material/Vaccines";
 import { useEncountersEnabled } from "libraries/hooks";
 import { Permission } from "libraries/permissionUtils/Permission";
 import { usePermission } from "libraries/permissionUtils/usePermission";
@@ -125,6 +126,18 @@ const OutPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
           <span>{t("nav.admissions")}:</span>
           <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
         </div>
+      </Permission>
+      <Permission require="care.access">
+        {encountersEnabled && (
+          <div
+            className={"patientDetails__main_menu__item " + isActive("care")}
+            onClick={() => changeUserSection("care")}
+          >
+            <VaccinesIcon fontSize="small" style={{ color: "white" }} />
+            <span>{t("nav.care")}:</span>
+            <img src={Arrow} className="icon_toggle" alt="Accordion toggle" />
+          </div>
+        )}
       </Permission>
       <Permission require="opds.access">
         {!encountersEnabled && (

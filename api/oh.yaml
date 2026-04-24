@@ -2201,6 +2201,33 @@ paths:
                 type: boolean
       security:
       - bearerAuth: []
+  /cares/{id}:
+    put:
+      tags:
+      - Cares
+      operationId: updateCare
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CareDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CareDTO"
+      security:
+      - bearerAuth: []
   /bills/{id}:
     get:
       tags:
@@ -3740,6 +3767,26 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CommuneDTO"
+      security:
+      - bearerAuth: []
+  /cares:
+    post:
+      tags:
+      - Cares
+      operationId: newCare
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CareDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CareDTO"
       security:
       - bearerAuth: []
   /bills:
@@ -6481,6 +6528,28 @@ paths:
                   $ref: "#/components/schemas/ConditioningDTO"
       security:
       - bearerAuth: []
+  /encounters/{code}/cares:
+    get:
+      tags:
+      - Encounter
+      operationId: getCareByPatientEncounter
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CareDTO"
+      security:
+      - bearerAuth: []
   /encounters/{code}/admissions:
     get:
       tags:
@@ -6752,6 +6821,29 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/ConditioningDTO"
+      security:
+      - bearerAuth: []
+  /cares/{patientCode}:
+    get:
+      tags:
+      - Cares
+      operationId: getCareByPatientCode
+      parameters:
+      - name: patientCode
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CareDTO"
       security:
       - bearerAuth: []
   /bills/pending:
@@ -7429,13 +7521,13 @@ components:
           format: int32
           description: lock
           example: 0
-        pharmacy:
+        female:
           type: boolean
         male:
           type: boolean
-        female:
-          type: boolean
         opd:
+          type: boolean
+        pharmacy:
           type: boolean
       required:
       - beds
@@ -8373,6 +8465,11 @@ components:
           type: string
           description: course of action prescribed by the doctor
           example: Probabilistic antibiotic therapy with amoxicillin for 7 days.
+        nextAppointment:
+          type: string
+          format: date-time
+          description: Next appointment date
+          example: string
         yprog:
           type: integer
           format: int32
@@ -9503,6 +9600,46 @@ components:
           example: Dassa
       required:
       - name
+    CareDTO:
+      type: object
+      description: Class representing a Care
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Id of the care
+          example: 1
+        team:
+          type: array
+          description: Team of the care
+          example:
+          - Dr. Albert
+          - Inf. Clodel
+          items:
+            type: string
+        observation:
+          type: string
+          description: Observation of the commune
+          example: Good observation
+        plannedCare:
+          type: string
+          description: Planned care
+          example: Take one perfusion
+        note:
+          type: string
+          description: Note of the care
+          example: The treatment has worked
+        careDate:
+          type: string
+          format: date-time
+          description: Date of the care
+          example: string
+        patient:
+          $ref: "#/components/schemas/PatientDTO"
+          description: patient
+          example: 22
+      required:
+      - patient
     BillItemsDTO:
       type: object
       description: Class representing a billItem
