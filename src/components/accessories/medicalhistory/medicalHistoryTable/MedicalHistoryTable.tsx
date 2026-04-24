@@ -149,7 +149,11 @@ const MedicalHistoryTable: FunctionComponent<IOwnProps> = ({
           item.vaccinationStateNoPev
         ).join(", "),
         antiMalarialProphylaxisVap: item.antiMalarialProphylaxisVap ?? "",
-        antiMalarialProphylaxisMilda: item.antiMalarialProphylaxisMilda ?? "",
+        antiMalarialProphylaxisMilda: item.antiMalarialProphylaxisMilda
+          ? item.antiMalarialProphylaxisMilda === "NO"
+            ? t("common.no")
+            : t("common.yes")
+          : "",
         antiMalarialProphylaxisOthers: item.antiMalarialProphylaxisOthers ?? "",
         surgicalProcedure: item.surgicalProcedure
           ? t("common.yes")

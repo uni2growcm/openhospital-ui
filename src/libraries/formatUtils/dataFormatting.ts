@@ -35,7 +35,9 @@ export const visitDataFormatter = (
 };
 
 export const renderDate = (date: string) => {
-  return moment(date).isValid() ? moment(date).format("DD/MM/YYYY HH:mm:ss") : "";
+  return moment(date).isValid()
+    ? moment(date).format("DD/MM/YYYY HH:mm:ss")
+    : "";
 };
 
 export const renderDateTime = (date: string) => {
@@ -66,3 +68,16 @@ export const sortAndSlice: any = (data: any) => {
     .slice(0, 10)
     .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
 };
+
+export function getLocalISOString(date: Date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const seconds = String(date.getSeconds()).padStart(2, "0");
+  const ms = String(date.getMilliseconds()).padStart(3, "0");
+
+  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${ms}Z`;
+}

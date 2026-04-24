@@ -764,7 +764,12 @@
       "otherSupplements": "Other Supplementation",
       "vaginaldelivery": "Vaginal delivery",
       "cesarian": "Cesarian",
-      "reasonMode": "Cesarian reason"
+      "reasonMode": "Cesarian reason",
+      "vap1": "VAP 1",
+      "vap2": "VAP 2",
+      "vap3": "VAP 3",
+      "antiMalarialProphylaxis": "Anti-malarial prophylaxis",
+      "vaccinalState": "Vaccinal state"
     },
     "personalPathological": {
       "title": "Pathological History (Personal)",
