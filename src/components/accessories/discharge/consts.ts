@@ -35,4 +35,8 @@ export const initialFields: TFields<DischargeFormFieldName> = {
     value: "",
     type: "text",
   },
+  nextAppointment: {
+    value: parseDateTime(Date.now().toString(), false),
+    type: "date",
+  },
 };

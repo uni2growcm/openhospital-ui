@@ -193,6 +193,7 @@ const AdmissionForm: FC<AdmissionProps> = ({
           },
         })
       : string(),
+    nextAppointment: string(),
     preTreatment: string(),
     preAssessment: string(),
     alertReceived: boolean().nullable(),
@@ -550,6 +551,20 @@ const AdmissionForm: FC<AdmissionProps> = ({
                     errorText={getErrorText("imageryCharge")}
                     onBlur={formik.handleBlur}
                     type="text"
+                    disabled={isLoading}
+                  />
+                </div>
+                <div className="patientAdmissionForm__item">
+                  <DateField
+                    fieldName="nextAppointment"
+                    fieldValue={formik.values.nextAppointment}
+                    disableFuture={false}
+                    theme="regular"
+                    format="dd/MM/yyyy HH:mm"
+                    isValid={isValid("nextAppointment")}
+                    errorText={getErrorText("nextAppointment")}
+                    label={t("admission.nextAppointment")}
+                    onChange={dateFieldHandleOnChange("nextAppointment")}
                     disabled={isLoading}
                   />
                 </div>

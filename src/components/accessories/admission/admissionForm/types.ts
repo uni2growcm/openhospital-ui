@@ -39,4 +39,5 @@ export type AdmissionFormFieldName =
   | "qualifiedAgent"
   | "transportation"
   | "physicalExam"
-  | "courseOfAction";
+  | "courseOfAction"
+  | "nextAppointment";

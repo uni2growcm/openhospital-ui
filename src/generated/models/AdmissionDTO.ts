@@ -262,6 +262,12 @@ export interface AdmissionDTO {
      */
     courseOfAction?: string;
     /**
+     * Next appointment date
+     * @type {string}
+     * @memberof AdmissionDTO
+     */
+    nextAppointment?: string;
+    /**
      * @type {number}
      * @memberof AdmissionDTO
      */
