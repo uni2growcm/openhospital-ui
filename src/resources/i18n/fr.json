@@ -753,6 +753,7 @@
     "discardMessage": "Êtes-vous sûr de vouloir rejeter cette opération ? Toutes les données non enregistrées seront perdues.",
     "printData": "Imprimer les données",
     "failedtodownloadthereport": "Échec de téléchargement du rapport",
+    "orderbyencounter": "Regrouper par consultation",
     "communes": "Communes",
     "ethnics": "Ethnies",
     "towns": "Villes",
@@ -762,7 +763,6 @@
     "addTown": "Ajouter une ville",
     "addOccupation": "Ajouter une profession"
   },
-
   "medicalHistory": {
     "physiological": {
       "title": "Antécédents physiologiques",
@@ -847,7 +847,6 @@
       "vaa": "VAA"
     }
   },
-
   "permission": {
     "denied": "Autorisation refusée",
     "unauthorized": "Non autorisé",
@@ -904,7 +903,8 @@
     "opd": "OPD",
     "booking": "Réservation",
     "exams": "Examen",
-    "therapy": "Thérapie"
+    "therapy": "Thérapie",
+    "encounter": "Consultation"
   },
   "lab": {
     "newlab": "Nouvel examen de laboratoire",
@@ -1152,15 +1152,33 @@
       "elderly": "Âgé"
     },
     "lab": {
-      "undefined": { "txt": "Indéfini" },
-      "blood": { "txt": "Sang" },
-      "cfs": { "txt": "CFS" },
-      "film": { "txt": "FILM" },
-      "sputum": { "txt": "Sputum" },
-      "stool": { "txt": "Excréments" },
-      "swabs": { "txt": "Écouvillons" },
-      "tissues": { "txt": "Tissus" },
-      "urine": { "txt": "Urine" }
+      "undefined": {
+        "txt": "Indéfini"
+      },
+      "blood": {
+        "txt": "Sang"
+      },
+      "cfs": {
+        "txt": "CFS"
+      },
+      "film": {
+        "txt": "FILM"
+      },
+      "sputum": {
+        "txt": "Sputum"
+      },
+      "stool": {
+        "txt": "Excréments"
+      },
+      "swabs": {
+        "txt": "Écouvillons"
+      },
+      "tissues": {
+        "txt": "Tissus"
+      },
+      "urine": {
+        "txt": "Urine"
+      }
     },
     "common": {
       "thecodeisalreadyinuse": {

@@ -10,6 +10,7 @@ import Tabs from "../tabs/Tabs";
 import { TTabConfig } from "../tabs/types";
 import PatientSummaryByDate from "./patientSummaryByDate/PatientSummaryByDate";
 import PatientSummaryByType from "./patientSummaryByType/PatientSummaryByType";
+import PatientSummaryByEncounter from "./patientSummaryByEncounter/PatientSummaryByEncounter";
 import "./styles.scss";
 
 const PatientSummary: FunctionComponent = () => {
@@ -22,6 +23,7 @@ const PatientSummary: FunctionComponent = () => {
   const patientSummaryTabs: TTabConfig = [
     { label: t("common.orderbydate"), content: <PatientSummaryByDate /> },
     { label: t("common.orderbytype"), content: <PatientSummaryByType /> },
+    { label: t("common.orderbyencounter"), content: <PatientSummaryByEncounter /> },
   ];
   const handlePrint = () => {
     printSubject.next(null);
