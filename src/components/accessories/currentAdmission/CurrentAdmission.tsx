@@ -48,7 +48,14 @@ export const CurrentAdmission: FunctionComponent<IOwnProps> = ({
       referenceSheet: adm.referenceSheet,
       qualifiedAgent: adm.qualifiedAgent,
       transportation: adm.transportation,
+      referralAlert: adm.referralAlert,
+      referralReason: adm.referralReason,
+      diagnosis: adm.diagnosis,
+      treatmentReceived: adm.treatmentReceived,
+      outcome: adm.outcome,
+      improvementFeedback: adm.improvementFeedback,
       physicalExam: adm.physicalExam,
+      courseOfAction: adm.courseOfAction,
     };
     dispatch(updateAdmission(admissionToSave));
   };

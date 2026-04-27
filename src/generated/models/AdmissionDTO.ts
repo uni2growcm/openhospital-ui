@@ -268,6 +268,54 @@ export interface AdmissionDTO {
      */
     nextAppointment?: string;
     /**
+     * Referring center
+     * @type {string}
+     * @memberof AdmissionDTO
+     */
+    referringCenter?: string;
+    /**
+     * Referral alert
+     * @type {string}
+     * @memberof AdmissionDTO
+     */
+    referralAlert?: string;
+    /**
+     * Transportation mode
+     * @type {string}
+     * @memberof AdmissionDTO
+     */
+    transportationMode?: string;
+    /**
+     * Referral reason
+     * @type {string}
+     * @memberof AdmissionDTO
+     */
+    referralReason?: string;
+    /**
+     * Diagnosis
+     * @type {string}
+     * @memberof AdmissionDTO
+     */
+    diagnosis?: string;
+    /**
+     * Treatment received
+     * @type {string}
+     * @memberof AdmissionDTO
+     */
+    treatmentReceived?: string;
+    /**
+     * Outcome
+     * @type {string}
+     * @memberof AdmissionDTO
+     */
+    outcome?: string;
+    /**
+     * Improvement feedback
+     * @type {string}
+     * @memberof AdmissionDTO
+     */
+    improvementFeedback?: string;
+    /**
      * @type {number}
      * @memberof AdmissionDTO
      */

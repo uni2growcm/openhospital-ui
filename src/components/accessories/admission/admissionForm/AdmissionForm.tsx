@@ -202,6 +202,12 @@ const AdmissionForm: FC<AdmissionProps> = ({
     transportation: string(),
     physicalExam: string(),
     courseOfAction: string(),
+    referralAlert: string(),
+    referralReason: string(),
+    diagnosis: string(),
+    treatmentReceived: string(),
+    outcome: string(),
+    improvementFeedback: string(),
   });
 
   const formik = useFormik({
@@ -242,6 +248,10 @@ const AdmissionForm: FC<AdmissionProps> = ({
   });
 
   const { setFieldValue, resetForm, handleBlur } = formik;
+
+  const isReferralAdmission = useMemo(() => {
+    return formik.values.admType === "R";
+  }, [formik.values.admType]);
 
   const dateFieldHandleOnChange = useCallback(
     (fieldName: string) => (value: any) => {
@@ -414,6 +424,7 @@ const AdmissionForm: FC<AdmissionProps> = ({
                 disabled={isLoading}
               />
             </div>
+            {isReferralAdmission && (
             <div className="patientAdmissionForm__item">
               <TextField
                 field={formik.getFieldProps("fhu")}
@@ -427,22 +438,114 @@ const AdmissionForm: FC<AdmissionProps> = ({
                 maxLength={50}
               />
             </div>
+            )}
           </div>
           <div className="row start-sm center-xs">
-            <div className="patientAdmissionForm__item">
-              <Autocomplete
-                id="transportation"
-                freeSolo
-                value={formik.values.transportation}
-                options={transportationOptions ?? []}
-                onChange={(_, value) => {
-                  formik.setFieldValue("transportation", value);
-                }}
-                label={t("admission.transportation")}
-                placeholder={t("admission.transportation")}
-              />
-            </div>
+            {isReferralAdmission && (
+              <>
+                <div className="patientAdmissionForm__item">
+                  <Autocomplete
+                    id="transportation"
+                    freeSolo
+                    value={formik.values.transportation}
+                    options={transportationOptions ?? []}
+                    onChange={(_, value) => {
+                      formik.setFieldValue("transportation", value);
+                    }}
+                    label={t("admission.transportation")}
+                    placeholder={t("admission.transportation")}
+                  />
+                </div>
+                <div className="patientAdmissionForm__item">
+                  <TextField
+                    field={formik.getFieldProps("referralAlert")}
+                    theme="regular"
+                    label={t("admission.referralAlert")}
+                    isValid={isValid("referralAlert")}
+                    errorText={getErrorText("referralAlert")}
+                    onBlur={formik.handleBlur}
+                    type="text"
+                    disabled={isLoading}
+                    maxLength={100}
+                  />
+                </div>
+              </>
+            )}
           </div>
+          {isReferralAdmission && (
+            <>
+              <div className="fullWidth patientAdmissionForm__item">
+                <TextField
+                  field={formik.getFieldProps("referralReason")}
+                  theme="regular"
+                  label={t("admission.referralReason")}
+                  multiline={true}
+                  type="text"
+                  isValid={isValid("referralReason")}
+                  errorText={getErrorText("referralReason")}
+                  onBlur={formik.handleBlur}
+                  rows={3}
+                  disabled={isLoading}
+                />
+              </div>
+              <div className="fullWidth patientAdmissionForm__item">
+                <TextField
+                  field={formik.getFieldProps("diagnosis")}
+                  theme="regular"
+                  label={t("admission.diagnosis")}
+                  multiline={true}
+                  type="text"
+                  isValid={isValid("diagnosis")}
+                  errorText={getErrorText("diagnosis")}
+                  onBlur={formik.handleBlur}
+                  rows={3}
+                  disabled={isLoading}
+                />
+              </div>
+              <div className="fullWidth patientAdmissionForm__item">
+                <TextField
+                  field={formik.getFieldProps("treatmentReceived")}
+                  theme="regular"
+                  label={t("admission.treatmentReceived")}
+                  multiline={true}
+                  type="text"
+                  isValid={isValid("treatmentReceived")}
+                  errorText={getErrorText("treatmentReceived")}
+                  onBlur={formik.handleBlur}
+                  rows={3}
+                  disabled={isLoading}
+                />
+              </div>
+              <div className="fullWidth patientAdmissionForm__item">
+                <TextField
+                  field={formik.getFieldProps("outcome")}
+                  theme="regular"
+                  label={t("admission.outcome")}
+                  multiline={true}
+                  type="text"
+                  isValid={isValid("outcome")}
+                  errorText={getErrorText("outcome")}
+                  onBlur={formik.handleBlur}
+                  rows={3}
+                  disabled={isLoading}
+                />
+              </div>
+              <div className="fullWidth patientAdmissionForm__item">
+                <TextField
+                  field={formik.getFieldProps("improvementFeedback")}
+                  theme="regular"
+                  label={t("admission.improvementFeedback")}
+                  multiline={true}
+                  type="text"
+                  isValid={isValid("improvementFeedback")}
+                  errorText={getErrorText("improvementFeedback")}
+                  onBlur={formik.handleBlur}
+                  rows={3}
+                  disabled={isLoading}
+                />
+              </div>
+            </>
+          )}
           {admitted && (
             <div>
               <div className="row start-sm center-xs">

@@ -141,6 +141,15 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
       formattedValues.transportation = formik.values.transportation;
       formattedValues.physicalExam = formik.values.physicalExam;
       formattedValues.courseOfAction = formik.values.courseOfAction;
+      
+      // Add referral fields
+      formattedValues.referralAlert = formik.values.referralAlert;
+      formattedValues.referralReason = formik.values.referralReason;
+      formattedValues.diagnosis = formik.values.diagnosis;
+      formattedValues.treatmentReceived = formik.values.treatmentReceived;
+      formattedValues.outcome = formik.values.outcome;
+      formattedValues.improvementFeedback = formik.values.improvementFeedback;
+      
       onSubmit({
         ...currentAdmission,
         ...formattedValues,
@@ -157,6 +166,8 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
       onDiscard();
     }
   }, [dispatch, activityTransitionState, patient, onDiscard]);
+
+  const isReferralAdmission = formik.values.admType === "R";
 
   useEffect(() => {
     setIsIronSupplementChecked(
@@ -268,31 +279,122 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
               disabled={isLoading}
             />
           </div>
-          <div className="currentAdmissionForm__item">
-            <TextField
-              field={formik.getFieldProps("fhu")}
-              theme="regular"
-              label={t("admission.fhu")}
-              isValid={isValid("fhu")}
-              errorText={getErrorText("fhu")}
-              onBlur={formik.handleBlur}
-              type="text"
-              disabled={isLoading}
-            />
-          </div>
-          <div className="currentAdmissionForm__item">
-            <Autocomplete
-              id="transportation"
-              freeSolo
-              value={formik.values.transportation}
-              options={transportationOptions ?? []}
-              onChange={(_, value) => {
-                formik.setFieldValue("transportation", value);
-              }}
-              label={t("admission.transportation")}
-              placeholder={t("admission.transportation")}
-            />
-          </div>
+          {isReferralAdmission && (
+            <>
+              <div className="currentAdmissionForm__item">
+                <TextField
+                  field={formik.getFieldProps("fhu")}
+                  theme="regular"
+                  label={t("admission.fhu")}
+                  isValid={isValid("fhu")}
+                  errorText={getErrorText("fhu")}
+                  onBlur={formik.handleBlur}
+                  type="text"
+                  disabled={isLoading}
+                />
+              </div>
+              <div className="currentAdmissionForm__item">
+                <Autocomplete
+                  id="transportation"
+                  freeSolo
+                  value={formik.values.transportation}
+                  options={transportationOptions ?? []}
+                  onChange={(_, value) => {
+                    formik.setFieldValue("transportation", value);
+                  }}
+                  label={t("admission.transportation")}
+                  placeholder={t("admission.transportation")}
+                />
+              </div>
+              <div className="currentAdmissionForm__item">
+                <TextField
+                  field={formik.getFieldProps("referralAlert")}
+                  theme="regular"
+                  label={t("admission.referralAlert")}
+                  isValid={isValid("referralAlert")}
+                  errorText={getErrorText("referralAlert")}
+                  onBlur={formik.handleBlur}
+                  type="text"
+                  disabled={isLoading}
+                  maxLength={100}
+                />
+              </div>
+            </>
+          )}
+          {isReferralAdmission && (
+            <>
+              <div className="fullWidth currentAdmissionForm__item">
+                <TextField
+                  field={formik.getFieldProps("referralReason")}
+                  theme="regular"
+                  label={t("admission.referralReason")}
+                  multiline={true}
+                  type="text"
+                  isValid={isValid("referralReason")}
+                  errorText={getErrorText("referralReason")}
+                  onBlur={formik.handleBlur}
+                  rows={3}
+                  disabled={isLoading}
+                />
+              </div>
+              <div className="fullWidth currentAdmissionForm__item">
+                <TextField
+                  field={formik.getFieldProps("diagnosis")}
+                  theme="regular"
+                  label={t("admission.diagnosis")}
+                  multiline={true}
+                  type="text"
+                  isValid={isValid("diagnosis")}
+                  errorText={getErrorText("diagnosis")}
+                  onBlur={formik.handleBlur}
+                  rows={3}
+                  disabled={isLoading}
+                />
+              </div>
+              <div className="fullWidth currentAdmissionForm__item">
+                <TextField
+                  field={formik.getFieldProps("treatmentReceived")}
+                  theme="regular"
+                  label={t("admission.treatmentReceived")}
+                  multiline={true}
+                  type="text"
+                  isValid={isValid("treatmentReceived")}
+                  errorText={getErrorText("treatmentReceived")}
+                  onBlur={formik.handleBlur}
+                  rows={3}
+                  disabled={isLoading}
+                />
+              </div>
+              <div className="fullWidth currentAdmissionForm__item">
+                <TextField
+                  field={formik.getFieldProps("outcome")}
+                  theme="regular"
+                  label={t("admission.outcome")}
+                  multiline={true}
+                  type="text"
+                  isValid={isValid("outcome")}
+                  errorText={getErrorText("outcome")}
+                  onBlur={formik.handleBlur}
+                  rows={3}
+                  disabled={isLoading}
+                />
+              </div>
+              <div className="fullWidth currentAdmissionForm__item">
+                <TextField
+                  field={formik.getFieldProps("improvementFeedback")}
+                  theme="regular"
+                  label={t("admission.improvementFeedback")}
+                  multiline={true}
+                  type="text"
+                  isValid={isValid("improvementFeedback")}
+                  errorText={getErrorText("improvementFeedback")}
+                  onBlur={formik.handleBlur}
+                  rows={3}
+                  disabled={isLoading}
+                />
+              </div>
+            </>
+          )}
           <div className="row start-sm center-xs">
             <div className="currentAdmissionForm__supplementRow">
               <div className="currentAdmissionForm__item">

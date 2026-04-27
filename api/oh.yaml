@@ -7521,11 +7521,11 @@ components:
           format: int32
           description: lock
           example: 0
+        opd:
+          type: boolean
         female:
           type: boolean
         male:
-          type: boolean
-        opd:
           type: boolean
         pharmacy:
           type: boolean
@@ -8470,6 +8470,38 @@ components:
           format: date-time
           description: Next appointment date
           example: string
+        referringCenter:
+          type: string
+          description: Referring center
+          example: Regional Hospital
+        referralAlert:
+          type: string
+          description: Referral alert
+          example: Urgent referral needed
+        transportationMode:
+          type: string
+          description: Transportation mode
+          example: Ambulance
+        referralReason:
+          type: string
+          description: Referral reason
+          example: Specialized treatment required
+        diagnosis:
+          type: string
+          description: Diagnosis
+          example: Pneumonia
+        treatmentReceived:
+          type: string
+          description: Treatment received
+          example: Antibiotic therapy
+        outcome:
+          type: string
+          description: Outcome
+          example: Recovered
+        improvementFeedback:
+          type: string
+          description: Improvement feedback
+          example: Patient showing significant improvement
         yprog:
           type: integer
           format: int32
