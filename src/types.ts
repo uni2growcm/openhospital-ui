@@ -273,4 +273,4 @@ export type TPermission =
   | "care.update"
   | "care.read"
   | "care.access"
-  | "reports.access";
+  | "statistics.access";
