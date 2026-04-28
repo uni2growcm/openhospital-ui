@@ -72,7 +72,7 @@ const ReportActivity: FC = () => {
           <div className="reports__header">
             <div className="reports__title">{t("reports.title")}</div>
           </div>
-          <Permission require="reports.access">
+          <Permission require="reports.read">
             <div className="reports__accordion">
               <TextField
                 label={t("reports.selectReport")}

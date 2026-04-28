@@ -70,7 +70,7 @@ const AppHeader: FunctionComponent<IOwnProps> = ({ breadcrumbMap }) => {
   const canAccessLaboratory = usePermission("laboratories.access");
   const canAccessDashboard = usePermission("dashboard.access");
   const canAccessAdmin = usePermission("admin.access");
-  const canAccessReport = usePermission("reports.access");
+  const canAccessReport = usePermission("reports.read");
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
