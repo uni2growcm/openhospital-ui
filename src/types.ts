@@ -272,4 +272,5 @@ export type TPermission =
   | "care.create"
   | "care.update"
   | "care.read"
-  | "care.access";
+  | "care.access"
+  | "reports.access";

@@ -70,6 +70,7 @@ const AppHeader: FunctionComponent<IOwnProps> = ({ breadcrumbMap }) => {
   const canAccessLaboratory = usePermission("laboratories.access");
   const canAccessDashboard = usePermission("dashboard.access");
   const canAccessAdmin = usePermission("admin.access");
+  const canAccessReport = usePermission("reports.access");
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -236,6 +237,14 @@ const AppHeader: FunctionComponent<IOwnProps> = ({ breadcrumbMap }) => {
                   onClick={() => navigate(PATHS.laboratory)}
                 >
                   {t("nav.laboratory")}
+                </div>
+              )}
+              {canAccessReport && (
+                <div
+                  className="appHeader__nav__item"
+                  onClick={() => navigate(PATHS.statistics)}
+                >
+                  {t("nav.statistics")}
                 </div>
               )}
             </div>

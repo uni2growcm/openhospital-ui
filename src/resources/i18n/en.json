@@ -567,7 +567,8 @@
     "medicalHistory": "Medical History",
     "userProfile": "User Profile",
     "care": "Care",
-    "referenceData": "Reference Data"
+    "referenceData": "Reference Data",
+    "statistics": "Statistics"
   },
   "userProfile": "User Profile",
   "operation": {
@@ -742,9 +743,9 @@
     "addCommune": "Add Commune",
     "addEthnic": "Add Ethnic",
     "addTown": "Add Town",
-    "addOccupation": "Add Occupation"
+    "addOccupation": "Add Occupation",
+    "noreportsfound": "No report found"
   },
-
   "town": {
     "id": "ID",
     "name": "Name",
@@ -758,7 +759,6 @@
     "nameisrequired": "Name is required",
     "nameshouldnotexceed": "Name must not exceed 100 characters"
   },
-
   "occupation": {
     "id": "ID",
     "name": "Name",
@@ -772,7 +772,6 @@
     "nameisrequired": "Name is required",
     "nameshouldnotexceed": "Name must not exceed 100 characters"
   },
-
   "ethnic": {
     "id": "ID",
     "name": "Name",
@@ -786,7 +785,6 @@
     "nameisrequired": "Name is required",
     "nameshouldnotexceed": "Name must not exceed 100 characters"
   },
-
   "commune": {
     "id": "ID",
     "name": "Name",
@@ -800,7 +798,6 @@
     "nameisrequired": "Name is required",
     "nameshouldnotexceed": "Name must not exceed 100 characters"
   },
-
   "medicalHistory": {
     "physiological": {
       "title": "Physiological History",
@@ -897,7 +894,6 @@
       "vaa": "VAA"
     }
   },
-
   "permission": {
     "denied": "Permission denied",
     "unauthorized": "Unauthorized",
@@ -1202,15 +1198,33 @@
       "elderly": "Elderly"
     },
     "lab": {
-      "undefined": { "txt": "Undefined" },
-      "blood": { "txt": "Blood" },
-      "cfs": { "txt": "CFS" },
-      "film": { "txt": "FILM" },
-      "sputum": { "txt": "Sputum" },
-      "stool": { "txt": "Stool" },
-      "swabs": { "txt": "Swabs" },
-      "tissues": { "txt": "Tissues" },
-      "urine": { "txt": "Urine" }
+      "undefined": {
+        "txt": "Undefined"
+      },
+      "blood": {
+        "txt": "Blood"
+      },
+      "cfs": {
+        "txt": "CFS"
+      },
+      "film": {
+        "txt": "FILM"
+      },
+      "sputum": {
+        "txt": "Sputum"
+      },
+      "stool": {
+        "txt": "Stool"
+      },
+      "swabs": {
+        "txt": "Swabs"
+      },
+      "tissues": {
+        "txt": "Tissues"
+      },
+      "urine": {
+        "txt": "Urine"
+      }
     },
     "common": {
       "thecodeisalreadyinuse": {
@@ -1638,5 +1652,39 @@
     "createsuccess": "Care created successfully",
     "updatesuccess": "Care updated successfully",
     "previousentries": "Previous Cares"
+  },
+  "reports": {
+    "title": "Statistics",
+    "selectReport": "Select a report",
+    "selectDateFrom": "Date from",
+    "selectDateTo": "Date to",
+    "selectMonth": "Month",
+    "selectYear": "Year",
+    "download": "Download",
+    "downloadReport": "Download launcher",
+    "oh009_inpatient": "Inpatient Report",
+    "moh705a_under5": "Under 5 Years Daily Outpatient Morbidity Summary",
+    "oh011b_pending": "Revenues, Incomes & Receivables (Pending)",
+    "moh717_page1": "Monthly Workload Report for Hospitals (Page 1)",
+    "hmis108_referrals": "Referrals Monthly Report",
+    "oh010_outpatient": "Outpatient Report",
+    "oh011d_monthly_ward": "Revenues by Ward / Month",
+    "hmis33b_weekly": "Weekly Epidemiological Surveillance",
+    "oh002_provenance": "Registered Patients by Provenance",
+    "hmis108_operations": "Operations Monthly Report",
+    "oh001_registered": "Registered Patients",
+    "oh005_age_sex": "Outpatient Count by Age and Sex",
+    "hmis105_diagnosis": "OPD by Diagnosis",
+    "oh011c_monthly": "Monthly Revenues",
+    "hmis105_attendance": "OPD Attendance",
+    "hmis105_referrals": "OPD Referrals",
+    "hmis55b_lab": "Laboratory Tests",
+    "oh007_lab_monthly": "Laboratory Monthly Report",
+    "oh007_lab_results": "Laboratory Result Report",
+    "oh003_age_sex": "Registered Patients by Age and Sex",
+    "oh004_price_codes": "All Incomes by Price Codes",
+    "oh006_diagnosis": "Outpatient Diagnosis Count",
+    "oh008_lab_opd": "Laboratory Monthly Report (OPD Only)",
+    "oh011a_all": "All Revenues, Incomes & Receivables"
   }
 }

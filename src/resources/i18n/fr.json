@@ -532,7 +532,8 @@
     "medicalHistory": "Antécédent médical",
     "userProfile": "Profile de l'utilisateur",
     "care": "Soins",
-    "referenceData": "Données de référence"
+    "referenceData": "Données de référence",
+    "statistics": "Statistiques"
   },
   "town": {
     "id": "ID",
@@ -760,9 +761,9 @@
     "addCommune": "Ajouter une commune",
     "addEthnic": "Ajouter une ethnie",
     "addTown": "Ajouter une ville",
-    "addOccupation": "Ajouter une profession"
+    "addOccupation": "Ajouter une profession",
+    "noreportsfound": "Aucun rapport trouvé"
   },
-
   "medicalHistory": {
     "physiological": {
       "title": "Antécédents physiologiques",
@@ -847,7 +848,6 @@
       "vaa": "VAA"
     }
   },
-
   "permission": {
     "denied": "Autorisation refusée",
     "unauthorized": "Non autorisé",
@@ -1152,15 +1152,33 @@
       "elderly": "Âgé"
     },
     "lab": {
-      "undefined": { "txt": "Indéfini" },
-      "blood": { "txt": "Sang" },
-      "cfs": { "txt": "CFS" },
-      "film": { "txt": "FILM" },
-      "sputum": { "txt": "Sputum" },
-      "stool": { "txt": "Excréments" },
-      "swabs": { "txt": "Écouvillons" },
-      "tissues": { "txt": "Tissus" },
-      "urine": { "txt": "Urine" }
+      "undefined": {
+        "txt": "Indéfini"
+      },
+      "blood": {
+        "txt": "Sang"
+      },
+      "cfs": {
+        "txt": "CFS"
+      },
+      "film": {
+        "txt": "FILM"
+      },
+      "sputum": {
+        "txt": "Sputum"
+      },
+      "stool": {
+        "txt": "Excréments"
+      },
+      "swabs": {
+        "txt": "Écouvillons"
+      },
+      "tissues": {
+        "txt": "Tissus"
+      },
+      "urine": {
+        "txt": "Urine"
+      }
     },
     "common": {
       "thecodeisalreadyinuse": {
@@ -1586,5 +1604,39 @@
     "createsuccess": "Soins créés avec succès",
     "updatesuccess": "Soins mis à jour avec succès",
     "previousentries": "Soins précédentes"
+  },
+  "reports": {
+    "title": "Statistiques",
+    "selectReport": "Sélectionnez un rapport",
+    "selectDateFrom": "Date de",
+    "selectDateTo": "Date à",
+    "selectMonth": "Mois",
+    "selectYear": "Année",
+    "download": "Télécharger",
+    "downloadReport": "Téléchargement de rapport",
+    "oh009_inpatient": "Rapport des patients hospitalisés",
+    "moh705a_under5": "Morbidité journalière des moins de 5 ans",
+    "oh011b_pending": "Revenus, recettes & créances (en attente)",
+    "moh717_page1": "Rapport mensuel d'activité des hôpitaux (page 1)",
+    "hmis108_referrals": "Rapport mensuel des références",
+    "oh010_outpatient": "Rapport des patients externes",
+    "oh011d_monthly_ward": "Revenus par service / mois",
+    "hmis33b_weekly": "Surveillance épidémiologique hebdomadaire",
+    "oh002_provenance": "Patients enregistrés par provenance",
+    "hmis108_operations": "Rapport mensuel des opérations",
+    "oh001_registered": "Patients enregistrés",
+    "oh005_age_sex": "Consultations externes par âge et sexe",
+    "hmis105_diagnosis": "Consultations par diagnostic",
+    "oh011c_monthly": "Revenus mensuels",
+    "hmis105_attendance": "Fréquentation des consultations",
+    "hmis105_referrals": "Références des consultations",
+    "hmis55b_lab": "Tests de laboratoire",
+    "oh007_lab_monthly": "Rapport mensuel du laboratoire",
+    "oh007_lab_results": "Résultats de laboratoire",
+    "oh003_age_sex": "Patients par âge et sexe",
+    "oh004_price_codes": "Revenus par codes tarifaires",
+    "oh006_diagnosis": "Diagnostics des consultations",
+    "oh008_lab_opd": "Laboratoire (consultations externes)",
+    "oh011a_all": "Tous les revenus et créances"
   }
 }

@@ -23,6 +23,7 @@ import { getUserSettings } from "../state/main";
 import { AdminRoutes } from "./Admin";
 import { PatientsRoutes } from "./Patients/PatientsRoutes";
 import { UserProfile } from "components/accessories/userProfile/userProfile/UserProfile";
+import ReportActivity from "components/accessories/reportActivity/ReportActivity";
 
 export const MainRouter: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -64,6 +65,7 @@ export const MainRouter: React.FC = () => {
           />
           <Route path={`${PATHS.patients}/*`} element={<PatientsRoutes />} />
           <Route path={`${PATHS.admin}/*`} element={<RequiredAdminAccess />} />
+          <Route path={`${PATHS.statistics}`} element={<ReportActivity />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />
