@@ -1,10 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { wrapper } from "libraries/apiUtils/wrapper";
 import { firstValueFrom } from "rxjs";
-import { AdmissionDTO, AdmissionsApi } from "../../generated";
+import { AdmissionDTO, AdmissionsApi, DischargeAgainstMedicalAdviceDTO, ReportsApi } from "../../generated";
 import { customConfiguration } from "../../libraries/apiUtils/configuration";
 
 const api = new AdmissionsApi(customConfiguration());
+
+const apiReport = new ReportsApi(customConfiguration());
 
 export const createAdmission = createAsyncThunk(
   "admissions/CREATE_ADMISSION",
@@ -104,4 +106,12 @@ export const getTransportations = createAsyncThunk(
     firstValueFrom(wrapper(() => api.getAdmissionTransportation())).catch(
       (error) => thunkApi.rejectWithValue(error.response)
     )
+);
+
+export const printDischargeAgainstMedicalAdviceReport = createAsyncThunk(
+  "discharge/PRINT_DISCHARGE_AGAINST_MEDICAL_ADVICE_REPORT",
+  async (dischargeAgainstMedicalAdviceDTO: DischargeAgainstMedicalAdviceDTO, thunkApi) =>
+    wrapper(() => apiReport.printDischargeAgainstMedicalAdvicePdf({ dischargeAgainstMedicalAdviceDTO }))
+      .toPromise()
+      .catch((error) => thunkApi.rejectWithValue(error.response))
 );

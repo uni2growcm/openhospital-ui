@@ -10,6 +10,7 @@ export * from './CommuneDTO';
 export * from './ConditioningDTO';
 export * from './DeliveryResultTypeDTO';
 export * from './DeliveryTypeDTO';
+export * from './DischargeAgainstMedicalAdviceDTO';
 export * from './DischargeTypeDTO';
 export * from './DiseaseDTO';
 export * from './DiseaseTypeDTO';

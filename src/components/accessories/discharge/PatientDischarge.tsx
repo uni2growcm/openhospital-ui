@@ -8,13 +8,14 @@ import { updateEncounter } from "state/encounter";
 import { getPatient } from "state/patients";
 import checkIcon from "../../../assets/check-icon.png";
 import warningIcon from "../../../assets/warning-icon.png";
-import { AdmissionDTO, EncounterDTO } from "../../../generated";
+import { AdmissionDTO, DischargeAgainstMedicalAdviceDTO, EncounterDTO } from "../../../generated";
 import { parseDateTime } from "../../../libraries/formDataHandling/functions";
 import { scrollToElement } from "../../../libraries/uiUtils/scrollToElement";
 import {
   dischargePatient,
   dischargePatientReset,
   getCurrentAdmission,
+  printDischargeAgainstMedicalAdviceReport,
 } from "../../../state/admissions";
 import { IState } from "../../../types";
 import ConfirmationDialog from "../confirmationDialog/ConfirmationDialog";
@@ -24,6 +25,9 @@ import DischargeForm from "./dischargeForm/DischargeForm";
 import "./styles.scss";
 import { AdmissionTransitionState } from "./types";
 import { useFields } from "./useFields";
+import DischargeAgainstMedicalAdviceDialog from "./dischargeAgainstMedialAdvice/DischargeAgainstMedicalAdviceDialog";
+import { downloadBlob } from "libraries/downloadUtils/downloadUtils";
+import moment from "moment";
 
 const PatientDischarge: FC = () => {
   const { t } = useTranslation();
@@ -34,6 +38,7 @@ const PatientDischarge: FC = () => {
   const [close, setClose] = useState(false);
   const [activityTransitionState, setActivityTransitionState] =
     useState<AdmissionTransitionState>("IDLE");
+  const [dischargeAdmission, setDischargeAdmission] = useState<AdmissionDTO | null>(null);
 
   const { id, code } = useParams();
 
@@ -57,6 +62,7 @@ const PatientDischarge: FC = () => {
   );
 
   const [openResetConfirmation, setOpenResetConfirmation] = useState(false);
+  const [openDischargeAgainstMedicalAdvice, setOpenDischargeAgainstMedicalAdvice] = useState(false);
 
   const currentAdmissionStatus = useAppSelector(
     (state: IState) => state.admissions.currentAdmissionByPatientId.status
@@ -86,7 +92,8 @@ const PatientDischarge: FC = () => {
 
   const onclosure = () => {
     setClose(true);
-    setOpenResetConfirmation(true);
+    setOpenResetConfirmation(true); 
+    setOpenDischargeAgainstMedicalAdvice(true);
   };
 
   const closeEncounter = (closureDate: string) => {
@@ -104,6 +111,52 @@ const PatientDischarge: FC = () => {
     setOpenResetConfirmation(false);
     scrollToElement(null);
     changeUserSection("encounters");
+  };
+
+  const dischargeAgainstMedicalAdvice = (dischargeAgainstMedicalAdviceData: any) => {
+    const data = {
+      ...dischargeAgainstMedicalAdviceData,
+      patID: patient?.code,
+      patientRelationshipOccupation:
+        dischargeAgainstMedicalAdviceData.occupation,
+      patientRelationshipName: dischargeAgainstMedicalAdviceData.name,
+      patientRelationshipType:
+        dischargeAgainstMedicalAdviceData.relationshipType,
+      phoneNumber: dischargeAgainstMedicalAdviceData.phone,
+      hospitalisationDate: moment(currentAdmission?.admDate),
+    } as DischargeAgainstMedicalAdviceDTO;
+    dispatch(printDischargeAgainstMedicalAdviceReport(data))
+    .unwrap()
+    .then((result) => {
+      if (result instanceof Blob)
+        downloadBlob(
+          result,
+          `discharge-against-medical-advice-report-${patient?.code}-${new Date().getTime()}.pdf`
+        );
+    });
+    setOpenDischargeAgainstMedicalAdvice(false);
+    evaluateDischargeClosure();
+  }
+
+  const onConfirmDischarge = () => {
+    if (dischargeAdmission && dischargeAdmission.disType?.description === "AGAINST MEDICAL ADVICE") {
+      setClose(true);
+      setOpenDischargeAgainstMedicalAdvice(true);
+    } else {
+      evaluateDischargeClosure();
+    }
+  }
+
+  const evaluateDischargeClosure = () => {
+    if (
+      dischargeStatus === "SUCCESS" &&
+      encountersEnabled &&
+      !!currentEncounter
+    ) {
+      onclosure();
+    } else {
+      setActivityTransitionState("TO_RESET");
+    }
   };
 
   const onSubmit = (adm: AdmissionDTO) => {
@@ -126,6 +179,7 @@ const PatientDischarge: FC = () => {
           admissionDTO: dischargeToSave,
         })
       );
+      setDischargeAdmission(dischargeToSave);
     }
   };
 
@@ -204,7 +258,7 @@ const PatientDischarge: FC = () => {
             : t("admission.dischargefailed")
         }
         primaryButtonLabel="Ok"
-        handlePrimaryButtonClick={() => setActivityTransitionState("TO_RESET")}
+        handlePrimaryButtonClick={() => onConfirmDischarge()}
         handleSecondaryButtonClick={() => ({})}
       />
 
@@ -220,10 +274,19 @@ const PatientDischarge: FC = () => {
         info={t("admission.closeEncounter")}
         primaryButtonLabel={t("common.yes")}
         secondaryButtonLabel={t("common.no")}
-        handlePrimaryButtonClick={() => onclosure()}
-        handleSecondaryButtonClick={() =>
-          setActivityTransitionState("TO_RESET")
-        }
+        handlePrimaryButtonClick={() => onConfirmDischarge()}
+        handleSecondaryButtonClick={() => onConfirmDischarge()}
+      />
+
+      <DischargeAgainstMedicalAdviceDialog
+        isOpen={openDischargeAgainstMedicalAdvice}
+        title={t("discharge.title").toUpperCase()}
+        info={t("discharge.description")}
+        icon={warningIcon}
+        primaryButtonLabel={t("common.save")}
+        secondaryButtonLabel={t("common.cancel")}
+        handlePrimaryButtonClick={dischargeAgainstMedicalAdvice}
+        handleSecondaryButtonClick={evaluateDischargeClosure}
       />
 
       <CloseEncounterDialog

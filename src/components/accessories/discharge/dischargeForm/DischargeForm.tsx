@@ -135,7 +135,6 @@ const DischargeForm: FC<DischargeProps> = ({
       formattedValues.disType = dischargeTypes?.find(
         (item) => item.code === formattedValues.disType
       );
-      console.log(formattedValues);
 
       onSubmit(formattedValues as any);
     },

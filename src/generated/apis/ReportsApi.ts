@@ -15,6 +15,13 @@ import type { Observable } from 'rxjs';
 import type { AjaxResponse } from 'rxjs/ajax';
 import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
 import type { OperationOpts, HttpHeaders } from '../runtime';
+import type {
+    DischargeAgainstMedicalAdviceDTO,
+} from '../models';
+
+export interface PrintDischargeAgainstMedicalAdvicePdfRequest {
+    dischargeAgainstMedicalAdviceDTO: DischargeAgainstMedicalAdviceDTO;
+}
 
 export interface PrintEncounterReportPdfRequest {
     encounterCode: string;
@@ -32,6 +39,26 @@ export interface PrintPatientExaminationPdfRequest {
  * no description
  */
 export class ReportsApi extends BaseAPI {
+
+    /**
+     */
+    printDischargeAgainstMedicalAdvicePdf({ dischargeAgainstMedicalAdviceDTO }: PrintDischargeAgainstMedicalAdvicePdfRequest): Observable<Blob>
+    printDischargeAgainstMedicalAdvicePdf({ dischargeAgainstMedicalAdviceDTO }: PrintDischargeAgainstMedicalAdvicePdfRequest, opts?: OperationOpts): Observable<AjaxResponse<Blob>>
+    printDischargeAgainstMedicalAdvicePdf({ dischargeAgainstMedicalAdviceDTO }: PrintDischargeAgainstMedicalAdvicePdfRequest, opts?: OperationOpts): Observable<Blob | AjaxResponse<Blob>> {
+        throwIfNullOrUndefined(dischargeAgainstMedicalAdviceDTO, 'dischargeAgainstMedicalAdviceDTO', 'printDischargeAgainstMedicalAdvicePdf');
+
+        const headers: HttpHeaders = {
+            'Content-Type': 'application/json',
+        };
+
+        return this.request<Blob>({
+            url: '/reports/dischargeagainstmedicaladvice',
+            method: 'POST',
+            headers,
+            body: dischargeAgainstMedicalAdviceDTO,
+            responseType: 'blob',
+        }, opts?.responseOpts);
+    };
 
     /**
      */

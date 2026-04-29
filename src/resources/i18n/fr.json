@@ -1586,5 +1586,18 @@
     "createsuccess": "Soins créés avec succès",
     "updatesuccess": "Soins mis à jour avec succès",
     "previousentries": "Soins précédentes"
+  },
+  "discharge": {
+    "madeOnDate": "Date de création",
+    "name": "Nom de la relation",
+    "localisation": "Résidant à",
+    "phone": "Numéro de téléphone",
+    "district": "Arrondissement",
+    "commune": "Commune",
+    "reference": "Référence (CI, Carte LEPI, passeport, etc.)",
+    "relationshipType": "Filiation avec le/la patient(e)",
+    "occupation": "Profession",
+    "title": "Décharge contre avis médical",
+    "description": "Entrez les informations suivantes pour télécharger le rapport de décharge contre avis médical"
   }
 }

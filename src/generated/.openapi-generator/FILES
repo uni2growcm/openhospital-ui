@@ -67,6 +67,7 @@ models/CommuneDTO.ts
 models/ConditioningDTO.ts
 models/DeliveryResultTypeDTO.ts
 models/DeliveryTypeDTO.ts
+models/DischargeAgainstMedicalAdviceDTO.ts
 models/DischargeTypeDTO.ts
 models/DiseaseDTO.ts
 models/DiseaseTypeDTO.ts

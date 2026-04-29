@@ -23,6 +23,9 @@ export const admissionSlice = createSlice({
     getTransportationsReset: (state) => {
       state.getTransportations = initial.getTransportations;
     },
+    printDischargeAgainstMedicalAdviceReportReset: (state) => {
+      state.printDischargeAgainstMedicalAdviceReport = initial.printDischargeAgainstMedicalAdviceReport;
+    },
   },
   extraReducers: (builder) =>
     builder
@@ -116,6 +119,20 @@ export const admissionSlice = createSlice({
       .addCase(thunks.getCurrentAdmission.rejected, (state, action) => {
         state.currentAdmissionByPatientId = ApiResponse.error(action.payload);
       })
+      // Print Discharge Against Medical Advice Report
+      .addCase(thunks.printDischargeAgainstMedicalAdviceReport.pending, (state) => {
+        state.printDischargeAgainstMedicalAdviceReport = ApiResponse.loading();
+      })
+      .addCase(thunks.printDischargeAgainstMedicalAdviceReport.fulfilled, (state, action) => {
+        if (action.payload instanceof Blob) {
+          state.printDischargeAgainstMedicalAdviceReport = ApiResponse.value(action.payload);
+        } else {
+          state.printDischargeAgainstMedicalAdviceReport = ApiResponse.error(action.payload);
+        }
+      })
+      .addCase(thunks.printDischargeAgainstMedicalAdviceReport.rejected, (state, action) => {
+        state.printDischargeAgainstMedicalAdviceReport = ApiResponse.error(action.payload);
+      })
       // Get Transportations
       .addCase(thunks.getTransportations.pending, (state) => {
         state.getTransportations = ApiResponse.loading();
@@ -136,4 +153,5 @@ export const {
   dischargePatientReset,
   getCurrentAdmissionReset,
   getTransportationsReset,
+  printDischargeAgainstMedicalAdviceReportReset,
 } = admissionSlice.actions;
