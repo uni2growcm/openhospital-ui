@@ -950,7 +950,8 @@
     "booking": "Reservation",
     "exams": "Exams",
     "therapy": "Therapy",
-    "encounter": "Consultation"
+    "encounter": "Consultation",
+    "noDataForEncounter": "No operations for this encounter."
   },
   "lab": {
     "newlab": "New laboratory exam",

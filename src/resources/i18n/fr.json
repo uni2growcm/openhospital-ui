@@ -904,7 +904,8 @@
     "booking": "Réservation",
     "exams": "Examen",
     "therapy": "Thérapie",
-    "encounter": "Consultation"
+    "encounter": "Consultation",
+    "noDataForEncounter": "Aucune opération pour cette rencontre."
   },
   "lab": {
     "newlab": "Nouvel examen de laboratoire",

@@ -6,10 +6,12 @@ import { renderSummary } from "../../../../libraries/reduxUtils/convert";
 import { loadSummaryDataGroupedByEncounter } from "../../../../state/summary";
 import { IState } from "../../../../types";
 import Table from "../../table/Table";
-import { ORDER_BY_DATE_PAGE_SIZE } from "../consts";
+import { ORDER_BY_TYPE_PAGE_SIZE } from "../consts";
 
 import { printSubject } from "libraries/printUtilis/printUtils";
 import useSummaryMetaData from "../useSummaryMetaData";
+import { SummaryType } from "../types";
+import InfoBox from "components/accessories/infoBox/InfoBox";
 
 const PatientSummaryByEncounter = () => {
   const { t } = useTranslation();
@@ -47,6 +49,9 @@ const PatientSummaryByEncounter = () => {
   }, []);
 
   const summaryGroups = Array.isArray(summaryData) ? summaryData : [];
+  const filterByType = (data: any[], type: string) => {
+    return data.filter((item) => item.type === type);
+  };
 
   return (
     <>
@@ -69,34 +74,172 @@ const PatientSummaryByEncounter = () => {
                 key={encounter.code ?? index}
                 className="patientSummary_encounter_group"
               >
-                <h3>{title}</h3>
-                <div className="patientSummary_date">
-                  {!isLoading ? (
-                    groupData.length > 0 && (
-                      <Table
-                        rowData={renderSummary(
-                          groupData,
-                          dateFields,
-                          labels,
-                          medicals
-                        )}
-                        dateFields={dateFields}
-                        tableHeader={header.date}
-                        labelData={labels}
-                        columnsOrder={order}
-                        rowsPerPage={ORDER_BY_DATE_PAGE_SIZE}
-                        isCollapsabile={true}
-                        showEmptyCell={false}
-                        detailsExcludedFields={["date"]}
-                        isExpanded={expanded}
-                      />
-                    )
-                  ) : (
-                    <CircularProgress
-                      style={{ marginLeft: "50%", position: "relative" }}
+                <h3 className="patientSummary_encounter_title">{title}</h3>
+                {filterByType(groupData, SummaryType.OPD).length > 0 && (
+                  <div className="patientSummary_type_row">
+                    <h4>
+                      {t("summary.opd")}({filterByType(groupData, SummaryType.OPD).length})
+                    </h4>
+                    <Table
+                      rowData={renderSummary(
+                        filterByType(groupData, SummaryType.OPD),
+                        dateFields,
+                        labels
+                      )}
+                      dateFields={dateFields}
+                      tableHeader={header.type.opd}
+                      labelData={labels}
+                      columnsOrder={order}
+                      rowsPerPage={ORDER_BY_TYPE_PAGE_SIZE}
+                      isCollapsabile={true}
+                      showEmptyCell={false}
+                      detailsExcludedFields={["date"]}
+                      isExpanded={expanded}
                     />
-                  )}
-                </div>
+                  </div>
+                )}
+                {filterByType(groupData, SummaryType.ADMISSION).length > 0 && (
+                  <div className="patientSummary_type_row">
+                    <h4>
+                      {t("summary.admission")}({filterByType(groupData, SummaryType.ADMISSION).length})
+                    </h4>
+                    <Table
+                      rowData={renderSummary(
+                        filterByType(groupData, SummaryType.ADMISSION),
+                        dateFields,
+                        labels,
+                        medicals
+                      )}
+                      dateFields={dateFields}
+                      tableHeader={header.type.admission}
+                      labelData={labels}
+                      columnsOrder={order}
+                      rowsPerPage={ORDER_BY_TYPE_PAGE_SIZE}
+                      isCollapsabile={true}
+                      showEmptyCell={false}
+                      detailsExcludedFields={["date"]}
+                      isExpanded={expanded}
+                    />
+                  </div>
+                )}
+                {filterByType(groupData, SummaryType.VISIT).length > 0 && (
+                  <div className="patientSummary_type_row">
+                    <h4>
+                      {t("summary.visits")}({filterByType(groupData, SummaryType.VISIT).length})
+                    </h4>
+                    <Table
+                      rowData={renderSummary(
+                        filterByType(groupData, SummaryType.VISIT),
+                        dateFields,
+                        labels,
+                        medicals
+                      )}
+                      dateFields={dateFields}
+                      tableHeader={header.type.visit}
+                      labelData={labels}
+                      columnsOrder={order}
+                      rowsPerPage={ORDER_BY_TYPE_PAGE_SIZE}
+                      isCollapsabile={true}
+                      showEmptyCell={false}
+                      detailsExcludedFields={["date"]}
+                      isExpanded={expanded}
+                    />
+                  </div>
+                )}
+                {filterByType(groupData, SummaryType.OPERATION).length > 0 && (
+                  <div className="patientSummary_type_row">
+                    <h4>
+                      {t("summary.operation")}({filterByType(groupData, SummaryType.OPERATION).length})
+                    </h4>
+                    <Table
+                      rowData={renderSummary(
+                        filterByType(groupData, SummaryType.OPERATION),
+                        dateFields,
+                        labels,
+                        medicals
+                      )}
+                      dateFields={dateFields}
+                      tableHeader={header.type.operation}
+                      labelData={labels}
+                      columnsOrder={order}
+                      rowsPerPage={ORDER_BY_TYPE_PAGE_SIZE}
+                      isCollapsabile={true}
+                      showEmptyCell={false}
+                      detailsExcludedFields={["date"]}
+                      isExpanded={expanded}
+                    />
+                  </div>
+                )}
+                {filterByType(groupData, SummaryType.TRIAGE).length > 0 && (
+                  <div className="patientSummary_type_row">
+                    <h4>
+                      {t("summary.triage")}({filterByType(groupData, SummaryType.TRIAGE).length})
+                    </h4>
+                    <Table
+                      rowData={renderSummary(
+                        filterByType(groupData, SummaryType.TRIAGE),
+                        dateFields,
+                        labels
+                      )}
+                      dateFields={dateFields}
+                      tableHeader={header.type.triage}
+                      labelData={labels}
+                      columnsOrder={order}
+                      rowsPerPage={ORDER_BY_TYPE_PAGE_SIZE}
+                      isCollapsabile={true}
+                      showEmptyCell={false}
+                      detailsExcludedFields={["date"]}
+                      isExpanded={expanded}
+                    />
+                  </div>
+                )}
+                {filterByType(groupData, SummaryType.EXAMS).length > 0 && (
+                  <div className="patientSummary_type_row">
+                    <h4>
+                      {t("summary.exams")}({filterByType(groupData, SummaryType.EXAMS).length})
+                    </h4>
+                    <Table
+                      rowData={renderSummary(
+                        filterByType(groupData, SummaryType.EXAMS),
+                        dateFields,
+                        labels
+                      )}
+                      dateFields={dateFields}
+                      tableHeader={header.type.exam}
+                      labelData={labels}
+                      columnsOrder={order}
+                      rowsPerPage={ORDER_BY_TYPE_PAGE_SIZE}
+                      isCollapsabile={true}
+                      showEmptyCell={false}
+                      detailsExcludedFields={["date"]}
+                      isExpanded={expanded}
+                    />
+                  </div>
+                )}
+                {filterByType(groupData, SummaryType.THERAPY).length > 0 && (
+                  <div className="patientSummary_type_row">
+                    <h4>
+                      {t("summary.therapy")}({filterByType(groupData, SummaryType.THERAPY).length})
+                    </h4>
+                    <Table
+                      rowData={renderSummary(
+                        filterByType(groupData, SummaryType.THERAPY),
+                        dateFields,
+                        labels
+                      )}
+                      dateFields={dateFields}
+                      tableHeader={header.type.therapy}
+                      labelData={labels}
+                      columnsOrder={order}
+                      rowsPerPage={ORDER_BY_TYPE_PAGE_SIZE}
+                      isCollapsabile={true}
+                      showEmptyCell={false}
+                      detailsExcludedFields={["date"]}
+                      isExpanded={expanded}
+                    />
+                  </div>
+                )}
+                {groupData.length === 0 && <InfoBox type="info" message={t("summary.noDataForEncounter")} />}
               </div>
             );
           })}
