@@ -3,7 +3,6 @@ import { admissionDTO } from "../fixtures/admissionDTO";
 const dischargeProps = {
   disDate: "2021-08-27T10:19:44.000Z",
   disType: { code: "F", description: "FUGUE" },
-  deathPeriod: "BEFORE_ADMISSION",
 };
 
 const admissions = [
