@@ -17,6 +17,7 @@ describe("Patient Details / Discharge", () => {
     cy.byId("disDate").focus().type("03052022").blur();
     cy.byId("disType").focus().type("NORMALE").blur();
     cy.byId("diseaseOut1").focus().type("Abortions").blur();
+    cy.byId("deathPeriod").focus().type("BEFORE_ADMISSION").blur();
     cy.byId("anamnesis").focus().clear().type("fail").blur();
   });
 
@@ -24,6 +25,14 @@ describe("Patient Details / Discharge", () => {
     cy.get("[class='submit_button']").click();
 
     cy.dataCy("info-box").should("have.class", "error");
+  });
+
+  it("should allow user to select death period options", () => {
+    cy.byId("deathPeriod").focus().type("BEFORE_ADMISSION").blur();
+    cy.byId("deathPeriod").should("have.value", "BEFORE_ADMISSION");
+    
+    cy.byId("deathPeriod").focus().clear().type("AFTER_ADMISSION").blur();
+    cy.byId("deathPeriod").should("have.value", "AFTER_ADMISSION");
   });
 
   it("should show a confirmation dialog if the patient discharging succeeds", () => {
