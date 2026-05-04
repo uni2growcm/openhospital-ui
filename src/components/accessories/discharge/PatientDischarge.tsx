@@ -118,6 +118,7 @@ const PatientDischarge: FC = () => {
         diseaseOut3: adm.diseaseOut3,
         anamnesis: adm.anamnesis,
         nextAppointment: parseDateTime(adm.nextAppointment ?? "", false),
+        deathPeriod: adm.deathPeriod,
         admitted: 0,
       };
       dispatch(

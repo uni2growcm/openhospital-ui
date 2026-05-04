@@ -1071,7 +1071,12 @@
     "transportation": "Transportation",
     "physicalExam": "Physical exam",
     "courseOfAction": "Course of action",
-    "nextAppointment": "Next appointment"
+    "nextAppointment": "Next appointment",
+    "deathPeriod": "Death Period",
+    "deathPeriodOptions": {
+      "before": "Before admission",
+      "after": "After admission"
+    }
   },
   "bill": {
     "title": "Welcome to Billing",

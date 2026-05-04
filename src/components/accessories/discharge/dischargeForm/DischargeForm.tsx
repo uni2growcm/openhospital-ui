@@ -115,6 +115,14 @@ const DischargeForm: FC<DischargeProps> = ({
       },
     }),
     nextAppointment: string(),
+    deathPeriod: string().when("disType", {
+      is: (disType: string) => {
+        const dischargeType = dischargeTypes?.find(item => item.code === disType);
+        return dischargeType?.code === "D" || dischargeType?.description?.toLowerCase().includes("dead");
+      },
+      then: string().required(t("common.required")),
+      otherwise: string(),
+    }),
   });
 
   const formik = useFormik({
@@ -135,7 +143,16 @@ const DischargeForm: FC<DischargeProps> = ({
       formattedValues.disType = dischargeTypes?.find(
         (item) => item.code === formattedValues.disType
       );
-      console.log(formattedValues);
+
+      // Ensure deathPeriod is properly handled
+      const isDeadDischarge = formattedValues.disType?.code === "D" || 
+                             formattedValues.disType?.description?.toLowerCase().includes("dead");
+      
+      if (!isDeadDischarge) {
+        formattedValues.deathPeriod = null;
+      }
+      // If discharge type is Dead, keep the value from formatAllFieldValues
+      // No need to reassign as formatAllFieldValues already handled it correctly
 
       onSubmit(formattedValues as any);
     },
@@ -293,6 +310,30 @@ const DischargeForm: FC<DischargeProps> = ({
               />
             </div>
           </div>
+          {(() => {
+            const currentDisType = dischargeTypes?.find(item => item.code === formik.values.disType);
+            const isDeadDischarge = currentDisType?.code === "D" || 
+                                   currentDisType?.description?.toLowerCase().includes("dead");
+            return isDeadDischarge ? (
+              <div className="row start-sm center-xs">
+                <div className="fullWidth patientAdmissionForm__item">
+                  <AutocompleteField
+                    fieldName="deathPeriod"
+                    fieldValue={formik.values.deathPeriod}
+                    label={t("admission.deathPeriod")}
+                    isValid={isValid("deathPeriod")}
+                    errorText={getErrorText("deathPeriod")}
+                    onBlur={onBlurCallback("deathPeriod")}
+                    options={[
+                      { value: "BEFORE_ADMISSION", label: t("admission.deathPeriodOptions.before") },
+                      { value: "AFTER_ADMISSION", label: t("admission.deathPeriodOptions.after") }
+                    ]}
+                    disabled={isLoading}
+                  />
+                </div>
+              </div>
+            ) : null;
+          })()}
 
           <div className="row start-sm center-xs">
             <div className="fullWidth patientAdmissionForm__item">

@@ -1021,7 +1021,12 @@
     "transportation": "Moyen de transport",
     "physicalExam": "Examen physique",
     "courseOfAction": "Conduite à tenir",
-    "nextAppointment": "Prochain rendez-vous"
+    "nextAppointment": "Prochain rendez-vous",
+    "deathPeriod": "Période de décès",
+    "deathPeriodOptions": {
+      "before": "Avant l'admission",
+      "after": "Après l'admission"
+    }
   },
   "bill": {
     "title": "Bienvenue dans la facturation",

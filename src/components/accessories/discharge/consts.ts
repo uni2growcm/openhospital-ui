@@ -39,4 +39,12 @@ export const initialFields: TFields<DischargeFormFieldName> = {
     value: parseDateTime(Date.now().toString(), false),
     type: "date",
   },
+  deathPeriod: {
+    value: "",
+    type: "text",
+    options: [
+      { value: "BEFORE_ADMISSION", label: "Avant l'admission" },
+      { value: "AFTER_ADMISSION", label: "Après l'admission" }
+    ],
+  },
 };

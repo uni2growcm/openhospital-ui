@@ -755,7 +755,12 @@
     "admregistered": "Ricoveri nel periodo specificato",
     "disregistered": "Dimissioni nel periodo specificato",
     "previousentries": "Ricoveri precedenti",
-    "no_beds": "Non ci sono letti disponibili nel reparto selezionato"
+    "no_beds": "Non ci sono letti disponibili nel reparto selezionato",
+    "deathPeriod": "Periodo decesso",
+    "deathPeriodOptions": {
+      "before": "Prima del ricovero",
+      "after": "Dopo il ricovero"
+    }
   },
   "bill": {
     "title": "Benvenuto nell'area pagamenti",
