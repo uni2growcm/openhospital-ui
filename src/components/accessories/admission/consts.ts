@@ -117,10 +117,6 @@ export const initialFields: TFields<AdmissionFormFieldName> = {
     value: "",
     type: "text",
   },
-  diagnosis: {
-    value: "",
-    type: "text",
-  },
   treatmentReceived: {
     value: "",
     type: "text",

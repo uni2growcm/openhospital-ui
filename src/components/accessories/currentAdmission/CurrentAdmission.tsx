@@ -50,7 +50,6 @@ export const CurrentAdmission: FunctionComponent<IOwnProps> = ({
       transportation: adm.transportation,
       referralAlert: adm.referralAlert,
       referralReason: adm.referralReason,
-      diagnosis: adm.diagnosis,
       treatmentReceived: adm.treatmentReceived,
       outcome: adm.outcome,
       improvementFeedback: adm.improvementFeedback,

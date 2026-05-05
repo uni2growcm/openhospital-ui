@@ -40,7 +40,6 @@ export type AdmissionFormFieldName =
   | "transportation"
   | "referralAlert"
   | "referralReason"
-  | "diagnosis"
   | "treatmentReceived"
   | "outcome"
   | "improvementFeedback"

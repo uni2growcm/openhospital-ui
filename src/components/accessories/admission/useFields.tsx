@@ -125,10 +125,6 @@ export const useFields = (
       value: admission?.referralReason ?? "",
       type: "text",
     },
-    diagnosis: {
-      value: admission?.diagnosis ?? "",
-      type: "text",
-    },
     treatmentReceived: {
       value: admission?.treatmentReceived ?? "",
       type: "text",

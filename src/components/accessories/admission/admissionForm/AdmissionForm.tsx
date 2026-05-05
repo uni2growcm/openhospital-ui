@@ -204,7 +204,6 @@ const AdmissionForm: FC<AdmissionProps> = ({
     courseOfAction: string(),
     referralAlert: string(),
     referralReason: string(),
-    diagnosis: string(),
     treatmentReceived: string(),
     outcome: string(),
     improvementFeedback: string(),
@@ -483,20 +482,6 @@ const AdmissionForm: FC<AdmissionProps> = ({
                   type="text"
                   isValid={isValid("referralReason")}
                   errorText={getErrorText("referralReason")}
-                  onBlur={formik.handleBlur}
-                  rows={3}
-                  disabled={isLoading}
-                />
-              </div>
-              <div className="fullWidth patientAdmissionForm__item">
-                <TextField
-                  field={formik.getFieldProps("diagnosis")}
-                  theme="regular"
-                  label={t("admission.diagnosis")}
-                  multiline={true}
-                  type="text"
-                  isValid={isValid("diagnosis")}
-                  errorText={getErrorText("diagnosis")}
                   onBlur={formik.handleBlur}
                   rows={3}
                   disabled={isLoading}

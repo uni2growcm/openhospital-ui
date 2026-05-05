@@ -8470,26 +8470,14 @@ components:
           format: date-time
           description: Next appointment date
           example: string
-        referringCenter:
-          type: string
-          description: Referring center
-          example: Regional Hospital
         referralAlert:
           type: string
           description: Referral alert
           example: Urgent referral needed
-        transportationMode:
-          type: string
-          description: Transportation mode
-          example: Ambulance
         referralReason:
           type: string
           description: Referral reason
           example: Specialized treatment required
-        diagnosis:
-          type: string
-          description: Diagnosis
-          example: Pneumonia
         treatmentReceived:
           type: string
           description: Treatment received

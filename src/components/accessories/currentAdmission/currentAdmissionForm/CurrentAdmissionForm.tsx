@@ -145,7 +145,6 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
       // Add referral fields
       formattedValues.referralAlert = formik.values.referralAlert;
       formattedValues.referralReason = formik.values.referralReason;
-      formattedValues.diagnosis = formik.values.diagnosis;
       formattedValues.treatmentReceived = formik.values.treatmentReceived;
       formattedValues.outcome = formik.values.outcome;
       formattedValues.improvementFeedback = formik.values.improvementFeedback;
@@ -332,20 +331,6 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
                   type="text"
                   isValid={isValid("referralReason")}
                   errorText={getErrorText("referralReason")}
-                  onBlur={formik.handleBlur}
-                  rows={3}
-                  disabled={isLoading}
-                />
-              </div>
-              <div className="fullWidth currentAdmissionForm__item">
-                <TextField
-                  field={formik.getFieldProps("diagnosis")}
-                  theme="regular"
-                  label={t("admission.diagnosis")}
-                  multiline={true}
-                  type="text"
-                  isValid={isValid("diagnosis")}
-                  errorText={getErrorText("diagnosis")}
                   onBlur={formik.handleBlur}
                   rows={3}
                   disabled={isLoading}
