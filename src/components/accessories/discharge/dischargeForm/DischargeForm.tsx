@@ -19,6 +19,7 @@ import {
 import { getDiseasesIpdOut } from "../../../../state/diseases";
 import { getDischargeTypes } from "../../../../state/types/discharges";
 import { IState } from "../../../../types";
+import { useDeathPeriodOptions } from "../../../../libraries/hooks/useDeathPeriodOptions";
 import AutocompleteField from "../../autocompleteField/AutocompleteField";
 import Button from "../../button/Button";
 import ConfirmationDialog from "../../confirmationDialog/ConfirmationDialog";
@@ -39,6 +40,7 @@ const DischargeForm: FC<DischargeProps> = ({
 }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const deathPeriodOptions = useDeathPeriodOptions();
 
   const diagnosisOutList = useAppSelector(
     (state: IState) => state.diseases.diseasesIpdOut.data
@@ -324,10 +326,7 @@ const DischargeForm: FC<DischargeProps> = ({
                     isValid={isValid("deathPeriod")}
                     errorText={getErrorText("deathPeriod")}
                     onBlur={onBlurCallback("deathPeriod")}
-                    options={[
-                      { value: "BEFORE_ADMISSION", label: t("admission.deathPeriodOptions.before") },
-                      { value: "AFTER_ADMISSION", label: t("admission.deathPeriodOptions.after") }
-                    ]}
+                    options={deathPeriodOptions}
                     disabled={isLoading}
                   />
                 </div>

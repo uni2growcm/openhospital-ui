@@ -1354,7 +1354,11 @@
     "updated": "Discharge type updated",
     "updateSuccess": "The discharge type has been updated successfully!",
     "cancelCreation": "Are you sure to cancel the discharge type creation?",
-    "cancelUpdate": "Are you sure to cancel the discharge type update?"
+    "cancelUpdate": "Are you sure to cancel the discharge type update?",
+    "deathPeriod": {
+      "beforeAdmission": "Before admission",
+      "afterAdmission": "After admission"
+    }
   },
   "deliveryTypes": {
     "code": "Code",

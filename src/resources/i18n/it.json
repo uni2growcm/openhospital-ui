@@ -1038,7 +1038,11 @@
     "updated": "Tipo dismissione aggiornato",
     "updateSuccess": "Tipo dismissione aggiornato correttamente",
     "cancelCreation": "Confermi l'annullamento della creazione tipo dismissione?",
-    "cancelUpdate": "Confermi l'annullamento dell'aggiornamento tipo dismissione?"
+    "cancelUpdate": "Confermi l'annullamento dell'aggiornamento tipo dismissione?",
+    "deathPeriod": {
+      "beforeAdmission": "Prima del ricovero",
+      "afterAdmission": "Dopo il ricovero"
+    }
   },
   "deliveryTypes": {
     "code": "Codice",

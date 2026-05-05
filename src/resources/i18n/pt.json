@@ -419,7 +419,12 @@
     "patientalreadyadmitted": "The patient has already been admitted, here you will find the history of admissions. To resign, go to the dismission page.",
     "updated": "Admission updated",
     "updatesuccess": "Admimission updated successfully",
-    "datebefore": "Admission date must be before the discharge date"
+    "datebefore": "Admission date must be before the discharge date",
+    "deathPeriod": "Death Period",
+    "deathPeriodOptions": {
+      "before": "Antes da admissão",
+      "after": "Após a admissão"
+    }
   },
   "bill": {
     "title": "Welcome to Billing",
@@ -538,5 +543,11 @@
     "cs": "Czech",
     "sq": "Albanian",
     "zh": "Chinese"
+  },
+  "dischargeTypes": {
+    "deathPeriod": {
+      "beforeAdmission": "Antes da admissão",
+      "afterAdmission": "Após a admissão"
+    }
   }
 }
