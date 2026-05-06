@@ -103,6 +103,8 @@ const AdmissionForm: FC<AdmissionProps> = ({
 
   const [isQualifiedAgentChecked, setIsVitASupplementChecked] = useState(false);
 
+  const [isReferralAdmission, setIsReferralAdmission] = useState(false);
+
   const renderOptions = (
     data:
       | (
@@ -248,9 +250,9 @@ const AdmissionForm: FC<AdmissionProps> = ({
 
   const { setFieldValue, resetForm, handleBlur } = formik;
 
-  const isReferralAdmission = useMemo(() => {
-    return formik.values.admType === "R";
-  }, [formik.values.admType]);
+  const handleReferralAdmission = (value: any) => {
+   setIsReferralAdmission(value?.value === "R");
+  };
 
   const dateFieldHandleOnChange = useCallback(
     (fieldName: string) => (value: any) => {
@@ -327,6 +329,7 @@ const AdmissionForm: FC<AdmissionProps> = ({
       setIsVitASupplementChecked(
         formik.values.qualifiedAgent === "true" ? true : false
       );
+      setIsReferralAdmission(formik.values.admType === "R");
     }
   }, [
     creationMode,
@@ -418,41 +421,42 @@ const AdmissionForm: FC<AdmissionProps> = ({
                 isValid={isValid("admType")}
                 errorText={getErrorText("admType")}
                 onBlur={onBlurCallback("admType")}
+                onChange={(_, value) => {
+                  handleReferralAdmission(value);
+                }}
                 options={renderOptions(admissionTypes)}
                 loading={admTypeStatus === "LOADING"}
                 disabled={isLoading}
               />
             </div>
-            {isReferralAdmission && (
             <div className="patientAdmissionForm__item">
-              <TextField
-                field={formik.getFieldProps("fhu")}
-                theme="regular"
-                label={t("admission.fhu")}
-                isValid={isValid("fhu")}
-                errorText={getErrorText("fhu")}
-                onBlur={formik.handleBlur}
-                type="text"
-                disabled={isLoading}
-                maxLength={50}
+              <Autocomplete
+                id="transportation"
+                freeSolo
+                value={formik.values.transportation}
+                options={transportationOptions ?? []}
+                onChange={(_, value) => {
+                  formik.setFieldValue("transportation", value);
+                }}
+                label={t("admission.transportation")}
+                placeholder={t("admission.transportation")}
               />
             </div>
-            )}
           </div>
           <div className="row start-sm center-xs">
             {isReferralAdmission && (
               <>
                 <div className="patientAdmissionForm__item">
-                  <Autocomplete
-                    id="transportation"
-                    freeSolo
-                    value={formik.values.transportation}
-                    options={transportationOptions ?? []}
-                    onChange={(_, value) => {
-                      formik.setFieldValue("transportation", value);
-                    }}
-                    label={t("admission.transportation")}
-                    placeholder={t("admission.transportation")}
+                  <TextField
+                    field={formik.getFieldProps("fhu")}
+                    theme="regular"
+                    label={t("admission.fhu")}
+                    isValid={isValid("fhu")}
+                    errorText={getErrorText("fhu")}
+                    onBlur={formik.handleBlur}
+                    type="text"
+                    disabled={isLoading}
+                    maxLength={50}
                   />
                 </div>
                 <div className="patientAdmissionForm__item">

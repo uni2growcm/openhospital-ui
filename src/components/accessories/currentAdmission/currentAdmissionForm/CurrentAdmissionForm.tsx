@@ -88,6 +88,8 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
 
   const [isQualifiedAgentChecked, setIsVitASupplementChecked] = useState(false);
 
+  const [isReferralAdmission, setIsReferralAdmission] = useState(false);
+
   const transportationsOptions = useAppSelector(
     (state: IState) => state.admissions.getTransportations.data
   );
@@ -166,7 +168,9 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
     }
   }, [dispatch, activityTransitionState, patient, onDiscard]);
 
-  const isReferralAdmission = formik.values.admType === "R";
+  const handleReferralAdmission = (value: any) => {
+    setIsReferralAdmission(value?.value === "R");
+  };
 
   useEffect(() => {
     setIsIronSupplementChecked(
@@ -178,6 +182,7 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
     setIsVitASupplementChecked(
       formik.values.qualifiedAgent === "true" ? true : false
     );
+    setIsReferralAdmission(formik.values.admType === "R");
     dispatch(getTransportations());
   }, [
     formik.values.alertReceived,
@@ -278,6 +283,19 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
               disabled={isLoading}
             />
           </div>
+          <div className="currentAdmissionForm__item">
+            <Autocomplete
+              id="transportation"
+              freeSolo
+              value={formik.values.transportation}
+              options={transportationOptions ?? []}
+              onChange={(_, value) => {
+                formik.setFieldValue("transportation", value);
+              }}
+              label={t("admission.transportation")}
+              placeholder={t("admission.transportation")}
+            />
+          </div>
           {isReferralAdmission && (
             <>
               <div className="currentAdmissionForm__item">
@@ -290,19 +308,6 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
                   onBlur={formik.handleBlur}
                   type="text"
                   disabled={isLoading}
-                />
-              </div>
-              <div className="currentAdmissionForm__item">
-                <Autocomplete
-                  id="transportation"
-                  freeSolo
-                  value={formik.values.transportation}
-                  options={transportationOptions ?? []}
-                  onChange={(_, value) => {
-                    formik.setFieldValue("transportation", value);
-                  }}
-                  label={t("admission.transportation")}
-                  placeholder={t("admission.transportation")}
                 />
               </div>
               <div className="currentAdmissionForm__item">
