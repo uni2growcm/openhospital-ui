@@ -36,6 +36,7 @@ import { townSlice } from "./town";
 import { occupationSlice } from "./occupation";
 import { ethnicSlice } from "./ethnic";
 import { communeSlice } from "./commune";
+import { hospitalisationconsultationSlice } from "./hospitalisationconsultation";
 
 const reducer = combineReducers({
   main: mainSlice.reducer,
@@ -75,6 +76,7 @@ const reducer = combineReducers({
   occupations: occupationSlice.reducer,
   ethnics: ethnicSlice.reducer,
   communes: communeSlice.reducer,
+  hospitalisationconsultations: hospitalisationconsultationSlice.reducer,
 });
 
 export const store = configureStore({

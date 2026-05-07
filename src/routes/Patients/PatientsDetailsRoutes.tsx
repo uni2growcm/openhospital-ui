@@ -19,6 +19,8 @@ import PatientDetailsActivity from "../../components/activities/patientDetailsAc
 import DischargeDetailsContent from "../../components/activities/patientDetailsActivityContent/DischargeDetailsActivityContent";
 import PatientDetailsContent from "../../components/activities/patientDetailsActivityContent/PatientDetailsActivityContent";
 import VisitDetailsContent from "../../components/activities/patientDetailsActivityContent/VisitDetailsActivityContent";
+import Hospitalisationconsultation
+  from "../../components/accessories/hospitalisationconsultation/Hospitalisationconsultation";
 
 export const PatientDetailsRoutes: FC<{
   encountersEnabled?: boolean;
@@ -123,6 +125,18 @@ export const PatientDetailsRoutes: FC<{
             />
           }
         />
+
+        {encountersEnabled && (
+          <Route
+            path="hospitalisationconsultation"
+            element={
+              <PatientDetailsContent
+                title={t("patient.Hospitalisationconsultation")}
+                content={Hospitalisationconsultation}
+              />
+            }
+          />
+        )}
 
         {!encountersEnabled && (
           <Route path="visits" element={<VisitDetailsContent />} />

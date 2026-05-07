@@ -17,6 +17,7 @@ apis/ExamRowsApi.ts
 apis/ExamTypesApi.ts
 apis/ExaminationsApi.ts
 apis/ExamsApi.ts
+apis/HospitalizationConsultationApi.ts
 apis/HospitalsApi.ts
 apis/LaboratoriesApi.ts
 apis/LoginApi.ts
@@ -67,6 +68,7 @@ models/CommuneDTO.ts
 models/ConditioningDTO.ts
 models/DeliveryResultTypeDTO.ts
 models/DeliveryTypeDTO.ts
+models/DischargeAgainstMedicalAdviceDTO.ts
 models/DischargeTypeDTO.ts
 models/DiseaseDTO.ts
 models/DiseaseTypeDTO.ts
@@ -79,6 +81,7 @@ models/ExamWithRowsDTO.ts
 models/FullBillDTO.ts
 models/GroupPermissionsDTO.ts
 models/HospitalDTO.ts
+models/HospitalizationConsultationDTO.ts
 models/Instance.ts
 models/InstancePreviewDTO.ts
 models/InstanceResponse.ts
@@ -103,6 +106,7 @@ models/OperationDTO.ts
 models/OperationRowDTO.ts
 models/OperationTypeDTO.ts
 models/PageAdmissionDTO.ts
+models/PageHospitalizationConsultationDTO.ts
 models/PageInfoDTO.ts
 models/PageLabWithRowsDTO.ts
 models/PageOpdDTO.ts

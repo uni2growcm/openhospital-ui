@@ -306,7 +306,24 @@
     },
     "motherSchoolingLevel": "Mother's educational level",
     "fatherSchoolingLevel": "Father's educational level",
-    "care": "Care"
+    "care": "Care",
+    "Hospitalisationconsultation": "Hospitalization Consultation"
+  },
+  "hospitalisationconsultation": {
+    "id": "ID",
+    "dateTime": "Date and time",
+    "teams": "Teams",
+    "parentComplaints": "Parent complaints",
+    "physicalExamination": "Physical examination",
+    "diagnosis": "Diagnosis",
+    "managementPlan": "Management plan",
+    "new": "New hospitalization consultation",
+    "edit": "Edit hospitalization consultation",
+    "previousentries": "Previous entries",
+    "created": "Consultation created",
+    "updated": "Consultation updated",
+    "createsuccess": "Hospitalization consultation created successfully",
+    "updatesuccess": "Hospitalization consultation updated successfully"
   },
   "encounters": {
     "admissions": "Admissions",
@@ -567,7 +584,8 @@
     "medicalHistory": "Medical History",
     "userProfile": "User Profile",
     "care": "Care",
-    "referenceData": "Reference Data"
+    "referenceData": "Reference Data",
+    "hospitalisationconsultation": "Hospitalization Consultation"   
   },
   "userProfile": "User Profile",
   "operation": {

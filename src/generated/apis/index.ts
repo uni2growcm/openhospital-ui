@@ -16,6 +16,7 @@ export * from './ExamRowsApi';
 export * from './ExamTypesApi';
 export * from './ExaminationsApi';
 export * from './ExamsApi';
+export * from './HospitalizationConsultationApi';
 export * from './HospitalsApi';
 export * from './LaboratoriesApi';
 export * from './LoginApi';

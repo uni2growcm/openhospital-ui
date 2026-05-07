@@ -19,6 +19,8 @@ import PatientSummary from "../../components/accessories/patientSummary/PatientS
 import PatientTherapy from "../../components/accessories/patientTherapy/PatientTherapy";
 import PatientTriage from "../../components/accessories/patientTriage/PatientTriage";
 import NotFound from "../../components/activities/notFound/NotFound";
+import Hospitalisationconsultation
+  from "../../components/accessories/hospitalisationconsultation/Hospitalisationconsultation";
 
 export const PatientsEncounterRoutes: FC = () => {
   const { t } = useTranslation();
@@ -78,6 +80,15 @@ export const PatientsEncounterRoutes: FC = () => {
             <PatientEncounterActivityContent
               title={t("patient.admissions")}
               content={PatientAdmission}
+            />
+          }
+        />
+        <Route
+          path="hospitalisationconsultation"
+          element={
+            <PatientEncounterActivityContent
+              title={t("patient.hospitalisationconsultation")}
+              content={Hospitalisationconsultation}
             />
           }
         />
