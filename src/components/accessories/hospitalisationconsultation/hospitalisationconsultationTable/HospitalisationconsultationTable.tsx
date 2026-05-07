@@ -25,7 +25,6 @@ const HospitalisationconsultationTable: FunctionComponent<IOwnProps> = ({
   const dispatch = useAppDispatch();
   const canUpdate = usePermission("hospitalisationconsultation.update");
 
-  // On récupère id (patient) et code (encounter) de l'URL
   const { id, code } = useParams<{ id: string; code?: string }>();
 
   const patientCodeFromStore = useAppSelector(
@@ -34,21 +33,16 @@ const HospitalisationconsultationTable: FunctionComponent<IOwnProps> = ({
 
   const effectivePatientCode = patientCodeFromStore?.toString() || id;
 
-  // Initialisation du statut de création pour filtrer les erreurs
   const createConsultationStatus = useAppSelector((state) =>
     state.hospitalisationconsultations.newHospitalizationConsultation.status
   );
 
   useEffect(() => {
-    // Debug pour vérifier que isEncounterMode est bien à FALSE quand on a l'ID patient
-    console.log("DEBUG ROUTING:", { id, code, effectivePatientCode });
-
     if (code) {
       dispatch(getHospitalizationConsultationsByEncounter(code));
     }
   }, [dispatch, code, effectivePatientCode, id, shouldUpdateTable]);
 
-  // Sélection des données et du statut en fonction du mode détecté
   const data = useAppSelector((state) => state.hospitalisationconsultations.getHospitalizationConsultationsByEncounter.data || []
   );
 
@@ -60,8 +54,7 @@ const HospitalisationconsultationTable: FunctionComponent<IOwnProps> = ({
     return errorState.error?.message || t("common.somethingwrong");
   });
 
-  // Configuration du tableau
-  const header = ["dateTime", "teams", "diagnosis"]; // Colonnes visibles
+  const header = ["dateTime", "teams", "diagnosis"];
   const dateFields = ["dateTime"];
   const order = ["dateTime", "teams", "diagnosis"];
 
@@ -102,7 +95,6 @@ const HospitalisationconsultationTable: FunctionComponent<IOwnProps> = ({
           case "LOADING":
             return <CircularProgress style={{ display: "block", margin: "20px auto" }} />;
           case "FAIL":
-            // On masque l'erreur du tableau si on est déjà en train d'afficher une erreur de création
             return createConsultationStatus !== "FAIL" && <InfoBox type="error" message={errorMessage} />;
           case "SUCCESS":
             return (

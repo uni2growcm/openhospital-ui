@@ -36,7 +36,6 @@ const Hospitalisationconsultation: FC = () => {
 
   const infoBoxRef = useRef<HTMLDivElement>(null);
 
-  // Recherche de la rencontre si le code est présent
   const encounter = useAppSelector((state) =>
     code
       ? state.encounters.getEncountersByPatient.data?.find(
@@ -68,7 +67,6 @@ const Hospitalisationconsultation: FC = () => {
   const onSubmit = (consultation: HospitalizationConsultationDTO) => {
     setShouldResetForm(false);
 
-    // Si pas de rencontre trouvée ET pas de code dans l'URL (mode dossier patient pur)
     if (!encounter && !code) {
       setOpenConfirmDialog(true);
       return;
@@ -76,7 +74,6 @@ const Hospitalisationconsultation: FC = () => {
 
     const payload = { ...consultation };
 
-    // On attache soit la rencontre, soit le patient pour que le backend sache à qui lier la donnée
     if (encounter) {
       payload.encounter = encounter;
     } else if (patient) {

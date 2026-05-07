@@ -97,9 +97,6 @@ const HospitalisationconsultationForm: FC<HospitalisationconsultationFormProps> 
   const dateFieldHandleOnChange = useCallback(
     (fieldName: string) => (value: any) => {
       if (value) {
-        // Ensure we keep a sensible time when user only picks a date.
-        // If the picked date has time 00:00, default to current hours/minutes so
-        // the form shows a date+time and user can update the time if needed.
         const newDate = new Date(value);
         if (newDate.getHours() === 0 && newDate.getMinutes() === 0) {
           const now = new Date();
