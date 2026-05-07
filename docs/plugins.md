@@ -337,7 +337,7 @@ For every remote with `location === PluginBundleLocationEnum.Main`, a top-level 
       import('../plugins/components').then(({ RenderPluginApp }) => ({
         Component: () => (
           <RenderPluginApp
-            plugin={{ entry: 'app', remote: remote.name, styles: remote.styles }}
+            plugin={{ entry: 'app', location: PluginBundleLocationEnum.Main, remote: remote.name, styles: remote.styles }}
           />
         ),
       })),
@@ -365,7 +365,7 @@ For every remote with `location === PluginBundleLocationEnum.Patient`, a child r
           <PatientDetailsActivityContent title={remote.label}>
             <RenderPluginApp
               showHeaderAndFooter={false}      // content-only, no global header/footer
-              plugin={{ entry: 'app', remote: remote.name, styles: remote.styles }}
+              plugin={{ entry: 'app', PluginBundleLocationEnum.Patient, remote: remote.name, styles: remote.styles }}
             />
           </PatientDetailsActivityContent>
         ),

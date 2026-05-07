@@ -91,6 +91,7 @@ export const useAppRouter = () => {
 												<RenderPluginApp
 													plugin={{
 														entry: 'app',
+														location: PluginBundleLocationEnum.Main,
 														remote: remote.name,
 														styles: remote.styles,
 													}}

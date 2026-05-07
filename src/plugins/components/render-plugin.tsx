@@ -5,6 +5,9 @@ import {
 	type JSXElementConstructor,
 	Suspense,
 } from 'react';
+import { useParams } from 'react-router';
+import { PATHS } from '~/consts';
+import { PluginBundleLocationEnum } from '~/generated/models/PluginBundle';
 import { usePluginsContext } from '../provider';
 import type { PluginRenderProps } from '../types';
 import { PluginErrorBoundary, PluginLoading } from './fallbacks';
@@ -24,9 +27,19 @@ export function RenderPluginApp({
 		fallback: () => <PluginErrorBoundary plugin={plugin} />,
 	});
 
+	const { id } = useParams();
+
 	return (
 		<PluginActivity plugin={plugin} showHeaderAndFooter={showHeaderAndFooter}>
-			<App memoryRouter={{ entryPath: '/' }} />
+			<App
+				patient={id}
+				basename={`${
+					plugin.location === PluginBundleLocationEnum.Main
+						? ''
+						: PATHS.patients_details_id.replace(':id', id || '')
+				}/${plugin.entry}`}
+				memoryRoute={{ entryPath: '/' }}
+			/>
 		</PluginActivity>
 	);
 }
