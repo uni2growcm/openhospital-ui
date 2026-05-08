@@ -38,6 +38,11 @@ export type AdmissionFormFieldName =
   | "referenceSheet"
   | "qualifiedAgent"
   | "transportation"
+  | "referralAlert"
+  | "referralReason"
+  | "treatmentReceived"
+  | "outcome"
+  | "improvementFeedback"
   | "physicalExam"
   | "courseOfAction"
   | "nextAppointment";

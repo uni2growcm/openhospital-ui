@@ -1019,8 +1019,16 @@
     "preAssessment": "Bilan avant admission",
     "entryReason": "Motif d'entrée",
     "transportation": "Moyen de transport",
+    "transportationMode": "Mode de transport",
+    "referringCenter": "Centre référent",
+    "referralAlert": "Alerte de référence",
+    "referralReason": "Raison de la référence",
     "physicalExam": "Examen physique",
     "courseOfAction": "Conduite à tenir",
+    "diagnosis": "Diagnostic",
+    "treatmentReceived": "Traitement reçu",
+    "outcome": "Issue",
+    "improvementFeedback": "Commentaire d'amélioration",
     "nextAppointment": "Prochain rendez-vous"
   },
   "bill": {
