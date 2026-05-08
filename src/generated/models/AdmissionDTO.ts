@@ -268,6 +268,12 @@ export interface AdmissionDTO {
      */
     nextAppointment?: string;
     /**
+     * Death period
+     * @type {string}
+     * @memberof AdmissionDTO
+     */
+    deathPeriod?: string;
+    /**
      * Referral alert
      * @type {string}
      * @memberof AdmissionDTO
