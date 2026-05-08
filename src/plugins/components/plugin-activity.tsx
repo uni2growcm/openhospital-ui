@@ -1,4 +1,5 @@
 import { type PropsWithChildren, useEffect } from 'react';
+import root from 'react-shadow';
 import AppHeader from '~/components/accessories/appHeader/AppHeader';
 import Footer from '~/components/accessories/footer/Footer';
 import { useAppSelector } from '../../libraries/hooks/redux';
@@ -29,7 +30,7 @@ export function PluginActivity({
 	}, []);
 
 	return (
-		<div
+		<root.div
 			data-cy={`plugin-activity-${plugin.remote}`}
 			className={classes.plugin}
 		>
@@ -44,7 +45,7 @@ export function PluginActivity({
 				{children}
 			</div>
 			{showHeaderAndFooter && <Footer />}
-		</div>
+		</root.div>
 	);
 }
 

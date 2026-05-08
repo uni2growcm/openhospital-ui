@@ -83,7 +83,7 @@ export const useAppRouter = () => {
 								(remote) => remote.location === PluginBundleLocationEnum.Main,
 							)
 							.map((remote) => ({
-								path: remote.name,
+								path: `${remote.name}/*`,
 								lazy: async () =>
 									import('../plugins/components').then(
 										({ RenderPluginApp }) => ({

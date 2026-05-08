@@ -71,7 +71,7 @@ export const usePatientDetailsRoutes = () => {
 					(remote) => remote.location === PluginBundleLocationEnum.Patient,
 				)
 				.map((remote) => ({
-					path: remote.name,
+					path: `${remote.name}/*`,
 					lazy: async () =>
 						import('../../plugins').then(({ RenderPluginApp }) => ({
 							Component: () => (

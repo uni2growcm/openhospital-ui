@@ -29,17 +29,15 @@ export function RenderPluginApp({
 
 	const { id } = useParams();
 
+	const basePath = `${
+		plugin.location === PluginBundleLocationEnum.Main
+			? ''
+			: PATHS.patients_details_id.replace(':id', id || '')
+	}/${plugin.remote}`;
+
 	return (
 		<PluginActivity plugin={plugin} showHeaderAndFooter={showHeaderAndFooter}>
-			<App
-				patient={id}
-				basename={`${
-					plugin.location === PluginBundleLocationEnum.Main
-						? ''
-						: PATHS.patients_details_id.replace(':id', id || '')
-				}/${plugin.entry}`}
-				memoryRoute={{ entryPath: '/' }}
-			/>
+			<App patient={id} basePath={basePath} />
 		</PluginActivity>
 	);
 }
