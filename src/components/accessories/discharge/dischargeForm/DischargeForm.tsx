@@ -50,6 +50,8 @@ const DischargeForm: FC<DischargeProps> = ({
     (state: IState) => state.types.discharges.getAll.data
   );
 
+  const [isDeadDischarge, setIsDeadDischarge] = useState(false);
+
   const renderOptions = (
     data:
       | (DiseaseDTO | AdmissionTypeDTO | DiseaseTypeDTO | DiseaseDTO)[]
@@ -145,17 +147,11 @@ const DischargeForm: FC<DischargeProps> = ({
       formattedValues.disType = dischargeTypes?.find(
         (item) => item.code === formattedValues.disType
       );
-
-      // Ensure deathPeriod is properly handled
-      const isDeadDischarge = formattedValues.disType?.code === "D" || 
-                             formattedValues.disType?.description?.toLowerCase().includes("dead");
       
       if (!isDeadDischarge) {
         formattedValues.deathPeriod = null;
       }
-      // If discharge type is Dead, keep the value from formatAllFieldValues
-      // No need to reassign as formatAllFieldValues already handled it correctly
-
+      
       onSubmit(formattedValues as any);
     },
   });
@@ -186,6 +182,10 @@ const DischargeForm: FC<DischargeProps> = ({
       ? (get(formik.errors, fieldName) as string)
       : "";
   };
+
+  const handleDischargeTypeChange = (value: any) => {
+      setIsDeadDischarge(value?.value === "D" || value?.label?.toLowerCase().includes("dead"));
+  }
 
   const onBlurCallback = useCallback(
     (fieldName: string) =>
@@ -307,32 +307,30 @@ const DischargeForm: FC<DischargeProps> = ({
                 errorText={getErrorText("disType")}
                 onBlur={onBlurCallback("disType")}
                 options={renderOptions(dischargeTypes)}
+                onChange={(_, value) => {
+                  handleDischargeTypeChange(value);
+                }}
                 loading={disTypeStatus === "LOADING"}
                 disabled={isLoading}
               />
             </div>
           </div>
-          {(() => {
-            const currentDisType = dischargeTypes?.find(item => item.code === formik.values.disType);
-            const isDeadDischarge = currentDisType?.code === "D" || 
-                                   currentDisType?.description?.toLowerCase().includes("dead");
-            return isDeadDischarge ? (
-              <div className="row start-sm center-xs">
-                <div className="fullWidth patientAdmissionForm__item">
-                  <AutocompleteField
-                    fieldName="deathPeriod"
-                    fieldValue={formik.values.deathPeriod}
-                    label={t("admission.deathPeriod")}
-                    isValid={isValid("deathPeriod")}
-                    errorText={getErrorText("deathPeriod")}
-                    onBlur={onBlurCallback("deathPeriod")}
-                    options={deathPeriodOptions}
-                    disabled={isLoading}
-                  />
-                </div>
+          {isDeadDischarge && (
+            <div className="row start-sm center-xs">
+              <div className="fullWidth patientAdmissionForm__item">
+                <AutocompleteField
+                  fieldName="deathPeriod"
+                  fieldValue={formik.values.deathPeriod}
+                  label={t("admission.deathPeriod")}
+                  isValid={isValid("deathPeriod")}
+                  errorText={getErrorText("deathPeriod")}
+                  onBlur={onBlurCallback("deathPeriod")}
+                  options={deathPeriodOptions}
+                  disabled={isLoading}
+                />
               </div>
-            ) : null;
-          })()}
+            </div>
+          )}
 
           <div className="row start-sm center-xs">
             <div className="fullWidth patientAdmissionForm__item">
