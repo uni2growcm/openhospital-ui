@@ -5,7 +5,7 @@ describe("Update Pharmaceutical", () => {
   });
 
   it("Should navigate to edit pharmaceutical form", () => {
-    cy.dataCy("table-edit-action").eq(3).click();
+    cy.dataCy("table-edit-action").eq(1).click();
     cy.dataCy("pharmaceutical-form").should("exist");
   });
 

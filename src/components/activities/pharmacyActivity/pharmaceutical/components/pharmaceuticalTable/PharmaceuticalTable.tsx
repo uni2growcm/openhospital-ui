@@ -57,7 +57,7 @@ export default function PharmaceuticalTable({
     "amc",
   ];
 
-  const order = ["pcsperpck", "stock", "criticalValue", "amc"];
+  const order = ["pcsperpck", "stock", "criticalValue", "amc", "code"];
 
   const filters: TFilterField[] = [
     {
@@ -180,7 +180,7 @@ export default function PharmaceuticalTable({
                 rowsPerPage={10}
                 columnsOrder={order}
                 rowClassNames={(row) => "pharmaceutical-table__row"}
-                initialOrderBy="pcsperpck"
+                initialOrderBy="code"
                 rowData={formattedData}
                 showEmptyCell={false}
                 isCollapsabile={false}
