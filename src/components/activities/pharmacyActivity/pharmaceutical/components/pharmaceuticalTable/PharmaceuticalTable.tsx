@@ -187,17 +187,7 @@ export default function PharmaceuticalTable({
                 detailColSpan={6}
                 filterColumns={filters}
                 rowKey="pharmaceutical"
-                manualFilter={false}
-                rawData={(data ?? []).map((item) => ({
-                  ...item,
-                  pharmaceutical: item.description,
-                  type: item.type?.description,
-                  code: item.code,
-                  pcsperpck: item.pcsperpck,
-                  stock: (item.initialqty || 0) + (item.inqty || 0) - (item.outqty || 0),
-                  criticalValue: item.minqty,
-                  amc: item.outqty,
-                }))}
+                manualFilter={true}
                 onDelete={handleDelete}
                 onEdit={handleEdit}
                 onView={handleView}
