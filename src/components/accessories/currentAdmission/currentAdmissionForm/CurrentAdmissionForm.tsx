@@ -12,6 +12,8 @@ import React, {
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
+import { Print } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
 import checkIcon from "../../../../assets/check-icon.png";
 import {
   AdmissionTypeDTO,
@@ -42,6 +44,7 @@ import { IOwnProps, TActivityTransitionState } from "./types";
 export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
   onDiscard,
   onSubmit,
+  onPrint,
   fields,
 }) => {
   const { t } = useTranslation();
@@ -531,6 +534,17 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
               {t("patient.discardchanges")}
             </Button>
           </div>
+          {onPrint && isReferralAdmission && (
+            <div className="print_button">
+              <IconButton 
+                onClick={() => onPrint(currentAdmission!)}
+                disabled={isLoading}
+                title={t("admission.printCrossReferenceReport")}
+              >
+                <Print color="secondary" />
+              </IconButton>
+            </div>
+          )}
         </div>
       </form>
       {status === "FAIL" && (

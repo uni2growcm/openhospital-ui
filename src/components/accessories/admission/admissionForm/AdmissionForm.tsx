@@ -8,6 +8,8 @@ import { get, has } from "lodash";
 import moment from "moment";
 import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Print } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
 import { getTransportations } from "state/admissions";
 import { boolean, object, string } from "yup";
 import warningIcon from "../../../../assets/warning-icon.png";
@@ -16,7 +18,7 @@ import {
   DiseaseDTO,
   DiseaseTypeDTO,
   PatientDTOSexEnum,
-  WardDTO,
+  WardDTO
 } from "../../../../generated";
 import {
   differenceInDays,
@@ -50,6 +52,8 @@ const AdmissionForm: FC<AdmissionProps> = ({
   admitted,
   shouldResetForm,
   resetFormCallback,
+  onPrint,
+  admissionToEdit,
 }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -812,6 +816,28 @@ const AdmissionForm: FC<AdmissionProps> = ({
                 {resetButtonLabel}
               </Button>
             </div>
+            {onPrint && !creationMode && isReferralAdmission && (
+              <div className="print_button">
+                <IconButton
+                  onClick={() => {
+                    if (admissionToEdit) {
+                      const currentDataToPrint = {
+                        ...admissionToEdit,
+                        ...formik.values,
+                        alertReceived: isAlertReceivedChecked,
+                        referenceSheet: isReferenceSheetChecked,
+                        qualifiedAgent: isQualifiedAgentChecked,
+                      };
+                      onPrint(currentDataToPrint);
+                    }
+                  }}
+                  disabled={isLoading}
+                  title={t("admission.printCrossReferenceReport")}
+                >
+                  <Print color="secondary" />
+                </IconButton>
+              </div>
+            )}
           </div>
           <ConfirmationDialog
             isOpen={openResetConfirmation}
