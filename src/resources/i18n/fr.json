@@ -655,7 +655,7 @@
     "saveopd": "Enregistrer OPD",
     "discard": "Annuler",
     "dismiss": "Rejeter",
-    "savetriage": "Enregistrer exam spécifique",
+    "savetriage": "Enregistrer un examen spécifique",
     "saveandprint": "Enregistrer et imprimer",
     "updateandprint": "Mettre à jour et imprimer",
     "404notfound": "404 - Page introuvable",
@@ -897,15 +897,17 @@
   },
   "summary": {
     "visits": "Visites",
-    "triage": "Exam spécifique",
+    "triage": "Examen spécifique",
     "admission": "Admission",
     "operation": "Opération",
     "opd": "OPD",
     "booking": "Réservation",
     "exams": "Examen",
     "therapy": "Thérapie",
+    "conditioning": "Conditionnement",
     "encounter": "Consultation",
-    "noDataForEncounter": "Aucune opération pour cette rencontre."
+    "noDataForEncounter": "Aucune opération pour cette rencontre.",
+    "noData": "Aucune rencontre pour ce patient."
   },
   "lab": {
     "newlab": "Nouvel examen de laboratoire",

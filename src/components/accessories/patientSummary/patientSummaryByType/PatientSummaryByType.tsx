@@ -228,6 +228,31 @@ const PatientSummaryByType = () => {
               />
             </div>
           )}
+
+          {filterByType(SummaryType.CONDITIONING).length > 0 && (
+            <div className="patientSummary_type_row">
+              <h4>
+                {t("summary.conditioning")}(
+                {filterByType(SummaryType.CONDITIONING).length})
+              </h4>
+              <Table
+                rowData={renderSummary(
+                  filterByType(SummaryType.CONDITIONING),
+                  dateFields,
+                  labels
+                )}
+                dateFields={dateFields}
+                tableHeader={header.type.conditioning}
+                labelData={labels}
+                columnsOrder={order}
+                rowsPerPage={ORDER_BY_TYPE_PAGE_SIZE}
+                isCollapsabile={true}
+                showEmptyCell={false}
+                detailsExcludedFields={["date"]}
+                isExpanded={expanded}
+              />
+            </div>
+          )}
         </div>
       ) : (
         <CircularProgress style={{ marginLeft: "50%", position: "relative" }} />

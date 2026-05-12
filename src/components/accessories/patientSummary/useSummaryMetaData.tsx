@@ -79,9 +79,9 @@ const useSummaryMetaData = () => {
       operation: ["date", "operation"],
       therapy: ["date", "medicalId"],
       visit: ["date", "duration"],
+      conditioning: ["date", "type"],
     },
   };
-
   const order = ["date", "type"];
 
   return { labels, dateFields, header, order };

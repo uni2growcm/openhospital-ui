@@ -4,6 +4,7 @@ import { concat, firstValueFrom, of } from "rxjs";
 import { catchError, map, toArray } from "rxjs/operators";
 import {
   AdmissionsApi,
+  ConditioningsApi,
   EncounterApi,
   ExaminationsApi,
   LaboratoriesApi,
@@ -17,6 +18,7 @@ import { convertToSummaryData } from "../../libraries/reduxUtils/convert";
 import { SummaryField } from "./consts";
 
 const therapiesApi = new TherapiesApi(customConfiguration());
+const conditioningsApi = new ConditioningsApi(customConfiguration());
 
 const operationsApi = new OperationsApi(customConfiguration());
 const admissionsApi = new AdmissionsApi(customConfiguration());
@@ -127,11 +129,15 @@ export const loadSummaryData = createAsyncThunk(
         wrapper(() => therapiesApi.getTherapyRows({ codePatient: code })).pipe(
           map((res) => convertToSummaryData(res, SummaryField.therapy)),
           catchError(() => of([]))
+        ),
+        wrapper(() => conditioningsApi.getConditioningByPatientCode({ patientCode: code })).pipe(
+          map((res) => convertToSummaryData(res, SummaryField.conditioning)),
+          catchError(() => of([]))
         )
       ).pipe(toArray())
     )
       .then(
-        ([triages, opds, exams, admissions, visits, operations, therapies]) => [
+        ([triages, opds, exams, admissions, visits, operations, therapies, conditionings]) => [
           ...triages,
           ...opds,
           ...exams,
@@ -139,6 +145,7 @@ export const loadSummaryData = createAsyncThunk(
           ...visits,
           ...operations,
           ...therapies,
+          ...conditionings,
         ]
       )
       .catch((error) => thunkApi.rejectWithValue(error))
@@ -219,6 +226,10 @@ export const loadSummaryDataGroupedByEncounter = createAsyncThunk(
               ),
               wrapper(() => encounterApi.getAdmissionsByEncounter({ code: encounter.code })).pipe(
                 map((res) => convertToSummaryData(res, SummaryField.admission)),
+                catchError(() => of([]))
+              ),
+              wrapper(() => encounterApi.getConditioningByPatientEncounter({ code: encounter.code })).pipe(
+                map((res) => convertToSummaryData(res, SummaryField.conditioning)),
                 catchError(() => of([]))
               ),
               of(convertToSummaryData(encounterVisits, SummaryField.visit)),
