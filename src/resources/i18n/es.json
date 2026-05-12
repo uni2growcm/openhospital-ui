@@ -429,7 +429,22 @@
     "patientalreadyadmitted": "The patient has already been admitted, here you will find the history of admissions. To resign, go to the dismission page.",
     "updated": "Admission updated",
     "updatesuccess": "Admimission updated successfully",
-    "datebefore": "Admission date must be before the discharge date"
+    "datebefore": "Admission date must be before the discharge date",
+    "preTreatment": "Tratamiento pre-admisión",
+    "preAssessment": "Evaluación pre-admisión",
+    "entryReason": "Motivo de entrada",
+    "transportation": "Transporte",
+    "transportationMode": "Modo de transporte",
+    "referringCenter": "Centro de referencia",
+    "referralAlert": "Alerta de referencia",
+    "referralReason": "Motivo de referencia",
+    "physicalExam": "Examen físico",
+    "courseOfAction": "Conducta a seguir",
+    "diagnosis": "Diagnóstico",
+    "treatmentReceived": "Tratamiento recibido",
+    "outcome": "Resultado",
+    "improvementFeedback": "Comentario de mejora",
+    "nextAppointment": "Próxima cita"
   },
   "bill": {
     "title": "Welcome to Billing",
