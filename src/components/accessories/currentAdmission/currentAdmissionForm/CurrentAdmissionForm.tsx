@@ -167,8 +167,10 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
   }, [dispatch, activityTransitionState, patient, onDiscard]);
 
   const handleReferralAdmission = (value: any) => {
-    console.log(value);
-    // setIsReferralAdmission(value?.value === "R");
+    const isReferral = value?.value === "R";
+    setIsReferralAdmission(isReferral);
+    setFieldValue("admType", value?.value || "");
+    formik.setFieldTouched("admType");
   };
 
   useEffect(() => {
@@ -187,6 +189,7 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
     formik.values.alertReceived,
     formik.values.referenceSheet,
     formik.values.qualifiedAgent,
+    formik.values.admType,
     dispatch,
   ]);
 
