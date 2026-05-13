@@ -1019,6 +1019,10 @@
     "preAssessment": "Bilan avant admission",
     "entryReason": "Motif d'entrée",
     "transportation": "Moyen de transport",
+    "transportationMode": "Mode de transport",
+    "referringCenter": "Centre référent",
+    "referralAlert": "Alerte de référence",
+    "referralReason": "Raison de la référence",
     "physicalExam": "Examen physique",
     "courseOfAction": "Conduite à tenir",
     "nextAppointment": "Prochain rendez-vous",
@@ -1026,7 +1030,11 @@
     "deathPeriodOptions": {
       "before": "Avant l'admission",
       "after": "Après l'admission"
-    }
+    },
+    "diagnosis": "Diagnostic",
+    "treatmentReceived": "Traitement reçu",
+    "outcome": "Issue",
+    "improvementFeedback": "Commentaire d'amélioration"
   },
   "bill": {
     "title": "Bienvenue dans la facturation",

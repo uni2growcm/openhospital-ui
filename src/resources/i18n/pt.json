@@ -424,7 +424,22 @@
     "deathPeriodOptions": {
       "before": "Antes da admissão",
       "after": "Após a admissão"
-    }
+    },
+    "preTreatment": "Tratamento pré-admissão",
+    "preAssessment": "Avaliação pré-admissão",
+    "entryReason": "Motivo de entrada",
+    "transportation": "Transporte",
+    "transportationMode": "Modo de transporte",
+    "referringCenter": "Centro de referência",
+    "referralAlert": "Alerta de referência",
+    "referralReason": "Motivo da referência",
+    "physicalExam": "Exame físico",
+    "courseOfAction": "Conduta a seguir",
+    "diagnosis": "Diagnóstico",
+    "treatmentReceived": "Tratamento recebido",
+    "outcome": "Resultado",
+    "improvementFeedback": "Feedback de melhoria",
+    "nextAppointment": "Próxima consulta"
   },
   "bill": {
     "title": "Welcome to Billing",

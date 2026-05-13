@@ -7628,9 +7628,9 @@ components:
           example: 0
         opd:
           type: boolean
-        female:
-          type: boolean
         male:
+          type: boolean
+        female:
           type: boolean
         pharmacy:
           type: boolean
@@ -8578,6 +8578,26 @@ components:
         deathPeriod:
           type: string
           description: Death period
+        referralAlert:
+          type: string
+          description: Referral alert
+          example: Urgent referral needed
+        referralReason:
+          type: string
+          description: Referral reason
+          example: Specialized treatment required
+        treatmentReceived:
+          type: string
+          description: Treatment received
+          example: Antibiotic therapy
+        outcome:
+          type: string
+          description: Outcome
+          example: Recovered
+        improvementFeedback:
+          type: string
+          description: Improvement feedback
+          example: Patient showing significant improvement
         yprog:
           type: integer
           format: int32

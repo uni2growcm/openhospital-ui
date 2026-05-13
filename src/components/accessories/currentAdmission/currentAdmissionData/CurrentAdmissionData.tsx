@@ -39,12 +39,6 @@ export const CurrentAdmissionData: FunctionComponent<IOwnProps> = ({
             <p className="item_content">{admission?.ward?.description}</p>
           </div>
         )}
-        {!isEmpty(admission?.fhu) && (
-          <div className="currentAdmissionData__item">
-            <span className="item_label">{t("admission.fhu")}</span>
-            <p className="item_content">{admission?.fhu}</p>
-          </div>
-        )}
         {!isEmpty(admission?.admType?.description) && (
           <div className="currentAdmissionData__item">
             <span className="item_label">{t("admission.admType")}</span>
@@ -79,12 +73,6 @@ export const CurrentAdmissionData: FunctionComponent<IOwnProps> = ({
             <p className="item_content">
               {admission.qualifiedAgent ? t("common.yes") : t("common.no")}
             </p>
-          </div>
-        )}
-        {!isEmpty(admission?.transportation) && (
-          <div className="currentAdmissionData__item">
-            <span className="item_label">{t("admission.transportation")}</span>
-            <p className="item_content">{admission.transportation}</p>
           </div>
         )}
         {!isEmpty(admission?.entryReason) && (
@@ -122,6 +110,52 @@ export const CurrentAdmissionData: FunctionComponent<IOwnProps> = ({
             <span className="item_label">{t("admission.courseOfAction")}</span>
             <p className="item_content">{admission.courseOfAction}</p>
           </div>
+        )}
+        {admission?.admType?.code === "R" && (
+          <>
+            {!isEmpty(admission?.fhu) && (
+              <div className="currentAdmissionData__item">
+                <span className="item_label">{t("admission.fhu")}</span>
+                <p className="item_content">{admission?.fhu}</p>
+              </div>
+            )}
+            {!isEmpty(admission?.transportation) && (
+              <div className="currentAdmissionData__item">
+                <span className="item_label">{t("admission.transportation")}</span>
+                <p className="item_content">{admission.transportation}</p>
+              </div>
+            )}
+            {!isEmpty(admission?.referralAlert) && (
+              <div className="currentAdmissionData__item">
+                <span className="item_label">{t("admission.referralAlert")}</span>
+                <p className="item_content">{admission.referralAlert}</p>
+              </div>
+            )}
+            {!isEmpty(admission?.referralReason) && (
+              <div className="fullWidth currentAdmissionData__item">
+                <span className="item_label">{t("admission.referralReason")}</span>
+                <p className="item_content">{admission.referralReason}</p>
+              </div>
+            )}
+            {!isEmpty(admission?.treatmentReceived) && (
+              <div className="fullWidth currentAdmissionData__item">
+                <span className="item_label">{t("admission.treatmentReceived")}</span>
+                <p className="item_content">{admission.treatmentReceived}</p>
+              </div>
+            )}
+            {!isEmpty(admission?.outcome) && (
+              <div className="fullWidth currentAdmissionData__item">
+                <span className="item_label">{t("admission.outcome")}</span>
+                <p className="item_content">{admission.outcome}</p>
+              </div>
+            )}
+            {!isEmpty(admission?.improvementFeedback) && (
+              <div className="fullWidth currentAdmissionData__item">
+                <span className="item_label">{t("admission.improvementFeedback")}</span>
+                <p className="item_content">{admission.improvementFeedback}</p>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>

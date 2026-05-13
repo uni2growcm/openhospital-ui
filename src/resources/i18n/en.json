@@ -1069,6 +1069,10 @@
     "preAssessment": "Pre-admission assessment",
     "entryReason": "Entry reason",
     "transportation": "Transportation",
+    "transportationMode": "Transportation mode",
+    "referringCenter": "Referring center",
+    "referralAlert": "Referral alert",
+    "referralReason": "Referral reason",
     "physicalExam": "Physical exam",
     "courseOfAction": "Course of action",
     "nextAppointment": "Next appointment",
@@ -1076,7 +1080,11 @@
     "deathPeriodOptions": {
       "before": "Before admission",
       "after": "After admission"
-    }
+    },
+    "diagnosis": "Diagnosis",
+    "treatmentReceived": "Treatment received",
+    "outcome": "Outcome",
+    "improvementFeedback": "Improvement feedback"
   },
   "bill": {
     "title": "Welcome to Billing",

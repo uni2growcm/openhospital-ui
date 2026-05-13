@@ -760,7 +760,22 @@
     "deathPeriodOptions": {
       "before": "Prima del ricovero",
       "after": "Dopo il ricovero"
-    }
+    },
+    "preTreatment": "Trattamento pre-ricovero",
+    "preAssessment": "Valutazione pre-ricovero",
+    "entryReason": "Motivo del ricovero",
+    "transportation": "Mezzo di trasporto",
+    "transportationMode": "Modalità di trasporto",
+    "referringCenter": "Centro di riferimento",
+    "referralAlert": "Allarme di riferimento",
+    "referralReason": "Motivo del riferimento",
+    "physicalExam": "Esame fisico",
+    "courseOfAction": "Condotta da tenere",
+    "diagnosis": "Diagnosi",
+    "treatmentReceived": "Trattamento ricevuto",
+    "outcome": "Esito",
+    "improvementFeedback": "Feedback di miglioramento",
+    "nextAppointment": "Prossimo appuntamento"
   },
   "bill": {
     "title": "Benvenuto nell'area pagamenti",
