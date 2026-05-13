@@ -1075,11 +1075,16 @@
     "referralReason": "Referral reason",
     "physicalExam": "Physical exam",
     "courseOfAction": "Course of action",
+    "nextAppointment": "Next appointment",
+    "deathPeriod": "Death Period",
+    "deathPeriodOptions": {
+      "before": "Before admission",
+      "after": "After admission"
+    },
     "diagnosis": "Diagnosis",
     "treatmentReceived": "Treatment received",
     "outcome": "Outcome",
-    "improvementFeedback": "Improvement feedback",
-    "nextAppointment": "Next appointment"
+    "improvementFeedback": "Improvement feedback"
   },
   "bill": {
     "title": "Welcome to Billing",
@@ -1357,7 +1362,11 @@
     "updated": "Discharge type updated",
     "updateSuccess": "The discharge type has been updated successfully!",
     "cancelCreation": "Are you sure to cancel the discharge type creation?",
-    "cancelUpdate": "Are you sure to cancel the discharge type update?"
+    "cancelUpdate": "Are you sure to cancel the discharge type update?",
+    "deathPeriod": {
+      "beforeAdmission": "Before admission",
+      "afterAdmission": "After admission"
+    }
   },
   "deliveryTypes": {
     "code": "Code",

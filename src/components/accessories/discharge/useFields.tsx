@@ -37,6 +37,10 @@ export const useFields = (admission?: AdmissionDTO) => {
       value: parseDateTime(admission?.nextAppointment?.toString()!, false),
       type: "date",
     },
+    deathPeriod: {
+      value: admission?.deathPeriod ?? "",
+      type: "text",
+    },
   };
 
   return fields;

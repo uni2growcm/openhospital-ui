@@ -756,6 +756,11 @@
     "disregistered": "Dimissioni nel periodo specificato",
     "previousentries": "Ricoveri precedenti",
     "no_beds": "Non ci sono letti disponibili nel reparto selezionato",
+    "deathPeriod": "Periodo decesso",
+    "deathPeriodOptions": {
+      "before": "Prima del ricovero",
+      "after": "Dopo il ricovero"
+    },
     "preTreatment": "Trattamento pre-ricovero",
     "preAssessment": "Valutazione pre-ricovero",
     "entryReason": "Motivo del ricovero",
@@ -1048,7 +1053,11 @@
     "updated": "Tipo dismissione aggiornato",
     "updateSuccess": "Tipo dismissione aggiornato correttamente",
     "cancelCreation": "Confermi l'annullamento della creazione tipo dismissione?",
-    "cancelUpdate": "Confermi l'annullamento dell'aggiornamento tipo dismissione?"
+    "cancelUpdate": "Confermi l'annullamento dell'aggiornamento tipo dismissione?",
+    "deathPeriod": {
+      "beforeAdmission": "Prima del ricovero",
+      "afterAdmission": "Dopo il ricovero"
+    }
   },
   "deliveryTypes": {
     "code": "Codice",

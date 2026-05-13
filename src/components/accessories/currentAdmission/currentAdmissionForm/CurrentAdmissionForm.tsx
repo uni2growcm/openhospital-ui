@@ -143,8 +143,6 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
       formattedValues.transportation = formik.values.transportation;
       formattedValues.physicalExam = formik.values.physicalExam;
       formattedValues.courseOfAction = formik.values.courseOfAction;
-      
-      // Add referral fields
       formattedValues.referralAlert = formik.values.referralAlert;
       formattedValues.referralReason = formik.values.referralReason;
       formattedValues.treatmentReceived = formik.values.treatmentReceived;
@@ -169,7 +167,10 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
   }, [dispatch, activityTransitionState, patient, onDiscard]);
 
   const handleReferralAdmission = (value: any) => {
-    setIsReferralAdmission(value?.value === "R");
+    const isReferral = value?.value === "R";
+    setIsReferralAdmission(isReferral);
+    setFieldValue("admType", value?.value || "");
+    formik.setFieldTouched("admType");
   };
 
   useEffect(() => {
@@ -188,6 +189,7 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
     formik.values.alertReceived,
     formik.values.referenceSheet,
     formik.values.qualifiedAgent,
+    formik.values.admType,
     dispatch,
   ]);
 
@@ -278,6 +280,9 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
               isValid={isValid("admType")}
               errorText={getErrorText("admType")}
               onBlur={onBlurCallback("admType")}
+              onChange={(_, value) => {
+               handleReferralAdmission(value);
+              }}
               options={renderOptions(admissionTypes)}
               loading={admTypeStatus === "LOADING"}
               disabled={isLoading}

@@ -251,7 +251,10 @@ const AdmissionForm: FC<AdmissionProps> = ({
   const { setFieldValue, resetForm, handleBlur } = formik;
 
   const handleReferralAdmission = (value: any) => {
-   setIsReferralAdmission(value?.value === "R");
+    const isReferral = value?.value === "R";
+    setIsReferralAdmission(isReferral);
+    setFieldValue("admType", value?.value || "");
+    formik.setFieldTouched("admType");
   };
 
   const dateFieldHandleOnChange = useCallback(
@@ -336,6 +339,7 @@ const AdmissionForm: FC<AdmissionProps> = ({
     formik.values.alertReceived,
     formik.values.referenceSheet,
     formik.values.qualifiedAgent,
+    formik.values.admType,
   ]);
 
   const diagnosisInStatus = useAppSelector(

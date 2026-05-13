@@ -420,6 +420,11 @@
     "updated": "Admission updated",
     "updatesuccess": "Admimission updated successfully",
     "datebefore": "Admission date must be before the discharge date",
+    "deathPeriod": "Death Period",
+    "deathPeriodOptions": {
+      "before": "Antes da admissão",
+      "after": "Após a admissão"
+    },
     "preTreatment": "Tratamento pré-admissão",
     "preAssessment": "Avaliação pré-admissão",
     "entryReason": "Motivo de entrada",
@@ -553,5 +558,11 @@
     "cs": "Czech",
     "sq": "Albanian",
     "zh": "Chinese"
+  },
+  "dischargeTypes": {
+    "deathPeriod": {
+      "beforeAdmission": "Antes da admissão",
+      "afterAdmission": "Após a admissão"
+    }
   }
 }

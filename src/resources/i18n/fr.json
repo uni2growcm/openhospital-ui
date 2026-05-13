@@ -1025,11 +1025,16 @@
     "referralReason": "Raison de la référence",
     "physicalExam": "Examen physique",
     "courseOfAction": "Conduite à tenir",
+    "nextAppointment": "Prochain rendez-vous",
+    "deathPeriod": "Période de décès",
+    "deathPeriodOptions": {
+      "before": "Avant l'admission",
+      "after": "Après l'admission"
+    },
     "diagnosis": "Diagnostic",
     "treatmentReceived": "Traitement reçu",
     "outcome": "Issue",
-    "improvementFeedback": "Commentaire d'amélioration",
-    "nextAppointment": "Prochain rendez-vous"
+    "improvementFeedback": "Commentaire d'amélioration"
   },
   "bill": {
     "title": "Bienvenue dans la facturation",
@@ -1307,7 +1312,11 @@
     "updated": "Type de décharge mis à jour",
     "updateSuccess": "Le type de décharge a été mis à jour avec succès!",
     "cancelCreation": "Êtes-vous sûr d'annuler la création du type de décharge?",
-    "cancelUpdate": "Êtes-vous sûr de vouloir annuler la mise à jour du type de décharge?"
+    "cancelUpdate": "Êtes-vous sûr de vouloir annuler la mise à jour du type de décharge?",
+    "deathPeriod": {
+      "beforeAdmission": "Avant l'admission",
+      "afterAdmission": "Après l'admission"
+    }
   },
   "deliveryTypes": {
     "code": "Code",
