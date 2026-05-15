@@ -7845,13 +7845,13 @@ components:
           format: int32
           description: lock
           example: 0
-        opd:
-          type: boolean
-        female:
+        pharmacy:
           type: boolean
         male:
           type: boolean
-        pharmacy:
+        female:
+          type: boolean
+        opd:
           type: boolean
       required:
       - beds
@@ -8794,11 +8794,11 @@ components:
           format: date-time
           description: Next appointment date
           example: string
+        fhu:
+          type: string
         yprog:
           type: integer
           format: int32
-        fhu:
-          type: string
       required:
       - admDate
       - admitted
@@ -9708,7 +9708,7 @@ components:
           type: string
           description: Teams involved in the consultation
           example: "Cardiology, Neurology"
-        dateTime:
+        consultationDate:
           type: string
           format: date-time
           description: Date and time of the consultation
@@ -9735,7 +9735,7 @@ components:
           description: Lock version for optimistic locking
           example: 1
       required:
-      - dateTime
+      - consultationDate
       - encounter
     ExamWithRowsDTO:
       type: object

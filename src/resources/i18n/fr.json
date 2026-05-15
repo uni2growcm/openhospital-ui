@@ -278,7 +278,7 @@
   },
   "hospitalisationconsultation": {
     "id": "ID",
-    "dateTime": "Date et heure",
+    "consultationDate": "Date et heure",
     "teams": "Équipes",
     "parentComplaints": "Plaintes parentales",
     "physicalExamination": "Examen physique",

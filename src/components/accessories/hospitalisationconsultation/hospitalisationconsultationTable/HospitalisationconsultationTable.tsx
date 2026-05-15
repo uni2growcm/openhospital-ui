@@ -54,13 +54,13 @@ const HospitalisationconsultationTable: FunctionComponent<IOwnProps> = ({
     return errorState.error?.message || t("common.somethingwrong");
   });
 
-  const header = ["dateTime", "teams", "diagnosis"];
-  const dateFields = ["dateTime"];
-  const order = ["dateTime", "teams", "diagnosis"];
+  const header = ["consultationDate", "teams", "diagnosis"];
+  const dateFields = ["consultationDate"];
+  const order = ["consultationDate", "teams", "diagnosis"];
 
   const label = {
     id: t("hospitalisationconsultation.id"),
-    dateTime: t("hospitalisationconsultation.dateTime"),
+    consultationDate: t("hospitalisationconsultation.consultationDate"),
     teams: t("hospitalisationconsultation.teams"),
     parentComplaints: t("hospitalisationconsultation.parentComplaints"),
     physicalExamination: t("hospitalisationconsultation.physicalExamination"),
@@ -78,7 +78,7 @@ const HospitalisationconsultationTable: FunctionComponent<IOwnProps> = ({
   const formatDataToDisplay = (rawData: HospitalizationConsultationDTO[]) => {
     return rawData.map((item) => ({
       id: item.id ?? "",
-      dateTime: item.dateTime ? renderDateTime(item.dateTime) : "",
+      consultationDate: item.consultationDate ? renderDateTime(item.consultationDate) : "",
       teams: item.teams ?? "",
       parentComplaints: item.parentComplaints ?? "",
       physicalExamination: item.physicalExamination ?? "",
@@ -107,7 +107,7 @@ const HospitalisationconsultationTable: FunctionComponent<IOwnProps> = ({
                 rowsPerPage={5}
                 isCollapsabile={true}
                 onEdit={canUpdate ? onEdit : undefined}
-                initialOrderBy="dateTime"
+                initialOrderBy="consultationDate"
                 showEmptyCell={false}
               />
             );

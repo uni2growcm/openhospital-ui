@@ -43,11 +43,11 @@ const HospitalisationconsultationForm: FC<HospitalisationconsultationFormProps> 
   );
 
   const validationSchema = yup.object({
-    dateTime: yup
+    consultationDate: yup
       .string()
       .required(t("common.required"))
       .test({
-        name: "dateTime",
+        name: "consultationDate",
         message: t("common.invaliddate"),
         test: function (value) {
           return moment(value).isValid();
@@ -62,7 +62,7 @@ const HospitalisationconsultationForm: FC<HospitalisationconsultationFormProps> 
 
   const fieldValues = getFromFields(fields, "value");
   const initialValues = {
-    dateTime: fieldValues.dateTime,
+    consultationDate: fieldValues.consultationDate,
     teams: fieldValues.teams 
       ? (typeof fieldValues.teams === 'string' 
           ? fieldValues.teams.split(',').filter(t => t.trim()) 
@@ -190,15 +190,15 @@ const HospitalisationconsultationForm: FC<HospitalisationconsultationFormProps> 
         <div className="row start-sm center-xs">
           <div className="hospitalisationconsultationForm__item">
             <DateField
-              fieldName="dateTime"
-              fieldValue={formik.values.dateTime}
+              fieldName="consultationDate"
+              fieldValue={formik.values.consultationDate}
               disableFuture={true}
               theme="regular"
               format="dd/MM/yyyy HH:mm"
-              isValid={isValid("dateTime")}
-              errorText={getErrorText("dateTime")}
-              label={t("hospitalisationconsultation.dateTime")}
-              onChange={dateFieldHandleOnChange("dateTime")}
+              isValid={isValid("consultationDate")}
+              errorText={getErrorText("consultationDate")}
+              label={t("hospitalisationconsultation.consultationDate")}
+              onChange={dateFieldHandleOnChange("consultationDate")}
               disabled={isLoading}
             />
           </div>

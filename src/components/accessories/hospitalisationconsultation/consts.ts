@@ -3,7 +3,7 @@ import { TFields } from "libraries/formDataHandling/types";
 import { HospitalisationconsultationFormFieldName } from "./hospitalisationconsultationForm/types";
 
 export const initialFields: TFields<HospitalisationconsultationFormFieldName> = {
-  dateTime: {
+  consultationDate: {
     value: parseDateTime(new Date().toISOString(), false),
     type: "date",
   },

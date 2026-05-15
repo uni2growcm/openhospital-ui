@@ -7,8 +7,8 @@ import { initialFields } from "./consts";
 export const useFields = (consultation?: HospitalizationConsultationDTO) => {
   const fields: TFields<HospitalisationconsultationFormFieldName> = {
     ...initialFields,
-    dateTime: {
-      value: parseDateTime(consultation?.dateTime?.toString()!, false),
+    consultationDate: {
+      value: parseDateTime(consultation?.consultationDate?.toString()!, false),
       type: "date",
     },
     teams: {

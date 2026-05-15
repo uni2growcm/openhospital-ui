@@ -2,7 +2,7 @@ import { HospitalizationConsultationDTO } from "../../../../generated";
 import { TFields } from "libraries/formDataHandling/types";
 
 export type HospitalisationconsultationFormFieldName =
-  | "dateTime"
+  | "consultationDate"
   | "teams"
   | "parentComplaints"
   | "physicalExamination"

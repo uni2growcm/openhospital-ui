@@ -43,7 +43,7 @@ export interface HospitalizationConsultationDTO {
      * @type {string}
      * @memberof HospitalizationConsultationDTO
      */
-    dateTime: string;
+    consultationDate: string;
     /**
      * Parent complaints
      * @type {string}
