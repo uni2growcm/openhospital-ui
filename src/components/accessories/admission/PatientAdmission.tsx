@@ -280,6 +280,7 @@ const PatientAdmission: FC = () => {
       <PatientAdmissionTable
         handleEdit={encounter?.closedAt ? undefined : onEdit}
         shouldUpdateTable={shouldUpdateTable}
+        onPrint={onPrint}
       />
 
       <ConfirmationDialog
