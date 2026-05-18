@@ -1,5 +1,6 @@
 import {
   AdmissionDTO,
+  ConditioningDTO,
   LaboratoryDTO,
   MedicalDTO,
   OpdDTO,
@@ -30,6 +31,7 @@ export const renderSummary = (
     | AdmissionDTO
     | OperationRowDTO
     | TherapyRowDTO
+    | ConditioningDTO
   >,
   dateFields: string[],
   labels: any,

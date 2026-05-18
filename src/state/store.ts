@@ -21,7 +21,7 @@ import { permissionSlice } from "./permissions";
 import { priceSlice } from "./prices";
 import { radiologySlice } from "./radiology";
 import { settingsSlice } from "./settings";
-import { summarySlice } from "./summary";
+import { summaryByEncounterSlice, summarySlice } from "./summary";
 import { supplierSlice } from "./suppliers";
 import { therapySlice } from "./therapies";
 import { diseaseTypeSlice } from "./types/diseases";
@@ -43,6 +43,7 @@ const reducer = combineReducers({
   examinations: examinationSlice.reducer,
   therapies: therapySlice.reducer,
   summary: summarySlice.reducer,
+  summaryByEncounter: summaryByEncounterSlice.reducer,
   opds: opdSlice.reducer,
   diseases: diseaseSlice.reducer,
   medicals: medicalSlice.reducer,
