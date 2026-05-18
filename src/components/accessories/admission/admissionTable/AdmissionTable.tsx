@@ -53,6 +53,11 @@ const PatientAdmissionTable: FunctionComponent<IOwnProps> = ({
     physicalExam: t("admission.physicalExam"),
     courseOfAction: t("admission.courseOfAction"),
     nextAppointment: t("admission.nextAppointment"),
+    referralAlert: t("admission.referralAlert"),
+    referralReason: t("admission.referralReason"),
+    treatmentReceived: t("admission.treatmentReceived"),
+    outcome: t("admission.outcome"),
+    improvementFeedback: t("admission.improvementFeedback"),
   };
   const order = ["admDate", "disDate"];
 
@@ -129,6 +134,11 @@ const PatientAdmissionTable: FunctionComponent<IOwnProps> = ({
         nextAppointment: item.nextAppointment
           ? renderDateTime(item.nextAppointment)
           : "",
+        referralAlert: item.referralAlert,
+        referralReason: item.referralReason ?? "",
+        treatmentReceived: item.treatmentReceived ?? "",
+        outcome: item.outcome ?? "",
+        improvementFeedback: item.improvementFeedback ?? "",
       };
     });
   };
