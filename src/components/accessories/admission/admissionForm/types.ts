@@ -11,6 +11,8 @@ interface IAdmissionProps {
   admitted: boolean;
   shouldResetForm: boolean;
   resetFormCallback: () => void;
+  onPrint?: (adm: AdmissionDTO | undefined) => void;
+  admissionToEdit?: AdmissionDTO;
 }
 
 export type AdmissionProps = IAdmissionProps;

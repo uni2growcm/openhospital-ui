@@ -16,7 +16,7 @@ import {
   DiseaseDTO,
   DiseaseTypeDTO,
   PatientDTOSexEnum,
-  WardDTO,
+  WardDTO
 } from "../../../../generated";
 import {
   differenceInDays,

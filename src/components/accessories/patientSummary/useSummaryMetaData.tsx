@@ -57,7 +57,19 @@ const useSummaryMetaData = () => {
     medicalId: t("therapy.medical"),
     service: t("visit.service"),
     duration: t("visit.duration"),
+    performedAt: t("conditioning.performedAt"),
+    ventilation: t("conditioning.ventilation"),
+    oxygenDebit: t("conditioning.oxygenDebit"),
+    sgVolume: t("conditioning.sgVolume"),
+    diazepamDose: t("conditioning.diazepamDose"),
+    bolusSsVolume: t("conditioning.bolusSsVolume"),
+    sngNumber: t("conditioning.sngNumber"),
+    reheating: t("conditioning.reheating"),
+    others: t("conditioning.others"),
+    hivTest: t("conditioning.hivTest"),
+    malaria: t("conditioning.malaria"),
   };
+  
   const dateFields = [
     "date",
     "admDate",
@@ -68,6 +80,7 @@ const useSummaryMetaData = () => {
     "startDate",
     "endDate",
     "labDate",
+    "performedAt",
   ];
   const header = {
     date: ["date", "type"],

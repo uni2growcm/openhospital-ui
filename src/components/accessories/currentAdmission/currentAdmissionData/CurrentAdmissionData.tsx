@@ -1,4 +1,4 @@
-import { Edit } from "@mui/icons-material";
+import { Edit, Print } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { renderDateTime } from "libraries/formatUtils/dataFormatting";
 import { isEmpty } from "lodash";
@@ -9,11 +9,13 @@ import "../styles.scss";
 
 interface IOwnProps {
   onEdit?: () => void;
+  onPrint?: (admission: AdmissionDTO) => void;
   admission: AdmissionDTO;
 }
 
 export const CurrentAdmissionData: FunctionComponent<IOwnProps> = ({
   onEdit,
+  onPrint,
   admission,
 }) => {
   const { t } = useTranslation();
@@ -23,6 +25,11 @@ export const CurrentAdmissionData: FunctionComponent<IOwnProps> = ({
         {onEdit && (
           <IconButton onClick={onEdit}>
             <Edit />
+          </IconButton>
+        )}
+        {onPrint && admission?.admType?.code === "R" && (
+          <IconButton onClick={() => onPrint(admission)}>
+            <Print color="secondary" />
           </IconButton>
         )}
       </div>
