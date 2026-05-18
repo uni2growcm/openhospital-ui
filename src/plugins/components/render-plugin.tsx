@@ -37,7 +37,7 @@ export function RenderPluginApp({
 
 	return (
 		<PluginActivity plugin={plugin} showHeaderAndFooter={showHeaderAndFooter}>
-			<App patient={id} basePath={basePath} />
+			<App id={plugin.remote} patient={id} basePath={basePath} />
 		</PluginActivity>
 	);
 }
