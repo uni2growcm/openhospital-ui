@@ -11,4 +11,4 @@ export const usePermission = (name: TPermission): boolean => {
     return true;
   }
   return permissions.includes(name);
-};
+};  

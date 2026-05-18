@@ -8,4 +8,5 @@ export enum SummaryType {
   TRIAGE = "TRIAGE",
   OPERATION = "OPERATION",
   THERAPY = "THERAPY",
+  CONDITIONING = "CONDITIONING",
 }
