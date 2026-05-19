@@ -735,6 +735,7 @@
     "discardMessage": "Are you sure to discard this operation ? All unsaved data will be lost.",
     "printData": "Print Data",
     "failedtodownloadthereport": "Failed to download report.",
+    "orderbyencounter": "Order by consultation",
     "communes": "Communes",
     "ethnics": "Ethnics",
     "towns": "Towns",
@@ -744,7 +745,6 @@
     "addTown": "Add Town",
     "addOccupation": "Add Occupation"
   },
-
   "town": {
     "id": "ID",
     "name": "Name",
@@ -758,7 +758,6 @@
     "nameisrequired": "Name is required",
     "nameshouldnotexceed": "Name must not exceed 100 characters"
   },
-
   "occupation": {
     "id": "ID",
     "name": "Name",
@@ -772,7 +771,6 @@
     "nameisrequired": "Name is required",
     "nameshouldnotexceed": "Name must not exceed 100 characters"
   },
-
   "ethnic": {
     "id": "ID",
     "name": "Name",
@@ -786,7 +784,6 @@
     "nameisrequired": "Name is required",
     "nameshouldnotexceed": "Name must not exceed 100 characters"
   },
-
   "commune": {
     "id": "ID",
     "name": "Name",
@@ -800,7 +797,6 @@
     "nameisrequired": "Name is required",
     "nameshouldnotexceed": "Name must not exceed 100 characters"
   },
-
   "medicalHistory": {
     "physiological": {
       "title": "Physiological History",
@@ -897,7 +893,6 @@
       "vaa": "VAA"
     }
   },
-
   "permission": {
     "denied": "Permission denied",
     "unauthorized": "Unauthorized",
@@ -954,7 +949,11 @@
     "opd": "OPD",
     "booking": "Reservation",
     "exams": "Exams",
-    "therapy": "Therapy"
+    "therapy": "Therapy",
+    "conditioning": "Conditioning",
+    "encounter": "Consultation",
+    "noDataForEncounter": "No operations for this encounter.",
+    "noData": "No encounter for this patient."
   },
   "lab": {
     "newlab": "New laboratory exam",
@@ -1069,9 +1068,22 @@
     "preAssessment": "Pre-admission assessment",
     "entryReason": "Entry reason",
     "transportation": "Transportation",
+    "transportationMode": "Transportation mode",
+    "referringCenter": "Referring center",
+    "referralAlert": "Referral alert",
+    "referralReason": "Referral reason",
     "physicalExam": "Physical exam",
     "courseOfAction": "Course of action",
-    "nextAppointment": "Next appointment"
+    "nextAppointment": "Next appointment",
+    "deathPeriod": "Death Period",
+    "deathPeriodOptions": {
+      "before": "Before admission",
+      "after": "After admission"
+    },
+    "diagnosis": "Diagnosis",
+    "treatmentReceived": "Treatment received",
+    "outcome": "Outcome",
+    "improvementFeedback": "Improvement feedback"
   },
   "bill": {
     "title": "Welcome to Billing",
@@ -1202,15 +1214,33 @@
       "elderly": "Elderly"
     },
     "lab": {
-      "undefined": { "txt": "Undefined" },
-      "blood": { "txt": "Blood" },
-      "cfs": { "txt": "CFS" },
-      "film": { "txt": "FILM" },
-      "sputum": { "txt": "Sputum" },
-      "stool": { "txt": "Stool" },
-      "swabs": { "txt": "Swabs" },
-      "tissues": { "txt": "Tissues" },
-      "urine": { "txt": "Urine" }
+      "undefined": {
+        "txt": "Undefined"
+      },
+      "blood": {
+        "txt": "Blood"
+      },
+      "cfs": {
+        "txt": "CFS"
+      },
+      "film": {
+        "txt": "FILM"
+      },
+      "sputum": {
+        "txt": "Sputum"
+      },
+      "stool": {
+        "txt": "Stool"
+      },
+      "swabs": {
+        "txt": "Swabs"
+      },
+      "tissues": {
+        "txt": "Tissues"
+      },
+      "urine": {
+        "txt": "Urine"
+      }
     },
     "common": {
       "thecodeisalreadyinuse": {
@@ -1349,7 +1379,11 @@
     "updated": "Discharge type updated",
     "updateSuccess": "The discharge type has been updated successfully!",
     "cancelCreation": "Are you sure to cancel the discharge type creation?",
-    "cancelUpdate": "Are you sure to cancel the discharge type update?"
+    "cancelUpdate": "Are you sure to cancel the discharge type update?",
+    "deathPeriod": {
+      "beforeAdmission": "Before admission",
+      "afterAdmission": "After admission"
+    }
   },
   "deliveryTypes": {
     "code": "Code",

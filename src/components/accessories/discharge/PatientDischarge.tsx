@@ -39,6 +39,7 @@ const PatientDischarge: FC = () => {
   const [activityTransitionState, setActivityTransitionState] =
     useState<AdmissionTransitionState>("IDLE");
   const [dischargeAdmission, setDischargeAdmission] = useState<AdmissionDTO | null>(null);
+  const [openCloseEncounterDialog, setOpenCloseEncounterDialog] = useState(false);
 
   const { id, code } = useParams();
 
@@ -92,8 +93,7 @@ const PatientDischarge: FC = () => {
 
   const onclosure = () => {
     setClose(true);
-    setOpenResetConfirmation(true); 
-    setOpenDischargeAgainstMedicalAdvice(true);
+    setOpenResetConfirmation(true);
   };
 
   const closeEncounter = (closureDate: string) => {
@@ -139,7 +139,9 @@ const PatientDischarge: FC = () => {
   }
 
   const onConfirmDischarge = () => {
-    if (dischargeAdmission && dischargeAdmission.disType?.description === "AGAINST MEDICAL ADVICE") {
+    if (
+      dischargeAdmission && dischargeAdmission.disType?.code === "CAM"
+    ) {
       setClose(true);
       setOpenDischargeAgainstMedicalAdvice(true);
     } else {
@@ -151,8 +153,10 @@ const PatientDischarge: FC = () => {
     if (
       dischargeStatus === "SUCCESS" &&
       encountersEnabled &&
-      !!currentEncounter
+      !!currentEncounter &&
+      openCloseEncounterDialog
     ) {
+      setOpenDischargeAgainstMedicalAdvice(false);
       onclosure();
     } else {
       setActivityTransitionState("TO_RESET");
@@ -171,6 +175,7 @@ const PatientDischarge: FC = () => {
         diseaseOut3: adm.diseaseOut3,
         anamnesis: adm.anamnesis,
         nextAppointment: parseDateTime(adm.nextAppointment ?? "", false),
+        deathPeriod: adm.deathPeriod,
         admitted: 0,
       };
       dispatch(
@@ -274,8 +279,14 @@ const PatientDischarge: FC = () => {
         info={t("admission.closeEncounter")}
         primaryButtonLabel={t("common.yes")}
         secondaryButtonLabel={t("common.no")}
-        handlePrimaryButtonClick={() => onConfirmDischarge()}
-        handleSecondaryButtonClick={() => onConfirmDischarge()}
+        handlePrimaryButtonClick={() => {
+          setOpenCloseEncounterDialog(true);
+          onConfirmDischarge();
+        }}
+        handleSecondaryButtonClick={() => {
+          setOpenCloseEncounterDialog(false);
+          onConfirmDischarge();
+        }}
       />
 
       <DischargeAgainstMedicalAdviceDialog

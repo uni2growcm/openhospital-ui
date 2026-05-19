@@ -22,4 +22,5 @@ export type DischargeFormFieldName =
   | "diseaseOut2"
   | "diseaseOut3"
   | "anamnesis"
-  | "nextAppointment";
+  | "nextAppointment"
+  | "deathPeriod";

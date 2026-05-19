@@ -14,11 +14,13 @@ import Table from "../../table/Table";
 interface IOwnProps {
   shouldUpdateTable: boolean;
   handleEdit?: (row: any) => void;
+  onPrint?: (row: any) => void;
 }
 
 const PatientAdmissionTable: FunctionComponent<IOwnProps> = ({
   shouldUpdateTable,
   handleEdit,
+  onPrint,
 }) => {
   const { t } = useTranslation();
   const canUpdate = usePermission("admissions.update");
@@ -51,6 +53,11 @@ const PatientAdmissionTable: FunctionComponent<IOwnProps> = ({
     physicalExam: t("admission.physicalExam"),
     courseOfAction: t("admission.courseOfAction"),
     nextAppointment: t("admission.nextAppointment"),
+    referralAlert: t("admission.referralAlert"),
+    referralReason: t("admission.referralReason"),
+    treatmentReceived: t("admission.treatmentReceived"),
+    outcome: t("admission.outcome"),
+    improvementFeedback: t("admission.improvementFeedback"),
   };
   const order = ["admDate", "disDate"];
 
@@ -75,6 +82,21 @@ const PatientAdmissionTable: FunctionComponent<IOwnProps> = ({
         handleEdit(data.find((item) => item.id === row?.id));
       }
     : undefined;
+
+  const onPrintHandler = onPrint
+    ? (row: AdmissionDTO) => {
+        const admission = data.find((item) => item.id === row?.id);
+        if (admission) onPrint(admission);
+      }
+    : undefined;
+
+  const displayRowAction = (row: any, action: string) => {
+    if (action === "print") {
+      const admission = data.find((item) => item.id === row?.id);
+      return admission?.type === "R" || admission?.admType?.code === "R";
+    }
+    return true;
+  };
 
   useEffect(() => {
     if (shouldUpdateTable || patientCode || code) {
@@ -112,6 +134,11 @@ const PatientAdmissionTable: FunctionComponent<IOwnProps> = ({
         nextAppointment: item.nextAppointment
           ? renderDateTime(item.nextAppointment)
           : "",
+        referralAlert: item.referralAlert,
+        referralReason: item.referralReason ?? "",
+        treatmentReceived: item.treatmentReceived ?? "",
+        outcome: item.outcome ?? "",
+        improvementFeedback: item.improvementFeedback ?? "",
       };
     });
   };
@@ -159,6 +186,8 @@ const PatientAdmissionTable: FunctionComponent<IOwnProps> = ({
                 rowsPerPage={5}
                 isCollapsabile={true}
                 onEdit={canUpdate ? onEdit : undefined}
+                onPrint={onPrintHandler}
+                displayRowAction={displayRowAction}
                 initialOrderBy="disDate"
                 showEmptyCell={false}
               />

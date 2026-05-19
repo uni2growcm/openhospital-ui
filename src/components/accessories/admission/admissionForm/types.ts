@@ -11,6 +11,8 @@ interface IAdmissionProps {
   admitted: boolean;
   shouldResetForm: boolean;
   resetFormCallback: () => void;
+  onPrint?: (adm: AdmissionDTO | undefined) => void;
+  admissionToEdit?: AdmissionDTO;
 }
 
 export type AdmissionProps = IAdmissionProps;
@@ -38,6 +40,11 @@ export type AdmissionFormFieldName =
   | "referenceSheet"
   | "qualifiedAgent"
   | "transportation"
+  | "referralAlert"
+  | "referralReason"
+  | "treatmentReceived"
+  | "outcome"
+  | "improvementFeedback"
   | "physicalExam"
   | "courseOfAction"
   | "nextAppointment";

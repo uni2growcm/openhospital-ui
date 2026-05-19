@@ -655,7 +655,7 @@
     "saveopd": "Enregistrer OPD",
     "discard": "Annuler",
     "dismiss": "Rejeter",
-    "savetriage": "Enregistrer exam spécifique",
+    "savetriage": "Enregistrer un examen spécifique",
     "saveandprint": "Enregistrer et imprimer",
     "updateandprint": "Mettre à jour et imprimer",
     "404notfound": "404 - Page introuvable",
@@ -753,6 +753,7 @@
     "discardMessage": "Êtes-vous sûr de vouloir rejeter cette opération ? Toutes les données non enregistrées seront perdues.",
     "printData": "Imprimer les données",
     "failedtodownloadthereport": "Échec de téléchargement du rapport",
+    "orderbyencounter": "Regrouper par consultation",
     "communes": "Communes",
     "ethnics": "Ethnies",
     "towns": "Villes",
@@ -762,7 +763,6 @@
     "addTown": "Ajouter une ville",
     "addOccupation": "Ajouter une profession"
   },
-
   "medicalHistory": {
     "physiological": {
       "title": "Antécédents physiologiques",
@@ -847,7 +847,6 @@
       "vaa": "VAA"
     }
   },
-
   "permission": {
     "denied": "Autorisation refusée",
     "unauthorized": "Non autorisé",
@@ -898,13 +897,17 @@
   },
   "summary": {
     "visits": "Visites",
-    "triage": "Exam spécifique",
+    "triage": "Examen spécifique",
     "admission": "Admission",
     "operation": "Opération",
     "opd": "OPD",
     "booking": "Réservation",
     "exams": "Examen",
-    "therapy": "Thérapie"
+    "therapy": "Thérapie",
+    "conditioning": "Conditionnement",
+    "encounter": "Consultation",
+    "noDataForEncounter": "Aucune opération pour cette rencontre.",
+    "noData": "Aucune rencontre pour ce patient."
   },
   "lab": {
     "newlab": "Nouvel examen de laboratoire",
@@ -1019,9 +1022,22 @@
     "preAssessment": "Bilan avant admission",
     "entryReason": "Motif d'entrée",
     "transportation": "Moyen de transport",
+    "transportationMode": "Mode de transport",
+    "referringCenter": "Centre référent",
+    "referralAlert": "Alerte de référence",
+    "referralReason": "Raison de la référence",
     "physicalExam": "Examen physique",
     "courseOfAction": "Conduite à tenir",
-    "nextAppointment": "Prochain rendez-vous"
+    "nextAppointment": "Prochain rendez-vous",
+    "deathPeriod": "Période de décès",
+    "deathPeriodOptions": {
+      "before": "Avant l'admission",
+      "after": "Après l'admission"
+    },
+    "diagnosis": "Diagnostic",
+    "treatmentReceived": "Traitement reçu",
+    "outcome": "Issue",
+    "improvementFeedback": "Commentaire d'amélioration"
   },
   "bill": {
     "title": "Bienvenue dans la facturation",
@@ -1152,15 +1168,33 @@
       "elderly": "Âgé"
     },
     "lab": {
-      "undefined": { "txt": "Indéfini" },
-      "blood": { "txt": "Sang" },
-      "cfs": { "txt": "CFS" },
-      "film": { "txt": "FILM" },
-      "sputum": { "txt": "Sputum" },
-      "stool": { "txt": "Excréments" },
-      "swabs": { "txt": "Écouvillons" },
-      "tissues": { "txt": "Tissus" },
-      "urine": { "txt": "Urine" }
+      "undefined": {
+        "txt": "Indéfini"
+      },
+      "blood": {
+        "txt": "Sang"
+      },
+      "cfs": {
+        "txt": "CFS"
+      },
+      "film": {
+        "txt": "FILM"
+      },
+      "sputum": {
+        "txt": "Sputum"
+      },
+      "stool": {
+        "txt": "Excréments"
+      },
+      "swabs": {
+        "txt": "Écouvillons"
+      },
+      "tissues": {
+        "txt": "Tissus"
+      },
+      "urine": {
+        "txt": "Urine"
+      }
     },
     "common": {
       "thecodeisalreadyinuse": {
@@ -1299,7 +1333,11 @@
     "updated": "Type de décharge mis à jour",
     "updateSuccess": "Le type de décharge a été mis à jour avec succès!",
     "cancelCreation": "Êtes-vous sûr d'annuler la création du type de décharge?",
-    "cancelUpdate": "Êtes-vous sûr de vouloir annuler la mise à jour du type de décharge?"
+    "cancelUpdate": "Êtes-vous sûr de vouloir annuler la mise à jour du type de décharge?",
+    "deathPeriod": {
+      "beforeAdmission": "Avant l'admission",
+      "afterAdmission": "Après l'admission"
+    }
   },
   "deliveryTypes": {
     "code": "Code",

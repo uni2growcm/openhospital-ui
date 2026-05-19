@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import logo from "../../../assets/logo-color.svg";
+import logo from "../../../assets/labbraccio-logopng.png";
 import { HospitalDTO } from "../../../generated";
 import { getHospital } from "../../../state/hospital";
 import "./styles.scss";

@@ -5,7 +5,6 @@ import { AdmissionDTO, AdmissionsApi, DischargeAgainstMedicalAdviceDTO, ReportsA
 import { customConfiguration } from "../../libraries/apiUtils/configuration";
 
 const api = new AdmissionsApi(customConfiguration());
-
 const apiReport = new ReportsApi(customConfiguration());
 
 export const createAdmission = createAsyncThunk(
@@ -106,6 +105,14 @@ export const getTransportations = createAsyncThunk(
     firstValueFrom(wrapper(() => api.getAdmissionTransportation())).catch(
       (error) => thunkApi.rejectWithValue(error.response)
     )
+);
+
+export const printCrossReferenceReport = createAsyncThunk(
+  "admissions/PRINT_CROSS_REFERENCE_REPORT",
+  async (payload: { patId: number; admId: number }, thunkApi) =>
+    firstValueFrom(
+      wrapper(() => apiReport.printCrossReferenceReportPdf(payload))
+    ).catch((error) => thunkApi.rejectWithValue(error.response))
 );
 
 export const printDischargeAgainstMedicalAdviceReport = createAsyncThunk(

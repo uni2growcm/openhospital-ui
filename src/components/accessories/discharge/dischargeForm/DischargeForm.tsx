@@ -19,6 +19,7 @@ import {
 import { getDiseasesIpdOut } from "../../../../state/diseases";
 import { getDischargeTypes } from "../../../../state/types/discharges";
 import { IState } from "../../../../types";
+import { useDeathPeriodOptions } from "../../../../libraries/hooks/useDeathPeriodOptions";
 import AutocompleteField from "../../autocompleteField/AutocompleteField";
 import Button from "../../button/Button";
 import ConfirmationDialog from "../../confirmationDialog/ConfirmationDialog";
@@ -39,6 +40,7 @@ const DischargeForm: FC<DischargeProps> = ({
 }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const deathPeriodOptions = useDeathPeriodOptions();
 
   const diagnosisOutList = useAppSelector(
     (state: IState) => state.diseases.diseasesIpdOut.data
@@ -47,6 +49,8 @@ const DischargeForm: FC<DischargeProps> = ({
   const dischargeTypes = useAppSelector(
     (state: IState) => state.types.discharges.getAll.data
   );
+
+  const [isDeadDischarge, setIsDeadDischarge] = useState(false);
 
   const renderOptions = (
     data:
@@ -115,6 +119,14 @@ const DischargeForm: FC<DischargeProps> = ({
       },
     }),
     nextAppointment: string(),
+    deathPeriod: string().when("disType", {
+      is: (disType: string) => {
+        const dischargeType = dischargeTypes?.find(item => item.code === disType);
+        return dischargeType?.code === "D" || dischargeType?.description?.toLowerCase().includes("dead");
+      },
+      then: string().required(t("common.required")),
+      otherwise: string(),
+    }),
   });
 
   const formik = useFormik({
@@ -166,6 +178,10 @@ const DischargeForm: FC<DischargeProps> = ({
       ? (get(formik.errors, fieldName) as string)
       : "";
   };
+
+  const handleDischargeTypeChange = (value: any) => {
+      setIsDeadDischarge(value?.value === "D" || value?.label?.toLowerCase().includes("dead"));
+  }
 
   const onBlurCallback = useCallback(
     (fieldName: string) =>
@@ -287,11 +303,30 @@ const DischargeForm: FC<DischargeProps> = ({
                 errorText={getErrorText("disType")}
                 onBlur={onBlurCallback("disType")}
                 options={renderOptions(dischargeTypes)}
+                onChange={(_, value) => {
+                  handleDischargeTypeChange(value);
+                }}
                 loading={disTypeStatus === "LOADING"}
                 disabled={isLoading}
               />
             </div>
           </div>
+          {isDeadDischarge && (
+            <div className="row start-sm center-xs">
+              <div className="fullWidth patientAdmissionForm__item">
+                <AutocompleteField
+                  fieldName="deathPeriod"
+                  fieldValue={formik.values.deathPeriod}
+                  label={t("admission.deathPeriod")}
+                  isValid={isValid("deathPeriod")}
+                  errorText={getErrorText("deathPeriod")}
+                  onBlur={onBlurCallback("deathPeriod")}
+                  options={deathPeriodOptions}
+                  disabled={isLoading}
+                />
+              </div>
+            </div>
+          )}
 
           <div className="row start-sm center-xs">
             <div className="fullWidth patientAdmissionForm__item">

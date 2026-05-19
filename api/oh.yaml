@@ -4655,6 +4655,90 @@ paths:
                 format: binary
       security:
       - bearerAuth: []
+  /reports/death:
+    get:
+      tags:
+      - Reports
+      operationId: printDeathReportPdf
+      parameters:
+      - name: fromDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: toDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+      security:
+      - bearerAuth: []
+  /reports/cross-reference/{patId}/{admId}:
+    get:
+      tags:
+      - Reports
+      operationId: printCrossReferenceReportPdf
+      parameters:
+      - name: patId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: admId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+      security:
+      - bearerAuth: []
+  /reports/admission:
+    get:
+      tags:
+      - Reports
+      operationId: getAdmissionReportPdf
+      parameters:
+      - name: fromDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: toDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+      security:
+      - bearerAuth: []
   /radiology/studies/{id}/series:
     get:
       tags:
@@ -7544,9 +7628,9 @@ components:
           example: 0
         female:
           type: boolean
-        opd:
-          type: boolean
         male:
+          type: boolean
+        opd:
           type: boolean
         pharmacy:
           type: boolean
@@ -8491,6 +8575,29 @@ components:
           format: date-time
           description: Next appointment date
           example: string
+        deathPeriod:
+          type: string
+          description: Death period
+        referralAlert:
+          type: string
+          description: Referral alert
+          example: Urgent referral needed
+        referralReason:
+          type: string
+          description: Referral reason
+          example: Specialized treatment required
+        treatmentReceived:
+          type: string
+          description: Treatment received
+          example: Antibiotic therapy
+        outcome:
+          type: string
+          description: Outcome
+          example: Recovered
+        improvementFeedback:
+          type: string
+          description: Improvement feedback
+          example: Patient showing significant improvement
         yprog:
           type: integer
           format: int32

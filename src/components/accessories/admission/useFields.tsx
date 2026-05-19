@@ -117,6 +117,26 @@ export const useFields = (
       value: admission?.nextAppointment ?? "",
       type: "date",
     },
+    referralAlert: {
+      value: admission?.referralAlert ?? "",
+      type: "text",
+    },
+    referralReason: {
+      value: admission?.referralReason ?? "",
+      type: "text",
+    },
+    treatmentReceived: {
+      value: admission?.treatmentReceived ?? "",
+      type: "text",
+    },
+    outcome: {
+      value: admission?.outcome ?? "",
+      type: "text",
+    },
+    improvementFeedback: {
+      value: admission?.improvementFeedback ?? "",
+      type: "text",
+    },
   };
 
   return fields;
