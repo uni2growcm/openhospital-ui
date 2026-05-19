@@ -14,4 +14,6 @@ export type TUserSection =
   | "clinic"
   | "conditioning"
   | "radiology"
-  | "care";
+  | "care"
+  | "hospitalisationconsultation";
+

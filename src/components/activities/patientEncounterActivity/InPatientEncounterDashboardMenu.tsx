@@ -5,9 +5,9 @@ import {
   Healing,
   HistoryEdu,
   LocalHospital,
-  LocalHotel,
+  LocalHotel, MedicalServices,
   Pageview,
-  SettingsApplications,
+  SettingsApplications
 } from "@mui/icons-material";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import VaccinesIcon from "@mui/icons-material/Vaccines";
@@ -87,6 +87,27 @@ const InPatientEncounterDashboardMenu: FunctionComponent<IOwnProps> = ({
           <span>{t("nav.conditioning")}:</span>
           <img src={Arrow} className="icon_toggle" alt="Accordion toggle" />
         </div>
+      </Permission>
+      <Permission require="hospitalisationconsultation.access">
+        {encountersEnabled && (
+          <div
+            className={
+              "patientEncounter__main_menu__item " + isActive("hospitalisationconsultation")
+            }
+            onClick={() => {
+              changeUserSection("hospitalisationconsultation");
+            }}
+          >
+            <MedicalServices
+              fontSize="small"
+              style={{
+                color: "white",
+              }}
+            />
+            <span>{t("nav.hospitalisationconsultation")}:</span>
+            <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
+          </div>
+        )}
       </Permission>
       <Permission require="medicalhistories.access">
         <div

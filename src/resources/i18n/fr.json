@@ -273,7 +273,24 @@
     },
     "motherSchoolingLevel": "Niveau scolaire de la mère",
     "fatherSchoolingLevel": "Niveau scolaire de la père",
-    "care": "Soins"
+    "care": "Soins",
+    "hospitalisationconsultation": "Consultation en hospitalisation"
+  },
+  "hospitalisationconsultation": {
+    "id": "ID",
+    "consultationDate": "Date et heure",
+    "teams": "Équipes",
+    "parentComplaints": "Plaintes parentales",
+    "physicalExamination": "Examen physique",
+    "diagnosis": "Diagnostic",
+    "instructions": "Conduite à tenir",
+    "new": "Nouvelle consultation d'hospitalisation",
+    "edit": "Modifier la consultation d'hospitalisation",
+    "previousentries": "Entrées précédentes",
+    "created": "Consultation créée",
+    "updated": "Consultation mise à jour",
+    "createsuccess": "Consultation d'hospitalisation créée avec succès",
+    "updatesuccess": "Consultation d'hospitalisation mise à jour avec succès"
   },
   "encounters": {
     "admissions": "Admissions",
@@ -532,7 +549,8 @@
     "medicalHistory": "Antécédent médical",
     "userProfile": "Profile de l'utilisateur",
     "care": "Soins",
-    "referenceData": "Données de référence"
+    "referenceData": "Données de référence",
+    "hospitalisationconsultation": "Hospitalisation Consultation"
   },
   "town": {
     "id": "ID",

@@ -6,9 +6,9 @@ import {
   Healing,
   HistoryEdu,
   LocalHospital,
-  LocalHotel,
+  LocalHotel, MedicalServices,
   Pageview,
-  SettingsApplications,
+  SettingsApplications
 } from "@mui/icons-material";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import VaccinesIcon from "@mui/icons-material/Vaccines";

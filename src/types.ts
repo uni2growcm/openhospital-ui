@@ -273,4 +273,9 @@ export type TPermission =
   | "care.create"
   | "care.update"
   | "care.read"
-  | "care.access";
+  | "care.access"
+  | "hospitalisationconsultation.access"
+  | "hospitalisationconsultation.create"
+  | "hospitalisationconsultation.update"
+  | "hospitalisationconsultation.read"
+  | "hospitalisationconsultation.delete";

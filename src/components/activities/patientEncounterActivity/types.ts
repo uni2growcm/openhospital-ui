@@ -14,7 +14,8 @@ export type TUserSection =
   | "clinic"
   | "conditioning"
   | "radiology"
-  | "care";
+  | "care"
+  | "hospitalisationconsultation";
 
 export interface IPatientEncounterContentProps {
   title: string;
