@@ -7,7 +7,7 @@ export type HospitalisationconsultationFormFieldName =
   | "parentComplaints"
   | "physicalExamination"
   | "diagnosis"
-  | "managementPlan";
+  | "instructions";
 
 export interface HospitalisationconsultationFormProps {
   fields: TFields<HospitalisationconsultationFormFieldName>;

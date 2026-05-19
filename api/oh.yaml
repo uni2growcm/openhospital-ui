@@ -4753,24 +4753,24 @@ paths:
                 format: binary
       security:
       - bearerAuth: []
-  /reports/discharge/{patId}/{admId}:
+  /reports/death:
     get:
       tags:
       - Reports
-      operationId: printDischargeReportPdf
+      operationId: printDeathReportPdf
       parameters:
-      - name: patId
-        in: path
+      - name: fromDate
+        in: query
         required: true
         schema:
-          type: integer
-          format: int32
-      - name: admId
-        in: path
+          type: string
+          format: date-time
+      - name: toDate
+        in: query
         required: true
         schema:
-          type: integer
-          format: int32
+          type: string
+          format: date-time
       responses:
         "200":
           description: OK
@@ -4799,6 +4799,34 @@ paths:
         schema:
           type: integer
           format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+      security:
+      - bearerAuth: []
+  /reports/admission:
+    get:
+      tags:
+      - Reports
+      operationId: getAdmissionReportPdf
+      parameters:
+      - name: fromDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: toDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
       responses:
         "200":
           description: OK
@@ -7845,13 +7873,13 @@ components:
           format: int32
           description: lock
           example: 0
-        pharmacy:
+        female:
           type: boolean
         male:
           type: boolean
-        female:
-          type: boolean
         opd:
+          type: boolean
+        pharmacy:
           type: boolean
       required:
       - beds
@@ -8794,11 +8822,34 @@ components:
           format: date-time
           description: Next appointment date
           example: string
-        fhu:
+        deathPeriod:
           type: string
+          description: Death period
+        referralAlert:
+          type: string
+          description: Referral alert
+          example: Urgent referral needed
+        referralReason:
+          type: string
+          description: Referral reason
+          example: Specialized treatment required
+        treatmentReceived:
+          type: string
+          description: Treatment received
+          example: Antibiotic therapy
+        outcome:
+          type: string
+          description: Outcome
+          example: Recovered
+        improvementFeedback:
+          type: string
+          description: Improvement feedback
+          example: Patient showing significant improvement
         yprog:
           type: integer
           format: int32
+        fhu:
+          type: string
       required:
       - admDate
       - admitted
@@ -9725,9 +9776,9 @@ components:
           type: string
           description: Diagnosis
           example: Acute myocardial infarction
-        managementPlan:
+        instructions:
           type: string
-          description: Management plan
+          description: Instructions
           example: "Start thrombolytic therapy, monitor vitals"
         lock:
           type: integer

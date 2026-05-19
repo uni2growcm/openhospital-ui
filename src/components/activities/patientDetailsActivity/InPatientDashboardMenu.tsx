@@ -112,27 +112,6 @@ const InPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
           <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
         </div>
       </Permission>
-      <Permission require="hospitalisationconsultation.access">
-        {encountersEnabled && (
-        <div
-          className={
-            "patientDetails__main_menu__item " + isActive("hospitalisationconsultation")
-          }
-          onClick={() => {
-            changeUserSection("hospitalisationconsultation");
-          }}
-        >
-          <MedicalServices
-            fontSize="small"
-            style={{
-              color: "white",
-            }}
-          />
-          <span>{t("nav.hospitalisationconsultation")}:</span>
-          <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
-        </div>
-        )}
-      </Permission>
       <Permission require="medicalhistories.access">
         {encountersEnabled && (
           <div

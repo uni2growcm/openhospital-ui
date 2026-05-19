@@ -23,7 +23,7 @@ export const initialFields: TFields<HospitalisationconsultationFormFieldName> = 
     value: "",
     type: "text",
   },
-  managementPlan: {
+  instructions: {
     value: "",
     type: "text",
   },

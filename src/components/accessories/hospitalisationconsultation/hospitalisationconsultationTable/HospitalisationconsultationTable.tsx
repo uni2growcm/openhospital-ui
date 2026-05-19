@@ -65,7 +65,7 @@ const HospitalisationconsultationTable: FunctionComponent<IOwnProps> = ({
     parentComplaints: t("hospitalisationconsultation.parentComplaints"),
     physicalExamination: t("hospitalisationconsultation.physicalExamination"),
     diagnosis: t("hospitalisationconsultation.diagnosis"),
-    managementPlan: t("hospitalisationconsultation.managementPlan"),
+    instructions: t("hospitalisationconsultation.instructions"),
   };
 
   const onEdit = (row: any) => {
@@ -83,7 +83,7 @@ const HospitalisationconsultationTable: FunctionComponent<IOwnProps> = ({
       parentComplaints: item.parentComplaints ?? "",
       physicalExamination: item.physicalExamination ?? "",
       diagnosis: item.diagnosis ?? "",
-      managementPlan: item.managementPlan ?? "",
+      instructions: item.instructions ?? "",
     }));
   };
 

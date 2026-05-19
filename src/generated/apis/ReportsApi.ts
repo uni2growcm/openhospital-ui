@@ -14,23 +14,28 @@
 import type { Observable } from 'rxjs';
 import type { AjaxResponse } from 'rxjs/ajax';
 import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
-import type { OperationOpts, HttpHeaders } from '../runtime';
+import type { OperationOpts, HttpHeaders, HttpQuery } from '../runtime';
 import type {
     DischargeAgainstMedicalAdviceDTO,
 } from '../models';
+
+export interface GetAdmissionReportPdfRequest {
+    fromDate: string;
+    toDate: string;
+}
 
 export interface PrintCrossReferenceReportPdfRequest {
     patId: number;
     admId: number;
 }
 
-export interface PrintDischargeAgainstMedicalAdvicePdfRequest {
-    dischargeAgainstMedicalAdviceDTO: DischargeAgainstMedicalAdviceDTO;
+export interface PrintDeathReportPdfRequest {
+    fromDate: string;
+    toDate: string;
 }
 
-export interface PrintDischargeReportPdfRequest {
-    patId: number;
-    admId: number;
+export interface PrintDischargeAgainstMedicalAdvicePdfRequest {
+    dischargeAgainstMedicalAdviceDTO: DischargeAgainstMedicalAdviceDTO;
 }
 
 export interface PrintEncounterReportPdfRequest {
@@ -49,6 +54,31 @@ export interface PrintPatientExaminationPdfRequest {
  * no description
  */
 export class ReportsApi extends BaseAPI {
+
+    /**
+     */
+    getAdmissionReportPdf({ fromDate, toDate }: GetAdmissionReportPdfRequest): Observable<Blob>
+    getAdmissionReportPdf({ fromDate, toDate }: GetAdmissionReportPdfRequest, opts?: OperationOpts): Observable<AjaxResponse<Blob>>
+    getAdmissionReportPdf({ fromDate, toDate }: GetAdmissionReportPdfRequest, opts?: OperationOpts): Observable<Blob | AjaxResponse<Blob>> {
+        throwIfNullOrUndefined(fromDate, 'fromDate', 'getAdmissionReportPdf');
+        throwIfNullOrUndefined(toDate, 'toDate', 'getAdmissionReportPdf');
+
+        const headers: HttpHeaders = {
+        };
+
+        const query: HttpQuery = { // required parameters are used directly since they are already checked by throwIfNullOrUndefined
+            'fromDate': (fromDate as any).toISOString(),
+            'toDate': (toDate as any).toISOString(),
+        };
+
+        return this.request<Blob>({
+            url: '/reports/admission',
+            method: 'GET',
+            headers,
+            query,
+            responseType: 'blob',
+        }, opts?.responseOpts);
+    };
 
     /**
      */
@@ -71,6 +101,31 @@ export class ReportsApi extends BaseAPI {
 
     /**
      */
+    printDeathReportPdf({ fromDate, toDate }: PrintDeathReportPdfRequest): Observable<Blob>
+    printDeathReportPdf({ fromDate, toDate }: PrintDeathReportPdfRequest, opts?: OperationOpts): Observable<AjaxResponse<Blob>>
+    printDeathReportPdf({ fromDate, toDate }: PrintDeathReportPdfRequest, opts?: OperationOpts): Observable<Blob | AjaxResponse<Blob>> {
+        throwIfNullOrUndefined(fromDate, 'fromDate', 'printDeathReportPdf');
+        throwIfNullOrUndefined(toDate, 'toDate', 'printDeathReportPdf');
+
+        const headers: HttpHeaders = {
+        };
+
+        const query: HttpQuery = { // required parameters are used directly since they are already checked by throwIfNullOrUndefined
+            'fromDate': (fromDate as any).toISOString(),
+            'toDate': (toDate as any).toISOString(),
+        };
+
+        return this.request<Blob>({
+            url: '/reports/death',
+            method: 'GET',
+            headers,
+            query,
+            responseType: 'blob',
+        }, opts?.responseOpts);
+    };
+
+    /**
+     */
     printDischargeAgainstMedicalAdvicePdf({ dischargeAgainstMedicalAdviceDTO }: PrintDischargeAgainstMedicalAdvicePdfRequest): Observable<Blob>
     printDischargeAgainstMedicalAdvicePdf({ dischargeAgainstMedicalAdviceDTO }: PrintDischargeAgainstMedicalAdvicePdfRequest, opts?: OperationOpts): Observable<AjaxResponse<Blob>>
     printDischargeAgainstMedicalAdvicePdf({ dischargeAgainstMedicalAdviceDTO }: PrintDischargeAgainstMedicalAdvicePdfRequest, opts?: OperationOpts): Observable<Blob | AjaxResponse<Blob>> {
@@ -85,25 +140,6 @@ export class ReportsApi extends BaseAPI {
             method: 'POST',
             headers,
             body: dischargeAgainstMedicalAdviceDTO,
-            responseType: 'blob',
-        }, opts?.responseOpts);
-    };
-
-    /**
-     */
-    printDischargeReportPdf({ patId, admId }: PrintDischargeReportPdfRequest): Observable<Blob>
-    printDischargeReportPdf({ patId, admId }: PrintDischargeReportPdfRequest, opts?: OperationOpts): Observable<AjaxResponse<Blob>>
-    printDischargeReportPdf({ patId, admId }: PrintDischargeReportPdfRequest, opts?: OperationOpts): Observable<Blob | AjaxResponse<Blob>> {
-        throwIfNullOrUndefined(patId, 'patId', 'printDischargeReportPdf');
-        throwIfNullOrUndefined(admId, 'admId', 'printDischargeReportPdf');
-
-        const headers: HttpHeaders = {
-        };
-
-        return this.request<Blob>({
-            url: '/reports/discharge/{patId}/{admId}'.replace('{patId}', encodeURI(patId)).replace('{admId}', encodeURI(admId)),
-            method: 'GET',
-            headers,
             responseType: 'blob',
         }, opts?.responseOpts);
     };

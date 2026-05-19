@@ -27,8 +27,8 @@ export const useFields = (consultation?: HospitalizationConsultationDTO) => {
       value: consultation?.diagnosis ?? "",
       type: "text",
     },
-    managementPlan: {
-      value: consultation?.managementPlan ?? "",
+    instructions: {
+      value: consultation?.instructions ?? "",
       type: "text",
     },
   };

@@ -63,11 +63,11 @@ export interface HospitalizationConsultationDTO {
      */
     diagnosis?: string;
     /**
-     * Management plan
+     * Instructions
      * @type {string}
      * @memberof HospitalizationConsultationDTO
      */
-    managementPlan?: string;
+    instructions?: string;
     /**
      * Lock version for optimistic locking
      * @type {number}

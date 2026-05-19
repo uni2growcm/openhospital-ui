@@ -57,7 +57,7 @@ const HospitalisationconsultationForm: FC<HospitalisationconsultationFormProps> 
     parentComplaints: yup.string().nullable(),
     physicalExamination: yup.string().nullable(),
     diagnosis: yup.array().of(yup.string()).nullable(),
-    managementPlan: yup.string().nullable(),
+    instructions: yup.string().nullable(),
   });
 
   const fieldValues = getFromFields(fields, "value");
@@ -75,7 +75,7 @@ const HospitalisationconsultationForm: FC<HospitalisationconsultationFormProps> 
           ? fieldValues.diagnosis.split(',').filter(t => t.trim()) 
           : fieldValues.diagnosis)
       : [],
-    managementPlan: fieldValues.managementPlan,
+    instructions: fieldValues.instructions,
   };
 
   const formik = useFormik({
@@ -270,13 +270,13 @@ const HospitalisationconsultationForm: FC<HospitalisationconsultationFormProps> 
         <div className="row start-sm center-xs">
           <div className="fullWidth hospitalisationconsultationForm__item">
             <TextField
-              field={formik.getFieldProps("managementPlan")}
+              field={formik.getFieldProps("instructions")}
               theme="regular"
-              label={t("hospitalisationconsultation.managementPlan")}
+              label={t("hospitalisationconsultation.instructions")}
               multiline={true}
               type="text"
-              isValid={isValid("managementPlan")}
-              errorText={getErrorText("managementPlan")}
+              isValid={isValid("instructions")}
+              errorText={getErrorText("instructions")}
               onBlur={formik.handleBlur}
               rows={5}
               disabled={isLoading}
@@ -285,11 +285,6 @@ const HospitalisationconsultationForm: FC<HospitalisationconsultationFormProps> 
         </div>
 
         <div className="hospitalisationconsultationForm__buttonSet">
-          <div className="submit_button">
-            <Button type="submit" variant="contained" disabled={isLoading}>
-              {submitButtonLabel}
-            </Button>
-          </div>
           <div className="reset_button">
             <Button
               type="reset"
@@ -298,6 +293,11 @@ const HospitalisationconsultationForm: FC<HospitalisationconsultationFormProps> 
               onClick={() => setOpenResetConfirmation(true)}
             >
               {resetButtonLabel}
+            </Button>
+          </div>
+          <div className="submit_button">
+            <Button type="submit" variant="contained" disabled={isLoading}>
+              {submitButtonLabel}
             </Button>
           </div>
         </div>
