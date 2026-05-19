@@ -274,7 +274,7 @@
     "motherSchoolingLevel": "Niveau scolaire de la mère",
     "fatherSchoolingLevel": "Niveau scolaire de la père",
     "care": "Soins",
-    "Hospitalisationconsultation": "Hospitalisation Consultation"
+    "hospitalisationconsultation": "Consultation en hospitalisation"
   },
   "hospitalisationconsultation": {
     "id": "ID",
