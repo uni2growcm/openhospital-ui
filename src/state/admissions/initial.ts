@@ -12,4 +12,5 @@ export const initial: IAdmissionsState = {
   dischargePatient: new ApiResponse({ status: "IDLE" }),
   getTransportations: new ApiResponse({ status: "IDLE", data: [] }),
   printCrossReferenceReport: new ApiResponse({ status: "IDLE" }),
+  printDischargeAgainstMedicalAdviceReport: new ApiResponse({ status: "IDLE" }),
 };

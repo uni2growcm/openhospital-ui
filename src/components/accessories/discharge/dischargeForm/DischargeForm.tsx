@@ -147,11 +147,7 @@ const DischargeForm: FC<DischargeProps> = ({
       formattedValues.disType = dischargeTypes?.find(
         (item) => item.code === formattedValues.disType
       );
-      
-      if (!isDeadDischarge) {
-        formattedValues.deathPeriod = null;
-      }
-      
+
       onSubmit(formattedValues as any);
     },
   });

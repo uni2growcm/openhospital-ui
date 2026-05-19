@@ -1672,5 +1672,18 @@
     "createsuccess": "Care created successfully",
     "updatesuccess": "Care updated successfully",
     "previousentries": "Previous Cares"
+  },
+  "discharge": {
+    "madeOnDate": "Made on Date",
+    "name": "Name of relationship",
+    "localisation": "Resident at",
+    "phone": "Phone number",
+    "district": "District",
+    "commune": "Commune",
+    "reference": "Reference (CI, Carte LEPI, passeport, etc.)",
+    "relationshipType": "Relationship with the patient",
+    "occupation": "Occupation",
+    "title": "Discharge against medical Advice",
+    "description": "Enter the following information to download the discharge against medical advice report"
   }
 }

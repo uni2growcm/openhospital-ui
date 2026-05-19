@@ -7626,11 +7626,11 @@ components:
           format: int32
           description: lock
           example: 0
-        opd:
+        female:
           type: boolean
         male:
           type: boolean
-        female:
+        opd:
           type: boolean
         pharmacy:
           type: boolean
