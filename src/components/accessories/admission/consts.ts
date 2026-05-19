@@ -109,4 +109,24 @@ export const initialFields: TFields<AdmissionFormFieldName> = {
     value: "",
     type: "date",
   },
+  referralAlert: {
+    value: "",
+    type: "text",
+  },
+  referralReason: {
+    value: "",
+    type: "text",
+  },
+  treatmentReceived: {
+    value: "",
+    type: "text",
+  },
+  outcome: {
+    value: "",
+    type: "text",
+  },
+  improvementFeedback: {
+    value: "",
+    type: "text",
+  },
 };

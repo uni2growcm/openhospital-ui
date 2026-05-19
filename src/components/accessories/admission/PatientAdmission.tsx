@@ -17,7 +17,9 @@ import {
   getCurrentAdmissionReset,
   updateAdmission,
   updateAdmissionReset,
+  printCrossReferenceReport,
 } from "../../../state/admissions";
+import { downloadBlob } from "../../../libraries/downloadUtils/downloadUtils";
 import { getLastOpd } from "../../../state/opds";
 import { IState } from "../../../types";
 import ConfirmationDialog from "../confirmationDialog/ConfirmationDialog";
@@ -48,6 +50,25 @@ const PatientAdmission: FC = () => {
   const [shouldUpdateTable, setShouldUpdateTable] = useState(false);
   const [activityTransitionState, setActivityTransitionState] =
     useState<AdmissionTransitionState>("IDLE");
+
+  const onPrint = (admission: AdmissionDTO | undefined) => {
+    if (!admission) return;
+
+    dispatch(printCrossReferenceReport({
+      patId: admission.patient?.code || 0,
+      admId: admission.id || 0
+    }))
+      .unwrap()
+      .then((result) => {
+        if (result instanceof Blob) {
+          downloadBlob(
+            result,
+            `cross-reference-report-${admission.patient?.code}-${admission.id}-${new Date().getTime()}.pdf`
+          );
+        }
+      })
+      .catch((err) => console.error("Erreur impression:", err));
+  };
 
   const patient = useAppSelector(
     (state: IState) => state.patients.selectedPatient.data
@@ -133,6 +154,11 @@ const PatientAdmission: FC = () => {
         qualifiedAgent: adm.qualifiedAgent,
         transportation: adm.transportation,
         physicalExam: adm.physicalExam,
+        referralAlert: adm.referralAlert,
+        referralReason: adm.referralReason,
+        treatmentReceived: adm.treatmentReceived,
+        outcome: adm.outcome,
+        improvementFeedback: adm.improvementFeedback,
       };
       if (!isEmpty(admissionToEdit?.disType)) {
         admissionToSave = {
@@ -241,6 +267,8 @@ const PatientAdmission: FC = () => {
               updateStatus === "LOADING" ||
               lastOpdStatus === "LOADING"
             }
+            onPrint={onPrint}
+            admissionToEdit={admissionToEdit}
           />
         )}
       {(createStatus === "FAIL" || updateStatus === "FAIL") && (
@@ -252,6 +280,7 @@ const PatientAdmission: FC = () => {
       <PatientAdmissionTable
         handleEdit={encounter?.closedAt ? undefined : onEdit}
         shouldUpdateTable={shouldUpdateTable}
+        onPrint={onPrint}
       />
 
       <ConfirmationDialog
