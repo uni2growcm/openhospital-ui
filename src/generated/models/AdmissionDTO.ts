@@ -268,13 +268,49 @@ export interface AdmissionDTO {
      */
     nextAppointment?: string;
     /**
-     * @type {number}
+     * Death period
+     * @type {string}
      * @memberof AdmissionDTO
      */
-    yprog?: number;
+    deathPeriod?: string;
+    /**
+     * Referral alert
+     * @type {string}
+     * @memberof AdmissionDTO
+     */
+    referralAlert?: string;
+    /**
+     * Referral reason
+     * @type {string}
+     * @memberof AdmissionDTO
+     */
+    referralReason?: string;
+    /**
+     * Treatment received
+     * @type {string}
+     * @memberof AdmissionDTO
+     */
+    treatmentReceived?: string;
+    /**
+     * Outcome
+     * @type {string}
+     * @memberof AdmissionDTO
+     */
+    outcome?: string;
+    /**
+     * Improvement feedback
+     * @type {string}
+     * @memberof AdmissionDTO
+     */
+    improvementFeedback?: string;
     /**
      * @type {string}
      * @memberof AdmissionDTO
      */
     fhu?: string;
+    /**
+     * @type {number}
+     * @memberof AdmissionDTO
+     */
+    yprog?: number;
 }

@@ -1,18 +1,30 @@
-import { useAppSelector } from "libraries/hooks/redux";
+import { Download } from "@mui/icons-material";
+import ClearIcon from "@mui/icons-material/Clear";
+import { IconButton, InputAdornment, TextField } from "@mui/material";
+import { downloadBlob } from "libraries/downloadUtils/downloadUtils";
+import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
+import { debounce } from "lodash";
 import React, { FC, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import {
+  printAdmissionReport,
+  printDeathReport,
+  printDischargesReport,
+  printPathologiesByAgeGenderReport,
+  printPathologiesReport,
+} from "state/statistics";
 import { PATHS } from "../../../consts";
 import { Permission } from "../../../libraries/permissionUtils/Permission";
 import AppHeader from "../../accessories/appHeader/AppHeader";
 import Footer from "../../accessories/footer/Footer";
-import "./styles.scss";
-import { InputAdornment, TextField, IconButton } from "@mui/material";
-import ClearIcon from "@mui/icons-material/Clear";
-import { debounce, set } from "lodash";
 import InfoBox from "../infoBox/InfoBox";
 import GetDownloadDateDialog from "./getDownloadDateDialog/GetDownloadDateDialog";
-import { Download } from "@mui/icons-material";
-import { IReportDownload, PrintProperties, reports } from "./getDownloadDateDialog/types";
+import {
+  IReportDownload,
+  PrintProperties,
+  reports,
+} from "./getDownloadDateDialog/types";
+import "./styles.scss";
 
 const ReportActivity: FC = () => {
   const { t } = useTranslation();
@@ -21,6 +33,8 @@ const ReportActivity: FC = () => {
       [t("nav.statistics")]: PATHS.statistics,
     };
   }, [t]);
+
+  const dispatch = useAppDispatch();
 
   const userCredentials = useAppSelector(
     (state) => state.main.authentication.data
@@ -53,12 +67,80 @@ const ReportActivity: FC = () => {
     );
   }, [debouncedSearchTerm, t]);
 
-  const [selectedReport, setSelectedReport] = useState<IReportDownload | null>(null);
+  const [selectedReport, setSelectedReport] = useState<IReportDownload | null>(
+    null
+  );
+  const [isDownloading, setIsDownloading] = useState(false);
 
-  
+  const getReportThunk = (report: IReportDownload) => {
+    switch (report.code) {
+      case "001":
+        return printAdmissionReport;
+      case "002":
+        return printPathologiesReport;
+      case "003":
+        return printPathologiesByAgeGenderReport;
+      case "004":
+        return printDischargesReport;
+      case "005":
+        return printDeathReport;
+      default:
+        return null;
+    }
+  };
+
+  const getDownloadFilename = (report: IReportDownload) => {
+    const cleanTitle = report.title
+      .replace(/[^a-zA-Z0-9]+/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/^-|-$/g, "")
+      .toLowerCase();
+    return `${cleanTitle}-${new Date().getTime()}.pdf`;
+  };
+
+  const isDateRangePayload = (
+    payload: PrintProperties
+  ): payload is { date: string; dateFrom: string; dateTo: string } => {
+    return "dateFrom" in payload && "dateTo" in payload;
+  };
+
   const handleDownloadDialogConfirm = (payload: PrintProperties) => {
-    // console.log("Downloaded!!!", payload, selectedReport);
-    setSelectedReport(null);
+    if (!selectedReport) {
+      return;
+    }
+
+    const thunk = getReportThunk(selectedReport);
+    if (!thunk) {
+      console.warn("No report thunk available for", selectedReport.code);
+      setSelectedReport(null);
+      return;
+    }
+
+    if (!isDateRangePayload(payload)) {
+      console.warn("Unsupported report payload:", payload);
+      setSelectedReport(null);
+      return;
+    }
+
+    const thunkPayload = {
+      fromDate: payload.dateFrom,
+      toDate: payload.dateTo,
+    };
+
+    console.log(thunkPayload);
+
+    setIsDownloading(true);
+    dispatch(thunk(thunkPayload))
+      .unwrap()
+      .then((result) => {
+        if (result instanceof Blob) {
+          downloadBlob(result, getDownloadFilename(selectedReport));
+        }
+      })
+      .finally(() => {
+        setIsDownloading(false);
+        setSelectedReport(null);
+      });
   };
 
   return (
@@ -118,9 +200,10 @@ const ReportActivity: FC = () => {
                           size="small"
                           color="primary"
                           type="button"
+                          disabled={isDownloading}
                           onClick={() => {
                             setSelectedReport({
-                              filename: report.filename,
+                              code: report.code,
                               title: `${report.code} - ${t(report.key)}`,
                               option: report.option,
                             });
@@ -148,6 +231,7 @@ const ReportActivity: FC = () => {
         secondaryButtonLabel={t("common.close")}
         handlePrimaryButtonClick={handleDownloadDialogConfirm}
         handleSecondaryButtonClick={() => setSelectedReport(null)}
+        loading={isDownloading}
         isOpen={!!selectedReport}
       />
       <Footer />

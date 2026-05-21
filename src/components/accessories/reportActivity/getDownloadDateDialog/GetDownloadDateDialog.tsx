@@ -16,6 +16,7 @@ const GetDownloadDateDialog: FunctionComponent<
   option,
   isOpen,
   title,
+  loading = false,
   primaryButtonLabel,
   secondaryButtonLabel,
   handlePrimaryButtonClick,
@@ -176,6 +177,7 @@ const GetDownloadDateDialog: FunctionComponent<
                 dataCy="approve-dialog"
                 type="submit"
                 variant="contained"
+                disabled={loading}
                 onClick={handleConfirm}
               >
                 {primaryButtonLabel}

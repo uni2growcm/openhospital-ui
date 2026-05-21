@@ -1648,6 +1648,69 @@ paths:
                 $ref: "#/components/schemas/HospitalDTO"
       security:
       - bearerAuth: []
+  /hospitalizationconsultations/{id}:
+    get:
+      tags:
+      - Hospitalization Consultation
+      operationId: getHospitalizationConsultation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HospitalizationConsultationDTO"
+      security:
+      - bearerAuth: []
+    put:
+      tags:
+      - Hospitalization Consultation
+      operationId: updateHospitalizationConsultation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HospitalizationConsultationDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HospitalizationConsultationDTO"
+      security:
+      - bearerAuth: []
+    delete:
+      tags:
+      - Hospitalization Consultation
+      operationId: deleteHospitalizationConsultation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "204":
+          description: No Content
+      security:
+      - bearerAuth: []
   /examtypes/{code}:
     put:
       tags:
@@ -2965,6 +3028,27 @@ paths:
                 type: boolean
       security:
       - bearerAuth: []
+  /reports/dischargeagainstmedicaladvice:
+    post:
+      tags:
+      - Reports
+      operationId: printDischargeAgainstMedicalAdvicePdf
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DischargeAgainstMedicalAdviceDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+      security:
+      - bearerAuth: []
   /pricesothers:
     get:
       tags:
@@ -3532,6 +3616,41 @@ paths:
             application/json:
               schema:
                 type: boolean
+      security:
+      - bearerAuth: []
+  /hospitalizationconsultations:
+    get:
+      tags:
+      - Hospitalization Consultation
+      operationId: getHospitalizationConsultations
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HospitalizationConsultationDTO"
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - Hospitalization Consultation
+      operationId: createHospitalizationConsultation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HospitalizationConsultationDTO"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HospitalizationConsultationDTO"
       security:
       - bearerAuth: []
   /examtypes:
@@ -4482,6 +4601,146 @@ paths:
                 type: boolean
       security:
       - bearerAuth: []
+  /statistics/pathologiesbyagegender:
+    get:
+      tags:
+      - Statistics
+      operationId: printPathologiesByAgeGenderPdf
+      parameters:
+      - name: fromDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: toDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+      security:
+      - bearerAuth: []
+  /statistics/pathologies:
+    get:
+      tags:
+      - Statistics
+      operationId: printPathologiesPdf
+      parameters:
+      - name: fromDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: toDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+      security:
+      - bearerAuth: []
+  /statistics/dischargesstatistics:
+    get:
+      tags:
+      - Statistics
+      operationId: printDischargesPdf
+      parameters:
+      - name: fromDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: toDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+      security:
+      - bearerAuth: []
+  /statistics/death:
+    get:
+      tags:
+      - Statistics
+      operationId: printDeathReportPdf
+      parameters:
+      - name: fromDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: toDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+      security:
+      - bearerAuth: []
+  /statistics/admission:
+    get:
+      tags:
+      - Statistics
+      operationId: getAdmissionReportPdf
+      parameters:
+      - name: fromDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: toDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+      security:
+      - bearerAuth: []
   /settings:
     get:
       tags:
@@ -4624,6 +4883,34 @@ paths:
       tags:
       - Reports
       operationId: printDiseasesListPdf
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+      security:
+      - bearerAuth: []
+  /reports/cross-reference/{patId}/{admId}:
+    get:
+      tags:
+      - Reports
+      operationId: printCrossReferenceReportPdf
+      parameters:
+      - name: patId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: admId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         "200":
           description: OK
@@ -6131,6 +6418,155 @@ paths:
                 type: string
       security:
       - bearerAuth: []
+  /hospitalizationconsultations/pageable:
+    get:
+      tags:
+      - Hospitalization Consultation
+      operationId: getHospitalizationConsultationsPageable
+      parameters:
+      - name: page
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: size
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageHospitalizationConsultationDTO"
+      security:
+      - bearerAuth: []
+  /hospitalizationconsultations/encounter/{encounterCode}:
+    get:
+      tags:
+      - Hospitalization Consultation
+      operationId: getHospitalizationConsultationsByEncounter
+      parameters:
+      - name: encounterCode
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HospitalizationConsultationDTO"
+      security:
+      - bearerAuth: []
+  /hospitalizationconsultations/encounter/{encounterCode}/pageable:
+    get:
+      tags:
+      - Hospitalization Consultation
+      operationId: getHospitalizationConsultationsByEncounterPageable
+      parameters:
+      - name: encounterCode
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: size
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageHospitalizationConsultationDTO"
+      security:
+      - bearerAuth: []
+  /hospitalizationconsultations/daterange:
+    get:
+      tags:
+      - Hospitalization Consultation
+      operationId: getHospitalizationConsultationsByDateRange
+      parameters:
+      - name: dateFrom
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: dateTo
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HospitalizationConsultationDTO"
+      security:
+      - bearerAuth: []
+  /hospitalizationconsultations/daterange/pageable:
+    get:
+      tags:
+      - Hospitalization Consultation
+      operationId: getHospitalizationConsultationsByDateRangePageable
+      parameters:
+      - name: dateFrom
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: dateTo
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: page
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: size
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageHospitalizationConsultationDTO"
+      security:
+      - bearerAuth: []
   /healthcheck:
     get:
       tags:
@@ -7523,11 +7959,11 @@ components:
           example: 0
         female:
           type: boolean
+        pharmacy:
+          type: boolean
         male:
           type: boolean
         opd:
-          type: boolean
-        pharmacy:
           type: boolean
       required:
       - beds
@@ -8470,11 +8906,34 @@ components:
           format: date-time
           description: Next appointment date
           example: string
+        deathPeriod:
+          type: string
+          description: Death period
+        referralAlert:
+          type: string
+          description: Referral alert
+          example: Urgent referral needed
+        referralReason:
+          type: string
+          description: Referral reason
+          example: Specialized treatment required
+        treatmentReceived:
+          type: string
+          description: Treatment received
+          example: Antibiotic therapy
+        outcome:
+          type: string
+          description: Outcome
+          example: Recovered
+        improvementFeedback:
+          type: string
+          description: Improvement feedback
+          example: Patient showing significant improvement
+        fhu:
+          type: string
         yprog:
           type: integer
           format: int32
-        fhu:
-          type: string
       required:
       - admDate
       - admitted
@@ -9329,6 +9788,90 @@ components:
           format: int32
           description: Lock
           example: 0
+    EncounterDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: id of the encounter
+          example: 13
+        code:
+          type: string
+          description: Code of the encounter
+          example: 123
+        status:
+          type: string
+          description: Status of encounter
+          enum:
+          - ACTIVE
+          - CANCELLED
+          example: ACTIVE
+        patient:
+          $ref: "#/components/schemas/PatientDTO"
+          description: Patient
+        performedAt:
+          type: string
+          format: date-time
+          description: Encounter date
+          example: 2025-08-26 16:15:58
+        closedAt:
+          type: string
+          format: date-time
+          description: Closed date
+          example: 2025-08-26 16:15:58
+        lock:
+          type: integer
+          format: int32
+          description: Lock
+          example: 1
+      required:
+      - code
+      - patient
+    HospitalizationConsultationDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: id of the hospitalization consultation
+          example: 13
+        encounter:
+          $ref: "#/components/schemas/EncounterDTO"
+          description: Encounter
+        teams:
+          type: string
+          description: Teams involved in the consultation
+          example: "Cardiology, Neurology"
+        consultationDate:
+          type: string
+          format: date-time
+          description: Date and time of the consultation
+          example: 2025-08-26T16:15:58
+        parentComplaints:
+          type: string
+          description: Parent complaints
+          example: Patient complains of chest pain and shortness of breath
+        physicalExamination:
+          type: string
+          description: Physical examination findings
+          example: "Normal heart sounds, clear lungs"
+        diagnosis:
+          type: string
+          description: Diagnosis
+          example: Acute myocardial infarction
+        instructions:
+          type: string
+          description: Instructions
+          example: "Start thrombolytic therapy, monitor vitals"
+        lock:
+          type: integer
+          format: int32
+          description: Lock version for optimistic locking
+          example: 1
+      required:
+      - consultationDate
+      - encounter
     ExamWithRowsDTO:
       type: object
       properties:
@@ -10018,6 +10561,67 @@ components:
       - smsNumber
       - smsText
       - smsUser
+    DischargeAgainstMedicalAdviceDTO:
+      type: object
+      properties:
+        patID:
+          type: integer
+          format: int32
+          description: ID of the patient
+          example: 45
+        localisation:
+          type: string
+          description: Localisation of the person who want to remove patient
+          example: Cotonou
+        reference:
+          type: string
+          description: "Reference of patient relationship: CNI / PASSPORT"
+          example: 100345678
+        district:
+          type: string
+          description: District of patient relationship
+          example: Ouest
+        commune:
+          type: string
+          description: Commune of patient relationship
+          example: Cotonou 1
+        phoneNumber:
+          type: string
+          description: Phone number of the patient relationship
+          example: 68790983
+        hospitalisationDate:
+          type: string
+          format: date-time
+          description: Hospitalisation date
+          example: 2026-04-24T12:23:46
+        patientRelationshipOccupation:
+          type: string
+          description: Patient relationship occupation
+          example: Data Analyst
+        patientRelationshipType:
+          type: string
+          description: Patient relationship type
+          example: Brother
+        patientRelationshipName:
+          type: string
+          description: Name of patient relationship
+          example: George Doe
+        madeOnDate:
+          type: string
+          format: date-time
+          description: Date of discharge against medical advice
+          example: 2026-04-24T12:23:46
+      required:
+      - commune
+      - district
+      - hospitalisationDate
+      - localisation
+      - madeOnDate
+      - patID
+      - patientRelationshipName
+      - patientRelationshipType
+      - phoneNumber
+      - reference
     MovementWardDTO:
       type: object
       properties:
@@ -10090,46 +10694,6 @@ components:
           example: NEGATIVE
         exam:
           $ref: "#/components/schemas/ExamDTO"
-    EncounterDTO:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: id of the encounter
-          example: 13
-        code:
-          type: string
-          description: Code of the encounter
-          example: 123
-        status:
-          type: string
-          description: Status of encounter
-          enum:
-          - ACTIVE
-          - CANCELLED
-          example: ACTIVE
-        patient:
-          $ref: "#/components/schemas/PatientDTO"
-          description: Patient
-        performedAt:
-          type: string
-          format: date-time
-          description: Encounter date
-          example: 2025-08-26 16:15:58
-        closedAt:
-          type: string
-          format: date-time
-          description: Closed date
-          example: 2025-08-26 16:15:58
-        lock:
-          type: integer
-          format: int32
-          description: Lock
-          example: 1
-      required:
-      - code
-      - patient
     TokenRefreshRequest:
       type: object
       properties:
@@ -10443,6 +11007,15 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/LabWithRowsDTO"
+        pageInfo:
+          $ref: "#/components/schemas/PageInfoDTO"
+    PageHospitalizationConsultationDTO:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/HospitalizationConsultationDTO"
         pageInfo:
           $ref: "#/components/schemas/PageInfoDTO"
     PagePatientExaminationDTO:
