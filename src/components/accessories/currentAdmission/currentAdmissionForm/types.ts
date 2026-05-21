@@ -25,4 +25,5 @@ export interface IOwnProps {
   onDiscard: () => void;
   fields: TFields<TCurrentAdmissionFieldName>;
   onSubmit: (adm: AdmissionDTO) => void;
+  onPrint?: (adm: AdmissionDTO) => void;
 }

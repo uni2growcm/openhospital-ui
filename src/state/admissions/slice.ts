@@ -23,6 +23,12 @@ export const admissionSlice = createSlice({
     getTransportationsReset: (state) => {
       state.getTransportations = initial.getTransportations;
     },
+    printCrossReferenceReportReset: (state) => {
+      state.printCrossReferenceReport = initial.printCrossReferenceReport;
+    },
+    printDischargeAgainstMedicalAdviceReportReset: (state) => {
+      state.printDischargeAgainstMedicalAdviceReport = initial.printDischargeAgainstMedicalAdviceReport;
+    },
   },
   extraReducers: (builder) =>
     builder
@@ -116,6 +122,20 @@ export const admissionSlice = createSlice({
       .addCase(thunks.getCurrentAdmission.rejected, (state, action) => {
         state.currentAdmissionByPatientId = ApiResponse.error(action.payload);
       })
+      // Print Discharge Against Medical Advice Report
+      .addCase(thunks.printDischargeAgainstMedicalAdviceReport.pending, (state) => {
+        state.printDischargeAgainstMedicalAdviceReport = ApiResponse.loading();
+      })
+      .addCase(thunks.printDischargeAgainstMedicalAdviceReport.fulfilled, (state, action) => {
+        if (action.payload instanceof Blob) {
+          state.printDischargeAgainstMedicalAdviceReport = ApiResponse.value(action.payload);
+        } else {
+          state.printDischargeAgainstMedicalAdviceReport = ApiResponse.error(action.payload);
+        }
+      })
+      .addCase(thunks.printDischargeAgainstMedicalAdviceReport.rejected, (state, action) => {
+        state.printDischargeAgainstMedicalAdviceReport = ApiResponse.error(action.payload);
+      })
       // Get Transportations
       .addCase(thunks.getTransportations.pending, (state) => {
         state.getTransportations = ApiResponse.loading();
@@ -127,6 +147,20 @@ export const admissionSlice = createSlice({
       })
       .addCase(thunks.getTransportations.rejected, (state, action) => {
         state.getTransportations = ApiResponse.error(action.payload);
+      })
+      // Print Cross Reference Report
+      .addCase(thunks.printCrossReferenceReport.pending, (state) => {
+        state.printCrossReferenceReport = ApiResponse.loading();
+      })
+      .addCase(thunks.printCrossReferenceReport.fulfilled, (state, action) => {
+        if (action.payload instanceof Blob) {
+          state.printCrossReferenceReport = ApiResponse.value(action.payload);
+        } else {
+          state.printCrossReferenceReport = ApiResponse.error(action.payload);
+        }
+      })
+      .addCase(thunks.printCrossReferenceReport.rejected, (state, action) => {
+        state.printCrossReferenceReport = ApiResponse.error(action.payload);
       }),
 });
 
@@ -136,4 +170,6 @@ export const {
   dischargePatientReset,
   getCurrentAdmissionReset,
   getTransportationsReset,
+  printCrossReferenceReportReset,
+  printDischargeAgainstMedicalAdviceReportReset,
 } = admissionSlice.actions;

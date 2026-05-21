@@ -306,7 +306,24 @@
     },
     "motherSchoolingLevel": "Mother's educational level",
     "fatherSchoolingLevel": "Father's educational level",
-    "care": "Care"
+    "care": "Care",
+    "hospitalisationconsultation": "Hospitalization Consultation"
+  },
+  "hospitalisationconsultation": {
+    "id": "ID",
+    "consultationDate": "Date and time",
+    "teams": "Teams",
+    "parentComplaints": "Parent complaints",
+    "physicalExamination": "Physical examination",
+    "diagnosis": "Diagnosis",
+    "instructions": "Instructions",
+    "new": "New hospitalization consultation",
+    "edit": "Edit hospitalization consultation",
+    "previousentries": "Previous entries",
+    "created": "Consultation created",
+    "updated": "Consultation updated",
+    "createsuccess": "Hospitalization consultation created successfully",
+    "updatesuccess": "Hospitalization consultation updated successfully"
   },
   "encounters": {
     "admissions": "Admissions",
@@ -568,6 +585,7 @@
     "userProfile": "User Profile",
     "care": "Care",
     "referenceData": "Reference Data",
+    "hospitalisationconsultation": "Hospitalization Consultation",
     "statistics": "Statistics"
   },
   "userProfile": "User Profile",
@@ -736,6 +754,7 @@
     "discardMessage": "Are you sure to discard this operation ? All unsaved data will be lost.",
     "printData": "Print Data",
     "failedtodownloadthereport": "Failed to download report.",
+    "orderbyencounter": "Order by consultation",
     "communes": "Communes",
     "ethnics": "Ethnics",
     "towns": "Towns",
@@ -950,7 +969,11 @@
     "opd": "OPD",
     "booking": "Reservation",
     "exams": "Exams",
-    "therapy": "Therapy"
+    "therapy": "Therapy",
+    "conditioning": "Conditioning",
+    "encounter": "Consultation",
+    "noDataForEncounter": "No operations for this encounter.",
+    "noData": "No encounter for this patient."
   },
   "lab": {
     "newlab": "New laboratory exam",
@@ -1065,9 +1088,22 @@
     "preAssessment": "Pre-admission assessment",
     "entryReason": "Entry reason",
     "transportation": "Transportation",
+    "transportationMode": "Transportation mode",
+    "referringCenter": "Referring center",
+    "referralAlert": "Referral alert",
+    "referralReason": "Referral reason",
     "physicalExam": "Physical exam",
     "courseOfAction": "Course of action",
-    "nextAppointment": "Next appointment"
+    "nextAppointment": "Next appointment",
+    "deathPeriod": "Death Period",
+    "deathPeriodOptions": {
+      "before": "Before admission",
+      "after": "After admission"
+    },
+    "diagnosis": "Diagnosis",
+    "treatmentReceived": "Treatment received",
+    "outcome": "Outcome",
+    "improvementFeedback": "Improvement feedback"
   },
   "bill": {
     "title": "Welcome to Billing",
@@ -1363,7 +1399,11 @@
     "updated": "Discharge type updated",
     "updateSuccess": "The discharge type has been updated successfully!",
     "cancelCreation": "Are you sure to cancel the discharge type creation?",
-    "cancelUpdate": "Are you sure to cancel the discharge type update?"
+    "cancelUpdate": "Are you sure to cancel the discharge type update?",
+    "deathPeriod": {
+      "beforeAdmission": "Before admission",
+      "afterAdmission": "After admission"
+    }
   },
   "deliveryTypes": {
     "code": "Code",
@@ -1652,6 +1692,19 @@
     "createsuccess": "Care created successfully",
     "updatesuccess": "Care updated successfully",
     "previousentries": "Previous Cares"
+  },
+  "discharge": {
+    "madeOnDate": "Made on Date",
+    "name": "Name of relationship",
+    "localisation": "Resident at",
+    "phone": "Phone number",
+    "district": "District",
+    "commune": "Commune",
+    "reference": "Reference (CI, Carte LEPI, passeport, etc.)",
+    "relationshipType": "Relationship with the patient",
+    "occupation": "Occupation",
+    "title": "Discharge against medical Advice",
+    "description": "Enter the following information to download the discharge against medical advice report"
   },
   "reports": {
     "title": "Statistics",

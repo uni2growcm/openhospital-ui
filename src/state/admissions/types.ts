@@ -15,4 +15,6 @@ export type IAdmissionsState = {
   currentAdmissionByPatientId: ApiResponse<AdmissionDTO>;
   dischargePatient: ApiResponse<AdmissionDTO>;
   getTransportations: ApiResponse<Array<string>>;
+  printCrossReferenceReport: ApiResponse<Blob>;
+  printDischargeAgainstMedicalAdviceReport: ApiResponse<Blob>;
 };

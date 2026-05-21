@@ -22,7 +22,7 @@ const CareTable: FunctionComponent<IOwnProps> = ({
   handleEdit, 
 }) => {
   const { t } = useTranslation();
-  const canUpdate = usePermission("conditionings.update");
+  const canUpdate = usePermission("care.update");
 
   const header = ["careDate"];
   const dateFields = ["careDate"];

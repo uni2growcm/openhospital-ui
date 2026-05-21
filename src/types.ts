@@ -18,7 +18,7 @@ import { IOperationState } from "./state/operations/types";
 import { IPatientsState } from "./state/patients/types";
 import { IPermissionsState } from "./state/permissions/types";
 import { IPricesState } from "./state/prices/types";
-import { ISummaryState } from "./state/summary/types";
+import { ISummaryByEncounterState, ISummaryState } from "./state/summary/types";
 import { ISupplierState } from "./state/suppliers/types";
 import { ITherapiesState } from "./state/therapies/types";
 import { IDiseaseTypesState } from "./state/types/diseases/types";
@@ -41,6 +41,7 @@ export interface IState {
   therapies: ITherapiesState;
   diseases: IDiseaseState;
   summary: ISummaryState;
+  summaryByEncounter: ISummaryByEncounterState;
   opds: IOpdState;
   medicals: IMedicalState;
   admissions: IAdmissionsState;
@@ -273,4 +274,9 @@ export type TPermission =
   | "care.update"
   | "care.read"
   | "care.access"
+  | "hospitalisationconsultation.access"
+  | "hospitalisationconsultation.create"
+  | "hospitalisationconsultation.update"
+  | "hospitalisationconsultation.read"
+  | "hospitalisationconsultation.delete"
   | "statistics.access";

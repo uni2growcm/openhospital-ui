@@ -27,4 +27,8 @@ export const SummaryField = {
     type: "THERAPY",
     dateField: "startDate",
   },
+  conditioning: {
+    type: "CONDITIONING",
+    dateField: "performedAt",
+  },
 };

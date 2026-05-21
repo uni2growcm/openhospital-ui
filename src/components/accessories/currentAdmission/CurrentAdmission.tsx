@@ -1,8 +1,9 @@
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { FunctionComponent, useEffect, useState } from "react";
-import { updateAdmission } from "state/admissions";
+import { updateAdmission, printCrossReferenceReport } from "state/admissions";
 import { AdmissionDTO } from "../../../generated";
 import { IState } from "../../../types";
+import { downloadBlob } from "../../../libraries/downloadUtils/downloadUtils";
 import { useFields } from "../admission/useFields";
 import { CurrentAdmissionData } from "./currentAdmissionData/CurrentAdmissionData";
 import { CurrentAdmissionForm } from "./currentAdmissionForm/CurrentAdmissionForm";
@@ -27,6 +28,21 @@ export const CurrentAdmission: FunctionComponent<IOwnProps> = ({
     setEditionMode(false);
   };
 
+  const onPrint = (admission: AdmissionDTO) => {
+    dispatch(printCrossReferenceReport({ 
+      patId: admission.patient?.code || 0, 
+      admId: admission.id || 0 
+    }))
+      .unwrap()
+      .then((result) => {
+        if (result instanceof Blob)
+          downloadBlob(
+            result,
+            `cross-reference-report-${admission.patient?.code}-${admission.id}-${new Date().getTime()}.pdf`
+          );
+      });
+  };
+
   const fields = useFields(currentAdmission, lastOpd?.disease);
 
   const onSubmit = (adm: AdmissionDTO) => {
@@ -48,7 +64,13 @@ export const CurrentAdmission: FunctionComponent<IOwnProps> = ({
       referenceSheet: adm.referenceSheet,
       qualifiedAgent: adm.qualifiedAgent,
       transportation: adm.transportation,
+      referralAlert: adm.referralAlert,
+      referralReason: adm.referralReason,
+      treatmentReceived: adm.treatmentReceived,
+      outcome: adm.outcome,
+      improvementFeedback: adm.improvementFeedback,
       physicalExam: adm.physicalExam,
+      courseOfAction: adm.courseOfAction,
     };
     dispatch(updateAdmission(admissionToSave));
   };
@@ -64,6 +86,7 @@ export const CurrentAdmission: FunctionComponent<IOwnProps> = ({
       {currentAdmission && !editionMode && (
         <CurrentAdmissionData
           onEdit={onEditChange ? handleEdit : undefined}
+          onPrint={onPrint}
           admission={currentAdmission}
         />
       )}
@@ -72,6 +95,7 @@ export const CurrentAdmission: FunctionComponent<IOwnProps> = ({
           fields={fields}
           onSubmit={onSubmit}
           onDiscard={handleDiscard}
+          onPrint={onPrint}
         />
       )}
     </div>

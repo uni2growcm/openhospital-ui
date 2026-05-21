@@ -273,7 +273,24 @@
     },
     "motherSchoolingLevel": "Niveau scolaire de la mère",
     "fatherSchoolingLevel": "Niveau scolaire de la père",
-    "care": "Soins"
+    "care": "Soins",
+    "hospitalisationconsultation": "Consultation en hospitalisation"
+  },
+  "hospitalisationconsultation": {
+    "id": "ID",
+    "consultationDate": "Date et heure",
+    "teams": "Équipes",
+    "parentComplaints": "Plaintes parentales",
+    "physicalExamination": "Examen physique",
+    "diagnosis": "Diagnostic",
+    "instructions": "Conduite à tenir",
+    "new": "Nouvelle consultation d'hospitalisation",
+    "edit": "Modifier la consultation d'hospitalisation",
+    "previousentries": "Entrées précédentes",
+    "created": "Consultation créée",
+    "updated": "Consultation mise à jour",
+    "createsuccess": "Consultation d'hospitalisation créée avec succès",
+    "updatesuccess": "Consultation d'hospitalisation mise à jour avec succès"
   },
   "encounters": {
     "admissions": "Admissions",
@@ -533,6 +550,7 @@
     "userProfile": "Profile de l'utilisateur",
     "care": "Soins",
     "referenceData": "Données de référence",
+    "hospitalisationconsultation": "Hospitalisation Consultation",
     "statistics": "Statistiques"
   },
   "town": {
@@ -656,7 +674,7 @@
     "saveopd": "Enregistrer OPD",
     "discard": "Annuler",
     "dismiss": "Rejeter",
-    "savetriage": "Enregistrer exam spécifique",
+    "savetriage": "Enregistrer un examen spécifique",
     "saveandprint": "Enregistrer et imprimer",
     "updateandprint": "Mettre à jour et imprimer",
     "404notfound": "404 - Page introuvable",
@@ -754,6 +772,7 @@
     "discardMessage": "Êtes-vous sûr de vouloir rejeter cette opération ? Toutes les données non enregistrées seront perdues.",
     "printData": "Imprimer les données",
     "failedtodownloadthereport": "Échec de téléchargement du rapport",
+    "orderbyencounter": "Regrouper par consultation",
     "communes": "Communes",
     "ethnics": "Ethnies",
     "towns": "Villes",
@@ -898,13 +917,17 @@
   },
   "summary": {
     "visits": "Visites",
-    "triage": "Exam spécifique",
+    "triage": "Examen spécifique",
     "admission": "Admission",
     "operation": "Opération",
     "opd": "OPD",
     "booking": "Réservation",
     "exams": "Examen",
-    "therapy": "Thérapie"
+    "therapy": "Thérapie",
+    "conditioning": "Conditionnement",
+    "encounter": "Consultation",
+    "noDataForEncounter": "Aucune opération pour cette rencontre.",
+    "noData": "Aucune rencontre pour ce patient."
   },
   "lab": {
     "newlab": "Nouvel examen de laboratoire",
@@ -1019,9 +1042,22 @@
     "preAssessment": "Bilan avant admission",
     "entryReason": "Motif d'entrée",
     "transportation": "Moyen de transport",
+    "transportationMode": "Mode de transport",
+    "referringCenter": "Centre référent",
+    "referralAlert": "Alerte de référence",
+    "referralReason": "Raison de la référence",
     "physicalExam": "Examen physique",
     "courseOfAction": "Conduite à tenir",
-    "nextAppointment": "Prochain rendez-vous"
+    "nextAppointment": "Prochain rendez-vous",
+    "deathPeriod": "Période de décès",
+    "deathPeriodOptions": {
+      "before": "Avant l'admission",
+      "after": "Après l'admission"
+    },
+    "diagnosis": "Diagnostic",
+    "treatmentReceived": "Traitement reçu",
+    "outcome": "Issue",
+    "improvementFeedback": "Commentaire d'amélioration"
   },
   "bill": {
     "title": "Bienvenue dans la facturation",
@@ -1317,7 +1353,11 @@
     "updated": "Type de décharge mis à jour",
     "updateSuccess": "Le type de décharge a été mis à jour avec succès!",
     "cancelCreation": "Êtes-vous sûr d'annuler la création du type de décharge?",
-    "cancelUpdate": "Êtes-vous sûr de vouloir annuler la mise à jour du type de décharge?"
+    "cancelUpdate": "Êtes-vous sûr de vouloir annuler la mise à jour du type de décharge?",
+    "deathPeriod": {
+      "beforeAdmission": "Avant l'admission",
+      "afterAdmission": "Après l'admission"
+    }
   },
   "deliveryTypes": {
     "code": "Code",
@@ -1604,6 +1644,19 @@
     "createsuccess": "Soins créés avec succès",
     "updatesuccess": "Soins mis à jour avec succès",
     "previousentries": "Soins précédentes"
+  },
+  "discharge": {
+    "madeOnDate": "Date de création",
+    "name": "Nom de la relation",
+    "localisation": "Résidant à",
+    "phone": "Numéro de téléphone",
+    "district": "Arrondissement",
+    "commune": "Commune",
+    "reference": "Référence (CI, Carte LEPI, passeport, etc.)",
+    "relationshipType": "Filiation avec le/la patient(e)",
+    "occupation": "Profession",
+    "title": "Décharge contre avis médical",
+    "description": "Entrez les informations suivantes pour télécharger le rapport de décharge contre avis médical"
   },
   "reports": {
     "title": "Statistiques",

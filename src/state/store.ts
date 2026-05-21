@@ -21,7 +21,7 @@ import { permissionSlice } from "./permissions";
 import { priceSlice } from "./prices";
 import { radiologySlice } from "./radiology";
 import { settingsSlice } from "./settings";
-import { summarySlice } from "./summary";
+import { summaryByEncounterSlice, summarySlice } from "./summary";
 import { supplierSlice } from "./suppliers";
 import { therapySlice } from "./therapies";
 import { diseaseTypeSlice } from "./types/diseases";
@@ -36,6 +36,7 @@ import { townSlice } from "./town";
 import { occupationSlice } from "./occupation";
 import { ethnicSlice } from "./ethnic";
 import { communeSlice } from "./commune";
+import { hospitalisationconsultationSlice } from "./hospitalisationconsultation";
 
 const reducer = combineReducers({
   main: mainSlice.reducer,
@@ -43,6 +44,7 @@ const reducer = combineReducers({
   examinations: examinationSlice.reducer,
   therapies: therapySlice.reducer,
   summary: summarySlice.reducer,
+  summaryByEncounter: summaryByEncounterSlice.reducer,
   opds: opdSlice.reducer,
   diseases: diseaseSlice.reducer,
   medicals: medicalSlice.reducer,
@@ -75,6 +77,7 @@ const reducer = combineReducers({
   occupations: occupationSlice.reducer,
   ethnics: ethnicSlice.reducer,
   communes: communeSlice.reducer,
+  hospitalisationconsultations: hospitalisationconsultationSlice.reducer,
 });
 
 export const store = configureStore({

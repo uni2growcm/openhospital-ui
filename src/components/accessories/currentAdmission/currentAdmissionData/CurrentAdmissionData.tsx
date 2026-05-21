@@ -1,4 +1,4 @@
-import { Edit } from "@mui/icons-material";
+import { Edit, Print } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { renderDateTime } from "libraries/formatUtils/dataFormatting";
 import { isEmpty } from "lodash";
@@ -9,11 +9,13 @@ import "../styles.scss";
 
 interface IOwnProps {
   onEdit?: () => void;
+  onPrint?: (admission: AdmissionDTO) => void;
   admission: AdmissionDTO;
 }
 
 export const CurrentAdmissionData: FunctionComponent<IOwnProps> = ({
   onEdit,
+  onPrint,
   admission,
 }) => {
   const { t } = useTranslation();
@@ -23,6 +25,11 @@ export const CurrentAdmissionData: FunctionComponent<IOwnProps> = ({
         {onEdit && (
           <IconButton onClick={onEdit}>
             <Edit />
+          </IconButton>
+        )}
+        {onPrint && admission?.admType?.code === "R" && (
+          <IconButton onClick={() => onPrint(admission)}>
+            <Print color="secondary" />
           </IconButton>
         )}
       </div>
@@ -37,12 +44,6 @@ export const CurrentAdmissionData: FunctionComponent<IOwnProps> = ({
           <div className="currentAdmissionData__item">
             <span className="item_label">{t("admission.ward")}</span>
             <p className="item_content">{admission?.ward?.description}</p>
-          </div>
-        )}
-        {!isEmpty(admission?.fhu) && (
-          <div className="currentAdmissionData__item">
-            <span className="item_label">{t("admission.fhu")}</span>
-            <p className="item_content">{admission?.fhu}</p>
           </div>
         )}
         {!isEmpty(admission?.admType?.description) && (
@@ -81,12 +82,6 @@ export const CurrentAdmissionData: FunctionComponent<IOwnProps> = ({
             </p>
           </div>
         )}
-        {!isEmpty(admission?.transportation) && (
-          <div className="currentAdmissionData__item">
-            <span className="item_label">{t("admission.transportation")}</span>
-            <p className="item_content">{admission.transportation}</p>
-          </div>
-        )}
         {!isEmpty(admission?.entryReason) && (
           <div className="fullWidth currentAdmissionData__item">
             <span className="item_label">{t("admission.entryReason")}</span>
@@ -122,6 +117,52 @@ export const CurrentAdmissionData: FunctionComponent<IOwnProps> = ({
             <span className="item_label">{t("admission.courseOfAction")}</span>
             <p className="item_content">{admission.courseOfAction}</p>
           </div>
+        )}
+        {admission?.admType?.code === "R" && (
+          <>
+            {!isEmpty(admission?.fhu) && (
+              <div className="currentAdmissionData__item">
+                <span className="item_label">{t("admission.fhu")}</span>
+                <p className="item_content">{admission?.fhu}</p>
+              </div>
+            )}
+            {!isEmpty(admission?.transportation) && (
+              <div className="currentAdmissionData__item">
+                <span className="item_label">{t("admission.transportation")}</span>
+                <p className="item_content">{admission.transportation}</p>
+              </div>
+            )}
+            {!isEmpty(admission?.referralAlert) && (
+              <div className="currentAdmissionData__item">
+                <span className="item_label">{t("admission.referralAlert")}</span>
+                <p className="item_content">{admission.referralAlert}</p>
+              </div>
+            )}
+            {!isEmpty(admission?.referralReason) && (
+              <div className="fullWidth currentAdmissionData__item">
+                <span className="item_label">{t("admission.referralReason")}</span>
+                <p className="item_content">{admission.referralReason}</p>
+              </div>
+            )}
+            {!isEmpty(admission?.treatmentReceived) && (
+              <div className="fullWidth currentAdmissionData__item">
+                <span className="item_label">{t("admission.treatmentReceived")}</span>
+                <p className="item_content">{admission.treatmentReceived}</p>
+              </div>
+            )}
+            {!isEmpty(admission?.outcome) && (
+              <div className="fullWidth currentAdmissionData__item">
+                <span className="item_label">{t("admission.outcome")}</span>
+                <p className="item_content">{admission.outcome}</p>
+              </div>
+            )}
+            {!isEmpty(admission?.improvementFeedback) && (
+              <div className="fullWidth currentAdmissionData__item">
+                <span className="item_label">{t("admission.improvementFeedback")}</span>
+                <p className="item_content">{admission.improvementFeedback}</p>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
