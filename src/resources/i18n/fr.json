@@ -550,7 +550,8 @@
     "userProfile": "Profile de l'utilisateur",
     "care": "Soins",
     "referenceData": "Données de référence",
-    "hospitalisationconsultation": "Hospitalisation Consultation"
+    "hospitalisationconsultation": "Hospitalisation Consultation",
+    "statistics": "Statistiques"
   },
   "town": {
     "id": "ID",
@@ -779,7 +780,8 @@
     "addCommune": "Ajouter une commune",
     "addEthnic": "Ajouter une ethnie",
     "addTown": "Ajouter une ville",
-    "addOccupation": "Ajouter une profession"
+    "addOccupation": "Ajouter une profession",
+    "noreportsfound": "Aucun rapport trouvé"
   },
   "medicalHistory": {
     "physiological": {
@@ -1655,5 +1657,20 @@
     "occupation": "Profession",
     "title": "Décharge contre avis médical",
     "description": "Entrez les informations suivantes pour télécharger le rapport de décharge contre avis médical"
+  },
+  "reports": {
+    "title": "Statistiques",
+    "selectReport": "Sélectionnez un rapport",
+    "selectDateFrom": "Date de",
+    "selectDateTo": "Date à",
+    "selectMonth": "Mois",
+    "selectYear": "Année",
+    "download": "Télécharger",
+    "downloadReport": "Téléchargement de rapport",
+    "admissionReport": "Rapport des admissions",
+    "pathologyReport": "Rapport de pathologie",
+    "deathReport": "Rapport des décès",
+    "pathologyByAgeGenderReport": "Rapport des pathologies par âge et sexe",
+    "dischargeReport": "Rapport des sorties d'hopitalisation"
   }
 }

@@ -585,7 +585,8 @@
     "userProfile": "User Profile",
     "care": "Care",
     "referenceData": "Reference Data",
-    "hospitalisationconsultation": "Hospitalization Consultation"   
+    "hospitalisationconsultation": "Hospitalization Consultation",
+    "statistics": "Statistics"
   },
   "userProfile": "User Profile",
   "operation": {
@@ -761,7 +762,8 @@
     "addCommune": "Add Commune",
     "addEthnic": "Add Ethnic",
     "addTown": "Add Town",
-    "addOccupation": "Add Occupation"
+    "addOccupation": "Add Occupation",
+    "noreportsfound": "No report found"
   },
   "town": {
     "id": "ID",
@@ -1703,5 +1705,20 @@
     "occupation": "Occupation",
     "title": "Discharge against medical Advice",
     "description": "Enter the following information to download the discharge against medical advice report"
+  },
+  "reports": {
+    "title": "Statistics",
+    "selectReport": "Select a report",
+    "selectDateFrom": "Date from",
+    "selectDateTo": "Date to",
+    "selectMonth": "Month",
+    "selectYear": "Year",
+    "download": "Download",
+    "downloadReport": "Download launcher",
+    "admissionReport": "Admissions Report",
+    "pathologyReport": "Pathology Report",
+    "deathReport": "Death Report",
+    "pathologyByAgeGenderReport": "Pathologies by Age and Gender Report",
+    "dischargeReport": "Discharge Report"
   }
 }

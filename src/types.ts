@@ -278,4 +278,5 @@ export type TPermission =
   | "hospitalisationconsultation.create"
   | "hospitalisationconsultation.update"
   | "hospitalisationconsultation.read"
-  | "hospitalisationconsultation.delete";
+  | "hospitalisationconsultation.delete"
+  | "statistics.access";

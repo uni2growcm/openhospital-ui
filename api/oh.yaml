@@ -4601,6 +4601,146 @@ paths:
                 type: boolean
       security:
       - bearerAuth: []
+  /statistics/pathologiesbyagegender:
+    get:
+      tags:
+      - Statistics
+      operationId: printPathologiesByAgeGenderPdf
+      parameters:
+      - name: fromDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: toDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+      security:
+      - bearerAuth: []
+  /statistics/pathologies:
+    get:
+      tags:
+      - Statistics
+      operationId: printPathologiesPdf
+      parameters:
+      - name: fromDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: toDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+      security:
+      - bearerAuth: []
+  /statistics/dischargesstatistics:
+    get:
+      tags:
+      - Statistics
+      operationId: printDischargesPdf
+      parameters:
+      - name: fromDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: toDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+      security:
+      - bearerAuth: []
+  /statistics/death:
+    get:
+      tags:
+      - Statistics
+      operationId: printDeathReportPdf
+      parameters:
+      - name: fromDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: toDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+      security:
+      - bearerAuth: []
+  /statistics/admission:
+    get:
+      tags:
+      - Statistics
+      operationId: getAdmissionReportPdf
+      parameters:
+      - name: fromDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: toDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+      security:
+      - bearerAuth: []
   /settings:
     get:
       tags:
@@ -4753,34 +4893,6 @@ paths:
                 format: binary
       security:
       - bearerAuth: []
-  /reports/death:
-    get:
-      tags:
-      - Reports
-      operationId: printDeathReportPdf
-      parameters:
-      - name: fromDate
-        in: query
-        required: true
-        schema:
-          type: string
-          format: date-time
-      - name: toDate
-        in: query
-        required: true
-        schema:
-          type: string
-          format: date-time
-      responses:
-        "200":
-          description: OK
-          content:
-            application/octet-stream:
-              schema:
-                type: string
-                format: binary
-      security:
-      - bearerAuth: []
   /reports/cross-reference/{patId}/{admId}:
     get:
       tags:
@@ -4799,34 +4911,6 @@ paths:
         schema:
           type: integer
           format: int32
-      responses:
-        "200":
-          description: OK
-          content:
-            application/octet-stream:
-              schema:
-                type: string
-                format: binary
-      security:
-      - bearerAuth: []
-  /reports/admission:
-    get:
-      tags:
-      - Reports
-      operationId: getAdmissionReportPdf
-      parameters:
-      - name: fromDate
-        in: query
-        required: true
-        schema:
-          type: string
-          format: date-time
-      - name: toDate
-        in: query
-        required: true
-        schema:
-          type: string
-          format: date-time
       responses:
         "200":
           description: OK
@@ -7875,11 +7959,11 @@ components:
           example: 0
         female:
           type: boolean
+        pharmacy:
+          type: boolean
         male:
           type: boolean
         opd:
-          type: boolean
-        pharmacy:
           type: boolean
       required:
       - beds
@@ -8845,11 +8929,11 @@ components:
           type: string
           description: Improvement feedback
           example: Patient showing significant improvement
+        fhu:
+          type: string
         yprog:
           type: integer
           format: int32
-        fhu:
-          type: string
       required:
       - admDate
       - admitted

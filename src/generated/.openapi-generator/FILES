@@ -43,6 +43,7 @@ apis/ReportsApi.ts
 apis/RootControllerApi.ts
 apis/SMSApi.ts
 apis/SettingsApi.ts
+apis/StatisticsApi.ts
 apis/StockMovementsApi.ts
 apis/SuppliersApi.ts
 apis/TherapiesApi.ts

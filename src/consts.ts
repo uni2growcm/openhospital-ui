@@ -98,4 +98,5 @@ export const PATHS = {
   admin_occupations: "/admin/reference-data/occupations",
   admin_occupations_new: "/admin/reference-data/occupations/new",
   admin_occupations_edit: "/admin/reference-data/occupations/:id/edit",
+  statistics: "/statistics",
 };

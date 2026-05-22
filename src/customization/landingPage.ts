@@ -26,4 +26,8 @@ export const landingPagePriority: TLandingPagePriority[] = [
     permission: "opds.access",
     route: "/visits",
   },
+  {
+    permission: "statistics.access",
+    route: "/statistics",
+  },
 ];

@@ -190,6 +190,8 @@ const permissionList = [
   "admissions.fullaccess",
   "examinassions.fullaccess",
   "hospitalisationconsultation.access",
+  "care.access",
+  "statistics.access",
 ];
 
 export default permissionList;
