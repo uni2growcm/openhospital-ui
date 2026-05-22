@@ -1,4 +1,5 @@
-import { type PropsWithChildren, useEffect } from 'react';
+import { type ComponentProps, useEffect } from 'react';
+import root from 'react-shadow';
 import AppHeader from '~/components/accessories/appHeader/AppHeader';
 import Footer from '~/components/accessories/footer/Footer';
 import { useAppSelector } from '../../libraries/hooks/redux';
@@ -9,12 +10,13 @@ import classes from './plugin-activity.module.scss';
 export type PluginActivityProps = {
 	plugin: PluginRenderProps;
 	showHeaderAndFooter?: boolean;
-} & PropsWithChildren;
+} & ComponentProps<'div'>;
 
 export function PluginActivity({
 	plugin,
 	showHeaderAndFooter = true,
 	children,
+	...props
 }: PluginActivityProps) {
 	const breadcrumbMap = {
 		[plugin.remote]: `/${plugin.remote}`,
@@ -29,9 +31,10 @@ export function PluginActivity({
 	}, []);
 
 	return (
-		<div
+		<root.div
 			data-cy={`plugin-activity-${plugin.remote}`}
 			className={classes.plugin}
+			{...props}
 		>
 			{showHeaderAndFooter && (
 				<AppHeader
@@ -44,7 +47,7 @@ export function PluginActivity({
 				{children}
 			</div>
 			{showHeaderAndFooter && <Footer />}
-		</div>
+		</root.div>
 	);
 }
 
