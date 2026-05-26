@@ -3,10 +3,7 @@ import { useTranslation } from "react-i18next";
 
 export function useCommune(communes: Array<string> | undefined) {
   const { t } = useTranslation();
-  const communesList = ["dassa", "glazoue", "savalou"];
-  const communesMerged = communesList
-    ?.concat(communes ?? [])
-    .filter((item, index, self) => self.indexOf(item) === index);
+  const communesMerged = (communes ?? []).filter((item, index, self) => self.indexOf(item) === index);
   const options = useMemo(
     () =>
       communesMerged?.map((item) => {
