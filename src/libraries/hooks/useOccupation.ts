@@ -1,12 +1,12 @@
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-export function useEthnic(ethnics: Array<string> | undefined) {
+export function useOccupation(occupations: Array<string> | undefined) {
   const { t } = useTranslation();
-  const ethnicsMerged = (ethnics ?? []).filter((item, index, self) => self.indexOf(item) === index);
+  const occupationsMerged = (occupations ?? []).filter((item, index, self) => self.indexOf(item) === index);
   const options = useMemo(
     () =>
-      ethnicsMerged?.map((item) => {
+      occupationsMerged?.map((item) => {
         const option = {
           value: item,
           label: t(`${item}`),
@@ -17,7 +17,7 @@ export function useEthnic(ethnics: Array<string> | undefined) {
 
         return option;
       }),
-    [ethnicsMerged, t]
+    [occupationsMerged, t]
   );
 
   const formatValues = useCallback(

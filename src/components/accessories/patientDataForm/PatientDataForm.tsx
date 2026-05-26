@@ -27,9 +27,6 @@ import {
 } from "../../../libraries/formDataHandling/functions";
 import {
   createPatientReset,
-  getCities,
-  getCommunes,
-  getEthnics,
   getPatientReset,
   updatePatientReset,
 } from "../../../state/patients";
@@ -45,6 +42,12 @@ import TextField from "../textField/TextField";
 import "./styles.scss";
 import { TAgeFieldName, TProps } from "./types";
 import { useCityOptions } from "./useCityOptions";
+import { useTown } from "libraries/hooks/useTown";
+import { useOccupation } from "libraries/hooks/useOccupation";
+import { getTowns } from "state/town";
+import { getCommunes } from "state/commune";
+import { getOccupations } from "state/occupation";
+import { getEthnics } from "state/ethnic";
 
 const PatientDataForm: FunctionComponent<TProps> = ({
   fields,
@@ -117,10 +120,16 @@ const PatientDataForm: FunctionComponent<TProps> = ({
   const options = getFromFields(fields, "options");
   const cityOptions = useCityOptions(cities);
   const ethnicsOptions = useAppSelector(
-    (state: IState) => state.patients.getEthnics.data
+    (state: IState) => state.ethnics.ethnicList.data
   );
   const communesOptions = useAppSelector(
-    (state: IState) => state.patients.getCommunes.data
+    (state: IState) => state.communes.getCommunes.data
+  );
+  const occupationsOptions = useAppSelector(
+    (state: IState) => state.occupations.occupationList.data
+  );
+  const townsOptions = useAppSelector(
+    (state: IState) => state.towns.townList.data
   );
 
   const ageRangeOptions = useAppSelector((state: IState) =>
@@ -218,9 +227,13 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 
   const [openResetConfirmation, setOpenResetConfirmation] = useState(false);
 
-  const { options: ethnicOptions } = useEthnic(ethnicsOptions);
+  const { options: ethnicOptions } = useEthnic(ethnicsOptions?.map((e) => e.name));
 
-  const { options: communeOptions } = useCommune(communesOptions);
+  const { options: communeOptions } = useCommune(communesOptions?.map((e) => e.name));
+
+   const { options: occupationOptions } = useOccupation(occupationsOptions?.map((e) => e.name));
+
+   const { options: townOptions } = useTown(townsOptions?.map((e) => e.name));
 
   const schoolingLevelOptions = [
     {
@@ -251,9 +264,10 @@ const PatientDataForm: FunctionComponent<TProps> = ({
   };
 
   useEffect(() => {
-    dispatch(getCities());
+    dispatch(getTowns());
     dispatch(getEthnics());
     dispatch(getCommunes());
+    dispatch(getOccupations());
   }, [dispatch, shouldResetForm]);
 
   useEffect(() => {
@@ -413,7 +427,7 @@ const PatientDataForm: FunctionComponent<TProps> = ({
               isValid={isValid("city")}
               errorText={getErrorText("city")}
               onBlur={onBlurCallback("city")}
-              options={cityOptions ?? []}
+              options={townOptions ?? []}
               disabled={isLoading}
               freeSolo={true}
               autoSelect={true}
@@ -535,9 +549,7 @@ const PatientDataForm: FunctionComponent<TProps> = ({
           )}
           {ageType === "age" && (
             <div className="patientDataForm__item">
-               <ButtonGroup
-                aria-label="Age unit group"
-              >
+              <ButtonGroup aria-label="Age unit group">
                 <TextField
                   field={formik.getFieldProps("ageDays")}
                   theme="regular"
@@ -677,7 +689,7 @@ const PatientDataForm: FunctionComponent<TProps> = ({
           </div>
 
           <div className="patientDataForm__item">
-            <TextField
+            {/* <TextField
               field={formik.getFieldProps("fatherOccupation")}
               theme="regular"
               label={t("patient.fatheroccupation")}
@@ -685,6 +697,22 @@ const PatientDataForm: FunctionComponent<TProps> = ({
               errorText={getErrorText("fatherOccupation")}
               onBlur={formik.handleBlur}
               disabled={isLoading}
+              maxLength={50}
+            /> */}
+            <AutocompleteField
+              fieldName="fatherOccupation"
+              fieldValue={formik.values.fatherOccupation}
+              label={t("patient.fatheroccupation")}
+              isValid={isValid("fatherOccupation")}
+              errorText={getErrorText("fatherOccupation")}
+              onBlur={onBlurCallback("fatherOccupation")}
+              options={occupationOptions ?? []}
+              disabled={isLoading}
+              freeSolo={true}
+              autoSelect={true}
+              clearOnBlur={true}
+              selectOnFocus={true}
+              handleHomeEndKeys={true}
               maxLength={50}
             />
           </div>
@@ -756,7 +784,7 @@ const PatientDataForm: FunctionComponent<TProps> = ({
           </div>
 
           <div className="patientDataForm__item">
-            <TextField
+            {/* <TextField
               field={formik.getFieldProps("motherOccupation")}
               theme="regular"
               label={t("patient.motheroccupation")}
@@ -764,6 +792,22 @@ const PatientDataForm: FunctionComponent<TProps> = ({
               errorText={getErrorText("motherOccupation")}
               onBlur={formik.handleBlur}
               disabled={isLoading}
+              maxLength={50}
+            /> */}
+            <AutocompleteField
+              fieldName="motherOccupation"
+              fieldValue={formik.values.motherOccupation}
+              label={t("patient.motheroccupation")}
+              isValid={isValid("motherOccupation")}
+              errorText={getErrorText("motherOccupation")}
+              onBlur={onBlurCallback("motherOccupation")}
+              options={occupationOptions ?? []}
+              disabled={isLoading}
+              freeSolo={true}
+              autoSelect={true}
+              clearOnBlur={true}
+              selectOnFocus={true}
+              handleHomeEndKeys={true}
               maxLength={50}
             />
           </div>
