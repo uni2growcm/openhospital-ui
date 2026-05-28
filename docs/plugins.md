@@ -74,6 +74,32 @@ export default provider;
 > The host always loads your plugin via `<remote-name>/app` and expects this bridge shape.
 > Do not export a plain React component as the default — the bridge is required.
 
+### Props Injected by the Host
+
+The host passes two props directly into your root component when mounting it:
+
+| Prop | Type | Description |
+|---|---|---|
+| `patient` | `string \| undefined` | The current patient's `:id` URL param. Populated for patient-location plugins; `undefined` for main-location plugins. |
+| `basePath` | `string` | Resolved base path for your plugin's internal router. `/<plugin-name>` for main plugins; `/patients/details/<id>/<plugin-name>` for patient plugins. |
+
+Use `basePath` as the `basename` for any internal router you create, and `patient` to scope API requests to the active patient:
+
+```tsx
+// src/app.tsx
+import { createBrowserRouter, RouterProvider } from 'react-router';
+
+interface AppProps {
+  patient?: string;   // OH patient ID — only set for patient-location plugins
+  basePath?: string;  // use as router basename for correct nested routing
+}
+
+export default function App({ patient, basePath }: AppProps) {
+  const router = createBrowserRouter(routes, { basename: basePath });
+  return <RouterProvider router={router} />;
+}
+```
+
 ---
 
 ### Vite Configuration (`vite.plugin.config.ts`)
@@ -337,7 +363,7 @@ For every remote with `location === PluginBundleLocationEnum.Main`, a top-level 
       import('../plugins/components').then(({ RenderPluginApp }) => ({
         Component: () => (
           <RenderPluginApp
-            plugin={{ entry: 'app', remote: remote.name, styles: remote.styles }}
+            plugin={{ entry: 'app', location: PluginBundleLocationEnum.Main, remote: remote.name, styles: remote.styles }}
           />
         ),
       })),
@@ -365,7 +391,7 @@ For every remote with `location === PluginBundleLocationEnum.Patient`, a child r
           <PatientDetailsActivityContent title={remote.label}>
             <RenderPluginApp
               showHeaderAndFooter={false}      // content-only, no global header/footer
-              plugin={{ entry: 'app', remote: remote.name, styles: remote.styles }}
+              plugin={{ entry: 'app', PluginBundleLocationEnum.Patient, remote: remote.name, styles: remote.styles }}
             />
           </PatientDetailsActivityContent>
         ),
@@ -434,14 +460,27 @@ const App = createRemoteAppComponent({
   fallback: () => <PluginErrorBoundary plugin={plugin} />,
 });
 
+const { id } = useParams();
+
+const basePath = `${
+  plugin.location === PluginBundleLocationEnum.Main
+    ? ''
+    : PATHS.patients_details_id.replace(':id', id || '')
+}/${plugin.remote}`;
+
 return (
   <PluginActivity plugin={plugin} showHeaderAndFooter={showHeaderAndFooter}>
-    <App memoryRouter={{ entryPath: '/' }} />
+    <App patient={id} basePath={basePath} />
   </PluginActivity>
 );
 ```
 
-`memoryRouter` gives the remote app its own isolated router tree. If the plugin is a patient-location plugin the host's `react-router` is shared as a singleton so the plugin can read URL params (e.g. `:id`).
+Two props are forwarded into the remote app's root component:
+
+| Prop | Type | When populated |
+|---|---|---|
+| `patient` | `string \| undefined` | The `:id` URL param — present for patient-location plugins, `undefined` for main-location plugins. |
+| `basePath` | `string` | Full resolved path prefix for the plugin's internal router. Empty string prefix (`/<plugin-name>`) for main plugins; `/patients/details/<id>/<plugin-name>` for patient plugins. |
 
 #### `RenderPluginWidget`
 

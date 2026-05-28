@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Navigate } from 'react-router';
 import PatientDetailsActivity from '~/components/activities/patientDetailsActivity/PatientDetailsActivity';
 import PatientDetailsActivityContent from '~/components/activities/patientDetailsActivityContent/PatientDetailsActivityContent';
-import { PluginBundleLocationEnum } from '~/generated';
+import { PluginBundleLocationEnum } from '~/generated/models/PluginBundle';
 import { usePluginsContext } from '~/plugins';
 import { PATIENT_RADIOLOGY_ROUTES } from './details_radiology';
 
@@ -71,7 +71,7 @@ export const usePatientDetailsRoutes = () => {
 					(remote) => remote.location === PluginBundleLocationEnum.Patient,
 				)
 				.map((remote) => ({
-					path: remote.name,
+					path: `${remote.name}/*`,
 					lazy: async () =>
 						import('../../plugins').then(({ RenderPluginApp }) => ({
 							Component: () => (
@@ -80,6 +80,7 @@ export const usePatientDetailsRoutes = () => {
 										showHeaderAndFooter={false}
 										plugin={{
 											entry: 'app',
+											location: PluginBundleLocationEnum.Patient,
 											remote: remote.name,
 											styles: remote.styles,
 										}}

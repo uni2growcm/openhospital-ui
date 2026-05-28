@@ -1,5 +1,8 @@
 import type { createInstance } from '@module-federation/enhanced/runtime';
-import type { PluginBundle } from '~/generated';
+import type {
+	PluginBundle,
+	PluginBundleLocationEnum,
+} from '~/generated/models/PluginBundle';
 
 export type Remote = Parameters<
 	typeof createInstance
@@ -9,6 +12,7 @@ export type Remote = Parameters<
 	};
 
 export type PluginRenderProps = {
+	location: PluginBundleLocationEnum;
 	remote: string;
 	entry: string;
 	styles?: string;
