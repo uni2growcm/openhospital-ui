@@ -71,6 +71,7 @@ export const ExamTable: FC<IExamTableProps> = ({
 		if (data && data.length > 0)
 			results = data.map((e) => {
 				return {
+          id: e.laboratoryDTO?.code ?? '',
 					code: e.laboratoryDTO?.code ?? '',
 					date: renderDateTime(e.laboratoryDTO?.labDate ?? ''),
 					patName: e.laboratoryDTO?.patName ?? '',
