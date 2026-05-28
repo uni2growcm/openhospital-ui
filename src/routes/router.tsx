@@ -1,17 +1,17 @@
-import { useMemo } from "react";
-import { Navigate } from "react-router";
-import { createBrowserRouter } from "react-router-dom";
-import { PluginBundleLocationEnum } from "~/generated/models/PluginBundle";
-import { usePluginsContext } from "~/plugins";
-import NotFound from "../components/activities/notFound/NotFound";
-import { Private } from "../components/Private";
-import { ADMIN_ROUTES } from "./admin";
-import { usePatientRoutes } from "./patients";
+import { useMemo } from 'react';
+import { Navigate } from 'react-router';
+import { createBrowserRouter } from 'react-router-dom';
+import { PluginBundleLocationEnum } from '~/generated/models/PluginBundle';
+import { usePluginsContext } from '~/plugins';
+import NotFound from '../components/activities/notFound/NotFound';
+import { Private } from '../components/Private';
+import { ADMIN_ROUTES } from './admin';
+import { usePatientRoutes } from './patients';
 
 export const useAppRouter = () => {
-  const { remotes } = usePluginsContext();
+	const { remotes } = usePluginsContext();
 
-  const patientRoutes = usePatientRoutes();
+	const patientRoutes = usePatientRoutes();
 
 	const router = useMemo(
 		() =>
@@ -68,6 +68,17 @@ export const useAppRouter = () => {
 								).then((module) => ({
 									Component: module.LaboratoryActivity,
 								})),
+							children: [
+								{
+									path: ':id/edit',
+									lazy: async () =>
+										import(
+											'../components/accessories/laboratory/EditLaboratoryContent'
+										).then((module) => ({
+											Component: module.EditLaboratoryContent,
+										})),
+								},
+							],
 						},
 						{
 							path: 'admin',
@@ -101,12 +112,12 @@ export const useAppRouter = () => {
 									),
 							})),
 
-            { path: "*", element: <NotFound /> },
-          ],
-        },
-      ]),
-    [remotes.filter, patientRoutes],
-  );
+						{ path: '*', element: <NotFound /> },
+					],
+				},
+			]),
+		[remotes.filter, patientRoutes],
+	);
 
-  return router;
+	return router;
 };
