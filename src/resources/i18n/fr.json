@@ -400,7 +400,7 @@
     "previousentries": "Visites précédentes"
   },
   "examination": {
-    "newtriage": "Créer un nouveau examen spécifique",
+    "newtriage": "Créer un nouvel examen spécifique",
     "edittriage": "Modifier l'examen spécifique",
     "ap": {
       "max": "Diastolique (mmHg)",
