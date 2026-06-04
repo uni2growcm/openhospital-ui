@@ -41,7 +41,7 @@ export const reports: IReport[] = [
   },
   {
     key: "reports.pathologyByAgeGenderReport",
-    code: "004",
+    code: "003",
     option: "date-range",
   },
   {
