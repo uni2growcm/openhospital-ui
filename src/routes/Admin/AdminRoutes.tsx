@@ -22,7 +22,7 @@ import {
   ReferenceData,
 } from "../../components/accessories/admin/referenceData";
 import {
-  EditCommune,
+  EditMunicipality,
   EditEthnic,
   EditOccupation,
   EditTown,
@@ -113,20 +113,20 @@ export const AdminRoutes = () => {
         ),
       },
       {
-        path: getPath(PATHS.admin_communes_new),
+        path: getPath(PATHS.admin_municipalities_new),
         element: (
           <AdminActivityContent
-            title={t("common.addCommune")}
-            children={<EditCommune />}
+            title={t("common.addCommmune")}
+            children={<EditMunicipality />}
           />
         ),
       },
       {
-        path: getPath(PATHS.admin_communes_edit),
+        path: getPath(PATHS.admin_municipalities_edit),
         element: (
           <AdminActivityContent
             title={t("commune.editCommune")}
-            children={<EditCommune />}
+            children={<EditMunicipality />}
           />
         ),
       },

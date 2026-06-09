@@ -10,8 +10,8 @@ import { DischargeFormFieldName } from "./dischargeForm/types";
 export const useFields = (admission?: AdmissionDTO) => {
   const fields: TFields<DischargeFormFieldName> = {
     ...initialFields,
-    diseaseOut1: {
-      value: admission?.diseaseOut1?.code?.toString() ?? "",
+    complicationDiagnosis: {
+      value: admission?.complicationDiagnosis?.code?.toString() ?? "",
       type: "text",
     },
     diseaseOut2: {

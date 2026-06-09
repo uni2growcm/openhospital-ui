@@ -4,7 +4,6 @@ apis/AdmissionsApi.ts
 apis/AgeTypesApi.ts
 apis/BillsApi.ts
 apis/CaresApi.ts
-apis/CommunesApi.ts
 apis/ConditioningsApi.ts
 apis/DeliveryResultTypeApi.ts
 apis/DeliveryTypeApi.ts
@@ -27,6 +26,7 @@ apis/MedicalStockMovementTypeApi.ts
 apis/MedicalStockWardApi.ts
 apis/MedicalTypesApi.ts
 apis/MedicalsApi.ts
+apis/MunicipalitiesApi.ts
 apis/OccupationsApi.ts
 apis/OpdsApi.ts
 apis/OperationsApi.ts
@@ -65,7 +65,6 @@ models/BillDTO.ts
 models/BillItemsDTO.ts
 models/BillPaymentsDTO.ts
 models/CareDTO.ts
-models/CommuneDTO.ts
 models/ConditioningDTO.ts
 models/DeliveryResultTypeDTO.ts
 models/DeliveryTypeDTO.ts
@@ -100,6 +99,7 @@ models/MedicalWardIdDTO.ts
 models/MovementDTO.ts
 models/MovementTypeDTO.ts
 models/MovementWardDTO.ts
+models/MunicipalityDTO.ts
 models/OccupationDTO.ts
 models/OpdDTO.ts
 models/OpdWithOperationRowDTO.ts

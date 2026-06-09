@@ -1,0 +1,1 @@
+export { EditMunicipality } from "./EditMunicipality";

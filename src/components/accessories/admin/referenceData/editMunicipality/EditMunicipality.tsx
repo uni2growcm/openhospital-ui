@@ -1,29 +1,31 @@
 import { CircularProgress } from "@mui/material";
 import { PATHS } from "consts";
-import { CommuneDTO } from "generated";
+import { MunicipalityDTO } from "generated";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router";
 import { Navigate } from "react-router-dom";
 import {
-  createCommune,
-  createCommuneReset,
-  getCommuneById,
-  getCommuneByIdReset,
-  updateCommune,
-  updateCommuneReset,
-} from "state/commune";
-import { EditCommuneForm } from "./EditCommuneForm";
+  createMunicipality,
+  createMunicipalityReset,
+  getMunicipalityById,
+  getMunicipalityByIdReset,
+  updateMunicipality,
+  updateMunicipalityReset,
+} from "state/municipality";
+import { EditMunicipalityForm } from "./EditMunicipalityForm";
 
-export const EditCommune = () => {
+export const EditMunicipality = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
   const { t } = useTranslation();
 
-  const [commune, setCommune] = useState<CommuneDTO | null>(null);
-  const [communeNotFound, setCommuneNotFound] = useState(false);
+  const [municipality, setMunicipality] = useState<MunicipalityDTO | null>(
+    null
+  );
+  const [municipalityNotFound, setMunicipalityNotFound] = useState(false);
 
   const isEdit = Boolean(id);
 
@@ -32,46 +34,50 @@ export const EditCommune = () => {
   };
 
   const { isLoading, hasSucceeded, hasFailed, error } = useAppSelector(
-    (state) => state.communes.updateCommune
+    (state) => state.communes.updateMunicipality
   );
-  const createState = useAppSelector((state) => state.communes.createCommune);
+  const createState = useAppSelector(
+    (state) => state.communes.createMunicipality
+  );
 
-  const communeRes = useAppSelector((state) => state.communes.getCommuneById);
+  const municipalityRes = useAppSelector(
+    (state) => state.communes.getMunicipalityById
+  );
 
   useEffect(() => {
     if (id) {
-      dispatch(getCommuneById(Number(id)));
+      dispatch(getMunicipalityById(Number(id)));
     }
 
     return () => {
-      dispatch(updateCommuneReset());
-      dispatch(createCommuneReset());
-      dispatch(getCommuneByIdReset());
+      dispatch(updateMunicipalityReset());
+      dispatch(createMunicipalityReset());
+      dispatch(getMunicipalityByIdReset());
     };
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (communeRes.hasSucceeded) {
-      if (communeRes.data) {
-        setCommune(communeRes.data);
+    if (municipalityRes.hasSucceeded) {
+      if (municipalityRes.data) {
+        setMunicipality(municipalityRes.data);
       } else {
-        setCommuneNotFound(true);
+        setMunicipalityNotFound(true);
       }
     }
-  }, [communeRes.hasSucceeded, communeRes.data]);
+  }, [municipalityRes.hasSucceeded, municipalityRes.data]);
 
-  const handleSubmit = (values: CommuneDTO) => {
+  const handleSubmit = (values: MunicipalityDTO) => {
     if (isEdit) {
-      dispatch(updateCommune({ id: values.id!, communeDTO: values }));
+      dispatch(updateMunicipality({ id: values.id!, municipalityDTO: values }));
     } else {
-      dispatch(createCommune(values));
+      dispatch(createMunicipality(values));
     }
   };
 
-  if (communeNotFound) return <Navigate to={PATHS.admin} />;
+  if (municipalityNotFound) return <Navigate to={PATHS.admin} />;
 
-  const initialValues: CommuneDTO =
-    commune || ({ id: 0, name: "" } as CommuneDTO);
+  const initialValues: MunicipalityDTO =
+    municipality || ({ id: 0, name: "" } as MunicipalityDTO);
 
   const loading = isEdit ? isLoading : createState.isLoading;
   const succeeded = isEdit ? hasSucceeded : createState.hasSucceeded;
@@ -80,10 +86,10 @@ export const EditCommune = () => {
 
   return (
     <div>
-      {isEdit && (communeRes.isLoading || !commune) ? (
+      {isEdit && (municipalityRes.isLoading || !municipality) ? (
         <CircularProgress style={{ marginLeft: "50%", position: "relative" }} />
       ) : (
-        <EditCommuneForm
+        <EditMunicipalityForm
           initialValues={initialValues}
           onSubmit={handleSubmit}
           isLoading={loading}

@@ -1,17 +1,17 @@
 import { Tab, Tabs } from "@mui/material";
+import { PATHS } from "consts";
+import { useAppDispatch } from "libraries/hooks/redux";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
-import { useAppDispatch } from "libraries/hooks/redux";
 import Button from "../../button/Button";
-import { PATHS } from "consts";
-import { CommunesTable } from "./communeTable";
 import { EthnicsTable } from "./ethnicTable";
+import { MunicipalitiesTable } from "./municipalityTable";
 import { OccupationsTable } from "./occupationTable";
 import { TownsTable } from "./townTable";
 
 export enum TabOptions {
-  commune = "commune",
+  municipality = "municipality",
   ethnic = "ethnic",
   town = "town",
   occupation = "occupation",
@@ -23,7 +23,7 @@ export const ReferenceData = () => {
   const dispatch = useAppDispatch();
 
   const { state }: { state: { tab?: TabOptions } } = useLocation();
-  const activeTab = state?.tab ?? TabOptions.commune;
+  const activeTab = state?.tab ?? TabOptions.municipality;
 
   const setTab = (tab: TabOptions) =>
     navigate(PATHS.admin_reference_data, { state: { tab } });
@@ -36,12 +36,12 @@ export const ReferenceData = () => {
   );
 
   const tabsConfig = {
-    [TabOptions.commune]: {
-      label: t("common.communes"),
-      table: CommunesTable,
-      addPath: PATHS.admin_communes_new,
-      editPath: PATHS.admin_communes_edit,
-      addLabel: t("common.addCommune"),
+    [TabOptions.municipality]: {
+      label: t("common.municipalities"),
+      table: MunicipalitiesTable,
+      addPath: PATHS.admin_municipalities_new,
+      editPath: PATHS.admin_municipalities_edit,
+      addLabel: t("common.addMunicipality"),
     },
 
     [TabOptions.ethnic]: {

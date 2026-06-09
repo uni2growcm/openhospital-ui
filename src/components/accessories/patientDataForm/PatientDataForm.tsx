@@ -3,6 +3,8 @@ import { useFormik } from "formik";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import { useCommune } from "libraries/hooks/useCommune";
 import { useEthnic } from "libraries/hooks/useEthnic";
+import { useOccupation } from "libraries/hooks/useOccupation";
+import { useTown } from "libraries/hooks/useTown";
 import { get, has, isEmpty } from "lodash";
 import moment from "moment";
 import React, {
@@ -14,6 +16,9 @@ import React, {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { getEthnics } from "state/ethnic";
+import { getOccupations } from "state/occupation";
+import { getTowns } from "state/town";
 import { getAgeTypes } from "state/types/ageTypes";
 import { number, object, string } from "yup";
 import warningIcon from "../../../assets/warning-icon.png";
@@ -42,12 +47,7 @@ import TextField from "../textField/TextField";
 import "./styles.scss";
 import { TAgeFieldName, TProps } from "./types";
 import { useCityOptions } from "./useCityOptions";
-import { useTown } from "libraries/hooks/useTown";
-import { useOccupation } from "libraries/hooks/useOccupation";
-import { getTowns } from "state/town";
-import { getCommunes } from "state/commune";
-import { getOccupations } from "state/occupation";
-import { getEthnics } from "state/ethnic";
+import { getMunicipalities } from "state/municipality";
 
 const PatientDataForm: FunctionComponent<TProps> = ({
   fields,
@@ -122,8 +122,8 @@ const PatientDataForm: FunctionComponent<TProps> = ({
   const ethnicsOptions = useAppSelector(
     (state: IState) => state.ethnics.ethnicList.data
   );
-  const communesOptions = useAppSelector(
-    (state: IState) => state.communes.getCommunes.data
+  const MunicipalitiesOptions = useAppSelector(
+    (state: IState) => state.communes.getMunicipalities.data
   );
   const occupationsOptions = useAppSelector(
     (state: IState) => state.occupations.occupationList.data
@@ -227,13 +227,19 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 
   const [openResetConfirmation, setOpenResetConfirmation] = useState(false);
 
-  const { options: ethnicOptions } = useEthnic(ethnicsOptions?.map((e) => e.name));
+  const { options: ethnicOptions } = useEthnic(
+    ethnicsOptions?.map((e) => e.name)
+  );
 
-  const { options: communeOptions } = useCommune(communesOptions?.map((e) => e.name));
+  const { options: communeOptions } = useCommune(
+    MunicipalitiesOptions?.map((e) => e.name)
+  );
 
-   const { options: occupationOptions } = useOccupation(occupationsOptions?.map((e) => e.name));
+  const { options: occupationOptions } = useOccupation(
+    occupationsOptions?.map((e) => e.name)
+  );
 
-   const { options: townOptions } = useTown(townsOptions?.map((e) => e.name));
+  const { options: townOptions } = useTown(townsOptions?.map((e) => e.name));
 
   const schoolingLevelOptions = [
     {
@@ -252,7 +258,7 @@ const PatientDataForm: FunctionComponent<TProps> = ({
       value: "Higher education",
       label: t("patient.schoolingLevel.higherEducation"),
     },
-     {
+    {
       value: "Illiterate",
       label: t("patient.schoolingLevel.illiterate"),
     },
@@ -266,7 +272,7 @@ const PatientDataForm: FunctionComponent<TProps> = ({
   useEffect(() => {
     dispatch(getTowns());
     dispatch(getEthnics());
-    dispatch(getCommunes());
+    dispatch(getMunicipalities());
     dispatch(getOccupations());
   }, [dispatch, shouldResetForm]);
 

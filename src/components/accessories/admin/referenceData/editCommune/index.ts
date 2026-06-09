@@ -1,1 +1,0 @@
-export { EditCommune } from "./EditCommune";

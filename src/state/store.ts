@@ -6,14 +6,18 @@ import { conditioningSlice } from "./conditionings";
 import { dashboardSlice } from "./dashboard";
 import { diseaseSlice } from "./diseases";
 import { encounterSlice } from "./encounter";
+import { ethnicSlice } from "./ethnic";
 import { examinationSlice } from "./examinations";
 import { examSlice } from "./exams";
 import { hospitalSlice } from "./hospital";
+import { hospitalisationconsultationSlice } from "./hospitalisationconsultation";
 import { laboratorySlice } from "./laboratories";
 import { layoutSlice } from "./layouts";
 import { mainSlice } from "./main";
 import { medicalHistorySlice } from "./medicalhistory";
 import { medicalSlice } from "./medicals";
+import { municipalitySlice } from "./municipality";
+import { occupationSlice } from "./occupation";
 import { opdSlice } from "./opds";
 import { operationSlice } from "./operations";
 import { patientSlice } from "./patients";
@@ -24,6 +28,7 @@ import { settingsSlice } from "./settings";
 import { summaryByEncounterSlice, summarySlice } from "./summary";
 import { supplierSlice } from "./suppliers";
 import { therapySlice } from "./therapies";
+import { townSlice } from "./town";
 import { diseaseTypeSlice } from "./types/diseases";
 import { examTypeSlice } from "./types/exams";
 import typesReducer from "./types/slice";
@@ -32,11 +37,6 @@ import { userSlice } from "./users";
 import { vaccineSlice } from "./vaccines";
 import { visitSlice } from "./visits";
 import { wardSlice } from "./ward";
-import { townSlice } from "./town";
-import { occupationSlice } from "./occupation";
-import { ethnicSlice } from "./ethnic";
-import { communeSlice } from "./commune";
-import { hospitalisationconsultationSlice } from "./hospitalisationconsultation";
 
 const reducer = combineReducers({
   main: mainSlice.reducer,
@@ -76,7 +76,7 @@ const reducer = combineReducers({
   towns: townSlice.reducer,
   occupations: occupationSlice.reducer,
   ethnics: ethnicSlice.reducer,
-  communes: communeSlice.reducer,
+  communes: municipalitySlice.reducer,
   hospitalisationconsultations: hospitalisationconsultationSlice.reducer,
 });
 

@@ -1,44 +1,47 @@
 import { CircularProgress } from "@mui/material";
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import Table from "components/accessories/table/Table";
-import { CommuneDTO } from "generated";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import { scrollToElement } from "libraries/uiUtils/scrollToElement";
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import {
-  deleteCommune,
-  deleteCommuneReset,
-  getCommunes,
-  updateCommuneReset,
-} from "state/commune";
+  deleteMunicipality,
+  deleteMunicipalityReset,
+  getMunicipalities,
+  updateMunicipalityReset,
+} from "state/municipality";
 import { IProps } from "./types";
+import { MunicipalityDTO } from "generated";
 
-export const CommunesTable: React.FC<IProps> = ({ headerActions, onEdit }) => {
+export const MunicipalitiesTable: React.FC<IProps> = ({
+  headerActions,
+  onEdit,
+}) => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const infoBoxRef = useRef<HTMLDivElement>(null);
 
   const { data, status, error } = useAppSelector(
-    (state) => state.communes.getCommunes
+    (state) => state.communes.getMunicipalities
   );
 
-  const deleteState = useAppSelector((state) => state.communes.deleteCommune);
-  const updateState = useAppSelector((state) => state.communes.updateCommune);
+  const deleteState = useAppSelector((state) => state.communes.deleteMunicipality);
+  const updateState = useAppSelector((state) => state.communes.updateMunicipality);
 
   useEffect(() => {
-    dispatch(getCommunes());
+    dispatch(getMunicipalities());
 
     return () => {
-      dispatch(deleteCommuneReset());
-      dispatch(updateCommuneReset());
+      dispatch(deleteMunicipalityReset());
+      dispatch(updateMunicipalityReset());
     };
   }, [dispatch]);
 
   const handleDelete = useCallback(
-    (row: CommuneDTO) => {
+    (row: MunicipalityDTO) => {
       if (row?.id) {
-        dispatch(deleteCommune(row.id));
+        dispatch(deleteMunicipality(row.id));
       }
     },
     [dispatch]
@@ -50,7 +53,7 @@ export const CommunesTable: React.FC<IProps> = ({ headerActions, onEdit }) => {
     }
 
     if (deleteState.hasSucceeded || updateState.hasSucceeded) {
-      dispatch(getCommunes());
+      dispatch(getMunicipalities());
     }
   }, [
     deleteState.hasFailed,
@@ -115,8 +118,8 @@ export const CommunesTable: React.FC<IProps> = ({ headerActions, onEdit }) => {
                   rowsPerPage={15}
                   manualFilter={false}
                   isCollapsabile={false}
-                  rawData={(rowData ?? []).map((commune) => ({
-                    ...commune,
+                  rawData={(rowData ?? []).map((municipality) => ({
+                    ...municipality,
                   }))}
                   rowKey="userName"
                   headerActions={headerActions}
