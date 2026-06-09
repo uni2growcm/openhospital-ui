@@ -8,10 +8,16 @@ import { initialFields } from "./consts";
 import { DischargeFormFieldName } from "./dischargeForm/types";
 
 export const useFields = (admission?: AdmissionDTO) => {
+  const complicationDiagnosisValue =
+    admission?.complicationDiagnosis
+      ?.map((diagnosis) => diagnosis?.code?.toString())
+      .filter((code): code is string => !!code)
+      .join(", ") ?? "";
+
   const fields: TFields<DischargeFormFieldName> = {
     ...initialFields,
     complicationDiagnosis: {
-      value: admission?.complicationDiagnosis?.code?.toString() ?? "",
+      value: complicationDiagnosisValue,
       type: "text",
     },
     diseaseOut2: {
@@ -34,7 +40,7 @@ export const useFields = (admission?: AdmissionDTO) => {
       type: "text",
     },
     nextAppointment: {
-      value: parseDateTime(admission?.nextAppointment?.toString()!, false),
+      value: parseDateTime(admission?.nextAppointment ?? "", false),
       type: "date",
     },
     deathPeriod: {
