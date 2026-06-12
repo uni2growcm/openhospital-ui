@@ -1,20 +1,20 @@
 import checkIcon from "assets/check-icon.png";
 import Button from "components/accessories/button/Button";
 import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
+import DiscardButton from "components/accessories/discardButton/DiscardButton";
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import ResetButton from "components/accessories/resetButton/resetButton";
 import TextField from "components/accessories/textField/TextField";
 import { useFormik } from "formik";
-import { CommuneDTO } from "generated";
+import { MunicipalityDTO } from "generated";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import "./styles.scss";
 import { IProps } from "./types";
-import DiscardButton from "components/accessories/discardButton/DiscardButton";
 
-export const EditCommuneForm = ({
+export const EditMunicipalityForm = ({
   initialValues,
   hasSucceeded,
   hasFailed,
@@ -22,7 +22,7 @@ export const EditCommuneForm = ({
   onSubmit,
   successTitle,
   successInfo,
-  onSuccess
+  onSuccess,
 }: IProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ export const EditCommuneForm = ({
     }
   }, [hasSucceeded]);
 
-  const formik = useFormik<CommuneDTO>({
+  const formik = useFormik<MunicipalityDTO>({
     initialValues,
     validationSchema,
     enableReinitialize: true,
@@ -73,7 +73,7 @@ export const EditCommuneForm = ({
       </div>
 
       <form onSubmit={formik.handleSubmit}>
-        <div className="editCommuneForm__item textfield fullwidth">   
+        <div className="editCommuneForm__item textfield fullwidth">
           <TextField
             field={formik.getFieldProps("name")}
             theme="regular"
@@ -85,13 +85,9 @@ export const EditCommuneForm = ({
             isValid={!!formik.touched.name && !!formik.errors.name}
           />
         </div>
-      
+
         <div className="form-button">
-          <Button
-            type="submit"
-            variant="contained"
-            className="submit_button"
-          >
+          <Button type="submit" variant="contained" className="submit_button">
             {t("common.save")}
           </Button>
 

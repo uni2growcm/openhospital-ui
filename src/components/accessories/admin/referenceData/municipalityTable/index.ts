@@ -1,0 +1,1 @@
+export { MunicipalitiesTable } from "./MunicipalitiesTable";

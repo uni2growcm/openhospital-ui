@@ -25,11 +25,6 @@ export const initialFields: TFields<AdmissionFormFieldName> = {
     type: "text",
     options: [],
   },
-  diseaseIn: {
-    value: "",
-    type: "text",
-    options: [],
-  },
   anamnesis: {
     value: "",
     type: "text",
@@ -42,24 +37,14 @@ export const initialFields: TFields<AdmissionFormFieldName> = {
     value: "",
     type: "text",
   },
+  diseaseIn: {
+    value: "",
+    type: "text",
+    options: [],
+  },
   bedDays: {
     value: "0",
     type: "number",
-  },
-  diseaseOut1: {
-    value: "",
-    type: "text",
-    options: [],
-  },
-  diseaseOut2: {
-    value: "",
-    type: "text",
-    options: [],
-  },
-  diseaseOut3: {
-    value: "",
-    type: "text",
-    options: [],
   },
   cliDiaryCharge: {
     value: "",
@@ -126,6 +111,22 @@ export const initialFields: TFields<AdmissionFormFieldName> = {
     type: "text",
   },
   improvementFeedback: {
+    value: "",
+    type: "text",
+  },
+  diagnosisIn: {
+    value: [],
+    type: "array",
+  },
+  diagnosisOut: {
+    value: [],
+    type: "array",
+  },
+  complicationDiagnosis: {
+    value: [],
+    type: "array",
+  },
+  othersInformation: {
     value: "",
     type: "text",
   },

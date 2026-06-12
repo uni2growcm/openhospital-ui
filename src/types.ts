@@ -30,9 +30,9 @@ import { IVaccineState } from "./state/vaccines/types";
 import { IVisitState } from "./state/visits/types";
 import { IWardState } from "./state/ward/types";
 import { ITownState } from "state/town";
-import { ICommuneState } from "state/commune";
 import { IOccupationState } from "state/occupation";
 import { IEthnicState } from "state/ethnic";
+import { IMunicipalityState } from "state/municipality";
 
 export interface IState {
   main: IMainState;
@@ -68,7 +68,7 @@ export interface IState {
   conditioning: IConditioningsState;
   medicalhistory: IMedicalHistoryState;
   towns: ITownState;
-  communes: ICommuneState;
+  communes: IMunicipalityState;
   occupations: IOccupationState;
   ethnics: IEthnicState;
 }

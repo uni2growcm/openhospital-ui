@@ -1,9 +1,9 @@
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { FunctionComponent, useEffect, useState } from "react";
-import { updateAdmission, printCrossReferenceReport } from "state/admissions";
-import { AdmissionDTO } from "../../../generated";
-import { IState } from "../../../types";
+import { printCrossReferenceReport, updateAdmission } from "state/admissions";
+import { AdmissionDTO, DiseaseDTO } from "../../../generated";
 import { downloadBlob } from "../../../libraries/downloadUtils/downloadUtils";
+import { IState } from "../../../types";
 import { useFields } from "../admission/useFields";
 import { CurrentAdmissionData } from "./currentAdmissionData/CurrentAdmissionData";
 import { CurrentAdmissionForm } from "./currentAdmissionForm/CurrentAdmissionForm";
@@ -29,16 +29,20 @@ export const CurrentAdmission: FunctionComponent<IOwnProps> = ({
   };
 
   const onPrint = (admission: AdmissionDTO) => {
-    dispatch(printCrossReferenceReport({ 
-      patId: admission.patient?.code || 0, 
-      admId: admission.id || 0 
-    }))
+    dispatch(
+      printCrossReferenceReport({
+        patId: admission.patient?.code || 0,
+        admId: admission.id || 0,
+      })
+    )
       .unwrap()
       .then((result) => {
         if (result instanceof Blob)
           downloadBlob(
             result,
-            `cross-reference-report-${admission.patient?.code}-${admission.id}-${new Date().getTime()}.pdf`
+            `cross-reference-report-${admission.patient?.code}-${
+              admission.id
+            }-${new Date().getTime()}.pdf`
           );
       });
   };
@@ -54,7 +58,7 @@ export const CurrentAdmission: FunctionComponent<IOwnProps> = ({
       fhu: adm.fhu,
       admDate: adm.admDate,
       admType: adm.admType,
-      diseaseIn: adm.diseaseIn,
+      diagnosisIn: adm.diagnosisIn,
       anamnesis: adm.anamnesis,
       ward: adm.ward,
       preTreatment: adm.preTreatment,
@@ -71,6 +75,7 @@ export const CurrentAdmission: FunctionComponent<IOwnProps> = ({
       improvementFeedback: adm.improvementFeedback,
       physicalExam: adm.physicalExam,
       courseOfAction: adm.courseOfAction,
+      complicationDiagnosis: [adm.diseaseIn!] as DiseaseDTO[],
     };
     dispatch(updateAdmission(admissionToSave));
   };

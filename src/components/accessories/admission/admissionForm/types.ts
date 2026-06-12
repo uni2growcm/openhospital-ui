@@ -28,9 +28,6 @@ export type AdmissionFormFieldName =
   | "disDate"
   | "disType"
   | "bedDays"
-  | "diseaseOut1"
-  | "diseaseOut2"
-  | "diseaseOut3"
   | "cliDiaryCharge"
   | "imageryCharge"
   | "preTreatment"
@@ -47,4 +44,8 @@ export type AdmissionFormFieldName =
   | "improvementFeedback"
   | "physicalExam"
   | "courseOfAction"
-  | "nextAppointment";
+  | "nextAppointment"
+  | "diagnosisIn"
+  | "diagnosisOut"
+  | "complicationDiagnosis"
+  | "othersInformation";

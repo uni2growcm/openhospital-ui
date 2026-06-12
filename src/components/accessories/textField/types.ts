@@ -24,4 +24,5 @@ export interface IProps {
   rows?: number;
   required?: FIELD_VALIDATION;
   maxLength?: number;
+  min?: number;
 }

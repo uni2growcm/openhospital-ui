@@ -8,7 +8,6 @@ export type TCurrentAdmissionFieldName =
   | "transUnit"
   | "admDate"
   | "admType"
-  | "diseaseIn"
   | "fhu"
   | "anamnesis"
   | "preTreatment"
@@ -17,7 +16,8 @@ export type TCurrentAdmissionFieldName =
   | "alertReceived"
   | "referenceSheet"
   | "qualifiedAgent"
-  | "physicalExam";
+  | "physicalExam"
+  | "diagnosisIn";
 
 export type TActivityTransitionState = "IDLE" | "TO_RESET" | "FAIL";
 

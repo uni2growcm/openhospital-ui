@@ -21,13 +21,6 @@ export const useFields = (
       value: admission?.admType?.code ?? "",
       type: "text",
     },
-    diseaseIn: {
-      value:
-        admission?.diseaseIn?.code?.toString() ??
-        lastOPDDisease?.code?.toString() ??
-        "",
-      type: "text",
-    },
     admDate: {
       value: admission?.admDate ?? parseDateTime(Date.now().toString(), false),
       type: "date",
@@ -48,16 +41,16 @@ export const useFields = (
       value: admission?.disType?.code ?? "",
       type: "text",
     },
-    diseaseOut1: {
-      value: admission?.diseaseOut1?.code?.toString() ?? "",
-      type: "text",
+    diagnosisOut: {
+      value: admission?.diagnosisOut?.map((d) => d.code?.toString() ?? "") ?? [],
+      type: "array",
     },
-    diseaseOut2: {
-      value: admission?.diseaseOut2?.code?.toString() ?? "",
-      type: "text",
+    complicationDiagnosis: {
+      value: admission?.complicationDiagnosis?.map((d) => d.code?.toString() ?? "") ?? [],
+      type: "array",
     },
-    diseaseOut3: {
-      value: admission?.diseaseOut3?.code?.toString() ?? "",
+    othersInformation: {
+      value: admission?.othersInformation ?? "",
       type: "text",
     },
     disDate: {
@@ -136,6 +129,10 @@ export const useFields = (
     improvementFeedback: {
       value: admission?.improvementFeedback ?? "",
       type: "text",
+    },
+    diagnosisIn: {
+      value: admission?.diagnosisIn?.map((d) => d.code?.toString() ?? "") ?? [],
+      type: "array",
     },
   };
 
