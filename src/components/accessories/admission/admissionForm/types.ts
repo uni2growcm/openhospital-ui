@@ -22,7 +22,6 @@ export type AdmissionFormFieldName =
   | "transUnit"
   | "admDate"
   | "admType"
-  | "diseaseIn"
   | "fhu"
   | "anamnesis"
   | "disDate"
