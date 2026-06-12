@@ -8,25 +8,21 @@ import { initialFields } from "./consts";
 import { DischargeFormFieldName } from "./dischargeForm/types";
 
 export const useFields = (admission?: AdmissionDTO) => {
-  const complicationDiagnosisValue =
-    admission?.complicationDiagnosis
-      ?.map((diagnosis) => diagnosis?.code?.toString())
-      .filter((code): code is string => !!code)
-      .join(", ") ?? "";
-
   const fields: TFields<DischargeFormFieldName> = {
     ...initialFields,
+    diagnosisIn: {
+      value: admission?.diagnosisIn?.map((d) => d.code?.toString() ?? "") ?? [],
+      type: "array",
+    },
     complicationDiagnosis: {
-      value: complicationDiagnosisValue,
-      type: "text",
+      value:
+        admission?.complicationDiagnosis?.map((d) => d.code?.toString() ?? "") ??
+        [],
+      type: "array",
     },
-    diseaseOut2: {
-      value: admission?.diseaseOut2?.code?.toString() ?? "",
-      type: "text",
-    },
-    diseaseOut3: {
-      value: admission?.diseaseOut3?.code?.toString() ?? "",
-      type: "text",
+    diagnosisOut: {
+      value: admission?.diagnosisOut?.map((d) => d.code?.toString() ?? "") ?? [],
+      type: "array",
     },
     bedDays: {
       value: differenceInDays(
@@ -37,6 +33,10 @@ export const useFields = (admission?: AdmissionDTO) => {
     },
     anamnesis: {
       value: admission?.anamnesis ?? "",
+      type: "text",
+    },
+    othersInformation: {
+      value: admission?.othersInformation ?? "",
       type: "text",
     },
     nextAppointment: {

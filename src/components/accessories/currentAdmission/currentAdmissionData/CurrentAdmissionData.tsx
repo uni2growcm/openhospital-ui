@@ -58,6 +58,14 @@ export const CurrentAdmissionData: FunctionComponent<IOwnProps> = ({
             <p className="item_content">{admission?.diseaseIn?.description}</p>
           </div>
         )}
+        {!isEmpty(admission?.diagnosisIn) && (
+          <div className="currentAdmissionData__item">
+            <span className="item_label">{t("admission.diagnosisIn")}</span>
+            <p className="item_content">
+              {admission?.diagnosisIn?.map((d) => d.description).join(", ")}
+            </p>
+          </div>
+        )}
         {admission?.alertReceived != null && (
           <div className="currentAdmissionData__item">
             <span className="item_label">{t("patient.alertReceived")}</span>

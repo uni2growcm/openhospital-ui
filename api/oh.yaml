@@ -3433,7 +3433,7 @@ paths:
     post:
       tags:
       - Municipalities
-      operationId: newCommune
+      operationId: newMunicipality
       requestBody:
         content:
           application/json:
@@ -7957,13 +7957,13 @@ components:
           format: int32
           description: lock
           example: 0
-        opd:
-          type: boolean
-        female:
+        pharmacy:
           type: boolean
         male:
           type: boolean
-        pharmacy:
+        female:
+          type: boolean
+        opd:
           type: boolean
       required:
       - beds
@@ -8796,6 +8796,16 @@ components:
           description: Complication Diagnosis
           items:
             $ref: "#/components/schemas/DiseaseDTO"
+        diagnosisOut:
+          type: array
+          description: Diagnosis out
+          items:
+            $ref: "#/components/schemas/DiseaseDTO"
+        diagnosisIn:
+          type: array
+          description: Diagnosis in
+          items:
+            $ref: "#/components/schemas/DiseaseDTO"
         diseaseOut2:
           $ref: "#/components/schemas/DiseaseDTO"
           description: 'Disease out '
@@ -8931,6 +8941,8 @@ components:
           type: string
           description: Improvement feedback
           example: Patient showing significant improvement
+        othersInformation:
+          type: string
         yprog:
           type: integer
           format: int32

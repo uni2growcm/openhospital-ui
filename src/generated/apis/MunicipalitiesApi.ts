@@ -27,7 +27,7 @@ export interface GetMunicipalityByIdRequest {
     id: number;
 }
 
-export interface NewCommuneRequest {
+export interface NewMunicipalityRequest {
     municipalityDTO: MunicipalityDTO;
 }
 
@@ -92,10 +92,10 @@ export class MunicipalitiesApi extends BaseAPI {
 
     /**
      */
-    newCommune({ municipalityDTO }: NewCommuneRequest): Observable<MunicipalityDTO>
-    newCommune({ municipalityDTO }: NewCommuneRequest, opts?: OperationOpts): Observable<AjaxResponse<MunicipalityDTO>>
-    newCommune({ municipalityDTO }: NewCommuneRequest, opts?: OperationOpts): Observable<MunicipalityDTO | AjaxResponse<MunicipalityDTO>> {
-        throwIfNullOrUndefined(municipalityDTO, 'municipalityDTO', 'newCommune');
+    newMunicipality({ municipalityDTO }: NewMunicipalityRequest): Observable<MunicipalityDTO>
+    newMunicipality({ municipalityDTO }: NewMunicipalityRequest, opts?: OperationOpts): Observable<AjaxResponse<MunicipalityDTO>>
+    newMunicipality({ municipalityDTO }: NewMunicipalityRequest, opts?: OperationOpts): Observable<MunicipalityDTO | AjaxResponse<MunicipalityDTO>> {
+        throwIfNullOrUndefined(municipalityDTO, 'municipalityDTO', 'newMunicipality');
 
         const headers: HttpHeaders = {
             'Content-Type': 'application/json',

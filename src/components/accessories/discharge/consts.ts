@@ -16,22 +16,26 @@ export const initialFields: TFields<DischargeFormFieldName> = {
     value: "0",
     type: "number",
   },
+  diagnosisIn: {
+    value: [],
+    type: "array",
+    options: [],
+  },
   complicationDiagnosis: {
-    value: "",
-    type: "text",
+    value: [],
+    type: "array",
     options: [],
   },
-  diseaseOut2: {
-    value: "",
-    type: "text",
-    options: [],
-  },
-  diseaseOut3: {
-    value: "",
-    type: "text",
+  diagnosisOut: {
+    value: [],
+    type: "array",
     options: [],
   },
   anamnesis: {
+    value: "",
+    type: "text",
+  },
+  othersInformation: {
     value: "",
     type: "text",
   },

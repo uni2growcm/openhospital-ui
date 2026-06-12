@@ -1,12 +1,12 @@
-import { CommuneDTO } from "generated";
+import { MunicipalityDTO } from "generated";
 
 export interface IProps {
-  initialValues: CommuneDTO;
+  initialValues: MunicipalityDTO;
   isLoading: boolean;
   hasSucceeded: boolean;
   hasFailed: boolean;
   error: any;
-  onSubmit: (commune: CommuneDTO) => void;
+  onSubmit: (municipality: MunicipalityDTO) => void;
   successTitle: string;
   successInfo: string;
   onSuccess?: () => void;

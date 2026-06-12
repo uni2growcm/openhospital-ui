@@ -71,9 +71,7 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
     (state: IState) => state.types.admissions.getAll.data
   );
   const wards = useAppSelector((state: IState) => state.wards.allWards.data);
-  const diagnosisInStatus = useAppSelector(
-    (state: IState) => state.diseases.diseasesIpdIn.status
-  );
+  
   const wardStatus = useAppSelector(
     (state: IState) => state.wards.allWards.status
   );
@@ -127,8 +125,8 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
         initialFields(currentAdmission),
         values
       );
-      formattedValues.diseaseIn = diagnosisInList?.find(
-        (item) => item.code === formattedValues.diseaseIn
+      formattedValues.diagnosisIn = diagnosisInList?.filter(
+        (item) => formattedValues.diagnosisIn?.includes(item.code)
       );
       formattedValues.admType = admissionTypes?.find(
         (item) => item.code === formattedValues.admType
@@ -281,7 +279,7 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
               errorText={getErrorText("admType")}
               onBlur={onBlurCallback("admType")}
               onChange={(_, value) => {
-               handleReferralAdmission(value);
+                handleReferralAdmission(value);
               }}
               options={renderOptions(admissionTypes)}
               loading={admTypeStatus === "LOADING"}
@@ -491,16 +489,17 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
                 />
               </div>
               <div className="fullWidth currentAdmissionForm__item">
-                <AutocompleteField
-                  fieldName="diseaseIn"
-                  fieldValue={formik.values.diseaseIn}
-                  label={t("admission.diseaseIn")}
-                  isValid={isValid("diseaseIn")}
-                  errorText={getErrorText("diseaseIn")}
-                  onBlur={onBlurCallback("diseaseIn")}
+                <Autocomplete
+                  id="diagnosisIn"
+                  multiple
+                  freeSolo
+                  value={formik.values.diagnosisIn}
                   options={renderOptions(diagnosisInList)}
-                  loading={diagnosisInStatus === "LOADING"}
-                  disabled={isLoading}
+                  onChange={(_, value) => {
+                    formik.setFieldValue("diagnosisIn", value);
+                  }}
+                  label={t("admission.diseaseIn")}
+                  placeholder={t("admission.diseaseIn")}
                 />
               </div>
               <div className="fullWidth currentAdmissionForm__item">

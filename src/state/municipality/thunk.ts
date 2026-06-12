@@ -24,7 +24,7 @@ export const getMunicipalityById = createAsyncThunk(
 export const createMunicipality = createAsyncThunk(
   "municipalities/createMunicipality",
   async (municipalityDTO: MunicipalityDTO, thunkApi) =>
-    wrapper(() => api.newCommune({ municipalityDTO }))
+    wrapper(() => api.newMunicipality({ municipalityDTO }))
       .toPromise()
       .then(() => municipalityDTO)
       .catch((error) => thunkApi.rejectWithValue(error.response))

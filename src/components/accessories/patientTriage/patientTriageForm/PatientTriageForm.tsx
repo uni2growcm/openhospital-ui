@@ -68,42 +68,12 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
       .min(30, t("common.greaterthan", { value: 30 }))
       .max(600, t("common.lessthan", { value: 600 })),
     pex_diuresis: number()
-      .transform((value) => (value === "" ? null : value))
-      .min(1, t("common.greaterthan", { value: 1 }))
-      .max(2500, t("common.lessthan", { value: 2500 })),
-    pex_rr: number()
-      .min(1, t("common.greaterthan", { value: 1 }))
-      .max(100, t("common.lessthan", { value: 100 })),
-    pex_ap_min: number()
-      .min(80, t("common.greaterthan", { value: 80 }))
-      .max(120, t("common.lessthan", { value: 120 }))
-      .test({
-        name: "pex_ap_min",
-        message: t("examination.ap.lessthanmax"),
-        test: function (value) {
-          if (!isEmpty(value) && !isEmpty(this.parent.pex_ap_max)) {
-            return this.parent.pex_ap_max >= value;
-          }
-          return true;
-        },
-      }),
-    pex_ap_max: number()
-      .min(80, t("common.greaterthan", { value: 80 }))
-      .max(120, t("common.lessthan", { value: 120 }))
-      .test({
-        name: "pex_ap_max",
-        message: t("examination.ap.morethanmin"),
-        test: function (value) {
-          if (!isEmpty(value) && !isEmpty(this.parent.pex_ap_min)) {
-            return this.parent.pex_ap_min <= value;
-          }
-          return true;
-        },
-      }),
+      .min(0, t("common.greaterthan", { value: 0 })),
+    pex_rr: number(),
+    pex_ap_min: number(),
+    pex_ap_max: number(),
     pex_pex_body_mass_index: number(),
-    pex_pex_branchial_perimeter: number()
-      .min(5, t("common.greaterthan", { value: 5 }))
-      .max(60, t("common.lessthan", { value: 60 })),
+    pex_pex_branchial_perimeter: number(),
     pex_type: string().required(t("common.required")),
     pex_pc: string(),
   });
@@ -418,20 +388,21 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
           </div>
           <Permission require="examinassions.fullaccess">
             <div className="row start-sm center-xs">
-              <div className="patientTriageForm__item">
-                <TextField
-                  field={formik.getFieldProps("pex_diuresis")}
-                  theme="regular"
-                  label={t("examination.diuresisvolume24h")}
-                  isValid={isValid("pex_diuresis")}
-                  errorText={getErrorText("pex_diuresis")}
-                  onBlur={formik.handleBlur}
-                  type="number"
-                  disabled={isLoading}
-                />
-              </div>
+                <div className="patientTriageForm__item">
+                  <TextField
+                    field={formik.getFieldProps("pex_diuresis")}
+                    theme="regular"
+                    label={t("examination.diuresisvolume24h")}
+                    isValid={isValid("pex_diuresis")}
+                    errorText={getErrorText("pex_diuresis")}
+                    onBlur={formik.handleBlur}
+                    type="number"
+                    disabled={isLoading}
+                    min={0}
+                  />
+                </div>
 
-              <div className="patientTriageForm__item">
+              {/* <div className="patientTriageForm__item">
                 <TextField
                   field={formik.getFieldProps("pex_hgt")}
                   theme="regular"
@@ -442,7 +413,7 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
                   type="number"
                   disabled={isLoading}
                 />
-              </div>
+              </div> */}
               <div className="patientTriageForm__item">
                 <SelectField
                   fieldName="pex_diuresis_desc"

@@ -29,11 +29,6 @@ export const initialFields = (
       type: "text",
       options: [],
     },
-    diseaseIn: {
-      value: "",
-      type: "text",
-      options: [],
-    },
     anamnesis: {
       value: "",
       type: "text",
@@ -65,6 +60,10 @@ export const initialFields = (
     physicalExam: {
       value: "",
       type: "boolean",
+    },
+    diagnosisIn: {
+      value: "",
+      type: "array",
     },
   };
 };

@@ -83,6 +83,18 @@ export interface AdmissionDTO {
      */
     complicationDiagnosis?: Array<DiseaseDTO>;
     /**
+     * Diagnosis out
+     * @type {Array<DiseaseDTO>}
+     * @memberof AdmissionDTO
+     */
+    diagnosisOut?: Array<DiseaseDTO>;
+    /**
+     * Diagnosis in
+     * @type {Array<DiseaseDTO>}
+     * @memberof AdmissionDTO
+     */
+    diagnosisIn?: Array<DiseaseDTO>;
+    /**
      * Disease out 
      * @type {DiseaseDTO}
      * @memberof AdmissionDTO
@@ -303,6 +315,11 @@ export interface AdmissionDTO {
      * @memberof AdmissionDTO
      */
     improvementFeedback?: string;
+    /**
+     * @type {string}
+     * @memberof AdmissionDTO
+     */
+    othersInformation?: string;
     /**
      * @type {number}
      * @memberof AdmissionDTO

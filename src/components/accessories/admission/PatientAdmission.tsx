@@ -7,7 +7,7 @@ import { useParams } from "react-router";
 import { getPatient } from "state/patients";
 import checkIcon from "../../../assets/check-icon.png";
 import failIcon from "../../../assets/fail-icon.png";
-import { AdmissionDTO, PatientDTOStatusEnum } from "../../../generated";
+import { AdmissionDTO, DiseaseDTO, PatientDTOStatusEnum } from "../../../generated";
 import { usePermission } from "../../../libraries/permissionUtils/usePermission";
 import { scrollToElement } from "../../../libraries/uiUtils/scrollToElement";
 import {
@@ -144,6 +144,7 @@ const PatientAdmission: FC = () => {
         admDate: adm.admDate,
         admType: adm.admType,
         diseaseIn: adm.diseaseIn,
+        diagnosisIn: adm.diagnosisIn,
         anamnesis: adm.anamnesis,
         ward: adm.ward,
         preTreatment: adm.preTreatment,
@@ -159,15 +160,17 @@ const PatientAdmission: FC = () => {
         treatmentReceived: adm.treatmentReceived,
         outcome: adm.outcome,
         improvementFeedback: adm.improvementFeedback,
+        complicationDiagnosis: [adm.diseaseIn!] as DiseaseDTO[],
       };
+
       if (!isEmpty(admissionToEdit?.disType)) {
         admissionToSave = {
           ...admissionToSave,
           disDate: adm.disDate,
           disType: adm.disType,
-          diseaseOut1: adm.diseaseOut1,
-          diseaseOut2: adm.diseaseOut2,
-          diseaseOut3: adm.diseaseOut3,
+          diagnosisOut: adm.diagnosisOut,
+          complicationDiagnosis: adm.complicationDiagnosis,
+          othersInformation: adm.othersInformation,
           nextAppointment: adm.nextAppointment,
         };
       }

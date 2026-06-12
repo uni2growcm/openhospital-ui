@@ -1,3 +1,4 @@
+import { Autocomplete } from "components/accessories/autocomplete";
 import { useFormik } from "formik";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import { get, has } from "lodash";
@@ -16,7 +17,7 @@ import {
   formatAllFieldValues,
   getFromFields,
 } from "../../../../libraries/formDataHandling/functions";
-import { getDiseasesIpdOut } from "../../../../state/diseases";
+import { getDiseasesIpdIn, getDiseasesIpdOut } from "../../../../state/diseases";
 import { getDischargeTypes } from "../../../../state/types/discharges";
 import { IState } from "../../../../types";
 import { useDeathPeriodOptions } from "../../../../libraries/hooks/useDeathPeriodOptions";
@@ -44,6 +45,14 @@ const DischargeForm: FC<DischargeProps> = ({
 
   const diagnosisOutList = useAppSelector(
     (state: IState) => state.diseases.diseasesIpdOut.data
+  );
+
+  const diagnosisInList = useAppSelector(
+    (state: IState) => state.diseases.diseasesIpdIn.data
+  );
+
+  const diagnosisInStatus = useAppSelector(
+    (state: IState) => state.diseases.diseasesIpdIn.status
   );
 
   const dischargeTypes = useAppSelector(
@@ -94,30 +103,6 @@ const DischargeForm: FC<DischargeProps> = ({
         },
       }),
     disType: string().required(t("common.required")),
-    diseaseOut1: string().required(t("common.required")),
-    diseaseOut2: string().test({
-      name: "diseaseOut2",
-      message: t("opd.validatedisease"),
-      test: function (value) {
-        return (
-          !value ||
-          (this.parent.diseaseOut1 && value !== this.parent.diseaseOut1)
-        );
-      },
-    }),
-    diseaseOut3: string().test({
-      name: "diseaseOut3",
-      message: t("opd.validatedisease"),
-      test: function (value) {
-        return (
-          !value ||
-          (this.parent.diseaseOut1 &&
-            this.parent.diseaseOut2 &&
-            value !== this.parent.diseaseOut1 &&
-            value !== this.parent.diseaseOut2)
-        );
-      },
-    }),
     nextAppointment: string(),
     deathPeriod: string().when("disType", {
       is: (disType: string) => {
@@ -135,14 +120,14 @@ const DischargeForm: FC<DischargeProps> = ({
     enableReinitialize: true,
     onSubmit: (values) => {
       const formattedValues = formatAllFieldValues(fields, values);
-      formattedValues.diseaseOut1 = diagnosisOutList?.find(
-        (item) => item.code === formattedValues.diseaseOut1
+      formattedValues.diagnosisIn = diagnosisInList?.filter(
+        (item) => formattedValues.diagnosisIn?.includes(item.code)
       );
-      formattedValues.diseaseOut2 = diagnosisOutList?.find(
-        (item) => item.code === formattedValues.diseaseOut2
+      formattedValues.complicationDiagnosis = diagnosisInList?.filter(
+        (item) => formattedValues.complicationDiagnosis?.includes(item.code)
       );
-      formattedValues.diseaseOut3 = diagnosisOutList?.find(
-        (item) => item.code === formattedValues.diseaseOut3
+      formattedValues.diagnosisOut = diagnosisOutList?.filter(
+        (item) => formattedValues.diagnosisOut?.includes(item.code)
       );
       formattedValues.disType = dischargeTypes?.find(
         (item) => item.code === formattedValues.disType
@@ -210,6 +195,7 @@ const DischargeForm: FC<DischargeProps> = ({
   useEffect(() => {
     dispatch(getDischargeTypes());
     dispatch(getDiseasesIpdOut());
+    dispatch(getDiseasesIpdIn());
   }, [dispatch]);
 
   const diagnosisOutStatus = useAppSelector(
@@ -256,42 +242,43 @@ const DischargeForm: FC<DischargeProps> = ({
           </div>
           <div className="row start-sm center-xs">
             <div className="fullWidth patientAdmissionForm__item">
-              <AutocompleteField
-                fieldName="diseaseOut1"
-                fieldValue={formik.values.diseaseOut1}
-                label={t("admission.diseaseOut1")}
-                isValid={isValid("diseaseOut1")}
-                errorText={getErrorText("diseaseOut1")}
-                onBlur={onBlurCallback("diseaseOut1")}
-                options={renderOptions(diagnosisOutList)}
-                loading={diagnosisOutStatus === "LOADING"}
-                disabled={isLoading}
+              <Autocomplete
+                id="diagnosisIn"
+                multiple
+                freeSolo
+                value={formik.values.diagnosisIn}
+                options={renderOptions(diagnosisInList)}
+                label={t("admission.diagnosisIn")}
+                placeholder={t("admission.diagnosisIn")}
+                disabled
               />
             </div>
             <div className="fullWidth patientAdmissionForm__item">
-              <AutocompleteField
-                fieldName="diseaseOut2"
-                fieldValue={formik.values.diseaseOut2}
-                label={t("admission.diseaseOut2")}
-                isValid={isValid("diseaseOut2")}
-                errorText={getErrorText("diseaseOut2")}
-                onBlur={onBlurCallback("diseaseOut2")}
+              <Autocomplete
+                id="diagnosisOut"
+                multiple
+                freeSolo
+                value={formik.values.diagnosisOut}
                 options={renderOptions(diagnosisOutList)}
-                loading={diagnosisOutStatus === "LOADING"}
-                disabled={isLoading}
+                onChange={(_, value) => {
+                  formik.setFieldValue("diagnosisOut", value);
+                }}
+                label={t("admission.diagnosisOut")}
+                placeholder={t("admission.diagnosisOut")}
               />
             </div>
             <div className="fullWidth patientAdmissionForm__item">
-              <AutocompleteField
-                fieldName="diseaseOut3"
-                fieldValue={formik.values.diseaseOut3}
-                label={t("admission.diseaseOut3")}
-                isValid={isValid("diseaseOut3")}
-                errorText={getErrorText("diseaseOut3")}
-                onBlur={onBlurCallback("diseaseOut3")}
-                options={renderOptions(diagnosisOutList)}
-                loading={diagnosisOutStatus === "LOADING"}
-                disabled={isLoading}
+              <Autocomplete
+                id="complicationDiagnosis"
+                multiple
+                freeSolo
+                value={formik.values.complicationDiagnosis}
+                options={renderOptions(diagnosisInList)}
+                onChange={(_, value) => {
+                  formik.setFieldValue("complicationDiagnosis", value);
+                }}
+                label={t("admission.complicationDiagnosis")}
+                placeholder={t("admission.complicationDiagnosis")}
               />
             </div>
             <div className="fullWidth patientAdmissionForm__item">
@@ -338,6 +325,20 @@ const DischargeForm: FC<DischargeProps> = ({
                 type="text"
                 isValid={isValid("anamnesis")}
                 errorText={getErrorText("anamnesis")}
+                onBlur={formik.handleBlur}
+                rows={5}
+                disabled={isLoading}
+              />
+            </div>
+            <div className="fullWidth patientAdmissionForm__item">
+              <TextField
+                field={formik.getFieldProps("othersInformation")}
+                theme="regular"
+                label={t("admission.othersInformation")}
+                multiline={true}
+                type="text"
+                isValid={isValid("othersInformation")}
+                errorText={getErrorText("othersInformation")}
                 onBlur={formik.handleBlur}
                 rows={5}
                 disabled={isLoading}
