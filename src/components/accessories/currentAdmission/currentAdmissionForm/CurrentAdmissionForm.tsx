@@ -313,7 +313,7 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
                   disabled={isLoading}
                 />
               </div>
-              <div className="currentAdmissionForm__item">
+              {/* <div className="currentAdmissionForm__item">
                 <TextField
                   field={formik.getFieldProps("referralAlert")}
                   theme="regular"
@@ -325,11 +325,39 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
                   disabled={isLoading}
                   maxLength={100}
                 />
-              </div>
+              </div> */}
             </>
           )}
           {isReferralAdmission && (
             <>
+              <div className="row start-sm center-xs">
+                <div className="currentAdmissionForm__supplementRow">
+                  <div className="currentAdmissionForm__item">
+                    <CheckboxField
+                      fieldName="alertReceived"
+                      label={t("admission.referralAlert")}
+                      checked={isAlertReceivedChecked}
+                      onChange={handleAlertReceivedChecked}
+                    />
+                  </div>
+                  <div className="currentAdmissionForm__item">
+                    <CheckboxField
+                      fieldName="referenceSheet"
+                      label={t("patient.referenceSheet")}
+                      checked={isReferenceSheetChecked}
+                      onChange={handleReferenceSheetChecked}
+                    />
+                  </div>
+                  <div className="currentAdmissionForm__item">
+                    <CheckboxField
+                      fieldName="qualifiedAgent"
+                      label={t("patient.qualifiedAgent")}
+                      checked={isQualifiedAgentChecked}
+                      onChange={handleQualifiedAgentChecked}
+                    />
+                  </div>
+                </div>
+              </div>
               <div className="fullWidth currentAdmissionForm__item">
                 <TextField
                   field={formik.getFieldProps("referralReason")}
@@ -388,34 +416,6 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
               </div>
             </>
           )}
-          <div className="row start-sm center-xs">
-            <div className="currentAdmissionForm__supplementRow">
-              <div className="currentAdmissionForm__item">
-                <CheckboxField
-                  fieldName="alertReceived"
-                  label={t("patient.alertReceived")}
-                  checked={isAlertReceivedChecked}
-                  onChange={handleAlertReceivedChecked}
-                />
-              </div>
-              <div className="currentAdmissionForm__item">
-                <CheckboxField
-                  fieldName="referenceSheet"
-                  label={t("patient.referenceSheet")}
-                  checked={isReferenceSheetChecked}
-                  onChange={handleReferenceSheetChecked}
-                />
-              </div>
-              <div className="currentAdmissionForm__item">
-                <CheckboxField
-                  fieldName="qualifiedAgent"
-                  label={t("patient.qualifiedAgent")}
-                  checked={isQualifiedAgentChecked}
-                  onChange={handleQualifiedAgentChecked}
-                />
-              </div>
-            </div>
-          </div>
           <Permission require="admissions.fullaccess">
             <>
               <div className="fullWidth currentAdmissionForm__item">
