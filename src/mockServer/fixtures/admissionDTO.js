@@ -48,18 +48,6 @@ export const admissionDTO = {
     code: "I",
     description: "SELF",
   },
-  diseaseIn: {
-    code: 88,
-    description: "Diarrhoea-Dysentry",
-    diseaseType: {
-      code: "ND",
-      description: "1.NOTIFIABLE DISEASES",
-    },
-    opdInclude: true,
-    ipdInInclude: true,
-    ipdOutInclude: true,
-    lock: 2,
-  },
   diseaseOut: null,
   operation: null,
   opDate: null,

@@ -35,7 +35,6 @@ const PatientAdmissionTable: FunctionComponent<IOwnProps> = ({
     admDate: t("admission.admDate"),
     disDate: t("admission.disDate"),
     admType: t("admission.admType"),
-    diseaseIn: t("admission.diseaseIn"),
     diagnosisIn: t("admission.diagnosisIn"),
     transUnit: t("admission.transUnit"),
     fhu: t("admission.fhu"),
