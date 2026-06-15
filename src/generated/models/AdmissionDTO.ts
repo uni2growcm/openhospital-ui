@@ -71,12 +71,6 @@ export interface AdmissionDTO {
      */
     admType?: AdmissionTypeDTO;
     /**
-     * Disease in 
-     * @type {DiseaseDTO}
-     * @memberof AdmissionDTO
-     */
-    diseaseIn?: DiseaseDTO;
-    /**
      * Complication Diagnosis
      * @type {Array<DiseaseDTO>}
      * @memberof AdmissionDTO
@@ -94,18 +88,6 @@ export interface AdmissionDTO {
      * @memberof AdmissionDTO
      */
     diagnosisIn?: Array<DiseaseDTO>;
-    /**
-     * Disease out 
-     * @type {DiseaseDTO}
-     * @memberof AdmissionDTO
-     */
-    diseaseOut2?: DiseaseDTO;
-    /**
-     * Disease out 
-     * @type {DiseaseDTO}
-     * @memberof AdmissionDTO
-     */
-    diseaseOut3?: DiseaseDTO;
     /**
      * Operation 
      * @type {OperationDTO}

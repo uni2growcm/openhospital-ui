@@ -75,7 +75,6 @@ export const CurrentAdmission: FunctionComponent<IOwnProps> = ({
       improvementFeedback: adm.improvementFeedback,
       physicalExam: adm.physicalExam,
       courseOfAction: adm.courseOfAction,
-      complicationDiagnosis: [adm.diseaseIn!] as DiseaseDTO[],
     };
     dispatch(updateAdmission(admissionToSave));
   };

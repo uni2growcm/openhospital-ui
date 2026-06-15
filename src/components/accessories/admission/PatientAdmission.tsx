@@ -143,7 +143,6 @@ const PatientAdmission: FC = () => {
         fhu: adm.fhu,
         admDate: adm.admDate,
         admType: adm.admType,
-        diseaseIn: adm.diseaseIn,
         diagnosisIn: adm.diagnosisIn,
         anamnesis: adm.anamnesis,
         ward: adm.ward,
@@ -160,7 +159,6 @@ const PatientAdmission: FC = () => {
         treatmentReceived: adm.treatmentReceived,
         outcome: adm.outcome,
         improvementFeedback: adm.improvementFeedback,
-        complicationDiagnosis: [adm.diseaseIn!] as DiseaseDTO[],
       };
 
       if (!isEmpty(admissionToEdit?.disType)) {

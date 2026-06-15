@@ -5,7 +5,7 @@ import { get, has } from "lodash";
 import moment from "moment";
 import React, { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { object, string } from "yup";
+import { array, object, string } from "yup";
 import warningIcon from "../../../../assets/warning-icon.png";
 import {
   AdmissionTypeDTO,
@@ -103,6 +103,7 @@ const DischargeForm: FC<DischargeProps> = ({
         },
       }),
     disType: string().required(t("common.required")),
+    diagnosisOut: array().min(1, t("common.required")),
     nextAppointment: string(),
     deathPeriod: string().when("disType", {
       is: (disType: string) => {
@@ -262,9 +263,13 @@ const DischargeForm: FC<DischargeProps> = ({
                 options={renderOptions(diagnosisOutList)}
                 onChange={(_, value) => {
                   formik.setFieldValue("diagnosisOut", value);
+                  formik.setFieldTouched("diagnosisOut", true);
                 }}
+                onBlur={() => formik.setFieldTouched("diagnosisOut", true)}
                 label={t("admission.diagnosisOut")}
                 placeholder={t("admission.diagnosisOut")}
+                error={isValid("diagnosisOut")}
+                helperText={getErrorText("diagnosisOut")}
               />
             </div>
             <div className="fullWidth patientAdmissionForm__item">

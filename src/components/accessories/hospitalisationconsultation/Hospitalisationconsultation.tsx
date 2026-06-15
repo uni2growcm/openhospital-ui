@@ -84,6 +84,7 @@ const Hospitalisationconsultation: FC = () => {
       dispatch(newHospitalizationConsultation(payload));
     } else {
       payload.id = consultationToEdit?.id!;
+      payload.lock = consultationToEdit?.lock!; 
       dispatch(updateHospitalizationConsultation({ id: payload.id, body: payload }));
     }
   };

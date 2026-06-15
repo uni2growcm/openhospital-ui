@@ -37,7 +37,7 @@ export const ReferenceData = () => {
 
   const tabsConfig = {
     [TabOptions.municipality]: {
-      label: t("common.municipalities"),
+      label: t("common.communes"),
       table: MunicipalitiesTable,
       addPath: PATHS.admin_municipalities_new,
       editPath: PATHS.admin_municipalities_edit,

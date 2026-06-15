@@ -16,7 +16,7 @@ import {
   DiseaseDTO,
   DiseaseTypeDTO,
   PatientDTOSexEnum,
-  WardDTO
+  WardDTO,
 } from "../../../../generated";
 import {
   differenceInDays,
@@ -186,8 +186,8 @@ const AdmissionForm: FC<AdmissionProps> = ({
     enableReinitialize: true,
     onSubmit: (values) => {
       const formattedValues = formatAllFieldValues(fields, values);
-      formattedValues.diagnosisIn = diagnosisInList?.filter(
-        (item) => formattedValues.diagnosisIn?.includes(item.code)
+      formattedValues.diagnosisIn = diagnosisInList?.filter((item) =>
+        formattedValues.diagnosisIn?.includes(item.code)
       );
       formattedValues.admType = admissionTypes?.find(
         (item) => item.code === formattedValues.admType
@@ -197,11 +197,11 @@ const AdmissionForm: FC<AdmissionProps> = ({
         (item) => item.code === formattedValues.ward
       );
 
-      formattedValues.diagnosisOut = diagnosisOutList?.filter(
-        (item) => formattedValues.diagnosisOut?.includes(item.code)
+      formattedValues.diagnosisOut = diagnosisOutList?.filter((item) =>
+        formattedValues.diagnosisOut?.includes(item.code)
       );
-      formattedValues.complicationDiagnosis = diagnosisInList?.filter(
-        (item) => formattedValues.complicationDiagnosis?.includes(item.code)
+      formattedValues.complicationDiagnosis = diagnosisInList?.filter((item) =>
+        formattedValues.complicationDiagnosis?.includes(item.code)
       );
       formattedValues.disType = dischargeTypes?.find(
         (item) => item.code === formattedValues.disType
@@ -429,7 +429,7 @@ const AdmissionForm: FC<AdmissionProps> = ({
                     maxLength={50}
                   />
                 </div>
-                <div className="patientAdmissionForm__item">
+                {/* <div className="patientAdmissionForm__item">
                   <TextField
                     field={formik.getFieldProps("referralAlert")}
                     theme="regular"
@@ -441,12 +441,40 @@ const AdmissionForm: FC<AdmissionProps> = ({
                     disabled={isLoading}
                     maxLength={100}
                   />
-                </div>
+                </div> */}
               </>
             )}
           </div>
           {isReferralAdmission && (
             <>
+              <div className="row start-sm center-xs">
+                <div className="patientAdmissionForm__supplementRow">
+                  <div className="patientAdmissionForm__item">
+                    <CheckboxField
+                      fieldName="alertReceived"
+                      label={t("patient.alertReceived")}
+                      checked={isAlertReceivedChecked}
+                      onChange={handleAlertReceivedChecked}
+                    />
+                  </div>
+                  <div className="patientAdmissionForm__item">
+                    <CheckboxField
+                      fieldName="referenceSheet"
+                      label={t("patient.referenceSheet")}
+                      checked={isReferenceSheetChecked}
+                      onChange={handleReferenceSheetChecked}
+                    />
+                  </div>
+                  <div className="patientAdmissionForm__item">
+                    <CheckboxField
+                      fieldName="qualifiedAgent"
+                      label={t("patient.qualifiedAgent")}
+                      checked={isQualifiedAgentChecked}
+                      onChange={handleQualifiedAgentChecked}
+                    />
+                  </div>
+                </div>
+              </div>
               <div className="fullWidth patientAdmissionForm__item">
                 <TextField
                   field={formik.getFieldProps("referralReason")}
@@ -648,34 +676,6 @@ const AdmissionForm: FC<AdmissionProps> = ({
               </div> */}
             </div>
           )}
-          <div className="row start-sm center-xs">
-            <div className="patientAdmissionForm__supplementRow">
-              <div className="patientAdmissionForm__item">
-                <CheckboxField
-                  fieldName="alertReceived"
-                  label={t("patient.alertReceived")}
-                  checked={isAlertReceivedChecked}
-                  onChange={handleAlertReceivedChecked}
-                />
-              </div>
-              <div className="patientAdmissionForm__item">
-                <CheckboxField
-                  fieldName="referenceSheet"
-                  label={t("patient.referenceSheet")}
-                  checked={isReferenceSheetChecked}
-                  onChange={handleReferenceSheetChecked}
-                />
-              </div>
-              <div className="patientAdmissionForm__item">
-                <CheckboxField
-                  fieldName="qualifiedAgent"
-                  label={t("patient.qualifiedAgent")}
-                  checked={isQualifiedAgentChecked}
-                  onChange={handleQualifiedAgentChecked}
-                />
-              </div>
-            </div>
-          </div>
           <Permission require="admissions.fullaccess">
             <>
               <div className="row start-sm center-xs">

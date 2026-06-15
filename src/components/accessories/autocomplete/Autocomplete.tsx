@@ -37,7 +37,7 @@ export function Autocomplete<
   const actualClassName = "autocomplete";
 
   return (
-    <FormControl variant="outlined" className={actualClassName}>
+    <FormControl variant="outlined" className={actualClassName} error={error}>
       <MaterialAutocomplete
         {...props}
         options={[
