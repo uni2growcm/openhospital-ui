@@ -16,6 +16,7 @@ describe("Patient Details / Discharge", () => {
   it("Should make it possible for the user to fill out the form to discharge the patient", () => {
     cy.byId("disDate").focus().type("03052022").blur();
     cy.byId("disType").focus().type("NORMALE").blur();
+    cy.byId("diagnosisOut").find("input").first().type("Abortions{enter}");
     cy.byId("othersInformation").focus().type("Test info").blur();
     cy.byId("anamnesis").focus().clear().type("fail").blur();
   });
