@@ -38,8 +38,12 @@ export const analysisDTO: LabbookPatientHistoricDTO = {
 			prescriptionDate: '2026-04-06',
 			analysis: 'Antibiogramme 1ère ligne des mycobactéries en milieu liquide',
 			recordNumber: '0004',
-			variable: 'Ethambutol',
-			result: 'Sensible',
+			variables: [
+				{
+					variable: 'Ethambutol',
+					result: 'Sensible',
+				},
+			],
 		},
 		{
 			id: 2,
@@ -47,8 +51,12 @@ export const analysisDTO: LabbookPatientHistoricDTO = {
 			prescriptionDate: '2026-04-06',
 			analysis: 'PCR VIH 1/2',
 			recordNumber: '0005',
-			variable: 'Charge virale',
-			result: 'Indétectable',
+			variables: [
+				{
+					variable: 'Charge virale',
+					result: 'Indétectable',
+				},
+			],
 		},
 		{
 			id: 3,
@@ -56,8 +64,12 @@ export const analysisDTO: LabbookPatientHistoricDTO = {
 			prescriptionDate: '2026-04-07',
 			analysis: 'Hémogramme complet',
 			recordNumber: '0006',
-			variable: 'Hémoglobine',
-			result: '13.8',
+			variables: [
+				{
+					variable: 'Hémoglobine',
+					result: '13.8',
+				},
+			],
 		},
 	],
 };

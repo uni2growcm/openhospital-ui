@@ -1292,6 +1292,7 @@
 		"result": "Résultat",
 		"previousentries": "Analyses précédentes",
 		"print": "Imprimer tous les rapports d'analyse",
-		"printerror": "L'impression des resultats d'analyse a échoué"
+		"printerror": "L'impression des resultats d'analyse a échoué",
+		"printnotavailable": "Le document de l'analyse n'est pas encore disponible"
 	}
 }

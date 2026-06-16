@@ -20,7 +20,7 @@ const AnalysisTable: FunctionComponent<IOwnProps> = ({ handlePrint }) => {
 	const dispatch = useAppDispatch();
 	const { id } = useParams();
 
-	const header = ['id', 'prescriptionDate'];
+	const header = ['id', 'prescriptionDate', 'analysis'];
 	const dateFields = ['prescriptionDate'];
 
 	const label = {
@@ -32,7 +32,7 @@ const AnalysisTable: FunctionComponent<IOwnProps> = ({ handlePrint }) => {
 		variable: t('analysis.variable'),
 		result: t('analysis.result'),
 	};
-	const order = ['id', 'prescriptionDate'];
+	const order = ['id', 'prescriptionDate', 'analysis'];
 
 	const patient = useAppSelector(
 		(state: IState) => state.patients.selectedPatient.data,
@@ -70,8 +70,7 @@ const AnalysisTable: FunctionComponent<IOwnProps> = ({ handlePrint }) => {
 					: '',
 				analysis: item.analysis ?? '',
 				recordNumber: item.recordNumber ?? '',
-				variable: item.variable ?? '',
-				result: item.result ?? '',
+				variables: item.variables ?? [],
 			};
 		});
 	}, [data]);
@@ -81,6 +80,30 @@ const AnalysisTable: FunctionComponent<IOwnProps> = ({ handlePrint }) => {
 			state.analysis.getPatientAnalysis.error?.message ||
 			t('common.somethingwrong'),
 	) as string;
+
+	const customRenderDetails = (row: Record<string, any>) => (
+		<ul>
+			{(['recordType', 'recordNumber'] as const).map((key) => (
+				<li className="collapseItem_row" key={key}>
+					<strong>{label[key]}: </strong>
+					<span>{row[key]}</span>
+				</li>
+			))}
+			
+			{row.variables?.length > 0 && (
+				<li className="collapseItem_row">
+					<strong>{t('analysis.variable')} / {t('analysis.result')}:</strong>
+					<ul>
+						{row.variables.map((v: any, i: number) => (
+							<li key={i}>
+								{v.variable}: {v.result}
+							</li>
+						))}
+					</ul>
+				</li>
+			)}
+		</ul>
+	);
 
 	return (
 		<div className="patientAnalysisTable">
@@ -109,6 +132,7 @@ const AnalysisTable: FunctionComponent<IOwnProps> = ({ handlePrint }) => {
 								onPrint={handlePrint}
 								initialOrderBy="id_rec"
 								showEmptyCell={false}
+								customRenderDetails={customRenderDetails}
 							/>
 						);
 					case 'SUCCESS_EMPTY':
