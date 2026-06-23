@@ -1613,6 +1613,7 @@
     "code": "Code",
     "previousentries": "Mises en condition précédentes",
     "updated": "Mise en condition mise à jour",
+    "created": "Mise en condition créée",
     "createsuccess": "La mise en condition a été enregistrée avec succès.",
     "updatesuccess": "La mise en condition a été mise à jour avec succès.",
     "positive": "Positif",
