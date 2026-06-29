@@ -1,7 +1,7 @@
-import type { PagePatientDTO } from 'generated';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
-import type { ApiResponse } from 'state/types';
+import type { PagePatientDTO } from '~/generated';
+import type { ApiResponse } from '~/state/types';
 import { useAppSelector } from '../redux';
 
 export const usePatients = () => {
@@ -27,7 +27,7 @@ export const usePatients = () => {
 		setRange(value);
 	};
 
-	const handlePageChange = (event: unknown, value: number) => {
+	const handlePageChange = (value: number) => {
 		setPage(value);
 	};
 
