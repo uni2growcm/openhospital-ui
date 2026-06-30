@@ -65,6 +65,8 @@ export const SearchPatientActivity = () => {
 		secondName: '',
 		birthDate: '',
 		address: '',
+		city: '',
+		age: '',
 	};
 
 	const validationSchema = object({
