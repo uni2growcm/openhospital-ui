@@ -36,12 +36,15 @@ export const SearchPatientActivity = () => {
 
 	//   const location = useLocation();
 
-	const { userCredentials, patientSearchResults, searchStatus } =
-		useAppSelector((state) => ({
-			userCredentials: state.main.authentication.data,
-			patientSearchResults: state.patients.searchResults.data,
-			searchStatus: state.patients.searchResults.status || 'IDLE',
-		}));
+	const { userCredentials, searchStatus } = useAppSelector((state) => ({
+		userCredentials: state.main.authentication.data,
+		searchStatus: state.patients.searchResults.status || 'IDLE',
+	}));
+
+	const patientSearchResults = useAppSelector((state) => {
+		const data = state.patients.searchResults.data;
+		return Array.isArray(data) ? data : data?.data ?? [];
+	});
 
 	const breadcrumbMap = {
 		[t('nav.patients')]: PATHS.patients,
