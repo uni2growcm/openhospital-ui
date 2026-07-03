@@ -72,7 +72,10 @@ export const Analysis: FC = () => {
 		(data: LabbookPatientHistoricDTO) => {
 			setIsPrintError(false);
 			if (data) {
-				const analysisIdlist = data.analyzes?.map((analyze) => analyze.id);
+				const analysisIdlist = [
+					...new Set(data.analyzes?.map((analyze) => analyze.id)),
+				];
+				
 				const reportGroupedRequest: ReportGroupedRequest = {
 					l_id_rec_vld: analysisIdlist,
 					filename: `patient-analysis-${id}-${Date.now()}.pdf`,
@@ -108,7 +111,7 @@ export const Analysis: FC = () => {
 				<AnalysisTable handlePrint={handlePrint} />
 				{isPrintError && (
 					<div ref={infoBoxRef} className="info-box-container">
-						<InfoBox type="error" message={t('analysis.printerror')} />
+						<InfoBox type="error" message={t('analysis.printnotavailable')} />
 					</div>
 				)}
 			</div>

@@ -1292,6 +1292,7 @@
 		"result": "Result",
 		"previousentries": "Previous Analyses",
 		"print": "Print all analysis reports",
-		"printerror": "Printing of the analysis results failed"
+		"printerror": "Printing of the analysis results failed",
+		"printnotavailable": "The analysis document is not yet available"
 	}
 }
