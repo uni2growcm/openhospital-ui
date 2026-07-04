@@ -78,6 +78,14 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 								test: (value) => moment(value).isValid(),
 							})
 					: string(),
+			labBookId: number()
+				.typeError(t('common.incorrectformat'))
+				.transform((value, originalValue) =>
+					originalValue === '' ? null : value,
+				)
+				.integer(t('common.incorrectformat'))
+				.positive(t('common.incorrectformat'))
+				.nullable(),
 			sex: string().required(t('common.required')),
 			telephone: string().matches(
 				/^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/,
@@ -396,6 +404,18 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 									? FIELD_VALIDATION.SUGGESTED
 									: FIELD_VALIDATION.IDLE
 							}
+						/>
+					</div>
+
+					<div className="patientDataForm__item">
+						<TextField
+							field={formik.getFieldProps('labBookId')}
+							theme="regular"
+							label={t('patient.labbookid')}
+							isValid={isValid('labBookId')}
+							errorText={getErrorText('labBookId')}
+							onBlur={formik.handleBlur}
+							type="number"
 						/>
 					</div>
 				</div>

@@ -1,4 +1,5 @@
 import type { IAdmissionsState } from './state/admissions/types';
+import type { IAnalysisState } from './state/analysis';
 import type { IBillsState } from './state/bills/types';
 import type { IDashboardState } from './state/dashboard/types';
 import type { IDiseaseState } from './state/diseases/types';
@@ -56,6 +57,7 @@ export interface IState {
 	suppliers: ISupplierState;
 	permissions: IPermissionsState;
 	settings: ISettingsState;
+	analysis: IAnalysisState;
 }
 
 export enum FIELD_VALIDATION {

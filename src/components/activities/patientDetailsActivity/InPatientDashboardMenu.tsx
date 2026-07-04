@@ -5,11 +5,17 @@ import {
 	Healing,
 	LocalHospital,
 	LocalHotel,
+	ManageHistory,
 	Pageview,
 	SettingsApplications,
 } from '@mui/icons-material';
 import type React from 'react';
-import { type FunctionComponent, useCallback } from 'react';
+import {
+	type FunctionComponent,
+	useCallback,
+	useEffect,
+	useState,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router';
 import { PATHS } from '~/consts';
@@ -18,6 +24,9 @@ import { usePluginsContext } from '~/plugins';
 import Arrow from '../../../assets/arrow-w.svg';
 import { Permission } from '../../../libraries/permissionUtils/Permission';
 import './styles.scss';
+import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
+import { getPatient } from '~/state/patients/thunk';
+import type { IState } from '~/types';
 import type { IUserSection } from './types';
 
 interface IOwnProps {
@@ -37,6 +46,12 @@ const InPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
 
 	const { remotes } = usePluginsContext();
 
+	const dispatch = useAppDispatch();
+
+	const [enabledMock] = useState<boolean>(
+		import.meta.env.VITE_USE_MOCK_API === 'true',
+	);
+
 	const canReadRadiology = usePermission('radiology.read');
 
 	const isActive = (value: string) => {
@@ -55,6 +70,18 @@ const InPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
 		},
 		[navigate, setUserSection, id],
 	);
+
+	const patient = useAppSelector(
+		(state: IState) => state.patients.selectedPatient.data,
+	);
+
+	useEffect(() => {
+		if (!enabledMock) {
+			if (id) {
+				dispatch(getPatient(id));
+			}
+		}
+	}, [id, dispatch, enabledMock]);
 
 	return (
 		<div
@@ -114,6 +141,22 @@ const InPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
 				<span>{t('nav.laboratory')}:</span>
 				<img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
 			</div>
+
+			{(patient?.labBookId || enabledMock) && (
+				<div
+					className={
+						'align__element patientDetails__main_menu__item ' +
+						isActive('analysis')
+					}
+					onClick={() => {
+						changeUserSection('analysis');
+					}}
+				>
+					<ManageHistory fontSize="small" style={{ color: 'white' }} />
+					<span>{t('nav.analysis')}:</span>
+					<img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
+				</div>
+			)}
 
 			{false && (
 				<div

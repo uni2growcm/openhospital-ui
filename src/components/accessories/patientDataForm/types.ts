@@ -37,4 +37,5 @@ export type TPatientDataFormFieldName =
 	| 'hasInsurance'
 	| 'parentTogether'
 	| 'taxCode'
-	| 'blobPhoto';
+	| 'blobPhoto'
+	| 'labBookId';
