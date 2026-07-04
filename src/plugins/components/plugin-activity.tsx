@@ -1,0 +1,54 @@
+import { type ComponentProps, useEffect } from 'react';
+import root from 'react-shadow';
+import AppHeader from '~/components/accessories/appHeader/AppHeader';
+import Footer from '~/components/accessories/footer/Footer';
+import { useAppSelector } from '../../libraries/hooks/redux';
+import { scrollToElement } from '../../libraries/uiUtils/scrollToElement';
+import type { PluginRenderProps } from '../types';
+import classes from './plugin-activity.module.scss';
+
+export type PluginActivityProps = {
+	plugin: PluginRenderProps;
+	showHeaderAndFooter?: boolean;
+} & ComponentProps<'div'>;
+
+export function PluginActivity({
+	plugin,
+	showHeaderAndFooter = true,
+	children,
+	...props
+}: PluginActivityProps) {
+	const breadcrumbMap = {
+		[plugin.remote]: `/${plugin.remote}`,
+	};
+
+	const userCredentials = useAppSelector(
+		(state) => state.main.authentication?.data,
+	);
+
+	useEffect(() => {
+		scrollToElement(null);
+	}, []);
+
+	return (
+		<root.div
+			data-cy={`plugin-activity-${plugin.remote}`}
+			className={classes.plugin}
+			{...props}
+		>
+			{showHeaderAndFooter && (
+				<AppHeader
+					userCredentials={userCredentials}
+					breadcrumbMap={breadcrumbMap}
+				/>
+			)}
+			<div className={classes.content}>
+				{plugin.styles && <style>{`@import url('${plugin.styles}');`}</style>}
+				{children}
+			</div>
+			{showHeaderAndFooter && <Footer />}
+		</root.div>
+	);
+}
+
+export default PluginActivity;

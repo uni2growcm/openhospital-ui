@@ -1,4 +1,5 @@
 .gitignore
+.openapi-generator-ignore
 apis/AdmissionTypesApi.ts
 apis/AdmissionsApi.ts
 apis/AgeTypesApi.ts
@@ -28,6 +29,7 @@ apis/PatientConsensusApi.ts
 apis/PatientVaccinesApi.ts
 apis/PatientsApi.ts
 apis/PermissionsApi.ts
+apis/PluginsApi.ts
 apis/PregnantTreatmentTypesApi.ts
 apis/PriceListsApi.ts
 apis/RadiologyApi.ts
@@ -99,6 +101,11 @@ models/PatientDTO.ts
 models/PatientExaminationDTO.ts
 models/PatientVaccineDTO.ts
 models/PermissionDTO.ts
+models/PluginBundle.ts
+models/PluginConfiguration.ts
+models/PluginDefinition.ts
+models/PluginPermission.ts
+models/PluginRoute.ts
 models/PregnantTreatmentTypeDTO.ts
 models/PriceDTO.ts
 models/PriceListDTO.ts

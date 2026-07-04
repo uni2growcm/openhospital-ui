@@ -27,6 +27,7 @@ export * from './PatientConsensusApi';
 export * from './PatientVaccinesApi';
 export * from './PatientsApi';
 export * from './PermissionsApi';
+export * from './PluginsApi';
 export * from './PregnantTreatmentTypesApi';
 export * from './PriceListsApi';
 export * from './RadiologyApi';
