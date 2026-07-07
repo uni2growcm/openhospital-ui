@@ -167,7 +167,7 @@ const PatientAdmission: FC = () => {
           disDate: adm.disDate,
           disType: adm.disType,
           diagnosisOut: adm.diagnosisOut,
-          complicationDiagnosis: adm.complicationDiagnosis,
+          complication: adm.complication,
           othersInformation: adm.othersInformation,
           nextAppointment: adm.nextAppointment,
         };

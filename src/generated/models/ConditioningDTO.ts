@@ -112,6 +112,18 @@ export interface ConditioningDTO {
      */
     bloodGlucoseLevel?: number;
     /**
+     * Conditioning others rapid screening test 
+     * @type {string}
+     * @memberof ConditioningDTO
+     */
+    othersRapidScreeningTest?: string;
+    /**
+     * Conditioning cpap details 
+     * @type {string}
+     * @memberof ConditioningDTO
+     */
+    cpapDetails?: string;
+    /**
      * patient
      * @type {PatientDTO}
      * @memberof ConditioningDTO

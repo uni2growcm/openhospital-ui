@@ -46,5 +46,5 @@ export type AdmissionFormFieldName =
   | "nextAppointment"
   | "diagnosisIn"
   | "diagnosisOut"
-  | "complicationDiagnosis"
+  | "complication"
   | "othersInformation";

@@ -274,7 +274,15 @@
     "motherSchoolingLevel": "Niveau scolaire de la mère",
     "fatherSchoolingLevel": "Niveau scolaire de la père",
     "care": "Soins",
-    "hospitalisationconsultation": "Consultation en hospitalisation"
+    "hospitalisationconsultation": "Consultation en hospitalisation",
+    "mariatalstatus": {
+      "married": "Mariés",
+      "divorced": "Divorcés",
+      "widowed": "Veuf/Veuve",
+      "cohabiting": "Concubinage",
+      "other": "Autre"
+
+    } 
   },
   "hospitalisationconsultation": {
     "id": "ID",
@@ -789,7 +797,7 @@
       "pregnancyAndDelivery": "Grossesse et Accouchement",
       "siblingRank": "Rang de la fratrie",
       "pregnancyTerm": "Terme",
-      "pregnancy": "Grossesse",
+      "pregnancy": "Suivit des grossesses",
       "deliveryMode": "Mode d'accouchement",
       "apgarScore": "APGAR",
       "birthWeight": "Poids à la naissance ",
@@ -842,7 +850,7 @@
       "mother": "Mère",
       "siblings": "Frères et sœurs",
       "otherUsefulInformation": "Autres informations utiles",
-      "otherFamilyPathologies": "Autres pathologies familiales"
+      "otherFamilyPathologies": "Autres"
     },
     "newmedicalHistory": "Nouvel antécédent médical",
     "editmedicalHistory": "Editer l'antécédent médical",
@@ -1001,7 +1009,7 @@
     "diseaseIn": "Diagnostic d'entrée",
     "diagnosisIn": "Diagnostics d'entrée",
     "diagnosisOut": "Diagnostics de sortie",
-    "complicationDiagnosis": "Diagnostics de complication",
+    "complication": "Complication",
     "othersInformation": "Autres informations",
     "ward": "Services",
     "transUnit": "Unité de transfusion",
@@ -1609,6 +1617,7 @@
     "performedAt": "Date et heure de la MCE",
     "others": "Autres",
     "cpap": "CPAP",
+    "cpapDetails": "Détails CPAP",
     "malaria": "Paludisme",
     "code": "Code",
     "previousentries": "Mises en condition précédentes",
@@ -1628,6 +1637,7 @@
       "hypoglycemia": "Hypoglycémie"
     },
     "bloodGlucoseLevel": "Taux de glycémie",
+    "othersRapidScreeningTest": "Autre test de diagnostic rapide",
     "indeterminate": "Indéterminé",
     "hivTest": "Test du VIH",
     "performedBy": "Effectué par l'utilisateur",

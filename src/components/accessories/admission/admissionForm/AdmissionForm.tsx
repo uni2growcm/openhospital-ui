@@ -196,12 +196,8 @@ const AdmissionForm: FC<AdmissionProps> = ({
       formattedValues.ward = wards?.find(
         (item) => item.code === formattedValues.ward
       );
-
       formattedValues.diagnosisOut = diagnosisOutList?.filter((item) =>
         formattedValues.diagnosisOut?.includes(item.code)
-      );
-      formattedValues.complicationDiagnosis = diagnosisInList?.filter((item) =>
-        formattedValues.complicationDiagnosis?.includes(item.code)
       );
       formattedValues.disType = dischargeTypes?.find(
         (item) => item.code === formattedValues.disType
@@ -592,18 +588,30 @@ const AdmissionForm: FC<AdmissionProps> = ({
                   />
                 </div>
                 <div className="fullWidth patientAdmissionForm__item">
-                  <Autocomplete
-                    id="complicationDiagnosis"
+                  <TextField
+                    field={formik.getFieldProps("complication")}
+                    theme="regular"
+                    label={t("admission.complication")}
+                    isValid={isValid("complication")}
+                    errorText={getErrorText("complication")}
+                    onBlur={formik.handleBlur}
+                    disabled={isLoading}
+                    type="text"
+                    rows={2}
+                    multiline={true}
+                  />
+                  {/* <Autocomplete
+                    id="complication"
                     multiple
                     freeSolo
-                    value={formik.values.complicationDiagnosis}
+                    value={formik.values.complication}
                     options={renderOptions(diagnosisInList)}
                     onChange={(_, value) => {
-                      formik.setFieldValue("complicationDiagnosis", value);
+                      formik.setFieldValue("complication", value);
                     }}
-                    label={t("admission.complicationDiagnosis")}
-                    placeholder={t("admission.complicationDiagnosis")}
-                  />
+                    label={t("admission.complication")}
+                    placeholder={t("admission.complication")}
+                  /> */}
                 </div>
                 <div className="fullWidth patientAdmissionForm__item">
                   <TextField

@@ -7957,11 +7957,11 @@ components:
           format: int32
           description: lock
           example: 0
-        male:
+        opd:
           type: boolean
         female:
           type: boolean
-        opd:
+        male:
           type: boolean
         pharmacy:
           type: boolean
@@ -8788,11 +8788,9 @@ components:
         admType:
           $ref: "#/components/schemas/AdmissionTypeDTO"
           description: Admission type
-        complicationDiagnosis:
-          type: array
+        complication:
+          type: string
           description: Complication Diagnosis
-          items:
-            $ref: "#/components/schemas/DiseaseDTO"
         diagnosisOut:
           type: array
           description: Diagnosis out
@@ -10121,6 +10119,14 @@ components:
           type: number
           format: double
           description: 'Conditioning blood glucose level '
+          example: 5.6
+        othersRapidScreeningTest:
+          type: string
+          description: 'Conditioning others rapid screening test '
+          example: 5.6
+        cpapDetails:
+          type: string
+          description: 'Conditioning cpap details '
           example: 5.6
         patient:
           $ref: "#/components/schemas/PatientDTO"

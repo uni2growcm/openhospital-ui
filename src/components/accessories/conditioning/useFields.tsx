@@ -15,6 +15,10 @@ export const useFields = (conditioning?: ConditioningDTO) => {
       value: conditioning?.cpap ? "true" : "false",
       type: "boolean",
     },
+    cpapDetails: {
+      value: conditioning?.cpapDetails ?? "",
+      type: "text",
+    },
     mce: {
       value: conditioning?.mce?.toString() ?? "",
       type: "number",
@@ -66,6 +70,10 @@ export const useFields = (conditioning?: ConditioningDTO) => {
     bloodGlucoseLevel: {
       value: conditioning?.bloodGlucoseLevel?.toString() ?? "",
       type: "number",
+    },
+    othersRapidScreeningTest: {
+      value: conditioning?.othersRapidScreeningTest ?? "",
+      type: "text",
     },
     performedBy: {
       value: conditioning?.performedBy?.userName ?? "",

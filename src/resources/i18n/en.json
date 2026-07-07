@@ -307,7 +307,14 @@
     "motherSchoolingLevel": "Mother's educational level",
     "fatherSchoolingLevel": "Father's educational level",
     "care": "Care",
-    "hospitalisationconsultation": "Hospitalization Consultation"
+    "hospitalisationconsultation": "Hospitalization Consultation",
+    "mariatalstatus": {
+      "married": "Married",
+      "divorced": "Divorced",
+      "widowed": "Widowed",
+      "cohabiting": "Cohabiting",
+      "other": "Ohter"
+    }
   },
   "hospitalisationconsultation": {
     "id": "ID",
@@ -823,7 +830,7 @@
       "pregnancyAndDelivery": "Pregnancy and Delivery",
       "siblingRank": "Sibling Rank",
       "pregnancyTerm": "Pregnancy Term",
-      "pregnancy": "Pregnancy",
+      "pregnancy": "Pregnancy monitoring",
       "deliveryMode": "Mode of delivery",
       "apgarScore": "APGAR",
       "birthWeight": "Birth Weight",
@@ -876,7 +883,7 @@
       "mother": "Mother",
       "siblings": "Siblings",
       "otherUsefulInformation": "Other Useful Information",
-      "otherFamilyPathologies": "Other Family Pathologies"
+      "otherFamilyPathologies": "Other"
     },
     "newmedicalHistory": "New medical history",
     "editmedicalHistory": "Edit medical history",
@@ -1047,7 +1054,7 @@
     "diseaseIn": "Diagnosis In",
     "diagnosisIn": "Diagnosis In",
     "diagnosisOut": "Diagnosis Out",
-    "complicationDiagnosis": "Complication Diagnosis",
+    "complication": "Complication",
     "othersInformation": "Others Information",
     "ward": "Services",
     "transUnit": "Trans Unit",
@@ -1655,6 +1662,7 @@
     "performedAt": "MCE Date and time",
     "others": "Others",
     "cpap": "CPAP",
+    "cpapDetails": "CPAP details",
     "malaria": "Malaria",
     "code": "Code",
     "created": "Conditioning created",
@@ -1676,6 +1684,7 @@
       "hypoglycemia": "Hypoglycemia"
     },
     "bloodGlucoseLevel": "Blood glucose level",
+    "othersRapidScreeningTest": "Other rapid screening test",
     "indeterminate": "Indeterminate",
     "hivTest": "HIV Test",
     "performedBy": "Performed by user",

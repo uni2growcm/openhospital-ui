@@ -17,10 +17,13 @@ import {
   formatAllFieldValues,
   getFromFields,
 } from "../../../../libraries/formDataHandling/functions";
-import { getDiseasesIpdIn, getDiseasesIpdOut } from "../../../../state/diseases";
+import { useDeathPeriodOptions } from "../../../../libraries/hooks/useDeathPeriodOptions";
+import {
+  getDiseasesIpdIn,
+  getDiseasesIpdOut,
+} from "../../../../state/diseases";
 import { getDischargeTypes } from "../../../../state/types/discharges";
 import { IState } from "../../../../types";
-import { useDeathPeriodOptions } from "../../../../libraries/hooks/useDeathPeriodOptions";
 import AutocompleteField from "../../autocompleteField/AutocompleteField";
 import Button from "../../button/Button";
 import ConfirmationDialog from "../../confirmationDialog/ConfirmationDialog";
@@ -107,8 +110,13 @@ const DischargeForm: FC<DischargeProps> = ({
     nextAppointment: string(),
     deathPeriod: string().when("disType", {
       is: (disType: string) => {
-        const dischargeType = dischargeTypes?.find(item => item.code === disType);
-        return dischargeType?.code === "D" || dischargeType?.description?.toLowerCase().includes("dead");
+        const dischargeType = dischargeTypes?.find(
+          (item) => item.code === disType
+        );
+        return (
+          dischargeType?.code === "D" ||
+          dischargeType?.description?.toLowerCase().includes("dead")
+        );
       },
       then: string().required(t("common.required")),
       otherwise: string(),
@@ -121,14 +129,11 @@ const DischargeForm: FC<DischargeProps> = ({
     enableReinitialize: true,
     onSubmit: (values) => {
       const formattedValues = formatAllFieldValues(fields, values);
-      formattedValues.diagnosisIn = diagnosisInList?.filter(
-        (item) => formattedValues.diagnosisIn?.includes(item.code)
+      formattedValues.diagnosisIn = diagnosisInList?.filter((item) =>
+        formattedValues.diagnosisIn?.includes(item.code)
       );
-      formattedValues.complicationDiagnosis = diagnosisInList?.filter(
-        (item) => formattedValues.complicationDiagnosis?.includes(item.code)
-      );
-      formattedValues.diagnosisOut = diagnosisOutList?.filter(
-        (item) => formattedValues.diagnosisOut?.includes(item.code)
+      formattedValues.diagnosisOut = diagnosisOutList?.filter((item) =>
+        formattedValues.diagnosisOut?.includes(item.code)
       );
       formattedValues.disType = dischargeTypes?.find(
         (item) => item.code === formattedValues.disType
@@ -166,8 +171,10 @@ const DischargeForm: FC<DischargeProps> = ({
   };
 
   const handleDischargeTypeChange = (value: any) => {
-      setIsDeadDischarge(value?.value === "D" || value?.label?.toLowerCase().includes("dead"));
-  }
+    setIsDeadDischarge(
+      value?.value === "D" || value?.label?.toLowerCase().includes("dead")
+    );
+  };
 
   const onBlurCallback = useCallback(
     (fieldName: string) =>
@@ -273,17 +280,17 @@ const DischargeForm: FC<DischargeProps> = ({
               />
             </div>
             <div className="fullWidth patientAdmissionForm__item">
-              <Autocomplete
-                id="complicationDiagnosis"
-                multiple
-                freeSolo
-                value={formik.values.complicationDiagnosis}
-                options={renderOptions(diagnosisInList)}
-                onChange={(_, value) => {
-                  formik.setFieldValue("complicationDiagnosis", value);
-                }}
-                label={t("admission.complicationDiagnosis")}
-                placeholder={t("admission.complicationDiagnosis")}
+              <TextField
+                field={formik.getFieldProps("complication")}
+                theme="regular"
+                label={t("admission.complication")}
+                isValid={isValid("complication")}
+                errorText={getErrorText("complication")}
+                onBlur={formik.handleBlur}
+                disabled={isLoading}
+                type="text"
+                rows={2}
+                multiline={true}
               />
             </div>
             <div className="fullWidth patientAdmissionForm__item">

@@ -39,7 +39,7 @@ const PatientDischarge: FC = () => {
   const [activityTransitionState, setActivityTransitionState] =
     useState<AdmissionTransitionState>("IDLE");
   const [dischargeAdmission, setDischargeAdmission] = useState<AdmissionDTO | null>(null);
-  const [openCloseEncounterDialog, setOpenCloseEncounterDialog] = useState(false);
+  const [scamDone, setScamDone] = useState(false);
 
   const { id, code } = useParams();
 
@@ -135,33 +135,28 @@ const PatientDischarge: FC = () => {
         );
     });
     setOpenDischargeAgainstMedicalAdvice(false);
-    evaluateDischargeClosure();
+    setScamDone(true);
+    handlePostScamClosure();
   }
 
-  const onConfirmDischarge = () => {
-    if (
-      dischargeAdmission && dischargeAdmission.disType?.code === "CAM"
-    ) {
-      setClose(true);
-      setOpenDischargeAgainstMedicalAdvice(true);
-    } else {
-      evaluateDischargeClosure();
-    }
-  }
-
-  const evaluateDischargeClosure = () => {
-    if (
-      dischargeStatus === "SUCCESS" &&
-      encountersEnabled &&
-      !!currentEncounter &&
-      openCloseEncounterDialog
-    ) {
-      setOpenDischargeAgainstMedicalAdvice(false);
+  const handlePostScamClosure = () => {
+    if (encountersEnabled && !!currentEncounter) {
       onclosure();
     } else {
       setActivityTransitionState("TO_RESET");
     }
-  };
+  }
+
+  const onConfirmDischarge = () => {
+    if (
+      dischargeAdmission && dischargeAdmission.disType?.code === "SCAM"
+    ) {
+      setClose(true);
+      setOpenDischargeAgainstMedicalAdvice(true);
+    } else {
+      setActivityTransitionState("TO_RESET");
+    }
+  }
 
   const onSubmit = (adm: AdmissionDTO) => {
     setShouldResetForm(false);
@@ -172,7 +167,7 @@ const PatientDischarge: FC = () => {
         disType: adm.disType,
         diagnosisIn: adm.diagnosisIn,
         diagnosisOut: adm.diagnosisOut,
-        complicationDiagnosis: adm.complicationDiagnosis,
+        complication: adm.complication,
         anamnesis: adm.anamnesis,
         othersInformation: adm.othersInformation,
         nextAppointment: parseDateTime(adm.nextAppointment ?? "", false),
@@ -210,6 +205,31 @@ const PatientDischarge: FC = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, activityTransitionState]);
+
+  useEffect(() => {
+    if (
+      dischargeStatus === "SUCCESS" &&
+      !close &&
+      dischargeAdmission?.disType?.code === "SCAM"
+    ) {
+      setClose(true);
+      setOpenDischargeAgainstMedicalAdvice(true);
+    }
+  }, [dischargeStatus, close, dischargeAdmission]);
+
+  useEffect(() => {
+    if (
+      dischargeStatus === "SUCCESS" &&
+      !close &&
+      encountersEnabled &&
+      !!currentEncounter &&
+      !scamDone &&
+      !openDischargeAgainstMedicalAdvice &&
+      !(dischargeAdmission?.disType?.code === "SCAM")
+    ) {
+      onclosure();
+    }
+  }, [dischargeStatus, close, encountersEnabled, currentEncounter, scamDone, openDischargeAgainstMedicalAdvice, dischargeAdmission]);
 
   const resetFormCallback = () => {
     setShouldResetForm(false);
@@ -250,7 +270,8 @@ const PatientDischarge: FC = () => {
       <ConfirmationDialog
         isOpen={
           dischargeStatus === "SUCCESS" &&
-          (!encountersEnabled || !currentEncounter)
+          (!encountersEnabled || !currentEncounter) &&
+          !close
         }
         title={
           dischargeStatus === "SUCCESS"
@@ -268,28 +289,6 @@ const PatientDischarge: FC = () => {
         handleSecondaryButtonClick={() => ({})}
       />
 
-      <ConfirmationDialog
-        isOpen={
-          dischargeStatus === "SUCCESS" &&
-          encountersEnabled &&
-          !!currentEncounter &&
-          !close
-        }
-        title={t("admission.discharged")}
-        icon={checkIcon}
-        info={t("admission.closeEncounter")}
-        primaryButtonLabel={t("common.yes")}
-        secondaryButtonLabel={t("common.no")}
-        handlePrimaryButtonClick={() => {
-          setOpenCloseEncounterDialog(true);
-          onConfirmDischarge();
-        }}
-        handleSecondaryButtonClick={() => {
-          setOpenCloseEncounterDialog(false);
-          onConfirmDischarge();
-        }}
-      />
-
       <DischargeAgainstMedicalAdviceDialog
         isOpen={openDischargeAgainstMedicalAdvice}
         title={t("discharge.title").toUpperCase()}
@@ -298,7 +297,7 @@ const PatientDischarge: FC = () => {
         primaryButtonLabel={t("common.save")}
         secondaryButtonLabel={t("common.cancel")}
         handlePrimaryButtonClick={dischargeAgainstMedicalAdvice}
-        handleSecondaryButtonClick={evaluateDischargeClosure}
+        handleSecondaryButtonClick={handlePostScamClosure}
       />
 
       <CloseEncounterDialog

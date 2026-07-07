@@ -14,14 +14,13 @@ export const useFields = (admission?: AdmissionDTO) => {
       value: admission?.diagnosisIn?.map((d) => d.code?.toString() ?? "") ?? [],
       type: "array",
     },
-    complicationDiagnosis: {
-      value:
-        admission?.complicationDiagnosis?.map((d) => d.code?.toString() ?? "") ??
-        [],
-      type: "array",
+    complication: {
+      value: admission?.complication ?? "",
+      type: "text",
     },
     diagnosisOut: {
-      value: admission?.diagnosisOut?.map((d) => d.code?.toString() ?? "") ?? [],
+      value:
+        admission?.diagnosisOut?.map((d) => d.code?.toString() ?? "") ?? [],
       type: "array",
     },
     bedDays: {

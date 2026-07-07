@@ -45,9 +45,11 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
     sngNumber: yup.boolean(),
     others: yup.string().nullable(),
     cpap: yup.boolean(),
+    cpapDetails: yup.string().nullable(),
     malaria: yup.string().nullable(),
     hivTest: yup.string().nullable(),
     bloodGlucoseLevel: yup.number().nullable(),
+    othersRapidScreeningTest: yup.string().nullable(),
     performedBy: yup.string().nullable(),
     performedAt: yup.date().required(t("common.required")),
     reheating: yup.boolean(),
@@ -332,6 +334,17 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
               disabled={isLoading}
             />
           </div>
+          <div className="conditioningForm__item">
+            <TextField
+              label={t("conditioning.othersRapidScreeningTest")}
+              field={formik.getFieldProps("othersRapidScreeningTest")}
+              theme="regular"
+              isValid={isValid("othersRapidScreeningTest")}
+              errorText={getErrorText("othersRapidScreeningTest")}
+              onBlur={formik.handleBlur}
+              disabled={isLoading}
+            />
+          </div>
         </div>
 
         <h3 className="formInsertMode">
@@ -391,12 +404,23 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
             />
           </div>
 
-          <div className="fullWidth conditioningForm__item">
+          <div className="conditioningForm__item">
             <CheckboxField
               fieldName="cpap"
               label={t("conditioning.cpap")}
               checked={isCpapChecked}
               onChange={handleCpapChecked}
+            />
+          </div>
+          <div className="conditioningForm__item">
+            <TextField
+              label={t("conditioning.cpapDetails")}
+              field={formik.getFieldProps("cpapDetails")}
+              theme="regular"
+              isValid={isValid("cpapDetails")}
+              errorText={getErrorText("cpapDetails")}
+              onBlur={formik.handleBlur}
+              disabled={isLoading}
             />
           </div>
           <div className="fullWidth conditioningForm__item">
