@@ -154,6 +154,30 @@ export interface PatientExaminationDTO {
      * @memberof PatientExaminationDTO
      */
     pex_pc?: number;
+    /**
+     * Head circumference per age
+     * @type {number}
+     * @memberof PatientExaminationDTO
+     */
+    pex_head_circ_age?: number;
+    /**
+     * Weight per age
+     * @type {number}
+     * @memberof PatientExaminationDTO
+     */
+    pex_weight_age?: number;
+    /**
+     * Height per age
+     * @type {number}
+     * @memberof PatientExaminationDTO
+     */
+    pex_height_age?: number;
+    /**
+     * Body mass index par age
+     * @type {number}
+     * @memberof PatientExaminationDTO
+     */
+    pex_body_mass_index_age?: number;
 }
 
 /**

@@ -16,8 +16,8 @@ export const useFields = (care?: CareDTO) => {
       type: "date",
     },
     observation: {
-      value: care?.observation ?? "",
-      type: "text",
+      value: care?.observation ? "true" : "false",
+      type: "boolean",
     },
     note: {
       value: care?.note ?? "",

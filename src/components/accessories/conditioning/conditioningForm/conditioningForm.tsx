@@ -36,7 +36,7 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
 
   const validationSchema = yup.object({
     aspiration: yup.boolean(),
-    mce: yup.number().nullable(),
+    mce: yup.boolean(),
     ventilation: yup.boolean(),
     oxygenDebit: yup.number().nullable(),
     sgVolume: yup.number().nullable(),
@@ -82,6 +82,7 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
 
   const [isAspirationChecked, setIsAspirationChecked] = useState(false);
   const [isCpapChecked, setIsCpapChecked] = useState(false);
+  const [isMceChecked, setIsMceChecked] = useState(false);
   const [isVentilationChecked, setIsVentilationChecked] = useState(false);
   const [isSngNumberChecked, setIsSngNumberChecked] = useState(false);
   const [isReheatingChecked, setIsReheatingChecked] = useState(false);
@@ -96,6 +97,7 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
         ...formattedValues,
         aspiration: isAspirationChecked,
         cpap: isCpapChecked,
+        mce: isMceChecked,
         ventilation: isVentilationChecked,
         reheating: isReheatingChecked,
         sngNumber: isSngNumberChecked,
@@ -103,6 +105,7 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
       onSubmit(conditioningToSave as any);
       setIsAspirationChecked(false);
       setIsCpapChecked(false);
+      setIsMceChecked(false);
       setIsVentilationChecked(false);
       setIsReheatingChecked(false);
       setIsSngNumberChecked(false);
@@ -159,6 +162,7 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
     formik.resetForm();
     setIsAspirationChecked(false);
     setIsCpapChecked(false);
+    setIsMceChecked(false);
     setIsVentilationChecked(false);
     setIsReheatingChecked(false);
     setIsSngNumberChecked(false);
@@ -171,6 +175,10 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
 
   const handleCpapChecked = () => {
     setIsCpapChecked(!isCpapChecked);
+  };
+
+  const handleMceChecked = () => {
+    setIsMceChecked(!isMceChecked);
   };
 
   const handleVentilationChecked = () => {
@@ -219,13 +227,14 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
         formik.values.aspiration === "true" ? true : false
       );
       setIsCpapChecked(formik.values.cpap === "true" ? true : false);
+      setIsMceChecked(formik.values.mce === "true" ? true : false);
       setIsVentilationChecked(
         formik.values.ventilation === "true" ? true : false
       );
       setIsReheatingChecked(formik.values.reheating === "true" ? true : false);
       setIsSngNumberChecked(formik.values.sngNumber === "true" ? true : false);
     }
-  }, [creationMode, formik.values.aspiration, formik.values.cpap]);
+  }, [creationMode, formik.values.aspiration, formik.values.cpap, formik.values.mce]);
 
   useEffect(() => {
     if (shouldResetForm) {
@@ -423,15 +432,12 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
               disabled={isLoading}
             />
           </div>
-          <div className="fullWidth conditioningForm__item">
-            <TextField
+          <div className="conditioningForm__item">
+            <CheckboxField
+              fieldName="mce"
               label={t("conditioning.mce")}
-              field={formik.getFieldProps("mce")}
-              theme="regular"
-              isValid={isValid("mce")}
-              errorText={getErrorText("mce")}
-              onBlur={formik.handleBlur}
-              disabled={isLoading}
+              checked={isMceChecked}
+              onChange={handleMceChecked}
             />
           </div>
           <div className="conditioningForm__supplementRow">

@@ -17,7 +17,7 @@ export const initialFields: TFields<ConditioningFormFieldName> = {
   },
   mce: {
     value: "",
-    type: "number",
+    type: "boolean",
   },
   ventilation: {
     value: "",

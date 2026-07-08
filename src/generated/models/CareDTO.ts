@@ -35,10 +35,10 @@ export interface CareDTO {
     team?: Array<string>;
     /**
      * Observation of the commune
-     * @type {string}
+     * @type {boolean}
      * @memberof CareDTO
      */
-    observation?: string;
+    observation?: boolean;
     /**
      * Planned care
      * @type {string}

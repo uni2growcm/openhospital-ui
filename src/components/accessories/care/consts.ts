@@ -13,7 +13,7 @@ export const initialFields: TFields<CareFormFieldName> = {
   },
   observation: {
     value: "",
-    type: "text",
+    type: "boolean",
   },
   plannedCare: {
     value: "",

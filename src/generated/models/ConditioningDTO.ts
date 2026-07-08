@@ -34,11 +34,11 @@ export interface ConditioningDTO {
      */
     aspiration?: boolean;
     /**
-     * Conditioning mce duration
-     * @type {number}
+     * Conditioning mce
+     * @type {boolean}
      * @memberof ConditioningDTO
      */
-    mce?: number;
+    mce?: boolean;
     /**
      * Conditioning ventilation duration
      * @type {boolean}

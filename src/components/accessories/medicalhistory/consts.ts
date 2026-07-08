@@ -31,6 +31,10 @@ export const initialFields: TFields<MedicalHistoryFormFieldName> = {
     value: "",
     type: "text",
   },
+  otherPregnancySection: {
+    value: "",
+    type: "text",
+  },
   birthWeight: {
     value: "",
     type: "number",
@@ -42,6 +46,10 @@ export const initialFields: TFields<MedicalHistoryFormFieldName> = {
   vaccinationStateNoPev: {
     value: [],
     type: "array",
+  },
+  otherVaccinationStateSection: {
+    value: "",
+    type: "text",
   },
   antiMalarialProphylaxisVap: {
     value: "",
@@ -75,6 +83,10 @@ export const initialFields: TFields<MedicalHistoryFormFieldName> = {
     value: "",
     type: "text",
   },
+  combinedBreastfeeding: {
+    value: "",
+    type: "text",
+  },
   neonatalPeriod: {
     value: "",
     type: "text",
@@ -104,6 +116,10 @@ export const initialFields: TFields<MedicalHistoryFormFieldName> = {
     type: "text",
   },
   deParasitization: {
+    value: "",
+    type: "text",
+  },
+  noApplicableDeparasitation: {
     value: "",
     type: "text",
   },

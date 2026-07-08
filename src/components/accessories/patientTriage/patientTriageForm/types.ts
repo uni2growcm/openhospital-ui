@@ -36,4 +36,8 @@ export type TPatientTriageFormFieldName =
   | "pex_branchial_perimeter"
   | "pex_type"
   | "pex_ipt"
-  | "pex_pc";
+  | "pex_pc"
+  | "pex_head_circ_age"
+  | "pex_weight_age"
+  | "pex_height_age"
+  | "pex_body_mass_index_age";

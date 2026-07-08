@@ -73,7 +73,7 @@ const CareTable: FunctionComponent<IOwnProps> = ({
       return {
         id: item.id ?? "",
         careDate: item.careDate ? renderDateTime(item.careDate) : "",
-        observation: item.observation ?? "",
+        observation: item.observation ? t("common.yes") : t("common.no"),
         plannedCare: item.plannedCare ?? "",
         team: formatCare(item.team).join(", "),
         note: item.note ?? "",

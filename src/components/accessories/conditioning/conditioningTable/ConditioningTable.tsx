@@ -88,7 +88,7 @@ const ConditioningTable: FunctionComponent<IOwnProps> = ({
         id: item.id ?? "",
         performedAt: item.performedAt ? renderDateTime(item.performedAt) : "",
         aspiration: item.aspiration ? t("common.yes") : t("common.no"),
-        mce: item.mce ?? "",
+        mce: item.mce ? t("common.yes") : t("common.no"),
         cpap: item.cpap ? t("common.yes") : t("common.no"),
         cpapDetails: item.cpapDetails ?? "",
         malaria: item.malaria ?? "",

@@ -20,8 +20,8 @@ export const useFields = (conditioning?: ConditioningDTO) => {
       type: "text",
     },
     mce: {
-      value: conditioning?.mce?.toString() ?? "",
-      type: "number",
+      value: conditioning?.mce ? "true" : "false",
+      type: "boolean",
     },
     ventilation: {
       value: conditioning?.ventilation ? "true" : "false",
