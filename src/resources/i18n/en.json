@@ -986,6 +986,8 @@
     "exams": "Exams",
     "therapy": "Therapy",
     "conditioning": "Conditioning",
+    "care": "Cares",
+    "medicalHistory": "Medical Histories",
     "encounter": "Consultation",
     "noDataForEncounter": "No operations for this encounter.",
     "noData": "No encounter for this patient."

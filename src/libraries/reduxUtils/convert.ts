@@ -1,13 +1,4 @@
-import {
-  AdmissionDTO,
-  ConditioningDTO,
-  LaboratoryDTO,
-  MedicalDTO,
-  OpdDTO,
-  OperationRowDTO,
-  PatientExaminationDTO,
-  TherapyRowDTO,
-} from "../../generated";
+import { MedicalDTO } from "../../generated";
 import { renderDateTime } from "../formatUtils/dataFormatting";
 import { SummaryFieldType } from "./SummaryFieldType";
 
@@ -24,15 +15,7 @@ export const convertToSummaryData = (
 };
 
 export const renderSummary = (
-  data: Array<
-    | PatientExaminationDTO
-    | OpdDTO
-    | LaboratoryDTO
-    | AdmissionDTO
-    | OperationRowDTO
-    | TherapyRowDTO
-    | ConditioningDTO
-  >,
+  data: any[],
   dateFields: string[],
   labels: any,
   medicals: MedicalDTO[] = []
@@ -40,16 +23,21 @@ export const renderSummary = (
   const itemRender = (item: any) => {
     const obj: any = {};
     Object.keys(labels).forEach((field: string) => {
-      if (typeof item[field] === "object") {
-        obj[field] = item[field]?.description ?? "";
-      } else if (dateFields.includes(field) && item[field]) {
-        obj[field] = renderDateTime(item[field]);
-      } else if (field === "medicalId" && item[field]) {
+      const value = item[field];
+      if (Array.isArray(value)) {
+        obj[field] = value.join(", ");
+      } else if (typeof value === "object" && value !== null) {
+        obj[field] = value?.description ?? "";
+      } else if (dateFields.includes(field) && value) {
+        obj[field] = renderDateTime(value);
+      } else if (field === "medicalId" && value) {
         obj[field] =
-          medicals.find((medoc) => medoc.code === item[field])?.description ??
-          item[field];
-      } else if (item[field]) {
-        obj[field] = item[field];
+          medicals.find((medoc) => medoc.code === value)?.description ??
+          value;
+      } else if (typeof value === "boolean") {
+        obj[field] = value ? "Yes" : "No";
+      } else if (value) {
+        obj[field] = value;
       }
       return obj[field];
     });

@@ -265,6 +265,54 @@ const PatientSummaryByEncounter = () => {
                     />
                   </div>
                 )}
+                {filterByType(groupData, SummaryType.CARE).length > 0 && (
+                  <div className="patientSummary_type_row">
+                    <h4>
+                      {t("summary.care")}({filterByType(groupData, SummaryType.CARE).length})
+                    </h4>
+                    <Table
+                      rowData={renderSummary(
+                        filterByType(groupData, SummaryType.CARE),
+                        dateFields,
+                        labels,
+                        medicals
+                      )}
+                      dateFields={dateFields}
+                      tableHeader={header.type.care}
+                      labelData={labels}
+                      columnsOrder={order}
+                      rowsPerPage={ORDER_BY_TYPE_PAGE_SIZE}
+                      isCollapsabile={true}
+                      showEmptyCell={false}
+                      detailsExcludedFields={["date"]}
+                      isExpanded={expanded}
+                    />
+                  </div>
+                )}
+                {filterByType(groupData, SummaryType.MEDICALHISTORY).length > 0 && (
+                  <div className="patientSummary_type_row">
+                    <h4>
+                      {t("summary.medicalHistory")}({filterByType(groupData, SummaryType.MEDICALHISTORY).length})
+                    </h4>
+                    <Table
+                      rowData={renderSummary(
+                        filterByType(groupData, SummaryType.MEDICALHISTORY),
+                        dateFields,
+                        labels,
+                        medicals
+                      )}
+                      dateFields={dateFields}
+                      tableHeader={header.type.medicalHistory}
+                      labelData={labels}
+                      columnsOrder={order}
+                      rowsPerPage={ORDER_BY_TYPE_PAGE_SIZE}
+                      isCollapsabile={true}
+                      showEmptyCell={false}
+                      detailsExcludedFields={["date"]}
+                      isExpanded={expanded}
+                    />
+                  </div>
+                )}
                 {groupData.length === 0 && <InfoBox type="info" message={t("summary.noDataForEncounter")} />}
               </div>
             );
