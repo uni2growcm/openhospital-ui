@@ -13,7 +13,7 @@ describe("Diseases Activity specs", () => {
       .find("table")
       .then(($table) => {
         const rows = $table.find("tbody tr");
-        expect(rows.length).equal(8);
+        expect(rows.length).equal(16);
       });
   });
   it("Should show only enabled diseases", () => {
@@ -24,7 +24,7 @@ describe("Diseases Activity specs", () => {
       .find("table")
       .then(($table) => {
         const rows = $table.find("tbody tr");
-        expect(rows.length).equal(6);
+        expect(rows.length).equal(12);
       });
   });
   it("Should show only disabled diseases", () => {
@@ -35,7 +35,7 @@ describe("Diseases Activity specs", () => {
       .find("table")
       .then(($table) => {
         const rows = $table.find("tbody tr");
-        expect(rows.length).equal(2);
+        expect(rows.length).equal(4);
       });
   });
 });
