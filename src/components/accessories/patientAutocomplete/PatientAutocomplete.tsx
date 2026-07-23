@@ -17,7 +17,7 @@ const PatientAutocomplete: FC<IProps> = ({ onBlur, ...props }) => {
 
 	const patientSearchResults = useAppSelector((state) => {
 		const data = state.patients.searchResults.data;
-		return Array.isArray(data) ? data : data?.data ?? [];
+		return Array.isArray(data) ? data : (data?.data ?? []);
 	});
 
 	const searchStatus = useAppSelector(

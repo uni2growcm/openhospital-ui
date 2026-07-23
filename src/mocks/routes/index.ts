@@ -1,6 +1,7 @@
 export * from './admissions';
 export * from './admissionTypes';
 export * from './ageTypes';
+export * from './analysis';
 export * from './auth';
 export * from './bill';
 export * from './deliveryResultType';

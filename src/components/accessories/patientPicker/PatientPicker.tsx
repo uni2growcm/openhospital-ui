@@ -97,7 +97,7 @@ const PatientPicker: FC<IProps> = ({
 
 	const patientData = useAppSelector((state) => {
 		const data = state.patients.searchResults.data;
-		return Array.isArray(data) ? data : data?.data ?? [];
+		return Array.isArray(data) ? data : (data?.data ?? []);
 	});
 
 	const { setFieldValue } = formik;
