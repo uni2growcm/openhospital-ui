@@ -155,6 +155,10 @@ export const initialFields: TFields<TPatientDataFormFieldName> = {
 		value: '',
 		type: 'text',
 	},
+	labBookId: {
+		value: '',
+		type: 'number',
+	},
 	blobPhoto: {
 		value: '',
 		type: 'text',

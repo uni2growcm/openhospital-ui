@@ -1,0 +1,75 @@
+import type { LabbookPatientHistoricDTO } from '~/generated';
+
+export const analysisDTO: LabbookPatientHistoricDTO = {
+	patient: {
+		idData: 1,
+		idUser: 12,
+		ano: 5,
+		code: '4AW68',
+		codeLab: '',
+		name: 'Joane',
+		firstname: 'Holmes',
+		birth: '',
+		sex: 2,
+		address: 'Londre',
+		zipcode: '',
+		city: '',
+		phone1: '+44 7700 900000',
+		phone2: '',
+		profession: '',
+		maiden: 'Joane Holmes',
+		district: '',
+		pbox: '',
+		birthApprox: 5,
+		age: 23,
+		ageUnit: 1037,
+		email: '',
+		agreement: 'N',
+		midname: 'wedwf',
+		nationality: 0,
+		resident: 'Y',
+		bloodGroup: 0,
+		bloodRhesus: 0,
+	},
+	analyzes: [
+		{
+			id: 1,
+			recordType: 'E',
+			prescriptionDate: '2026-04-06',
+			analysis: 'Antibiogramme 1ère ligne des mycobactéries en milieu liquide',
+			recordNumber: '0004',
+			variables: [
+				{
+					variable: 'Ethambutol',
+					result: 'Sensible',
+				},
+			],
+		},
+		{
+			id: 2,
+			recordType: 'E',
+			prescriptionDate: '2026-04-06',
+			analysis: 'PCR VIH 1/2',
+			recordNumber: '0005',
+			variables: [
+				{
+					variable: 'Charge virale',
+					result: 'Indétectable',
+				},
+			],
+		},
+		{
+			id: 3,
+			recordType: 'E',
+			prescriptionDate: '2026-04-07',
+			analysis: 'Hémogramme complet',
+			recordNumber: '0006',
+			variables: [
+				{
+					variable: 'Hémoglobine',
+					result: '13.8',
+				},
+			],
+		},
+	],
+};

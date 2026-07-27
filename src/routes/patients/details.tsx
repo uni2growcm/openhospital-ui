@@ -37,6 +37,13 @@ export const usePatientDetailsRoutes = () => {
 					),
 			},
 			{
+				path: 'analysis',
+				lazy: async () =>
+					import(
+						'../../components/accessories/laboratory/analysis/Analysis'
+					).then((module) => ({ Component: module.Analysis })),
+			},
+			{
 				path: 'triage',
 				lazy: async () =>
 					import(

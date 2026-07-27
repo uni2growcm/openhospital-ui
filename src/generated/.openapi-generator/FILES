@@ -13,6 +13,7 @@ apis/ExamTypesApi.ts
 apis/ExaminationsApi.ts
 apis/ExamsApi.ts
 apis/HospitalsApi.ts
+apis/LabbookApi.ts
 apis/LaboratoriesApi.ts
 apis/LoginApi.ts
 apis/MalnutritionsApi.ts
@@ -71,6 +72,10 @@ models/Instance.ts
 models/InstancePreviewDTO.ts
 models/InstanceResponse.ts
 models/LabWithRowsDTO.ts
+models/LabbookAnalysisDTO.ts
+models/LabbookAnalysisVariableDTO.ts
+models/LabbookPatientHistoricDTO.ts
+models/LabbookRawPatientDTO.ts
 models/LaboratoryDTO.ts
 models/LoginRequest.ts
 models/LoginResponse.ts
@@ -109,6 +114,7 @@ models/PregnantTreatmentTypeDTO.ts
 models/PriceDTO.ts
 models/PriceListDTO.ts
 models/PricesOthersDTO.ts
+models/ReportGroupedRequest.ts
 models/Series.ts
 models/SeriesResponse.ts
 models/SettingDTO.ts

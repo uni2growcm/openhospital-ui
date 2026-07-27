@@ -11,6 +11,7 @@ import {
 
 export const patientDTO: PatientDTO = {
 	code: 1,
+	labBookId: 1,
 	status: PatientDTOStatusEnum.I,
 	firstName: 'Antonio Carlos',
 	secondName: 'Jobim',

@@ -252,7 +252,9 @@
 		"updatesuccessful": "The patient was edit successfully.",
 		"createother": "Add Another Patient",
 		"status": "Status",
-		"radiology": "Radiology"
+		"radiology": "Radiology",
+		"labbookid": "LabBook ID",
+		"analysis": "Laboratory Analyses"
 	},
 	"opd": {
 		"newopd": "Create new OPD Visit",
@@ -451,7 +453,8 @@
 		"hospitalInfo": "Hospital Info",
 		"hospital": "Hospital",
 		"settings": "Settings",
-		"radiology": "Radiology"
+		"radiology": "Radiology",
+		"analysis": "Laboratory Analysis"
 	},
 	"operation": {
 		"newoperation": "New Operation",
@@ -1301,6 +1304,19 @@
 		"buttons": {
 			"menu": "Plugins"
 		}
+	},
+	"analysis": {
+		"id": "ID",
+		"recordType": "Type of analysis",
+		"prescriptionDate": "Analysis Date",
+		"analysis": "Analysis",
+		"recordNumber": "Record Number",
+		"variable": "Variable",
+		"result": "Result",
+		"previousentries": "Previous Analyses",
+		"print": "Print all analysis reports",
+		"printerror": "Printing of the analysis results failed",
+		"printnotavailable": "The analysis document is not yet available"
 	},
 	"ethiopianCalendar": {
 		"dialog": {

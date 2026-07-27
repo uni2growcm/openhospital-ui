@@ -12,6 +12,7 @@ export * from './ExamTypesApi';
 export * from './ExaminationsApi';
 export * from './ExamsApi';
 export * from './HospitalsApi';
+export * from './LabbookApi';
 export * from './LaboratoriesApi';
 export * from './LoginApi';
 export * from './MalnutritionsApi';
