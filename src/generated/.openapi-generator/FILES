@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 apis/AdmissionTypesApi.ts
 apis/AdmissionsApi.ts
 apis/AgeTypesApi.ts
