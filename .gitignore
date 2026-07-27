@@ -39,3 +39,8 @@ cypress/screenshots
 
 # Extras
 .__mf__temp
+
+# Agent and specs 
+.agent
+.opencode
+openspec

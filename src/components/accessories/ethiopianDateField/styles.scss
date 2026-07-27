@@ -1,0 +1,46 @@
+.ethiopianDateField {
+	width: 100%;
+
+	&__container {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	&__display {
+		font-size: 0.875rem;
+		color: rgba(0, 0, 0, 0.7);
+		padding: 8px;
+		background: #f5f5f5;
+		border-radius: 4px;
+		text-align: center;
+	}
+}
+
+.ethiopianDatePicker {
+	display: flex; 
+	flex-direction: row;
+	gap: 8px;
+	align-items: center;
+
+	&__select {
+		flex: 1;
+		min-width: 0;
+
+		&--month {
+			font-family: 'Noto Sans Ethiopic', sans-serif !important;
+		}
+	}
+}
+
+@media (max-width: 599px) {
+	.ethiopianDatePicker {
+		flex-direction: column;
+		align-items: stretch;
+
+		&__select {
+			width: 100% !important;
+			flex: unset;
+		}
+	}
+}
