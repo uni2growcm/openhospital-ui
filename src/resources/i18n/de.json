@@ -797,15 +797,33 @@
 			"elderly": "Älter"
 		},
 		"lab": {
-			"undefined": { "txt": "Nicht definiert" },
-			"blood": { "txt": "Blut" },
-			"cfs": { "txt": "CFS" },
-			"film": { "txt": "FILM" },
-			"sputum": { "txt": "Spucke" },
-			"stool": { "txt": "Stuhl" },
-			"swabs": { "txt": "Wattestäbchen" },
-			"tissues": { "txt": "Gewebe" },
-			"urine": { "txt": "Urin" }
+			"undefined": {
+				"txt": "Nicht definiert"
+			},
+			"blood": {
+				"txt": "Blut"
+			},
+			"cfs": {
+				"txt": "CFS"
+			},
+			"film": {
+				"txt": "FILM"
+			},
+			"sputum": {
+				"txt": "Spucke"
+			},
+			"stool": {
+				"txt": "Stuhl"
+			},
+			"swabs": {
+				"txt": "Wattestäbchen"
+			},
+			"tissues": {
+				"txt": "Gewebe"
+			},
+			"urine": {
+				"txt": "Urin"
+			}
 		}
 	},
 	"exam": {
@@ -856,5 +874,54 @@
 		"opdInclude": "OPD",
 		"ipdInInclude": "IP In",
 		"ipdOutInclude": "IP Out"
+	},
+	"ethiopianCalendar": {
+		"dialog": {
+			"title": "Select Date",
+			"cancel": "Cancel",
+			"confirm": "Confirm",
+			"year": "Year",
+			"month": "Month",
+			"day": "Day"
+		},
+		"mode": {
+			"ethiopian": "Ethiopian",
+			"gregorian": "Gregorian"
+		},
+		"preview": {
+			"ethiopian": "Ethiopian",
+			"gregorian": "Gregorian"
+		},
+		"months": {
+			"ethiopian": [
+				"Meskerem",
+				"Tikimt",
+				"Hidar",
+				"Tahsas",
+				"Tir",
+				"Yekatit",
+				"Megabit",
+				"Miyazya",
+				"Genna",
+				"Sene",
+				"Hamle",
+				"Nehase",
+				"Pagume"
+			],
+			"gregorian": [
+				"January",
+				"February",
+				"March",
+				"April",
+				"May",
+				"June",
+				"July",
+				"August",
+				"September",
+				"October",
+				"November",
+				"December"
+			]
+		}
 	}
 }

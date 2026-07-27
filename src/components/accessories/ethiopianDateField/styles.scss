@@ -15,10 +15,26 @@
 		border-radius: 4px;
 		text-align: center;
 	}
+
+	&__compactRow {
+		display: flex;
+		flex-direction: row;
+		gap: 8px;
+		align-items: center;
+		padding-top: 8px;
+	}
+
+	&__convertedDate {
+		font-size: 0.75rem;
+		color: rgba(0, 0, 0, 0.6);
+		margin-top: 8px;
+		padding: 4px 0;
+		border-top: 1px solid rgba(0, 0, 0, 0.1);
+	}
 }
 
 .ethiopianDatePicker {
-	display: flex; 
+	display: flex;
 	flex-direction: row;
 	gap: 8px;
 	align-items: center;
@@ -33,7 +49,21 @@
 	}
 }
 
+.gregorianDatePicker {
+	display: flex;
+	flex-direction: row;
+	gap: 8px;
+	align-items: center;
+}
+
 @media (max-width: 599px) {
+	.ethiopianDateField {
+		&__compactRow {
+			flex-direction: column;
+			align-items: stretch;
+		}
+	}
+
 	.ethiopianDatePicker {
 		flex-direction: column;
 		align-items: stretch;
@@ -41,6 +71,15 @@
 		&__select {
 			width: 100% !important;
 			flex: unset;
+		}
+	}
+
+	.gregorianDatePicker {
+		flex-direction: column;
+		align-items: stretch;
+
+		> .MuiFormControl-root {
+			width: 100%;
 		}
 	}
 }

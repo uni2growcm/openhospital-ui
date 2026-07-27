@@ -538,5 +538,54 @@
 		"cs": "Czech",
 		"sq": "Albanian",
 		"zh": "Chinese"
+	},
+	"ethiopianCalendar": {
+		"dialog": {
+			"title": "Select Date",
+			"cancel": "Cancel",
+			"confirm": "Confirm",
+			"year": "Year",
+			"month": "Month",
+			"day": "Day"
+		},
+		"mode": {
+			"ethiopian": "Ethiopian",
+			"gregorian": "Gregorian"
+		},
+		"preview": {
+			"ethiopian": "Ethiopian",
+			"gregorian": "Gregorian"
+		},
+		"months": {
+			"ethiopian": [
+				"Meskerem",
+				"Tikimt",
+				"Hidar",
+				"Tahsas",
+				"Tir",
+				"Yekatit",
+				"Megabit",
+				"Miyazya",
+				"Genna",
+				"Sene",
+				"Hamle",
+				"Nehase",
+				"Pagume"
+			],
+			"gregorian": [
+				"January",
+				"February",
+				"March",
+				"April",
+				"May",
+				"June",
+				"July",
+				"August",
+				"September",
+				"October",
+				"November",
+				"December"
+			]
+		}
 	}
 }

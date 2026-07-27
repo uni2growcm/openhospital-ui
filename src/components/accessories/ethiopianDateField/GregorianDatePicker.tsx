@@ -6,24 +6,47 @@ import {
 	useMemo,
 	useState,
 } from 'react';
-import {
-	ETHIOPIAN_MONTHS_AMHARIC,
-	getCurrentEthiopianDate,
-	getEthiopianMonthDays,
-	isValidEthiopianDate,
-} from '../../../libraries/ethiopianCalendar/ethiopianCalendar';
-import type { EthiopianDatePickerProps } from './types';
 
-const EthiopianDatePicker: FunctionComponent<EthiopianDatePickerProps> = ({
+export interface GregorianDatePickerProps {
+	year: number;
+	month: number;
+	day: number;
+	onChange: (year: number, month: number, day: number) => void;
+	disableFuture?: boolean;
+	disabled?: boolean;
+}
+
+const GREGORIAN_MONTHS = [
+	'January',
+	'February',
+	'March',
+	'April',
+	'May',
+	'June',
+	'July',
+	'August',
+	'September',
+	'October',
+	'November',
+	'December',
+];
+
+const getDaysInMonth = (year: number, month: number): number => {
+	return new Date(year, month, 0).getDate();
+};
+
+const GregorianDatePicker: FunctionComponent<GregorianDatePickerProps> = ({
 	year,
 	month,
 	day,
 	onChange,
 	disableFuture = false,
 	disabled = false,
-	disableMonthChange = false,
 }) => {
-	const currentEthiopianDate = getCurrentEthiopianDate();
+	const now = new Date();
+	const currentYear = now.getFullYear();
+	const currentMonth = now.getMonth() + 1;
+	const currentDay = now.getDate();
 	const startYear = 1900;
 
 	const [selectedYear, setSelectedYear] = useState(year);
@@ -36,16 +59,14 @@ const EthiopianDatePicker: FunctionComponent<EthiopianDatePickerProps> = ({
 		setSelectedDay(day);
 	}, [year, month, day]);
 
-	const maxDay = getEthiopianMonthDays(selectedYear, selectedMonth);
+	const maxDay = getDaysInMonth(selectedYear, selectedMonth);
 
 	const handleYearChange = useCallback(
 		(newYear: number) => {
 			setSelectedYear(newYear);
-			const newMaxDay = getEthiopianMonthDays(newYear, selectedMonth);
+			const newMaxDay = getDaysInMonth(newYear, selectedMonth);
 			const newDay = Math.min(selectedDay, newMaxDay);
-			if (isValidEthiopianDate(newYear, selectedMonth, newDay)) {
-				onChange(newYear, selectedMonth, newDay);
-			}
+			onChange(newYear, selectedMonth, newDay);
 		},
 		[selectedMonth, selectedDay, onChange],
 	);
@@ -53,11 +74,9 @@ const EthiopianDatePicker: FunctionComponent<EthiopianDatePickerProps> = ({
 	const handleMonthChange = useCallback(
 		(newMonth: number) => {
 			setSelectedMonth(newMonth);
-			const newMaxDay = getEthiopianMonthDays(selectedYear, newMonth);
+			const newMaxDay = getDaysInMonth(selectedYear, newMonth);
 			const newDay = Math.min(selectedDay, newMaxDay);
-			if (isValidEthiopianDate(selectedYear, newMonth, newDay)) {
-				onChange(selectedYear, newMonth, newDay);
-			}
+			onChange(selectedYear, newMonth, newDay);
 		},
 		[selectedYear, selectedDay, onChange],
 	);
@@ -65,46 +84,36 @@ const EthiopianDatePicker: FunctionComponent<EthiopianDatePickerProps> = ({
 	const handleDayChange = useCallback(
 		(newDay: number) => {
 			setSelectedDay(newDay);
-			if (isValidEthiopianDate(selectedYear, selectedMonth, newDay)) {
-				onChange(selectedYear, selectedMonth, newDay);
-			}
+			onChange(selectedYear, selectedMonth, newDay);
 		},
 		[selectedYear, selectedMonth, onChange],
 	);
 
 	const yearOptions = useMemo(() => {
-		const endYear = disableFuture
-			? currentEthiopianDate.year
-			: currentEthiopianDate.year + 50;
+		const endYear = disableFuture ? currentYear : currentYear + 50;
 		const options = [];
 		for (let y = startYear; y <= endYear; y++) {
 			options.push(y);
 		}
 		return options;
-	}, [disableFuture, currentEthiopianDate.year]);
+	}, [disableFuture, currentYear]);
 
 	const monthOptions = useMemo(() => {
-		const isCurrentYear = selectedYear === currentEthiopianDate.year;
-		return ETHIOPIAN_MONTHS_AMHARIC.map((name, index) => ({
+		const isCurrentYear = selectedYear === currentYear;
+		return GREGORIAN_MONTHS.map((name, index) => ({
 			value: index + 1,
 			label: `${index + 1} - ${name}`,
-			disabled:
-				disableFuture &&
-				isCurrentYear &&
-				index + 1 > currentEthiopianDate.month,
+			disabled: disableFuture && isCurrentYear && index + 1 > currentMonth,
 		}));
-	}, [selectedYear, disableFuture, currentEthiopianDate]);
+	}, [selectedYear, disableFuture, currentYear, currentMonth]);
 
 	const dayOptions = useMemo(() => {
-		const isCurrentYear = selectedYear === currentEthiopianDate.year;
-		const isCurrentMonth = selectedMonth === currentEthiopianDate.month;
+		const isCurrentYear = selectedYear === currentYear;
+		const isCurrentMonth = selectedMonth === currentMonth;
 		const options = [];
 		for (let d = 1; d <= maxDay; d++) {
 			const isFutureDay =
-				disableFuture &&
-				isCurrentYear &&
-				isCurrentMonth &&
-				d > currentEthiopianDate.day;
+				disableFuture && isCurrentYear && isCurrentMonth && d > currentDay;
 			options.push({ value: d, disabled: isFutureDay });
 		}
 		return options;
@@ -113,7 +122,9 @@ const EthiopianDatePicker: FunctionComponent<EthiopianDatePickerProps> = ({
 		selectedMonth,
 		maxDay,
 		disableFuture,
-		currentEthiopianDate,
+		currentYear,
+		currentMonth,
+		currentDay,
 	]);
 
 	const menuProps = {
@@ -124,25 +135,21 @@ const EthiopianDatePicker: FunctionComponent<EthiopianDatePickerProps> = ({
 
 	return (
 		<div
-			className="ethiopianDatePicker"
+			className="gregorianDatePicker"
 			style={{
 				display: 'grid',
 				gridTemplateColumns: 'repeat(3, 1fr)',
 				gap: '8px',
 			}}
 		>
-			<FormControl
-				size="small"
-				className="ethiopianDatePicker__select"
-				disabled={disabled}
-			>
-				<InputLabel id={`${year}-label`}>Year</InputLabel>
+			<FormControl size="small" disabled={disabled}>
+				<InputLabel id="gregorian-year-label">Year</InputLabel>
 				<Select
-					labelId={`${year}-label`}
+					labelId="gregorian-year-label"
 					value={selectedYear}
 					label="Year"
 					onChange={(e) => handleYearChange(Number(e.target.value))}
-					aria-label="Ethiopian year"
+					aria-label="Gregorian year"
 					MenuProps={menuProps}
 				>
 					{yearOptions.map((y) => (
@@ -153,47 +160,32 @@ const EthiopianDatePicker: FunctionComponent<EthiopianDatePickerProps> = ({
 				</Select>
 			</FormControl>
 
-			<FormControl
-				size="small"
-				className="ethiopianDatePicker__select ethiopianDatePicker__select--month"
-				disabled={disabled}
-			>
-				<InputLabel id={`${month}-label`}>Month</InputLabel>
+			<FormControl size="small" disabled={disabled}>
+				<InputLabel id="gregorian-month-label">Month</InputLabel>
 				<Select
-					labelId={`${month}-label`}
+					labelId="gregorian-month-label"
 					value={selectedMonth}
 					label="Month"
 					onChange={(e) => handleMonthChange(Number(e.target.value))}
-					disabled={disableMonthChange}
-					aria-label="Ethiopian month"
+					aria-label="Gregorian month"
 					MenuProps={menuProps}
-					sx={{ fontFamily: 'Noto Sans Ethiopic, sans-serif !important' }}
 				>
 					{monthOptions.map((m) => (
-						<MenuItem
-							key={m.value}
-							value={m.value}
-							disabled={m.disabled}
-							sx={{ fontFamily: 'Noto Sans Ethiopic, sans-serif !important' }}
-						>
+						<MenuItem key={m.value} value={m.value} disabled={m.disabled}>
 							{m.label}
 						</MenuItem>
 					))}
 				</Select>
 			</FormControl>
 
-			<FormControl
-				size="small"
-				className="ethiopianDatePicker__select"
-				disabled={disabled}
-			>
-				<InputLabel id={`${day}-label`}>Day</InputLabel>
+			<FormControl size="small" disabled={disabled}>
+				<InputLabel id="gregorian-day-label">Day</InputLabel>
 				<Select
-					labelId={`${day}-label`}
+					labelId="gregorian-day-label"
 					value={selectedDay}
 					label="Day"
 					onChange={(e) => handleDayChange(Number(e.target.value))}
-					aria-label="Ethiopian day"
+					aria-label="Gregorian day"
 					MenuProps={menuProps}
 				>
 					{dayOptions.map((d) => (
@@ -207,4 +199,4 @@ const EthiopianDatePicker: FunctionComponent<EthiopianDatePickerProps> = ({
 	);
 };
 
-export default EthiopianDatePicker;
+export default GregorianDatePicker;

@@ -875,15 +875,33 @@
 			"elderly": "ዓብዪ"
 		},
 		"lab": {
-			"undefined": { "txt": "ዘይተገልጸ" },
-			"blood": { "txt": "ደም" },
-			"cfs": { "txt": "ሲኤፍኤስ" },
-			"film": { "txt": "ፊልሚ" },
-			"sputum": { "txt": "ረስኒ" },
-			"stool": { "txt": "ድኳ" },
-			"swabs": { "txt": "ስዋብ" },
-			"tissues": { "txt": "ቲሹታት" },
-			"urine": { "txt": "ሽንቲ" }
+			"undefined": {
+				"txt": "ዘይተገልጸ"
+			},
+			"blood": {
+				"txt": "ደም"
+			},
+			"cfs": {
+				"txt": "ሲኤፍኤስ"
+			},
+			"film": {
+				"txt": "ፊልሚ"
+			},
+			"sputum": {
+				"txt": "ረስኒ"
+			},
+			"stool": {
+				"txt": "ድኳ"
+			},
+			"swabs": {
+				"txt": "ስዋብ"
+			},
+			"tissues": {
+				"txt": "ቲሹታት"
+			},
+			"urine": {
+				"txt": "ሽንቲ"
+			}
 		},
 		"common": {
 			"thecodeisalreadyinuse": {
@@ -1225,5 +1243,54 @@
 		"updateSuccess": "ዓይነት ፈተና ብዓወት ተሓዲሱ ኣሎ!",
 		"cancelCreation": "ርግጸኛ ዲኻ ነቲ ናይ ፈተና ዓይነት ምፍጣር ክትስርዞ?",
 		"cancelUpdate": "ርግጸኛ ዲኻ ነቲ ናይ ፈተና ዓይነት update ክትስርዞ?"
+	},
+	"ethiopianCalendar": {
+		"dialog": {
+			"title": "Select Date",
+			"cancel": "Cancel",
+			"confirm": "Confirm",
+			"year": "Year",
+			"month": "Month",
+			"day": "Day"
+		},
+		"mode": {
+			"ethiopian": "Ethiopian",
+			"gregorian": "Gregorian"
+		},
+		"preview": {
+			"ethiopian": "Ethiopian",
+			"gregorian": "Gregorian"
+		},
+		"months": {
+			"ethiopian": [
+				"Meskerem",
+				"Tikimt",
+				"Hidar",
+				"Tahsas",
+				"Tir",
+				"Yekatit",
+				"Megabit",
+				"Miyazya",
+				"Genna",
+				"Sene",
+				"Hamle",
+				"Nehase",
+				"Pagume"
+			],
+			"gregorian": [
+				"January",
+				"February",
+				"March",
+				"April",
+				"May",
+				"June",
+				"July",
+				"August",
+				"September",
+				"October",
+				"November",
+				"December"
+			]
+		}
 	}
 }
