@@ -1,153 +1,239 @@
 import {
-  ArtTrack,
-  Colorize,
-  Healing,
-  LocalHospital,
-  LocalHotel,
-  Pageview,
-} from "@mui/icons-material";
-import { usePermission } from "libraries/permissionUtils/usePermission";
-import React, { FunctionComponent, useCallback } from "react";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
-import Arrow from "../../../assets/arrow-w.svg";
-import "./styles.scss";
-import { IUserSection } from "./types";
+	ArtTrack,
+	Colorize,
+	Healing,
+	LocalHospital,
+	LocalHotel,
+	ManageHistory,
+	Pageview,
+} from '@mui/icons-material';
+import type React from 'react';
+import {
+	type FunctionComponent,
+	useCallback,
+	useEffect,
+	useState,
+} from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate, useParams } from 'react-router';
+import { PATHS } from '~/consts';
+import { usePermission } from '~/libraries/permissionUtils/usePermission';
+import { usePluginsContext } from '~/plugins';
+import Arrow from '../../../assets/arrow-w.svg';
+import './styles.scss';
+import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
+import { getPatient } from '~/state/patients';
+import type { IState } from '~/types';
+import type { IUserSection } from './types';
 
 interface IOwnProps {
-  setUserSection: React.Dispatch<React.SetStateAction<IUserSection>>;
-  userSection: IUserSection;
+	setUserSection: React.Dispatch<React.SetStateAction<IUserSection>>;
+	userSection: IUserSection;
 }
 
 const OutPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
-  setUserSection,
-  userSection,
+	setUserSection,
+	userSection,
 }) => {
-  const { t } = useTranslation();
+	const { t } = useTranslation();
+	const { id } = useParams();
 
-  const isActive = (value: string) => {
-    return value === userSection ? "active" : "default";
-  };
+	const navigate = useNavigate();
 
-  const canReadRadiology = usePermission("radiology.read");
+	const { remotes } = usePluginsContext();
 
-  const navigate = useNavigate();
+	const dispatch = useAppDispatch();
 
-  const changeUserSection = useCallback(
-    (section: IUserSection) => {
-      setUserSection(section);
-      navigate(`${section}`, { replace: true });
-    },
-    [navigate, setUserSection]
-  );
+	const [enabledMock] = useState<boolean>(
+		import.meta.env.VITE_USE_MOCK_API === 'true',
+	);
 
-  return (
-    <div
-      data-cy="patient-details-main-menu"
-      className="patientDetails__main_menu"
-    >
-      <h6>{t("patient.usersections")}</h6>
+	const canReadRadiology = usePermission('radiology.read');
 
-      <div
-        className={"patientDetails__main_menu__item " + isActive("admissions")}
-        onClick={() => {
-          changeUserSection("admissions");
-        }}
-      >
-        <LocalHotel
-          fontSize="small"
-          style={{
-            color: "white",
-          }}
-        />
-        <span>{t("nav.admissions")}:</span>
-        <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
-      </div>
+	const isActive = (value: string) => {
+		return value === userSection ? 'active' : 'default';
+	};
 
-      <div
-        className={
-          "align__element patientDetails__main_menu__item " + isActive("visits")
-        }
-        onClick={() => {
-          changeUserSection("visits");
-        }}
-      >
-        <Pageview fontSize="small" style={{ color: "white" }} />
-        <span>{t("nav.visits")}:</span>
-        <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
-      </div>
+	// const changeUserSection = useCallback(
+	// 	(section: IUserSection) => {
+	// 		setUserSection(section);
+	// 		navigate(
+	// 			`${PATHS.patients_details_id.replace(':id', id ?? '')}/${section}`,
+	// 			{
+	// 				replace: true,
+	// 			},
+	// 		);
+	// 	},
+	// 	[navigate, setUserSection, id],
+	// );
 
-      <div
-        className={
-          "align__element patientDetails__main_menu__item " + isActive("triage")
-        }
-        onClick={() => {
-          changeUserSection("triage");
-        }}
-      >
-        <ArtTrack fontSize="small" style={{ color: "white" }} />
-        <span>{t("nav.triage")}:</span>
-        <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
-      </div>
+	const changeUserSection = useCallback(
+		(section: IUserSection) => {
+			if (!id) return;
 
-      <div
-        className={
-          "align__element patientDetails__main_menu__item " +
-          isActive("laboratory")
-        }
-        onClick={() => {
-          changeUserSection("laboratory");
-        }}
-      >
-        <Colorize fontSize="small" style={{ color: "white" }} />
-        <span>{t("nav.laboratory")}:</span>
-        <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
-      </div>
+			setUserSection(section);
 
-      {false && (
-        <div
-          className={
-            "align__element patientDetails__main_menu__item " +
-            isActive("therapy")
-          }
-          onClick={() => {
-            changeUserSection("therapy");
-          }}
-        >
-          <Healing fontSize="small" style={{ color: "white" }} />
-          <span>{t("nav.therapy")}:</span>
-          <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
-        </div>
-      )}
-      <div
-        className={
-          "align__element patientDetails__main_menu__item " + isActive("clinic")
-        }
-        onClick={() => {
-          changeUserSection("clinic");
-        }}
-      >
-        <LocalHospital fontSize="small" style={{ color: "white" }} />
-        <span>{t("nav.userclinic")}</span>
-        <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
-      </div>
-      {canReadRadiology && (
-        <div
-          className={
-            "align__element patientDetails__main_menu__item " +
-            isActive("radiology")
-          }
-          onClick={() => {
-            changeUserSection("radiology");
-          }}
-        >
-          <Healing fontSize="small" style={{ color: "white" }} />
-          <span>{t("nav.radiology")}</span>
-          <img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
-        </div>
-      )}
-    </div>
-  );
+			if (section === 'radiology') {
+				navigate(PATHS.patient_radiology_studies.replace(':id', id), {
+					replace: true,
+				});
+				return;
+			}
+
+			navigate(`${PATHS.patients_details_id.replace(':id', id)}/${section}`, {
+				replace: true,
+			});
+		},
+		[navigate, setUserSection, id],
+	);
+
+	const patient = useAppSelector(
+		(state: IState) => state.patients.selectedPatient.data,
+	);
+
+	useEffect(() => {
+		if (!enabledMock) {
+			if (id) {
+				dispatch(getPatient(id));
+			}
+		}
+	}, [id, dispatch, enabledMock]);
+
+	return (
+		<div
+			data-cy="patient-details-main-menu"
+			className="patientDetails__main_menu"
+		>
+			<h6>{t('patient.usersections')}</h6>
+
+			<div
+				className={`patientDetails__main_menu__item ${isActive('admissions')}`}
+				onClick={() => {
+					changeUserSection('admissions');
+				}}
+			>
+				<LocalHotel
+					fontSize="small"
+					style={{
+						color: 'white',
+					}}
+				/>
+				<span>{t('nav.admissions')}:</span>
+				<img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
+			</div>
+
+			<div
+				className={`align__element patientDetails__main_menu__item ${isActive('visits')}`}
+				onClick={() => {
+					changeUserSection('visits');
+				}}
+			>
+				<Pageview fontSize="small" style={{ color: 'white' }} />
+				<span>{t('nav.visits')}:</span>
+				<img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
+			</div>
+
+			<div
+				className={`align__element patientDetails__main_menu__item ${isActive('triage')}`}
+				onClick={() => {
+					changeUserSection('triage');
+				}}
+			>
+				<ArtTrack fontSize="small" style={{ color: 'white' }} />
+				<span>{t('nav.triage')}:</span>
+				<img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
+			</div>
+
+			<div
+				className={
+					'align__element patientDetails__main_menu__item ' +
+					isActive('laboratory')
+				}
+				onClick={() => {
+					changeUserSection('laboratory');
+				}}
+			>
+				<Colorize fontSize="small" style={{ color: 'white' }} />
+				<span>{t('nav.laboratory')}:</span>
+				<img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
+			</div>
+
+			{(patient?.labBookId || enabledMock) && (
+				<div
+					className={
+						'align__element patientDetails__main_menu__item ' +
+						isActive('analysis')
+					}
+					onClick={() => {
+						changeUserSection('analysis');
+					}}
+				>
+					<ManageHistory fontSize="small" style={{ color: 'white' }} />
+					<span>{t('nav.analysis')}:</span>
+					<img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
+				</div>
+			)}
+
+			{false && (
+				<div
+					className={
+						'align__element patientDetails__main_menu__item ' +
+						isActive('therapy')
+					}
+					onClick={() => {
+						changeUserSection('therapy');
+					}}
+				>
+					<Healing fontSize="small" style={{ color: 'white' }} />
+					<span>{t('nav.therapy')}:</span>
+					<img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
+				</div>
+			)}
+			<div
+				className={`align__element patientDetails__main_menu__item ${isActive('clinic')}`}
+				onClick={() => {
+					changeUserSection('clinic');
+				}}
+			>
+				<LocalHospital fontSize="small" style={{ color: 'white' }} />
+				<span>{t('nav.userclinic')}</span>
+				<img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
+			</div>
+			{canReadRadiology && (
+				<div
+					className={
+						'align__element patientDetails__main_menu__item ' +
+						isActive('radiology')
+					}
+					onClick={() => {
+						changeUserSection('radiology');
+					}}
+				>
+					<Healing fontSize="small" style={{ color: 'white' }} />
+					<span>{t('nav.radiology')}</span>
+					<img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
+				</div>
+			)}
+			{remotes
+				.filter((remote) => remote.location === 'patient')
+				.map((remote) => (
+					<div
+						key={remote.name}
+						className={
+							'align__element patientDetails__main_menu__item ' +
+							isActive(remote.name)
+						}
+						onClick={() => {
+							changeUserSection(remote.name as IUserSection);
+						}}
+					>
+						<Healing fontSize="small" style={{ color: 'white' }} />
+						<span>{remote.label}</span>
+						<img src={Arrow} className="icon_toggle" alt="Accordion toogle" />
+					</div>
+				))}
+		</div>
+	);
 };
 
 export default OutPatientDashboardMenu;

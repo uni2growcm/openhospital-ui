@@ -23,6 +23,12 @@ export interface PatientDTO {
      */
     readonly code?: number;
     /**
+     * Code of the Patient in labBook software
+     * @type {number}
+     * @memberof PatientDTO
+     */
+    labBookId?: number;
+    /**
      * First name of the patient
      * @type {string}
      * @memberof PatientDTO

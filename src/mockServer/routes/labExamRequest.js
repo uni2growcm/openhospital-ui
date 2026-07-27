@@ -1,31 +1,31 @@
-import { examRequestDTO } from "mockServer/fixtures/examRequestDTO";
+import { examRequestDTO } from 'mockServer/fixtures/examRequestDTO';
 
 export const labExamRequestRoutes = (server) => {
-  server.namespace("/laboratories/examRequest", () => {
-    server.get("/patient/:id").intercept((req, res) => {
-      res.status(200).json(examRequestDTO);
-    });
-    server.post("/").intercept((req, res) => {
-      let body = req.jsonBody();
-      switch (body.code) {
-        case "FAIL":
-          res.status(400).json({ message: "Fail to create lab exam request" });
-          break;
-        default:
-          res.status(200).json(body);
-      }
-    });
-  });
-  server.get("/reports/patientexamrequest/:patientId").intercept((req, res) => {
-    const { patientId } = req.params;
-    if (patientId === "FAIL") {
-      res.status(400).json({ message: "Fail to generate exam request PDF" });
-    } else {
-      const blob = new Blob(["fake pdf content"], { type: "application/pdf" });
-      res.send({
-        status: 200,
-        body: blob,
-      });
-    }
-  });
+	server.namespace('/laboratories/examRequest', () => {
+		server.get('/patient/:id').intercept((_req, res) => {
+			res.status(200).json(examRequestDTO);
+		});
+		server.post('/').intercept((req, res) => {
+			const body = req.jsonBody();
+			switch (body.code) {
+				case 'FAIL':
+					res.status(400).json({ message: 'Fail to create lab exam request' });
+					break;
+				default:
+					res.status(200).json(body);
+			}
+		});
+	});
+	server.get('/reports/patientexamrequest/:patientId').intercept((req, res) => {
+		const { patientId } = req.params;
+		if (patientId === 'FAIL') {
+			res.status(400).json({ message: 'Fail to generate exam request PDF' });
+		} else {
+			const blob = new Blob(['fake pdf content'], { type: 'application/pdf' });
+			res.send({
+				status: 200,
+				body: blob,
+			});
+		}
+	});
 };
