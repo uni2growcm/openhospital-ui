@@ -66,20 +66,21 @@ export const EditPatientActivity = () => {
 			state.patients.updatePatient.error?.message || t('common.somethingwrong'),
 	) as string;
 
-	const onSubmit = (updatePatientValues: PatientDTO) => {
-		if (patient?.data?.code)
-			dispatch(
-				updatePatient({
-					code: patient?.data?.code,
-					patientDTO: {
-						...updatePatientValues,
-						code: patient?.data?.code,
-						allergies: patient.data?.allergies,
-						anamnesis: patient.data?.anamnesis,
-					},
-				}),
-			);
-	};
+  const onSubmit = (updatePatientValues: PatientDTO) => {
+    if (patient?.data?.code)
+      dispatch(
+        updatePatient({
+          code: patient?.data?.code,
+          patientDTO: {
+            ...updatePatientValues,
+            code: patient?.data?.code,
+            allergies: patient.data?.allergies,
+            anamnesis: patient.data?.anamnesis,
+            updatedFrom: "OH",
+          },
+        })
+      );
+  };
 
 	const [activityTransitionState, setActivityTransitionState] =
 		useState<TActivityTransitionState>('IDLE');
