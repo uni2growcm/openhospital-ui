@@ -211,8 +211,8 @@ const EthiopianDateField: FunctionComponent<IEthiopianDateFieldProps> = ({
 				variant="outlined"
 				margin="dense"
 			>
-				<InputLabel shrink sx={{background: '#fff'}}>{displayLabel} *</InputLabel>
-				<div className="ethiopianDateField__compactRow"
+			<InputLabel shrink sx={{background: '#fff'}}>{displayLabel} *</InputLabel>
+			<div className="ethiopianDateField__compactRow"
 				style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '8px'}}>
 					<Select
 						size="small"
@@ -224,16 +224,17 @@ const EthiopianDateField: FunctionComponent<IEthiopianDateFieldProps> = ({
 						<MenuItem value="ethiopian">{t('ethiopianCalendar.mode.ethiopian')}</MenuItem>
 						<MenuItem value="gregorian">{t('ethiopianCalendar.mode.gregorian')}</MenuItem>
 					</Select>
-				<TextField
-					size="small"
-					value={displayValue}
-					error={Boolean(errorText)}
-					placeholder={t('common.selectdate')}
-					InputProps={{ readOnly: true }}
-					onClick={() => !disabled && setDialogOpen(true)}
-					sx={{ flex: 1, cursor: disabled ? 'default' : 'pointer' }}
-					disabled={disabled}
-				/>
+					<TextField
+						size="small"
+						value={displayValue}
+						error={Boolean(errorText)}
+						placeholder={t('common.selectdate')}
+						InputProps={{ readOnly: true }}
+						onClick={() => !disabled && setDialogOpen(true)}
+						sx={{ flex: 1, cursor: disabled ? 'default' : 'pointer' }}
+						disabled={disabled}
+						id={fieldName}
+					/>
 				</div>
 				{errorText && <FormHelperText>{errorText}</FormHelperText>}
 				<div className="ethiopianDateField__convertedDate">

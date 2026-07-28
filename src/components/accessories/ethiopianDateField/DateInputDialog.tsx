@@ -237,6 +237,7 @@ const DateInputDialog: FunctionComponent<DateInputDialogProps> = ({
 							{t('ethiopianCalendar.dialog.year')}
 						</InputLabel>
 						<Select
+							data-cy="birth-year-select"
 							labelId="dialog-year-label"
 							value={localYear}
 							label={t('ethiopianCalendar.dialog.year')}
@@ -259,6 +260,7 @@ const DateInputDialog: FunctionComponent<DateInputDialogProps> = ({
 							{t('ethiopianCalendar.dialog.month')}
 						</InputLabel>
 						<Select
+							data-cy="birth-month-select"
 							labelId="dialog-month-label"
 							value={localMonth}
 							label={t('ethiopianCalendar.dialog.month')}
@@ -283,6 +285,7 @@ const DateInputDialog: FunctionComponent<DateInputDialogProps> = ({
 							{t('ethiopianCalendar.dialog.day')}
 						</InputLabel>
 						<Select
+							data-cy="birth-day-select"
 							labelId="dialog-day-label"
 							value={localDay}
 							label={t('ethiopianCalendar.dialog.day')}

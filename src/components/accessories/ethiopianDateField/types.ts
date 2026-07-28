@@ -15,6 +15,7 @@ export interface IEthiopianDateFieldProps {
 	required?: FIELD_VALIDATION;
 	TextFieldComponent?: React.ComponentType<TextFieldProps>;
 	setFieldValue?: (field: string, value: unknown) => void;
+	nativeFieldProps?: Record<string, unknown>;
 }
 
 export interface EthiopianDatePickerProps {
