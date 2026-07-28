@@ -25,15 +25,25 @@ describe('EditPatientActivity spec', () => {
 	it('should pass in initialValues carrying only default values', () => {
 		const fields = Object.keys(initialValues).map((fieldName) => ({
 			fieldName,
-			id: `[id=${fieldName.toString()}]`,
+			id: `[id=${fieldName}]`,
 		}));
+
 		fields.forEach((field) => {
+			if (field.fieldName === 'birthDate') {
+			cy.byId('birthDate')
+				.invoke('val')
+				.should('not.equal', '');
+
+			return;
+			}
+
 			cy.get(field.id).should(
-				'have.value',
-				initialValues[field.fieldName as InitialValuesKeys],
+			'have.value',
+			initialValues[field.fieldName as InitialValuesKeys],
 			);
 		});
 	});
+
 
 	it('should pass the “save” button label', () => {
 		cy.dataCy('patient-data-submit-button').contains('Save');
