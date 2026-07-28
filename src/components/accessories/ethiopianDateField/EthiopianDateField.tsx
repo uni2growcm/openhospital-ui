@@ -16,6 +16,7 @@ import { useTranslation } from 'react-i18next';
 import {
 	ethiopianToGregorian,
 	formatEthiopianDate,
+	getCurrentEthiopianDate,
 	gregorianToEthiopian,
 	isValidEthiopianDate,
 } from '../../../libraries/ethiopianCalendar/ethiopianCalendar';
@@ -244,9 +245,9 @@ const EthiopianDateField: FunctionComponent<IEthiopianDateFieldProps> = ({
 				open={dialogOpen}
 				onClose={() => setDialogOpen(false)}
 				onConfirm={handleConfirm}
-				year={displayMode === 'ethiopian' ? ethiopianYear : gregorianYear}
-				month={displayMode === 'ethiopian' ? ethiopianMonth : gregorianMonth}
-				day={displayMode === 'ethiopian' ? ethiopianDay : gregorianDay}
+				year={displayMode === 'ethiopian' ? (ethiopianYear ?? getCurrentEthiopianDate().year) : (gregorianYear ?? new Date().getFullYear())}
+				month={displayMode === 'ethiopian' ? (ethiopianMonth ?? getCurrentEthiopianDate().month) : (gregorianMonth ?? new Date().getMonth() + 1)}
+				day={displayMode === 'ethiopian' ? (ethiopianDay ?? getCurrentEthiopianDate().day) : (gregorianDay ?? new Date().getDate())}
 				mode={displayMode}
 				disableFuture={disableFuture}
 				disabled={disabled}
