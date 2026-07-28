@@ -31,18 +31,19 @@ const EthiopianDateField: FunctionComponent<IEthiopianDateFieldProps> = ({
 	errorText,
 	label,
 	required = FIELD_VALIDATION.IDLE,
+	setFieldValue,
 }) => {
 	const { t } = useTranslation();
 	const [displayMode, setDisplayMode] = useState<CalendarMode>('ethiopian');
 	const [dialogOpen, setDialogOpen] = useState(false);
 
-	const [ethiopianYear, setEthiopianYear] = useState(2016);
-	const [ethiopianMonth, setEthiopianMonth] = useState(1);
-	const [ethiopianDay, setEthiopianDay] = useState(1);
+	const [ethiopianYear, setEthiopianYear] = useState<number | null>(null);
+	const [ethiopianMonth, setEthiopianMonth] = useState<number | null>(null);
+	const [ethiopianDay, setEthiopianDay] = useState<number | null>(null);
 
-	const [gregorianYear, setGregorianYear] = useState(2024);
-	const [gregorianMonth, setGregorianMonth] = useState(9);
-	const [gregorianDay, setGregorianDay] = useState(11);
+	const [gregorianYear, setGregorianYear] = useState<number | null>(null);
+	const [gregorianMonth, setGregorianMonth] = useState<number | null>(null);
+	const [gregorianDay, setGregorianDay] = useState<number | null>(null);
 
 	useEffect(() => {
 		if (fieldValue && fieldValue !== '') {
@@ -62,13 +63,20 @@ const EthiopianDateField: FunctionComponent<IEthiopianDateFieldProps> = ({
 					setGregorianDay(date.getDate());
 				}
 			} catch {
-				setEthiopianYear(2016);
-				setEthiopianMonth(1);
-				setEthiopianDay(1);
-				setGregorianYear(2024);
-				setGregorianMonth(9);
-				setGregorianDay(11);
+				setEthiopianYear(null);
+				setEthiopianMonth(null);
+				setEthiopianDay(null);
+				setGregorianYear(null);
+				setGregorianMonth(null);
+				setGregorianDay(null);
 			}
+		} else {
+			setEthiopianYear(null);
+			setEthiopianMonth(null);
+			setEthiopianDay(null);
+			setGregorianYear(null);
+			setGregorianMonth(null);
+			setGregorianDay(null);
 		}
 	}, [fieldValue]);
 
@@ -93,14 +101,19 @@ const EthiopianDateField: FunctionComponent<IEthiopianDateFieldProps> = ({
 						gregorianDate.day,
 					);
 					const timestamp = dateObj.toISOString();
-					const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
-						HTMLInputElement.prototype,
-						'value',
-					)?.set;
-					const input = document.querySelector(`input[name="${fieldName}"]`);
-					if (input && nativeInputValueSetter) {
-						nativeInputValueSetter.call(input, timestamp);
-						input.dispatchEvent(new Event('input', { bubbles: true }));
+					
+					if (setFieldValue) {
+						setFieldValue(fieldName, timestamp);
+					} else {
+						const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+							HTMLInputElement.prototype,
+							'value',
+						)?.set;
+						const input = document.querySelector(`input[name="${fieldName}"]`);
+						if (input && nativeInputValueSetter) {
+							nativeInputValueSetter.call(input, timestamp);
+							input.dispatchEvent(new Event('input', { bubbles: true }));
+						}
 					}
 				}
 			} else {
@@ -115,18 +128,23 @@ const EthiopianDateField: FunctionComponent<IEthiopianDateFieldProps> = ({
 
 				const dateObj = new Date(year, month - 1, day);
 				const timestamp = dateObj.toISOString();
-				const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
-					HTMLInputElement.prototype,
-					'value',
-				)?.set;
-				const input = document.querySelector(`input[name="${fieldName}"]`);
-				if (input && nativeInputValueSetter) {
-					nativeInputValueSetter.call(input, timestamp);
-					input.dispatchEvent(new Event('input', { bubbles: true }));
+				
+				if (setFieldValue) {
+					setFieldValue(fieldName, timestamp);
+				} else {
+					const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+						HTMLInputElement.prototype,
+						'value',
+					)?.set;
+					const input = document.querySelector(`input[name="${fieldName}"]`);
+					if (input && nativeInputValueSetter) {
+						nativeInputValueSetter.call(input, timestamp);
+						input.dispatchEvent(new Event('input', { bubbles: true }));
+					}
 				}
 			}
 		},
-		[displayMode, fieldName],
+		[displayMode, fieldName, setFieldValue],
 	);
 
 	const handleModeChange = useCallback((newMode: CalendarMode) => {
@@ -156,21 +174,28 @@ const EthiopianDateField: FunctionComponent<IEthiopianDateFieldProps> = ({
 	};
 
 	const displayValue =
-		displayMode === 'ethiopian'
-			? formatAbbreviatedEthiopian(ethiopianYear, ethiopianMonth, ethiopianDay)
-			: formatAbbreviatedGregorian(gregorianYear, gregorianMonth, gregorianDay);
+		ethiopianYear !== null && ethiopianMonth !== null && ethiopianDay !== null
+			? displayMode === 'ethiopian'
+				? formatAbbreviatedEthiopian(ethiopianYear, ethiopianMonth, ethiopianDay)
+				: formatAbbreviatedGregorian(gregorianYear!, gregorianMonth!, gregorianDay!)
+			: '';
 
-	const formattedEthiopian = formatEthiopianDate(
-		ethiopianYear,
-		ethiopianMonth,
-		ethiopianDay,
-		'english',
-	);
+	const formattedEthiopian =
+		ethiopianYear !== null && ethiopianMonth !== null && ethiopianDay !== null
+			? formatEthiopianDate(ethiopianYear, ethiopianMonth, ethiopianDay, 'english')
+			: '';
 
-	const formattedGregorian = `${gregorianYear}-${String(gregorianMonth).padStart(2, '0')}-${String(gregorianDay).padStart(2, '0')}`;
+	const formattedGregorian =
+		gregorianYear !== null && gregorianMonth !== null && gregorianDay !== null
+			? `${gregorianYear}-${String(gregorianMonth).padStart(2, '0')}-${String(gregorianDay).padStart(2, '0')}`
+			: '';
 
 	const convertedDate =
-		displayMode === 'ethiopian' ? formattedGregorian : formattedEthiopian;
+		ethiopianYear !== null && gregorianYear !== null
+			? displayMode === 'ethiopian'
+				? formattedGregorian
+				: formattedEthiopian
+			: '';
 	const convertedLabel =
 		displayMode === 'ethiopian'
 			? t('ethiopianCalendar.preview.gregorian')
@@ -185,7 +210,7 @@ const EthiopianDateField: FunctionComponent<IEthiopianDateFieldProps> = ({
 				variant="outlined"
 				margin="dense"
 			>
-				<InputLabel shrink>{displayLabel}</InputLabel>
+				<InputLabel shrink sx={{background: '#fff'}}>{displayLabel} *</InputLabel>
 				<div className="ethiopianDateField__compactRow"
 				style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '8px'}}>
 					<Select
@@ -198,14 +223,16 @@ const EthiopianDateField: FunctionComponent<IEthiopianDateFieldProps> = ({
 						<MenuItem value="ethiopian">{t('ethiopianCalendar.mode.ethiopian')}</MenuItem>
 						<MenuItem value="gregorian">{t('ethiopianCalendar.mode.gregorian')}</MenuItem>
 					</Select>
-					<TextField
-						size="small"
-						value={displayValue}
-						InputProps={{ readOnly: true }}
-						onClick={() => !disabled && setDialogOpen(true)}
-						sx={{ flex: 1, cursor: disabled ? 'default' : 'pointer' }}
-						disabled={disabled}
-					/>
+				<TextField
+					size="small"
+					value={displayValue}
+					error={Boolean(errorText)}
+					placeholder={t('common.selectdate')}
+					InputProps={{ readOnly: true }}
+					onClick={() => !disabled && setDialogOpen(true)}
+					sx={{ flex: 1, cursor: disabled ? 'default' : 'pointer' }}
+					disabled={disabled}
+				/>
 				</div>
 				{errorText && <FormHelperText>{errorText}</FormHelperText>}
 				<div className="ethiopianDateField__convertedDate">

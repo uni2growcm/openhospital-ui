@@ -14,6 +14,7 @@ export interface IEthiopianDateFieldProps {
 	onChange?: (value: string) => void;
 	required?: FIELD_VALIDATION;
 	TextFieldComponent?: React.ComponentType<TextFieldProps>;
+	setFieldValue?: (field: string, value: unknown) => void;
 }
 
 export interface EthiopianDatePickerProps {

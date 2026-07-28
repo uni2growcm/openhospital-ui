@@ -621,7 +621,8 @@
 		"saveandprint": "Save and Print",
 		"updateandprint": "Update and Print",
 		"printData": "Print Data",
-		"failedtodownloadthereport": "Failed to download report."
+		"failedtodownloadthereport": "Failed to download report.",
+		"selectdate": "Select Date"
 	},
 	"permission": {
 		"denied": "Permission denied",

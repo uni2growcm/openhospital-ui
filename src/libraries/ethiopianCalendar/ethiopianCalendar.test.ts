@@ -72,8 +72,24 @@ describe('Ethiopian Calendar Utilities', () => {
 			expect(isValidEthiopianDate(2017, 1, 31)).toBe(false);
 		});
 
-		it('should return false for invalid date in Pagume', () => {
+		it('should return false for invalid date in Pagume (non-leap year)', () => {
 			expect(isValidEthiopianDate(2017, 13, 7)).toBe(false);
+		});
+
+		it('should return true for valid Pagume date in leap year', () => {
+			expect(isValidEthiopianDate(2019, 13, 6)).toBe(true);
+		});
+
+		it('should return false for invalid Pagume date in leap year', () => {
+			expect(isValidEthiopianDate(2019, 13, 7)).toBe(false);
+		});
+
+		it('should return true for valid leap year date', () => {
+			expect(isValidEthiopianDate(2019, 1, 1)).toBe(true);
+		});
+
+		it('should return false for date in leap year with invalid day in regular month', () => {
+			expect(isValidEthiopianDate(2019, 1, 31)).toBe(false);
 		});
 	});
 

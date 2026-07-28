@@ -359,25 +359,26 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 							/>
 						</div>
 					)}
-					{ageType === 'birthDate' && (
-						<div className="patientDataForm__item">
-							<EthiopianDateField
-								fieldName="birthDate"
-								fieldValue={formik.values.birthDate}
-								disableFuture={true}
-								theme="regular"
-								isValid={isValid('birthDate')}
-								errorText={getErrorText('birthDate')}
-								label={t('patient.birthdate')}
-								disabled={isLoading}
-								required={
-									isFieldSuggested(formCustomization, 'birthDate')
-										? FIELD_VALIDATION.SUGGESTED
-										: FIELD_VALIDATION.REQUIRED
-								}
-							/>
-						</div>
-					)}
+				{ageType === 'birthDate' && (
+					<div className="patientDataForm__item">
+						<EthiopianDateField
+							fieldName="birthDate"
+							fieldValue={formik.values.birthDate}
+							disableFuture={true}
+							theme="regular"
+							isValid={isValid('birthDate')}
+							errorText={getErrorText('birthDate')}
+							label={t('patient.birthdate')}
+							disabled={isLoading}
+							required={
+								isFieldSuggested(formCustomization, 'birthDate')
+									? FIELD_VALIDATION.SUGGESTED
+									: FIELD_VALIDATION.REQUIRED
+							}
+							setFieldValue={formik.setFieldValue}
+						/>
+					</div>
+				)}
 
 					<div className="patientDataForm__item">
 						<SelectField
