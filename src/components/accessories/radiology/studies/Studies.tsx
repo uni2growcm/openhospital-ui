@@ -143,25 +143,6 @@ export const Studies = () => {
 					case 'SUCCESS':
 						return (
 							<>
-								<p className="studies__lastStudy">
-									<Trans
-										i18nKey="radiology.studies.summary"
-										defaults="There are no studies for this patient"
-										components={[<strong key="value">value</strong>]}
-										values={{ count: studiesState.data?.length ?? 0 }}
-									/>
-								</p>
-								{lastStudyDate && (
-									<span className="studies__summary">
-										{t('radiology.studies.last', {
-											value: `${timeAgo.format(lastStudyDate)} | ${moment(
-												lastStudyDate,
-											)
-												.locale(i18n.language)
-												.format('LL')}`,
-										})}
-									</span>
-								)}
 								<Table
 									rowData={formatDataToDisplay(studiesState.data ?? [])}
 									dateFields={dateFields}
@@ -204,14 +185,6 @@ export const Studies = () => {
 					case 'SUCCESS_EMPTY':
 						return (
 							<>
-								<p className="studies__lastStudy">
-									<Trans
-										i18nKey="radiology.studies.summary"
-										defaults="There are no studies for this patient"
-										components={[<strong key="value">value</strong>]}
-										values={{ count: studiesState.data?.length ?? 0 }}
-									/>
-								</p>
 								<InfoBox type="info" message={t('common.emptydata')} />
 							</>
 						);
