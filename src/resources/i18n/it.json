@@ -875,15 +875,33 @@
 			"elderly": "Anziani"
 		},
 		"lab": {
-			"undefined": { "txt": "Non definito" },
-			"blood": { "txt": "Sangue" },
-			"cfs": { "txt": "CFS" },
-			"film": { "txt": "FILM" },
-			"sputum": { "txt": "Sputum" },
-			"stool": { "txt": "(Stool) Feci" },
-			"swabs": { "txt": "Tamponi" },
-			"tissues": { "txt": "Tessuti" },
-			"urine": { "txt": "Urine" }
+			"undefined": {
+				"txt": "Non definito"
+			},
+			"blood": {
+				"txt": "Sangue"
+			},
+			"cfs": {
+				"txt": "CFS"
+			},
+			"film": {
+				"txt": "FILM"
+			},
+			"sputum": {
+				"txt": "Sputum"
+			},
+			"stool": {
+				"txt": "(Stool) Feci"
+			},
+			"swabs": {
+				"txt": "Tamponi"
+			},
+			"tissues": {
+				"txt": "Tessuti"
+			},
+			"urine": {
+				"txt": "Urine"
+			}
 		},
 		"common": {
 			"thecodeisalreadyinuse": {
@@ -1225,5 +1243,54 @@
 		"updateSuccess": "Il tipo esame è stato aggiornato con successo",
 		"cancelCreation": "Confermi la cancellazione della creazione tipo esame?",
 		"cancelUpdate": "Confermi la cancellazione delle modifiche a tipo esame?"
+	},
+	"ethiopianCalendar": {
+		"dialog": {
+			"title": "Select Date",
+			"cancel": "Cancel",
+			"confirm": "Confirm",
+			"year": "Year",
+			"month": "Month",
+			"day": "Day"
+		},
+		"mode": {
+			"ethiopian": "Ethiopian",
+			"gregorian": "Gregorian"
+		},
+		"preview": {
+			"ethiopian": "Ethiopian",
+			"gregorian": "Gregorian"
+		},
+		"months": {
+			"ethiopian": [
+				"Meskerem",
+				"Tikimt",
+				"Hidar",
+				"Tahsas",
+				"Tir",
+				"Yekatit",
+				"Megabit",
+				"Miyazya",
+				"Genna",
+				"Sene",
+				"Hamle",
+				"Nehase",
+				"Pagume"
+			],
+			"gregorian": [
+				"January",
+				"February",
+				"March",
+				"April",
+				"May",
+				"June",
+				"July",
+				"August",
+				"September",
+				"October",
+				"November",
+				"December"
+			]
+		}
 	}
 }

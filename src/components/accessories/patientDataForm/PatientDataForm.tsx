@@ -33,7 +33,7 @@ import { FIELD_VALIDATION, type IState } from '../../../types';
 import AutocompleteField from '../autocompleteField/AutocompleteField';
 import Button from '../button/Button';
 import ConfirmationDialog from '../confirmationDialog/ConfirmationDialog';
-import DateField from '../dateField/DateField';
+import EthiopianDateField from '../ethiopianDateField/EthiopianDateField';
 import { ProfilePicture } from '../profilePicture/ProfilePicture';
 import SelectField from '../selectField/SelectField';
 import TextField from '../textField/TextField';
@@ -174,14 +174,6 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 			resetForm();
 		}
 	}, [shouldResetForm, resetForm]);
-
-	const dateFieldHandleOnChange = useCallback(
-		(fieldName: string) => (value: any) => {
-			setFieldValue(fieldName, value);
-			formik.setFieldTouched(fieldName);
-		},
-		[setFieldValue, formik],
-	);
 
 	const onBlurCallback = useCallback(
 		(fieldName: string) =>
@@ -367,27 +359,26 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 							/>
 						</div>
 					)}
-					{ageType === 'birthDate' && (
-						<div className="patientDataForm__item">
-							<DateField
-								fieldName="birthDate"
-								fieldValue={formik.values.birthDate}
-								disableFuture={true}
-								theme="regular"
-								format="dd/MM/yyyy"
-								isValid={isValid('birthDate')}
-								errorText={getErrorText('birthDate')}
-								label={t('patient.birthdate')}
-								onChange={dateFieldHandleOnChange('birthDate')}
-								disabled={isLoading}
-								required={
-									isFieldSuggested(formCustomization, 'birthDate')
-										? FIELD_VALIDATION.SUGGESTED
-										: FIELD_VALIDATION.REQUIRED
-								}
-							/>
-						</div>
-					)}
+				{ageType === 'birthDate' && (
+					<div className="patientDataForm__item">
+						<EthiopianDateField
+							fieldName="birthDate"
+							fieldValue={formik.values.birthDate}
+							disableFuture={true}
+							theme="regular"
+							isValid={isValid('birthDate')}
+							errorText={getErrorText('birthDate')}
+							label={t('patient.birthdate')}
+							disabled={isLoading}
+							required={
+								isFieldSuggested(formCustomization, 'birthDate')
+									? FIELD_VALIDATION.SUGGESTED
+									: FIELD_VALIDATION.REQUIRED
+							}
+							setFieldValue={formik.setFieldValue}
+						/>
+					</div>
+				)}
 
 					<div className="patientDataForm__item">
 						<SelectField
