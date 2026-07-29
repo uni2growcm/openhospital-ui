@@ -1,10 +1,10 @@
 import { ChevronLeft, OpenInNew } from '@mui/icons-material';
 import {
-	Backdrop,
-	Button,
-	CircularProgress,
-	IconButton,
-	Tooltip,
+    Backdrop,
+    Button,
+    CircularProgress,
+    IconButton,
+    Tooltip,
 } from '@mui/material';
 import { isEmpty } from 'lodash';
 import moment from 'moment';
@@ -13,12 +13,12 @@ import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate, useParams } from 'react-router';
 import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
 import {
-	getInstancePreview,
-	getInstancePreviewReset,
-	getStudySeriesReset,
-	getStudySeriesWithInstances,
-	getStudySeriesWithInstancesReset,
-	type SeriesWithInstances,
+    getInstancePreview,
+    getInstancePreviewReset,
+    getStudySeriesReset,
+    getStudySeriesWithInstances,
+    getStudySeriesWithInstancesReset,
+    type SeriesWithInstances,
 } from '~/state/radiology';
 import InfoBox from '../../infoBox/InfoBox';
 import type { TFilterField } from '../../table/filter/types';
@@ -32,7 +32,7 @@ export const Series = () => {
 	const { t, i18n } = useTranslation();
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-	const { id } = useParams();
+	const { studyId } = useParams();
 	const { state: study } = useLocation();
 
 	const [openPreview, setOpenPreview] = useState(false);
@@ -80,10 +80,10 @@ export const Series = () => {
 	======================= */
 
 	useEffect(() => {
-		if (id) {
-			dispatch(getStudySeriesWithInstances(id));
+		if (studyId) {
+			dispatch(getStudySeriesWithInstances(studyId));
 		}
-	}, [dispatch, id]);
+	}, [dispatch, studyId]);
 
 	useEffect(() => {
 		return () => {

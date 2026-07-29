@@ -29,7 +29,7 @@ export const PATIENT_RADIOLOGY_ROUTES = [
 					),
 			},
 			{
-				path: 'studies/:id/series',
+				path: 'studies/:studyId/series',
 				lazy: async () =>
 					import('../../components/accessories/radiology/series/Series').then(
 						(mod) => ({
@@ -38,7 +38,7 @@ export const PATIENT_RADIOLOGY_ROUTES = [
 					),
 			},
 			{
-				path: 'studies/:id/series/:serie_id/instances',
+				path: 'studies/:studyId/series/:serie_id/instances',
 				element: <h1>Serie Instances</h1>,
 			},
 			{
