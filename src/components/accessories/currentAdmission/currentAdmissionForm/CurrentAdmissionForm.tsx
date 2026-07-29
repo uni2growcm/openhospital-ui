@@ -29,7 +29,12 @@ import {
   updateAdmissionReset,
 } from "../../../../state/admissions";
 import { getPatient } from "../../../../state/patients";
+import {
+  getDiseasesIpdIn,
+  getDiseasesIpdOut,
+} from "../../../../state/diseases";
 import { IState } from "../../../../types";
+import { AddDiseaseModal } from "../../addDiseaseModal/AddDiseaseModal";
 import AutocompleteField from "../../autocompleteField/AutocompleteField";
 import Button from "../../button/Button";
 import ConfirmationDialog from "../../confirmationDialog/ConfirmationDialog";
@@ -87,6 +92,18 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
   const [isQualifiedAgentChecked, setIsVitASupplementChecked] = useState(false);
 
   const [isReferralAdmission, setIsReferralAdmission] = useState(false);
+
+  const [openAddDiseaseModal, setOpenAddDiseaseModal] = useState(false);
+
+  const handleDiseaseCreated = (disease: DiseaseDTO) => {
+    const diseaseCode = disease.code?.toString() ?? "";
+    const currentDiagnosis = formik.values.diagnosisIn ?? [];
+    if (!currentDiagnosis.includes(diseaseCode) && disease.ipdInInclude) {
+      formik.setFieldValue("diagnosisIn", [...currentDiagnosis, diseaseCode]);
+    }
+    dispatch(getDiseasesIpdIn());
+    dispatch(getDiseasesIpdOut());
+  };
 
   const transportationsOptions = useAppSelector(
     (state: IState) => state.admissions.getTransportations.data
@@ -550,6 +567,11 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
         primaryButtonLabel={t("common.ok")}
         handlePrimaryButtonClick={() => setActivityTransitionState("TO_RESET")}
         handleSecondaryButtonClick={() => {}}
+      />
+      <AddDiseaseModal
+        open={openAddDiseaseModal}
+        onClose={() => setOpenAddDiseaseModal(false)}
+        onDiseaseCreated={handleDiseaseCreated}
       />
     </>
   );

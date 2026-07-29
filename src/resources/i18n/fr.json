@@ -1617,7 +1617,7 @@
   "conditioning": {
     "title": "Mise en condition",
     "aspiration": "Aspiration",
-    "mce": "MCE (mn)",
+    "mce": "MCE",
     "ventilation": "Ventilation",
     "oxygenDebit": "Oxygène  (mn)",
     "sgVolume": "SG 10% or 30% (cc) ",

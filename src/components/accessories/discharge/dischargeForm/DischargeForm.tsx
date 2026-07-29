@@ -22,6 +22,7 @@ import {
   getDiseasesIpdIn,
   getDiseasesIpdOut,
 } from "../../../../state/diseases";
+import { AddDiseaseModal } from "../../addDiseaseModal/AddDiseaseModal";
 import { getDischargeTypes } from "../../../../state/types/discharges";
 import { IState } from "../../../../types";
 import AutocompleteField from "../../autocompleteField/AutocompleteField";
@@ -188,6 +189,18 @@ const DischargeForm: FC<DischargeProps> = ({
 
   const [openResetConfirmation, setOpenResetConfirmation] = useState(false);
 
+  const [openAddDiseaseModal, setOpenAddDiseaseModal] = useState(false);
+
+  const handleDiseaseCreated = (disease: DiseaseDTO) => {
+    const diseaseCode = disease.code?.toString() ?? "";
+    const currentDiagnosis = formik.values.diagnosisOut ?? [];
+    if (!currentDiagnosis.includes(diseaseCode) && disease.ipdOutInclude) {
+      formik.setFieldValue("diagnosisOut", [...currentDiagnosis, diseaseCode]);
+    }
+    dispatch(getDiseasesIpdIn());
+    dispatch(getDiseasesIpdOut());
+  };
+
   const handleResetConfirmation = () => {
     setOpenResetConfirmation(false);
     formik.resetForm();
@@ -215,6 +228,15 @@ const DischargeForm: FC<DischargeProps> = ({
 
   return (
     <>
+      <div className="addDiseaseButton">
+        <Button
+          type="button"
+          variant="text"
+          onClick={() => setOpenAddDiseaseModal(true)}
+        >
+          + {t("disease.addDisease")}
+        </Button>
+      </div>
       <div className="patientAdmissionForm">
         <form
           className="patientAdmissionForm__form"
@@ -398,6 +420,11 @@ const DischargeForm: FC<DischargeProps> = ({
             secondaryButtonLabel={t("common.discard")}
             handlePrimaryButtonClick={handleResetConfirmation}
             handleSecondaryButtonClick={() => setOpenResetConfirmation(false)}
+          />
+          <AddDiseaseModal
+            open={openAddDiseaseModal}
+            onClose={() => setOpenAddDiseaseModal(false)}
+            onDiseaseCreated={handleDiseaseCreated}
           />
         </form>
       </div>

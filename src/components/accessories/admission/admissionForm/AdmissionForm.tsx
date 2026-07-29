@@ -28,6 +28,7 @@ import {
   getDiseasesIpdIn,
   getDiseasesIpdOut,
 } from "../../../../state/diseases";
+import { AddDiseaseModal } from "../../addDiseaseModal/AddDiseaseModal";
 import { getAdmissionTypes } from "../../../../state/types/admissions";
 import { getDischargeTypes } from "../../../../state/types/discharges";
 import { getWards } from "../../../../state/ward";
@@ -104,6 +105,18 @@ const AdmissionForm: FC<AdmissionProps> = ({
   const [isQualifiedAgentChecked, setIsVitASupplementChecked] = useState(false);
 
   const [isReferralAdmission, setIsReferralAdmission] = useState(false);
+
+  const [openAddDiseaseModal, setOpenAddDiseaseModal] = useState(false);
+
+  const handleDiseaseCreated = (disease: DiseaseDTO) => {
+    const diseaseCode = disease.code?.toString() ?? "";
+    const currentDiagnosis = formik.values.diagnosisIn ?? [];
+    if (!currentDiagnosis.includes(diseaseCode) && disease.ipdInInclude) {
+      formik.setFieldValue("diagnosisIn", [...currentDiagnosis, diseaseCode]);
+    }
+    dispatch(getDiseasesIpdIn());
+    dispatch(getDiseasesIpdOut());
+  };
 
   const renderOptions = (
     data:
@@ -344,6 +357,15 @@ const AdmissionForm: FC<AdmissionProps> = ({
               ": " +
               renderDate(formik.values.admDate)}
         </h5>
+        <div className="addDiseaseButton">
+          <Button
+            type="button"
+            variant="text"
+            onClick={() => setOpenAddDiseaseModal(true)}
+          >
+            + {t("disease.addDisease")}
+          </Button>
+        </div>
         <form
           className="patientAdmissionForm__form"
           onSubmit={formik.handleSubmit}
@@ -802,6 +824,11 @@ const AdmissionForm: FC<AdmissionProps> = ({
             secondaryButtonLabel={t("common.discard")}
             handlePrimaryButtonClick={handleResetConfirmation}
             handleSecondaryButtonClick={() => setOpenResetConfirmation(false)}
+          />
+          <AddDiseaseModal
+            open={openAddDiseaseModal}
+            onClose={() => setOpenAddDiseaseModal(false)}
+            onDiseaseCreated={handleDiseaseCreated}
           />
         </form>
       </div>
