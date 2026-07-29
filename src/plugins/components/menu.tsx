@@ -18,6 +18,9 @@ export function PluginMenu({ onSelect, ...props }: PluginMenuProps) {
 	const { t } = useTranslation();
 
 	const { remotes: items } = usePluginsContext();
+	const mainItems = items.filter(
+		(item) => item.location === PluginBundleLocationEnum.Main,
+	);
 
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
@@ -32,7 +35,7 @@ export function PluginMenu({ onSelect, ...props }: PluginMenuProps) {
 		[onSelect],
 	);
 
-	if (!items.length) {
+	if (!mainItems.length) {
 		return null;
 	}
 
@@ -58,13 +61,11 @@ export function PluginMenu({ onSelect, ...props }: PluginMenuProps) {
 					},
 				}}
 			>
-				{items
-					.filter((item) => item.location === PluginBundleLocationEnum.Main)
-					.map((item) => (
-						<MenuItem key={item.name} onClick={handleClose(item)}>
-							{item.label}
-						</MenuItem>
-					))}
+				{mainItems.map((item) => (
+					<MenuItem key={item.name} onClick={handleClose(item)}>
+						{item.label}
+					</MenuItem>
+				))}
 			</Menu>
 		</div>
 	);
