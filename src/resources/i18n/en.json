@@ -254,7 +254,7 @@
 		"status": "Status",
 		"radiology": "Radiology",
 		"labbookid": "LabBook ID",
-		"analysis": "Laboratory Analyses",
+		"analysis": "Laboratory Analysis",
     	"labbook": "LabBook ID"
 	},
 	"opd": {
@@ -1315,7 +1315,7 @@
 		"recordNumber": "Record Number",
 		"variable": "Variable",
 		"result": "Result",
-		"previousentries": "Previous Analyses",
+		"previousentries": "Previous Analysis",
 		"print": "Print all analysis reports",
 		"printerror": "Printing of the analysis results failed",
 		"printnotavailable": "The analysis document is not yet available"
