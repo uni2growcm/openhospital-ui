@@ -32,6 +32,7 @@ import InPatientDashboardMenu from './InPatientDashboardMenu';
 import OutPatientDashboardMenu from './OutPatientDashboardMenu';
 import './styles.scss';
 import type { IUserSection, TActivityTransitionState } from './types';
+import { createKenatFromGregorian } from '../../../libraries/ethiopianCalendar/ethiopianCalendar';
 
 type ContextType = { status: string | null };
 
@@ -86,14 +87,36 @@ const PatientDetailsActivity = () => {
 		setExpanded(section === expanded ? false : section);
 	};
 
+	const toEthiopianDate = (date: Date): string => {
+		return createKenatFromGregorian(date).format({
+			calendar: 'ethiopian',
+			lang: 'english'
+		});
+	};
+
 	const personalData = (
 		<>
+			<div className="patientDetails__personalData__item">
+				<div className="patientDetails__personalData__item__label">
+					{t('patient.labbook')}:
+				</div>
+				<div className="patientDetails__personalData__item__value">
+					{patient.data?.labBookId || '-'}
+				</div>
+			</div>
 			<div className="patientDetails__personalData__item">
 				<div className="patientDetails__personalData__item__label">
 					{t('patient.birthdate')}:
 				</div>
 				<div className="patientDetails__personalData__item__value">
-					{renderDate(patient.data?.birthDate || '-')}
+					{patient.data?.birthDate ? (
+						<>
+							{renderDate(patient.data.birthDate)} (
+							{toEthiopianDate(new Date(patient.data.birthDate))})
+						</>
+						) : (
+						'-'
+					)}
 				</div>
 			</div>
 			<div className="patientDetails__personalData__item">

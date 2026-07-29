@@ -222,7 +222,8 @@
     "status": "État de santé",
     "radiology": "Radiologie",
     "labbookid": "ID de labBook",
-    "analysis": "Analyses de laboratoire"
+    "analysis": "Analyses de laboratoire",
+    "labbook": "ID LabBook"
   },
   "opd": {
     "newopd": "Créer une nouvelle visite OPD",
