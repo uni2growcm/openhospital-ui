@@ -94,11 +94,9 @@ export const Series = () => {
 	useEffect(() => {
 		return () => {
 			dispatch(getStudySeriesReset());
-			if (previewState.status !== 'IDLE') {
-				dispatch(getInstancePreviewReset());
-			}
+			dispatch(getInstancePreviewReset());
 		};
-	}, [dispatch, previewState.status]);
+	}, [dispatch]);
 
 	/* =======================
 	   HELPERS

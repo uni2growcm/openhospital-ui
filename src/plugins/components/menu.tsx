@@ -35,6 +35,10 @@ export function PluginMenu({ onSelect, ...props }: PluginMenuProps) {
 		[onSelect],
 	);
 
+	const handleClosePluginsMenu = useCallback(() => {
+		setAnchorEl(null);
+	}, []);
+
 	if (!mainItems.length) {
 		return null;
 	}
@@ -54,6 +58,7 @@ export function PluginMenu({ onSelect, ...props }: PluginMenuProps) {
 				id="plugins-menu"
 				anchorEl={anchorEl}
 				open={open}
+				onClick={handleClosePluginsMenu}
 				onClose={handleClose}
 				slotProps={{
 					list: {
