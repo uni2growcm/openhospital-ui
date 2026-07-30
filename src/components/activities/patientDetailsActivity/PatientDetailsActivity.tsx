@@ -87,8 +87,6 @@ const PatientDetailsActivity = () => {
 		setExpanded(section === expanded ? false : section);
 	};
 
-
-
 	const personalData = (
 		<>
 			<div className="patientDetails__personalData__item">
