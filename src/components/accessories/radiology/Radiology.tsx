@@ -1,4 +1,3 @@
-import 'moment/min/locales';
 import { Outlet } from 'react-router';
 
 export const Radiology = () => {

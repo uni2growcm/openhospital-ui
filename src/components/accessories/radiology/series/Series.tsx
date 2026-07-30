@@ -94,11 +94,9 @@ export const Series = () => {
 	useEffect(() => {
 		return () => {
 			dispatch(getStudySeriesReset());
-			if (previewState.status !== 'IDLE') {
-				dispatch(getInstancePreviewReset());
-			}
+			dispatch(getInstancePreviewReset());
 		};
-	}, [dispatch, previewState.status]);
+	}, [dispatch]);
 
 	/* =======================
 	   HELPERS
@@ -229,6 +227,9 @@ export const Series = () => {
 										<Instances
 											onPreview={handlePreview}
 											data={row.instancesData}
+											seriesDescription={
+												row.title !== '--' ? row.title : undefined
+											}
 										/>
 									)}
 								/>

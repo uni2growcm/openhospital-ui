@@ -8,6 +8,7 @@ import type {
 	IPatientSearchItemProps,
 	TActivityTransitionState,
 } from './types';
+import { toEthiopianDate } from '~/libraries/ethiopianCalendar/ethiopianCalendar';
 
 const PatientSearchItem: FunctionComponent<IPatientSearchItemProps> = ({
 	patient,
@@ -72,7 +73,8 @@ const PatientSearchItem: FunctionComponent<IPatientSearchItemProps> = ({
 							</div>
 							{!hideAdditionalInformation && (
 								<div className="patientSearchItem__profile__content__item">
-									<strong>{t('patient.birthdate')}:</strong> {patientDate}
+									<strong>{t('patient.birthdate')}:</strong> {patientDate} (
+									{toEthiopianDate(new Date(patient.birthDate || ''))})
 								</div>
 							)}
 							{!hideAdditionalInformation && (

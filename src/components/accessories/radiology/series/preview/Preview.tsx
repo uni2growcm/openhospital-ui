@@ -28,7 +28,7 @@ export const Preview = ({ open, onClose }: IOwnProps) => {
 			<DialogContent dividers>
 				<img
 					className="preview__image"
-					src={`data:image/png;base64, ${data}`}
+					src={`data:image/png;base64,${data}`}
 					alt="Preview"
 				/>
 			</DialogContent>
