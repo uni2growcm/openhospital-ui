@@ -9,9 +9,10 @@ import Table from '~/components/accessories/table/Table';
 interface IOwnProps {
 	data: InstanceResponse[];
 	onPreview: (row: any) => () => void;
+	seriesDescription?: string;
 }
 
-export const Instances = ({ data, onPreview }: IOwnProps) => {
+export const Instances = ({ data, onPreview, seriesDescription }: IOwnProps) => {
 	const { t, i18n } = useTranslation();
 
 	const header = ['title', 'date', 'time'];
@@ -28,9 +29,11 @@ export const Instances = ({ data, onPreview }: IOwnProps) => {
 		return data.map((instance) => {
 			return {
 				id: instance.id ?? '',
-				title: t('radiology.instances.title', {
-					number: instance.instance?.instanceNumber ?? '',
-				}),
+				title: seriesDescription
+					? seriesDescription
+					: t('radiology.instances.title', {
+							number: instance.instance?.instanceNumber ?? '',
+					  }),
 				date: instance.instance?.creationDate
 					? moment(instance.instance.creationDate, 'YYYYMMDD')
 							.locale(i18n.language)

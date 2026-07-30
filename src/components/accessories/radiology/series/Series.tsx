@@ -227,6 +227,9 @@ export const Series = () => {
 										<Instances
 											onPreview={handlePreview}
 											data={row.instancesData}
+											seriesDescription={
+												row.title !== '--' ? row.title : undefined
+											}
 										/>
 									)}
 								/>
