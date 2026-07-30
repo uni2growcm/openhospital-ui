@@ -106,3 +106,10 @@ export function getCurrentEthiopianDate(): EthiopianDate {
 		now.getDate(),
 	);
 }
+
+export const toEthiopianDate = (date: Date): string => {
+	return createKenatFromGregorian(date).format({
+		calendar: 'ethiopian',
+		lang: 'english'
+	});
+};

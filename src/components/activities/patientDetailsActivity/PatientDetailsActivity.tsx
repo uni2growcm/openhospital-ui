@@ -32,7 +32,7 @@ import InPatientDashboardMenu from './InPatientDashboardMenu';
 import OutPatientDashboardMenu from './OutPatientDashboardMenu';
 import './styles.scss';
 import type { IUserSection, TActivityTransitionState } from './types';
-import { createKenatFromGregorian } from '../../../libraries/ethiopianCalendar/ethiopianCalendar';
+import { toEthiopianDate } from '../../../libraries/ethiopianCalendar/ethiopianCalendar';
 
 type ContextType = { status: string | null };
 
@@ -87,12 +87,7 @@ const PatientDetailsActivity = () => {
 		setExpanded(section === expanded ? false : section);
 	};
 
-	const toEthiopianDate = (date: Date): string => {
-		return createKenatFromGregorian(date).format({
-			calendar: 'ethiopian',
-			lang: 'english'
-		});
-	};
+
 
 	const personalData = (
 		<>
