@@ -3,8 +3,7 @@ import { ApiResponse } from "../types";
 export type SummaryDataType = {
   date: string;
   type: string;
-  result: string;
-  note: string;
+  [key: string]: any;
 };
 
 export type EncounterSummaryGroup = {

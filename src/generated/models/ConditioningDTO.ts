@@ -34,11 +34,11 @@ export interface ConditioningDTO {
      */
     aspiration?: boolean;
     /**
-     * Conditioning mce duration
-     * @type {number}
+     * Conditioning mce
+     * @type {boolean}
      * @memberof ConditioningDTO
      */
-    mce?: number;
+    mce?: boolean;
     /**
      * Conditioning ventilation duration
      * @type {boolean}
@@ -111,6 +111,18 @@ export interface ConditioningDTO {
      * @memberof ConditioningDTO
      */
     bloodGlucoseLevel?: number;
+    /**
+     * Conditioning others rapid screening test 
+     * @type {string}
+     * @memberof ConditioningDTO
+     */
+    othersRapidScreeningTest?: string;
+    /**
+     * Conditioning cpap details 
+     * @type {string}
+     * @memberof ConditioningDTO
+     */
+    cpapDetails?: string;
     /**
      * patient
      * @type {PatientDTO}

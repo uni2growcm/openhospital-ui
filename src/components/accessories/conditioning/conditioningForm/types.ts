@@ -27,8 +27,10 @@ export type ConditioningFormFieldName =
   | "performedAt"
   | "conditionAtAdmission"
   | "cpap"
+  | "cpapDetails"
   | "malaria"
   | "hivTest"
   | "bloodGlucoseLevel"
+  | "othersRapidScreeningTest"
   | "performedBy"
   | "reheating";

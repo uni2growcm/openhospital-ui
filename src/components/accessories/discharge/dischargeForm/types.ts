@@ -19,7 +19,7 @@ export type DischargeFormFieldName =
   | "disType"
   | "bedDays"
   | "diagnosisIn"
-  | "complicationDiagnosis"
+  | "complication"
   | "diagnosisOut"
   | "anamnesis"
   | "othersInformation"

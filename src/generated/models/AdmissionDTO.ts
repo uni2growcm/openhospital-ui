@@ -72,10 +72,10 @@ export interface AdmissionDTO {
     admType?: AdmissionTypeDTO;
     /**
      * Complication Diagnosis
-     * @type {Array<DiseaseDTO>}
+     * @type {string}
      * @memberof AdmissionDTO
      */
-    complicationDiagnosis?: Array<DiseaseDTO>;
+    complication?: string;
     /**
      * Diagnosis out
      * @type {Array<DiseaseDTO>}
@@ -124,6 +124,12 @@ export interface AdmissionDTO {
      * @memberof AdmissionDTO
      */
     anamnesis?: string;
+    /**
+     * Note
+     * @type {string}
+     * @memberof AdmissionDTO
+     */
+    note?: string;
     /**
      * Transfusional unit
      * @type {number}

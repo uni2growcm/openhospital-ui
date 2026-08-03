@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 const DELIVERY_TYPE_START_PATH = "/admin/types/deliveries";
 
 describe("Delivery types Edit Activity specs", () => {

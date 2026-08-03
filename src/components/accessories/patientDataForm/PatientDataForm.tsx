@@ -48,6 +48,7 @@ import "./styles.scss";
 import { TAgeFieldName, TProps } from "./types";
 import { useCityOptions } from "./useCityOptions";
 import { getMunicipalities } from "state/municipality";
+import { useMaritalStatus } from "libraries/hooks/useMaritalStatus";
 
 const PatientDataForm: FunctionComponent<TProps> = ({
   fields,
@@ -118,7 +119,8 @@ const PatientDataForm: FunctionComponent<TProps> = ({
     (state: IState) => state.patients.getCities.data
   );
   const options = getFromFields(fields, "options");
-  const cityOptions = useCityOptions(cities);
+  const maritalStatusOptions = useMaritalStatus();
+
   const ethnicsOptions = useAppSelector(
     (state: IState) => state.ethnics.ethnicList.data
   );
@@ -874,7 +876,7 @@ const PatientDataForm: FunctionComponent<TProps> = ({
               isValid={isValid("parentTogether")}
               errorText={getErrorText("parentTogether")}
               onBlur={onBlurCallback("parentTogether")}
-              options={options.parentTogether}
+              options={maritalStatusOptions}
               translateOptions={true}
               disabled={isLoading}
               required={

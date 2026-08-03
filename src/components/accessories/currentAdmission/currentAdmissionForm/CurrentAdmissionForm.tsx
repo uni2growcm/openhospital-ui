@@ -29,7 +29,12 @@ import {
   updateAdmissionReset,
 } from "../../../../state/admissions";
 import { getPatient } from "../../../../state/patients";
+import {
+  getDiseasesIpdIn,
+  getDiseasesIpdOut,
+} from "../../../../state/diseases";
 import { IState } from "../../../../types";
+import { AddDiseaseModal } from "../../addDiseaseModal/AddDiseaseModal";
 import AutocompleteField from "../../autocompleteField/AutocompleteField";
 import Button from "../../button/Button";
 import ConfirmationDialog from "../../confirmationDialog/ConfirmationDialog";
@@ -87,6 +92,18 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
   const [isQualifiedAgentChecked, setIsVitASupplementChecked] = useState(false);
 
   const [isReferralAdmission, setIsReferralAdmission] = useState(false);
+
+  const [openAddDiseaseModal, setOpenAddDiseaseModal] = useState(false);
+
+  const handleDiseaseCreated = (disease: DiseaseDTO) => {
+    const diseaseCode = disease.code?.toString() ?? "";
+    const currentDiagnosis = formik.values.diagnosisIn ?? [];
+    if (!currentDiagnosis.includes(diseaseCode) && disease.ipdInInclude) {
+      formik.setFieldValue("diagnosisIn", [...currentDiagnosis, diseaseCode]);
+    }
+    dispatch(getDiseasesIpdIn());
+    dispatch(getDiseasesIpdOut());
+  };
 
   const transportationsOptions = useAppSelector(
     (state: IState) => state.admissions.getTransportations.data
@@ -146,6 +163,7 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
       formattedValues.treatmentReceived = formik.values.treatmentReceived;
       formattedValues.outcome = formik.values.outcome;
       formattedValues.improvementFeedback = formik.values.improvementFeedback;
+      formattedValues.note = formik.values.note;
       
       onSubmit({
         ...currentAdmission,
@@ -428,7 +446,7 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
                   isValid={isValid("entryReason")}
                   errorText={getErrorText("entryReason")}
                   onBlur={formik.handleBlur}
-                  rows={1}
+                  rows={3}
                   disabled={isLoading}
                 />
               </div>
@@ -504,6 +522,20 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
               </div>
               <div className="fullWidth currentAdmissionForm__item">
                 <TextField
+                  field={formik.getFieldProps("note")}
+                  theme="regular"
+                  label={t("patient.anamnesis")}
+                  multiline={true}
+                  type="text"
+                  isValid={isValid("note")}
+                  errorText={getErrorText("note")}
+                  onBlur={formik.handleBlur}
+                  rows={3}
+                  disabled={isLoading}
+                />
+              </div>
+              <div className="fullWidth currentAdmissionForm__item">
+                <TextField
                   field={formik.getFieldProps("courseOfAction")}
                   theme="regular"
                   label={t("admission.courseOfAction")}
@@ -550,6 +582,11 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
         primaryButtonLabel={t("common.ok")}
         handlePrimaryButtonClick={() => setActivityTransitionState("TO_RESET")}
         handleSecondaryButtonClick={() => {}}
+      />
+      <AddDiseaseModal
+        open={openAddDiseaseModal}
+        onClose={() => setOpenAddDiseaseModal(false)}
+        onDiseaseCreated={handleDiseaseCreated}
       />
     </>
   );

@@ -21,10 +21,9 @@ export const initialFields: TFields<DischargeFormFieldName> = {
     type: "array",
     options: [],
   },
-  complicationDiagnosis: {
-    value: [],
-    type: "array",
-    options: [],
+  complication: {
+    value: "",
+    type: "text",
   },
   diagnosisOut: {
     value: [],

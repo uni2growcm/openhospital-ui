@@ -265,7 +265,7 @@
     "qualifiedAgent": "Agent qualifié",
     "schoolingLevel": {
       "label": "Niveau scolaire",
-      "noSchooling": "Non scolairsé",
+      "noSchooling": "Non scolarisé",
       "primary": "Primaire",
       "secondary": "Secondaire",
       "higherEducation": "Enseignement supérieur",
@@ -274,7 +274,15 @@
     "motherSchoolingLevel": "Niveau scolaire de la mère",
     "fatherSchoolingLevel": "Niveau scolaire de la père",
     "care": "Soins",
-    "hospitalisationconsultation": "Consultation en hospitalisation"
+    "hospitalisationconsultation": "Consultation en hospitalisation",
+    "mariatalstatus": {
+      "married": "Mariés",
+      "divorced": "Divorcés",
+      "widowed": "Veuf/Veuve",
+      "cohabiting": "Concubinage",
+      "other": "Autre"
+
+    } 
   },
   "hospitalisationconsultation": {
     "id": "ID",
@@ -469,6 +477,10 @@
     "examinationType": "Type de paramètre",
     "ipt": "Indice poid taille(IPT)",
     "headcircumference": "Périmetre cranien",
+    "headcircumferencescore": "PC/A",
+    "weightscore": "P/A",
+    "heightscore": "T/A",
+    "bodymassindexscore": "IMC/A",
     "physiologicalconstants": "Constantes physiologiques",
     "anthropometricconstants": "Constantes anthropométriques"
   },
@@ -789,21 +801,25 @@
       "pregnancyAndDelivery": "Grossesse et Accouchement",
       "siblingRank": "Rang de la fratrie",
       "pregnancyTerm": "Terme",
-      "pregnancy": "Grossesse",
+      "pregnancy": "Suivit des grossesses",
       "deliveryMode": "Mode d'accouchement",
       "apgarScore": "APGAR",
+      "otherPregnancySection": "Autres informations sur la grossesse",
       "birthWeight": "Poids à la naissance ",
       "vaccinationStatus": "État vaccinal",
       "vaccinationStatePev": "État vaccinal (Pev)",
       "vaccinationStateNoPev": "État vaccinal (Non Pev)",
+      "otherVaccinationStateSection": "Autres informations sur l'état vaccinal",
       "antiMalarialProphylaxisVap": "Prophylaxie anti-palustre (Vap)",
       "antiMalarialProphylaxisMilda": "Prophylaxie anti-palustre (Milda)",
       "antiMalarialProphylaxisOthers": "Prophylaxie anti-palustre (Autres)",
       "malariaProphylaxis": "Prophylaxie anti-palustre",
       "diet": "Régime alimentaire (AME)",
       "diversification": "Diversification",
+      "combinedBreastfeeding": "Allaitement mixte",
       "deworming": "Déparasitage (Oui, Si le patient le fait depuis plus de trois mois. Sinon Non)",
       "deParasitization": "Déparasitage",
+      "noApplicableDeparasitation": "Non applicable",
       "psychomotorDevelopment": "Développement psychomoteur",
       "somaticGrowth": "Croissance somatique",
       "Supplement": "Supplémentation ",
@@ -842,7 +858,7 @@
       "mother": "Mère",
       "siblings": "Frères et sœurs",
       "otherUsefulInformation": "Autres informations utiles",
-      "otherFamilyPathologies": "Autres pathologies familiales"
+      "otherFamilyPathologies": "Autres"
     },
     "newmedicalHistory": "Nouvel antécédent médical",
     "editmedicalHistory": "Editer l'antécédent médical",
@@ -925,6 +941,8 @@
     "exams": "Examen",
     "therapy": "Thérapie",
     "conditioning": "Conditionnement",
+    "care": "Soins",
+    "medicalHistory": "Antécédents médicaux",
     "encounter": "Consultation",
     "noDataForEncounter": "Aucune opération pour cette rencontre.",
     "noData": "Aucune rencontre pour ce patient."
@@ -1001,8 +1019,9 @@
     "diseaseIn": "Diagnostic d'entrée",
     "diagnosisIn": "Diagnostics d'entrée",
     "diagnosisOut": "Diagnostics de sortie",
-    "complicationDiagnosis": "Diagnostics de complication",
+    "complication": "Complication",
     "othersInformation": "Autres informations",
+    "note": "Remarque",
     "ward": "Services",
     "transUnit": "Unité de transfusion",
     "fhu": "Centre référent du patient",
@@ -1599,7 +1618,7 @@
   "conditioning": {
     "title": "Mise en condition",
     "aspiration": "Aspiration",
-    "mce": "MCE (mn)",
+    "mce": "MCE",
     "ventilation": "Ventilation",
     "oxygenDebit": "Oxygène  (mn)",
     "sgVolume": "SG 10% or 30% (cc) ",
@@ -1609,6 +1628,7 @@
     "performedAt": "Date et heure de la MCE",
     "others": "Autres",
     "cpap": "CPAP",
+    "cpapDetails": "Détails CPAP",
     "malaria": "Paludisme",
     "code": "Code",
     "previousentries": "Mises en condition précédentes",
@@ -1628,6 +1648,7 @@
       "hypoglycemia": "Hypoglycémie"
     },
     "bloodGlucoseLevel": "Taux de glycémie",
+    "othersRapidScreeningTest": "Autre test de diagnostic rapide",
     "indeterminate": "Indéterminé",
     "hivTest": "Test du VIH",
     "performedBy": "Effectué par l'utilisateur",

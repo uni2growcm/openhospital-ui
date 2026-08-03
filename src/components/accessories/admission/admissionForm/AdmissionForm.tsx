@@ -28,6 +28,7 @@ import {
   getDiseasesIpdIn,
   getDiseasesIpdOut,
 } from "../../../../state/diseases";
+import { AddDiseaseModal } from "../../addDiseaseModal/AddDiseaseModal";
 import { getAdmissionTypes } from "../../../../state/types/admissions";
 import { getDischargeTypes } from "../../../../state/types/discharges";
 import { getWards } from "../../../../state/ward";
@@ -105,6 +106,18 @@ const AdmissionForm: FC<AdmissionProps> = ({
 
   const [isReferralAdmission, setIsReferralAdmission] = useState(false);
 
+  const [openAddDiseaseModal, setOpenAddDiseaseModal] = useState(false);
+
+  const handleDiseaseCreated = (disease: DiseaseDTO) => {
+    const diseaseCode = disease.code?.toString() ?? "";
+    const currentDiagnosis = formik.values.diagnosisIn ?? [];
+    if (!currentDiagnosis.includes(diseaseCode) && disease.ipdInInclude) {
+      formik.setFieldValue("diagnosisIn", [...currentDiagnosis, diseaseCode]);
+    }
+    dispatch(getDiseasesIpdIn());
+    dispatch(getDiseasesIpdOut());
+  };
+
   const renderOptions = (
     data:
       | (
@@ -178,6 +191,7 @@ const AdmissionForm: FC<AdmissionProps> = ({
     treatmentReceived: string(),
     outcome: string(),
     improvementFeedback: string(),
+    note: string(),
   });
 
   const formik = useFormik({
@@ -196,12 +210,8 @@ const AdmissionForm: FC<AdmissionProps> = ({
       formattedValues.ward = wards?.find(
         (item) => item.code === formattedValues.ward
       );
-
       formattedValues.diagnosisOut = diagnosisOutList?.filter((item) =>
         formattedValues.diagnosisOut?.includes(item.code)
-      );
-      formattedValues.complicationDiagnosis = diagnosisInList?.filter((item) =>
-        formattedValues.complicationDiagnosis?.includes(item.code)
       );
       formattedValues.disType = dischargeTypes?.find(
         (item) => item.code === formattedValues.disType
@@ -348,6 +358,15 @@ const AdmissionForm: FC<AdmissionProps> = ({
               ": " +
               renderDate(formik.values.admDate)}
         </h5>
+        <div className="addDiseaseButton">
+          <Button
+            type="button"
+            variant="text"
+            onClick={() => setOpenAddDiseaseModal(true)}
+          >
+            + {t("disease.addDisease")}
+          </Button>
+        </div>
         <form
           className="patientAdmissionForm__form"
           onSubmit={formik.handleSubmit}
@@ -592,17 +611,17 @@ const AdmissionForm: FC<AdmissionProps> = ({
                   />
                 </div>
                 <div className="fullWidth patientAdmissionForm__item">
-                  <Autocomplete
-                    id="complicationDiagnosis"
-                    multiple
-                    freeSolo
-                    value={formik.values.complicationDiagnosis}
-                    options={renderOptions(diagnosisInList)}
-                    onChange={(_, value) => {
-                      formik.setFieldValue("complicationDiagnosis", value);
-                    }}
-                    label={t("admission.complicationDiagnosis")}
-                    placeholder={t("admission.complicationDiagnosis")}
+                  <TextField
+                    field={formik.getFieldProps("complication")}
+                    theme="regular"
+                    label={t("admission.complication")}
+                    isValid={isValid("complication")}
+                    errorText={getErrorText("complication")}
+                    onBlur={formik.handleBlur}
+                    disabled={isLoading}
+                    type="text"
+                    rows={2}
+                    multiline={true}
                   />
                 </div>
                 <div className="fullWidth patientAdmissionForm__item">
@@ -689,7 +708,7 @@ const AdmissionForm: FC<AdmissionProps> = ({
                     isValid={isValid("entryReason")}
                     errorText={getErrorText("entryReason")}
                     onBlur={formik.handleBlur}
-                    rows={1}
+                    rows={3}
                     disabled={isLoading}
                   />
                 </div>
@@ -753,6 +772,20 @@ const AdmissionForm: FC<AdmissionProps> = ({
                 </div>
                 <div className="fullWidth patientAdmissionForm__item">
                   <TextField
+                    field={formik.getFieldProps("note")}
+                    theme="regular"
+                    label={t("patient.anamnesis")}
+                    multiline={true}
+                    type="text"
+                    isValid={isValid("note")}
+                    errorText={getErrorText("note")}
+                    onBlur={formik.handleBlur}
+                    rows={3}
+                    disabled={isLoading}
+                  />
+                </div>
+                <div className="fullWidth patientAdmissionForm__item">
+                  <TextField
                     field={formik.getFieldProps("courseOfAction")}
                     theme="regular"
                     label={t("admission.courseOfAction")}
@@ -794,6 +827,11 @@ const AdmissionForm: FC<AdmissionProps> = ({
             secondaryButtonLabel={t("common.discard")}
             handlePrimaryButtonClick={handleResetConfirmation}
             handleSecondaryButtonClick={() => setOpenResetConfirmation(false)}
+          />
+          <AddDiseaseModal
+            open={openAddDiseaseModal}
+            onClose={() => setOpenAddDiseaseModal(false)}
+            onDiseaseCreated={handleDiseaseCreated}
           />
         </form>
       </div>

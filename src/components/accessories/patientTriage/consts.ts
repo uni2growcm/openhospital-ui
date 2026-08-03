@@ -105,4 +105,20 @@ export const initialFields: TFields<TPatientTriageFormFieldName> = {
     value: "",
     type: "number",
   },
+  pex_head_circ_age: {
+    value: "",
+    type: "number",
+  },
+  pex_weight_age: {
+    value: "",
+    type: "number",
+  },
+  pex_height_age: {
+    value: "",
+    type: "number",
+  },
+  pex_body_mass_index_age: {
+    value: "",
+    type: "number",
+  },
 };

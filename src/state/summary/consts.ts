@@ -31,4 +31,12 @@ export const SummaryField = {
     type: "CONDITIONING",
     dateField: "performedAt",
   },
+  care: {
+    type: "CARE",
+    dateField: "careDate",
+  },
+  medicalHistory: {
+    type: "MEDICALHISTORY",
+    dateField: "performedAt",
+  },
 };

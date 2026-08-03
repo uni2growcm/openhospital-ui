@@ -43,9 +43,11 @@ const ConditioningTable: FunctionComponent<IOwnProps> = ({
     reheating: t("conditioning.reheating"),
     others: t("conditioning.others"),
     cpap: t("conditioning.cpap"),
+    cpapDetails: t("conditioning.cpapDetails"),
     hivTest: t("conditioning.hivTest"),
     malaria: t("conditioning.malaria"),
     bloodGlucoseLevel: t("conditioning.bloodGlucoseLevel"),
+    othersRapidScreeningTest: t("conditioning.othersRapidScreeningTest"),
     conditionAtAdmission: t("conditioning.conditionAtAdmission.label"),
     performedBy: t("conditioning.performedBy"),
   };
@@ -86,8 +88,9 @@ const ConditioningTable: FunctionComponent<IOwnProps> = ({
         id: item.id ?? "",
         performedAt: item.performedAt ? renderDateTime(item.performedAt) : "",
         aspiration: item.aspiration ? t("common.yes") : t("common.no"),
-        mce: item.mce ?? "",
+        mce: item.mce ? t("common.yes") : t("common.no"),
         cpap: item.cpap ? t("common.yes") : t("common.no"),
+        cpapDetails: item.cpapDetails ?? "",
         malaria: item.malaria ?? "",
         hivTest: item.hivTest ?? "",
         ventilation: item.ventilation ? t("common.yes") : t("common.no"),
@@ -102,6 +105,7 @@ const ConditioningTable: FunctionComponent<IOwnProps> = ({
           ", "
         ),
         bloodGlucoseLevel: item.bloodGlucoseLevel ?? "",
+        othersRapidScreeningTest: item.othersRapidScreeningTest ?? "",
         performedBy: item.performedBy?.userName ?? "",
       };
     });

@@ -4,10 +4,12 @@ import { concat, firstValueFrom, of } from "rxjs";
 import { catchError, map, toArray } from "rxjs/operators";
 import {
   AdmissionsApi,
+  CaresApi,
   ConditioningsApi,
   EncounterApi,
   ExaminationsApi,
   LaboratoriesApi,
+  MedicalHistoryApi,
   OpdsApi,
   OperationsApi,
   TherapiesApi,
@@ -29,6 +31,8 @@ const examinationsApi = new ExaminationsApi(customConfiguration());
 
 const laboratoriesApi = new LaboratoriesApi(customConfiguration());
 const encounterApi = new EncounterApi(customConfiguration());
+const caresApi = new CaresApi(customConfiguration());
+const medicalHistoryApi = new MedicalHistoryApi(customConfiguration());
 
 const parseDate = (value?: string | number | null) => {
   if (!value) return NaN;
@@ -133,11 +137,19 @@ export const loadSummaryData = createAsyncThunk(
         wrapper(() => conditioningsApi.getConditioningByPatientCode({ patientCode: code })).pipe(
           map((res) => convertToSummaryData(res, SummaryField.conditioning)),
           catchError(() => of([]))
+        ),
+        wrapper(() => caresApi.getCareByPatientCode({ patientCode: code })).pipe(
+          map((res) => convertToSummaryData(res, SummaryField.care)),
+          catchError(() => of([]))
+        ),
+        wrapper(() => medicalHistoryApi.getMedicalHistoryByPatientCode({ patientCode: code })).pipe(
+          map((res) => convertToSummaryData(res, SummaryField.medicalHistory)),
+          catchError(() => of([]))
         )
       ).pipe(toArray())
     )
       .then(
-        ([triages, opds, exams, admissions, visits, operations, therapies, conditionings]) => [
+        ([triages, opds, exams, admissions, visits, operations, therapies, conditionings, cares, medicalHistories]) => [
           ...triages,
           ...opds,
           ...exams,
@@ -146,6 +158,8 @@ export const loadSummaryData = createAsyncThunk(
           ...operations,
           ...therapies,
           ...conditionings,
+          ...cares,
+          ...medicalHistories,
         ]
       )
       .catch((error) => thunkApi.rejectWithValue(error))
@@ -230,6 +244,14 @@ export const loadSummaryDataGroupedByEncounter = createAsyncThunk(
               ),
               wrapper(() => encounterApi.getConditioningByPatientEncounter({ code: encounter.code })).pipe(
                 map((res) => convertToSummaryData(res, SummaryField.conditioning)),
+                catchError(() => of([]))
+              ),
+              wrapper(() => encounterApi.getCareByPatientEncounter({ code: encounter.code })).pipe(
+                map((res) => convertToSummaryData(res, SummaryField.care)),
+                catchError(() => of([]))
+              ),
+              wrapper(() => encounterApi.getMedicalHistoriesEncounterByEncounter({ code: encounter.code })).pipe(
+                map((res) => convertToSummaryData(res, SummaryField.medicalHistory)),
                 catchError(() => of([]))
               ),
               of(convertToSummaryData(encounterVisits, SummaryField.visit)),

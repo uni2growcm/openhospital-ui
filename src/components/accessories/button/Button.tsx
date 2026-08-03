@@ -15,7 +15,7 @@ const Button: FunctionComponent<IProps> = ({
 }) => {
   return (
     <MaterialComponent
-      className={"button " + className ?? ""}
+      className={"button " + (className ?? "")}
       type={type}
       color={color}
       variant={variant}

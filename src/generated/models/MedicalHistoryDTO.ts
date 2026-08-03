@@ -274,6 +274,30 @@ export interface MedicalHistoryDTO {
      */
     performedAt?: string;
     /**
+     * Medical history other pregnancy section
+     * @type {string}
+     * @memberof MedicalHistoryDTO
+     */
+    otherPregnancySection?: string;
+    /**
+     * Medical history other vaccination state section
+     * @type {string}
+     * @memberof MedicalHistoryDTO
+     */
+    otherVaccinationStateSection?: string;
+    /**
+     * Medical history combined breastfeeding
+     * @type {string}
+     * @memberof MedicalHistoryDTO
+     */
+    combinedBreastfeeding?: string;
+    /**
+     * Medical history no applicable deparasitation
+     * @type {boolean}
+     * @memberof MedicalHistoryDTO
+     */
+    noApplicableDeparasitation?: boolean;
+    /**
      * Optimistic lock value
      * @type {number}
      * @memberof MedicalHistoryDTO

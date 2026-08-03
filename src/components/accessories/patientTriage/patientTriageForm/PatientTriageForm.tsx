@@ -62,8 +62,8 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
     pex_rr: number(),
     pex_ap_min: number(),
     pex_ap_max: number(),
-    pex_pex_body_mass_index: number(),
-    pex_pex_branchial_perimeter: number(),
+    pex_body_mass_index: number(),
+    pex_branchial_perimeter: number(),
     pex_type: string().required(t("common.required")),
     pex_pc: string(),
   });
@@ -316,12 +316,36 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
             </div>
             <div className="patientTriageForm__item">
               <TextField
+                field={formik.getFieldProps("pex_weight_age")}
+                theme="regular"
+                label={t("examination.weightscore")}
+                isValid={isValid("pex_weight_age")}
+                errorText={getErrorText("pex_weight_age")}
+                onBlur={formik.handleBlur}
+                type="number"
+                disabled={isLoading}
+              />
+            </div>
+            <div className="patientTriageForm__item">
+              <TextField
                 field={formik.getFieldProps("pex_height")}
                 theme="regular"
                 label={t("examination.height")}
                 isValid={isValid("pex_height")}
                 errorText={getErrorText("pex_height")}
                 onBlur={handleCalculateBMI}
+                type="number"
+                disabled={isLoading}
+              />
+            </div>
+            <div className="patientTriageForm__item">
+              <TextField
+                field={formik.getFieldProps("pex_height_age")}
+                theme="regular"
+                label={t("examination.heightscore")}
+                isValid={isValid("pex_height_age")}
+                errorText={getErrorText("pex_height_age")}
+                onBlur={formik.handleBlur}
                 type="number"
                 disabled={isLoading}
               />
@@ -352,11 +376,35 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
             </div>
             <div className="patientTriageForm__item">
               <TextField
+                field={formik.getFieldProps("pex_head_circ_age")}
+                theme="regular"
+                label={t("examination.headcircumferencescore")}
+                isValid={isValid("pex_head_circ_age")}
+                errorText={getErrorText("pex_head_circ_age")}
+                onBlur={formik.handleBlur}
+                type="number"
+                disabled={isLoading}
+              />
+            </div>
+            <div className="patientTriageForm__item">
+              <TextField
                 field={formik.getFieldProps("pex_body_mass_index")}
                 theme="regular"
                 label={t("examination.bodymassindex")}
                 isValid={isValid("pex_body_mass_index")}
                 errorText={getErrorText("pex_body_mass_index")}
+                onBlur={formik.handleBlur}
+                type="number"
+                disabled={isLoading}
+              />
+            </div>
+            <div className="patientTriageForm__item">
+              <TextField
+                field={formik.getFieldProps("pex_body_mass_index_age")}
+                theme="regular"
+                label={t("examination.bodymassindexscore")}
+                isValid={isValid("pex_body_mass_index_age")}
+                errorText={getErrorText("pex_body_mass_index_age")}
                 onBlur={formik.handleBlur}
                 type="number"
                 disabled={isLoading}

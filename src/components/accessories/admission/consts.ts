@@ -117,11 +117,15 @@ export const initialFields: TFields<AdmissionFormFieldName> = {
     value: [],
     type: "array",
   },
-  complicationDiagnosis: {
-    value: [],
-    type: "array",
+  complication: {
+    value: "",
+    type: "text",
   },
   othersInformation: {
+    value: "",
+    type: "text",
+  },
+  note: {
     value: "",
     type: "text",
   },

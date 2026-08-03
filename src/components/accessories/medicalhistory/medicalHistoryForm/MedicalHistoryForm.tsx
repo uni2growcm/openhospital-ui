@@ -44,9 +44,11 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
     deliveryMode: string().nullable(),
     reasonMode: string().nullable(),
     apgarScore: string().nullable(),
+    otherPregnancySection: string().nullable(),
     birthWeight: number().nullable(),
     vaccinationStatePev: string().nullable(),
     vaccinationStateNoPev: string().nullable(),
+    otherVaccinationStateSection: string().nullable(),
     antiMalarialProphylaxisVap: string().nullable(),
     antiMalarialProphylaxisMilda: string().nullable(),
     antiMalarialProphylaxisOthers: string().nullable(),
@@ -57,7 +59,9 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
     surgicalProcedureDate: date().nullable(),
     diet: string().nullable(),
     diversification: string().nullable(),
+    combinedBreastfeeding: string().nullable(),
     deParasitization: boolean().nullable(),
+    noApplicableDeparasitation: boolean().nullable(),
     psychomotorDev: string().nullable(),
     somaticGrowth: string().nullable(),
     ironSupplement: boolean().nullable(),
@@ -88,6 +92,8 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
     useState(false);
   const [isDeParasitizationChecked, setIsDeParasitizationChecked] =
     useState(false);
+  const [isNoApplicableDeparasitationChecked, setIsNoApplicableDeparasitationChecked] =
+    useState(false);
   const [isIronSupplementChecked, setIsIronSupplementChecked] = useState(false);
   const [isFolicAcidSupplementChecked, setIsFolicAcidSupplementChecked] =
     useState(false);
@@ -116,6 +122,7 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
           ? parseDateTime(values.lastTransfusionDate)
           : null,
         deParasitization: isDeParasitizationChecked ? true : false,
+        noApplicableDeparasitation: isNoApplicableDeparasitationChecked ? true : false,
         surgicalProcedureDate: isSurgicalProcedureChecked
           ? parseDateTime(values.surgicalProcedureDate)
           : null,
@@ -134,6 +141,7 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
       setIsTransfusionChecked(false);
       setIsSickleCellChecked(false);
       setIsDeParasitizationChecked(false);
+      setIsNoApplicableDeparasitationChecked(false);
       setIsSurgicalProcedureChecked(false);
     },
   });
@@ -155,6 +163,16 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
   };
   const handleDeParasitizationChecked = () => {
     setIsDeParasitizationChecked(!isDeParasitizationChecked);
+    if (!isDeParasitizationChecked) {
+      setIsNoApplicableDeparasitationChecked(false);
+    }
+  };
+
+  const handleNoApplicableDeparasitationChecked = () => {
+    setIsNoApplicableDeparasitationChecked(!isNoApplicableDeparasitationChecked);
+    if (!isNoApplicableDeparasitationChecked) {
+      setIsDeParasitizationChecked(false);
+    }
   };
 
   const handleIronSupplementChecked = () => {
@@ -196,6 +214,7 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
     setIsTransfusionChecked(false);
     setIsSickleCellChecked(false);
     setIsDeParasitizationChecked(false);
+    setIsNoApplicableDeparasitationChecked(false);
     setIsSurgicalProcedureChecked(false);
     resetFormCallback();
   };
@@ -221,6 +240,9 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
       setIsDeParasitizationChecked(
         formik.values.deParasitization === "true" ? true : false
       );
+      setIsNoApplicableDeparasitationChecked(
+        formik.values.noApplicableDeparasitation === "true" ? true : false
+      );
       setIsSurgicalProcedureChecked(
         formik.values.surgicalProcedure === "true" ? true : false
       );
@@ -236,6 +258,7 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
     formik.values.hemylosis,
     formik.values.sickleCell,
     formik.values.deParasitization,
+    formik.values.noApplicableDeparasitation,
     formik.values.surgicalProcedure,
     formik.values.performedAt,
   ]);
@@ -386,6 +409,20 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
                 disabled={isLoading}
               />
             </div>
+            <div className="fullWidth medicalHistoryForm__item">
+              <TextField
+                field={formik.getFieldProps("otherPregnancySection")}
+                theme="regular"
+                label={t("medicalHistory.physiological.otherPregnancySection")}
+                multiline={true}
+                isValid={isValid("otherPregnancySection")}
+                errorText={getErrorText("otherPregnancySection")}
+                onBlur={formik.handleBlur}
+                rows={2}
+                maxLength={2000}
+                disabled={isLoading}
+              />
+            </div>
           </div>
 
           <h4 className="formInsertMode">
@@ -491,6 +528,22 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
                 )}
               />
             </div>
+            <div className="fullWidth medicalHistoryForm__item">
+              <TextField
+                field={formik.getFieldProps("otherVaccinationStateSection")}
+                theme="regular"
+                label={t(
+                  "medicalHistory.physiological.otherVaccinationStateSection"
+                )}
+                multiline={true}
+                isValid={isValid("otherVaccinationStateSection")}
+                errorText={getErrorText("otherVaccinationStateSection")}
+                onBlur={formik.handleBlur}
+                rows={2}
+                maxLength={2000}
+                disabled={isLoading}
+              />
+            </div>
           </div>
           <h4 className="formInsertMode">
             {t("medicalHistory.physiological.diet")}
@@ -527,12 +580,34 @@ const MedicalHistoryForm: FC<MedicalHistoryProps> = ({
                 disabled={isLoading}
               />
             </div>
+            <div className="fullWidth medicalHistoryForm__item">
+              <TextField
+                field={formik.getFieldProps("combinedBreastfeeding")}
+                theme="regular"
+                label={t("medicalHistory.physiological.combinedBreastfeeding")}
+                multiline={true}
+                isValid={isValid("combinedBreastfeeding")}
+                errorText={getErrorText("combinedBreastfeeding")}
+                onBlur={formik.handleBlur}
+                rows={2}
+                maxLength={2000}
+                disabled={isLoading}
+              />
+            </div>
             <div className="medicalHistoryForm__item">
               <CheckboxField
                 fieldName="deParasitization"
                 label={t("medicalHistory.physiological.deworming")}
                 checked={isDeParasitizationChecked}
                 onChange={handleDeParasitizationChecked}
+              />
+            </div>
+            <div className="medicalHistoryForm__item">
+              <CheckboxField
+                fieldName="noApplicableDeparasitation"
+                label={t("medicalHistory.physiological.noApplicableDeparasitation")}
+                checked={isNoApplicableDeparasitationChecked}
+                onChange={handleNoApplicableDeparasitationChecked}
               />
             </div>
             <div className="fullWidth medicalHistoryForm__item">

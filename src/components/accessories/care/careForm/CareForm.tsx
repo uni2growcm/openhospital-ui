@@ -1,4 +1,5 @@
 import { Autocomplete } from "components/accessories/autocomplete";
+import CheckboxField from "components/accessories/checkboxField/CheckboxField";
 import DateField from "components/accessories/dateField/DateField";
 import TextField from "components/accessories/textField/TextField";
 import { useFormik } from "formik";
@@ -34,7 +35,7 @@ const CareForm: FC<CareFormProps> = ({
   const validationSchema = yup.object({
     note: yup.string().nullable(),
     plannedCare: yup.string().nullable(),
-    observation: yup.string().nullable(),
+    observation: yup.boolean(),
     careDate: yup.date().required(t("common.required")),
   });
 
@@ -54,8 +55,10 @@ const CareForm: FC<CareFormProps> = ({
       const formattedValues = formatAllFieldValues(fields, values);
       const careToSave: any = {
         ...formattedValues,
+        observation: isObservationChecked,
       };
       onSubmit(careToSave as any);
+      setIsObservationChecked(false);
     },
   });
 
@@ -85,6 +88,7 @@ const CareForm: FC<CareFormProps> = ({
   const [usersOptions, setUsersOptions] = useState<userOption[] | undefined>(
     undefined
   );
+  const [isObservationChecked, setIsObservationChecked] = useState(false);
 
   const isValid = (fieldName: string) =>
     has(formik.touched, fieldName) && has(formik.errors, fieldName);
@@ -94,9 +98,14 @@ const CareForm: FC<CareFormProps> = ({
       ? (get(formik.errors, fieldName) as string)
       : "";
 
+  const handleObservationChecked = () => {
+    setIsObservationChecked(!isObservationChecked);
+  };
+
   const handleResetConfirmation = () => {
     setOpenResetConfirmation(false);
     formik.resetForm();
+    setIsObservationChecked(false);
     resetFormCallback();
   };
 
@@ -119,6 +128,14 @@ const CareForm: FC<CareFormProps> = ({
       );
     }
   }, [usersList, dispatch]);
+
+  useEffect(() => {
+    if (!creationMode) {
+      setIsObservationChecked(
+        formik.values.observation === "true" ? true : false
+      );
+    }
+  }, [creationMode, formik.values.observation]);
 
   useEffect(() => {
     if (shouldResetForm) {
@@ -145,8 +162,9 @@ const CareForm: FC<CareFormProps> = ({
               disabled={isLoading}
             />
           </div>
-
-          <div className="fullWidth careForm__item">
+        </div>
+        <div className="row start-sm center-xs bottom-sm">
+          <div className="careForm__item">
             <Autocomplete
               id="team"
               multiple
@@ -159,6 +177,14 @@ const CareForm: FC<CareFormProps> = ({
               placeholder={t("care.team")}
             />
           </div>
+          <div className="careForm__item">
+            <CheckboxField
+              fieldName="observation"
+              label={t("care.observation")}
+              checked={isObservationChecked}
+              onChange={handleObservationChecked}
+            />
+          </div>
           <div className="fullWidth careForm__item">
             <TextField
               label={t("care.plannedCare")}
@@ -166,17 +192,6 @@ const CareForm: FC<CareFormProps> = ({
               theme="regular"
               isValid={isValid("plannedCare")}
               errorText={getErrorText("plannedCare")}
-              onBlur={formik.handleBlur}
-              disabled={isLoading}
-            />
-          </div>
-          <div className="fullWidth careForm__item">
-            <TextField
-              label={t("care.observation")}
-              field={formik.getFieldProps("observation")}
-              theme="regular"
-              isValid={isValid("observation")}
-              errorText={getErrorText("observation")}
               onBlur={formik.handleBlur}
               disabled={isLoading}
             />

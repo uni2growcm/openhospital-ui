@@ -7957,13 +7957,13 @@ components:
           format: int32
           description: lock
           example: 0
-        male:
-          type: boolean
         female:
           type: boolean
-        opd:
+        male:
           type: boolean
         pharmacy:
+          type: boolean
+        opd:
           type: boolean
       required:
       - beds
@@ -8788,11 +8788,9 @@ components:
         admType:
           $ref: "#/components/schemas/AdmissionTypeDTO"
           description: Admission type
-        complicationDiagnosis:
-          type: array
+        complication:
+          type: string
           description: Complication Diagnosis
-          items:
-            $ref: "#/components/schemas/DiseaseDTO"
         diagnosisOut:
           type: array
           description: Diagnosis out
@@ -8822,6 +8820,10 @@ components:
         anamnesis:
           type: string
           description: Anamnesis
+          maxLength: 65535
+        note:
+          type: string
+          description: Note
           maxLength: 65535
         transUnit:
           type: number
@@ -9597,6 +9599,21 @@ components:
           format: date-time
           description: Medical history performed date
           example: 2025-08-26T16:15:58
+        otherPregnancySection:
+          type: string
+          description: Medical history other pregnancy section
+          example: None
+        otherVaccinationStateSection:
+          type: string
+          description: Medical history other vaccination state section
+          example: None
+        combinedBreastfeeding:
+          type: string
+          description: Medical history combined breastfeeding
+          example: None
+        noApplicableDeparasitation:
+          type: boolean
+          description: Medical history no applicable deparasitation
         lock:
           type: integer
           format: int32
@@ -10028,6 +10045,26 @@ components:
           format: double
           description: Head circumference
           example: 23
+        pex_head_circ_age:
+          type: number
+          format: double
+          description: Head circumference per age
+          example: 23
+        pex_weight_age:
+          type: number
+          format: double
+          description: Weight per age
+          example: 22
+        pex_height_age:
+          type: number
+          format: double
+          description: Height per age
+          example: 25
+        pex_body_mass_index_age:
+          type: number
+          format: double
+          description: Body mass index par age
+          example: 26
       required:
       - patientCode
       - pex_date
@@ -10060,9 +10097,8 @@ components:
           description: Aspiration conditioning
           example: true
         mce:
-          type: integer
-          format: int32
-          description: Conditioning mce duration
+          type: boolean
+          description: Conditioning mce
           example: 4
         ventilation:
           type: boolean
@@ -10122,6 +10158,14 @@ components:
           format: double
           description: 'Conditioning blood glucose level '
           example: 5.6
+        othersRapidScreeningTest:
+          type: string
+          description: 'Conditioning others rapid screening test '
+          example: 5.6
+        cpapDetails:
+          type: string
+          description: 'Conditioning cpap details '
+          example: 5.6
         patient:
           $ref: "#/components/schemas/PatientDTO"
           description: patient
@@ -10166,7 +10210,7 @@ components:
           items:
             type: string
         observation:
-          type: string
+          type: boolean
           description: Observation of the commune
           example: Good observation
         plannedCare:
@@ -10574,6 +10618,11 @@ components:
           format: int32
           description: ID of the patient
           example: 45
+        admID:
+          type: integer
+          format: int32
+          description: ID of patient admission
+          example: 513
         localisation:
           type: string
           description: Localisation of the person who want to remove patient
@@ -10617,6 +10666,7 @@ components:
           description: Date of discharge against medical advice
           example: 2026-04-24T12:23:46
       required:
+      - admID
       - commune
       - district
       - hospitalisationDate

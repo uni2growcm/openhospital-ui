@@ -38,6 +38,10 @@ export const useFields = (medicalhistory?: MedicalHistoryDTO) => {
       value: medicalhistory?.apgarScore ?? "",
       type: "text",
     },
+    otherPregnancySection: {
+      value: medicalhistory?.otherPregnancySection ?? "",
+      type: "text",
+    },
     birthWeight: {
       value: medicalhistory?.birthWeight?.toString() ?? "",
       type: "number",
@@ -49,6 +53,10 @@ export const useFields = (medicalhistory?: MedicalHistoryDTO) => {
     vaccinationStateNoPev: {
       value: medicalhistory?.vaccinationStateNoPev ?? [],
       type: "array",
+    },
+    otherVaccinationStateSection: {
+      value: medicalhistory?.otherVaccinationStateSection ?? "",
+      type: "text",
     },
     antiMalarialProphylaxisVap: {
       value: medicalhistory?.antiMalarialProphylaxisVap ?? "",
@@ -82,6 +90,10 @@ export const useFields = (medicalhistory?: MedicalHistoryDTO) => {
       value: medicalhistory?.diversification ?? "",
       type: "text",
     },
+    combinedBreastfeeding: {
+      value: medicalhistory?.combinedBreastfeeding ?? "",
+      type: "text",
+    },
     neonatalPeriod: {
       value: medicalhistory?.neonatalPeriod ?? "",
       type: "text",
@@ -112,6 +124,10 @@ export const useFields = (medicalhistory?: MedicalHistoryDTO) => {
     },
     deParasitization: {
       value: medicalhistory?.deParasitization ? "true" : "false",
+      type: "boolean",
+    },
+    noApplicableDeparasitation: {
+      value: medicalhistory?.noApplicableDeparasitation ? "true" : "false",
       type: "boolean",
     },
     psychomotorDev: {

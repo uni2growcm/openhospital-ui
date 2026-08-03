@@ -11,9 +11,13 @@ export const initialFields: TFields<ConditioningFormFieldName> = {
     value: "",
     type: "boolean",
   },
+  cpapDetails: {
+    value: "",
+    type: "text",
+  },
   mce: {
     value: "",
-    type: "number",
+    type: "boolean",
   },
   ventilation: {
     value: "",
@@ -58,6 +62,10 @@ export const initialFields: TFields<ConditioningFormFieldName> = {
   bloodGlucoseLevel: {
     value: "",
     type: "number",
+  },
+  othersRapidScreeningTest: {
+    value: "",
+    type: "text",
   },
   performedBy: {
     value: "",

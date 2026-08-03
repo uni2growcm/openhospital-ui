@@ -37,10 +37,14 @@ const MedicalHistoryTable: FunctionComponent<IOwnProps> = ({
     deliveryMode: t("medicalHistory.physiological.deliveryMode"),
     reasonMode: t("medicalHistory.physiological.reasonMode"),
     apgarScore: t("medicalHistory.physiological.apgarScore"),
+    otherPregnancySection: t("medicalHistory.physiological.otherPregnancySection"),
     birthWeight: t("medicalHistory.physiological.birthWeight"),
     vaccinationStatePev: t("medicalHistory.physiological.vaccinationStatePev"),
     vaccinationStateNoPev: t(
       "medicalHistory.physiological.vaccinationStateNoPev"
+    ),
+    otherVaccinationStateSection: t(
+      "medicalHistory.physiological.otherVaccinationStateSection"
     ),
     antiMalarialProphylaxisVap: t(
       "medicalHistory.physiological.antiMalarialProphylaxisVap"
@@ -78,7 +82,9 @@ const MedicalHistoryTable: FunctionComponent<IOwnProps> = ({
       "medicalHistory.familyPathological.otherUsefulInformation"
     ),
     diversification: t("medicalHistory.physiological.diversification"),
+    combinedBreastfeeding: t("medicalHistory.physiological.combinedBreastfeeding"),
     deParasitization: t("medicalHistory.physiological.deParasitization"),
+    noApplicableDeparasitation: t("medicalHistory.physiological.noApplicableDeparasitation"),
     psychomotorDev: t("medicalHistory.physiological.psychomotorDevelopment"),
     somaticGrowth: t("medicalHistory.physiological.somaticGrowth"),
     ironSupplement: t("medicalHistory.physiological.ironSupplement"),
@@ -141,6 +147,7 @@ const MedicalHistoryTable: FunctionComponent<IOwnProps> = ({
           : "",
         reasonMode: item.reasonMode ?? "",
         apgarScore: item.apgarScore ?? "",
+        otherPregnancySection: item.otherPregnancySection ?? "",
         birthWeight: item.birthWeight ?? "",
         vaccinationStatePev: formatVaccinationStatePev(
           item.vaccinationStatePev
@@ -148,6 +155,7 @@ const MedicalHistoryTable: FunctionComponent<IOwnProps> = ({
         vaccinationStateNoPev: formatVaccinationStateNoPev(
           item.vaccinationStateNoPev
         ).join(", "),
+        otherVaccinationStateSection: item.otherVaccinationStateSection ?? "",
         antiMalarialProphylaxisVap: item.antiMalarialProphylaxisVap ?? "",
         antiMalarialProphylaxisMilda: item.antiMalarialProphylaxisMilda
           ? item.antiMalarialProphylaxisMilda === "NO"
@@ -164,6 +172,7 @@ const MedicalHistoryTable: FunctionComponent<IOwnProps> = ({
           ? renderDateTime(item.surgicalProcedureDate)
           : "",
         diversification: item.diversification ?? "",
+        combinedBreastfeeding: item.combinedBreastfeeding ?? "",
         neonatalPeriod: item.neonatalPeriod ?? "",
         previousHospitalization: item.previousHospitalization ?? "",
         father: item.father ?? "",
@@ -172,6 +181,9 @@ const MedicalHistoryTable: FunctionComponent<IOwnProps> = ({
         otherUsefulInformation: item.otherUsefulInformation ?? "",
         diet: item.diet ?? "",
         deParasitization: item.deParasitization
+          ? t("common.yes")
+          : t("common.no"),
+        noApplicableDeparasitation: item.noApplicableDeparasitation
           ? t("common.yes")
           : t("common.no"),
         psychomotorDev: item.psychomotorDev ?? "",
