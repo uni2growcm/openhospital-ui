@@ -131,6 +131,10 @@ export const useFields = (
       value: admission?.improvementFeedback ?? "",
       type: "text",
     },
+    note: {
+      value: admission?.note ?? "",
+      type: "text",
+    },
     diagnosisIn: {
       value: admission?.diagnosisIn?.map((d) => d.code?.toString() ?? "") ?? [],
       type: "array",

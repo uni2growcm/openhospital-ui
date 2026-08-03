@@ -120,6 +120,12 @@ export const CurrentAdmissionData: FunctionComponent<IOwnProps> = ({
             <p className="item_content">{admission.courseOfAction}</p>
           </div>
         )}
+        {!isEmpty(admission?.note) && (
+          <div className="fullWidth currentAdmissionData__item">
+            <span className="item_label">{t("patient.anamnesis")}</span>
+            <p className="item_content">{admission.note}</p>
+          </div>
+        )}
         {admission?.admType?.code === "R" && (
           <>
             {!isEmpty(admission?.fhu) && (
@@ -130,25 +136,33 @@ export const CurrentAdmissionData: FunctionComponent<IOwnProps> = ({
             )}
             {!isEmpty(admission?.transportation) && (
               <div className="currentAdmissionData__item">
-                <span className="item_label">{t("admission.transportation")}</span>
+                <span className="item_label">
+                  {t("admission.transportation")}
+                </span>
                 <p className="item_content">{admission.transportation}</p>
               </div>
             )}
             {!isEmpty(admission?.referralAlert) && (
               <div className="currentAdmissionData__item">
-                <span className="item_label">{t("admission.referralAlert")}</span>
+                <span className="item_label">
+                  {t("admission.referralAlert")}
+                </span>
                 <p className="item_content">{admission.referralAlert}</p>
               </div>
             )}
             {!isEmpty(admission?.referralReason) && (
               <div className="fullWidth currentAdmissionData__item">
-                <span className="item_label">{t("admission.referralReason")}</span>
+                <span className="item_label">
+                  {t("admission.referralReason")}
+                </span>
                 <p className="item_content">{admission.referralReason}</p>
               </div>
             )}
             {!isEmpty(admission?.treatmentReceived) && (
               <div className="fullWidth currentAdmissionData__item">
-                <span className="item_label">{t("admission.treatmentReceived")}</span>
+                <span className="item_label">
+                  {t("admission.treatmentReceived")}
+                </span>
                 <p className="item_content">{admission.treatmentReceived}</p>
               </div>
             )}
@@ -160,7 +174,9 @@ export const CurrentAdmissionData: FunctionComponent<IOwnProps> = ({
             )}
             {!isEmpty(admission?.improvementFeedback) && (
               <div className="fullWidth currentAdmissionData__item">
-                <span className="item_label">{t("admission.improvementFeedback")}</span>
+                <span className="item_label">
+                  {t("admission.improvementFeedback")}
+                </span>
                 <p className="item_content">{admission.improvementFeedback}</p>
               </div>
             )}

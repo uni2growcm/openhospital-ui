@@ -1066,6 +1066,7 @@
     "diagnosisOut": "Diagnosis Out",
     "complication": "Complication",
     "othersInformation": "Others Information",
+    "note": "Note",
     "ward": "Services",
     "transUnit": "Trans Unit",
     "fhu": "Patient referral center",

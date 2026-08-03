@@ -7957,13 +7957,13 @@ components:
           format: int32
           description: lock
           example: 0
-        opd:
-          type: boolean
-        pharmacy:
-          type: boolean
         female:
           type: boolean
         male:
+          type: boolean
+        pharmacy:
+          type: boolean
+        opd:
           type: boolean
       required:
       - beds
@@ -8820,6 +8820,10 @@ components:
         anamnesis:
           type: string
           description: Anamnesis
+          maxLength: 65535
+        note:
+          type: string
+          description: Note
           maxLength: 65535
         transUnit:
           type: number
@@ -10614,6 +10618,11 @@ components:
           format: int32
           description: ID of the patient
           example: 45
+        admID:
+          type: integer
+          format: int32
+          description: ID of patient admission
+          example: 513
         localisation:
           type: string
           description: Localisation of the person who want to remove patient
@@ -10657,6 +10666,7 @@ components:
           description: Date of discharge against medical advice
           example: 2026-04-24T12:23:46
       required:
+      - admID
       - commune
       - district
       - hospitalisationDate

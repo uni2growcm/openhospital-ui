@@ -23,6 +23,12 @@ export interface DischargeAgainstMedicalAdviceDTO {
      */
     patID: number;
     /**
+     * ID of patient admission
+     * @type {number}
+     * @memberof DischargeAgainstMedicalAdviceDTO
+     */
+    admID: number;
+    /**
      * Localisation of the person who want to remove patient
      * @type {string}
      * @memberof DischargeAgainstMedicalAdviceDTO

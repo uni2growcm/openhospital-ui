@@ -117,6 +117,7 @@ const PatientDischarge: FC = () => {
     const data = {
       ...dischargeAgainstMedicalAdviceData,
       patID: patient?.code,
+      admID: currentAdmission?.id,
       patientRelationshipOccupation:
         dischargeAgainstMedicalAdviceData.occupation,
       patientRelationshipName: dischargeAgainstMedicalAdviceData.name,

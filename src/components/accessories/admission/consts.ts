@@ -125,4 +125,8 @@ export const initialFields: TFields<AdmissionFormFieldName> = {
     value: "",
     type: "text",
   },
+  note: {
+    value: "",
+    type: "text",
+  },
 };

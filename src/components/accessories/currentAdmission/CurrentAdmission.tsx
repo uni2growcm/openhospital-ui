@@ -75,6 +75,7 @@ export const CurrentAdmission: FunctionComponent<IOwnProps> = ({
       improvementFeedback: adm.improvementFeedback,
       physicalExam: adm.physicalExam,
       courseOfAction: adm.courseOfAction,
+      note: adm.note,
     };
     dispatch(updateAdmission(admissionToSave));
   };

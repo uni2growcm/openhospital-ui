@@ -62,8 +62,8 @@ const PatientTriageForm: FunctionComponent<TProps> = ({
     pex_rr: number(),
     pex_ap_min: number(),
     pex_ap_max: number(),
-    pex_pex_body_mass_index: number(),
-    pex_pex_branchial_perimeter: number(),
+    pex_body_mass_index: number(),
+    pex_branchial_perimeter: number(),
     pex_type: string().required(t("common.required")),
     pex_pc: string(),
   });

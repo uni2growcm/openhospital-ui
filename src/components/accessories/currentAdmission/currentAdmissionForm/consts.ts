@@ -65,5 +65,9 @@ export const initialFields = (
       value: "",
       type: "array",
     },
+    note: {
+      value: "",
+      type: "text",
+    },
   };
 };

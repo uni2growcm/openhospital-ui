@@ -159,6 +159,7 @@ const PatientAdmission: FC = () => {
         treatmentReceived: adm.treatmentReceived,
         outcome: adm.outcome,
         improvementFeedback: adm.improvementFeedback,
+        note: adm.note,
       };
 
       if (!isEmpty(admissionToEdit?.disType)) {

@@ -163,6 +163,7 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
       formattedValues.treatmentReceived = formik.values.treatmentReceived;
       formattedValues.outcome = formik.values.outcome;
       formattedValues.improvementFeedback = formik.values.improvementFeedback;
+      formattedValues.note = formik.values.note;
       
       onSubmit({
         ...currentAdmission,
@@ -445,7 +446,7 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
                   isValid={isValid("entryReason")}
                   errorText={getErrorText("entryReason")}
                   onBlur={formik.handleBlur}
-                  rows={1}
+                  rows={3}
                   disabled={isLoading}
                 />
               </div>
@@ -517,6 +518,20 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
                   }}
                   label={t("admission.diseaseIn")}
                   placeholder={t("admission.diseaseIn")}
+                />
+              </div>
+              <div className="fullWidth currentAdmissionForm__item">
+                <TextField
+                  field={formik.getFieldProps("note")}
+                  theme="regular"
+                  label={t("patient.anamnesis")}
+                  multiline={true}
+                  type="text"
+                  isValid={isValid("note")}
+                  errorText={getErrorText("note")}
+                  onBlur={formik.handleBlur}
+                  rows={3}
+                  disabled={isLoading}
                 />
               </div>
               <div className="fullWidth currentAdmissionForm__item">

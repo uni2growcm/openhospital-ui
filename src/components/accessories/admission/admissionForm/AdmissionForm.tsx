@@ -191,6 +191,7 @@ const AdmissionForm: FC<AdmissionProps> = ({
     treatmentReceived: string(),
     outcome: string(),
     improvementFeedback: string(),
+    note: string(),
   });
 
   const formik = useFormik({
@@ -622,18 +623,6 @@ const AdmissionForm: FC<AdmissionProps> = ({
                     rows={2}
                     multiline={true}
                   />
-                  {/* <Autocomplete
-                    id="complication"
-                    multiple
-                    freeSolo
-                    value={formik.values.complication}
-                    options={renderOptions(diagnosisInList)}
-                    onChange={(_, value) => {
-                      formik.setFieldValue("complication", value);
-                    }}
-                    label={t("admission.complication")}
-                    placeholder={t("admission.complication")}
-                  /> */}
                 </div>
                 <div className="fullWidth patientAdmissionForm__item">
                   <TextField
@@ -719,7 +708,7 @@ const AdmissionForm: FC<AdmissionProps> = ({
                     isValid={isValid("entryReason")}
                     errorText={getErrorText("entryReason")}
                     onBlur={formik.handleBlur}
-                    rows={1}
+                    rows={3}
                     disabled={isLoading}
                   />
                 </div>
@@ -779,6 +768,20 @@ const AdmissionForm: FC<AdmissionProps> = ({
                     }}
                     label={t("admission.diseaseIn")}
                     placeholder={t("admission.diseaseIn")}
+                  />
+                </div>
+                <div className="fullWidth patientAdmissionForm__item">
+                  <TextField
+                    field={formik.getFieldProps("note")}
+                    theme="regular"
+                    label={t("patient.anamnesis")}
+                    multiline={true}
+                    type="text"
+                    isValid={isValid("note")}
+                    errorText={getErrorText("note")}
+                    onBlur={formik.handleBlur}
+                    rows={3}
+                    disabled={isLoading}
                   />
                 </div>
                 <div className="fullWidth patientAdmissionForm__item">

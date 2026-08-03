@@ -38,17 +38,42 @@ const ConditioningForm: FC<ConditioningFormProps> = ({
     aspiration: yup.boolean(),
     mce: yup.boolean(),
     ventilation: yup.boolean(),
-    oxygenDebit: yup.number().nullable(),
-    sgVolume: yup.number().nullable(),
-    diazepamDose: yup.number().nullable(),
-    bolusSsVolume: yup.number().nullable(),
+    oxygenDebit: yup
+      .number()
+      .nullable()
+      .transform((value, originalValue) =>
+        originalValue === "" ? null : value
+      ),
+    sgVolume: yup
+      .number()
+      .nullable()
+      .transform((value, originalValue) =>
+        originalValue === "" ? null : value
+      ),
+    diazepamDose: yup
+      .number()
+      .nullable()
+      .transform((value, originalValue) =>
+        originalValue === "" ? null : value
+      ),
+    bolusSsVolume: yup
+      .number()
+      .nullable()
+      .transform((value, originalValue) =>
+        originalValue === "" ? null : value
+      ),
     sngNumber: yup.boolean(),
     others: yup.string().nullable(),
     cpap: yup.boolean(),
     cpapDetails: yup.string().nullable(),
     malaria: yup.string().nullable(),
     hivTest: yup.string().nullable(),
-    bloodGlucoseLevel: yup.number().nullable(),
+    bloodGlucoseLevel: yup
+      .number()
+      .nullable()
+      .transform((value, originalValue) =>
+        originalValue === "" ? null : value
+      ),
     othersRapidScreeningTest: yup.string().nullable(),
     performedBy: yup.string().nullable(),
     performedAt: yup.date().required(t("common.required")),

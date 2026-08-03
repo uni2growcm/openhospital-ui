@@ -125,6 +125,12 @@ export interface AdmissionDTO {
      */
     anamnesis?: string;
     /**
+     * Note
+     * @type {string}
+     * @memberof AdmissionDTO
+     */
+    note?: string;
+    /**
      * Transfusional unit
      * @type {number}
      * @memberof AdmissionDTO
