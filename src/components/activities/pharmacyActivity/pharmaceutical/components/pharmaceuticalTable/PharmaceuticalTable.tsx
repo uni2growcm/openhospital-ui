@@ -11,8 +11,6 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { deleteMedical } from "state/medicals";
 import { getMedicals } from "state/pharmacy";
-import PharmaceuticalFilters from "../pharmaceuticalFilter/PharmaceuticalFilters";
-
 interface PharmaceuticalTableProps {
   onDataChange: (data: any[]) => void;
 }
@@ -59,9 +57,39 @@ export default function PharmaceuticalTable({
 
   const order = ["pcsperpck", "stock", "criticalValue", "amc", "code"];
 
-  const [nameFilter, setNameFilter] = useState<string>("");
-  const [codeFilter, setCodeFilter] = useState<string>("");
-  const [typeFilter, setTypeFilter] = useState<string>("");
+  const typeOptions = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          data
+            .map((item) => item.type?.description)
+            .filter((type): type is string => !!type)
+        )
+      ).sort((a, b) => a.localeCompare(b)),
+    [data]
+  );
+
+  const filterColumns = useMemo(
+    () => [
+      {
+        key: "pharmaceutical",
+        label: t("pharmacy.stock.pharmaceutical"),
+        type: "text" as const,
+      },
+      {
+        key: "type",
+        label: t("pharmacy.stock.type"),
+        type: "select" as const,
+        options: typeOptions.map((type) => ({ value: type, label: type })),
+      },
+      {
+        key: "code",
+        label: t("pharmacy.stock.code"),
+        type: "number" as const,
+      },
+    ],
+    [t, typeOptions]
+  );
 
   const formattedData = useMemo(() => {
     return data.map((item) => {
@@ -109,37 +137,6 @@ export default function PharmaceuticalTable({
       };
     });
   }, [data]);
-
-  const typeOptions = useMemo(
-    () =>
-      Array.from(
-        new Set(
-          data
-            .map((item) => item.type?.description)
-            .filter((type): type is string => !!type)
-        )
-      ).sort((a, b) => a.localeCompare(b)),
-    [data]
-  );
-
-  const filteredData = useMemo(() => {
-    const normalizedName = nameFilter.trim().toLowerCase();
-    const normalizedCode = codeFilter.trim().toLowerCase();
-
-    return formattedData.filter((row) => {
-      const matchesName =
-        !normalizedName ||
-        String(row.pharmaceutical ?? "")
-          .toLowerCase()
-          .includes(normalizedName);
-      const matchesCode =
-        !normalizedCode ||
-        String(row.code ?? "").toLowerCase().includes(normalizedCode);
-      const matchesType = !typeFilter || row.type === typeFilter;
-
-      return matchesName && matchesCode && matchesType;
-    });
-  }, [formattedData, nameFilter, codeFilter, typeFilter]);
 
   const deletedStautus = useAppSelector(
     (state) => state.medicals.delete.status
@@ -200,15 +197,6 @@ export default function PharmaceuticalTable({
           case "SUCCESS":
             return (
               <>
-                <PharmaceuticalFilters
-                  nameFilter={nameFilter}
-                  codeFilter={codeFilter}
-                  typeFilter={typeFilter}
-                  typeOptions={typeOptions}
-                  onNameFilterChange={setNameFilter}
-                  onCodeFilterChange={setCodeFilter}
-                  onTypeFilterChange={setTypeFilter}
-                />
                 <Table
                   labelData={labelData}
                   tableHeader={tableHeader}
@@ -216,7 +204,15 @@ export default function PharmaceuticalTable({
                   columnsOrder={order}
                   rowClassNames={(row) => "pharmaceutical-table__row"}
                   initialOrderBy="code"
-                  rowData={filteredData}
+                  rowData={formattedData}
+                  rawData={data.map((item) => ({
+                    ...item,
+                    pharmaceutical: item.description,
+                    type: item.type?.description,
+                    code: item.code,
+                  }))}
+                  filterColumns={filterColumns}
+                  manualFilter={false}
                   showEmptyCell={false}
                   isCollapsabile={false}
                   detailColSpan={6}

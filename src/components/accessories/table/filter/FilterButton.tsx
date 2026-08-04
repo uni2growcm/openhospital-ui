@@ -2,7 +2,7 @@ import { FilterAltTwoTone } from "@mui/icons-material";
 import { IconButton, Menu } from "@mui/material";
 import classnames from "classnames";
 import { useFormik } from "formik";
-import { get, has, isEmpty } from "lodash";
+import { get, has } from "lodash";
 import React, {
   MouseEvent,
   useCallback,
@@ -35,6 +35,8 @@ export const FilterButton = ({ field, onChange }: IOwnProps) => {
     setAnchorEl(null);
   };
 
+  const menuId = useMemo(() => `filter-menu-${field.key}`, [field.key]);
+
   const fields: TFields<TFilterFormFieldName> = useMemo(() => {
     return {
       value: {
@@ -49,9 +51,43 @@ export const FilterButton = ({ field, onChange }: IOwnProps) => {
     };
   }, [field.type]);
 
-  const validationSchema = object({
-    value: string(),
-  });
+  const validationSchema = useMemo(() => {
+    const baseSchema = object({
+      value: string(),
+      min: string(),
+      max: string(),
+    });
+
+    if (field.type === "number") {
+      return baseSchema.test(
+        "min-max-comparison",
+        t("common.minMaxRangeError"),
+        function (values) {
+          const { min, max } = values as Record<string, string>;
+          const minValue = min?.toString().trim();
+          const maxValue = max?.toString().trim();
+
+          if (
+            minValue &&
+            maxValue &&
+            Number(minValue) > Number(maxValue)
+          ) {
+            return this.createError({
+              path: "max",
+              message: t("common.minMaxRangeError", {
+                min: minValue,
+                max: maxValue,
+              }),
+            });
+          }
+
+          return true;
+        }
+      );
+    }
+
+    return baseSchema;
+  }, [field.type, t]);
 
   const formik = useFormik({
     initialValues: getFromFields(fields, "value"),
@@ -59,11 +95,11 @@ export const FilterButton = ({ field, onChange }: IOwnProps) => {
     enableReinitialize: true,
     onSubmit: (values) => {
       const formattedValues = formatAllFieldValues(fields, values);
-    
+
       const value = values.value ?? "";
       const min = values.min ?? "";
       const max = values.max ?? "";
-    
+
       onChange({
         value: value.length === 0 ? undefined : formattedValues.value,
         min: min.length === 0 ? undefined : formattedValues.min,
@@ -78,6 +114,19 @@ export const FilterButton = ({ field, onChange }: IOwnProps) => {
       formik.setFieldTouched(fieldName);
     },
     [formik]
+  );
+
+  const handleAutocompleteChange = useCallback(
+    (_event: any, value: any | null) => {
+      const selectedValue = value?.value ?? value ?? "";
+      formik.setFieldValue("value", selectedValue);
+      formik.setFieldTouched("value", true);
+
+      if (field.type === "select") {
+        formik.submitForm();
+      }
+    },
+    [field.type, formik]
   );
 
   const onBlurCallback = useCallback(
@@ -99,28 +148,40 @@ export const FilterButton = ({ field, onChange }: IOwnProps) => {
       : "";
   };
 
+  const { submitForm, values } = formik;
+
+  const isFilterActive = useMemo(
+    () =>
+      [values.value, values.min, values.max].some(
+        (value) => value !== undefined && value !== ""
+      ),
+    [values.value, values.min, values.max]
+  );
+
+  const shouldAutoSubmit = field.type !== "select";
+
   useEffect(() => {
-    const submit = setTimeout(() => {
-      formik.submitForm();
+    if (!shouldAutoSubmit) {
+      return;
+    }
+
+    const timeoutId = setTimeout(() => {
+      submitForm();
     }, 250);
 
-    return () => clearInterval(submit);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formik.values]);
+    return () => clearTimeout(timeoutId);
+  }, [submitForm, values, shouldAutoSubmit]);
 
   return (
     <div>
       <IconButton
-        aria-controls="filter-menu"
+        aria-controls={menuId}
         aria-haspopup="true"
         onClick={handleClick}
       >
         <FilterAltTwoTone
           className={classnames(classes.icon, {
-            [classes.filtered]:
-              !isEmpty(formik.values.value) ||
-              !isEmpty(formik.values.min) ||
-              !isEmpty(formik.values.max),
+            [classes.filtered]: isFilterActive,
           })}
           fontSize="small"
         />
@@ -171,6 +232,7 @@ export const FilterButton = ({ field, onChange }: IOwnProps) => {
                 { value: "", label: t("common.all") },
                 ...field.options,
               ]}
+              onChange={handleAutocompleteChange}
               onBlur={onBlurCallback("value")}
             />
           )}

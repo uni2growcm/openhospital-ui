@@ -520,6 +520,7 @@
     "close": "CLOSE",
     "greaterthan": "The value must be at least {{value}}.",
     "lessthan": "The value must not exceed {{value}}.",
+    "minMaxRangeError": "Min cannot be greater than Max.",
     "confirm": "Confirm",
     "invaliddate": "Invalid Date",
     "outofrange": "Out of range",
