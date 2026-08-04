@@ -106,6 +106,17 @@ const Table: FunctionComponent<IProps> = ({
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
+
+  const handleFilterChange = useCallback(
+    (key: string, value: TFilterValues) => {
+      setFilters((previous) => ({
+        ...previous,
+        [key]: value,
+      }));
+    },
+    []
+  );
+
   const createSortHandler =
     (property: any) => (event: React.MouseEvent<unknown>) => {
       handleRequestSort(event, property);
@@ -466,7 +477,7 @@ const Table: FunctionComponent<IProps> = ({
         filters,
         manualFilter
       ),
-    [filterColumns, filters, manualFilter, rowData]
+    [filterColumns, filters, manualFilter, rawData, rowData, rowKey]
   );
   
   useEffect(() => {
@@ -479,7 +490,7 @@ const Table: FunctionComponent<IProps> = ({
     if (onFilterChange && !manualFilter) {
       onFilterChange(filters);
     }
-  }, [filters]);
+  }, [filters, manualFilter, onFilterChange]);
 
   return (
     <>
@@ -528,12 +539,7 @@ const Table: FunctionComponent<IProps> = ({
                       {filterField && (
                         <FilterButton
                           field={filterField}
-                          onChange={(value) =>
-                            setFilters((previous) => ({
-                              ...previous,
-                              [filterField.key]: value,
-                            }))
-                          }
+                          onChange={(value) => handleFilterChange(filterField.key, value)}
                         />
                       )}
                     </div>
