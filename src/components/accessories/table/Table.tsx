@@ -1,23 +1,23 @@
 import {
-    Add,
-    Archive,
-    Close,
-    Delete,
-    Edit,
-    HighlightOff,
-    InfoOutlined,
-    InventoryOutlined,
-    Logout,
-    MonetizationOn,
-    Print,
-    Restore,
-    Undo,
+  Add,
+  Archive,
+  Close,
+  Delete,
+  Edit,
+  HighlightOff,
+  InfoOutlined,
+  InventoryOutlined,
+  Logout,
+  MonetizationOn,
+  Print,
+  Restore,
+  Undo,
 } from "@mui/icons-material";
 import {
-    IconButton,
-    Table as MaterialComponent,
-    TablePagination,
-    TableSortLabel,
+  IconButton,
+  Table as MaterialComponent,
+  TablePagination,
+  TableSortLabel,
 } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import TableBody from "@mui/material/TableBody";
@@ -28,17 +28,17 @@ import TablePaginationActions from "@mui/material/TablePagination/TablePaginatio
 import TableRow from "@mui/material/TableRow";
 import { filterData } from "libraries/tableUtils";
 import React, {
-    FunctionComponent,
-    useCallback,
-    useEffect,
-    useMemo,
-    useState,
+  FunctionComponent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
 } from "react";
 import { useTranslation } from "react-i18next";
 import warningIcon from "../../../assets/warning-icon.png";
 import {
-    dateComparator,
-    defaultComparator,
+  dateComparator,
+  defaultComparator,
 } from "../../../libraries/sortUtils/sortUtils";
 import { TOrder } from "../../../libraries/sortUtils/types";
 import Button from "../button/Button";
