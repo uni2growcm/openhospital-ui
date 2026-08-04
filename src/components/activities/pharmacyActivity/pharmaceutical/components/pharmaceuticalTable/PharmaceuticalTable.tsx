@@ -3,7 +3,6 @@ import checkIcon from "assets/check-icon.png";
 import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import Table from "components/accessories/table/Table";
-import { TFilterField } from "components/accessories/table/filter/types";
 import { PATHS } from "consts";
 import { MedicalDTO } from "generated";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
@@ -12,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { deleteMedical } from "state/medicals";
 import { getMedicals } from "state/pharmacy";
+import PharmaceuticalFilters from "../pharmaceuticalFilter/PharmaceuticalFilters";
 
 interface PharmaceuticalTableProps {
   onDataChange: (data: any[]) => void;
@@ -59,15 +59,9 @@ export default function PharmaceuticalTable({
 
   const order = ["pcsperpck", "stock", "criticalValue", "amc", "code"];
 
-  const filters: TFilterField[] = [
-    {
-      key: "pharmaceutical",
-      label: t("pharmacy.stock.pharmaceutical"),
-      type: "text",
-    },
-    { key: "type", label: t("pharmacy.stock.type"), type: "text" },
-    { key: "code", label: t("pharmacy.stock.code"), type: "number" },
-  ];
+  const [nameFilter, setNameFilter] = useState<string>("");
+  const [codeFilter, setCodeFilter] = useState<string>("");
+  const [typeFilter, setTypeFilter] = useState<string>("");
 
   const formattedData = useMemo(() => {
     return data.map((item) => {
@@ -115,6 +109,37 @@ export default function PharmaceuticalTable({
       };
     });
   }, [data]);
+
+  const typeOptions = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          data
+            .map((item) => item.type?.description)
+            .filter((type): type is string => !!type)
+        )
+      ).sort((a, b) => a.localeCompare(b)),
+    [data]
+  );
+
+  const filteredData = useMemo(() => {
+    const normalizedName = nameFilter.trim().toLowerCase();
+    const normalizedCode = codeFilter.trim().toLowerCase();
+
+    return formattedData.filter((row) => {
+      const matchesName =
+        !normalizedName ||
+        String(row.pharmaceutical ?? "")
+          .toLowerCase()
+          .includes(normalizedName);
+      const matchesCode =
+        !normalizedCode ||
+        String(row.code ?? "").toLowerCase().includes(normalizedCode);
+      const matchesType = !typeFilter || row.type === typeFilter;
+
+      return matchesName && matchesCode && matchesType;
+    });
+  }, [formattedData, nameFilter, codeFilter, typeFilter]);
 
   const deletedStautus = useAppSelector(
     (state) => state.medicals.delete.status
@@ -174,25 +199,33 @@ export default function PharmaceuticalTable({
             return <CircularProgress />;
           case "SUCCESS":
             return (
-              <Table
-                labelData={labelData}
-                tableHeader={tableHeader}
-                rowsPerPage={10}
-                columnsOrder={order}
-                rowClassNames={(row) => "pharmaceutical-table__row"}
-                initialOrderBy="code"
-                rowData={formattedData}
-                showEmptyCell={false}
-                isCollapsabile={false}
-                detailColSpan={6}
-                filterColumns={filters}
-                rowKey="pharmaceutical"
-                manualFilter={true}
-                onDelete={handleDelete}
-                onEdit={handleEdit}
-                onView={handleView}
-                onFilteredDataChange={onDataChange}
-              />
+              <>
+                <PharmaceuticalFilters
+                  nameFilter={nameFilter}
+                  codeFilter={codeFilter}
+                  typeFilter={typeFilter}
+                  typeOptions={typeOptions}
+                  onNameFilterChange={setNameFilter}
+                  onCodeFilterChange={setCodeFilter}
+                  onTypeFilterChange={setTypeFilter}
+                />
+                <Table
+                  labelData={labelData}
+                  tableHeader={tableHeader}
+                  rowsPerPage={10}
+                  columnsOrder={order}
+                  rowClassNames={(row) => "pharmaceutical-table__row"}
+                  initialOrderBy="code"
+                  rowData={filteredData}
+                  showEmptyCell={false}
+                  isCollapsabile={false}
+                  detailColSpan={6}
+                  onDelete={handleDelete}
+                  onEdit={handleEdit}
+                  onView={handleView}
+                  onFilteredDataChange={onDataChange}
+                />
+              </>
             );
           case "SUCCESS_EMPTY":
             return <InfoBox type="info" message={t("common.emptydata")} />;
