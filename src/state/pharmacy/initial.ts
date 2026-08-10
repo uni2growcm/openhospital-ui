@@ -20,6 +20,7 @@ export const initial: IPharmacyState = {
   newMedical: new ApiResponse({ status: "IDLE" }),
   updateMedical: new ApiResponse({ status: "IDLE" }),
   getMedicalTypes: new ApiResponse({ status: "IDLE", data: [] }),
+  getNextMedicalCode: new ApiResponse({ status: "IDLE" }),
   newMovementWard: new ApiResponse({ status: "IDLE" }),
   medicalLots: new ApiResponse({ status: "IDLE", data: [] }),
   wardStock: {

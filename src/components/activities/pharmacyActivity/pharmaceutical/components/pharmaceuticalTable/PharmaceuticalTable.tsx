@@ -104,7 +104,7 @@ export default function PharmaceuticalTable({
       return {
         pharmaceutical: item.description,
         type: item.type?.description,
-        code: item.code,
+        code: Number(item.prodCode),
         pcsperpck: item.pcsperpck,
         stock: (item.initialqty || 0) + (item.inqty || 0) - (item.outqty || 0),
         criticalValue: item.minqty,
@@ -122,8 +122,8 @@ export default function PharmaceuticalTable({
   const [openConfirmDialog, setOpenConfirmDialog] = useState<boolean>(false);
 
   const handleDelete = useCallback(
-    (medical: MedicalDTO) => {
-      dispatch(deleteMedical(medical.code ?? 0))
+    (row: any) => {
+      dispatch(deleteMedical(row.medicalData?.code ?? 0)) 
         .unwrap()
         .then(() => setOpenConfirmDialog(true));
     },
@@ -137,11 +137,11 @@ export default function PharmaceuticalTable({
   }, [dispatch, deletedStautus]);
 
   const handleEdit = useCallback(
-    (medical: MedicalDTO) => {
+    (row: any) => {
       navigate(
         PATHS.pharmacy_pharmaceutical_update.replace(
           ":id",
-          medical.code?.toString() ?? ""
+          row.medicalData?.code?.toString() ?? ""
         )
       );
     },
@@ -154,7 +154,7 @@ export default function PharmaceuticalTable({
         navigate(
           PATHS.pharmacy_pharmaceutical_detail.replace(
             ":id",
-            row.code?.toString() ?? ""
+            row.medicalData?.code?.toString() ?? ""
           )
         );
       }
@@ -187,7 +187,7 @@ export default function PharmaceuticalTable({
                 detailColSpan={6}
                 filterColumns={filters}
                 rowKey="pharmaceutical"
-                manualFilter={true}
+                manualFilter={false}
                 onDelete={handleDelete}
                 onEdit={handleEdit}
                 onView={handleView}

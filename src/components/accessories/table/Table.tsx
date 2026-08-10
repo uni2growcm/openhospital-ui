@@ -82,7 +82,7 @@ const Table: FunctionComponent<IProps> = ({
   detailsExcludedFields,
   filterColumns = [],
   onFilterChange,
-  manualFilter = true,
+  manualFilter = false,
   rawData,
   rowKey = "code",
   headerActions,

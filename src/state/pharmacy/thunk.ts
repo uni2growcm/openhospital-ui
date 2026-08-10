@@ -240,6 +240,20 @@ export const getMedical = createAsyncThunk(
   }
 );
 
+export const getNextMedicalCode = createAsyncThunk(
+  "pharmacy/getNextMedicalCode",
+  async (_, thunkApi) => {
+    try {
+      const result = await firstValueFrom(
+        wrapper(() => medicalApi.getNextMedicalCode())
+      );
+      return result;
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.response);
+    }
+  }
+);
+
 export const newMedical = createAsyncThunk(
   "pharmacy/newMedical",
   async (payload: NewMedicalRequest, thunkApi) => {

@@ -890,15 +890,33 @@
       "elderly": "Âgé"
     },
     "lab": {
-      "undefined": { "txt": "Indéfini" },
-      "blood": { "txt": "Sang" },
-      "cfs": { "txt": "CFS" },
-      "film": { "txt": "FILM" },
-      "sputum": { "txt": "Sputum" },
-      "stool": { "txt": "Excréments" },
-      "swabs": { "txt": "Écouvillons" },
-      "tissues": { "txt": "Tissus" },
-      "urine": { "txt": "Urine" }
+      "undefined": {
+        "txt": "Indéfini"
+      },
+      "blood": {
+        "txt": "Sang"
+      },
+      "cfs": {
+        "txt": "CFS"
+      },
+      "film": {
+        "txt": "FILM"
+      },
+      "sputum": {
+        "txt": "Sputum"
+      },
+      "stool": {
+        "txt": "Excréments"
+      },
+      "swabs": {
+        "txt": "Écouvillons"
+      },
+      "tissues": {
+        "txt": "Tissus"
+      },
+      "urine": {
+        "txt": "Urine"
+      }
     },
     "common": {
       "thecodeisalreadyinuse": {
@@ -1337,7 +1355,9 @@
         "typeRequired": "Le type de produit est obligatoire.",
         "descriptionRequired": "La description est obligatoire.",
         "pcsPerPackRequired": "Le nombre de pièces par paquet doit être supérieur à 0.",
-        "minQtyRequired": "Le seuil critique ne peut pas être négatif."
+        "minQtyRequired": "Le seuil critique ne peut pas être négatif.",
+        "prodCodeExists": "Un médicament avec ce code existe déjà.",
+        "invalidData": "Données invalides. Veuillez vérifier tous les champs obligatoires."
       }
     },
     "stock": {

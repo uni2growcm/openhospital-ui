@@ -5,7 +5,7 @@ import { PATHS } from "consts";
 import { MedicalDTO } from "generated";
 import { useNavigationHandler, useTranslation } from "libraries/hooks";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import { useOutletContext } from "react-router";
 import { getMedicalTypes, newMedical, resetNewMedical } from "state/pharmacy";
 import { PharmacyActivityContent } from "../PharmacyActivityContent";
@@ -39,11 +39,35 @@ export function NewPharmaceutical() {
 
   const status = useAppSelector((state) => state.pharmacy.newMedical.status);
 
-  const errorMessage = useAppSelector(
-    (state) =>
-      state.pharmacy.newMedical.error?.message ??
-      t("pharmacy.messages.new-pharmaceutical-fail.description")
+  const errorMessageRaw = useAppSelector(
+    (state) => state.pharmacy.newMedical.error?.message
   );
+
+  const errorMessage = useMemo(() => {
+    if (!errorMessageRaw) {
+      return t("pharmacy.messages.new-pharmaceutical-fail.description");
+    }
+
+    if (errorMessageRaw.includes("Medical type is required")) {
+      return t("pharmacy.form.errors.typeRequired");
+    }
+    
+    if (errorMessageRaw.includes("already exists") || 
+        errorMessageRaw.includes("already in use")) {
+      return t("pharmacy.form.errors.prodCodeExists");
+    }
+    
+    if (errorMessageRaw.includes("Invalid data provided") || 
+        errorMessageRaw.includes("check all required fields")) {
+      return t("pharmacy.form.errors.invalidData");
+    }
+    
+    if (errorMessageRaw.includes("angal.")) {
+      return t("pharmacy.messages.new-pharmaceutical-fail.description");
+    }
+
+    return errorMessageRaw || t("pharmacy.messages.new-pharmaceutical-fail.description");
+  }, [errorMessageRaw, t]);
 
   const handleGoBack = useNavigationHandler(PATHS.pharmacy_pharmaceutical, {
     replace: true,
@@ -61,7 +85,7 @@ export function NewPharmaceutical() {
     if (status === "SUCCESS") {
       handleGoBack();
     }
-  }, [dispatch, handleGoBack]);
+  }, [dispatch, handleGoBack, status]);
 
   useEffect(() => {
     dispatch(getMedicalTypes());

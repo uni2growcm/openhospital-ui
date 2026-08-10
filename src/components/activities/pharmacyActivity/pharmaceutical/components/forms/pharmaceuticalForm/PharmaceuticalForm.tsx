@@ -9,11 +9,12 @@ import { PATHS } from "consts";
 import { MedicalDTO } from "generated";
 import { useNavigationHandler, useTranslation } from "libraries/hooks";
 import { useMedicalTypes } from "libraries/hooks/api/useMedicalTypes";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { MedicalDTOSchema, getInitialValues } from "./consts";
 import "./styles.scss";
 import { PharmaceuticalFormProps, TFormValues } from "./types";
+import { useNextMedicalCode } from "libraries/hooks/api/useNextMedicalCode";
 
 export function PharmaceuticalForm({
   pharmaceutical,
@@ -22,12 +23,14 @@ export function PharmaceuticalForm({
 }: PharmaceuticalFormProps) {
   const { t } = useTranslation();
 
-  const { control, handleSubmit } = useForm<TFormValues>({
-    defaultValues: getInitialValues(pharmaceutical),
-    resolver: standardSchemaResolver(MedicalDTOSchema),
-  });
+const { control, handleSubmit, setValue } = useForm<TFormValues>({
+  defaultValues: getInitialValues(pharmaceutical),
+  resolver: standardSchemaResolver(MedicalDTOSchema),
+});
 
   const { medicalTypes, options: medicalTypeOptions } = useMedicalTypes();
+
+  const { nextCode } = useNextMedicalCode(!pharmaceutical);
 
   const handleGoBack = useNavigationHandler(PATHS.pharmacy_pharmaceutical, {
     replace: true,
@@ -47,6 +50,12 @@ export function PharmaceuticalForm({
     },
     [medicalTypes, onSubmit]
   );
+
+  useEffect(() => {
+    if (!pharmaceutical && nextCode !== undefined) {
+      setValue("prodCode", nextCode);
+    }
+  }, [pharmaceutical, nextCode, setValue]);
 
   return (
     <div className="pharmaceuticalForm">
