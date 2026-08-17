@@ -69,7 +69,6 @@ const { control, handleSubmit, setValue } = useForm<TFormValues>({
           label={t("pharmacy.form.fields.prodCode")}
           control={control}
           name="prodCode"
-          disabled={!!pharmaceutical}
         />
         <AutocompleteFormField
           label={t("pharmacy.form.fields.typeMedical")}
