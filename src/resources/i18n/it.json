@@ -519,6 +519,7 @@
     "close": "Chiudi",
     "greaterthan": "Il valore deve essere almeno {{value}}",
     "lessthan": "Il valore non deve eccedere {{value}}",
+    "minMaxRangeError": "Il minimo non può essere maggiore del massimo.",
     "confirm": "Conferma",
     "invaliddate": "Data non valida",
     "outofrange": "Valore oltre i limiti",

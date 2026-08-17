@@ -3,7 +3,6 @@ import checkIcon from "assets/check-icon.png";
 import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import Table from "components/accessories/table/Table";
-import { TFilterField } from "components/accessories/table/filter/types";
 import { PATHS } from "consts";
 import { MedicalDTO } from "generated";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
@@ -12,7 +11,6 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { deleteMedical } from "state/medicals";
 import { getMedicals } from "state/pharmacy";
-
 interface PharmaceuticalTableProps {
   onDataChange: (data: any[]) => void;
 }
@@ -59,15 +57,39 @@ export default function PharmaceuticalTable({
 
   const order = ["pcsperpck", "stock", "criticalValue", "amc", "code"];
 
-  const filters: TFilterField[] = [
-    {
-      key: "pharmaceutical",
-      label: t("pharmacy.stock.pharmaceutical"),
-      type: "text",
-    },
-    { key: "type", label: t("pharmacy.stock.type"), type: "text" },
-    { key: "code", label: t("pharmacy.stock.code"), type: "number" },
-  ];
+  const typeOptions = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          data
+            .map((item) => item.type?.description)
+            .filter((type): type is string => !!type)
+        )
+      ).sort((a, b) => a.localeCompare(b)),
+    [data]
+  );
+
+  const filterColumns = useMemo(
+    () => [
+      {
+        key: "pharmaceutical",
+        label: t("pharmacy.stock.pharmaceutical"),
+        type: "text" as const,
+      },
+      {
+        key: "type",
+        label: t("pharmacy.stock.type"),
+        type: "select" as const,
+        options: typeOptions.map((type) => ({ value: type, label: type })),
+      },
+      {
+        key: "code",
+        label: t("pharmacy.stock.code"),
+        type: "number" as const,
+      },
+    ],
+    [t, typeOptions]
+  );
 
   const formattedData = useMemo(() => {
     return data.map((item) => {
@@ -174,25 +196,32 @@ export default function PharmaceuticalTable({
             return <CircularProgress />;
           case "SUCCESS":
             return (
-              <Table
-                labelData={labelData}
-                tableHeader={tableHeader}
-                rowsPerPage={10}
-                columnsOrder={order}
-                rowClassNames={(row) => "pharmaceutical-table__row"}
-                initialOrderBy="code"
-                rowData={formattedData}
-                showEmptyCell={false}
-                isCollapsabile={false}
-                detailColSpan={6}
-                filterColumns={filters}
-                rowKey="pharmaceutical"
-                manualFilter={false}
-                onDelete={handleDelete}
-                onEdit={handleEdit}
-                onView={handleView}
-                onFilteredDataChange={onDataChange}
-              />
+              <>
+                <Table
+                  labelData={labelData}
+                  tableHeader={tableHeader}
+                  rowsPerPage={10}
+                  columnsOrder={order}
+                  rowClassNames={(row) => "pharmaceutical-table__row"}
+                  initialOrderBy="code"
+                  rowData={formattedData}
+                  rawData={data.map((item) => ({
+                    ...item,
+                    pharmaceutical: item.description,
+                    type: item.type?.description,
+                    code: item.code,
+                  }))}
+                  filterColumns={filterColumns}
+                  manualFilter={false}
+                  showEmptyCell={false}
+                  isCollapsabile={false}
+                  detailColSpan={6}
+                  onDelete={handleDelete}
+                  onEdit={handleEdit}
+                  onView={handleView}
+                  onFilteredDataChange={onDataChange}
+                />
+              </>
             );
           case "SUCCESS_EMPTY":
             return <InfoBox type="info" message={t("common.emptydata")} />;
