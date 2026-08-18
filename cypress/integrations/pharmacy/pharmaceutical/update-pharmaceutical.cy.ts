@@ -10,7 +10,8 @@ describe("Update Pharmaceutical", () => {
   });
 
   it("Should update form fields", () => {
-    cy.byId("prodCode").should("be.disabled");
+    cy.byId("prodCode").should("not.be.disabled");
+    cy.byId("prodCode").focus().clear().type("999");
     cy.byId("type").focus().clear().type("Labora");
     cy.byId("type-option-0").click();
     cy.byId("description").focus().clear().type("fail");
