@@ -1261,6 +1261,14 @@
       "pharmaceutical-created": "Pharmaceutical created",
       "pharmaceutical-add-another": "Add another pharmaceutical"
     },
+    "validation": {
+      "medicalRequired": "Please select a medical product.",
+      "referenceRequired": "Please enter the movement reference.",
+      "wardRequired": "Please select a target ward.",
+      "quantityRequired": "Please enter a quantity greater than zero.",
+      "quantityExceedsStock": "The quantity cannot exceed the main store stock.",
+      "movementDetailsRequired": "Please select a target ward and enter a quantity."
+    },
     "messages": {
       "charge-movement-success": {
         "title": "Charge Movement Successful",

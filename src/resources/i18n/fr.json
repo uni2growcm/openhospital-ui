@@ -1272,6 +1272,14 @@
         "overallQuantity": "Quantité totale"
       }
     },
+    "validation": {
+      "medicalRequired": "Veuillez sélectionner un médicament.",
+      "referenceRequired": "Veuillez saisir la référence du mouvement.",
+      "wardRequired": "Veuillez sélectionner un service cible.",
+      "quantityRequired": "Veuillez saisir une quantité supérieure à zéro.",
+      "quantityExceedsStock": "La quantité ne peut pas dépasser le stock du magasin principal.",
+      "movementDetailsRequired": "Veuillez sélectionner un service cible et saisir une quantité."
+    },
     "messages": {
       "charge-movement-success": {
         "title": "Mouvement de charge réussi",
