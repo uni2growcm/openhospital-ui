@@ -9,8 +9,8 @@ import { MovementDTO } from "generated";
 import { renderDateTime } from "libraries/formatUtils/dataFormatting";
 import { useTranslation } from "libraries/hooks";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
-import React, { useEffect, useMemo, useState } from "react";
-import { getMovements } from "state/pharmacy";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { getMovements, updateMovement, updateMovementReset } from "state/pharmacy";
 
 export function StockTable({
   onDataChange,
@@ -36,6 +36,16 @@ export function StockTable({
   const [selectedMovement, setSelectedMovement] = useState<
     MovementDTO | undefined
   >();
+
+  const updateStatus = useAppSelector(
+    (state) => state.pharmacy.updateMovement.status
+  );
+
+  const updateErrorMessage = useAppSelector(
+    (state) =>
+      state.pharmacy.updateMovement.error?.message ||
+      t("errors.somethingwrong")
+  ) as string;
 
   const labelData = {
     refNo: t("pharmacy.stock.refNo"),
@@ -111,15 +121,44 @@ export function StockTable({
     }));
   }, [t, data]);
 
-  const handleAdjustClick = (movement: MovementDTO) => {
+  const handleAdjustClick = (row: Record<string, any>) => {
+    const movement =
+      (data ?? []).find(
+        (item) =>
+          item.refNo === row.refNo &&
+          item.quantity === row.quantity &&
+          item.lot?.code === row.lot &&
+          item.date === row.date
+      ) ?? (row as unknown as MovementDTO);
     setSelectedMovement(movement);
+    dispatch(updateMovementReset());
     setOpenStockModal(true);
   };
 
-  const handleCloseModal = () => {
+  const handleCloseModal = useCallback(() => {
     setOpenStockModal(false);
     setSelectedMovement(undefined);
-  };
+    dispatch(updateMovementReset());
+  }, [dispatch]);
+
+  const handleAdjustSubmit = useCallback(
+    ({ movement, newQuantity }: { movement: MovementDTO; newQuantity: number }) => {
+      dispatch(
+        updateMovement({
+          ...movement,
+          quantity: newQuantity,
+        })
+      );
+    },
+    [dispatch]
+  );
+
+  useEffect(() => {
+    if (updateStatus === "SUCCESS") {
+      handleCloseModal();
+      dispatch(getMovements());
+    }
+  }, [updateStatus, dispatch, handleCloseModal]);
 
   useEffect(() => {
     dispatch(getMovements());
@@ -183,9 +222,15 @@ export function StockTable({
       <StockModal open={openStockModal} onClose={handleCloseModal}>
         <AdjustQuantityForm
           movement={selectedMovement}
-          onSubmit={handleCloseModal}
+          loading={updateStatus === "LOADING"}
+          onSubmit={handleAdjustSubmit}
           onCancel={handleCloseModal}
         />
+        {updateStatus === "FAIL" && (
+          <div data-cy="adjust-quantity-error" className="adjust-quantity-error">
+            <InfoBox type="error" message={updateErrorMessage} />
+          </div>
+        )}
       </StockModal>
     </div>
   );

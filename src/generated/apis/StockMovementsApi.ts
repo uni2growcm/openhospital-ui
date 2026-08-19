@@ -104,6 +104,10 @@ export interface NewMultipleDischargingMovements1Request {
     movementDTO: Array<MovementDTO>;
 }
 
+export interface UpdateMovementRequest {
+    movementDTO: MovementDTO;
+}
+
 /**
  * no description
  */
@@ -461,6 +465,28 @@ export class StockMovementsApi extends BaseAPI {
         return this.request<boolean>({
             url: '/medicalstockmovements/discharge',
             method: 'POST',
+            headers,
+            query,
+            body: movementDTO,
+        }, opts?.responseOpts);
+    };
+
+    /**
+     */
+    updateMovement({ movementDTO }: UpdateMovementRequest): Observable<MovementDTO>
+    updateMovement({ movementDTO }: UpdateMovementRequest, opts?: OperationOpts): Observable<AjaxResponse<MovementDTO>>
+    updateMovement({ movementDTO }: UpdateMovementRequest, opts?: OperationOpts): Observable<MovementDTO | AjaxResponse<MovementDTO>> {
+        throwIfNullOrUndefined(movementDTO, 'movementDTO', 'updateMovement');
+
+        const headers: HttpHeaders = {
+            'Content-Type': 'application/json',
+        };
+
+        const query: HttpQuery = {};
+
+        return this.request<MovementDTO>({
+            url: '/stockmovements',
+            method: 'PUT',
             headers,
             query,
             body: movementDTO,
