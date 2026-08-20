@@ -1282,14 +1282,17 @@
     "validation": {
       "medicalRequired": "Please select a medical product.",
       "supplierRequired": "Please select a supplier.",
-      "referenceRequired": "Please enter the movement reference.",
+      "referenceRequired": "Please enter the reference of the movement.",
       "lotRequired": "Please select a lot.",
       "lotCodeRequired": "Please enter the lot code.",
       "lotPreparationDateRequired": "Please enter the lot production date.",
       "lotDueDateRequired": "Please enter the lot expiry date.",
       "lotCostRequired": "Please enter the lot cost.",
-      "quantityRequired": "Please enter the movement quantity.",
-      "quantityPositive": "The movement quantity must be greater than zero."
+      "quantityPositive": "The movement quantity must be greater than zero.",
+      "wardRequired": "Please select a target ward.",
+      "quantityRequired": "Please enter a quantity greater than zero.",
+      "quantityExceedsStock": "The quantity cannot exceed the main store stock.",
+      "movementDetailsRequired": "Please select a target ward and enter a quantity."
     },
     "messages": {
       "charge-movement-success": {

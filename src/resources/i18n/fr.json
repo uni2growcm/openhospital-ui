@@ -1299,8 +1299,11 @@
       "lotPreparationDateRequired": "Veuillez saisir la date de production du lot.",
       "lotDueDateRequired": "Veuillez saisir la date de péremption du lot.",
       "lotCostRequired": "Veuillez saisir le coût du lot.",
-      "quantityRequired": "Veuillez saisir la quantité du mouvement.",
-      "quantityPositive": "La quantité du mouvement doit être supérieure à zéro."
+      "quantityPositive": "La quantité du mouvement doit être supérieure à zéro.",
+      "wardRequired": "Veuillez sélectionner un service cible.",
+      "quantityRequired": "Veuillez saisir une quantité supérieure à zéro.",
+      "quantityExceedsStock": "La quantité ne peut pas dépasser le stock du magasin principal.",
+      "movementDetailsRequired": "Veuillez sélectionner un service cible et saisir une quantité."
     },
     "messages": {
       "charge-movement-success": {
