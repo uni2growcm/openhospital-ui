@@ -1279,6 +1279,18 @@
       "pharmaceutical-created": "Pharmaceutical created",
       "pharmaceutical-add-another": "Add another pharmaceutical"
     },
+    "validation": {
+      "medicalRequired": "Please select a medical product.",
+      "supplierRequired": "Please select a supplier.",
+      "referenceRequired": "Please enter the movement reference.",
+      "lotRequired": "Please select a lot.",
+      "lotCodeRequired": "Please enter the lot code.",
+      "lotPreparationDateRequired": "Please enter the lot production date.",
+      "lotDueDateRequired": "Please enter the lot expiry date.",
+      "lotCostRequired": "Please enter the lot cost.",
+      "quantityRequired": "Please enter the movement quantity.",
+      "quantityPositive": "The movement quantity must be greater than zero."
+    },
     "messages": {
       "charge-movement-success": {
         "title": "Charge Movement Successful",
@@ -1349,7 +1361,9 @@
         "typeRequired": "Product type is required.",
         "descriptionRequired": "Description is required.",
         "pcsPerPackRequired": "Pieces per pack must be greater than 0.",
+        "pcsPerPackPositive": "If entered, pieces per pack must be greater than 0.",
         "minQtyRequired": "Critical level cannot be negative.",
+        "minQtyNonNegative": "Critical level cannot be negative.",
         "prodCodeExists": "A medical with this code already exists.",
         "invalidData": "Invalid data provided. Please check all required fields."
       }

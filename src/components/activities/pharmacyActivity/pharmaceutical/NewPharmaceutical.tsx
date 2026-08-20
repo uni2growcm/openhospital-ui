@@ -39,9 +39,14 @@ export function NewPharmaceutical() {
 
   const status = useAppSelector((state) => state.pharmacy.newMedical.status);
 
-  const errorMessageRaw = useAppSelector(
-    (state) => state.pharmacy.newMedical.error?.message
-  );
+  const errorMessageRaw = useAppSelector((state) => {
+    const error = state.pharmacy.newMedical.error;
+    return (
+      error?.data?.message ??
+      error?.message ??
+      error?.response?.data?.message
+    );
+  });
 
   const errorMessage = useMemo(() => {
     if (!errorMessageRaw) {

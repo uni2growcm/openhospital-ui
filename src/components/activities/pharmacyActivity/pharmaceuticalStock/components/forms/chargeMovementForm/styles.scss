@@ -7,9 +7,20 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 16px;
+  row-gap: 1.5rem;
   width: 100%;
   background-color: $c-white;
   padding: 8px;
+
+  form.form-grid-layout {
+    row-gap: 1.5rem;
+  }
+
+  &__supplierQuantity {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px;
+  }
 
   .fields {
     display: flex;
@@ -27,6 +38,15 @@
     }
     .separator {
       display: none;
+    }
+
+    .chargeMovementForm {
+       row-gap: 1.5rem;
+    }
+
+    &__supplierQuantity {
+      grid-template-columns: 1fr;
+      row-gap: 1.5rem;
     }
   }
 }

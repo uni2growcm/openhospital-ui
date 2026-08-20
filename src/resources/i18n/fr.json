@@ -1290,6 +1290,18 @@
         "overallQuantity": "Quantité totale"
       }
     },
+    "validation": {
+      "medicalRequired": "Veuillez sélectionner un médicament.",
+      "supplierRequired": "Veuillez sélectionner un fournisseur.",
+      "referenceRequired": "Veuillez saisir la référence du mouvement.",
+      "lotRequired": "Veuillez sélectionner un lot.",
+      "lotCodeRequired": "Veuillez saisir le code du lot.",
+      "lotPreparationDateRequired": "Veuillez saisir la date de production du lot.",
+      "lotDueDateRequired": "Veuillez saisir la date de péremption du lot.",
+      "lotCostRequired": "Veuillez saisir le coût du lot.",
+      "quantityRequired": "Veuillez saisir la quantité du mouvement.",
+      "quantityPositive": "La quantité du mouvement doit être supérieure à zéro."
+    },
     "messages": {
       "charge-movement-success": {
         "title": "Mouvement de charge réussi",
@@ -1356,7 +1368,9 @@
         "typeRequired": "Le type de produit est obligatoire.",
         "descriptionRequired": "La description est obligatoire.",
         "pcsPerPackRequired": "Le nombre de pièces par paquet doit être supérieur à 0.",
+        "pcsPerPackPositive": "Si cette valeur est saisie, le nombre de pièces par paquet doit être supérieur à 0.",
         "minQtyRequired": "Le seuil critique ne peut pas être négatif.",
+        "minQtyNonNegative": "Le seuil critique ne peut pas être négatif.",
         "prodCodeExists": "Un médicament avec ce code existe déjà.",
         "invalidData": "Données invalides. Veuillez vérifier tous les champs obligatoires."
       }

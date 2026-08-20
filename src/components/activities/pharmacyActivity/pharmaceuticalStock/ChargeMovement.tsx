@@ -43,11 +43,15 @@ export function ChargeMovement() {
     (state) => state.pharmacy.chargeMovements.status
   );
 
-  const errorMessage = useAppSelector(
-    (state) =>
-      state.pharmacy.chargeMovements.error?.message ??
+  const errorMessage = useAppSelector((state) => {
+    const error = state.pharmacy.chargeMovements.error;
+    return (
+      error?.data?.message ??
+      error?.message ??
+      error?.response?.data?.message ??
       t("pharmacy.messages.charge-movement-fail.description")
-  );
+    );
+  });
 
   const handleGoBack = useNavigationHandler(
     PATHS.pharmacy_pharmaceuticalstock,
@@ -79,6 +83,7 @@ export function ChargeMovement() {
   }, [dispatch, handleGoBack]);
 
   useEffect(() => {
+    dispatch(resetChargeMovements());
     dispatch(getMedicals());
     dispatch(getSuppliers());
   }, [dispatch]);
