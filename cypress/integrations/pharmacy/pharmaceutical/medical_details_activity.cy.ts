@@ -3,6 +3,7 @@ describe("Medical Details Activity", () => {
     cy.authenticate("/pharmacy/pharmaceutical");
     cy.dataCy("pharmaceutical").should("exist");
 
+    cy.dataCy("table-view-action").should("have.length.greaterThan", 0);
     cy.dataCy("table-view-action").eq(0).click();
     cy.dataCy("medical-details").should("exist");
   });

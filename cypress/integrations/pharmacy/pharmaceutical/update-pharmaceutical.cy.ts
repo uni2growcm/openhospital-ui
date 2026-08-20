@@ -2,6 +2,8 @@ describe("Update Pharmaceutical", () => {
   before(() => {
     cy.authenticate("/pharmacy/pharmaceutical");
     cy.dataCy("pharmaceutical").should("exist");
+
+    cy.dataCy("table-edit-action").should("have.length.greaterThan", 1);
   });
 
   it("Should navigate to edit pharmaceutical form", () => {
@@ -20,14 +22,14 @@ describe("Update Pharmaceutical", () => {
   });
 
   it("Should display an error info box if the medical update fails", () => {
-    cy.dataCy("submit-button").click();
+    cy.dataCy("submit-button").should("be.visible").click();
 
-    cy.dataCy("info-box").should("have.class", "error");
+    cy.dataCy("info-box").should("exist").and("have.class", "error");
   });
 
   it("Should show a confirmation dialog if the medical update succeeds", () => {
     cy.byId("description").focus().clear().type("New description").blur();
-    cy.dataCy("submit-button").click();
+    cy.dataCy("submit-button").should("be.visible").click();
     cy.dataCy("info-box").should("not.exist");
     cy.dataCy("dialog-title").contains("Pharmaceutical updated successfully");
     cy.dataCy("approve-dialog").click();

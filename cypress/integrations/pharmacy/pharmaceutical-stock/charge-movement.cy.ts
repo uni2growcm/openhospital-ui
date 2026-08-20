@@ -16,17 +16,17 @@ describe("Charge movement", () => {
     cy.byId("medical-option-0").click();
     cy.byId("supplier").focus().type("East");
     cy.byId("supplier-option-0").click();
-    cy.byId('"quantity"').focus().type("12").blur();
-    cy.byId('"lot.code"').focus().type("128").blur();
-    cy.byId('"lot.preparationDate"').focus().type("030820251200").blur();
-    cy.byId('"lot.dueDate"').focus().type("030820281200").blur();
-    cy.byId('"lot.cost"').focus().type("64").blur();
+    cy.byId("quantity").focus().type("12").blur();
+    cy.byId("lot.code").focus().type("128").blur();
+    cy.byId("lot.preparationDate").focus().type("030820251200").blur();
+    cy.byId("lot.dueDate").focus().type("030820281200").blur();
+    cy.byId("lot.cost").focus().type("64").blur();
   });
 
   it("Should display an error info box if the movement charging fails", () => {
-    cy.dataCy("submit-button").click();
+    cy.dataCy("submit-button").should("be.visible").click();
 
-    cy.dataCy("info-box").should("have.class", "error");
+    cy.dataCy("info-box").should("exist").and("have.class", "error");
   });
 
   it("Should show a confirmation dialog if the movement charging succeeds", () => {
