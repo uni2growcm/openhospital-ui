@@ -22,36 +22,69 @@ export const LotDTOSchema = z
       ctx.addIssue({
         code: "custom",
         path: ["quantity"],
-        message: "The quantity is required.",
+        message: "pharmacy.validation.quantityRequired",
       });
     }
     if (!hasWard && hasQuantity) {
       ctx.addIssue({
         code: "custom",
         path: ["ward"],
-        message: "The ward is required.",
+        message: "pharmacy.validation.wardRequired",
+      });
+    }
+    if (!hasWard && !hasQuantity) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["ward"],
+        message: "pharmacy.validation.wardRequired",
+      });
+      ctx.addIssue({
+        code: "custom",
+        path: ["quantity"],
+        message: "pharmacy.validation.quantityRequired",
       });
     }
     if (lot.quantity && lot.quantity > (lot.mainStoreQuantity ?? 0)) {
       ctx.addIssue({
         code: "custom",
         path: ["quantity"],
-        message: "Should not exceed main store quantity.",
+        message: "pharmacy.validation.quantityExceedsStock",
       });
     }
   });
 
-export const MovementDTOSchema = z.object({
-  code: z.number().nullish(),
-  medical: z.coerce.number(),
-  type: z.string(),
-  ward: z.string().nullish(),
-  lots: z.array(LotDTOSchema).nullish(),
-  date: z.date(),
-  quantity: z.number().nullish(),
-  supplier: z.number().nullish(),
-  refNo: z.string().min(1),
-});
+export const MovementDTOSchema = z
+  .object({
+    code: z.number().nullish(),
+    medical: z.preprocess(
+      (value) =>
+        value === "" || value === null || value === undefined
+          ? undefined
+          : Number(value),
+      z.number({ message: "pharmacy.validation.medicalRequired" })
+    ),
+    type: z.string(),
+    ward: z.string().nullish(),
+    lots: z.array(LotDTOSchema).nullish(),
+    date: z.date(),
+    quantity: z.number().nullish(),
+    supplier: z.number().nullish(),
+    refNo: z.string().trim().min(1, "pharmacy.validation.referenceRequired"),
+  })
+  .superRefine((movement, ctx) => {
+    const hasMovement =
+      movement.lots?.some(
+        (lot) => !!lot.ward && lot.quantity !== undefined && lot.quantity > 0
+      ) ?? false;
+
+    if (!hasMovement && (!movement.lots || movement.lots.length === 0)) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["lots"],
+        message: "pharmacy.validation.movementDetailsRequired",
+      });
+    }
+  });
 
 export function getInitialValues(from?: MedicalDTO): Partial<TFormValues> {
   return {

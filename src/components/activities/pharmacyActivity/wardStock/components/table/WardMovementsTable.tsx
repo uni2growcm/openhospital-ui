@@ -15,7 +15,37 @@ export function WardMovementsTable() {
 
   const filter = useAppSelector((state) => state.pharmacy.wardStock.filter);
 
-  const status = useAppSelector((state) => state.pharmacy.wardMovements.status);
+  const wardMovementsStatus = useAppSelector(
+    (state) => state.pharmacy.wardMovements.status
+  );
+  const getMovementsWardStatus = useAppSelector(
+    (state) => state.pharmacy.getMovementsWard.status
+  );
+  const getWardMovementsToWardStatus = useAppSelector(
+    (state) => state.pharmacy.getWardMovementsToWard.status
+  );
+
+  const status = useMemo(() => {
+    const statuses = [
+      wardMovementsStatus,
+      getMovementsWardStatus,
+      getWardMovementsToWardStatus,
+    ];
+
+    if (statuses.some((s) => s === "IDLE" || s === "LOADING")) {
+      return "IDLE";
+    }
+
+    if (statuses.some((s) => s === "SUCCESS")) {
+      return "SUCCESS";
+    }
+
+    if (statuses.every((s) => s === "FAIL")) {
+      return "FAIL";
+    }
+
+    return "SUCCESS_EMPTY";
+  }, [wardMovementsStatus, getMovementsWardStatus, getWardMovementsToWardStatus]);
 
   const errorMessage = useAppSelector(
     (state) =>
