@@ -1464,6 +1464,7 @@
       "title": "Détails du produit",
       "status": "Statut",
       "available": "Disponible",
+      "outOfStock": "Rupture de stock",
       "piecesPerPack": "Unités x Paquet",
       "criticalLevel": "Niveau critique",
       "code": "Code",

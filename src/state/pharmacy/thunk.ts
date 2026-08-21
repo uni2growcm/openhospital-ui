@@ -198,6 +198,20 @@ export const chargeMovements = createAsyncThunk(
   }
 );
 
+export const updateMovement = createAsyncThunk(
+  "pharmacy/updateMovement",
+  async (movementDTO: MovementDTO, thunkApi) => {
+    try {
+      const result = await firstValueFrom(
+        wrapper(() => api.updateMovement({ movementDTO }))
+      );
+      return result;
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.response);
+    }
+  }
+);
+
 export const getMedicals = createAsyncThunk(
   "pharmacy/getMedicals",
   async (_, thunkApi) => {

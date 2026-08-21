@@ -209,6 +209,16 @@ export const pharmacySlice = createSlice({
       .addCase(thunks.chargeMovements.rejected, (state, action) => {
         state.chargeMovements = ApiResponse.error(action.payload);
       })
+      // Update movement (adjust quantity)
+      .addCase(thunks.updateMovement.pending, (state) => {
+        state.updateMovement = ApiResponse.loading();
+      })
+      .addCase(thunks.updateMovement.fulfilled, (state, action) => {
+        state.updateMovement = ApiResponse.value(action.payload);
+      })
+      .addCase(thunks.updateMovement.rejected, (state, action) => {
+        state.updateMovement = ApiResponse.error(action.payload);
+      })
       // Discharge movements
       .addCase(thunks.dischargeMovements.pending, (state) => {
         state.dischargeMovements = ApiResponse.loading();
