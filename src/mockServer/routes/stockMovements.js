@@ -7,6 +7,16 @@ export const stockMovementsRoutes = (server) => {
     server.get("/").intercept((_, res) => {
       res.status(200).json(MOVEMENTS);
     });
+    server.put("/").intercept((req, res) => {
+      const body = req.jsonBody();
+      const movement = MOVEMENTS.find((item) => item.code === body.code);
+      if (!movement) {
+        res.status(404).json({ message: "Movement not found." });
+        return;
+      }
+      movement.quantity = body.quantity;
+      res.status(200).json(movement);
+    });
     server.post("/charge").intercept((req, res) => {
       const body = req.jsonBody();
       switch (body[0].refNo) {

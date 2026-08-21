@@ -1517,6 +1517,7 @@
       "title": "Medical Details",
       "status": "Status",
       "available": "Available",
+      "outOfStock": "Out of stock",
       "piecesPerPack": "Pieces x Pack",
       "criticalLevel": "Critical level",
       "code": "Code",

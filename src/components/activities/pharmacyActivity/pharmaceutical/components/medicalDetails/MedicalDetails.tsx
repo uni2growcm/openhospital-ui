@@ -9,7 +9,7 @@ import { useNavigate, useOutletContext, useParams } from "react-router";
 import { getCurrentQuantityInAllWards, getMedical } from "state/pharmacy";
 import { getWards } from "state/ward";
 import MedicalItemCard from "../medicalItemCard/MedicalItemCard";
-import { getPharmacyData } from "./consts";
+import { getPharmaceuticalStock, getPharmacyData } from "./consts";
 import "./styles.scss";
 
 const MedicalDetails = () => {
@@ -75,6 +75,9 @@ const MedicalDetails = () => {
 
   if (!medical) return;
   const pharmacyData = getPharmacyData(medical);
+  const isAvailable =
+    getPharmaceuticalStock(medical) > 0 ||
+    wardQties.some((wardQty) => wardQty.quantity > 0);
 
   return (
     <div data-cy="medical-details" className="medicalDetails">
@@ -103,14 +106,24 @@ const MedicalDetails = () => {
 
           <div className="medicalDetails__sidebar__info">
             <div className="medicalDetails__sidebar__item">
-              <div className="medicalDetails_status_wrapper medicalDetails_status_in">
+              <div
+                className={`medicalDetails_status_wrapper ${
+                  isAvailable
+                    ? "medicalDetails_status_in"
+                    : "medicalDetails_status_out"
+                }`}
+              >
                 <h6
                   data-cy="medical-status"
                   className="medicalDetails__sidebar__item__label"
                 >
                   {t("pharmacy.medicalDetails.status")}:{" "}
                   <span className="medicalDetails__sidebar__item__value">
-                    {t("pharmacy.medicalDetails.available")}
+                    {t(
+                      isAvailable
+                        ? "pharmacy.medicalDetails.available"
+                        : "pharmacy.medicalDetails.outOfStock"
+                    )}
                   </span>
                 </h6>
               </div>

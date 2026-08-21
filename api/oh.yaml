@@ -3627,6 +3627,25 @@ paths:
                   $ref: "#/components/schemas/MovementDTO"
       security:
       - bearerAuth: []
+    put:
+      tags:
+      - Stock Movements
+      operationId: updateMovement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MovementDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MovementDTO"
+      security:
+      - bearerAuth: []
   /stockmovements/{ref}:
     get:
       tags:

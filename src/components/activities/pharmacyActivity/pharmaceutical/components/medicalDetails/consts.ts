@@ -1,12 +1,15 @@
 import { MedicalDTO } from "generated";
 import { MedicalItemDataprops } from "./types";
 
+export const getPharmaceuticalStock = (medical: MedicalDTO): number =>
+  (medical.initialqty || 0) + (medical.inqty || 0) - (medical.outqty || 0);
+
 export const getPharmacyData = (
   medical: MedicalDTO
 ): MedicalItemDataprops[] => [
   {
     title: "pharmacy.medicalDetails.pharmaceuticalStock",
-    value: medical?.inqty ?? 0,
+    value: getPharmaceuticalStock(medical),
   },
   {
     title: "pharmacy.medicalDetails.lotsExpiringThisMonth",
