@@ -3,7 +3,7 @@ import { MedicalDTO } from "generated";
 export const MEDICALS: MedicalDTO[] = [
   {
     code: 1,
-    prodCode: "PARA500",
+    prodCode: "100500",
     description: "Paracetamol 500mg tablets",
     type: { code: "DRUG", description: "Pharmaceutical" },
     initialqty: 2000,

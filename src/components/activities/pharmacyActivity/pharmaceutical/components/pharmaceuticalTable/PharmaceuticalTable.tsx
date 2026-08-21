@@ -123,6 +123,7 @@ export default function PharmaceuticalTable({
       }
 
       return {
+        id: item.code,
         pharmaceutical: item.description,
         type: item.type?.description,
         code: Number(item.prodCode) || 0,
@@ -206,15 +207,17 @@ export default function PharmaceuticalTable({
                   rowData={formattedData}
                   rawData={data.map((item) => ({
                     ...item,
+                    id: item.code,
                     pharmaceutical: item.description,
                     type: item.type?.description,
-                    code: item.code,
+                    code: Number(item.prodCode) || 0,
                   }))}
                   filterColumns={filterColumns}
                   manualFilter={false}
                   showEmptyCell={false}
                   isCollapsabile={false}
                   detailColSpan={6}
+                  rowKey="id"
                   onDelete={handleDelete}
                   onEdit={handleEdit}
                   onView={handleView}

@@ -10,7 +10,7 @@ export const stockMovementsRoutes = (server) => {
     server.post("/charge").intercept((req, res) => {
       const body = req.jsonBody();
       switch (body[0].refNo) {
-        case 0:
+        case "0":
           res.status(400);
           break;
         default:

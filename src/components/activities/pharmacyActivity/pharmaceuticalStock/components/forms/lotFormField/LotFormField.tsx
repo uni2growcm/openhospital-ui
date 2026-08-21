@@ -175,7 +175,14 @@ export function LotFormField<T extends Record<string, any>>({
                   value={newLot.code}
                   checked={newLot.code === value?.code}
                   className="col-start-1 col-span-full"
-                  control={<Radio onClick={handleSelectNewLot(field)} />}
+                  control={
+                    <Radio
+                      inputProps={
+                        { "data-cy": "new-lot-radio" } as React.InputHTMLAttributes<HTMLInputElement>
+                      }
+                      onClick={handleSelectNewLot(field)}
+                    />
+                  }
                   label={t("pharmacy.lot.labels.change-on-this")}
                 />
                 <TextFormField

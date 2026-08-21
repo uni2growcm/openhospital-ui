@@ -5,7 +5,7 @@ export const MOVEMENTS: MovementDTO[] = [
     code: 1001,
     medical: {
       code: 1,
-      prodCode: "PARA500",
+      prodCode: "100500",
       description: "Paracetamol 500mg tablets",
       type: { code: "DRUG", description: "Pharmaceutical" },
       initialqty: 2000,
@@ -74,7 +74,7 @@ export const MOVEMENTS: MovementDTO[] = [
     code: 1004,
     medical: {
       code: 1,
-      prodCode: "PARA500",
+      prodCode: "100500",
       description: "Paracetamol 500mg tablets",
     },
     type: {

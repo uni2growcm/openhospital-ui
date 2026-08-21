@@ -4,7 +4,7 @@ import { LOTS } from "./lots";
 export const MEDICALS: MedicalDTO[] = [
   {
     code: 1,
-    prodCode: "PARA500",
+    prodCode: "100500",
     description: "Paracetamol 500mg tablets",
     type: { code: "DRUG", description: "Pharmaceutical" },
     initialqty: 2000,
@@ -16,7 +16,7 @@ export const MEDICALS: MedicalDTO[] = [
   },
   {
     code: 2,
-    prodCode: "AMOX250",
+    prodCode: "0001250",
     description: "Amoxicillin 250mg capsules",
     type: { code: "DRUG", description: "Pharmaceutical" },
     initialqty: 1500,

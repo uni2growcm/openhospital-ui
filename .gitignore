@@ -30,3 +30,8 @@ yarn-error.log*
 
 # Cypress
 cypress/downloads
+
+.opencode
+openspec
+# Cypress screenshots
+cypress/screenshots
