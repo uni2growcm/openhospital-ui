@@ -80,7 +80,7 @@ export function ChargeMovement() {
     if (status === "SUCCESS") {
       handleGoBack();
     }
-  }, [dispatch, handleGoBack]);
+  }, [dispatch, handleGoBack, status]);
 
   useEffect(() => {
     dispatch(resetChargeMovements());

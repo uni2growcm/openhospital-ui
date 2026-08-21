@@ -15,7 +15,7 @@ export function useNextMedicalCode(enabled: boolean) {
       dispatch(getNextMedicalCode());
     }
     return () => {
-      if (!enabled) hasFetchedRef.current = false;
+      hasFetchedRef.current = false;
     };
   }, [enabled, dispatch]);
 

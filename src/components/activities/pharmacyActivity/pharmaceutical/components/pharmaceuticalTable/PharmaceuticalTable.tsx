@@ -4,7 +4,6 @@ import ConfirmationDialog from "components/accessories/confirmationDialog/Confir
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import Table from "components/accessories/table/Table";
 import { PATHS } from "consts";
-import { MedicalDTO } from "generated";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -126,7 +125,7 @@ export default function PharmaceuticalTable({
       return {
         pharmaceutical: item.description,
         type: item.type?.description,
-        code: Number(item.prodCode),
+        code: Number(item.prodCode) || 0,
         pcsperpck: item.pcsperpck,
         stock: (item.initialqty || 0) + (item.inqty || 0) - (item.outqty || 0),
         criticalValue: item.minqty,

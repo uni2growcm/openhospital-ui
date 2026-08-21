@@ -14,9 +14,10 @@ export const MovementDTOSchema = z.object({
   ),
   type: z.string().optional(),
   ward: z.string().optional(),
-  lot: z
-    .union([LotDTOSchema, z.undefined()])
-    .refine((lot) => !!lot, "pharmacy.validation.lotRequired"),
+  lot: LotDTOSchema.optional().refine(
+    (lot) => !!lot,
+    "pharmacy.validation.lotRequired"
+  ),
   date: z.date(),
   supplier: z.preprocess(
     (value) =>

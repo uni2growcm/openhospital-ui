@@ -31,6 +31,11 @@ interface PharmaceuticalActionsProps {
 export default function PharmaceuticalActions({
   dataToExport,
 }: PharmaceuticalActionsProps) {
+  const dispatch = useAppDispatch();
+  const [isPrint, setIsPrint] = useState<boolean>(false);
+  const [isAMCReport, setIsAMCReport] = useState<boolean>(false);
+  const [isPrincipalStock, setIsPrincipalStock] = useState<boolean>(false);
+  const [noPageToExport, setNoPageToExport] = useState<boolean>(false);
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const handleOpenExpiringDialog = () => {
@@ -150,12 +155,6 @@ export default function PharmaceuticalActions({
       });
     setIsOpen(false);
   };
-
-  const dispatch = useAppDispatch();
-  const [isPrint, setIsPrint] = useState<boolean>(false);
-  const [isAMCReport, setIsAMCReport] = useState<boolean>(false);
-  const [isPrincipalStock, setIsPrincipalStock] = useState<boolean>(false);
-  const [noPageToExport, setNoPageToExport] = useState<boolean>(false);
 
   const handlePrintExportListExcel = () => {
     if (!dataToExport) return;

@@ -1,7 +1,9 @@
 import DateField from "components/accessories/dateField/DateField";
 import { isValid } from "date-fns";
-import React, { ComponentProps } from "react";
+import { useTranslation } from "libraries/hooks";
+import React, { ComponentProps, useCallback } from "react";
 import { Control, Controller, Path } from "react-hook-form";
+import { LocaleKey } from "resources/types";
 
 export type DateFormFieldProps<T extends Record<string, any>> = {
   control: Control<T>;
@@ -16,6 +18,11 @@ export function DateFormField<T extends Record<string, any>>({
   control,
   ...props
 }: DateFormFieldProps<T>) {
+  const { t } = useTranslation();
+  const getErrorText = useCallback(
+    (key?: string) => (key ? t(key as LocaleKey) : ""),
+    [t]
+  );
   return (
     <Controller
       name={name}
@@ -32,7 +39,7 @@ export function DateFormField<T extends Record<string, any>>({
           }
           disabled={props.disabled ?? field.disabled}
           onChange={field.onChange}
-          errorText={fieldState.error?.message ?? ""}
+          errorText={getErrorText(fieldState.error?.message)}
           isValid={!fieldState.invalid}
         />
       )}
