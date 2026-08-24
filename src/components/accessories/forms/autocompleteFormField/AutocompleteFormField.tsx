@@ -42,11 +42,6 @@ export function AutocompleteFormField<T extends Record<string, any>>({
       name={name}
       control={control}
       render={({ field, fieldState }) => {
-        const translatedError =
-          typeof fieldState.error?.message === "string"
-            ? t(fieldState.error.message)
-            : "";
-
         return (
           <AutocompleteField
             {...props}
@@ -56,7 +51,7 @@ export function AutocompleteFormField<T extends Record<string, any>>({
             disabled={props.disabled ?? field.disabled}
             onBlur={field.onBlur}
             errorText={getErrorText(fieldState.error?.message)}
-            isValid={!fieldState.invalid}
+            isValid={fieldState.invalid}
             onChange={handleChange(field)}
           />
         );

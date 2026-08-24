@@ -95,7 +95,6 @@ export const FilterButton = ({ field, onChange }: IOwnProps) => {
     enableReinitialize: true,
     onSubmit: (values) => {
       const formattedValues = formatAllFieldValues(fields, values);
-
       const value = values.value ?? "";
       const min = values.min ?? "";
       const max = values.max ?? "";

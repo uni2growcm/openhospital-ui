@@ -4,7 +4,6 @@ import ConfirmationDialog from "components/accessories/confirmationDialog/Confir
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import Table from "components/accessories/table/Table";
 import { PATHS } from "consts";
-import { MedicalDTO } from "generated";
 import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -124,9 +123,10 @@ export default function PharmaceuticalTable({
       }
 
       return {
+        id: item.code,
         pharmaceutical: item.description,
         type: item.type?.description,
-        code: item.code,
+        code: Number(item.prodCode) || 0,
         pcsperpck: item.pcsperpck,
         stock: (item.initialqty || 0) + (item.inqty || 0) - (item.outqty || 0),
         criticalValue: item.minqty,
@@ -144,8 +144,8 @@ export default function PharmaceuticalTable({
   const [openConfirmDialog, setOpenConfirmDialog] = useState<boolean>(false);
 
   const handleDelete = useCallback(
-    (medical: MedicalDTO) => {
-      dispatch(deleteMedical(medical.code ?? 0))
+    (row: any) => {
+      dispatch(deleteMedical(row.medicalData?.code ?? 0)) 
         .unwrap()
         .then(() => setOpenConfirmDialog(true));
     },
@@ -159,11 +159,11 @@ export default function PharmaceuticalTable({
   }, [dispatch, deletedStautus]);
 
   const handleEdit = useCallback(
-    (medical: MedicalDTO) => {
+    (row: any) => {
       navigate(
         PATHS.pharmacy_pharmaceutical_update.replace(
           ":id",
-          medical.code?.toString() ?? ""
+          row.medicalData?.code?.toString() ?? ""
         )
       );
     },
@@ -176,7 +176,7 @@ export default function PharmaceuticalTable({
         navigate(
           PATHS.pharmacy_pharmaceutical_detail.replace(
             ":id",
-            row.code?.toString() ?? ""
+            row.medicalData?.code?.toString() ?? ""
           )
         );
       }
@@ -207,15 +207,17 @@ export default function PharmaceuticalTable({
                   rowData={formattedData}
                   rawData={data.map((item) => ({
                     ...item,
+                    id: item.code,
                     pharmaceutical: item.description,
                     type: item.type?.description,
-                    code: item.code,
+                    code: Number(item.prodCode) || 0,
                   }))}
                   filterColumns={filterColumns}
                   manualFilter={false}
                   showEmptyCell={false}
                   isCollapsabile={false}
                   detailColSpan={6}
+                  rowKey="id"
                   onDelete={handleDelete}
                   onEdit={handleEdit}
                   onView={handleView}

@@ -892,15 +892,33 @@
       "elderly": "Elderly"
     },
     "lab": {
-      "undefined": { "txt": "Undefined" },
-      "blood": { "txt": "Blood" },
-      "cfs": { "txt": "CFS" },
-      "film": { "txt": "FILM" },
-      "sputum": { "txt": "Sputum" },
-      "stool": { "txt": "Stool" },
-      "swabs": { "txt": "Swabs" },
-      "tissues": { "txt": "Tissues" },
-      "urine": { "txt": "Urine" }
+      "undefined": {
+        "txt": "Undefined"
+      },
+      "blood": {
+        "txt": "Blood"
+      },
+      "cfs": {
+        "txt": "CFS"
+      },
+      "film": {
+        "txt": "FILM"
+      },
+      "sputum": {
+        "txt": "Sputum"
+      },
+      "stool": {
+        "txt": "Stool"
+      },
+      "swabs": {
+        "txt": "Swabs"
+      },
+      "tissues": {
+        "txt": "Tissues"
+      },
+      "urine": {
+        "txt": "Urine"
+      }
     },
     "common": {
       "thecodeisalreadyinuse": {
@@ -1263,7 +1281,14 @@
     },
     "validation": {
       "medicalRequired": "Please select a medical product.",
-      "referenceRequired": "Please enter the movement reference.",
+      "supplierRequired": "Please select a supplier.",
+      "referenceRequired": "Please enter the reference of the movement.",
+      "lotRequired": "Please select a lot.",
+      "lotCodeRequired": "Please enter the lot code.",
+      "lotPreparationDateRequired": "Please enter the lot production date.",
+      "lotDueDateRequired": "Please enter the lot expiry date.",
+      "lotCostRequired": "Please enter the lot cost.",
+      "quantityPositive": "The movement quantity must be greater than zero.",
       "wardRequired": "Please select a target ward.",
       "quantityRequired": "Please enter a quantity greater than zero.",
       "quantityExceedsStock": "The quantity cannot exceed the main store stock.",
@@ -1339,7 +1364,11 @@
         "typeRequired": "Product type is required.",
         "descriptionRequired": "Description is required.",
         "pcsPerPackRequired": "Pieces per pack must be greater than 0.",
-        "minQtyRequired": "Critical level cannot be negative."
+        "pcsPerPackPositive": "If entered, pieces per pack must be greater than 0.",
+        "minQtyRequired": "Critical level cannot be negative.",
+        "minQtyNonNegative": "Critical level cannot be negative.",
+        "prodCodeExists": "A medical with this code already exists.",
+        "invalidData": "Invalid data provided. Please check all required fields."
       }
     },
     "lot": {

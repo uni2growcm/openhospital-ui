@@ -1,4 +1,9 @@
-import { FormControlLabel, Radio, TextField } from "@mui/material";
+import {
+  FormControlLabel,
+  FormHelperText,
+  Radio,
+  TextField,
+} from "@mui/material";
 import DateField from "components/accessories/dateField/DateField";
 import { DateFormField, TextFormField } from "components/accessories/forms";
 import { parseISO } from "date-fns";
@@ -16,10 +21,10 @@ import React, {
 } from "react";
 import {
   Controller,
-  ControllerRenderProps,
   Path,
   useWatch,
 } from "react-hook-form";
+import { LocaleKey } from "resources/types";
 import { LotFormFieldProps } from "./types";
 
 export function LotFormField<T extends Record<string, any>>({
@@ -42,12 +47,12 @@ export function LotFormField<T extends Record<string, any>>({
   const value = useWatch({ control, name });
 
   const isNewLotActive = useMemo(
-    () => !medical.lots?.some((lot) => lot.code === value?.code),
+    () => !!value && !medical.lots?.some((lot) => lot.code === value?.code),
     [value, medical]
   );
 
-  const handleChange = useCallback(
-    (field: ControllerRenderProps<T, any>, lot: LotDTO) => () => {
+  const handleSelectExistingLot = useCallback(
+    (field: any, lot: LotDTO) => () => {
       field.onChange({
         ...lot,
         dueDate: lot.dueDate ? parseISO(lot.dueDate) : undefined,
@@ -57,6 +62,19 @@ export function LotFormField<T extends Record<string, any>>({
       });
     },
     []
+  );
+
+  const handleSelectNewLot = useCallback(
+    (field: any) => () => {
+      field.onChange({
+        ...newLot,
+        dueDate: newLot.dueDate ? parseISO(newLot.dueDate) : undefined,
+        preparationDate: newLot.preparationDate
+          ? parseISO(newLot.preparationDate)
+          : undefined,
+      });
+    },
+    [newLot]
   );
 
   useEffect(() => {
@@ -82,7 +100,7 @@ export function LotFormField<T extends Record<string, any>>({
       <Controller
         control={control}
         name={name}
-        render={({ field }) => (
+        render={({ field, fieldState }) => (
           <>
             {(medical.lots ?? []).map((lot, index) => (
               <Fragment key={lot.code}>
@@ -90,7 +108,9 @@ export function LotFormField<T extends Record<string, any>>({
                   value={lot.code}
                   checked={lot.code === field.value?.code}
                   className="col-start-1 col-span-full"
-                  control={<Radio onClick={handleChange(field, lot)} />}
+                  control={
+                    <Radio onClick={handleSelectExistingLot(field, lot)} />
+                  }
                   label={t("pharmacy.lot.labels.change-on-this")}
                 />
                 <TextField
@@ -155,7 +175,14 @@ export function LotFormField<T extends Record<string, any>>({
                   value={newLot.code}
                   checked={newLot.code === value?.code}
                   className="col-start-1 col-span-full"
-                  control={<Radio onClick={handleChange(field, newLot)} />}
+                  control={
+                    <Radio
+                      inputProps={
+                        { "data-cy": "new-lot-radio" } as React.InputHTMLAttributes<HTMLInputElement>
+                      }
+                      onClick={handleSelectNewLot(field)}
+                    />
+                  }
                   label={t("pharmacy.lot.labels.change-on-this")}
                 />
                 <TextFormField
@@ -195,6 +222,12 @@ export function LotFormField<T extends Record<string, any>>({
                   />
                 )}
               </>
+            )}
+
+            {fieldState.error && (
+              <FormHelperText error className="col-start-1 col-span-full">
+                {t(fieldState.error.message as LocaleKey)}
+              </FormHelperText>
             )}
           </>
         )}

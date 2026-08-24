@@ -891,15 +891,33 @@
       "elderly": "Âgé"
     },
     "lab": {
-      "undefined": { "txt": "Indéfini" },
-      "blood": { "txt": "Sang" },
-      "cfs": { "txt": "CFS" },
-      "film": { "txt": "FILM" },
-      "sputum": { "txt": "Sputum" },
-      "stool": { "txt": "Excréments" },
-      "swabs": { "txt": "Écouvillons" },
-      "tissues": { "txt": "Tissus" },
-      "urine": { "txt": "Urine" }
+      "undefined": {
+        "txt": "Indéfini"
+      },
+      "blood": {
+        "txt": "Sang"
+      },
+      "cfs": {
+        "txt": "CFS"
+      },
+      "film": {
+        "txt": "FILM"
+      },
+      "sputum": {
+        "txt": "Sputum"
+      },
+      "stool": {
+        "txt": "Excréments"
+      },
+      "swabs": {
+        "txt": "Écouvillons"
+      },
+      "tissues": {
+        "txt": "Tissus"
+      },
+      "urine": {
+        "txt": "Urine"
+      }
     },
     "common": {
       "thecodeisalreadyinuse": {
@@ -1274,7 +1292,14 @@
     },
     "validation": {
       "medicalRequired": "Veuillez sélectionner un médicament.",
+      "supplierRequired": "Veuillez sélectionner un fournisseur.",
       "referenceRequired": "Veuillez saisir la référence du mouvement.",
+      "lotRequired": "Veuillez sélectionner un lot.",
+      "lotCodeRequired": "Veuillez saisir le code du lot.",
+      "lotPreparationDateRequired": "Veuillez saisir la date de production du lot.",
+      "lotDueDateRequired": "Veuillez saisir la date de péremption du lot.",
+      "lotCostRequired": "Veuillez saisir le coût du lot.",
+      "quantityPositive": "La quantité du mouvement doit être supérieure à zéro.",
       "wardRequired": "Veuillez sélectionner un service cible.",
       "quantityRequired": "Veuillez saisir une quantité supérieure à zéro.",
       "quantityExceedsStock": "La quantité ne peut pas dépasser le stock du magasin principal.",
@@ -1346,7 +1371,11 @@
         "typeRequired": "Le type de produit est obligatoire.",
         "descriptionRequired": "La description est obligatoire.",
         "pcsPerPackRequired": "Le nombre de pièces par paquet doit être supérieur à 0.",
-        "minQtyRequired": "Le seuil critique ne peut pas être négatif."
+        "pcsPerPackPositive": "Si cette valeur est saisie, le nombre de pièces par paquet doit être supérieur à 0.",
+        "minQtyRequired": "Le seuil critique ne peut pas être négatif.",
+        "minQtyNonNegative": "Le seuil critique ne peut pas être négatif.",
+        "prodCodeExists": "Un médicament avec ce code existe déjà.",
+        "invalidData": "Données invalides. Veuillez vérifier tous les champs obligatoires."
       }
     },
     "stock": {

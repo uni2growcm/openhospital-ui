@@ -134,6 +134,21 @@ export class MedicalsApi extends BaseAPI {
 
     /**
      */
+    getNextMedicalCode(): Observable<number>
+    getNextMedicalCode(opts?: OperationOpts): Observable<AjaxResponse<number>>
+    getNextMedicalCode(opts?: OperationOpts): Observable<number | AjaxResponse<number>> {
+        const headers: HttpHeaders = {
+        };
+
+        return this.request<number>({
+            url: '/medicals/next-code',
+            method: 'GET',
+            headers,
+        }, opts?.responseOpts);
+    };
+
+    /**
+     */
     newMedical({ medicalDTO, ignoreSimilar }: NewMedicalRequest): Observable<MedicalDTO>
     newMedical({ medicalDTO, ignoreSimilar }: NewMedicalRequest, opts?: OperationOpts): Observable<AjaxResponse<MedicalDTO>>
     newMedical({ medicalDTO, ignoreSimilar }: NewMedicalRequest, opts?: OperationOpts): Observable<MedicalDTO | AjaxResponse<MedicalDTO>> {

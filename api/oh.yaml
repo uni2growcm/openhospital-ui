@@ -5243,6 +5243,21 @@ paths:
                 type: boolean
       security:
       - bearerAuth: []
+  /medicals/next-code:
+    get:
+      tags:
+      - Medicals
+      operationId: getNextMedicalCode
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int32
+      security:
+      - bearerAuth: []
   /medicals/filter:
     get:
       tags:

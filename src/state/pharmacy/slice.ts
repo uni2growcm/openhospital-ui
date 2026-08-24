@@ -48,6 +48,9 @@ export const pharmacySlice = createSlice({
     resetMedicalTypes: (state) => {
       state.getMedicalTypes = initial.getMedicalTypes;
     },
+    resetGetNextMedicalCode: (state) => {
+      state.getNextMedicalCode = initial.getNextMedicalCode;
+    },
     resetGetMedical: (state) => {
       state.getMedical = initial.getMedical;
     },
@@ -239,6 +242,16 @@ export const pharmacySlice = createSlice({
       })
       .addCase(thunks.getMedicalTypes.rejected, (state, action) => {
         state.getMedicalTypes = ApiResponse.error(action.payload);
+      })
+      // get next medical code
+      .addCase(thunks.getNextMedicalCode.pending, (state) => {
+        state.getNextMedicalCode = ApiResponse.loading();
+      })
+      .addCase(thunks.getNextMedicalCode.fulfilled, (state, action) => {
+        state.getNextMedicalCode = ApiResponse.value(action.payload);
+      })
+      .addCase(thunks.getNextMedicalCode.rejected, (state, action) => {
+        state.getNextMedicalCode = ApiResponse.error(action.payload);
       })
       // Get medical
       .addCase(thunks.getMedical.pending, (state) => {
@@ -456,6 +469,7 @@ export const {
   resetMedicals,
   resetMedicalTypes,
   resetGetMedical,
+  resetGetNextMedicalCode,
   resetNewMedical,
   resetUpdateMedical,
   resetCreateWardMovement,

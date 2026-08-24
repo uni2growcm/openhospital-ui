@@ -17,7 +17,7 @@ const plugin: Cypress.PluginConfig = (on, config) => {
   // `config` is the resolved Cypress config
 
   on("before:browser:launch", (browser, launchOptions) => {
-    if (browser.name === "chrome" || browser.name === "firefox") {
+    if (browser.name === "chrome" || browser.name === "firefox" || browser.name === "electron") {
       launchOptions.args.push("--lang=en");
       return launchOptions;
     } else {
