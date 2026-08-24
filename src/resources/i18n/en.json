@@ -1288,6 +1288,7 @@
       "lotPreparationDateRequired": "Please enter the lot production date.",
       "lotDueDateRequired": "Please enter the lot expiry date.",
       "lotCostRequired": "Please enter the lot cost.",
+      "lotCostPositive": "The lot cost must be greater than zero.",
       "quantityPositive": "The movement quantity must be greater than zero.",
       "wardRequired": "Please select a target ward.",
       "quantityRequired": "Please enter a quantity greater than zero.",
