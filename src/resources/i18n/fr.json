@@ -1331,6 +1331,10 @@
         "title": "Medicament supprimé avec succès",
         "description": "Le produit pharmaceutique a été supprimé avec succès."
       },
+      "delete-pharmaceutical-fail": {
+        "title": "Échec de la suppression du médicament",
+        "description": "Impossible de supprimer le médicament car des mouvements de stock y sont associés."
+      },
       "update-pharmaceutical-fail": {
         "title": "Échec de la mise à jour du pharmaceutique",
         "description": "Impossible de mettre à jour le produit pharmaceutique. Veuillez réessayer ou contacter le support."

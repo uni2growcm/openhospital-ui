@@ -1324,6 +1324,10 @@
         "title": "Pharmaceutical deleted successfully",
         "description": "The pharmaceutical has been deleted successfully."
       },
+      "delete-pharmaceutical-fail": {
+        "title": "Pharmaceutical deletion failed",
+        "description": "Cannot delete the pharmaceutical because stock movements are associated with it."
+      },
       "update-pharmaceutical-fail": {
         "title": "Pharamaceutical update failed",
         "description": "We were unable to update the pharmaceutical. Please try again or contact support."
