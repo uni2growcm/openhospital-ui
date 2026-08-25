@@ -1299,6 +1299,7 @@
       "lotPreparationDateRequired": "Veuillez saisir la date de production du lot.",
       "lotDueDateRequired": "Veuillez saisir la date de péremption du lot.",
       "lotCostRequired": "Veuillez saisir le coût du lot.",
+      "lotCostPositive": "Le coût du lot doit être supérieur à zéro.",
       "quantityPositive": "La quantité du mouvement doit être supérieure à zéro.",
       "wardRequired": "Veuillez sélectionner un service cible.",
       "quantityRequired": "Veuillez saisir une quantité supérieure à zéro.",
@@ -1329,6 +1330,10 @@
       "delete-pharmaceutical-success": {
         "title": "Medicament supprimé avec succès",
         "description": "Le produit pharmaceutique a été supprimé avec succès."
+      },
+      "delete-pharmaceutical-fail": {
+        "title": "Échec de la suppression du médicament",
+        "description": "Impossible de supprimer le médicament car des mouvements de stock y sont associés."
       },
       "update-pharmaceutical-fail": {
         "title": "Échec de la mise à jour du pharmaceutique",

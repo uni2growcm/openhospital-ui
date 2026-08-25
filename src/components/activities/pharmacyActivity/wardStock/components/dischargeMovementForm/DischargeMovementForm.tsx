@@ -13,7 +13,6 @@ import { MedicalDTO, MovementWardDTO, WardDTO } from "generated";
 import { DATETIME_FORMAT } from "libraries/consts";
 import { useTranslation } from "libraries/hooks";
 import { useWardOptions, useWards } from "libraries/hooks/api";
-import { useAppDispatch } from "libraries/hooks/redux";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { LocaleKey } from "resources/types";
@@ -31,7 +30,6 @@ export function WardDischargeForm({
   onSubmit,
 }: IWardDischargeFormProps) {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
   const [destinationType, setDestinationType] =
     useState<DestinationType>("patient");
   const [info, setInfo] = useState<{
@@ -249,12 +247,10 @@ export function WardDischargeForm({
           showMainStoreQuantity={false}
           showNewLotOption={false}
           showWardTotalQuantity
+          onLotChange={(lot) =>
+            setValue("lot", lot, { shouldDirty: true, shouldValidate: true })
+          }
         />
-        {getErrorMessage("lot") && (
-          <div className="lot-error col-span-full">
-            {getErrorMessage("lot")}
-          </div>
-        )}
       </div>
 
       {info.type && (

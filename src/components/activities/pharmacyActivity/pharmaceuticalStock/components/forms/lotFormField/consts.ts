@@ -8,7 +8,15 @@ export const LotDTOSchema = z.object({
     error: "pharmacy.validation.lotPreparationDateRequired",
   }),
   dueDate: z.date({ error: "pharmacy.validation.lotDueDateRequired" }),
-  cost: z.number().optional(),
+  cost: z.preprocess(
+    (value) =>
+      value === "" || value === null || value === undefined
+        ? undefined
+        : Number(value),
+    z
+      .number({ error: "pharmacy.validation.lotCostRequired" })
+      .positive("pharmacy.validation.lotCostPositive")
+  ),
   ward: z.string().optional(),
   mainStoreQuantity: z.number().optional(),
   wardsTotalQuantity: z.number().optional(),

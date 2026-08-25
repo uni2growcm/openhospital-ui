@@ -35,6 +35,7 @@ export function LotFormField<T extends Record<string, any>>({
   showMainStoreQuantity = true,
   showWardTotalQuantity,
   hideQty,
+  onLotChange,
 }: LotFormFieldProps<T>) {
   const { t } = useTranslation();
   const [newLot, setNewLot] = useState<LotDTO>({
@@ -53,15 +54,17 @@ export function LotFormField<T extends Record<string, any>>({
 
   const handleSelectExistingLot = useCallback(
     (field: any, lot: LotDTO) => () => {
-      field.onChange({
+      const selectedLot = {
         ...lot,
         dueDate: lot.dueDate ? parseISO(lot.dueDate) : undefined,
         preparationDate: lot.preparationDate
           ? parseISO(lot.preparationDate)
           : undefined,
-      });
+      };
+      field.onChange(selectedLot);
+      onLotChange?.(selectedLot);
     },
-    []
+    [onLotChange]
   );
 
   const handleSelectNewLot = useCallback(

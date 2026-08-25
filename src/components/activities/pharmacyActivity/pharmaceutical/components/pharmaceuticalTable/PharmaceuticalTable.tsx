@@ -1,5 +1,6 @@
 import { CircularProgress } from "@mui/material";
 import checkIcon from "assets/check-icon.png";
+import warningIcon from "assets/warning-icon.png";
 import ConfirmationDialog from "components/accessories/confirmationDialog/ConfirmationDialog";
 import InfoBox from "components/accessories/infoBox/InfoBox";
 import Table from "components/accessories/table/Table";
@@ -8,7 +9,7 @@ import { useAppDispatch, useAppSelector } from "libraries/hooks/redux";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import { deleteMedical } from "state/medicals";
+import { deleteMedical, deleteMedicalReset } from "state/medicals";
 import { getMedicals } from "state/pharmacy";
 interface PharmaceuticalTableProps {
   onDataChange: (data: any[]) => void;
@@ -147,7 +148,8 @@ export default function PharmaceuticalTable({
     (row: any) => {
       dispatch(deleteMedical(row.medicalData?.code ?? 0)) 
         .unwrap()
-        .then(() => setOpenConfirmDialog(true));
+        .then(() => setOpenConfirmDialog(true))
+        .catch(() => {});
     },
     [dispatch]
   );
@@ -242,6 +244,15 @@ export default function PharmaceuticalTable({
         primaryButtonLabel="OK"
         handlePrimaryButtonClick={handleDialogActions}
         handleSecondaryButtonClick={handleDialogActions}
+      />
+      <ConfirmationDialog
+        isOpen={deletedStautus === "FAIL"}
+        title={t("pharmacy.messages.delete-pharmaceutical-fail.title")}
+        icon={warningIcon}
+        info={t("pharmacy.messages.delete-pharmaceutical-fail.description")}
+        primaryButtonLabel="OK"
+        handlePrimaryButtonClick={() => dispatch(deleteMedicalReset())}
+        handleSecondaryButtonClick={() => {}}
       />
     </div>
   );

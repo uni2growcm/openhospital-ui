@@ -21,7 +21,15 @@ describe("Charge movement", () => {
     cy.byId(`"lot.code"`).focus().clear().type("128").blur();
     cy.byId(`"lot.preparationDate"`).focus().type("030820251200").blur();
     cy.byId(`"lot.dueDate"`).focus().type("030820281200").blur();
-    cy.byId(`"lot.cost"`).focus().type("64").blur();
+    cy.dataCy("submit-button").click();
+    cy.contains("Please enter the lot cost.").should("be.visible");
+    cy.byId(`"lot.cost"`).focus().type("0").blur();
+    cy.dataCy("submit-button").click();
+    cy.contains("The lot cost must be greater than zero.").should("be.visible");
+    cy.byId(`"lot.cost"`).focus().clear().type("-1").blur();
+    cy.dataCy("submit-button").click();
+    cy.contains("The lot cost must be greater than zero.").should("be.visible");
+    cy.byId(`"lot.cost"`).focus().clear().type("64").blur();
   });
 
   it("Should display an error info box if the movement charging fails", () => {
