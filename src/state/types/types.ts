@@ -1,6 +1,7 @@
 import type { IAdmissionTypesState } from './admissions';
 import type { IAgeTypesState } from './ageTypes';
 import type { ITypeConfigsState } from './config';
+import type { ICountriesState } from './countries';
 import type { IDeliveryTypesState } from './deliveries';
 import type { IDeliveryResultTypeState } from './deliveryResults';
 import type { IDischargeTypesState } from './discharges';
@@ -9,6 +10,7 @@ import type { IExamTypesState } from './exams';
 import type { IMedicalTypesState } from './medicals';
 import type { IOperationTypesState } from './operations';
 import type { IPregnantTreatmentTypesState } from './pregnantTreatment';
+import type { IReductionPlansState } from './reductionPlans';
 import type { IVaccineTypesState } from './vaccines';
 
 export type ITypesState = {
@@ -24,4 +26,6 @@ export type ITypesState = {
 	medicals: IMedicalTypesState;
 	pregnantTreatment: IPregnantTreatmentTypesState;
 	deliveryResult: IDeliveryResultTypeState;
+	countries: ICountriesState;
+	reductionPlans: IReductionPlansState;
 };
