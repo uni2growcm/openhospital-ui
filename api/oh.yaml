@@ -5905,6 +5905,25 @@ paths:
                   $ref: "#/components/schemas/CountryDTO"
       security:
       - bearerAuth: []
+    post:
+      tags:
+      - Countries
+      operationId: newCountry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CountryDTO"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CountryDTO"
+      security:
+      - bearerAuth: []
   /bills/pending:
     get:
       tags:
@@ -7065,6 +7084,16 @@ components:
         country:
           $ref: "#/components/schemas/CountryDTO"
           description: Country of the patient
+        affiliatedPatientCode:
+          type: integer
+          format: int32
+          description: Code of the affiliated patient
+          example: 2
+        affiliatedPatientName:
+          type: string
+          description: Name of the affiliated patient
+          example: Mario Rossi
+          readOnly: true
         fatherName:
           type: string
           description: Father's name

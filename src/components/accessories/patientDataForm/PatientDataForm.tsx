@@ -1,4 +1,5 @@
-import { Tooltip } from '@mui/material';
+import { AddCircleOutline } from '@mui/icons-material';
+import { IconButton, Tooltip } from '@mui/material';
 import { useFormik } from 'formik';
 import { get, has, isEmpty } from 'lodash';
 import moment from 'moment';
@@ -19,6 +20,7 @@ import { getCountries } from '~/state/types/countries';
 import { getReductionPlans } from '~/state/types/reductionPlans';
 import warningIcon from '../../../assets/warning-icon.png';
 import { formCustomization } from '../../../customization/formCustomization';
+import type { CountryDTO, PatientDTO } from '../../../generated';
 import {
 	formatAllFieldValues,
 	getBirthDateAndAge,
@@ -33,11 +35,13 @@ import {
 	updatePatientReset,
 } from '../../../state/patients';
 import { FIELD_VALIDATION, type IState } from '../../../types';
+import AddCountryModal from '../addCountryModal/AddCountryModal';
 import AutocompleteField from '../autocompleteField/AutocompleteField';
 import Button from '../button/Button';
 import CheckboxField from '../checkboxField/CheckboxField';
 import ConfirmationDialog from '../confirmationDialog/ConfirmationDialog';
 import DateField from '../dateField/DateField';
+import PatientAutocomplete from '../patientAutocomplete/PatientAutocomplete';
 import { ProfilePicture } from '../profilePicture/ProfilePicture';
 import SelectField from '../selectField/SelectField';
 import TextField from '../textField/TextField';
@@ -181,6 +185,9 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 				country: formattedValues.country
 					? { id: Number(formattedValues.country) }
 					: null,
+				affiliatedPatientCode: formattedValues.affiliatedPatientCode
+					? Number(formattedValues.affiliatedPatientCode)
+					: null,
 				priceList: formattedValues.priceList
 					? { id: Number(formattedValues.priceList) }
 					: null,
@@ -236,11 +243,30 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 		[setFieldValue, handleBlur],
 	);
 
+	const onAffiliatedPatientBlur = useCallback(
+		(e: React.FocusEvent<HTMLInputElement>, value: PatientDTO | undefined) => {
+			handleBlur(e);
+			setFieldValue('affiliatedPatientCode', value?.code?.toString() ?? '');
+		},
+		[setFieldValue, handleBlur],
+	);
+
 	const handleCheckboxChange = useCallback(
 		(fieldName: string) => (value: boolean) => {
 			setFieldValue(fieldName, value ? 'true' : 'false');
 		},
 		[setFieldValue],
+	);
+
+	const [isAddCountryOpen, setIsAddCountryOpen] = useState(false);
+
+	const onCountryCreated = useCallback(
+		(country: CountryDTO) => {
+			dispatch(getCountries());
+			setFieldValue('country', country.id?.toString() ?? '');
+			setIsAddCountryOpen(false);
+		},
+		[dispatch, setFieldValue],
 	);
 
 	const [openResetConfirmation, setOpenResetConfirmation] = useState(false);
@@ -478,7 +504,7 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 						/>
 					</div>
 
-					<div className="patientDataForm__item">
+					<div className="patientDataForm__item patientDataForm__itemWithAction">
 						<SelectField
 							fieldName="country"
 							fieldValue={formik.values.country}
@@ -489,6 +515,25 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 							options={countryOptions}
 							disabled={isLoading}
 							required={FIELD_VALIDATION.IDLE}
+						/>
+						<IconButton
+							aria-label={t('patient.addcountry')}
+							onClick={() => setIsAddCountryOpen(true)}
+							disabled={isLoading}
+						>
+							<AddCircleOutline />
+						</IconButton>
+					</div>
+
+					<div className="patientDataForm__item">
+						<PatientAutocomplete
+							fieldName="affiliatedPatientCode"
+							fieldValue={Number(formik.values.affiliatedPatientCode) || 0}
+							label={t('patient.affiliatedpatient')}
+							isValid={isValid('affiliatedPatientCode')}
+							errorText={getErrorText('affiliatedPatientCode')}
+							onBlur={onAffiliatedPatientBlur}
+							disabled={isLoading}
 						/>
 					</div>
 
@@ -922,6 +967,12 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 						handleSecondaryButtonClick={() => setOpenResetConfirmation(false)}
 					/>
 				)}
+
+				<AddCountryModal
+					isOpen={isAddCountryOpen}
+					onClose={() => setIsAddCountryOpen(false)}
+					onCreated={onCountryCreated}
+				/>
 			</form>
 		</div>
 	);

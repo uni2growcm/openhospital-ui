@@ -196,6 +196,12 @@
 		"transportmeans": "Moyen de transport",
 		"blama": "Nom et numéro de téléphone du Blama",
 		"country": "Pays",
+		"affiliatedpatient": "Patient affilié",
+		"addcountry": "Ajouter un pays",
+		"countryname": "Nom du pays",
+		"countryisocode": "Code ISO",
+		"countryphonecode": "Code téléphonique",
+		"countryalreadyexists": "Un pays avec ce nom, ce code ISO ou ce code téléphonique existe déjà.",
 		"maritalstatus": "Situation matrimoniale",
 		"maritalstatuses": {
 			"unknown": "Inconnue",

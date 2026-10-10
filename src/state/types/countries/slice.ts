@@ -8,7 +8,11 @@ import * as thunks from './thunk';
 export const countrySlice = createSlice({
 	name: 'countries',
 	initialState: initial,
-	reducers: {},
+	reducers: {
+		createCountryReset: (state) => {
+			state.create = initial.create;
+		},
+	},
 	extraReducers: (builder) =>
 		builder
 			// Get Countries
@@ -22,5 +26,17 @@ export const countrySlice = createSlice({
 			})
 			.addCase(thunks.getCountries.rejected, (state, action) => {
 				state.getAll = ApiResponse.error(action.payload);
+			})
+			// Create Country
+			.addCase(thunks.createCountry.pending, (state) => {
+				state.create = ApiResponse.loading();
+			})
+			.addCase(thunks.createCountry.fulfilled, (state, action) => {
+				state.create = ApiResponse.value(action.payload);
+			})
+			.addCase(thunks.createCountry.rejected, (state, action) => {
+				state.create = ApiResponse.error(action.payload);
 			}),
 });
+
+export const { createCountryReset } = countrySlice.actions;

@@ -22,3 +22,8 @@ export const selectCountries = createSelector(
 	[selectGetAllCountriesState],
 	(getAllState) => getAllState.data,
 );
+
+export const selectCreateCountryState = createSelector(
+	[selectCountriesState],
+	(countriesState) => countriesState.create,
+);

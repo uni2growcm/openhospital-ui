@@ -15,7 +15,10 @@ export interface IProps {
 	onInputChange?: (e: any, value: any) => void;
 	freeSolo?: boolean;
 	getOptionLabel?: (option: any) => string;
-	renderOption?: (params: any) => React.ReactElement;
+	renderOption?: (
+		props: React.HTMLAttributes<HTMLLIElement>,
+		option: any,
+	) => React.ReactElement;
 	id?: string;
 	onChange?: (e: object, val: any | null) => void;
 	optionsComparator?: (option: any, val: string | number) => boolean;

@@ -251,6 +251,10 @@ export const initialFields: TFields<TPatientDataFormFieldName> = {
 		value: '',
 		type: 'text',
 	},
+	affiliatedPatientCode: {
+		value: '',
+		type: 'text',
+	},
 	fatherName: {
 		value: '',
 		type: 'text',
