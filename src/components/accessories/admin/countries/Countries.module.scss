@@ -1,0 +1,22 @@
+.countries {
+  display: flex;
+  flex-direction: column;
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+
+.searchBox {
+  flex: 1;
+  max-width: 400px;
+}
+
+.headerActions {
+  display: flex;
+  justify-content: flex-end;
+}

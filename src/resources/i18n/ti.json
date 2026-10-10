@@ -7,6 +7,13 @@
 		"internalerror": "ውሽጣዊ ጌጋ ኣጋጢሙ",
 		"lab": {
 			"someexamswithoutresultpleasecheck": "ገለ ውጽኢት ዘይብሉ ፈተናታት በጃኹም መርምሩ።"
+		},
+		"country": {
+			"isocode_exists": "A country with this ISO code already exists.",
+			"name_exists": "A country with this name already exists.",
+			"phonecode_exists": "A country with this phone code already exists.",
+			"not_found": "Country not found.",
+			"integrity_violation": "Country data integrity violation."
 		}
 	},
 	"validations": {
@@ -416,7 +423,8 @@
 		"users": "ተጠቀምቲ &amp; ጉጅለታት",
 		"types": "ዓይነታት ምምሕዳር",
 		"hospitalInfo": "ሆስፒታል ሓበሬታ",
-		"hospital": "ሆስፒታል"
+		"hospital": "ሆስፒታል",
+		"countries": "Countries"
 	},
 	"operation": {
 		"newoperation": "ሓድሽ ስርሒት።",
@@ -875,15 +883,33 @@
 			"elderly": "ዓብዪ"
 		},
 		"lab": {
-			"undefined": { "txt": "ዘይተገልጸ" },
-			"blood": { "txt": "ደም" },
-			"cfs": { "txt": "ሲኤፍኤስ" },
-			"film": { "txt": "ፊልሚ" },
-			"sputum": { "txt": "ረስኒ" },
-			"stool": { "txt": "ድኳ" },
-			"swabs": { "txt": "ስዋብ" },
-			"tissues": { "txt": "ቲሹታት" },
-			"urine": { "txt": "ሽንቲ" }
+			"undefined": {
+				"txt": "ዘይተገልጸ"
+			},
+			"blood": {
+				"txt": "ደም"
+			},
+			"cfs": {
+				"txt": "ሲኤፍኤስ"
+			},
+			"film": {
+				"txt": "ፊልሚ"
+			},
+			"sputum": {
+				"txt": "ረስኒ"
+			},
+			"stool": {
+				"txt": "ድኳ"
+			},
+			"swabs": {
+				"txt": "ስዋብ"
+			},
+			"tissues": {
+				"txt": "ቲሹታት"
+			},
+			"urine": {
+				"txt": "ሽንቲ"
+			}
 		},
 		"common": {
 			"thecodeisalreadyinuse": {
@@ -1225,5 +1251,26 @@
 		"updateSuccess": "ዓይነት ፈተና ብዓወት ተሓዲሱ ኣሎ!",
 		"cancelCreation": "ርግጸኛ ዲኻ ነቲ ናይ ፈተና ዓይነት ምፍጣር ክትስርዞ?",
 		"cancelUpdate": "ርግጸኛ ዲኻ ነቲ ናይ ፈተና ዓይነት update ክትስርዞ?"
+	},
+	"country": {
+		"searchPlaceholder": "ሃገር ድለይ...",
+		"id": "Country ID",
+		"isoCode": "ISO Code",
+		"name": "Country Name",
+		"phoneCode": "Phone Code",
+		"isoCodeInvalidFormat": "ISO code must be 2 uppercase letters",
+		"phoneCodeInvalidFormat": "Invalid phone code format",
+		"addNewCountry": "Add a new country",
+		"editCountry": "Edit country",
+		"updateCountry": "Save changes",
+		"saveCountry": "Save",
+		"addCountry": "New country",
+		"updated": "Country updated",
+		"updateSuccess": "Country has been updated successfully!",
+		"created": "Country created",
+		"createSuccess": "Country has been created successfully!",
+		"deleted": "Country deleted",
+		"deleting": "Deleting country...",
+		"deleteSuccess": "Country has been deleted successfully!"
 	}
 }

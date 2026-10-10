@@ -7,6 +7,13 @@
 		"internalerror": "Es ist ein interner Fehler aufgetreten",
 		"lab": {
 			"someexamswithoutresultpleasecheck": "Einige Prüfungen ohne Ergebnis, bitte überprüfen."
+		},
+		"country": {
+			"isocode_exists": "Ein Land mit diesem ISO-Code existiert bereits.",
+			"name_exists": "Ein Land mit diesem Namen existiert bereits.",
+			"phonecode_exists": "Ein Land mit dieser Vorwahl existiert bereits.",
+			"not_found": "Land nicht gefunden.",
+			"integrity_violation": "Datenintegritätsverletzung für das Land."
 		}
 	},
 	"validations": {
@@ -376,7 +383,8 @@
 		"users": "Benutzer & Gruppen",
 		"types": "Typen verwalten",
 		"hospitalInfo": "Krankenhausinfo",
-		"hospital": "Krankenhaus"
+		"hospital": "Krankenhaus",
+		"countries": "Länder"
 	},
 	"operation": {
 		"newoperation": "Neue Operation",
@@ -797,15 +805,33 @@
 			"elderly": "Älter"
 		},
 		"lab": {
-			"undefined": { "txt": "Nicht definiert" },
-			"blood": { "txt": "Blut" },
-			"cfs": { "txt": "CFS" },
-			"film": { "txt": "FILM" },
-			"sputum": { "txt": "Spucke" },
-			"stool": { "txt": "Stuhl" },
-			"swabs": { "txt": "Wattestäbchen" },
-			"tissues": { "txt": "Gewebe" },
-			"urine": { "txt": "Urin" }
+			"undefined": {
+				"txt": "Nicht definiert"
+			},
+			"blood": {
+				"txt": "Blut"
+			},
+			"cfs": {
+				"txt": "CFS"
+			},
+			"film": {
+				"txt": "FILM"
+			},
+			"sputum": {
+				"txt": "Spucke"
+			},
+			"stool": {
+				"txt": "Stuhl"
+			},
+			"swabs": {
+				"txt": "Wattestäbchen"
+			},
+			"tissues": {
+				"txt": "Gewebe"
+			},
+			"urine": {
+				"txt": "Urin"
+			}
 		}
 	},
 	"exam": {
@@ -856,5 +882,26 @@
 		"opdInclude": "OPD",
 		"ipdInInclude": "IP In",
 		"ipdOutInclude": "IP Out"
+	},
+	"country": {
+		"searchPlaceholder": "Land suchen...",
+		"id": "Länder-ID",
+		"isoCode": "ISO-Code",
+		"name": "Name",
+		"phoneCode": "Telefonvorwahl",
+		"isoCodeInvalidFormat": "Der ISO-Code muss aus 2 Großbuchstaben bestehen",
+		"phoneCodeInvalidFormat": "Ungültiges Telefonvorwahlformat",
+		"addNewCountry": "Neues Land hinzufügen",
+		"editCountry": "Land bearbeiten",
+		"updateCountry": "Änderungen speichern",
+		"saveCountry": "Speichern",
+		"addCountry": "Neues Land",
+		"updated": "Land aktualisiert",
+		"updateSuccess": "Land wurde erfolgreich aktualisiert!",
+		"created": "Land erstellt",
+		"createSuccess": "Land wurde erfolgreich erstellt!",
+		"deleted": "Land gelöscht",
+		"deleting": "Land wird gelöscht...",
+		"deleteSuccess": "Land wurde erfolgreich gelöscht!"
 	}
 }

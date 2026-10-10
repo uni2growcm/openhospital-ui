@@ -7,6 +7,13 @@
 		"internalerror": "Une erreur interne s'est produite",
 		"lab": {
 			"someexamswithoutresultpleasecheck": "Certains examens n'ont pas de résultats. Veuillez vérifier."
+		},
+		"country": {
+			"isocode_exists": "Un pays avec ce code ISO existe déjà.",
+			"name_exists": "Un pays avec ce nom existe déjà.",
+			"phonecode_exists": "Un pays avec cet indicatif téléphonique existe déjà.",
+			"not_found": "Pays introuvable.",
+			"integrity_violation": "Erreur d'intégrité des données du pays."
 		}
 	},
 	"validations": {
@@ -413,6 +420,7 @@
 		"vaccines": "Vaccins",
 		"prices": "Liste de prix",
 		"suppliers": "Fournisseurs",
+		"countries": "Pays",
 		"telemetry": "Télémétrie",
 		"users": "Utilisateurs & Groupes",
 		"types": "Gérer les types",
@@ -1137,6 +1145,27 @@
 		"deleted": "Fournisseur supprimé",
 		"deleting": "Suppression du fournisseur...",
 		"deleteSuccess": "Fournisseur supprimé avec succès !"
+	},
+	"country": {
+		"searchPlaceholder": "Rechercher un pays...",
+		"id": "Identifiant du pays",
+		"isoCode": "Code ISO",
+		"name": "Nom du pays",
+		"phoneCode": "Indicatif téléphonique",
+		"isoCodeInvalidFormat": "Le code ISO doit être composé de 2 lettres majuscules",
+		"phoneCodeInvalidFormat": "Format d'indicatif téléphonique invalide",
+		"addNewCountry": "Ajouter un nouveau pays",
+		"editCountry": "Modifier le pays",
+		"updateCountry": "Enregistrer les modifications",
+		"saveCountry": "Enregistrer",
+		"addCountry": "Nouveau pays",
+		"updated": "Pays mis à jour",
+		"updateSuccess": "Le pays a été mis à jour avec succès !",
+		"created": "Pays créé",
+		"createSuccess": "Le pays a été créé avec succès !",
+		"deleted": "Pays supprimé",
+		"deleting": "Suppression du pays...",
+		"deleteSuccess": "Le pays a été supprimé avec succès !"
 	},
 	"ward": {
 		"code": "Code",

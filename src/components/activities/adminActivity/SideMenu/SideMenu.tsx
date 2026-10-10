@@ -8,6 +8,7 @@ import {
 	LocalDrink,
 	LocalHospitalSharp,
 	People,
+	Public,
 	SupervisedUserCircle,
 	Tune,
 } from '@mui/icons-material';
@@ -60,6 +61,10 @@ const SideMenu = () => {
 		{
 			key: 'suppliers',
 			icon: <SupervisedUserCircle fontSize="small" />,
+		},
+		{
+			key: 'countries',
+			icon: <Public fontSize="small" />,
 		},
 		{
 			key: 'users',

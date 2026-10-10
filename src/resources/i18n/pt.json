@@ -233,7 +233,8 @@
 		"managebills": "Manage Bills",
 		"billrecords": "Bill Records",
 		"visits": "Visits",
-		"patients": "Patients"
+		"patients": "Patients",
+		"countries": "Países"
 	},
 	"operation": {
 		"newoperation": "New Operation",
@@ -538,5 +539,35 @@
 		"cs": "Czech",
 		"sq": "Albanian",
 		"zh": "Chinese"
+	},
+	"errors": {
+		"country": {
+			"isocode_exists": "Já existe um país com este código ISO.",
+			"name_exists": "Já existe um país com este nome.",
+			"phonecode_exists": "Já existe um país com este código telefônico.",
+			"not_found": "País não encontrado.",
+			"integrity_violation": "Violação de integridade dos dados do país."
+		}
+	},
+	"country": {
+		"searchPlaceholder": "Pesquisar país...",
+		"id": "ID do país",
+		"isoCode": "Código ISO",
+		"name": "Nome",
+		"phoneCode": "Código telefônico",
+		"isoCodeInvalidFormat": "O código ISO deve ter 2 letras maiúsculas",
+		"phoneCodeInvalidFormat": "Formato de código telefônico inválido",
+		"addNewCountry": "Adicionar novo país",
+		"editCountry": "Editar país",
+		"updateCountry": "Salvar alterações",
+		"saveCountry": "Salvar",
+		"addCountry": "Novo país",
+		"updated": "País atualizado",
+		"updateSuccess": "País atualizado com sucesso!",
+		"created": "País criado",
+		"createSuccess": "País criado com sucesso!",
+		"deleted": "País excluído",
+		"deleting": "Excluindo país...",
+		"deleteSuccess": "País excluído com sucesso!"
 	}
 }
