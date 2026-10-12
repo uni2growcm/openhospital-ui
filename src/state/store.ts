@@ -16,6 +16,7 @@ import { patientSlice } from './patients';
 import { permissionSlice } from './permissions';
 import { priceSlice } from './prices';
 import { radiologySlice } from './radiology';
+import { reductionPlansSlice } from './reductionPlans';
 import { settingsSlice } from './settings';
 import { summarySlice } from './summary';
 import { supplierSlice } from './suppliers';
@@ -59,6 +60,7 @@ const reducer = combineReducers({
 	types: typesReducer,
 	suppliers: supplierSlice.reducer,
 	radiology: radiologySlice.reducer,
+	reductionPlans: reductionPlansSlice.reducer,
 });
 
 export const store = configureStore({

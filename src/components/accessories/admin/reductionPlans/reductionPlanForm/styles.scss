@@ -1,0 +1,130 @@
+@import "../../../../../styles/variables";
+@import "../../../../../../node_modules/susy/sass/susy";
+
+.reductionPlanForm {
+  display: inline-block;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  .row {
+    justify-content: space-between;
+  }
+
+  .reductionPlanForm__item {
+    margin: 7px 0px;
+    padding: 0px 15px;
+    width: 50%;
+    @include susy-media($narrow) {
+      padding: 0px 10px;
+    }
+    @include susy-media($tablet_land) {
+      padding: 0px 10px;
+    }
+    @include susy-media($medium-up) {
+      width: 25%;
+    }
+    @include susy-media($tablet_port) {
+      width: 50%;
+    }
+    @include susy-media($smartphone) {
+      width: 100%;
+    }
+    .textField,
+    .selectField {
+      width: 100%;
+    }
+
+    &.fullWidth {
+      width: 100%;
+    }
+
+    &.halfWidth {
+      width: 50%;
+      @include susy-media($smartphone) {
+        width: 100%;
+      }
+    }
+
+    &.quarterWidth {
+      width: 25%;
+      @include susy-media($tablet_port) {
+        width: 50%;
+      }
+      @include susy-media($smartphone) {
+        width: 100%;
+      }
+    }
+  }
+
+  .reductionPlanForm__header {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+  }
+
+  .sectionTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 25px 15px 15px;
+    color: #333;
+  }
+
+  .specificReductionsContainer {
+    margin: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    background: #fafafa;
+
+    .addRow {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 15px 0;
+      flex-wrap: wrap;
+
+      .itemSelect {
+        flex: 1;
+        min-width: 280px;
+      }
+
+      .rateInput {
+        width: 140px;
+        margin-top: 8px;
+      }
+
+      button {
+        margin-top: 8px;
+      }
+    }
+
+    .emptyMessage {
+      padding: 20px;
+      text-align: center;
+      color: #666;
+      font-style: italic;
+    }
+
+    .tableContainer {
+      margin-top: 15px;
+      background: #fff;
+      max-height: 380px;
+      overflow-y: auto;
+    }
+  }
+
+  .reductionPlanForm__buttonSet {
+    display: flex;
+    margin-top: 25px;
+    padding: 0px 15px;
+    flex-direction: row-reverse;
+    gap: 15px;
+    @include susy-media($smartphone_small) {
+      display: block;
+    }
+  }
+}

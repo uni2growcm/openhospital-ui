@@ -81,6 +81,9 @@ export const PATHS = {
 	admin_age_types: '/admin/types/ages',
 	admin_age_types_edit: '/admin/types/ages/edit',
 	admin_settings: '/admin/settings',
+	admin_reductionplans: '/admin/reduction-plans',
+	admin_reductionplans_new: '/admin/reduction-plans/new',
+	admin_reductionplans_edit: '/admin/reduction-plans/:id/edit',
 	patient_radiology: '/patients/details/:id/radiology',
 	patient_radiology_studies: '/patients/details/:id/radiology/studies',
 	patient_radiology_series:

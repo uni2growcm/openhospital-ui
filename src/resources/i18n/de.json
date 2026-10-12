@@ -7,6 +7,16 @@
 		"internalerror": "Es ist ein interner Fehler aufgetreten",
 		"lab": {
 			"someexamswithoutresultpleasecheck": "Einige Prüfungen ohne Ergebnis, bitte überprüfen."
+		},
+		"reductionplan": {
+			"integrity_violation": "Datenintegritätsverletzung des Ermäßigungsplans.",
+			"not_found": "Ermäßigungsplan nicht gefunden.",
+			"description_duplicate": "Ein Ermäßigungsplan mit dieser Bezeichnung existiert bereits."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Datenintegritätsverletzung des Ermäßigungsplans.",
+			"not_found": "Ermäßigungsplan nicht gefunden.",
+			"description_duplicate": "Ein Ermäßigungsplan mit dieser Bezeichnung existiert bereits."
 		}
 	},
 	"validations": {
@@ -376,7 +386,8 @@
 		"users": "Benutzer & Gruppen",
 		"types": "Typen verwalten",
 		"hospitalInfo": "Krankenhausinfo",
-		"hospital": "Krankenhaus"
+		"hospital": "Krankenhaus",
+		"reductionPlans": "Ermäßigungspläne"
 	},
 	"operation": {
 		"newoperation": "Neue Operation",
@@ -797,15 +808,33 @@
 			"elderly": "Älter"
 		},
 		"lab": {
-			"undefined": { "txt": "Nicht definiert" },
-			"blood": { "txt": "Blut" },
-			"cfs": { "txt": "CFS" },
-			"film": { "txt": "FILM" },
-			"sputum": { "txt": "Spucke" },
-			"stool": { "txt": "Stuhl" },
-			"swabs": { "txt": "Wattestäbchen" },
-			"tissues": { "txt": "Gewebe" },
-			"urine": { "txt": "Urin" }
+			"undefined": {
+				"txt": "Nicht definiert"
+			},
+			"blood": {
+				"txt": "Blut"
+			},
+			"cfs": {
+				"txt": "CFS"
+			},
+			"film": {
+				"txt": "FILM"
+			},
+			"sputum": {
+				"txt": "Spucke"
+			},
+			"stool": {
+				"txt": "Stuhl"
+			},
+			"swabs": {
+				"txt": "Wattestäbchen"
+			},
+			"tissues": {
+				"txt": "Gewebe"
+			},
+			"urine": {
+				"txt": "Urin"
+			}
 		}
 	},
 	"exam": {
@@ -856,5 +885,40 @@
 		"opdInclude": "OPD",
 		"ipdInInclude": "IP In",
 		"ipdOutInclude": "IP Out"
+	},
+	"reductionPlan": {
+		"addReductionPlan": "Ermäßigungsplan hinzufügen",
+		"addNewReductionPlan": "Neuen Ermäßigungsplan hinzufügen",
+		"editReductionPlan": "Ermäßigungsplan bearbeiten",
+		"saveReductionPlan": "Ermäßigungsplan speichern",
+		"updateReductionPlan": "Änderungen speichern",
+		"description": "Bezeichnung",
+		"medicalRate": "Medikamente Satz (%)",
+		"examRate": "Untersuchungen Satz (%)",
+		"operationRate": "Operationen Satz (%)",
+		"otherRate": "Sonstige Satz (%)",
+		"generalRates": "Allgemeine Ermäßigungssätze",
+		"specificReductions": "Spezifische Ermäßigungen",
+		"medicals": "Medikamente",
+		"exams": "Untersuchungen",
+		"operations": "Operationen",
+		"others": "Sonstige Preise",
+		"item": "Element",
+		"rate": "Satz (%)",
+		"actions": "Aktionen",
+		"addItem": "Hinzufügen",
+		"selectMedical": "Medikament auswählen...",
+		"selectExam": "Untersuchung auswählen...",
+		"selectOperation": "Operation auswählen...",
+		"selectOther": "Sonstigen Preis auswählen...",
+		"removeAll": "Alle entfernen",
+		"noSpecificReductions": "Keine spezifischen Ermäßigungen definiert (allgemeiner Satz gilt).",
+		"deleting": "Ermäßigungsplan wird gelöscht...",
+		"deleted": "Ermäßigungsplan gelöscht",
+		"deleteSuccess": "Ermäßigungsplan erfolgreich gelöscht",
+		"created": "Ermäßigungsplan erstellt",
+		"createSuccess": "Ermäßigungsplan erfolgreich erstellt",
+		"updated": "Ermäßigungsplan aktualisiert",
+		"updateSuccess": "Ermäßigungsplan erfolgreich aktualisiert"
 	}
 }
