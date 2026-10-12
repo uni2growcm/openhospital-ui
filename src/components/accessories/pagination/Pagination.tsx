@@ -98,7 +98,7 @@ const Pagination: FunctionComponent<IProps> = ({
 					type="button"
 					variant="outlined"
 					disabled={page === 0 || disabled}
-					onClick={() => setPage((p) => Math.max(0, p - 1))}
+					onClick={() => setPage(Math.max(0, page - 1))}
 				>
 					{t('common.previous')}
 				</Button>
@@ -120,7 +120,7 @@ const Pagination: FunctionComponent<IProps> = ({
 					type="button"
 					variant="outlined"
 					disabled={page + 1 >= totalPages || disabled}
-					onClick={() => setPage((p) => p + 1)}
+					onClick={() => setPage(page + 1)}
 				>
 					{t('common.next')}
 				</Button>

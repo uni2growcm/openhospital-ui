@@ -134,8 +134,6 @@ export const Exams: FC = () => {
 		setCanceledObjCode(code === undefined ? '' : `${code}`);
 		dispatch(cancelLab(code));
 	};
-	const onPageChange = (e: any, page: number) => handlePageChange(e, page - 1);
-
 	const errorMessage = useAppSelector((state: IState) =>
 		state.laboratories.searchLabs.error?.message
 			? state.laboratories.searchLabs.error?.message
@@ -201,9 +199,10 @@ export const Exams: FC = () => {
 									handleEdit={onEdit}
 								/>
 								<Pagination
-									page={(pageInfo?.page ?? 0) + 1}
-									count={pageInfo?.totalPages}
-									onChange={onPageChange}
+									page={pageInfo?.page ?? 0}
+									totalPages={pageInfo?.totalPages ?? 0}
+									totalElements={pageInfo?.totalNbOfElements}
+									setPage={(p) => handlePageChange(undefined, p)}
 								/>
 							</>
 						)}

@@ -41,8 +41,6 @@ export const Opds: FC = () => {
 		setFilter(initialFilter as TFilterValues);
 	};
 
-	const onPageChange = (e: any, page: number) => handlePageChange(e, page - 1);
-
 	const errorMessage = error || t('common.somethingwrong');
 
 	useEffect(() => {
@@ -99,9 +97,10 @@ export const Opds: FC = () => {
 								/>
 								<OpdTable data={data ?? []} />
 								<Pagination
-									page={(pageInfo?.page ?? 0) + 1}
-									count={pageInfo?.totalPages}
-									onChange={onPageChange}
+									page={pageInfo?.page ?? 0}
+									totalPages={pageInfo?.totalPages ?? 0}
+									totalElements={pageInfo?.totalNbOfElements}
+									setPage={(p) => handlePageChange(undefined, p)}
 								/>
 							</Permission>
 						);
