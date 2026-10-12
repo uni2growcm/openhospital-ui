@@ -7,6 +7,16 @@
 		"internalerror": "Une erreur interne s'est produite",
 		"lab": {
 			"someexamswithoutresultpleasecheck": "Certains examens n'ont pas de résultats. Veuillez vérifier."
+		},
+		"articleFamily": {
+			"code_exists": "Une famille d'articles avec ce code existe déjà.",
+			"not_found": "Famille d'articles non trouvée.",
+			"integrity_violation": "Violation d'intégrité des données de la famille d'articles."
+		},
+		"articlefamily": {
+			"code_exists": "Une famille d'articles avec ce code existe déjà.",
+			"not_found": "Famille d'articles non trouvée.",
+			"integrity_violation": "Violation d'intégrité des données de la famille d'articles."
 		}
 	},
 	"validations": {
@@ -413,6 +423,7 @@
 		"vaccines": "Vaccins",
 		"prices": "Liste de prix",
 		"suppliers": "Fournisseurs",
+		"articleFamilies": "Familles d'articles",
 		"telemetry": "Télémétrie",
 		"users": "Utilisateurs & Groupes",
 		"types": "Gérer les types",
@@ -883,15 +894,33 @@
 			"elderly": "Âgé"
 		},
 		"lab": {
-			"undefined": { "txt": "Indéfini" },
-			"blood": { "txt": "Sang" },
-			"cfs": { "txt": "CFS" },
-			"film": { "txt": "FILM" },
-			"sputum": { "txt": "Sputum" },
-			"stool": { "txt": "Excréments" },
-			"swabs": { "txt": "Écouvillons" },
-			"tissues": { "txt": "Tissus" },
-			"urine": { "txt": "Urine" }
+			"undefined": {
+				"txt": "Indéfini"
+			},
+			"blood": {
+				"txt": "Sang"
+			},
+			"cfs": {
+				"txt": "CFS"
+			},
+			"film": {
+				"txt": "FILM"
+			},
+			"sputum": {
+				"txt": "Sputum"
+			},
+			"stool": {
+				"txt": "Excréments"
+			},
+			"swabs": {
+				"txt": "Écouvillons"
+			},
+			"tissues": {
+				"txt": "Tissus"
+			},
+			"urine": {
+				"txt": "Urine"
+			}
 		},
 		"common": {
 			"thecodeisalreadyinuse": {
@@ -1137,6 +1166,24 @@
 		"deleted": "Fournisseur supprimé",
 		"deleting": "Suppression du fournisseur...",
 		"deleteSuccess": "Fournisseur supprimé avec succès !"
+	},
+	"articleFamily": {
+		"searchPlaceholder": "Rechercher une famille d'articles...",
+		"id": "ID Famille d'articles",
+		"code": "Code",
+		"description": "Description",
+		"addNewArticleFamily": "Ajouter une nouvelle famille d'articles",
+		"editArticleFamily": "Modifier la famille d'articles",
+		"updateArticleFamily": "Enregistrer les modifications",
+		"saveArticleFamily": "Enregistrer",
+		"addArticleFamily": "Nouvelle famille d'articles",
+		"updated": "Famille d'articles mise à jour",
+		"updateSuccess": "La famille d'articles a été mise à jour avec succès !",
+		"created": "Famille d'articles créée",
+		"createSuccess": "La famille d'articles a été créée avec succès !",
+		"deleted": "Famille d'articles supprimée",
+		"deleting": "Suppression de la famille d'articles...",
+		"deleteSuccess": "La famille d'articles a été supprimée avec succès !"
 	},
 	"ward": {
 		"code": "Code",

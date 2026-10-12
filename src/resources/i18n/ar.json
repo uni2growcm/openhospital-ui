@@ -233,7 +233,8 @@
 		"managebills": "Manage Bills",
 		"billrecords": "Bill Records",
 		"visits": "Visits",
-		"patients": "Patients"
+		"patients": "Patients",
+		"articleFamilies": "عائلات الأصناف"
 	},
 	"operation": {
 		"newoperation": "New Operation",
@@ -538,5 +539,35 @@
 		"cs": "Czech",
 		"sq": "Albanian",
 		"zh": "Chinese"
+	},
+	"errors": {
+		"articlefamily": {
+			"code_exists": "توجد عائلة أصناف بهذا الرمز بالفعل.",
+			"not_found": "عائلة الأصناف غير موجودة.",
+			"integrity_violation": "انتهاك سلامة بيانات عائلة الأصناف."
+		},
+		"articleFamily": {
+			"code_exists": "توجد عائلة أصناف بهذا الرمز بالفعل.",
+			"not_found": "عائلة الأصناف غير موجودة.",
+			"integrity_violation": "انتهاك سلامة بيانات عائلة الأصناف."
+		}
+	},
+	"articleFamily": {
+		"searchPlaceholder": "البحث عن عائلة أصناف...",
+		"id": "معرف عائلة الأصناف",
+		"code": "الرمز",
+		"description": "الوصف",
+		"addNewArticleFamily": "إضافة عائلة أصناف جديدة",
+		"editArticleFamily": "تعديل عائلة الأصناف",
+		"updateArticleFamily": "حفظ التغييرات",
+		"saveArticleFamily": "حفظ",
+		"addArticleFamily": "عائلة أصناف جديدة",
+		"updated": "تم تحديث عائلة الأصناف",
+		"updateSuccess": "تم تحديث عائلة الأصناف بنجاح!",
+		"created": "تم إنشاء عائلة الأصناف",
+		"createSuccess": "تم إنشاء عائلة الأصناف بنجاح!",
+		"deleted": "تم حذف عائلة الأصناف",
+		"deleting": "جارٍ حذف عائلة الأصناف...",
+		"deleteSuccess": "تم حذف عائلة الأصناف بنجاح!"
 	}
 }

@@ -105,7 +105,8 @@
 		"searchpatient": "Search Patient",
 		"patientdashboard": "Patient Dashboard",
 		"newtherapy": "New Therapy",
-		"managetherapy": "Manage Therapy"
+		"managetherapy": "Manage Therapy",
+		"articleFamilies": "项目系列"
 	},
 	"common": {
 		"ok": "OK",
@@ -161,5 +162,35 @@
 		"therapy": "Therapy",
 		"opd": "Diagnostics",
 		"booking": "Prescriptions"
+	},
+	"errors": {
+		"articlefamily": {
+			"code_exists": "具有此代码的项目系列已存在。",
+			"not_found": "未找到项目系列。",
+			"integrity_violation": "项目系列数据完整性违规。"
+		},
+		"articleFamily": {
+			"code_exists": "具有此代码的项目系列已存在。",
+			"not_found": "未找到项目系列。",
+			"integrity_violation": "项目系列数据完整性违规。"
+		}
+	},
+	"articleFamily": {
+		"searchPlaceholder": "搜索项目系列...",
+		"id": "项目系列 ID",
+		"code": "代码",
+		"description": "描述",
+		"addNewArticleFamily": "添加新项目系列",
+		"editArticleFamily": "编辑项目系列",
+		"updateArticleFamily": "保存更改",
+		"saveArticleFamily": "保存",
+		"addArticleFamily": "新项目系列",
+		"updated": "项目系列已更新",
+		"updateSuccess": "项目系列更新成功！",
+		"created": "Article family created",
+		"createSuccess": "Article family has been created successfully!",
+		"deleted": "Article family deleted",
+		"deleting": "Deleting article family...",
+		"deleteSuccess": "Article family has been deleted successfully!"
 	}
 }

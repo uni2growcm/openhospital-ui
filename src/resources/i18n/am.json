@@ -7,6 +7,16 @@
 		"internalerror": "የውስጥ ስህተት ተከስቷል።",
 		"lab": {
 			"someexamswithoutresultpleasecheck": "አንዳንድ ፈተናዎች ያለ ውጤት እባክዎ ያረጋግጡ።"
+		},
+		"articlefamily": {
+			"code_exists": "በዚህ ኮድ ያለ የዕቃ ቤተሰብ አስቀድሞ አለ።",
+			"not_found": "የዕቃ ቤተሰብ አልተገኘም።",
+			"integrity_violation": "የዕቃ ቤተሰብ የውሂብ ታማኝነት ጥሰት።"
+		},
+		"articleFamily": {
+			"code_exists": "በዚህ ኮድ ያለ የዕቃ ቤተሰብ አስቀድሞ አለ።",
+			"not_found": "የዕቃ ቤተሰብ አልተገኘም።",
+			"integrity_violation": "የዕቃ ቤተሰብ የውሂብ ታማኝነት ጥሰት።"
 		}
 	},
 	"validations": {
@@ -416,7 +426,8 @@
 		"users": "ተጠቃሚዎች እና ቡድኖች",
 		"types": "ዓይነቶችን ያስተዳድሩ",
 		"hospitalInfo": "የሆስፒታል መረጃ",
-		"hospital": "ሆስፒታል"
+		"hospital": "ሆስፒታል",
+		"articleFamilies": "የዕቃ ቤተሰቦች"
 	},
 	"operation": {
 		"newoperation": "አዲስ ኦፕሬሽን",
@@ -875,15 +886,33 @@
 			"elderly": "አረጋውያን"
 		},
 		"lab": {
-			"undefined": { "txt": "ያልተገለጸ" },
-			"blood": { "txt": "ደም" },
-			"cfs": { "txt": "ሲኤፍኤስ" },
-			"film": { "txt": "ፊልም" },
-			"sputum": { "txt": "አክታ" },
-			"stool": { "txt": "በርጩማ" },
-			"swabs": { "txt": "ስዋዎች" },
-			"tissues": { "txt": "ቲሹዎች" },
-			"urine": { "txt": "ሽንት" }
+			"undefined": {
+				"txt": "ያልተገለጸ"
+			},
+			"blood": {
+				"txt": "ደም"
+			},
+			"cfs": {
+				"txt": "ሲኤፍኤስ"
+			},
+			"film": {
+				"txt": "ፊልም"
+			},
+			"sputum": {
+				"txt": "አክታ"
+			},
+			"stool": {
+				"txt": "በርጩማ"
+			},
+			"swabs": {
+				"txt": "ስዋዎች"
+			},
+			"tissues": {
+				"txt": "ቲሹዎች"
+			},
+			"urine": {
+				"txt": "ሽንት"
+			}
 		},
 		"common": {
 			"thecodeisalreadyinuse": {
@@ -1225,5 +1254,23 @@
 		"updateSuccess": "የፈተናው አይነት በተሳካ ሁኔታ ዘምኗል!",
 		"cancelCreation": "እርግጠኛ ነህ የፈተና አይነት መፍጠር መሰረዝህን እርግጠኛ ነህ?",
 		"cancelUpdate": "እርግጠኛ ነህ የፈተናውን አይነት ማዘመን መሰረዝህን እርግጠኛ ነህ?"
+	},
+	"articleFamily": {
+		"searchPlaceholder": "የዕቃ ቤተሰብ ፈልግ...",
+		"id": "የዕቃ ቤተሰብ መለያ",
+		"code": "ኮድ",
+		"description": "መግለጫ",
+		"addNewArticleFamily": "አዲስ የዕቃ ቤተሰብ አክል",
+		"editArticleFamily": "የዕቃ ቤተሰብ አርትዕ",
+		"updateArticleFamily": "ለውጦችን አስቀምጥ",
+		"saveArticleFamily": "አስቀምጥ",
+		"addArticleFamily": "አዲስ የዕቃ ቤተሰብ",
+		"updated": "የዕቃ ቤተሰብ ተዘምኗል",
+		"updateSuccess": "የዕቃ ቤተሰብ በተሳካ ሁኔታ ተዘምኗል!",
+		"created": "የዕቃ ቤተሰብ ተፈጥሯል",
+		"createSuccess": "የዕቃ ቤተሰብ በተሳካ ሁኔታ ተፈጥሯል!",
+		"deleted": "የዕቃ ቤተሰብ ተሰርዟል",
+		"deleting": "የዕቃ ቤተሰብ በመሰረዝ ላይ...",
+		"deleteSuccess": "የዕቃ ቤተሰብ በተሳካ ሁኔታ ተሰርዟል!"
 	}
 }

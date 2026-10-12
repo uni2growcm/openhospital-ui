@@ -233,7 +233,8 @@
 		"managebills": "Manage Bills",
 		"billrecords": "Bill Records",
 		"visits": "Visits",
-		"patients": "Patients"
+		"patients": "Patients",
+		"articleFamilies": "Familias de artículos"
 	},
 	"operation": {
 		"newoperation": "New Operation",
@@ -538,5 +539,35 @@
 		"cs": "Czech",
 		"sq": "Albanian",
 		"zh": "Chinese"
+	},
+	"errors": {
+		"articlefamily": {
+			"code_exists": "Ya existe una familia de artículos con este código.",
+			"not_found": "Familia de artículos no encontrada.",
+			"integrity_violation": "Violación de integridad de datos de la familia de artículos."
+		},
+		"articleFamily": {
+			"code_exists": "Ya existe una familia de artículos con este código.",
+			"not_found": "Familia de artículos no encontrada.",
+			"integrity_violation": "Violación de integridad de datos de la familia de artículos."
+		}
+	},
+	"articleFamily": {
+		"searchPlaceholder": "Buscar familia de artículos...",
+		"id": "ID de la familia de artículos",
+		"code": "Código",
+		"description": "Descripción",
+		"addNewArticleFamily": "Agregar una nueva familia de artículos",
+		"editArticleFamily": "Editar familia de artículos",
+		"updateArticleFamily": "Guardar cambios",
+		"saveArticleFamily": "Guardar",
+		"addArticleFamily": "Nueva familia de artículos",
+		"updated": "Familia de artículos actualizada",
+		"updateSuccess": "¡La familia de artículos se ha actualizado correctamente!",
+		"created": "Familia de artículos creada",
+		"createSuccess": "¡La familia de artículos se ha creado correctamente!",
+		"deleted": "Familia de artículos eliminada",
+		"deleting": "Eliminando familia de artículos...",
+		"deleteSuccess": "¡La familia de artículos se ha eliminado correctamente!"
 	}
 }

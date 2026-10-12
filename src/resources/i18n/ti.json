@@ -7,6 +7,16 @@
 		"internalerror": "ውሽጣዊ ጌጋ ኣጋጢሙ",
 		"lab": {
 			"someexamswithoutresultpleasecheck": "ገለ ውጽኢት ዘይብሉ ፈተናታት በጃኹም መርምሩ።"
+		},
+		"articlefamily": {
+			"code_exists": "በዚ ኮድ ዘለዎ ናይ ኣቕሓ ስድራቤት ድሮ ኣሎ።",
+			"not_found": "ናይ ኣቕሓ ስድራቤት ኣይተረኽበን።",
+			"integrity_violation": "ናይ ኣቕሓ ስድራቤት ዳታ ምጥሓስ ቅኑዕነት።"
+		},
+		"articleFamily": {
+			"code_exists": "በዚ ኮድ ዘለዎ ናይ ኣቕሓ ስድራቤት ድሮ ኣሎ።",
+			"not_found": "ናይ ኣቕሓ ስድራቤት ኣይተረኽበን።",
+			"integrity_violation": "ናይ ኣቕሓ ስድራቤት ዳታ ምጥሓስ ቅኑዕነት።"
 		}
 	},
 	"validations": {
@@ -416,7 +426,8 @@
 		"users": "ተጠቀምቲ &amp; ጉጅለታት",
 		"types": "ዓይነታት ምምሕዳር",
 		"hospitalInfo": "ሆስፒታል ሓበሬታ",
-		"hospital": "ሆስፒታል"
+		"hospital": "ሆስፒታል",
+		"articleFamilies": "ናይ ኣቕሓ ስድራቤታት"
 	},
 	"operation": {
 		"newoperation": "ሓድሽ ስርሒት።",
@@ -875,15 +886,33 @@
 			"elderly": "ዓብዪ"
 		},
 		"lab": {
-			"undefined": { "txt": "ዘይተገልጸ" },
-			"blood": { "txt": "ደም" },
-			"cfs": { "txt": "ሲኤፍኤስ" },
-			"film": { "txt": "ፊልሚ" },
-			"sputum": { "txt": "ረስኒ" },
-			"stool": { "txt": "ድኳ" },
-			"swabs": { "txt": "ስዋብ" },
-			"tissues": { "txt": "ቲሹታት" },
-			"urine": { "txt": "ሽንቲ" }
+			"undefined": {
+				"txt": "ዘይተገልጸ"
+			},
+			"blood": {
+				"txt": "ደም"
+			},
+			"cfs": {
+				"txt": "ሲኤፍኤስ"
+			},
+			"film": {
+				"txt": "ፊልሚ"
+			},
+			"sputum": {
+				"txt": "ረስኒ"
+			},
+			"stool": {
+				"txt": "ድኳ"
+			},
+			"swabs": {
+				"txt": "ስዋብ"
+			},
+			"tissues": {
+				"txt": "ቲሹታት"
+			},
+			"urine": {
+				"txt": "ሽንቲ"
+			}
 		},
 		"common": {
 			"thecodeisalreadyinuse": {
@@ -1225,5 +1254,23 @@
 		"updateSuccess": "ዓይነት ፈተና ብዓወት ተሓዲሱ ኣሎ!",
 		"cancelCreation": "ርግጸኛ ዲኻ ነቲ ናይ ፈተና ዓይነት ምፍጣር ክትስርዞ?",
 		"cancelUpdate": "ርግጸኛ ዲኻ ነቲ ናይ ፈተና ዓይነት update ክትስርዞ?"
+	},
+	"articleFamily": {
+		"searchPlaceholder": "ናይ ኣቕሓ ስድራቤት ድለ...",
+		"id": "መፍለዪ ናይ ኣቕሓ ስድራቤት",
+		"code": "ኮድ",
+		"description": "መግለጺ",
+		"addNewArticleFamily": "ሓድሽ ናይ ኣቕሓ ስድራቤት ወስኽ",
+		"editArticleFamily": "Edit article family",
+		"updateArticleFamily": "Save changes",
+		"saveArticleFamily": "Save",
+		"addArticleFamily": "New article family",
+		"updated": "Article family updated",
+		"updateSuccess": "Article family has been updated successfully!",
+		"created": "Article family created",
+		"createSuccess": "Article family has been created successfully!",
+		"deleted": "Article family deleted",
+		"deleting": "Deleting article family...",
+		"deleteSuccess": "Article family has been deleted successfully!"
 	}
 }
