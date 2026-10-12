@@ -70,6 +70,157 @@ paths:
                 $ref: "#/components/schemas/WardDTO"
       security:
       - bearerAuth: []
+  /staff:
+    get:
+      tags:
+      - Staff
+      operationId: getStaff
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StaffDTO"
+      security:
+      - bearerAuth: []
+    put:
+      tags:
+      - Staff
+      operationId: updateStaff
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StaffDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StaffDTO"
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - Staff
+      operationId: newStaff
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StaffDTO"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StaffDTO"
+      security:
+      - bearerAuth: []
+  /staff/{code}:
+    get:
+      tags:
+      - Staff
+      operationId: getStaff_1
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StaffDTO"
+      security:
+      - bearerAuth: []
+    delete:
+      tags:
+      - Staff
+      operationId: deleteStaff
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+      security:
+      - bearerAuth: []
+  /staff/paged:
+    get:
+      tags:
+      - Staff
+      operationId: getStaffPaged
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - name: keyword
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageStaffDTO"
+      security:
+      - bearerAuth: []
+  /staff/search:
+    get:
+      tags:
+      - Staff
+      operationId: searchStaff
+      parameters:
+      - name: keyword
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StaffDTO"
+      security:
+      - bearerAuth: []
   /visits/{visitID}:
     put:
       tags:
@@ -6895,6 +7046,43 @@ components:
       - docs
       - nurs
       - visitDuration
+    StaffDTO:
+      type: object
+      description: Class representing a staff member (personnel)
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The staff member's code
+        firstName:
+          type: string
+          description: The first name of the staff member
+          maxLength: 50
+        lastName:
+          type: string
+          description: The last name of the staff member
+          maxLength: 50
+        profession:
+          type: string
+          description: The profession of the staff member
+          maxLength: 50
+        position:
+          type: string
+          description: The position of the staff member
+          maxLength: 50
+        phone:
+          type: string
+          description: The phone number of the staff member
+          maxLength: 50
+        lock:
+          type: integer
+          format: int32
+          description: lock
+          example: 0
+      required:
+      - firstName
+      - lastName
+      - position
     PatientDTO:
       type: object
       description: Class representing a patient
@@ -9233,6 +9421,15 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/OpdDTO"
+        pageInfo:
+          $ref: "#/components/schemas/PageInfoDTO"
+    PageStaffDTO:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/StaffDTO"
         pageInfo:
           $ref: "#/components/schemas/PageInfoDTO"
     MedicalWardDTO:

@@ -32,6 +32,27 @@ export const ADMIN_ROUTES: RouteObject[] = [
 			})),
 	},
 	{
+		path: getPath(PATHS.admin_staff),
+		lazy: async () =>
+			import('../../components/accessories/admin/staff').then((module) => ({
+				Component: module.Staff,
+			})),
+	},
+	{
+		path: getPath(PATHS.admin_staff_new),
+		lazy: async () =>
+			import('../../components/accessories/admin/staff').then((module) => ({
+				Component: module.NewStaff,
+			})),
+	},
+	{
+		path: getPath(PATHS.admin_staff_edit),
+		lazy: async () =>
+			import('../../components/accessories/admin/staff').then((module) => ({
+				Component: module.EditStaff,
+			})),
+	},
+	{
 		path: getPath(PATHS.admin_diseases),
 		lazy: async () =>
 			import('../../components/accessories/admin/diseases').then((module) => ({
