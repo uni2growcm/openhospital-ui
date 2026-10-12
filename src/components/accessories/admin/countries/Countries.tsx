@@ -65,24 +65,22 @@ export const Countries = () => {
 							}}
 						/>
 					</div>
+					<div className={classes.headerActions}>
+						<Button
+							onClick={() => {
+								navigate(PATHS.admin_countries_new);
+							}}
+							type="button"
+							variant="contained"
+							color="primary"
+						>
+							{t('country.addCountry')}
+						</Button>
+					</div>
 				</div>
 				<CountriesTable
 					onEdit={handleEdit}
 					onDelete={handleDelete}
-					headerActions={
-						<div className={classes.headerActions}>
-							<Button
-								onClick={() => {
-									navigate(PATHS.admin_countries_new);
-								}}
-								type="button"
-								variant="contained"
-								color="primary"
-							>
-								{t('country.addCountry')}
-							</Button>
-						</div>
-					}
 				/>
 			</div>
 		</AdminActivityContent>
