@@ -1,4 +1,5 @@
-import { Tooltip } from '@mui/material';
+import { AddCircleOutline } from '@mui/icons-material';
+import { IconButton, Tooltip } from '@mui/material';
 import { useFormik } from 'formik';
 import { get, has, isEmpty } from 'lodash';
 import moment from 'moment';
@@ -15,14 +16,18 @@ import { useNavigate } from 'react-router-dom';
 import { number, object, string } from 'yup';
 import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
 import { getAgeTypes } from '~/state/types/ageTypes';
+import { getCountries } from '~/state/types/countries';
+import { getReductionPlans } from '~/state/types/reductionPlans';
 import warningIcon from '../../../assets/warning-icon.png';
 import { formCustomization } from '../../../customization/formCustomization';
+import type { CountryDTO, PatientDTO } from '../../../generated';
 import {
 	formatAllFieldValues,
 	getBirthDateAndAge,
 	getFromFields,
 	isFieldSuggested,
 } from '../../../libraries/formDataHandling/functions';
+import { getPriceLists } from '../../../state/prices';
 import {
 	createPatientReset,
 	getCities,
@@ -30,10 +35,13 @@ import {
 	updatePatientReset,
 } from '../../../state/patients';
 import { FIELD_VALIDATION, type IState } from '../../../types';
+import AddCountryModal from '../addCountryModal/AddCountryModal';
 import AutocompleteField from '../autocompleteField/AutocompleteField';
 import Button from '../button/Button';
+import CheckboxField from '../checkboxField/CheckboxField';
 import ConfirmationDialog from '../confirmationDialog/ConfirmationDialog';
 import DateField from '../dateField/DateField';
+import PatientAutocomplete from '../patientAutocomplete/PatientAutocomplete';
 import { ProfilePicture } from '../profilePicture/ProfilePicture';
 import SelectField from '../selectField/SelectField';
 import TextField from '../textField/TextField';
@@ -97,6 +105,42 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 	const options = getFromFields(fields, 'options');
 	const cityOptions = useCityOptions(cities);
 
+	const countries = useAppSelector(
+		(state: IState) => state.types.countries.getAll.data,
+	);
+	const countryOptions = useMemo(
+		() =>
+			countries?.map((country) => ({
+				label: country.name ?? '',
+				value: country.id?.toString() ?? '',
+			})) ?? [],
+		[countries],
+	);
+
+	const priceLists = useAppSelector(
+		(state: IState) => state.prices.getPriceLists.data,
+	);
+	const priceListOptions = useMemo(
+		() =>
+			priceLists?.map((priceList) => ({
+				label: priceList.name ?? '',
+				value: priceList.id?.toString() ?? '',
+			})) ?? [],
+		[priceLists],
+	);
+
+	const reductionPlans = useAppSelector(
+		(state: IState) => state.types.reductionPlans.getAll.data,
+	);
+	const reductionPlanOptions = useMemo(
+		() =>
+			reductionPlans?.map((reductionPlan) => ({
+				label: reductionPlan.description ?? '',
+				value: reductionPlan.id?.toString() ?? '',
+			})) ?? [],
+		[reductionPlans],
+	);
+
 	const ageRangeOptions = useAppSelector((state: IState) =>
 		state.types.ageTypes.getAll.data?.map((e) => ({
 			value: e.code ?? '',
@@ -138,6 +182,18 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 				birthDate: birthDate,
 				age: age,
 				agetype: '',
+				country: formattedValues.country
+					? { id: Number(formattedValues.country) }
+					: null,
+				affiliatedPatientCode: formattedValues.affiliatedPatientCode
+					? Number(formattedValues.affiliatedPatientCode)
+					: null,
+				priceList: formattedValues.priceList
+					? { id: Number(formattedValues.priceList) }
+					: null,
+				reductionPlan: formattedValues.reductionPlan
+					? { id: Number(formattedValues.reductionPlan) }
+					: null,
 			} as any);
 		},
 	});
@@ -187,6 +243,32 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 		[setFieldValue, handleBlur],
 	);
 
+	const onAffiliatedPatientBlur = useCallback(
+		(e: React.FocusEvent<HTMLInputElement>, value: PatientDTO | undefined) => {
+			handleBlur(e);
+			setFieldValue('affiliatedPatientCode', value?.code?.toString() ?? '');
+		},
+		[setFieldValue, handleBlur],
+	);
+
+	const handleCheckboxChange = useCallback(
+		(fieldName: string) => (value: boolean) => {
+			setFieldValue(fieldName, value ? 'true' : 'false');
+		},
+		[setFieldValue],
+	);
+
+	const [isAddCountryOpen, setIsAddCountryOpen] = useState(false);
+
+	const onCountryCreated = useCallback(
+		(country: CountryDTO) => {
+			dispatch(getCountries());
+			setFieldValue('country', country.id?.toString() ?? '');
+			setIsAddCountryOpen(false);
+		},
+		[dispatch, setFieldValue],
+	);
+
 	const [openResetConfirmation, setOpenResetConfirmation] = useState(false);
 
 	const handleResetConfirmation = () => {
@@ -196,6 +278,9 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 
 	useEffect(() => {
 		dispatch(getCities());
+		dispatch(getCountries());
+		dispatch(getPriceLists());
+		dispatch(getReductionPlans());
 	}, [dispatch]);
 
 	useEffect(() => {
@@ -403,6 +488,96 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 				<div className="row start-sm center-xs">
 					<div className="patientDataForm__item">
 						<TextField
+							field={formik.getFieldProps('birthPlace')}
+							theme="regular"
+							label={t('patient.birthplace')}
+							isValid={isValid('birthPlace')}
+							errorText={getErrorText('birthPlace')}
+							onBlur={formik.handleBlur}
+							disabled={isLoading}
+							required={
+								isFieldSuggested(formCustomization, 'birthPlace')
+									? FIELD_VALIDATION.SUGGESTED
+									: FIELD_VALIDATION.IDLE
+							}
+							maxLength={100}
+						/>
+					</div>
+
+					<div className="patientDataForm__item patientDataForm__itemWithAction">
+						<SelectField
+							fieldName="country"
+							fieldValue={formik.values.country}
+							label={t('patient.country')}
+							isValid={isValid('country')}
+							errorText={getErrorText('country')}
+							onBlur={onBlurCallback('country')}
+							options={countryOptions}
+							disabled={isLoading}
+							required={FIELD_VALIDATION.IDLE}
+						/>
+						<IconButton
+							aria-label={t('patient.addcountry')}
+							onClick={() => setIsAddCountryOpen(true)}
+							disabled={isLoading}
+						>
+							<AddCircleOutline />
+						</IconButton>
+					</div>
+
+					<div className="patientDataForm__item">
+						<PatientAutocomplete
+							fieldName="affiliatedPatientCode"
+							fieldValue={Number(formik.values.affiliatedPatientCode) || 0}
+							label={t('patient.affiliatedpatient')}
+							isValid={isValid('affiliatedPatientCode')}
+							errorText={getErrorText('affiliatedPatientCode')}
+							onBlur={onAffiliatedPatientBlur}
+							disabled={isLoading}
+						/>
+					</div>
+
+					<div className="patientDataForm__item">
+						<TextField
+							field={formik.getFieldProps('numberOfChildren')}
+							theme="regular"
+							label={t('patient.numberofchildren')}
+							isValid={isValid('numberOfChildren')}
+							errorText={getErrorText('numberOfChildren')}
+							onBlur={formik.handleBlur}
+							disabled={isLoading}
+							type="number"
+							required={
+								isFieldSuggested(formCustomization, 'numberOfChildren')
+									? FIELD_VALIDATION.SUGGESTED
+									: FIELD_VALIDATION.IDLE
+							}
+						/>
+					</div>
+
+					<div className="patientDataForm__item">
+						<SelectField
+							fieldName="geographicPosition"
+							fieldValue={formik.values.geographicPosition}
+							label={t('patient.geographicposition')}
+							isValid={isValid('geographicPosition')}
+							errorText={getErrorText('geographicPosition')}
+							onBlur={onBlurCallback('geographicPosition')}
+							options={options.geographicPosition}
+							translateOptions={true}
+							disabled={isLoading}
+							required={
+								isFieldSuggested(formCustomization, 'geographicPosition')
+									? FIELD_VALIDATION.SUGGESTED
+									: FIELD_VALIDATION.IDLE
+							}
+						/>
+					</div>
+				</div>
+
+				<div className="row start-sm center-xs">
+					<div className="patientDataForm__item">
+						<TextField
 							field={formik.getFieldProps('motherName')}
 							theme="regular"
 							label={t('patient.mothername')}
@@ -416,6 +591,21 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 									: FIELD_VALIDATION.IDLE
 							}
 							maxLength={50}
+						/>
+					</div>
+
+					<div className="patientDataForm__item">
+						<SelectField
+							fieldName="mother"
+							fieldValue={formik.values.mother}
+							label={t('patient.mothername')}
+							isValid={isValid('mother')}
+							errorText={getErrorText('mother')}
+							onBlur={onBlurCallback('mother')}
+							options={options.mother}
+							translateOptions={true}
+							disabled={isLoading}
+							required={FIELD_VALIDATION.IDLE}
 						/>
 					</div>
 
@@ -434,6 +624,21 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 									: FIELD_VALIDATION.IDLE
 							}
 							maxLength={50}
+						/>
+					</div>
+
+					<div className="patientDataForm__item">
+						<SelectField
+							fieldName="father"
+							fieldValue={formik.values.father}
+							label={t('patient.fathername')}
+							isValid={isValid('father')}
+							errorText={getErrorText('father')}
+							onBlur={onBlurCallback('father')}
+							options={options.father}
+							translateOptions={true}
+							disabled={isLoading}
+							required={FIELD_VALIDATION.IDLE}
 						/>
 					</div>
 
@@ -521,6 +726,62 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 
 				<div className="row start-sm center-xs">
 					<div className="patientDataForm__item">
+						<TextField
+							field={formik.getFieldProps('parentsResidence')}
+							theme="regular"
+							label={t('patient.parentsresidence')}
+							isValid={isValid('parentsResidence')}
+							errorText={getErrorText('parentsResidence')}
+							onBlur={formik.handleBlur}
+							disabled={isLoading}
+							required={
+								isFieldSuggested(formCustomization, 'parentsResidence')
+									? FIELD_VALIDATION.SUGGESTED
+									: FIELD_VALIDATION.IDLE
+							}
+							maxLength={255}
+						/>
+					</div>
+
+					<div className="patientDataForm__item">
+						<TextField
+							field={formik.getFieldProps('transportMeans')}
+							theme="regular"
+							label={t('patient.transportmeans')}
+							isValid={isValid('transportMeans')}
+							errorText={getErrorText('transportMeans')}
+							onBlur={formik.handleBlur}
+							disabled={isLoading}
+							required={
+								isFieldSuggested(formCustomization, 'transportMeans')
+									? FIELD_VALIDATION.SUGGESTED
+									: FIELD_VALIDATION.IDLE
+							}
+							maxLength={100}
+						/>
+					</div>
+
+					<div className="patientDataForm__item">
+						<TextField
+							field={formik.getFieldProps('blama')}
+							theme="regular"
+							label={t('patient.blama')}
+							isValid={isValid('blama')}
+							errorText={getErrorText('blama')}
+							onBlur={formik.handleBlur}
+							disabled={isLoading}
+							required={
+								isFieldSuggested(formCustomization, 'blama')
+									? FIELD_VALIDATION.SUGGESTED
+									: FIELD_VALIDATION.IDLE
+							}
+							maxLength={255}
+						/>
+					</div>
+				</div>
+
+				<div className="row start-sm center-xs">
+					<div className="patientDataForm__item">
 						<SelectField
 							fieldName="hasInsurance"
 							fieldValue={formik.values.hasInsurance}
@@ -536,6 +797,74 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 									? FIELD_VALIDATION.SUGGESTED
 									: FIELD_VALIDATION.IDLE
 							}
+						/>
+					</div>
+
+					<div className="patientDataForm__item">
+						<SelectField
+							fieldName="maritalStatus"
+							fieldValue={formik.values.maritalStatus}
+							label={t('patient.maritalstatus')}
+							isValid={isValid('maritalStatus')}
+							errorText={getErrorText('maritalStatus')}
+							onBlur={onBlurCallback('maritalStatus')}
+							options={options.maritalStatus}
+							translateOptions={true}
+							disabled={isLoading}
+							required={
+								isFieldSuggested(formCustomization, 'maritalStatus')
+									? FIELD_VALIDATION.SUGGESTED
+									: FIELD_VALIDATION.IDLE
+							}
+						/>
+					</div>
+
+					<div className="patientDataForm__item">
+						<SelectField
+							fieldName="profession"
+							fieldValue={formik.values.profession}
+							label={t('patient.profession')}
+							isValid={isValid('profession')}
+							errorText={getErrorText('profession')}
+							onBlur={onBlurCallback('profession')}
+							options={options.profession}
+							translateOptions={true}
+							disabled={isLoading}
+							required={
+								isFieldSuggested(formCustomization, 'profession')
+									? FIELD_VALIDATION.SUGGESTED
+									: FIELD_VALIDATION.IDLE
+							}
+						/>
+					</div>
+				</div>
+
+				<div className="row start-sm center-xs">
+					<div className="patientDataForm__item">
+						<SelectField
+							fieldName="priceList"
+							fieldValue={formik.values.priceList}
+							label={t('patient.pricelist')}
+							isValid={isValid('priceList')}
+							errorText={getErrorText('priceList')}
+							onBlur={onBlurCallback('priceList')}
+							options={priceListOptions}
+							disabled={isLoading}
+							required={FIELD_VALIDATION.IDLE}
+						/>
+					</div>
+
+					<div className="patientDataForm__item">
+						<SelectField
+							fieldName="reductionPlan"
+							fieldValue={formik.values.reductionPlan}
+							label={t('patient.reductionplan')}
+							isValid={isValid('reductionPlan')}
+							errorText={getErrorText('reductionPlan')}
+							onBlur={onBlurCallback('reductionPlan')}
+							options={reductionPlanOptions}
+							disabled={isLoading}
+							required={FIELD_VALIDATION.IDLE}
 						/>
 					</div>
 				</div>
@@ -557,6 +886,27 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 									: FIELD_VALIDATION.IDLE
 							}
 							maxLength={65535}
+						/>
+					</div>
+				</div>
+
+				<div className="row start-sm center-xs">
+					<div className="patientDataForm__item fullWidth">
+						<CheckboxField
+							fieldName="consensusFlag"
+							checked={formik.values.consensusFlag === 'true'}
+							label={t('patient.consensus')}
+							onChange={handleCheckboxChange('consensusFlag')}
+							disabled={isLoading}
+						/>
+					</div>
+					<div className="patientDataForm__item fullWidth">
+						<CheckboxField
+							fieldName="consensusServiceFlag"
+							checked={formik.values.consensusServiceFlag === 'true'}
+							label={t('patient.consensusservice')}
+							onChange={handleCheckboxChange('consensusServiceFlag')}
+							disabled={isLoading}
 						/>
 					</div>
 				</div>
@@ -617,6 +967,12 @@ const PatientDataForm: FunctionComponent<TProps> = ({
 						handleSecondaryButtonClick={() => setOpenResetConfirmation(false)}
 					/>
 				)}
+
+				<AddCountryModal
+					isOpen={isAddCountryOpen}
+					onClose={() => setIsAddCountryOpen(false)}
+					onCreated={onCountryCreated}
+				/>
 			</form>
 		</div>
 	);

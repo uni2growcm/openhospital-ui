@@ -93,6 +93,15 @@
     }
   }
 
+  .patientDataForm__itemWithAction {
+    display: flex;
+    align-items: center;
+
+    .selectField {
+      flex: 1;
+    }
+  }
+
   .patientDataForm__buttonSet {
     display: flex;
     margin-top: 25px;

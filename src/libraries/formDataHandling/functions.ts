@@ -143,10 +143,20 @@ export const updateFields = (
 ): TFields => {
 	return produce(fields, (draft: Record<string, any>) => {
 		Object.keys(values ?? {}).forEach((key) => {
-			if (draft[key as string]) {
-				draft[key as string].value = values?.[key as keyof PatientDTO];
+			if (!draft[key as string]) {
 				return;
 			}
+			const value = values?.[key as keyof PatientDTO];
+			if (['country', 'priceList', 'reductionPlan'].includes(key)) {
+				draft[key as string].value =
+					(value as { id?: number })?.id?.toString() ?? '';
+				return;
+			}
+			if (['consensusFlag', 'consensusServiceFlag'].includes(key)) {
+				draft[key as string].value = value ? 'true' : 'false';
+				return;
+			}
+			draft[key as string].value = value;
 		});
 	});
 };
