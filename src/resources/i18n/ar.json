@@ -233,7 +233,8 @@
 		"managebills": "Manage Bills",
 		"billrecords": "Bill Records",
 		"visits": "Visits",
-		"patients": "Patients"
+		"patients": "Patients",
+		"staff": "الموظفون"
 	},
 	"operation": {
 		"newoperation": "New Operation",
@@ -538,5 +539,23 @@
 		"cs": "Czech",
 		"sq": "Albanian",
 		"zh": "Chinese"
+	},
+	"staff": {
+		"code": "الرمز",
+		"firstName": "الاسم الأول",
+		"lastName": "اسم العائلة",
+		"profession": "المهنة",
+		"position": "المنصب",
+		"phone": "الهاتف",
+		"addStaff": "إضافة موظف",
+		"editStaff": "تعديل الموظف",
+		"updateStaff": "تحديث الموظف",
+		"saveStaff": "حفظ الموظف",
+		"created": "تم إنشاء الموظف",
+		"updated": "تم تحديث الموظف",
+		"deleted": "تم حذف الموظف",
+		"createSuccess": "تم إنشاء الموظف بنجاح!",
+		"updateSuccess": "تم تحديث الموظف {{code}} بنجاح!",
+		"deleteSuccess": "تم حذف الموظف بنجاح!"
 	}
 }

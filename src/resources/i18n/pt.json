@@ -233,7 +233,8 @@
 		"managebills": "Manage Bills",
 		"billrecords": "Bill Records",
 		"visits": "Visits",
-		"patients": "Patients"
+		"patients": "Patients",
+		"staff": "Pessoal"
 	},
 	"operation": {
 		"newoperation": "New Operation",
@@ -538,5 +539,23 @@
 		"cs": "Czech",
 		"sq": "Albanian",
 		"zh": "Chinese"
+	},
+	"staff": {
+		"code": "Código",
+		"firstName": "Nome",
+		"lastName": "Sobrenome",
+		"profession": "Profissão",
+		"position": "Cargo",
+		"phone": "Telefone",
+		"addStaff": "Adicionar pessoal",
+		"editStaff": "Editar pessoal",
+		"updateStaff": "Atualizar pessoal",
+		"saveStaff": "Salvar pessoal",
+		"created": "Pessoal criado",
+		"updated": "Pessoal atualizado",
+		"deleted": "Pessoal excluído",
+		"createSuccess": "O pessoal foi criado com sucesso!",
+		"updateSuccess": "O pessoal {{code}} foi atualizado com sucesso!",
+		"deleteSuccess": "O pessoal foi excluído com sucesso!"
 	}
 }

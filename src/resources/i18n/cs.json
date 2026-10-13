@@ -105,7 +105,8 @@
 		"searchpatient": "Search Patient",
 		"patientdashboard": "Patient Dashboard",
 		"newtherapy": "New Therapy",
-		"managetherapy": "Manage Therapy"
+		"managetherapy": "Manage Therapy",
+		"staff": "Personál"
 	},
 	"common": {
 		"ok": "OK",
@@ -161,5 +162,23 @@
 		"therapy": "Therapy",
 		"opd": "Diagnostics",
 		"booking": "Prescriptions"
+	},
+	"staff": {
+		"code": "Kód",
+		"firstName": "Jméno",
+		"lastName": "Příjmení",
+		"profession": "Profese",
+		"position": "Pozice",
+		"phone": "Telefon",
+		"addStaff": "Přidat personál",
+		"editStaff": "Upravit personál",
+		"updateStaff": "Aktualizovat personál",
+		"saveStaff": "Uložit personál",
+		"created": "Personál vytvořen",
+		"updated": "Personál aktualizován",
+		"deleted": "Personál smazán",
+		"createSuccess": "Personál byl úspěšně vytvořen!",
+		"updateSuccess": "Personál {{code}} byl úspěšně aktualizován!",
+		"deleteSuccess": "Personál byl úspěšně smazán!"
 	}
 }

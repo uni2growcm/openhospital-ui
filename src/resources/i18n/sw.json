@@ -233,7 +233,8 @@
 		"managebills": "Manage Bills",
 		"billrecords": "Bill Records",
 		"visits": "Visits",
-		"patients": "Patients"
+		"patients": "Patients",
+		"staff": "Wafanyakazi"
 	},
 	"operation": {
 		"newoperation": "New Operation",
@@ -538,5 +539,23 @@
 		"cs": "Czech",
 		"sq": "Albanian",
 		"zh": "Chinese"
+	},
+	"staff": {
+		"code": "Nambari",
+		"firstName": "Jina la kwanza",
+		"lastName": "Jina la mwisho",
+		"profession": "Taaluma",
+		"position": "Wadhifa",
+		"phone": "Simu",
+		"addStaff": "Ongeza mfanyakazi",
+		"editStaff": "Hariri mfanyakazi",
+		"updateStaff": "Sasisha mfanyakazi",
+		"saveStaff": "Hifadhi mfanyakazi",
+		"created": "Mfanyakazi ameongezwa",
+		"updated": "Mfanyakazi amesasishwa",
+		"deleted": "Mfanyakazi amefutwa",
+		"createSuccess": "Mfanyakazi ameongezwa kwa mafanikio!",
+		"updateSuccess": "Mfanyakazi {{code}} amesasishwa kwa mafanikio!",
+		"deleteSuccess": "Mfanyakazi amefutwa kwa mafanikio!"
 	}
 }

@@ -105,7 +105,8 @@
 		"searchpatient": "Search Patient",
 		"patientdashboard": "Patient Dashboard",
 		"newtherapy": "New Therapy",
-		"managetherapy": "Manage Therapy"
+		"managetherapy": "Manage Therapy",
+		"staff": "员工"
 	},
 	"common": {
 		"ok": "OK",
@@ -161,5 +162,23 @@
 		"therapy": "Therapy",
 		"opd": "Diagnostics",
 		"booking": "Prescriptions"
+	},
+	"staff": {
+		"code": "代码",
+		"firstName": "名字",
+		"lastName": "姓氏",
+		"profession": "职业",
+		"position": "职位",
+		"phone": "电话",
+		"addStaff": "添加员工",
+		"editStaff": "编辑员工",
+		"updateStaff": "更新员工",
+		"saveStaff": "保存员工",
+		"created": "员工已创建",
+		"updated": "员工已更新",
+		"deleted": "员工已删除",
+		"createSuccess": "员工已成功创建！",
+		"updateSuccess": "员工 {{code}} 已成功更新！",
+		"deleteSuccess": "员工已成功删除！"
 	}
 }

@@ -11,6 +11,7 @@ import ConfirmationDialog from '../../../confirmationDialog/ConfirmationDialog';
 import InfoBox from '../../../infoBox/InfoBox';
 import Pagination from '../../../pagination/Pagination';
 import Table from '../../../table/Table';
+import type { TFilterField } from '../../../table/filter/types';
 import classes from './StaffTable.module.scss';
 
 const SEARCH_DEBOUNCE_MS = 300;
@@ -48,6 +49,14 @@ export const StaffTable: FunctionComponent<IOwnProps> = ({
 		phone: t('staff.phone'),
 	};
 	const order = ['code', 'firstName', 'lastName', 'profession', 'position', 'phone'];
+
+	const filters: TFilterField[] = [
+		{ key: 'firstName', label: t('staff.firstName'), type: 'text' },
+		{ key: 'lastName', label: t('staff.lastName'), type: 'text' },
+		{ key: 'profession', label: t('staff.profession'), type: 'text' },
+		{ key: 'position', label: t('staff.position'), type: 'text' },
+		{ key: 'phone', label: t('staff.phone'), type: 'text' },
+	];
 
 	const { data: pagedData, status, error } = useAppSelector(
 		(state) => state.staff.pagedStaff,
@@ -139,6 +148,9 @@ export const StaffTable: FunctionComponent<IOwnProps> = ({
 
 	return (
 		<div className={classes.table}>
+			<div className="header">
+				<div className="headerActions">{combinedHeaderActions}</div>
+			</div>
 			{(() => {
 				switch (status) {
 					case 'FAIL':
@@ -159,12 +171,7 @@ export const StaffTable: FunctionComponent<IOwnProps> = ({
 									</div>
 								)}
 								{(data ?? []).length === 0 ? (
-									<>
-										<div className="header">
-											<div className="headerActions">{combinedHeaderActions}</div>
-										</div>
-										<InfoBox type="info" message={t('common.emptydata')} />
-									</>
+									<InfoBox type="info" message={t('common.emptydata')} />
 								) : (
 									<>
 										<Table
@@ -178,10 +185,10 @@ export const StaffTable: FunctionComponent<IOwnProps> = ({
 											onEdit={handleEdit}
 											onDelete={handleDelete}
 											showEmptyCell={false}
+											filterColumns={filters}
 											rawData={data}
 											manualFilter={false}
 											rowKey="code"
-											headerActions={combinedHeaderActions}
 										/>
 										<Pagination
 											page={page}

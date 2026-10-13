@@ -407,6 +407,7 @@
 		"consultancy": "Consulenza",
 		"administration": "Amministrazione",
 		"wards": "Reparti",
+		"staff": "Personale",
 		"diseases": "Malattie",
 		"operations": "Interventi chiururgici",
 		"vaccines": "Vaccini",
@@ -875,15 +876,33 @@
 			"elderly": "Anziani"
 		},
 		"lab": {
-			"undefined": { "txt": "Non definito" },
-			"blood": { "txt": "Sangue" },
-			"cfs": { "txt": "CFS" },
-			"film": { "txt": "FILM" },
-			"sputum": { "txt": "Sputum" },
-			"stool": { "txt": "(Stool) Feci" },
-			"swabs": { "txt": "Tamponi" },
-			"tissues": { "txt": "Tessuti" },
-			"urine": { "txt": "Urine" }
+			"undefined": {
+				"txt": "Non definito"
+			},
+			"blood": {
+				"txt": "Sangue"
+			},
+			"cfs": {
+				"txt": "CFS"
+			},
+			"film": {
+				"txt": "FILM"
+			},
+			"sputum": {
+				"txt": "Sputum"
+			},
+			"stool": {
+				"txt": "(Stool) Feci"
+			},
+			"swabs": {
+				"txt": "Tamponi"
+			},
+			"tissues": {
+				"txt": "Tessuti"
+			},
+			"urine": {
+				"txt": "Urine"
+			}
 		},
 		"common": {
 			"thecodeisalreadyinuse": {
@@ -1155,6 +1174,24 @@
 		"createSuccess": "Reparto cancellato correttamente",
 		"updateSuccess": "Il reparto {{code}} è stato correttamente aggiornato",
 		"deleteSuccess": "Il reparto {{code}} è stato correttamente cancellato"
+	},
+	"staff": {
+		"code": "Codice",
+		"firstName": "Nome",
+		"lastName": "Cognome",
+		"profession": "Professione",
+		"position": "Posizione",
+		"phone": "Telefono",
+		"addStaff": "Aggiungi personale",
+		"editStaff": "Modifica personale",
+		"updateStaff": "Aggiorna personale",
+		"saveStaff": "Salva personale",
+		"created": "Personale creato",
+		"updated": "Personale aggiornato",
+		"deleted": "Personale eliminato",
+		"createSuccess": "Il personale è stato creato con successo!",
+		"updateSuccess": "Il personale {{code}} è stato aggiornato con successo!",
+		"deleteSuccess": "Il personale è stato eliminato con successo!"
 	},
 	"disease": {
 		"code": "Codice",
