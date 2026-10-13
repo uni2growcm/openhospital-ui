@@ -118,14 +118,15 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 
 		if (!rawErr) return t('common.somethingwrong');
 
-		if (typeof rawErr === 'string') return rawErr;
-		if (rawErr.response?.data?.message) return rawErr.response.data.message;
-		if (rawErr.response?.message) return rawErr.response.message;
-		if (rawErr.data?.message) return rawErr.data.message;
-		if (rawErr.message && rawErr.message !== 'ajax error') return rawErr.message;
-		if (rawErr.error) return rawErr.error;
+		let msg = t('common.somethingwrong');
+		if (typeof rawErr === 'string') msg = rawErr;
+		else if (rawErr.response?.data?.message) msg = rawErr.response.data.message;
+		else if (rawErr.response?.message) msg = rawErr.response.message;
+		else if (rawErr.data?.message) msg = rawErr.data.message;
+		else if (rawErr.message && rawErr.message !== 'ajax error') msg = rawErr.message;
+		else if (rawErr.error) msg = rawErr.error;
 
-		return t('common.somethingwrong');
+		return t(msg);
 	}, [
 		creationMode,
 		t,
@@ -219,7 +220,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 	const handleAddMedicalReduction = () => {
 		const med = medicalsList.find((m) => `${m.code}` === selectedMedicalCode);
 		const rate = Number(medicalRateInput);
-		if (med && !isNaN(rate) && rate > 0 && rate <= 100) {
+		if (med && !isNaN(rate) && rate >= 0.01 && rate <= 100) {
 			setMedicalReductions((prev) => [
 				...prev,
 				{ medical: med, reductionRate: rate },
@@ -232,7 +233,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 	const handleAddExamReduction = () => {
 		const ex = examsList.find((e) => e.code === selectedExamCode);
 		const rate = Number(examRateInput);
-		if (ex && !isNaN(rate) && rate > 0 && rate <= 100) {
+		if (ex && !isNaN(rate) && rate >= 0.01 && rate <= 100) {
 			setExamReductions((prev) => [
 				...prev,
 				{ exam: ex, reductionRate: rate },
@@ -245,7 +246,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 	const handleAddOperationReduction = () => {
 		const op = operationsList.find((o) => o.code === selectedOperationCode);
 		const rate = Number(operationRateInput);
-		if (op && !isNaN(rate) && rate > 0 && rate <= 100) {
+		if (op && !isNaN(rate) && rate >= 0.01 && rate <= 100) {
 			setOperationReductions((prev) => [
 				...prev,
 				{ operation: op, reductionRate: rate },
@@ -258,7 +259,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 	const handleAddOtherReduction = () => {
 		const other = pricesOthersList.find((p) => `${p.id}` === selectedOtherId);
 		const rate = Number(otherRateInput);
-		if (other && !isNaN(rate) && rate > 0 && rate <= 100) {
+		if (other && !isNaN(rate) && rate >= 0.01 && rate <= 100) {
 			setPriceOtherReductions((prev) => [
 				...prev,
 				{ pricesOthers: other, reductionRate: rate },
@@ -425,7 +426,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									label={t('reductionPlan.rate')}
 									value={medicalRateInput}
 									onChange={(e) => setMedicalRateInput(e.target.value)}
-									inputProps={{ min: 0, max: 100, step: 'any' }}
+									inputProps={{ min: 0.01, max: 100, step: 0.01 }}
 								/>
 								<Button
 									type="button"
@@ -434,7 +435,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									disabled={
 										!selectedMedicalCode ||
 										medicalRateInput === '' ||
-										Number(medicalRateInput) <= 0 ||
+										Number(medicalRateInput) < 0.01 ||
 										Number(medicalRateInput) > 100
 									}
 								>
@@ -535,7 +536,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									label={t('reductionPlan.rate')}
 									value={examRateInput}
 									onChange={(e) => setExamRateInput(e.target.value)}
-									inputProps={{ min: 0, max: 100, step: 'any' }}
+									inputProps={{ min: 0.01, max: 100, step: 0.01 }}
 								/>
 								<Button
 									type="button"
@@ -544,7 +545,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									disabled={
 										!selectedExamCode ||
 										examRateInput === '' ||
-										Number(examRateInput) <= 0 ||
+										Number(examRateInput) < 0.01 ||
 										Number(examRateInput) > 100
 									}
 								>
@@ -645,7 +646,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									label={t('reductionPlan.rate')}
 									value={operationRateInput}
 									onChange={(e) => setOperationRateInput(e.target.value)}
-									inputProps={{ min: 0, max: 100, step: 'any' }}
+									inputProps={{ min: 0.01, max: 100, step: 0.01 }}
 								/>
 								<Button
 									type="button"
@@ -654,7 +655,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									disabled={
 										!selectedOperationCode ||
 										operationRateInput === '' ||
-										Number(operationRateInput) <= 0 ||
+										Number(operationRateInput) < 0.01 ||
 										Number(operationRateInput) > 100
 									}
 								>
@@ -755,7 +756,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									label={t('reductionPlan.rate')}
 									value={otherRateInput}
 									onChange={(e) => setOtherRateInput(e.target.value)}
-									inputProps={{ min: 0, max: 100, step: 'any' }}
+									inputProps={{ min: 0.01, max: 100, step: 0.01 }}
 								/>
 								<Button
 									type="button"
@@ -764,7 +765,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									disabled={
 										!selectedOtherId ||
 										otherRateInput === '' ||
-										Number(otherRateInput) <= 0 ||
+										Number(otherRateInput) < 0.01 ||
 										Number(otherRateInput) > 100
 									}
 								>

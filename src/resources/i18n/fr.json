@@ -17,7 +17,8 @@
 			"integrity_violation": "Violation d'intégrité des données du plan de réduction.",
 			"not_found": "Plan de réduction non trouvé.",
 			"description_duplicate": "Un plan de réduction avec cette description existe déjà."
-		}
+		},
+		"angal.sql.thedatahasbeenupdatedbysomeoneelse.msg": "Les données ont été modifiées par un autre utilisateur ou ont expiré. Veuillez rafraîchir la page avant de réessayer."
 	},
 	"validations": {
 		"min": "La valeur doit être au moins {{min}}",
