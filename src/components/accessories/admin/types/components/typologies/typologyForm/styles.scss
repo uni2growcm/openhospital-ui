@@ -1,0 +1,32 @@
+.typologyForm {
+	padding: 20px 0;
+
+	&__form {
+		margin-top: 15px;
+	}
+
+	&__item {
+		margin-bottom: 20px;
+		padding: 0 10px;
+
+		&.halfWidth {
+			width: 50%;
+			box-sizing: border-box;
+
+			@media (max-width: 768px) {
+				width: 100%;
+			}
+		}
+	}
+
+	&__buttonSet {
+		display: flex;
+		gap: 15px;
+		margin-top: 20px;
+		padding: 0 10px;
+	}
+
+	.info-box-container {
+		margin: 20px 10px 0;
+	}
+}

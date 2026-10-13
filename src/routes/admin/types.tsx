@@ -233,6 +233,44 @@ export const TYPES_ROUTES: RouteObject[] = [
 				'../../components/accessories/admin/types/components/agetypes'
 			).then((module) => ({ Component: module.EditAgeTypes })),
 	},
+	...['visittypes', 'partnertypes', 'familyplanningmethods', 'familyplanningvisittypes', 'hivtreatmenttypes', 'tuberculosisregimens', 'tuberculosiscontacts'].flatMap((segment) => [
+		{
+			path: segment,
+			lazy: async () =>
+				import('../../components/accessories/admin/types/components/typologies').then(
+					(module) => ({
+						Component: () => {
+							const config = module.TYPOLOGY_FAMILIES[segment];
+							return <module.Typologies config={config} />;
+						},
+					}),
+				),
+		},
+		{
+			path: `${segment}/new`,
+			lazy: async () =>
+				import('../../components/accessories/admin/types/components/typologies').then(
+					(module) => ({
+						Component: () => {
+							const config = module.TYPOLOGY_FAMILIES[segment];
+							return <module.NewTypology config={config} />;
+						},
+					}),
+				),
+		},
+		{
+			path: `${segment}/:code/edit`,
+			lazy: async () =>
+				import('../../components/accessories/admin/types/components/typologies').then(
+					(module) => ({
+						Component: () => {
+							const config = module.TYPOLOGY_FAMILIES[segment];
+							return <module.EditTypology config={config} />;
+						},
+					}),
+				),
+		},
+	]),
 	{
 		path: '*',
 		lazy: async () =>

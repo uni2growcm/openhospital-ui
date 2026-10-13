@@ -979,7 +979,14 @@
 		"medicals": "Types of medical",
 		"chooseATypeToStart": "Choose a type to start...",
 		"pregnantTreatment": "Types of pregnant treatment",
-		"deliveryResultType": "Types of delivery result"
+		"deliveryResultType": "Types of delivery result",
+		"visitTypes": "Types of visit",
+		"partnerTypes": "Types of partner",
+		"familyPlanningMethods": "Family planning methods",
+		"familyPlanningVisitTypes": "Family planning visit types",
+		"hivTreatmentTypes": "HIV treatment types",
+		"tuberculosisRegimens": "Tuberculosis regimens",
+		"tuberculosisContacts": "Tuberculosis contact types"
 	},
 	"vaccineTypes": {
 		"code": "Code",
