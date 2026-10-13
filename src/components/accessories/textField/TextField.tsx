@@ -16,6 +16,7 @@ const TextField: FunctionComponent<IProps> = ({
 	onBlur,
 	disabled,
 	InputProps,
+	InputLabelProps,
 	rows = 10,
 	required = FIELD_VALIDATION.IDLE,
 	maxLength,
@@ -44,7 +45,7 @@ const TextField: FunctionComponent<IProps> = ({
 				disabled={disabled}
 				InputProps={InputProps}
 				inputProps={{ maxLength }}
-				InputLabelProps={{ shrink: !!field.value }}
+				InputLabelProps={InputLabelProps ?? { shrink: !!field.value }}
 				required={required === FIELD_VALIDATION.REQUIRED}
 			/>
 			{maxLength && maxLength > 0 && (

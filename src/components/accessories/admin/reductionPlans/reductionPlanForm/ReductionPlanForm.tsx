@@ -97,10 +97,8 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 		PriceOtherReductionDTO[]
 	>(initialPlan?.priceOtherReductions ?? []);
 
-	// Active tab
 	const [activeTab, setActiveTab] = useState<number>(0);
 
-	// Add item inputs
 	const [selectedMedicalCode, setSelectedMedicalCode] = useState<string>('');
 	const [medicalRateInput, setMedicalRateInput] = useState<string>('');
 
@@ -113,19 +111,27 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 	const [selectedOtherId, setSelectedOtherId] = useState<string>('');
 	const [otherRateInput, setOtherRateInput] = useState<string>('');
 
-	const errorMessage = useMemo(
-		() =>
-			(creationMode
-				? reductionPlanStore.create.error?.message
-				: reductionPlanStore.update.error?.message) ??
-			t('common.somethingwrong'),
-		[
-			creationMode,
-			t,
-			reductionPlanStore.create.error?.message,
-			reductionPlanStore.update.error?.message,
-		],
-	);
+	const errorMessage = useMemo(() => {
+		const rawErr = creationMode
+			? reductionPlanStore.create.error
+			: reductionPlanStore.update.error;
+
+		if (!rawErr) return t('common.somethingwrong');
+
+		if (typeof rawErr === 'string') return rawErr;
+		if (rawErr.response?.data?.message) return rawErr.response.data.message;
+		if (rawErr.response?.message) return rawErr.response.message;
+		if (rawErr.data?.message) return rawErr.data.message;
+		if (rawErr.message && rawErr.message !== 'ajax error') return rawErr.message;
+		if (rawErr.error) return rawErr.error;
+
+		return t('common.somethingwrong');
+	}, [
+		creationMode,
+		t,
+		reductionPlanStore.create.error,
+		reductionPlanStore.update.error,
+	]);
 
 	const initialValues = getFromFields(fields, 'value');
 
@@ -199,11 +205,21 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 		return cleanUp;
 	}, [cleanUp]);
 
-	// Add Medical Reduction handler
+	const handleRateBlur = (fieldName: string) => (e: React.FocusEvent<any>) => {
+		formik.handleBlur(e);
+		const currentVal = formik.values[fieldName];
+		if (currentVal === '' || currentVal === null || currentVal === undefined) {
+			const defaultVal = initialValues[fieldName] != null && initialValues[fieldName] !== ''
+				? initialValues[fieldName]
+				: '0';
+			formik.setFieldValue(fieldName, defaultVal);
+		}
+	};
+
 	const handleAddMedicalReduction = () => {
 		const med = medicalsList.find((m) => `${m.code}` === selectedMedicalCode);
 		const rate = Number(medicalRateInput);
-		if (med && !isNaN(rate) && rate >= 0 && rate <= 100) {
+		if (med && !isNaN(rate) && rate > 0 && rate <= 100) {
 			setMedicalReductions((prev) => [
 				...prev,
 				{ medical: med, reductionRate: rate },
@@ -213,11 +229,10 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 		}
 	};
 
-	// Add Exam Reduction handler
 	const handleAddExamReduction = () => {
 		const ex = examsList.find((e) => e.code === selectedExamCode);
 		const rate = Number(examRateInput);
-		if (ex && !isNaN(rate) && rate >= 0 && rate <= 100) {
+		if (ex && !isNaN(rate) && rate > 0 && rate <= 100) {
 			setExamReductions((prev) => [
 				...prev,
 				{ exam: ex, reductionRate: rate },
@@ -227,11 +242,10 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 		}
 	};
 
-	// Add Operation Reduction handler
 	const handleAddOperationReduction = () => {
 		const op = operationsList.find((o) => o.code === selectedOperationCode);
 		const rate = Number(operationRateInput);
-		if (op && !isNaN(rate) && rate >= 0 && rate <= 100) {
+		if (op && !isNaN(rate) && rate > 0 && rate <= 100) {
 			setOperationReductions((prev) => [
 				...prev,
 				{ operation: op, reductionRate: rate },
@@ -241,11 +255,10 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 		}
 	};
 
-	// Add Other Reduction handler
 	const handleAddOtherReduction = () => {
 		const other = pricesOthersList.find((p) => `${p.id}` === selectedOtherId);
 		const rate = Number(otherRateInput);
-		if (other && !isNaN(rate) && rate >= 0 && rate <= 100) {
+		if (other && !isNaN(rate) && rate > 0 && rate <= 100) {
 			setPriceOtherReductions((prev) => [
 				...prev,
 				{ pricesOthers: other, reductionRate: rate },
@@ -255,7 +268,6 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 		}
 	};
 
-	// Filter out already added items
 	const availableMedicals = useMemo(() => {
 		const usedCodes = new Set(medicalReductions.map((r) => r.medical.code));
 		return medicalsList.filter((m) => !usedCodes.has(m.code));
@@ -310,7 +322,8 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 							label={t('reductionPlan.medicalRate')}
 							isValid={isValid('medicalRate')}
 							errorText={getErrorText('medicalRate')}
-							onBlur={formik.handleBlur}
+							onBlur={handleRateBlur('medicalRate')}
+							InputLabelProps={{ shrink: true }}
 							type="number"
 							disabled={isLoading}
 						/>
@@ -322,7 +335,8 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 							label={t('reductionPlan.examRate')}
 							isValid={isValid('examRate')}
 							errorText={getErrorText('examRate')}
-							onBlur={formik.handleBlur}
+							onBlur={handleRateBlur('examRate')}
+							InputLabelProps={{ shrink: true }}
 							type="number"
 							disabled={isLoading}
 						/>
@@ -334,7 +348,8 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 							label={t('reductionPlan.operationRate')}
 							isValid={isValid('operationRate')}
 							errorText={getErrorText('operationRate')}
-							onBlur={formik.handleBlur}
+							onBlur={handleRateBlur('operationRate')}
+							InputLabelProps={{ shrink: true }}
 							type="number"
 							disabled={isLoading}
 						/>
@@ -346,7 +361,8 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 							label={t('reductionPlan.otherRate')}
 							isValid={isValid('otherRate')}
 							errorText={getErrorText('otherRate')}
-							onBlur={formik.handleBlur}
+							onBlur={handleRateBlur('otherRate')}
+							InputLabelProps={{ shrink: true }}
 							type="number"
 							disabled={isLoading}
 						/>
@@ -367,7 +383,6 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 						<Tab label={`${t('reductionPlan.others')} (${priceOtherReductions.length})`} />
 					</Tabs>
 
-					{/* Tab 0: Medicals */}
 					{activeTab === 0 && (
 						<div>
 							<div className="addRow">
@@ -419,7 +434,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									disabled={
 										!selectedMedicalCode ||
 										medicalRateInput === '' ||
-										Number(medicalRateInput) < 0 ||
+										Number(medicalRateInput) <= 0 ||
 										Number(medicalRateInput) > 100
 									}
 								>
@@ -478,7 +493,6 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 						</div>
 					)}
 
-					{/* Tab 1: Exams */}
 					{activeTab === 1 && (
 						<div>
 							<div className="addRow">
@@ -530,7 +544,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									disabled={
 										!selectedExamCode ||
 										examRateInput === '' ||
-										Number(examRateInput) < 0 ||
+										Number(examRateInput) <= 0 ||
 										Number(examRateInput) > 100
 									}
 								>
@@ -589,7 +603,6 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 						</div>
 					)}
 
-					{/* Tab 2: Operations */}
 					{activeTab === 2 && (
 						<div>
 							<div className="addRow">
@@ -641,7 +654,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									disabled={
 										!selectedOperationCode ||
 										operationRateInput === '' ||
-										Number(operationRateInput) < 0 ||
+										Number(operationRateInput) <= 0 ||
 										Number(operationRateInput) > 100
 									}
 								>
@@ -700,7 +713,6 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 						</div>
 					)}
 
-					{/* Tab 3: Other Prices */}
 					{activeTab === 3 && (
 						<div>
 							<div className="addRow">
@@ -752,7 +764,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									disabled={
 										!selectedOtherId ||
 										otherRateInput === '' ||
-										Number(otherRateInput) < 0 ||
+										Number(otherRateInput) <= 0 ||
 										Number(otherRateInput) > 100
 									}
 								>

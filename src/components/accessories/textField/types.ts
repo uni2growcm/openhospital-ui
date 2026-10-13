@@ -21,6 +21,7 @@ export interface IProps {
 		| Partial<InputProps>
 		| Partial<FilledInputProps>
 		| Partial<OutlinedInputProps>;
+	InputLabelProps?: any;
 	rows?: number;
 	required?: FIELD_VALIDATION;
 	maxLength?: number;
