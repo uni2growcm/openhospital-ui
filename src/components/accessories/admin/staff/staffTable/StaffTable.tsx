@@ -1,4 +1,5 @@
-import { CircularProgress } from '@mui/material';
+import { Search } from '@mui/icons-material';
+import { CircularProgress, InputAdornment, TextField } from '@mui/material';
 import { type FunctionComponent, type ReactNode, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { StaffDTO } from '~/generated/models/StaffDTO';
@@ -11,6 +12,8 @@ import InfoBox from '../../../infoBox/InfoBox';
 import Pagination from '../../../pagination/Pagination';
 import Table from '../../../table/Table';
 import classes from './StaffTable.module.scss';
+
+const SEARCH_DEBOUNCE_MS = 300;
 
 const DEFAULT_PAGE_SIZE = 10;
 
@@ -31,6 +34,8 @@ export const StaffTable: FunctionComponent<IOwnProps> = ({
 
 	const [page, setPage] = useState(0);
 	const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
+	const [keyword, setKeyword] = useState('');
+	const [debouncedKeyword, setDebouncedKeyword] = useState('');
 
 	const header = ['code', 'firstName', 'lastName', 'profession', 'position', 'phone'];
 
@@ -62,8 +67,19 @@ export const StaffTable: FunctionComponent<IOwnProps> = ({
 	};
 
 	useEffect(() => {
-		dispatch(getStaffPaged({ page, size: pageSize }));
-	}, [dispatch, page, pageSize]);
+		const timeout = setTimeout(() => {
+			setPage(0);
+			setDebouncedKeyword(keyword.trim());
+		}, SEARCH_DEBOUNCE_MS);
+
+		return () => clearTimeout(timeout);
+	}, [keyword]);
+
+	useEffect(() => {
+		dispatch(
+			getStaffPaged({ page, size: pageSize, keyword: debouncedKeyword || undefined }),
+		);
+	}, [dispatch, page, pageSize, debouncedKeyword]);
 
 	useEffect(() => {
 		if (deleteStaffState.status === 'FAIL') {
@@ -74,9 +90,38 @@ export const StaffTable: FunctionComponent<IOwnProps> = ({
 			deleteStaffState.status === 'SUCCESS' ||
 			deleteStaffState.status === 'SUCCESS_EMPTY'
 		) {
-			dispatch(getStaffPaged({ page, size: pageSize }));
+			dispatch(
+				getStaffPaged({ page, size: pageSize, keyword: debouncedKeyword || undefined }),
+			);
 		}
-	}, [deleteStaffState.status, dispatch, page, pageSize]);
+	}, [deleteStaffState.status, dispatch, page, pageSize, debouncedKeyword]);
+
+	const searchField = (
+		<TextField
+			value={keyword}
+			onChange={(event) => setKeyword(event.target.value)}
+			placeholder={t('common.search')}
+			size="small"
+			variant="outlined"
+			data-cy="staff-search"
+			slotProps={{
+				input: {
+					startAdornment: (
+						<InputAdornment position="start">
+							<Search fontSize="small" />
+						</InputAdornment>
+					),
+				},
+			}}
+		/>
+	);
+
+	const combinedHeaderActions = (
+		<>
+			{searchField}
+			{headerActions}
+		</>
+	);
 
 	const formatDataToDisplay = (data: StaffDTO[]) => {
 		return data.map((item) => {
@@ -115,11 +160,9 @@ export const StaffTable: FunctionComponent<IOwnProps> = ({
 								)}
 								{(data ?? []).length === 0 ? (
 									<>
-										{headerActions && (
-											<div className="header">
-												<div className="headerActions">{headerActions}</div>
-											</div>
-										)}
+										<div className="header">
+											<div className="headerActions">{combinedHeaderActions}</div>
+										</div>
 										<InfoBox type="info" message={t('common.emptydata')} />
 									</>
 								) : (
@@ -138,7 +181,7 @@ export const StaffTable: FunctionComponent<IOwnProps> = ({
 											rawData={data}
 											manualFilter={false}
 											rowKey="code"
-											headerActions={headerActions}
+											headerActions={combinedHeaderActions}
 										/>
 										<Pagination
 											page={page}
