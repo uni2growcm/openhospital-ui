@@ -511,7 +511,20 @@
 		"value": "Vlera",
 		"true": "Aktiv",
 		"false": "Jo-aktiv",
-		"all": "Të gjitha"
+		"all": "Të gjitha",
+		"add": "Shto",
+		"edit": "Modifiko",
+		"description": "Përshkrimi",
+		"created": "Krijuar",
+		"updated": "Përditësuar",
+		"deleted": "Fshirë",
+		"createdSuccessfully": "Elementi u krijua me sukses",
+		"updatedSuccessfully": "Elementi u përditësua me sukses",
+		"deletedSuccessfully": "Elementi u fshi me sukses",
+		"typeCreated": "{{type}} u krijua",
+		"typeCreateSuccess": "{{type}} u krijua me sukses!",
+		"typeUpdated": "{{type}} u përditësua",
+		"typeUpdateSuccess": "{{type}} u përditësua me sukses!"
 	},
 	"permission": {
 		"denied": "Leja u refuzua",
@@ -797,15 +810,33 @@
 			"elderly": "I moshuar"
 		},
 		"lab": {
-			"undefined": { "txt": "Pa definuar" },
-			"blood": { "txt": "Gjaku" },
-			"cfs": { "txt": "CFS" },
-			"film": { "txt": "GRAFI" },
-			"sputum": { "txt": "Pështymë" },
-			"stool": { "txt": "Jashtëqitja" },
-			"swabs": { "txt": "Tamponët" },
-			"tissues": { "txt": "Indet" },
-			"urine": { "txt": "Urina" }
+			"undefined": {
+				"txt": "Pa definuar"
+			},
+			"blood": {
+				"txt": "Gjaku"
+			},
+			"cfs": {
+				"txt": "CFS"
+			},
+			"film": {
+				"txt": "GRAFI"
+			},
+			"sputum": {
+				"txt": "Pështymë"
+			},
+			"stool": {
+				"txt": "Jashtëqitja"
+			},
+			"swabs": {
+				"txt": "Tamponët"
+			},
+			"tissues": {
+				"txt": "Indet"
+			},
+			"urine": {
+				"txt": "Urina"
+			}
 		}
 	},
 	"exam": {
@@ -856,5 +887,27 @@
 		"opdInclude": "DPJ",
 		"ipdInInclude": "PB Hyrje",
 		"ipdOutInclude": "PB Dalje"
+	},
+	"types": {
+		"selectAType": "Zgjidhni një lloj",
+		"vaccines": "Llojet e vaksinave",
+		"exams": "Llojet e ekzaminimeve",
+		"admissions": "Llojet e pranimeve",
+		"ages": "Llojet e moshës",
+		"diseases": "Llojet e sëmundjeve",
+		"discharges": "Llojet e daljeve",
+		"deliveries": "Llojet e lindjeve",
+		"operations": "Llojet e operacioneve",
+		"medicals": "Llojet e barnave",
+		"chooseATypeToStart": "Zgjidhni një lloj për të filluar...",
+		"pregnantTreatment": "Llojet e trajtimit të shtatzënisë",
+		"deliveryResultType": "Llojet e rezultateve të lindjes",
+		"visitTypes": "Llojet e vizitave",
+		"partnerTypes": "Llojet e partnerit",
+		"familyPlanningMethods": "Metodat e planifikimit familjar",
+		"familyPlanningVisitTypes": "Llojet e vizitave të planifikimit familjar",
+		"hivTreatmentTypes": "Llojet e trajtimit të HIV",
+		"tuberculosisRegimens": "Regjimet e tuberkulozit",
+		"tuberculosisContacts": "Llojet e kontakteve të tuberkulozit"
 	}
 }

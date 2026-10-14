@@ -306,7 +306,20 @@
 		"lessthan": "The value must not exceed {{value}}.",
 		"confirm": "Confirm",
 		"invaliddate": "Invalid Date",
-		"outofrange": "Out of range"
+		"outofrange": "Out of range",
+		"add": "Añadir",
+		"edit": "Editar",
+		"description": "Descripción",
+		"created": "Creado",
+		"updated": "Actualizado",
+		"deleted": "Eliminado",
+		"createdSuccessfully": "Elemento creado con éxito",
+		"updatedSuccessfully": "Elemento actualizado con éxito",
+		"deletedSuccessfully": "Elemento eliminado con éxito",
+		"typeCreated": "{{type}} creado",
+		"typeCreateSuccess": "¡El {{type}} se ha creado con éxito!",
+		"typeUpdated": "{{type}} actualizado",
+		"typeUpdateSuccess": "¡El {{type}} se ha actualizado con éxito!"
 	},
 	"therapy": {
 		"newtherapy": "New Therapy",
@@ -538,5 +551,27 @@
 		"cs": "Czech",
 		"sq": "Albanian",
 		"zh": "Chinese"
+	},
+	"types": {
+		"selectAType": "Seleccionar un tipo",
+		"vaccines": "Tipos de vacuna",
+		"exams": "Tipos de examen",
+		"admissions": "Tipos de admisión",
+		"ages": "Tipos de edad",
+		"diseases": "Tipos de enfermedad",
+		"discharges": "Tipos de alta",
+		"deliveries": "Tipos de parto",
+		"operations": "Tipos de operación",
+		"medicals": "Tipos de medicamento",
+		"chooseATypeToStart": "Elija un tipo para comenzar...",
+		"pregnantTreatment": "Tipos de tratamiento para embarazadas",
+		"deliveryResultType": "Tipos de resultado de parto",
+		"visitTypes": "Tipos de visita",
+		"partnerTypes": "Tipos de pareja",
+		"familyPlanningMethods": "Métodos de planificación familiar",
+		"familyPlanningVisitTypes": "Tipos de visita de planificación familiar",
+		"hivTreatmentTypes": "Tipos de tratamiento de VIH",
+		"tuberculosisRegimens": "Pautas para tuberculosis",
+		"tuberculosisContacts": "Tipos de contacto de tuberculosis"
 	}
 }

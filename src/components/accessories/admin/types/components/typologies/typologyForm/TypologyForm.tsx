@@ -32,6 +32,7 @@ const TypologyForm: FC<ITypologyFormProps> = ({
 	isLoading,
 	family,
 	onSuccessPath,
+	typeName,
 }) => {
 	const dispatch = useAppDispatch();
 	const { t } = useTranslation();
@@ -107,10 +108,8 @@ const TypologyForm: FC<ITypologyFormProps> = ({
 
 	return (
 		<div className="typologyForm">
-			<div className="form__header">
-				<div className="form__actions">
-					<DiscardButton />
-				</div>
+			<div className="formInsertMode">
+				<DiscardButton />
 			</div>
 			<form className="typologyForm__form" onSubmit={formik.handleSubmit}>
 				<div className="row start-sm center-xs">
@@ -169,13 +168,15 @@ const TypologyForm: FC<ITypologyFormProps> = ({
 							: typologiesStore.update.hasSucceeded)
 					}
 					title={
-						creationMode ? t('common.created') : t('common.updated')
+						creationMode
+							? t('common.typeCreated', { type: typeName ?? '' })
+							: t('common.typeUpdated', { type: typeName ?? '' })
 					}
 					icon={checkIcon}
 					info={
 						creationMode
-							? t('common.createdSuccessfully')
-							: t('common.updatedSuccessfully')
+							? t('common.typeCreateSuccess', { type: typeName ?? '' })
+							: t('common.typeUpdateSuccess', { type: typeName ?? '' })
 					}
 					primaryButtonLabel="Ok"
 					handlePrimaryButtonClick={() => {

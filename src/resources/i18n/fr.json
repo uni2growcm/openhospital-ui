@@ -586,7 +586,19 @@
 		"printData": "Imprimer les données",
 		"saveandprint": "Enregistrer et imprimer",
 		"updateandprint": "Mettre à jour et imprimer",
-		"failedtodownloadthereport": "Échec de téléchargement du rapport"
+		"failedtodownloadthereport": "Échec de téléchargement du rapport",
+		"add": "Ajouter",
+		"edit": "Modifier",
+		"description": "Description",
+		"created": "Créé",
+		"updated": "Mis à jour",
+		"createdSuccessfully": "Élément créé avec succès",
+		"updatedSuccessfully": "Élément mis à jour avec succès",
+		"deletedSuccessfully": "Élément supprimé avec succès",
+		"typeCreated": "{{type}} créé",
+		"typeCreateSuccess": "Le {{type}} a été créé avec succès !",
+		"typeUpdated": "{{type}} mis à jour",
+		"typeUpdateSuccess": "Le {{type}} a été mis à jour avec succès !"
 	},
 	"permission": {
 		"denied": "Autorisation refusée",
@@ -883,15 +895,33 @@
 			"elderly": "Âgé"
 		},
 		"lab": {
-			"undefined": { "txt": "Indéfini" },
-			"blood": { "txt": "Sang" },
-			"cfs": { "txt": "CFS" },
-			"film": { "txt": "FILM" },
-			"sputum": { "txt": "Sputum" },
-			"stool": { "txt": "Excréments" },
-			"swabs": { "txt": "Écouvillons" },
-			"tissues": { "txt": "Tissus" },
-			"urine": { "txt": "Urine" }
+			"undefined": {
+				"txt": "Indéfini"
+			},
+			"blood": {
+				"txt": "Sang"
+			},
+			"cfs": {
+				"txt": "CFS"
+			},
+			"film": {
+				"txt": "FILM"
+			},
+			"sputum": {
+				"txt": "Sputum"
+			},
+			"stool": {
+				"txt": "Excréments"
+			},
+			"swabs": {
+				"txt": "Écouvillons"
+			},
+			"tissues": {
+				"txt": "Tissus"
+			},
+			"urine": {
+				"txt": "Urine"
+			}
 		},
 		"common": {
 			"thecodeisalreadyinuse": {

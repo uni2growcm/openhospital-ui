@@ -131,7 +131,21 @@
 		"patienteditsuccessfull": "The patient was edit successfully.",
 		"patientregistrationsuccessfull": "The patient registration was successful.",
 		"somethingwrong": "Something went wrong, please retry later.",
-		"searchpatientinstruction": "If you don't have the patient ID, fill as many fields as possible and click search"
+		"searchpatientinstruction": "If you don't have the patient ID, fill as many fields as possible and click search",
+		"code": "Kód",
+		"add": "Přidat",
+		"edit": "Upravit",
+		"description": "Popis",
+		"created": "Vytvořeno",
+		"updated": "Aktualizováno",
+		"deleted": "Smazáno",
+		"createdSuccessfully": "Položka byla úspěšně vytvořena",
+		"updatedSuccessfully": "Položka byla úspěšně aktualizována",
+		"deletedSuccessfully": "Položka byla úspěšně smazána",
+		"typeCreated": "{{type}} vytvořeno",
+		"typeCreateSuccess": "{{type}} byla úspěšně vytvořena!",
+		"typeUpdated": "{{type}} aktualizováno",
+		"typeUpdateSuccess": "{{type}} byla úspěšně aktualizována!"
 	},
 	"therapy": {
 		"newtherapy": "New Therapy",
@@ -161,5 +175,27 @@
 		"therapy": "Therapy",
 		"opd": "Diagnostics",
 		"booking": "Prescriptions"
+	},
+	"types": {
+		"selectAType": "Vyberte typ",
+		"vaccines": "Typy očkování",
+		"exams": "Typy vyšetření",
+		"admissions": "Typy přijetí",
+		"ages": "Věkové skupiny",
+		"diseases": "Typy onemocnění",
+		"discharges": "Typy propuštění",
+		"deliveries": "Typy porodu",
+		"operations": "Typy operací",
+		"medicals": "Typy léků",
+		"chooseATypeToStart": "Vyberte typ pro začátek...",
+		"pregnantTreatment": "Typy léčby těhotných",
+		"deliveryResultType": "Typy výsledků porodu",
+		"visitTypes": "Typy návštěv",
+		"partnerTypes": "Typy partnerů",
+		"familyPlanningMethods": "Metody plánovaného rodičovství",
+		"familyPlanningVisitTypes": "Typy návštěv plánovaného rodičovství",
+		"hivTreatmentTypes": "Typy léčby HIV",
+		"tuberculosisRegimens": "Režimy léčby tuberkulózy",
+		"tuberculosisContacts": "Typy kontaktů s tuberkulózou"
 	}
 }

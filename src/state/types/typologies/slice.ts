@@ -74,6 +74,9 @@ export const typologySlice = createSlice({
 				state.getTypologies.data = state.getTypologies.data?.filter((e) => {
 					return e.code !== action.payload.code;
 				});
+				if (state.getTypologies.data?.length === 0) {
+					state.getTypologies.status = 'SUCCESS_EMPTY';
+				}
 			})
 			.addCase(thunks.deleteTypology.rejected, (state, action) => {
 				state.delete = ApiResponse.error(action.payload);

@@ -92,6 +92,16 @@ const TypologiesTable = (props: IOwnProps) => {
 					headerActions={headerActions}
 				/>
 			)}
+			{status === 'SUCCESS_EMPTY' && (
+				<>
+					{headerActions && (
+						<div className="header">
+							<div className="headerActions">{headerActions}</div>
+						</div>
+					)}
+					<InfoBox type="info" message={t('common.emptydata')} />
+				</>
+			)}
 			{status === 'LOADING' && (
 				<div className="center">
 					<CircularProgress />

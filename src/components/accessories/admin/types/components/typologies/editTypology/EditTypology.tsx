@@ -13,6 +13,7 @@ import {
 import type { TypologyFamilyConfig } from '../typologyConfig';
 import { getInitialFields } from '../typologyForm/consts';
 import TypologyForm from '../typologyForm/TypologyForm';
+import './styles.scss';
 
 interface IEditTypologyProps {
 	config: TypologyFamilyConfig;
@@ -70,6 +71,7 @@ export const EditTypology: FC<IEditTypologyProps> = ({ config }) => {
 				fields={getInitialFields(currentTypology)}
 				family={config.family}
 				onSuccessPath={listPath}
+				typeName={t(config.translationKey)}
 			/>
 		</div>
 	);

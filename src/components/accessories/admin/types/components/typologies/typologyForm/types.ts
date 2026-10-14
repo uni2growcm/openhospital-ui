@@ -10,6 +10,7 @@ export interface ITypologyFormProps {
 	isLoading: boolean;
 	family: TypologyDTO['family'];
 	onSuccessPath: string;
+	typeName?: string;
 }
 
 export type TypologyFormFieldName = 'code' | 'description';
