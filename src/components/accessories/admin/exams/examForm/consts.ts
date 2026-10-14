@@ -11,6 +11,10 @@ export const getInitialFields: (
 	description: { type: 'text', value: exam?.description ?? '' },
 	procedure: { type: 'number', value: exam?.procedure?.toString() ?? '3' },
 	defaultResult: { type: 'text', value: exam?.defaultResult ?? '' },
+	articleFamily: {
+		type: 'text',
+		value: exam?.articleFamily?.id ? `${exam.articleFamily.id}` : '',
+	},
 	lock: { type: 'number', value: exam?.lock ?? '' },
 	rows: {
 		type: 'text',

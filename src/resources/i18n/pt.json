@@ -233,7 +233,8 @@
 		"managebills": "Manage Bills",
 		"billrecords": "Bill Records",
 		"visits": "Visits",
-		"patients": "Patients"
+		"patients": "Patients",
+		"articleFamilies": "Famílias de artigos"
 	},
 	"operation": {
 		"newoperation": "New Operation",
@@ -256,7 +257,8 @@
 		"rowupdatesuccess": "Operation Row updated successfully",
 		"rowcreatesuccess": "Operation Row created successfully",
 		"rowdeletesuccess": "Operation Row deleted successfully",
-		"dateafteradmission": "Must be greater than admission date"
+		"dateafteradmission": "Must be greater than admission date",
+		"articleFamily": "Família de artigos"
 	},
 	"common": {
 		"ok": "OK",
@@ -538,5 +540,38 @@
 		"cs": "Czech",
 		"sq": "Albanian",
 		"zh": "Chinese"
+	},
+	"errors": {
+		"articlefamily": {
+			"code_exists": "Já existe uma família de artigos com este código.",
+			"not_found": "Família de artigos não encontrada.",
+			"integrity_violation": "Violação de integridade dos dados da família de artigos."
+		},
+		"articleFamily": {
+			"code_exists": "Já existe uma família de artigos com este código.",
+			"not_found": "Família de artigos não encontrada.",
+			"integrity_violation": "Violação de integridade dos dados da família de artigos."
+		}
+	},
+	"articleFamily": {
+		"searchPlaceholder": "Pesquisar família de artigos...",
+		"id": "ID da família de artigos",
+		"code": "Código",
+		"description": "Descrição",
+		"addNewArticleFamily": "Adicionar uma nova família de artigos",
+		"editArticleFamily": "Editar família de artigos",
+		"updateArticleFamily": "Salvar alterações",
+		"saveArticleFamily": "Salvar",
+		"addArticleFamily": "Nova família de artigos",
+		"updated": "Família de artigos atualizada",
+		"updateSuccess": "A família de artigos foi atualizada com sucesso!",
+		"created": "Família de artigos criada",
+		"createSuccess": "A família de artigos foi criada com sucesso!",
+		"deleted": "Família de artigos excluída",
+		"deleting": "Excluindo família de artigos...",
+		"deleteSuccess": "A família de artigos foi excluída com sucesso!"
+	},
+	"exam": {
+		"articleFamily": "Família de artigos"
 	}
 }

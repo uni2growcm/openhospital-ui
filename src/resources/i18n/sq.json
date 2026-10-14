@@ -7,6 +7,16 @@
 		"internalerror": "Ndodhi një gabim i brendshëm",
 		"lab": {
 			"someexamswithoutresultpleasecheck": "Disa ekzaminime pa rezultat ju lutemi kontrolloni."
+		},
+		"articleFamily": {
+			"code_exists": "Një familje artikujsh me këtë kod tashmë ekziston.",
+			"not_found": "Familja e artikujve nuk u gjet.",
+			"integrity_violation": "Shkelje e integritetit të të dhënave të familjes së artikujve."
+		},
+		"articlefamily": {
+			"code_exists": "Një familje artikujsh me këtë kod tashmë ekziston.",
+			"not_found": "Familja e artikujve nuk u gjet.",
+			"integrity_violation": "Shkelje e integritetit të të dhënave të familjes së artikujve."
 		}
 	},
 	"validations": {
@@ -372,6 +382,7 @@
 		"vaccines": "Vaksinat",
 		"prices": "Lista e çmimeve",
 		"suppliers": "Furnitorët",
+		"articleFamilies": "Familjet e artikujve",
 		"telemetry": "Telemetria",
 		"users": "Përdoruesit & Grupet",
 		"types": "Menaxho llojet",
@@ -416,7 +427,8 @@
 		"classes": {
 			"major": "I madh",
 			"minor": "I vogël"
-		}
+		},
+		"articleFamily": "Familje artikujsh"
 	},
 	"common": {
 		"ok": "OK",
@@ -797,15 +809,33 @@
 			"elderly": "I moshuar"
 		},
 		"lab": {
-			"undefined": { "txt": "Pa definuar" },
-			"blood": { "txt": "Gjaku" },
-			"cfs": { "txt": "CFS" },
-			"film": { "txt": "GRAFI" },
-			"sputum": { "txt": "Pështymë" },
-			"stool": { "txt": "Jashtëqitja" },
-			"swabs": { "txt": "Tamponët" },
-			"tissues": { "txt": "Indet" },
-			"urine": { "txt": "Urina" }
+			"undefined": {
+				"txt": "Pa definuar"
+			},
+			"blood": {
+				"txt": "Gjaku"
+			},
+			"cfs": {
+				"txt": "CFS"
+			},
+			"film": {
+				"txt": "GRAFI"
+			},
+			"sputum": {
+				"txt": "Pështymë"
+			},
+			"stool": {
+				"txt": "Jashtëqitja"
+			},
+			"swabs": {
+				"txt": "Tamponët"
+			},
+			"tissues": {
+				"txt": "Indet"
+			},
+			"urine": {
+				"txt": "Urina"
+			}
 		}
 	},
 	"exam": {
@@ -813,7 +843,8 @@
 		"examtype": "Lloji i ekzaminimit",
 		"description": "Emri",
 		"procedure": "Procedura",
-		"defaultResult": "Vlera standard"
+		"defaultResult": "Vlera standard",
+		"articleFamily": "Familje artikujsh"
 	},
 	"supplier": {
 		"name": "Emri",
@@ -823,6 +854,24 @@
 		"fax": "Faks",
 		"email": "Adresa Email",
 		"note": "Shënim"
+	},
+	"articleFamily": {
+		"searchPlaceholder": "Kërko familjen e artikujve...",
+		"id": "ID e familjes së artikujve",
+		"code": "Kodi",
+		"description": "Përshkrimi",
+		"addNewArticleFamily": "Shto një familje të re artikujsh",
+		"editArticleFamily": "Ndrysho familjen e artikujve",
+		"updateArticleFamily": "Ruaj ndryshimet",
+		"saveArticleFamily": "Ruaj",
+		"addArticleFamily": "Familje e re artikujsh",
+		"updated": "Familja e artikujve u përditësua",
+		"updateSuccess": "Familja e artikujve u përditësua me sukses!",
+		"created": "Familja e artikujve u krijua",
+		"createSuccess": "Familja e artikujve u krijua me sukses!",
+		"deleted": "Familja e artikujve u fshi",
+		"deleting": "Duke fshirë familjen e artikujve...",
+		"deleteSuccess": "Familja e artikujve u fshi me sukses!"
 	},
 	"ward": {
 		"code": "Kodi",

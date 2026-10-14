@@ -7,6 +7,16 @@
 		"internalerror": "Si è verificato un errore interno",
 		"lab": {
 			"someexamswithoutresultpleasecheck": "Alcuni esami senza esito, si prega di verificare."
+		},
+		"articleFamily": {
+			"code_exists": "Una famiglia di articoli con questo codice esiste già.",
+			"not_found": "Famiglia di articoli non trovata.",
+			"integrity_violation": "Violazione dell'integrità dei dati della famiglia di articoli."
+		},
+		"articlefamily": {
+			"code_exists": "Una famiglia di articoli con questo codice esiste già.",
+			"not_found": "Famiglia di articoli non trovata.",
+			"integrity_violation": "Violazione dell'integrità dei dati della famiglia di articoli."
 		}
 	},
 	"validations": {
@@ -412,6 +422,7 @@
 		"vaccines": "Vaccini",
 		"prices": "Listino prezzi",
 		"suppliers": "Fornitori",
+		"articleFamilies": "Famiglie di articoli",
 		"telemetry": "Telemetria",
 		"users": "Utenti e Gruppi",
 		"types": "Gestisci i Tipi",
@@ -469,7 +480,8 @@
 			"opd_admission": "OPD/Ricovero",
 			"admission": "Ricovero",
 			"opd": "OPD"
-		}
+		},
+		"articleFamily": "Famiglia di articoli"
 	},
 	"common": {
 		"ok": "OK",
@@ -875,15 +887,33 @@
 			"elderly": "Anziani"
 		},
 		"lab": {
-			"undefined": { "txt": "Non definito" },
-			"blood": { "txt": "Sangue" },
-			"cfs": { "txt": "CFS" },
-			"film": { "txt": "FILM" },
-			"sputum": { "txt": "Sputum" },
-			"stool": { "txt": "(Stool) Feci" },
-			"swabs": { "txt": "Tamponi" },
-			"tissues": { "txt": "Tessuti" },
-			"urine": { "txt": "Urine" }
+			"undefined": {
+				"txt": "Non definito"
+			},
+			"blood": {
+				"txt": "Sangue"
+			},
+			"cfs": {
+				"txt": "CFS"
+			},
+			"film": {
+				"txt": "FILM"
+			},
+			"sputum": {
+				"txt": "Sputum"
+			},
+			"stool": {
+				"txt": "(Stool) Feci"
+			},
+			"swabs": {
+				"txt": "Tamponi"
+			},
+			"tissues": {
+				"txt": "Tessuti"
+			},
+			"urine": {
+				"txt": "Urine"
+			}
 		},
 		"common": {
 			"thecodeisalreadyinuse": {
@@ -938,7 +968,8 @@
 		"validateProcedureMinMax": "I valori possibili sono 1, 2 o 3",
 		"possibleValues": "Valori possibili",
 		"defaultValue": "Valore di default",
-		"invalidDefaultResult": "Il valore di default è all'interno di una lista"
+		"invalidDefaultResult": "Il valore di default è all'interno di una lista",
+		"articleFamily": "Famiglia di articoli"
 	},
 	"vaccine": {
 		"code": "Codice",
@@ -1129,6 +1160,24 @@
 		"deleted": "Fornitore cancellato",
 		"deleting": "Sto cancellando il fornitore ...",
 		"deleteSuccess": "Il fornitore è stato correttamente cancellato"
+	},
+	"articleFamily": {
+		"searchPlaceholder": "Cerca famiglia di articoli...",
+		"id": "ID Famiglia di articoli",
+		"code": "Codice",
+		"description": "Descrizione",
+		"addNewArticleFamily": "Aggiungi una nuova famiglia di articoli",
+		"editArticleFamily": "Modifica famiglia di articoli",
+		"updateArticleFamily": "Salva modifiche",
+		"saveArticleFamily": "Salva",
+		"addArticleFamily": "Nuova famiglia di articoli",
+		"updated": "Famiglia di articoli aggiornata",
+		"updateSuccess": "La famiglia di articoli è stata aggiornata con successo!",
+		"created": "Famiglia di articoli creata",
+		"createSuccess": "La famiglia di articoli è stata creata con successo!",
+		"deleted": "Famiglia di articoli eliminata",
+		"deleting": "Eliminazione famiglia di articoli...",
+		"deleteSuccess": "La famiglia di articoli è stata eliminata con successo!"
 	},
 	"ward": {
 		"code": "Codice",

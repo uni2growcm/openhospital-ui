@@ -9,7 +9,7 @@ info:
     url: https://github.com/informatici/openhospital-api?tab=GPL-3.0-1-ov-file#readme
   version: 0.1.0
 servers:
-- url: http://localhost
+- url: http://localhost:8080
 security:
 - bearerAuth: []
 tags:
@@ -1909,6 +1909,98 @@ paths:
                 type: boolean
       security:
       - bearerAuth: []
+  /article-families/{id}:
+    get:
+      tags:
+      - Article Families
+      summary: Get an article family by ID
+      operationId: getArticleFamily
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Article family retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleFamilyDTO"
+        "404":
+          description: Article family not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleFamilyDTO"
+      security:
+      - bearerAuth: []
+    put:
+      tags:
+      - Article Families
+      summary: Update an existing article family
+      operationId: updateArticleFamily
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArticleFamilyDTO"
+        required: true
+      responses:
+        "200":
+          description: Article family updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleFamilyDTO"
+        "400":
+          description: Invalid request payload
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleFamilyDTO"
+        "404":
+          description: Article family not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleFamilyDTO"
+        "409":
+          description: Conflict with an existing article family
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleFamilyDTO"
+      security:
+      - bearerAuth: []
+    delete:
+      tags:
+      - Article Families
+      summary: Delete an article family by ID (soft delete)
+      operationId: deleteArticleFamily
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "204":
+          description: Article family successfully deleted
+        "404":
+          description: Article family not found
+      security:
+      - bearerAuth: []
   /agetypes:
     get:
       tags:
@@ -3339,6 +3431,55 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LoginResponse"
+      security:
+      - bearerAuth: []
+  /article-families:
+    get:
+      tags:
+      - Article Families
+      summary: Get all active article families
+      operationId: getAllArticleFamilies
+      responses:
+        "200":
+          description: List of active article families retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ArticleFamilyDTO"
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - Article Families
+      summary: Create a new article family
+      operationId: createArticleFamily
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArticleFamilyDTO"
+        required: true
+      responses:
+        "201":
+          description: Article family created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleFamilyDTO"
+        "400":
+          description: Invalid request payload
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleFamilyDTO"
+        "409":
+          description: Article family code already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleFamilyDTO"
       security:
       - bearerAuth: []
   /admissions/discharge:
@@ -6014,6 +6155,29 @@ paths:
                   $ref: "#/components/schemas/BillItemsDTO"
       security:
       - bearerAuth: []
+  /article-families/search:
+    get:
+      tags:
+      - Article Families
+      summary: Search active article families
+      operationId: searchArticleFamilies
+      parameters:
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Matching article families retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ArticleFamilyDTO"
+      security:
+      - bearerAuth: []
   /agetypes/{index}:
     get:
       tags:
@@ -7385,6 +7549,34 @@ components:
       - defaultValue
       - id
       - type
+    ArticleFamilyDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Identifier of the article family
+          example: 1
+        code:
+          type: string
+          description: Code of the article family
+          example: MED
+          maxLength: 50
+          minLength: 0
+        description:
+          type: string
+          description: Description of the article family
+          example: Medicines and Drugs
+          maxLength: 255
+          minLength: 0
+        lock:
+          type: integer
+          format: int32
+          description: Optimistic locking version indicator
+          example: 0
+      required:
+      - code
+      - description
     PricesOthersDTO:
       type: object
       description: Class representing a price others
@@ -7401,6 +7593,9 @@ components:
           type: string
           description: The description
           maxLength: 100
+        articleFamily:
+          $ref: "#/components/schemas/ArticleFamilyDTO"
+          description: The article family
         lock:
           type: integer
           format: int32
@@ -7559,6 +7754,9 @@ components:
         type:
           $ref: "#/components/schemas/OperationTypeDTO"
           description: The operation type
+        articleFamily:
+          $ref: "#/components/schemas/ArticleFamilyDTO"
+          description: The article family
         opeFor:
           type: string
           description: The operation context
@@ -8199,6 +8397,9 @@ components:
         examtype:
           $ref: "#/components/schemas/ExamTypeDTO"
           description: Exam Type
+        articleFamily:
+          $ref: "#/components/schemas/ArticleFamilyDTO"
+          description: Article Family
         lock:
           type: integer
           format: int32

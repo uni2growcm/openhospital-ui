@@ -15,4 +15,5 @@ export type OperationFormFieldName =
 	| 'description'
 	| 'type'
 	| 'major'
-	| 'opeFor';
+	| 'opeFor'
+	| 'articleFamily';

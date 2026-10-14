@@ -15,6 +15,7 @@ import {
 	formatAllFieldValues,
 	getFromFields,
 } from '../../../../../libraries/formDataHandling/functions';
+import { getArticleFamilies } from '../../../../../state/articleFamilies';
 import {
 	createOperationReset,
 	updateOperationReset,
@@ -43,6 +44,18 @@ const OperationForm: FC<IOperationProps> = ({
 	const infoBoxRef = useRef<HTMLDivElement>(null);
 
 	const operationStore = useAppSelector((state) => state.operations);
+
+	const articleFamiliesState = useAppSelector(
+		(state) => state.articleFamilies.articleFamilyList,
+	);
+	const articleFamilyOptions = useMemo(
+		() =>
+			articleFamiliesState.data?.map((item) => ({
+				value: `${item.id}`,
+				label: `${item.code} - ${item.description}`,
+			})) ?? [],
+		[articleFamiliesState.data],
+	);
 
 	const operationsTypeState = useAppSelector(
 		(state: IState) => state.types.operations.getAll,
@@ -96,6 +109,9 @@ const OperationForm: FC<IOperationProps> = ({
 			formattedValues.type = operationsTypeState.data?.find(
 				(item) => item.code === values.type,
 			);
+			formattedValues.articleFamily = articleFamiliesState.data?.find(
+				(item) => `${item.id}` === values.articleFamily,
+			);
 			onSubmit(formattedValues as any);
 		},
 	});
@@ -138,6 +154,7 @@ const OperationForm: FC<IOperationProps> = ({
 
 	useEffect(() => {
 		dispatch(getOperationTypes());
+		dispatch(getArticleFamilies(undefined));
 	}, [dispatch]);
 
 	useEffect(() => {
@@ -181,7 +198,7 @@ const OperationForm: FC<IOperationProps> = ({
 				</div>
 
 				<div className="row start-sm center-xs">
-					<div className="operationForm__item thirdWidth">
+					<div className="operationForm__item halfWidth">
 						<TextField
 							field={formik.getFieldProps('description')}
 							theme="regular"
@@ -193,7 +210,23 @@ const OperationForm: FC<IOperationProps> = ({
 							disabled={isLoading}
 						/>
 					</div>
-					<div className="operationForm__item thirdWidth">
+					<div className="operationForm__item halfWidth">
+						<AutocompleteField
+							fieldName="articleFamily"
+							fieldValue={formik.values.articleFamily}
+							label={t('operation.articleFamily')}
+							isValid={isValid('articleFamily')}
+							errorText={getErrorText('articleFamily')}
+							onBlur={onBlurCallback('articleFamily')}
+							options={articleFamilyOptions}
+							loading={articleFamiliesState.status === 'LOADING'}
+							disabled={isLoading}
+						/>
+					</div>
+				</div>
+
+				<div className="row start-sm center-xs">
+					<div className="operationForm__item halfWidth">
 						<AutocompleteField
 							fieldName="opeFor"
 							fieldValue={formik.values.opeFor}
@@ -206,7 +239,7 @@ const OperationForm: FC<IOperationProps> = ({
 							disabled={isLoading}
 						/>
 					</div>
-					<div className="operationForm__item thirdWith">
+					<div className="operationForm__item halfWidth">
 						<CheckboxField
 							fieldName={'major'}
 							checked={formik.values.major === '1'}

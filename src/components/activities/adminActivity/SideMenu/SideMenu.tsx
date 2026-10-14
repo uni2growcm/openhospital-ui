@@ -3,6 +3,7 @@ import {
 	ArrowForwardIosRounded,
 	AssignmentInd,
 	BlurCircular,
+	Category,
 	GroupWork,
 	Healing,
 	LocalDrink,
@@ -31,7 +32,11 @@ const SideMenu = () => {
 
 	const changeAdminSection = useCallback(
 		(section: IAdminSection) => {
-			navigate(`${PATHS.admin}/${section}`);
+			if (section === 'articleFamilies') {
+				navigate(PATHS.admin_article_families);
+			} else {
+				navigate(`${PATHS.admin}/${section}`);
+			}
 		},
 		[navigate],
 	);
@@ -62,6 +67,10 @@ const SideMenu = () => {
 			icon: <SupervisedUserCircle fontSize="small" />,
 		},
 		{
+			key: 'articleFamilies',
+			icon: <Category fontSize="small" />,
+		},
+		{
 			key: 'users',
 			icon: <People fontSize="small" />,
 		},
@@ -82,9 +91,13 @@ const SideMenu = () => {
 					key={item.key}
 					icon={item.icon}
 					label={t(`nav.${item.key}`)}
-					selected={location.pathname
-						.slice(location.pathname.lastIndexOf('admin') + 6)
-						.startsWith(item.key)}
+					selected={
+						item.key === 'articleFamilies'
+							? location.pathname.includes('article-families')
+							: location.pathname
+									.slice(location.pathname.lastIndexOf('admin') + 6)
+									.startsWith(item.key)
+					}
 					onClick={() => {
 						changeAdminSection(item.key);
 					}}
