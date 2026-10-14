@@ -407,6 +407,7 @@
 		"consultancy": "ናይ ምኽሪ ስራሕ",
 		"administration": "ምምሕዳር",
 		"wards": "ዋርድያታት",
+		"staff": "ሰራሕተኛታት",
 		"diseases": "ሕማማት",
 		"operations": "ስርሒታት",
 		"vaccines": "ክታበት",
@@ -500,6 +501,13 @@
 		"searchpatientinstruction": "መለለዪ ሕሙም እንተዘይብልካ ብዝተኻእለ መጠን ብዙሓት ዓውድታት መሊእካ ምድላይ ጠውቕ",
 		"required": "እዚ ዓውዲ እዚ የድሊ",
 		"emptydata": "ዝኾነ ምእታው ኣይተረኽበን!",
+		"page": "ገጽ",
+		"previous": "ናይ ቅድሚ",
+		"next": "ቀጺሉ",
+		"first_page": "ቀዳማይ ገጽ",
+		"last_page": "ናይ መወዳእታ ገጽ",
+		"per_page": "ንገጽ",
+		"total_items": "ንጥፈታት",
 		"save": "ምቑጣብ",
 		"code": "ኮድ",
 		"update": "ኣዘምን",
@@ -875,15 +883,33 @@
 			"elderly": "ዓብዪ"
 		},
 		"lab": {
-			"undefined": { "txt": "ዘይተገልጸ" },
-			"blood": { "txt": "ደም" },
-			"cfs": { "txt": "ሲኤፍኤስ" },
-			"film": { "txt": "ፊልሚ" },
-			"sputum": { "txt": "ረስኒ" },
-			"stool": { "txt": "ድኳ" },
-			"swabs": { "txt": "ስዋብ" },
-			"tissues": { "txt": "ቲሹታት" },
-			"urine": { "txt": "ሽንቲ" }
+			"undefined": {
+				"txt": "ዘይተገልጸ"
+			},
+			"blood": {
+				"txt": "ደም"
+			},
+			"cfs": {
+				"txt": "ሲኤፍኤስ"
+			},
+			"film": {
+				"txt": "ፊልሚ"
+			},
+			"sputum": {
+				"txt": "ረስኒ"
+			},
+			"stool": {
+				"txt": "ድኳ"
+			},
+			"swabs": {
+				"txt": "ስዋብ"
+			},
+			"tissues": {
+				"txt": "ቲሹታት"
+			},
+			"urine": {
+				"txt": "ሽንቲ"
+			}
 		},
 		"common": {
 			"thecodeisalreadyinuse": {
@@ -1155,6 +1181,24 @@
 		"createSuccess": "ዋርድ ብዓወት ተፈጢሩ ኣሎ!",
 		"updateSuccess": "ዋርድ {{code}} ብዓወት ተሓዲሱ ኣሎ!",
 		"deleteSuccess": "ዋርድ {{code}} ብዓወት ተደምሲሱ!"
+	},
+	"staff": {
+		"code": "ኮድ",
+		"firstName": "ቀዳማይ ስም",
+		"lastName": "ናይ ኣቦ ስም",
+		"profession": "ሞያ",
+		"position": "ቦታ",
+		"phone": "ተሌፎን",
+		"addStaff": "ሰራሕተኛ ወስኽ",
+		"editStaff": "ሰራሕተኛ ኣመሓይሽ",
+		"updateStaff": "ሰራሕተኛ ኣዘምን",
+		"saveStaff": "ሰራሕተኛ ኣቐምጥ",
+		"created": "ሰራሕተኛ ተፈጢሩ",
+		"updated": "ሰራሕተኛ ተዓርዩ",
+		"deleted": "ሰራሕተኛ ተሰሪዙ",
+		"createSuccess": "ሰራሕተኛ ብዓወት ተፈጢሩ!",
+		"updateSuccess": "ሰራሕተኛ {{code}} ብዓወት ተዓርዩ!",
+		"deleteSuccess": "ሰራሕተኛ ብዓወት ተሰሪዙ!"
 	},
 	"disease": {
 		"code": "ኮድ",

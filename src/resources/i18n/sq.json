@@ -367,6 +367,7 @@
 		"consultancy": "Konsultim",
 		"administration": "Administrimi",
 		"wards": "Repartet",
+		"staff": "Personeli",
 		"diseases": "Sëmundjet",
 		"operations": "Operacionet",
 		"vaccines": "Vaksinat",
@@ -446,6 +447,13 @@
 		"searchpatientinstruction": "Nëse nuk e keni ID-në e pacientit, plotësoni sa më shumë fusha të jetë e mundur dhe klikoni kërkimin",
 		"required": "Kjo fushë është e nevojshme",
 		"emptydata": "Nuk u gjet asnjë e dhënë!",
+		"page": "Faqja",
+		"previous": "Mëparshme",
+		"next": "Tjetër",
+		"first_page": "Faqja e parë",
+		"last_page": "Faqja e fundit",
+		"per_page": "Për faqe",
+		"total_items": "elementë",
 		"save": "Ruaj",
 		"code": "Kodi",
 		"update": "aktualizo",
@@ -797,15 +805,33 @@
 			"elderly": "I moshuar"
 		},
 		"lab": {
-			"undefined": { "txt": "Pa definuar" },
-			"blood": { "txt": "Gjaku" },
-			"cfs": { "txt": "CFS" },
-			"film": { "txt": "GRAFI" },
-			"sputum": { "txt": "Pështymë" },
-			"stool": { "txt": "Jashtëqitja" },
-			"swabs": { "txt": "Tamponët" },
-			"tissues": { "txt": "Indet" },
-			"urine": { "txt": "Urina" }
+			"undefined": {
+				"txt": "Pa definuar"
+			},
+			"blood": {
+				"txt": "Gjaku"
+			},
+			"cfs": {
+				"txt": "CFS"
+			},
+			"film": {
+				"txt": "GRAFI"
+			},
+			"sputum": {
+				"txt": "Pështymë"
+			},
+			"stool": {
+				"txt": "Jashtëqitja"
+			},
+			"swabs": {
+				"txt": "Tamponët"
+			},
+			"tissues": {
+				"txt": "Indet"
+			},
+			"urine": {
+				"txt": "Urina"
+			}
 		}
 	},
 	"exam": {
@@ -848,6 +874,24 @@
 		"createSuccess": "Reparti u krijua me sukses!",
 		"updateSuccess": "Reparti {{code}} u krijua me sukses!",
 		"deleteSuccess": "Reparti {{code}} u fshi me sukses!"
+	},
+	"staff": {
+		"code": "Kodi",
+		"firstName": "Emri",
+		"lastName": "Mbiemri",
+		"profession": "Profesioni",
+		"position": "Pozicioni",
+		"phone": "Telefoni",
+		"addStaff": "Shto personel",
+		"editStaff": "Modifiko personelin",
+		"updateStaff": "Përditëso personelin",
+		"saveStaff": "Ruaj personelin",
+		"created": "Personeli u krijua",
+		"updated": "Personeli u përditësua",
+		"deleted": "Personeli u fshi",
+		"createSuccess": "Personeli u krijua me sukses!",
+		"updateSuccess": "Personeli {{code}} u përditësua me sukses!",
+		"deleteSuccess": "Personeli u fshi me sukses!"
 	},
 	"disease": {
 		"code": "Kodi",

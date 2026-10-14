@@ -407,6 +407,7 @@
 		"consultancy": "ማማከር",
 		"administration": "አስተዳደር",
 		"wards": "ዋርድስ",
+		"staff": "ሰራተኞች",
 		"diseases": "በሽታዎች",
 		"operations": "ስራዎች",
 		"vaccines": "ክትባቶች",
@@ -500,6 +501,13 @@
 		"searchpatientinstruction": "የታካሚ መታወቂያ ከሌልዎት በተቻለ መጠን ብዙ መስኮችን ይሙሉ እና ፍለጋን ጠቅ ያድርጉ",
 		"required": "ይህ መስክ ያስፈልጋል",
 		"emptydata": "ምንም ግቤት አልተገኘም!",
+		"page": "ገጽ",
+		"previous": "ቀዳሚ",
+		"next": "ቀጣይ",
+		"first_page": "መጀመሪያ ገጽ",
+		"last_page": "የመጨረሻ ገጽ",
+		"per_page": "በገጽ",
+		"total_items": "ንጥሎች",
 		"save": "አስቀምጥ",
 		"code": "ኮድ",
 		"update": "አዘምን",
@@ -875,15 +883,33 @@
 			"elderly": "አረጋውያን"
 		},
 		"lab": {
-			"undefined": { "txt": "ያልተገለጸ" },
-			"blood": { "txt": "ደም" },
-			"cfs": { "txt": "ሲኤፍኤስ" },
-			"film": { "txt": "ፊልም" },
-			"sputum": { "txt": "አክታ" },
-			"stool": { "txt": "በርጩማ" },
-			"swabs": { "txt": "ስዋዎች" },
-			"tissues": { "txt": "ቲሹዎች" },
-			"urine": { "txt": "ሽንት" }
+			"undefined": {
+				"txt": "ያልተገለጸ"
+			},
+			"blood": {
+				"txt": "ደም"
+			},
+			"cfs": {
+				"txt": "ሲኤፍኤስ"
+			},
+			"film": {
+				"txt": "ፊልም"
+			},
+			"sputum": {
+				"txt": "አክታ"
+			},
+			"stool": {
+				"txt": "በርጩማ"
+			},
+			"swabs": {
+				"txt": "ስዋዎች"
+			},
+			"tissues": {
+				"txt": "ቲሹዎች"
+			},
+			"urine": {
+				"txt": "ሽንት"
+			}
 		},
 		"common": {
 			"thecodeisalreadyinuse": {
@@ -1155,6 +1181,24 @@
 		"createSuccess": "ዋርድ በተሳካ ሁኔታ ተፈጥሯል!",
 		"updateSuccess": "ዋርድ {{code}} በተሳካ ሁኔታ ዘምኗል!",
 		"deleteSuccess": "ዋርድ {{code}} በተሳካ ሁኔታ ተሰርዟል!"
+	},
+	"staff": {
+		"code": "ኮድ",
+		"firstName": "የመጀመሪያ ስም",
+		"lastName": "የአባት ስም",
+		"profession": "ሙያ",
+		"position": "ቦታ",
+		"phone": "ስልክ",
+		"addStaff": "ሰራተኛ ጨምር",
+		"editStaff": "ሰራተኛ አርትዕ",
+		"updateStaff": "ሰራተኛ አዘምን",
+		"saveStaff": "ሰራተኛ አስቀምጥ",
+		"created": "ሰራተኛ ተፈጥሯል",
+		"updated": "ሰራተኛ ዘምኗል",
+		"deleted": "ሰራተኛ ተሰርዟል",
+		"createSuccess": "ሰራተኛው በተሳካ ሁኔታ ተፈጥሯል!",
+		"updateSuccess": "ሰራተኛ {{code}} በተሳካ ሁኔታ ዘምኗል!",
+		"deleteSuccess": "ሰራተኛው በተሳካ ሁኔታ ተሰርዟል!"
 	},
 	"disease": {
 		"code": "ኮድ",

@@ -15,6 +15,7 @@ import type { IPatientsState } from './state/patients/types';
 import type { IPermissionsState } from './state/permissions/types';
 import type { IPricesState } from './state/prices/types';
 import type { ISettingsState } from './state/settings';
+import type { IStaffState } from './state/staff/types';
 import type { ISummaryState } from './state/summary/types';
 import type { ISupplierState } from './state/suppliers/types';
 import type { ITherapiesState } from './state/therapies/types';
@@ -56,6 +57,7 @@ export interface IState {
 	suppliers: ISupplierState;
 	permissions: IPermissionsState;
 	settings: ISettingsState;
+	staff: IStaffState;
 }
 
 export enum FIELD_VALIDATION {
@@ -204,6 +206,10 @@ export type TPermission =
 	| 'sms.read'
 	| 'sms.update'
 	| 'sms.delete'
+	| 'staff.create'
+	| 'staff.read'
+	| 'staff.update'
+	| 'staff.delete'
 	| 'suppliers.create'
 	| 'suppliers.read'
 	| 'suppliers.update'
