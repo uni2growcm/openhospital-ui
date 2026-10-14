@@ -11,7 +11,7 @@
 
   .pagination_info {
     font-size: 0.85rem;
-    color: $c-grey-medium;
+    color: rgba(0, 0, 0, 0.87);
   }
 
   .pagination_controls {
@@ -33,7 +33,7 @@
     gap: 6px;
     margin-right: 8px;
     font-size: 0.85rem;
-    color: $c-grey-medium;
+    color: rgba(0, 0, 0, 0.87);
 
     input {
       width: 56px;

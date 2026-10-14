@@ -9,7 +9,6 @@ import { scrollToElement } from '../../../../../libraries/uiUtils/scrollToElemen
 import { deleteStaffReset, getStaffPaged } from '../../../../../state/staff';
 import ConfirmationDialog from '../../../confirmationDialog/ConfirmationDialog';
 import InfoBox from '../../../infoBox/InfoBox';
-import Pagination from '../../../pagination/Pagination';
 import Table from '../../../table/Table';
 import type { TFilterField } from '../../../table/filter/types';
 import classes from './StaffTable.module.scss';
@@ -173,32 +172,29 @@ export const StaffTable: FunctionComponent<IOwnProps> = ({
 								{(data ?? []).length === 0 ? (
 									<InfoBox type="info" message={t('common.emptydata')} />
 								) : (
-									<>
-										<Table
-											rowData={formatDataToDisplay(data ?? [])}
-											tableHeader={header}
-											labelData={label}
-											columnsOrder={order}
-											rowsPerPage={pageSize}
-											hidePaginator
-											isCollapsabile={true}
-											onEdit={handleEdit}
-											onDelete={handleDelete}
-											showEmptyCell={false}
-											filterColumns={filters}
-											rawData={data}
-											manualFilter={false}
-											rowKey="code"
-										/>
-										<Pagination
-											page={page}
-											totalPages={pageInfo?.totalPages ?? 0}
-											totalElements={pageInfo?.totalNbOfElements}
-											setPage={setPage}
-											pageSize={pageSize}
-											setPageSize={setPageSize}
-										/>
-									</>
+									<Table
+										rowData={formatDataToDisplay(data ?? [])}
+										tableHeader={header}
+										labelData={label}
+										columnsOrder={order}
+										rowsPerPage={pageSize}
+										isCollapsabile={true}
+										onEdit={handleEdit}
+										onDelete={handleDelete}
+										showEmptyCell={false}
+										filterColumns={filters}
+										rawData={data}
+										manualFilter={false}
+										rowKey="code"
+										serverPagination={{
+											page,
+											totalPages: pageInfo?.totalPages ?? 0,
+											totalElements: pageInfo?.totalNbOfElements,
+											setPage,
+											pageSize,
+											setPageSize,
+										}}
+									/>
 								)}
 								<ConfirmationDialog
 									isOpen={!!deleteStaffState.hasSucceeded}

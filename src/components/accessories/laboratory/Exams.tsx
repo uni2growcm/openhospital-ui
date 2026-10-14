@@ -27,7 +27,6 @@ import {
 import type { IState } from '../../../types';
 import ConfirmationDialog from '../confirmationDialog/ConfirmationDialog';
 import InfoBox from '../infoBox/InfoBox';
-import Pagination from '../pagination/Pagination';
 import { ChangeLabStatus } from './ChangeLabStatus';
 import { initialFilter, initialFilterFields } from './consts';
 import { EditLaboratoryContent } from './EditLaboratoryContent';
@@ -98,6 +97,10 @@ export const Exams: FC = () => {
 
 	const onSubmit = (values: TFilterValues) => {
 		setFilter({ ...values, page: 0, size: filter.size });
+	};
+
+	const handleSizeChange = (size: number) => {
+		setFilter((previous) => ({ ...previous, size, page: 0 }));
 	};
 
 	const onEdit = (row: LaboratoryDTO) => {
@@ -191,20 +194,20 @@ export const Exams: FC = () => {
 							</div>
 						)}
 						{status === 'SUCCESS' && (
-							<>
-								<ExamTable
-									data={data ?? []}
-									handleDelete={onDelete}
-									handleCancel={onCancel}
-									handleEdit={onEdit}
-								/>
-								<Pagination
-									page={pageInfo?.page ?? 0}
-									totalPages={pageInfo?.totalPages ?? 0}
-									totalElements={pageInfo?.totalNbOfElements}
-									setPage={(p) => handlePageChange(undefined, p)}
-								/>
-							</>
+							<ExamTable
+								data={data ?? []}
+								handleDelete={onDelete}
+								handleCancel={onCancel}
+								handleEdit={onEdit}
+								serverPagination={{
+									page: pageInfo?.page ?? 0,
+									totalPages: pageInfo?.totalPages ?? 0,
+									totalElements: pageInfo?.totalNbOfElements,
+									setPage: (p) => handlePageChange(undefined, p),
+									pageSize: filter.size,
+									setPageSize: handleSizeChange,
+								}}
+							/>
 						)}
 						{labStore.deleteLab.status === 'LOADING' && (
 							<CircularProgress

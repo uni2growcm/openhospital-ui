@@ -507,6 +507,8 @@
 		"page": "Page",
 		"previous": "Précédent",
 		"next": "Suivant",
+		"first_page": "Première page",
+		"last_page": "Dernière page",
 		"per_page": "Par page",
 		"total_items": "éléments",
 		"save": "Enregistrer",

@@ -1,3 +1,10 @@
+import {
+	FirstPage,
+	KeyboardArrowLeft,
+	KeyboardArrowRight,
+	LastPage,
+} from '@mui/icons-material';
+import { IconButton } from '@mui/material';
 import { type FunctionComponent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '../button/Button';
@@ -85,23 +92,25 @@ const Pagination: FunctionComponent<IProps> = ({
 					</div>
 				)}
 
-				<Button
-					type="button"
-					variant="outlined"
+				<IconButton
+					size="small"
+					sx={{ '&:not(.Mui-disabled)': { color: 'rgba(0, 0, 0, 0.87)' } }}
+					title={t('common.first_page')}
 					disabled={page === 0 || disabled}
 					onClick={() => setPage(0)}
 				>
-					{'<<'}
-				</Button>
+					<FirstPage />
+				</IconButton>
 
-				<Button
-					type="button"
-					variant="outlined"
+				<IconButton
+					size="small"
+					sx={{ '&:not(.Mui-disabled)': { color: 'rgba(0, 0, 0, 0.87)' } }}
+					title={t('common.previous')}
 					disabled={page === 0 || disabled}
 					onClick={() => setPage(Math.max(0, page - 1))}
 				>
-					{'<'}
-				</Button>
+					<KeyboardArrowLeft />
+				</IconButton>
 
 				{pages.map((p) => (
 					<Button
@@ -116,23 +125,25 @@ const Pagination: FunctionComponent<IProps> = ({
 					</Button>
 				))}
 
-				<Button
-					type="button"
-					variant="outlined"
+				<IconButton
+					size="small"
+					sx={{ '&:not(.Mui-disabled)': { color: 'rgba(0, 0, 0, 0.87)' } }}
+					title={t('common.next')}
 					disabled={page + 1 >= totalPages || disabled}
 					onClick={() => setPage(page + 1)}
 				>
-					{'>'}
-				</Button>
+					<KeyboardArrowRight />
+				</IconButton>
 
-				<Button
-					type="button"
-					variant="outlined"
+				<IconButton
+					size="small"
+					sx={{ '&:not(.Mui-disabled)': { color: 'rgba(0, 0, 0, 0.87)' } }}
+					title={t('common.last_page')}
 					disabled={page + 1 >= totalPages || disabled}
 					onClick={() => setPage(totalPages - 1)}
 				>
-					{'>>'}
-				</Button>
+					<LastPage />
+				</IconButton>
 			</div>
 		</div>
 	);
