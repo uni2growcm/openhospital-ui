@@ -10,13 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "lts/*"
-          cache: "npm"
+      - uses: actions/checkout@v1
       - name: Installing...
-        run: npm ci
+        run: npm i
       - name: Building...
         env:
           CI: false
@@ -26,13 +22,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "lts/*"
-          cache: "npm"
+      - uses: actions/checkout@v1
       - name: Installing...
-        run: npm ci
+        run: npm i
       - name: Testing...
         run: npm test
 
@@ -53,14 +45,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v2
       - uses: fregante/setup-git-user@v1
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "lts/*"
-          cache: "npm"
       - name: Installing...
-        run: npm ci
+        run: npm i
       - name: Building
         env:
           CI: false

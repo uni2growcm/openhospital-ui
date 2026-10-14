@@ -11,13 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "lts/*"
-          cache: "npm"
+      - uses: actions/checkout@v1
       - name: Installing...
-        run: npm ci
+        run: npm i
       - name: Building...
         env:
           CI: false
@@ -27,13 +23,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "lts/*"
-          cache: "npm"
+      - uses: actions/checkout@v1
       - name: Installing...
-        run: npm ci
+        run: npm i
       - name: Testing...
         run: npm test
 
@@ -41,13 +33,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "lts/*"
-          cache: "npm"
+      - uses: actions/checkout@v1
       - name: Installing...
-        run: npm ci
+        run: npm i
       - name: Type Checking...
         run: npm run tsc
 
@@ -55,13 +43,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "lts/*"
-          cache: "npm"
+      - uses: actions/checkout@v1
       - name: Installing...
-        run: npm ci
+        run: npm i
       - name: Linting...
         run: npm run lint
 
