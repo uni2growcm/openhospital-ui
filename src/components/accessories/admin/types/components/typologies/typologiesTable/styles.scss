@@ -1,0 +1,22 @@
+.typologiesTable {
+	.center {
+		display: flex;
+		justify-content: center;
+		padding: 40px;
+	}
+
+	.info-box-container {
+		margin-bottom: 20px;
+	}
+
+	.header {
+		display: flex;
+		justify-content: flex-end;
+		margin-bottom: 12px;
+
+		.headerActions {
+			display: flex;
+			justify-content: flex-end;
+		}
+	}
+}

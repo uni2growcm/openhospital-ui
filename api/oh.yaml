@@ -9,7 +9,7 @@ info:
     url: https://github.com/informatici/openhospital-api?tab=GPL-3.0-1-ov-file#readme
   version: 0.1.0
 servers:
-- url: http://localhost
+- url: http://localhost:8080
 security:
 - bearerAuth: []
 tags:
@@ -454,6 +454,75 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/PermissionDTO"
+      security:
+      - bearerAuth: []
+  /typologies:
+    get:
+      tags:
+      - Typologies
+      operationId: getTypologies
+      parameters:
+      - name: family
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - angal.typology.deliverytype
+          - angal.typology.visittype
+          - angal.typology.partnertype
+          - angal.typology.familyplanningmethodtype
+          - angal.typology.familyplanningvisittype
+          - angal.typology.hivtreatmenttype
+          - angal.typology.tuberculosisregimen
+          - angal.typology.tuberculosiscontact
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TypologyDTO"
+      security:
+      - bearerAuth: []
+    put:
+      tags:
+      - Typologies
+      operationId: updateTypology
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TypologyDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TypologyDTO"
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - Typologies
+      operationId: newTypology
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TypologyDTO"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TypologyDTO"
       security:
       - bearerAuth: []
   /suppliers:
@@ -3572,6 +3641,113 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/PermissionDTO"
+      security:
+      - bearerAuth: []
+  /typologies/{code}:
+    get:
+      tags:
+      - Typologies
+      operationId: getTypologyByCode
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TypologyDTO"
+      security:
+      - bearerAuth: []
+    delete:
+      tags:
+      - Typologies
+      operationId: deleteTypology
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+      security:
+      - bearerAuth: []
+  /typologies/search:
+    get:
+      tags:
+      - Typologies
+      operationId: searchTypologies
+      parameters:
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: family
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - angal.typology.deliverytype
+          - angal.typology.visittype
+          - angal.typology.partnertype
+          - angal.typology.familyplanningmethodtype
+          - angal.typology.familyplanningvisittype
+          - angal.typology.hivtreatmenttype
+          - angal.typology.tuberculosisregimen
+          - angal.typology.tuberculosiscontact
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageTypologyDTO"
+      security:
+      - bearerAuth: []
+  /typologies/check/{code}:
+    get:
+      tags:
+      - Typologies
+      operationId: checkTypologyCode
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
       security:
       - bearerAuth: []
   /therapies/{code_patient}:
@@ -7267,6 +7443,35 @@ components:
           items:
             type: integer
             format: int32
+    TypologyDTO:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Code of the typology
+          example: VT1
+        description:
+          type: string
+          description: Description of the typology
+          example: Visit Type 1
+          maxLength: 255
+        family:
+          type: string
+          description: Family of the typology
+          enum:
+          - angal.typology.deliverytype
+          - angal.typology.visittype
+          - angal.typology.partnertype
+          - angal.typology.familyplanningmethodtype
+          - angal.typology.familyplanningvisittype
+          - angal.typology.hivtreatmenttype
+          - angal.typology.tuberculosisregimen
+          - angal.typology.tuberculosiscontact
+          example: VISITTYPE
+      required:
+      - code
+      - description
+      - family
     SupplierDTO:
       type: object
       properties:
@@ -8941,6 +9146,65 @@ components:
       required:
       - password
       - username
+    PageTypologyDTO:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        pageable:
+          $ref: "#/components/schemas/PageableObject"
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/TypologyDTO"
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: "#/components/schemas/SortObject"
+        numberOfElements:
+          type: integer
+          format: int32
+        first:
+          type: boolean
+        last:
+          type: boolean
+        empty:
+          type: boolean
+    PageableObject:
+      type: object
+      properties:
+        paged:
+          type: boolean
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        unpaged:
+          type: boolean
+        offset:
+          type: integer
+          format: int64
+        sort:
+          $ref: "#/components/schemas/SortObject"
+    SortObject:
+      type: object
+      properties:
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+        empty:
+          type: boolean
     Series:
       type: object
       properties:

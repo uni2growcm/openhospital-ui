@@ -511,7 +511,20 @@
 		"value": "Wert",
 		"true": "Aktiv",
 		"false": "False",
-		"all": "Alle"
+		"all": "Alle",
+		"add": "Hinzufügen",
+		"edit": "Bearbeiten",
+		"description": "Beschreibung",
+		"created": "Erstellt",
+		"updated": "Aktualisiert",
+		"deleted": "Gelöscht",
+		"createdSuccessfully": "Element erfolgreich erstellt",
+		"updatedSuccessfully": "Element erfolgreich aktualisiert",
+		"deletedSuccessfully": "Element erfolgreich gelöscht",
+		"typeCreated": "{{type}} erstellt",
+		"typeCreateSuccess": "{{type}} wurde erfolgreich erstellt!",
+		"typeUpdated": "{{type}} aktualisiert",
+		"typeUpdateSuccess": "{{type}} wurde erfolgreich aktualisiert!"
 	},
 	"permission": {
 		"denied": "Zugriff verweigert",
@@ -797,15 +810,33 @@
 			"elderly": "Älter"
 		},
 		"lab": {
-			"undefined": { "txt": "Nicht definiert" },
-			"blood": { "txt": "Blut" },
-			"cfs": { "txt": "CFS" },
-			"film": { "txt": "FILM" },
-			"sputum": { "txt": "Spucke" },
-			"stool": { "txt": "Stuhl" },
-			"swabs": { "txt": "Wattestäbchen" },
-			"tissues": { "txt": "Gewebe" },
-			"urine": { "txt": "Urin" }
+			"undefined": {
+				"txt": "Nicht definiert"
+			},
+			"blood": {
+				"txt": "Blut"
+			},
+			"cfs": {
+				"txt": "CFS"
+			},
+			"film": {
+				"txt": "FILM"
+			},
+			"sputum": {
+				"txt": "Spucke"
+			},
+			"stool": {
+				"txt": "Stuhl"
+			},
+			"swabs": {
+				"txt": "Wattestäbchen"
+			},
+			"tissues": {
+				"txt": "Gewebe"
+			},
+			"urine": {
+				"txt": "Urin"
+			}
 		}
 	},
 	"exam": {
@@ -856,5 +887,27 @@
 		"opdInclude": "OPD",
 		"ipdInInclude": "IP In",
 		"ipdOutInclude": "IP Out"
+	},
+	"types": {
+		"selectAType": "Typ auswählen",
+		"vaccines": "Impfstofftypen",
+		"exams": "Untersuchungstypen",
+		"admissions": "Aufnahmetypen",
+		"ages": "Alterstypen",
+		"diseases": "Krankheitstypen",
+		"discharges": "Entlassungstypen",
+		"deliveries": "Entbindungstypen",
+		"operations": "Operationstypen",
+		"medicals": "Medikamententypen",
+		"chooseATypeToStart": "Wählen Sie einen Typ, um zu beginnen...",
+		"pregnantTreatment": "Behandlungstypen für Schwangere",
+		"deliveryResultType": "Entbindungsergebnistypen",
+		"visitTypes": "Besuchstypen",
+		"partnerTypes": "Partnertypen",
+		"familyPlanningMethods": "Familienplanungsmethoden",
+		"familyPlanningVisitTypes": "Besuchstypen für Familienplanung",
+		"hivTreatmentTypes": "HIV-Behandlungstypen",
+		"tuberculosisRegimens": "Tuberkulose-Behandlungsschemata",
+		"tuberculosisContacts": "Tuberkulose-Kontakttypen"
 	}
 }

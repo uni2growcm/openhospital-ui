@@ -306,7 +306,20 @@
 		"lessthan": "The value must not exceed {{value}}.",
 		"confirm": "Confirm",
 		"invaliddate": "Invalid Date",
-		"outofrange": "Out of range"
+		"outofrange": "Out of range",
+		"add": "إضافة",
+		"edit": "تعديل",
+		"description": "الوصف",
+		"created": "تم الإنشاء",
+		"updated": "تم التحديث",
+		"deleted": "تم الحذف",
+		"createdSuccessfully": "تم إنشاء العنصر بنجاح",
+		"updatedSuccessfully": "تم تحديث العنصر بنجاح",
+		"deletedSuccessfully": "تم حذف العنصر بنجاح",
+		"typeCreated": "تم إنشاء {{type}}",
+		"typeCreateSuccess": "تم إنشاء {{type}} بنجاح!",
+		"typeUpdated": "تم تحديث {{type}}",
+		"typeUpdateSuccess": "تم تحديث {{type}} بنجاح!"
 	},
 	"therapy": {
 		"newtherapy": "معالجة جديدة",
@@ -538,5 +551,27 @@
 		"cs": "Czech",
 		"sq": "Albanian",
 		"zh": "Chinese"
+	},
+	"types": {
+		"selectAType": "حدد نوعاً",
+		"vaccines": "أنواع اللقاحات",
+		"exams": "أنواع الفحوصات",
+		"admissions": "أنواع الدخول",
+		"ages": "أنواع الأعمار",
+		"diseases": "أنواع الأمراض",
+		"discharges": "أنواع الخروج",
+		"deliveries": "أنواع الولادة",
+		"operations": "أنواع العمليات",
+		"medicals": "أنواع الأدوية",
+		"chooseATypeToStart": "اختر نوعاً للبدء...",
+		"pregnantTreatment": "أنواع علاج الحوامل",
+		"deliveryResultType": "أنواع نتائج الولادة",
+		"visitTypes": "أنواع الزيارات",
+		"partnerTypes": "أنواع الشركاء",
+		"familyPlanningMethods": "طرق تنظيم الأسرة",
+		"familyPlanningVisitTypes": "أنواع زيارات تنظيم الأسرة",
+		"hivTreatmentTypes": "أنواع علاج فيروس نقص المناعة البشرية",
+		"tuberculosisRegimens": "أنظمة علاج السل",
+		"tuberculosisContacts": "أنواع مخالطي السل"
 	}
 }

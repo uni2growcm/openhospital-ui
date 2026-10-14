@@ -586,7 +586,19 @@
 		"saveandprint": "Save and Print",
 		"updateandprint": "Update and Print",
 		"printData": "Print Data",
-		"failedtodownloadthereport": "Failed to download report."
+		"failedtodownloadthereport": "Failed to download report.",
+		"add": "Add",
+		"edit": "Edit",
+		"description": "Description",
+		"created": "Created",
+		"updated": "Updated",
+		"createdSuccessfully": "Item created successfully",
+		"updatedSuccessfully": "Item updated successfully",
+		"deletedSuccessfully": "Item deleted successfully",
+		"typeCreated": "{{type}} created",
+		"typeCreateSuccess": "The {{type}} was created successfully!",
+		"typeUpdated": "{{type}} updated",
+		"typeUpdateSuccess": "The {{type}} was updated successfully!"
 	},
 	"permission": {
 		"denied": "Permission denied",
@@ -883,15 +895,33 @@
 			"elderly": "Elderly"
 		},
 		"lab": {
-			"undefined": { "txt": "Undefined" },
-			"blood": { "txt": "Blood" },
-			"cfs": { "txt": "CFS" },
-			"film": { "txt": "FILM" },
-			"sputum": { "txt": "Sputum" },
-			"stool": { "txt": "Stool" },
-			"swabs": { "txt": "Swabs" },
-			"tissues": { "txt": "Tissues" },
-			"urine": { "txt": "Urine" }
+			"undefined": {
+				"txt": "Undefined"
+			},
+			"blood": {
+				"txt": "Blood"
+			},
+			"cfs": {
+				"txt": "CFS"
+			},
+			"film": {
+				"txt": "FILM"
+			},
+			"sputum": {
+				"txt": "Sputum"
+			},
+			"stool": {
+				"txt": "Stool"
+			},
+			"swabs": {
+				"txt": "Swabs"
+			},
+			"tissues": {
+				"txt": "Tissues"
+			},
+			"urine": {
+				"txt": "Urine"
+			}
 		},
 		"common": {
 			"thecodeisalreadyinuse": {
@@ -979,7 +1009,14 @@
 		"medicals": "Types of medical",
 		"chooseATypeToStart": "Choose a type to start...",
 		"pregnantTreatment": "Types of pregnant treatment",
-		"deliveryResultType": "Types of delivery result"
+		"deliveryResultType": "Types of delivery result",
+		"visitTypes": "Types of visit",
+		"partnerTypes": "Types of partner",
+		"familyPlanningMethods": "Family planning methods",
+		"familyPlanningVisitTypes": "Family planning visit types",
+		"hivTreatmentTypes": "HIV treatment types",
+		"tuberculosisRegimens": "Tuberculosis regimens",
+		"tuberculosisContacts": "Tuberculosis contact types"
 	},
 	"vaccineTypes": {
 		"code": "Code",
