@@ -122,6 +122,34 @@ export const ADMIN_ROUTES: RouteObject[] = [
 			})),
 	},
 	{
+		path: getPath(PATHS.admin_prices),
+		lazy: async () =>
+			import('../../components/accessories/admin/prices').then((module) => ({
+				Component: module.PriceBrowser,
+			})),
+	},
+	{
+		path: getPath(PATHS.admin_price_lists),
+		lazy: async () =>
+			import('../../components/accessories/admin/prices').then((module) => ({
+				Component: module.Prices,
+			})),
+	},
+	{
+		path: getPath(PATHS.admin_price_lists_new),
+		lazy: async () =>
+			import('../../components/accessories/admin/prices').then((module) => ({
+				Component: module.NewPriceList,
+			})),
+	},
+	{
+		path: getPath(PATHS.admin_price_lists_edit),
+		lazy: async () =>
+			import('../../components/accessories/admin/prices').then((module) => ({
+				Component: module.EditPriceList,
+			})),
+	},
+	{
 		path: getPath(PATHS.admin_suppliers),
 		lazy: async () =>
 			import('../../components/accessories/admin/suppliers').then((module) => ({

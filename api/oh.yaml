@@ -9,7 +9,7 @@ info:
     url: https://github.com/informatici/openhospital-api?tab=GPL-3.0-1-ov-file#readme
   version: 0.1.0
 servers:
-- url: http://localhost
+- url: http://localhost:8080
 security:
 - bearerAuth: []
 tags:
@@ -628,6 +628,35 @@ paths:
         schema:
           type: integer
           format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+      security:
+      - bearerAuth: []
+  /pricelists/{id}/prices:
+    put:
+      tags:
+      - Price Lists
+      operationId: updatePrices
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/PriceDTO"
+        required: true
       responses:
         "200":
           description: OK
@@ -7462,6 +7491,52 @@ components:
           type: integer
           format: int32
           readOnly: true
+    PriceDTO:
+      type: object
+      description: Class representing a prices
+      properties:
+        id:
+          type: integer
+          format: int32
+        list:
+          $ref: "#/components/schemas/PriceListDTO"
+          description: The price list
+        group:
+          type: string
+          description: The group
+        item:
+          type: string
+          description: The item name
+          maxLength: 10
+        description:
+          type: string
+          description: The description
+          maxLength: 100
+        price:
+          type: number
+          format: double
+          description: Price
+          example: 1500
+        lock:
+          type: integer
+          format: int32
+          description: Lock
+          example: 0
+        editable:
+          type: boolean
+          readOnly: true
+        hashCode:
+          type: integer
+          format: int32
+          readOnly: true
+        variable:
+          type: boolean
+      required:
+      - description
+      - group
+      - item
+      - list
+      - price
     PregnantTreatmentTypeDTO:
       type: object
       description: Class representing a pregnant treatment type
@@ -9092,50 +9167,6 @@ components:
         data:
           type: string
           description: Base64 representation of the instance preview
-    PriceDTO:
-      type: object
-      description: Class representing a prices
-      properties:
-        id:
-          type: integer
-          format: int32
-        list:
-          $ref: "#/components/schemas/PriceListDTO"
-          description: The price list
-        group:
-          type: string
-          description: The group
-        item:
-          type: string
-          description: The item name
-          maxLength: 10
-        description:
-          type: string
-          description: The description
-          maxLength: 100
-        price:
-          type: number
-          format: double
-          description: Price
-          example: 1500
-        lock:
-          type: integer
-          format: int32
-          description: Lock
-          example: 0
-        editable:
-          type: boolean
-          readOnly: true
-        hashCode:
-          type: integer
-          format: int32
-          readOnly: true
-      required:
-      - description
-      - group
-      - item
-      - list
-      - price
     PluginBundle:
       type: object
       properties:

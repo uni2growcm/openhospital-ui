@@ -8,4 +8,6 @@ export type IPricesState = {
 	createPriceList: ApiResponse<PriceListDTO>;
 	updatePriceList: ApiResponse<PriceListDTO>;
 	deletePriceList: ApiResponse<void>;
+	updatePrices: ApiResponse<boolean>;
+	copyPriceList: ApiResponse<boolean>;
 };
