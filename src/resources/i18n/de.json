@@ -919,6 +919,9 @@
 		"created": "Ermäßigungsplan erstellt",
 		"createSuccess": "Ermäßigungsplan erfolgreich erstellt",
 		"updated": "Ermäßigungsplan aktualisiert",
-		"updateSuccess": "Ermäßigungsplan erfolgreich aktualisiert"
+		"updateSuccess": "Ermäßigungsplan erfolgreich aktualisiert",
+		"editItem": "Bearbeiten",
+		"saveItem": "Speichern",
+		"cancelEdit": "Abbrechen"
 	}
 }

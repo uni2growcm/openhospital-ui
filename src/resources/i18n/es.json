@@ -573,7 +573,10 @@
 		"created": "Plan de reducción creado",
 		"createSuccess": "Plan de reducción creado con éxito",
 		"updated": "Plan de reducción actualizado",
-		"updateSuccess": "Plan de reducción actualizado con éxito"
+		"updateSuccess": "Plan de reducción actualizado con éxito",
+		"editItem": "Modificar",
+		"saveItem": "Guardar",
+		"cancelEdit": "Cancelar"
 	},
 	"errors": {
 		"reductionplan": {

@@ -1,4 +1,4 @@
-import { Delete } from '@mui/icons-material';
+import { Check, Close, Delete, Edit } from '@mui/icons-material';
 import {
 	Autocomplete,
 	IconButton,
@@ -83,7 +83,6 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 		dispatch(getPricesOthers());
 	}, [dispatch]);
 
-	// Specific reductions state
 	const [medicalReductions, setMedicalReductions] = useState<
 		MedicalReductionDTO[]
 	>(initialPlan?.medicalReductions ?? []);
@@ -110,6 +109,12 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 
 	const [selectedOtherId, setSelectedOtherId] = useState<string>('');
 	const [otherRateInput, setOtherRateInput] = useState<string>('');
+
+	const [editingCategory, setEditingCategory] = useState<
+		'medicals' | 'exams' | 'operations' | 'others' | null
+	>(null);
+	const [editingIndex, setEditingIndex] = useState<number | null>(null);
+	const [editingRate, setEditingRate] = useState<string>('');
 
 	const errorMessage = useMemo(() => {
 		const rawErr = creationMode
@@ -206,6 +211,19 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 		return cleanUp;
 	}, [cleanUp]);
 
+	useEffect(() => {
+		const status = creationMode
+			? reductionPlanStore.create.status
+			: reductionPlanStore.update.status;
+		if (status === 'FAIL' && infoBoxRef.current) {
+			infoBoxRef.current.scrollIntoView({ behavior: 'smooth' });
+		}
+	}, [
+		creationMode,
+		reductionPlanStore.create.status,
+		reductionPlanStore.update.status,
+	]);
+
 	const handleRateBlur = (fieldName: string) => (e: React.FocusEvent<any>) => {
 		formik.handleBlur(e);
 		const currentVal = formik.values[fieldName];
@@ -220,7 +238,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 	const handleAddMedicalReduction = () => {
 		const med = medicalsList.find((m) => `${m.code}` === selectedMedicalCode);
 		const rate = Number(medicalRateInput);
-		if (med && !isNaN(rate) && rate >= 0.01 && rate <= 100) {
+		if (med && !Number.isNaN(rate) && rate >= 0.01 && rate <= 100) {
 			setMedicalReductions((prev) => [
 				...prev,
 				{ medical: med, reductionRate: rate },
@@ -233,7 +251,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 	const handleAddExamReduction = () => {
 		const ex = examsList.find((e) => e.code === selectedExamCode);
 		const rate = Number(examRateInput);
-		if (ex && !isNaN(rate) && rate >= 0.01 && rate <= 100) {
+		if (ex && !Number.isNaN(rate) && rate >= 0.01 && rate <= 100) {
 			setExamReductions((prev) => [
 				...prev,
 				{ exam: ex, reductionRate: rate },
@@ -246,7 +264,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 	const handleAddOperationReduction = () => {
 		const op = operationsList.find((o) => o.code === selectedOperationCode);
 		const rate = Number(operationRateInput);
-		if (op && !isNaN(rate) && rate >= 0.01 && rate <= 100) {
+		if (op && !Number.isNaN(rate) && rate >= 0.01 && rate <= 100) {
 			setOperationReductions((prev) => [
 				...prev,
 				{ operation: op, reductionRate: rate },
@@ -259,7 +277,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 	const handleAddOtherReduction = () => {
 		const other = pricesOthersList.find((p) => `${p.id}` === selectedOtherId);
 		const rate = Number(otherRateInput);
-		if (other && !isNaN(rate) && rate >= 0.01 && rate <= 100) {
+		if (other && !Number.isNaN(rate) && rate >= 0.01 && rate <= 100) {
 			setPriceOtherReductions((prev) => [
 				...prev,
 				{ pricesOthers: other, reductionRate: rate },
@@ -267,6 +285,61 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 			setSelectedOtherId('');
 			setOtherRateInput('');
 		}
+	};
+
+	const handleStartEdit = (
+		category: 'medicals' | 'exams' | 'operations' | 'others',
+		index: number,
+		currentRate: number,
+	) => {
+		setEditingCategory(category);
+		setEditingIndex(index);
+		setEditingRate(`${currentRate}`);
+	};
+
+	const handleCancelEdit = () => {
+		setEditingCategory(null);
+		setEditingIndex(null);
+		setEditingRate('');
+	};
+
+	const handleSaveEdit = () => {
+		if (editingCategory === null || editingIndex === null) return;
+		const rate = Number(editingRate);
+		if (Number.isNaN(rate) || rate < 0.01 || rate > 100) return;
+
+		switch (editingCategory) {
+			case 'medicals':
+				setMedicalReductions((prev) =>
+					prev.map((item, i) =>
+						i === editingIndex ? { ...item, reductionRate: rate } : item,
+					),
+				);
+				break;
+			case 'exams':
+				setExamReductions((prev) =>
+					prev.map((item, i) =>
+						i === editingIndex ? { ...item, reductionRate: rate } : item,
+					),
+				);
+				break;
+			case 'operations':
+				setOperationReductions((prev) =>
+					prev.map((item, i) =>
+						i === editingIndex ? { ...item, reductionRate: rate } : item,
+					),
+				);
+				break;
+			case 'others':
+				setPriceOtherReductions((prev) =>
+					prev.map((item, i) =>
+						i === editingIndex ? { ...item, reductionRate: rate } : item,
+					),
+				);
+				break;
+		}
+
+		handleCancelEdit();
 	};
 
 	const availableMedicals = useMemo(() => {
@@ -374,7 +447,10 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 				<div className="specificReductionsContainer">
 					<Tabs
 						value={activeTab}
-						onChange={(_, val) => setActiveTab(val)}
+						onChange={(_, val) => {
+							setActiveTab(val);
+							handleCancelEdit();
+						}}
 						indicatorColor="primary"
 						textColor="primary"
 					>
@@ -445,7 +521,11 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									<Button
 										type="button"
 										variant="text"
-										onClick={() => setMedicalReductions([])}
+										onClick={() => {
+											handleCancelEdit();
+											setMedicalReductions([]);
+										}}
+										disabled={editingIndex !== null}
 									>
 										{t('reductionPlan.removeAll')}
 									</Button>
@@ -466,27 +546,104 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 											</TableRow>
 										</TableHead>
 										<TableBody>
-											{medicalReductions.map((item, index) => (
-												<TableRow key={index}>
-													<TableCell>
-														{item.medical.description} ({item.medical.code})
-													</TableCell>
-													<TableCell>{item.reductionRate}%</TableCell>
-													<TableCell align="right">
-														<IconButton
-															size="small"
-															color="error"
-															onClick={() =>
-																setMedicalReductions((prev) =>
-																	prev.filter((_, i) => i !== index),
-																)
-															}
-														>
-															<Delete fontSize="small" />
-														</IconButton>
-													</TableCell>
-												</TableRow>
-											))}
+											{medicalReductions.map((item, index) => {
+												const isEditing =
+													editingCategory === 'medicals' && editingIndex === index;
+												return (
+													<TableRow key={index}>
+														<TableCell>
+															{item.medical.description} ({item.medical.code})
+														</TableCell>
+														<TableCell>
+															{isEditing ? (
+																<MuiTextField
+																	className="tableRateInput"
+																	size="small"
+																	type="number"
+																	value={editingRate}
+																	onChange={(e) => setEditingRate(e.target.value)}
+																	onKeyDown={(e) => {
+																		if (e.key === 'Enter') {
+																			e.preventDefault();
+																			handleSaveEdit();
+																		} else if (e.key === 'Escape') {
+																			handleCancelEdit();
+																		}
+																	}}
+																	autoFocus
+																	inputProps={{ min: 0.01, max: 100, step: 0.01 }}
+																/>
+															) : (
+																`${item.reductionRate}%`
+															)}
+														</TableCell>
+														<TableCell align="right">
+															{isEditing ? (
+																<>
+																	<IconButton
+																		size="small"
+																		color="primary"
+																		onClick={handleSaveEdit}
+																		disabled={
+																			editingRate === '' ||
+																			Number.isNaN(Number(editingRate)) ||
+																			Number(editingRate) < 0.01 ||
+																			Number(editingRate) > 100
+																		}
+																		title={t('reductionPlan.saveItem')}
+																	>
+																		<Check fontSize="small" />
+																	</IconButton>
+																	<IconButton
+																		size="small"
+																		onClick={handleCancelEdit}
+																		title={t('reductionPlan.cancelEdit')}
+																	>
+																		<Close fontSize="small" />
+																	</IconButton>
+																</>
+															) : (
+																<>
+																	<IconButton
+																		size="small"
+																		color="primary"
+																		onClick={() =>
+																			handleStartEdit(
+																				'medicals',
+																				index,
+																				item.reductionRate,
+																			)
+																		}
+																		disabled={editingIndex !== null}
+																		title={t('reductionPlan.editItem')}
+																	>
+																		<Edit fontSize="small" />
+																	</IconButton>
+																	<IconButton
+																		size="small"
+																		color="error"
+																		onClick={() => {
+																			if (
+																				editingCategory === 'medicals' &&
+																				editingIndex === index
+																			) {
+																				handleCancelEdit();
+																			}
+																			setMedicalReductions((prev) =>
+																				prev.filter((_, i) => i !== index),
+																			);
+																		}}
+																		disabled={editingIndex !== null}
+																		title={t('common.delete')}
+																	>
+																		<Delete fontSize="small" />
+																	</IconButton>
+																</>
+															)}
+														</TableCell>
+													</TableRow>
+												);
+											})}
 										</TableBody>
 									</MuiTable>
 								</TableContainer>
@@ -555,7 +712,11 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									<Button
 										type="button"
 										variant="text"
-										onClick={() => setExamReductions([])}
+										onClick={() => {
+											handleCancelEdit();
+											setExamReductions([]);
+										}}
+										disabled={editingIndex !== null}
 									>
 										{t('reductionPlan.removeAll')}
 									</Button>
@@ -576,27 +737,104 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 											</TableRow>
 										</TableHead>
 										<TableBody>
-											{examReductions.map((item, index) => (
-												<TableRow key={index}>
-													<TableCell>
-														{item.exam.description} ({item.exam.code})
-													</TableCell>
-													<TableCell>{item.reductionRate}%</TableCell>
-													<TableCell align="right">
-														<IconButton
-															size="small"
-															color="error"
-															onClick={() =>
-																setExamReductions((prev) =>
-																	prev.filter((_, i) => i !== index),
-																)
-															}
-														>
-															<Delete fontSize="small" />
-														</IconButton>
-													</TableCell>
-												</TableRow>
-											))}
+											{examReductions.map((item, index) => {
+												const isEditing =
+													editingCategory === 'exams' && editingIndex === index;
+												return (
+													<TableRow key={index}>
+														<TableCell>
+															{item.exam.description} ({item.exam.code})
+														</TableCell>
+														<TableCell>
+															{isEditing ? (
+																<MuiTextField
+																	className="tableRateInput"
+																	size="small"
+																	type="number"
+																	value={editingRate}
+																	onChange={(e) => setEditingRate(e.target.value)}
+																	onKeyDown={(e) => {
+																		if (e.key === 'Enter') {
+																			e.preventDefault();
+																			handleSaveEdit();
+																		} else if (e.key === 'Escape') {
+																			handleCancelEdit();
+																		}
+																	}}
+																	autoFocus
+																	inputProps={{ min: 0.01, max: 100, step: 0.01 }}
+																/>
+															) : (
+																`${item.reductionRate}%`
+															)}
+														</TableCell>
+														<TableCell align="right">
+															{isEditing ? (
+																<>
+																	<IconButton
+																		size="small"
+																		color="primary"
+																		onClick={handleSaveEdit}
+																		disabled={
+																			editingRate === '' ||
+																			Number.isNaN(Number(editingRate)) ||
+																			Number(editingRate) < 0.01 ||
+																			Number(editingRate) > 100
+																		}
+																		title={t('reductionPlan.saveItem')}
+																	>
+																		<Check fontSize="small" />
+																	</IconButton>
+																	<IconButton
+																		size="small"
+																		onClick={handleCancelEdit}
+																		title={t('reductionPlan.cancelEdit')}
+																	>
+																		<Close fontSize="small" />
+																	</IconButton>
+																</>
+															) : (
+																<>
+																	<IconButton
+																		size="small"
+																		color="primary"
+																		onClick={() =>
+																			handleStartEdit(
+																				'exams',
+																				index,
+																				item.reductionRate,
+																			)
+																		}
+																		disabled={editingIndex !== null}
+																		title={t('reductionPlan.editItem')}
+																	>
+																		<Edit fontSize="small" />
+																	</IconButton>
+																	<IconButton
+																		size="small"
+																		color="error"
+																		onClick={() => {
+																			if (
+																				editingCategory === 'exams' &&
+																				editingIndex === index
+																			) {
+																				handleCancelEdit();
+																			}
+																			setExamReductions((prev) =>
+																				prev.filter((_, i) => i !== index),
+																			);
+																		}}
+																		disabled={editingIndex !== null}
+																		title={t('common.delete')}
+																	>
+																		<Delete fontSize="small" />
+																	</IconButton>
+																</>
+															)}
+														</TableCell>
+													</TableRow>
+												);
+											})}
 										</TableBody>
 									</MuiTable>
 								</TableContainer>
@@ -665,7 +903,11 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									<Button
 										type="button"
 										variant="text"
-										onClick={() => setOperationReductions([])}
+										onClick={() => {
+											handleCancelEdit();
+											setOperationReductions([]);
+										}}
+										disabled={editingIndex !== null}
 									>
 										{t('reductionPlan.removeAll')}
 									</Button>
@@ -686,27 +928,104 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 											</TableRow>
 										</TableHead>
 										<TableBody>
-											{operationReductions.map((item, index) => (
-												<TableRow key={index}>
-													<TableCell>
-														{item.operation.description} ({item.operation.code})
-													</TableCell>
-													<TableCell>{item.reductionRate}%</TableCell>
-													<TableCell align="right">
-														<IconButton
-															size="small"
-															color="error"
-															onClick={() =>
-																setOperationReductions((prev) =>
-																	prev.filter((_, i) => i !== index),
-																)
-															}
-														>
-															<Delete fontSize="small" />
-														</IconButton>
-													</TableCell>
-												</TableRow>
-											))}
+											{operationReductions.map((item, index) => {
+												const isEditing =
+													editingCategory === 'operations' && editingIndex === index;
+												return (
+													<TableRow key={index}>
+														<TableCell>
+															{item.operation.description} ({item.operation.code})
+														</TableCell>
+														<TableCell>
+															{isEditing ? (
+																<MuiTextField
+																	className="tableRateInput"
+																	size="small"
+																	type="number"
+																	value={editingRate}
+																	onChange={(e) => setEditingRate(e.target.value)}
+																	onKeyDown={(e) => {
+																		if (e.key === 'Enter') {
+																			e.preventDefault();
+																			handleSaveEdit();
+																		} else if (e.key === 'Escape') {
+																			handleCancelEdit();
+																		}
+																	}}
+																	autoFocus
+																	inputProps={{ min: 0.01, max: 100, step: 0.01 }}
+																/>
+															) : (
+																`${item.reductionRate}%`
+															)}
+														</TableCell>
+														<TableCell align="right">
+															{isEditing ? (
+																<>
+																	<IconButton
+																		size="small"
+																		color="primary"
+																		onClick={handleSaveEdit}
+																		disabled={
+																			editingRate === '' ||
+																			Number.isNaN(Number(editingRate)) ||
+																			Number(editingRate) < 0.01 ||
+																			Number(editingRate) > 100
+																		}
+																		title={t('reductionPlan.saveItem')}
+																	>
+																		<Check fontSize="small" />
+																	</IconButton>
+																	<IconButton
+																		size="small"
+																		onClick={handleCancelEdit}
+																		title={t('reductionPlan.cancelEdit')}
+																	>
+																		<Close fontSize="small" />
+																	</IconButton>
+																</>
+															) : (
+																<>
+																	<IconButton
+																		size="small"
+																		color="primary"
+																		onClick={() =>
+																			handleStartEdit(
+																				'operations',
+																				index,
+																				item.reductionRate,
+																			)
+																		}
+																		disabled={editingIndex !== null}
+																		title={t('reductionPlan.editItem')}
+																	>
+																		<Edit fontSize="small" />
+																	</IconButton>
+																	<IconButton
+																		size="small"
+																		color="error"
+																		onClick={() => {
+																			if (
+																				editingCategory === 'operations' &&
+																				editingIndex === index
+																			) {
+																				handleCancelEdit();
+																			}
+																			setOperationReductions((prev) =>
+																				prev.filter((_, i) => i !== index),
+																			);
+																		}}
+																		disabled={editingIndex !== null}
+																		title={t('common.delete')}
+																	>
+																		<Delete fontSize="small" />
+																	</IconButton>
+																</>
+															)}
+														</TableCell>
+													</TableRow>
+												);
+											})}
 										</TableBody>
 									</MuiTable>
 								</TableContainer>
@@ -775,7 +1094,11 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									<Button
 										type="button"
 										variant="text"
-										onClick={() => setPriceOtherReductions([])}
+										onClick={() => {
+											handleCancelEdit();
+											setPriceOtherReductions([]);
+										}}
+										disabled={editingIndex !== null}
 									>
 										{t('reductionPlan.removeAll')}
 									</Button>
@@ -796,27 +1119,104 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 											</TableRow>
 										</TableHead>
 										<TableBody>
-											{priceOtherReductions.map((item, index) => (
-												<TableRow key={index}>
-													<TableCell>
-														{item.pricesOthers.description} ({item.pricesOthers.code})
-													</TableCell>
-													<TableCell>{item.reductionRate}%</TableCell>
-													<TableCell align="right">
-														<IconButton
-															size="small"
-															color="error"
-															onClick={() =>
-																setPriceOtherReductions((prev) =>
-																	prev.filter((_, i) => i !== index),
-																)
-															}
-														>
-															<Delete fontSize="small" />
-														</IconButton>
-													</TableCell>
-												</TableRow>
-											))}
+											{priceOtherReductions.map((item, index) => {
+												const isEditing =
+													editingCategory === 'others' && editingIndex === index;
+												return (
+													<TableRow key={index}>
+														<TableCell>
+															{item.pricesOthers.description} ({item.pricesOthers.code})
+														</TableCell>
+														<TableCell>
+															{isEditing ? (
+																<MuiTextField
+																	className="tableRateInput"
+																	size="small"
+																	type="number"
+																	value={editingRate}
+																	onChange={(e) => setEditingRate(e.target.value)}
+																	onKeyDown={(e) => {
+																		if (e.key === 'Enter') {
+																			e.preventDefault();
+																			handleSaveEdit();
+																		} else if (e.key === 'Escape') {
+																			handleCancelEdit();
+																		}
+																	}}
+																	autoFocus
+																	inputProps={{ min: 0.01, max: 100, step: 0.01 }}
+																/>
+															) : (
+																`${item.reductionRate}%`
+															)}
+														</TableCell>
+														<TableCell align="right">
+															{isEditing ? (
+																<>
+																	<IconButton
+																		size="small"
+																		color="primary"
+																		onClick={handleSaveEdit}
+																		disabled={
+																			editingRate === '' ||
+																			Number.isNaN(Number(editingRate)) ||
+																			Number(editingRate) < 0.01 ||
+																			Number(editingRate) > 100
+																		}
+																		title={t('reductionPlan.saveItem')}
+																	>
+																		<Check fontSize="small" />
+																	</IconButton>
+																	<IconButton
+																		size="small"
+																		onClick={handleCancelEdit}
+																		title={t('reductionPlan.cancelEdit')}
+																	>
+																		<Close fontSize="small" />
+																	</IconButton>
+																</>
+															) : (
+																<>
+																	<IconButton
+																		size="small"
+																		color="primary"
+																		onClick={() =>
+																			handleStartEdit(
+																				'others',
+																				index,
+																				item.reductionRate,
+																			)
+																		}
+																		disabled={editingIndex !== null}
+																		title={t('reductionPlan.editItem')}
+																	>
+																		<Edit fontSize="small" />
+																	</IconButton>
+																	<IconButton
+																		size="small"
+																		color="error"
+																		onClick={() => {
+																			if (
+																				editingCategory === 'others' &&
+																				editingIndex === index
+																			) {
+																				handleCancelEdit();
+																			}
+																			setPriceOtherReductions((prev) =>
+																				prev.filter((_, i) => i !== index),
+																			);
+																		}}
+																		disabled={editingIndex !== null}
+																		title={t('common.delete')}
+																	>
+																		<Delete fontSize="small" />
+																	</IconButton>
+																</>
+															)}
+														</TableCell>
+													</TableRow>
+												);
+											})}
 										</TableBody>
 									</MuiTable>
 								</TableContainer>

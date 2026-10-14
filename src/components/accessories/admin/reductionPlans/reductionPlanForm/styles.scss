@@ -115,6 +115,16 @@
       max-height: 380px;
       overflow-y: auto;
     }
+
+    .tableRateInput {
+      width: 100px;
+      margin: 0;
+
+      .MuiInputBase-input {
+        padding: 6px 8px;
+        font-size: 0.875rem;
+      }
+    }
   }
 
   .reductionPlanForm__buttonSet {

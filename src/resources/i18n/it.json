@@ -1288,6 +1288,9 @@
 		"created": "Piano di riduzione creato",
 		"createSuccess": "Piano di riduzione creato con successo",
 		"updated": "Piano di riduzione aggiornato",
-		"updateSuccess": "Piano di riduzione aggiornato con successo"
+		"updateSuccess": "Piano di riduzione aggiornato con successo",
+		"editItem": "Modifica",
+		"saveItem": "Salva",
+		"cancelEdit": "Annulla"
 	}
 }

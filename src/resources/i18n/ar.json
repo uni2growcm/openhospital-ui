@@ -573,7 +573,10 @@
 		"created": "Reduction Plan Created",
 		"createSuccess": "Reduction plan created successfully",
 		"updated": "Reduction Plan Updated",
-		"updateSuccess": "Reduction plan updated successfully"
+		"updateSuccess": "Reduction plan updated successfully",
+		"editItem": "تعديل",
+		"saveItem": "حفظ",
+		"cancelEdit": "إلغاء"
 	},
 	"errors": {
 		"reductionplan": {

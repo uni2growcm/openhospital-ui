@@ -7,7 +7,9 @@ import { PATHS } from '../../../../../consts';
 import type { ReductionPlanDTO } from '../../../../../generated';
 import {
 	getReductionPlan,
+	getReductionPlanReset,
 	updateReductionPlan,
+	updateReductionPlanReset,
 } from '../../../../../state/reductionPlans';
 import { getInitialFields } from '../reductionPlanForm/consts';
 import ReductionPlanForm from '../reductionPlanForm/ReductionPlanForm';
@@ -24,12 +26,20 @@ export const EditReductionPlan = () => {
 	);
 
 	useEffect(() => {
+		dispatch(updateReductionPlanReset());
 		if (id) {
 			dispatch(getReductionPlan(Number(id)));
 		}
+		return () => {
+			dispatch(getReductionPlanReset());
+			dispatch(updateReductionPlanReset());
+		};
 	}, [dispatch, id]);
 
 	const currentPlan = selectedPlan ?? state;
+	const formKey = selectedPlan
+		? `plan-${selectedPlan.id}-${selectedPlan.lock ?? 0}`
+		: (state ? `state-${state.id}-${state.lock ?? 0}` : `empty-${id}`);
 
 	useEffect(() => {
 		if (!id || (state && state.id !== Number(id))) {
@@ -44,7 +54,7 @@ export const EditReductionPlan = () => {
 	return (
 		<AdminActivityContent title={t('reductionPlan.editReductionPlan')}>
 			<ReductionPlanForm
-				key={currentPlan?.id ?? id}
+				key={formKey}
 				creationMode={false}
 				initialPlan={currentPlan}
 				onSubmit={handleSubmit}

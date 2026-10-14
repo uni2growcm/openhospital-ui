@@ -36,14 +36,19 @@ export const updateReductionPlan = createAsyncThunk(
 		if (reductionPlanDTO.id == null) {
 			return thunkApi.rejectWithValue({ message: 'Missing reduction plan ID' });
 		}
-		return firstValueFrom(
-			wrapper(() =>
-				api.updateReductionPlan({
-					id: reductionPlanDTO.id!,
-					reductionPlanDTO,
-				}),
-			),
-		).catch((error) => thunkApi.rejectWithValue(error.response));
+		const id = reductionPlanDTO.id;
+		try {
+			return await firstValueFrom(
+				wrapper(() =>
+					api.updateReductionPlan({
+						id,
+						reductionPlanDTO,
+					}),
+				),
+			);
+		} catch (error: any) {
+			return thunkApi.rejectWithValue(error.response ?? error);
+		}
 	},
 );
 

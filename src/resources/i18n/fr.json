@@ -1342,6 +1342,9 @@
 		"created": "Plan de réduction créé",
 		"createSuccess": "Le plan de réduction a été créé avec succès",
 		"updated": "Plan de réduction mis à jour",
-		"updateSuccess": "Le plan de réduction a été mis à jour avec succès"
+		"updateSuccess": "Le plan de réduction a été mis à jour avec succès",
+		"editItem": "Modifier",
+		"saveItem": "Valider",
+		"cancelEdit": "Annuler"
 	}
 }

@@ -196,7 +196,10 @@
 		"created": "Reduction Plan Created",
 		"createSuccess": "Reduction plan created successfully",
 		"updated": "Reduction Plan Updated",
-		"updateSuccess": "Reduction plan updated successfully"
+		"updateSuccess": "Reduction plan updated successfully",
+		"editItem": "Upravit",
+		"saveItem": "Uložit",
+		"cancelEdit": "Zrušit"
 	},
 	"errors": {
 		"reductionplan": {
