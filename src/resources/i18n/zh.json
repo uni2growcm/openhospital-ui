@@ -192,5 +192,11 @@
 		"deleted": "Article family deleted",
 		"deleting": "Deleting article family...",
 		"deleteSuccess": "Article family has been deleted successfully!"
+	},
+	"exam": {
+		"articleFamily": "项目系列"
+	},
+	"operation": {
+		"articleFamily": "项目系列"
 	}
 }

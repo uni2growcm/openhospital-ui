@@ -480,7 +480,8 @@
 			"opd_admission": "OPD/መግቢያ",
 			"admission": "መግቢያ",
 			"opd": "ኦህዴድ"
-		}
+		},
+		"articleFamily": "የዕቃ ቤተሰብ"
 	},
 	"common": {
 		"ok": "እሺ",
@@ -967,7 +968,8 @@
 		"validateProcedureMinMax": "ዋጋ 1, 2 ወይም 3 ብቻ ሊሆን ይችላል",
 		"possibleValues": "ሊሆኑ የሚችሉ እሴቶች",
 		"defaultValue": "ነባሪ እሴት",
-		"invalidDefaultResult": "ነባሪ ውጤት ሊሆኑ ከሚችሉ እሴቶች ውስጥ አንዱ መሆን አለበት።"
+		"invalidDefaultResult": "ነባሪ ውጤት ሊሆኑ ከሚችሉ እሴቶች ውስጥ አንዱ መሆን አለበት።",
+		"articleFamily": "የዕቃ ቤተሰብ"
 	},
 	"vaccine": {
 		"code": "ኮድ",

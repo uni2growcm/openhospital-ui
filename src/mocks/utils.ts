@@ -1,5 +1,5 @@
 import { HttpResponse, http, type JsonBodyType } from 'msw';
-import { makeServer } from './server';
+// import { makeServer } from './server';
 
 export { http };
 
@@ -13,7 +13,7 @@ export async function enableMocking() {
 
 	console.info('Enabling API mocking');
 
-	makeServer();
+	// makeServer();
 }
 
 export function badRequest<T extends JsonBodyType>(response: T) {

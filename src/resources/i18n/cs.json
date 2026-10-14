@@ -192,5 +192,11 @@
 		"deleted": "Skupina artiklů smazána",
 		"deleting": "Mazání skupiny artiklů...",
 		"deleteSuccess": "Skupina artiklů byla úspěšně smazána!"
+	},
+	"exam": {
+		"articleFamily": "Skupina artiklů"
+	},
+	"operation": {
+		"articleFamily": "Skupina artiklů"
 	}
 }

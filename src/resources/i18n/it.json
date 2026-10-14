@@ -480,7 +480,8 @@
 			"opd_admission": "OPD/Ricovero",
 			"admission": "Ricovero",
 			"opd": "OPD"
-		}
+		},
+		"articleFamily": "Famiglia di articoli"
 	},
 	"common": {
 		"ok": "OK",
@@ -967,7 +968,8 @@
 		"validateProcedureMinMax": "I valori possibili sono 1, 2 o 3",
 		"possibleValues": "Valori possibili",
 		"defaultValue": "Valore di default",
-		"invalidDefaultResult": "Il valore di default è all'interno di una lista"
+		"invalidDefaultResult": "Il valore di default è all'interno di una lista",
+		"articleFamily": "Famiglia di articoli"
 	},
 	"vaccine": {
 		"code": "Codice",

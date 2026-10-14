@@ -427,7 +427,8 @@
 		"classes": {
 			"major": "I madh",
 			"minor": "I vogël"
-		}
+		},
+		"articleFamily": "Familje artikujsh"
 	},
 	"common": {
 		"ok": "OK",
@@ -842,7 +843,8 @@
 		"examtype": "Lloji i ekzaminimit",
 		"description": "Emri",
 		"procedure": "Procedura",
-		"defaultResult": "Vlera standard"
+		"defaultResult": "Vlera standard",
+		"articleFamily": "Familje artikujsh"
 	},
 	"supplier": {
 		"name": "Emri",

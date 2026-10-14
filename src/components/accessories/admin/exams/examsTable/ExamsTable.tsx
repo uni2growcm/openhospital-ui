@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
 import checkIcon from '../../../../../assets/check-icon.png';
 import type { ExamDTO, ExamTypeDTO } from '../../../../../generated';
+import { getArticleFamilies } from '../../../../../state/articleFamilies';
 import { deleteExamReset, getExams } from '../../../../../state/exams';
 import { getExamTypes } from '../../../../../state/types/exams';
 import ConfirmationDialog from '../../../confirmationDialog/ConfirmationDialog';
@@ -27,12 +28,14 @@ export const ExamsTable = ({ onDelete, onEdit, headerActions }: IOwnProps) => {
 	useEffect(() => {
 		dispatch(getExams());
 		dispatch(getExamTypes());
+		dispatch(getArticleFamilies(undefined));
 	}, [dispatch]);
 
 	const header: Array<ExamFormFieldName> = [
 		'code',
 		'examtype',
 		'description',
+		'articleFamily',
 		'procedure',
 		'defaultResult',
 	];
@@ -41,6 +44,13 @@ export const ExamsTable = ({ onDelete, onEdit, headerActions }: IOwnProps) => {
 			state.types.exams.getAll.data?.map((item: ExamTypeDTO) => ({
 				value: item.code ?? '',
 				label: item.description ?? item.code ?? '',
+			})) ?? [],
+	);
+	const articleFamiliesOptions = useAppSelector(
+		(state) =>
+			state.articleFamilies.articleFamilyList.data?.map((item) => ({
+				value: `${item.code} - ${item.description}`,
+				label: `${item.code} - ${item.description}`,
 			})) ?? [],
 	);
 
@@ -52,6 +62,12 @@ export const ExamsTable = ({ onDelete, onEdit, headerActions }: IOwnProps) => {
 			options: examTypesOptions,
 		},
 		{ key: 'description', label: t('exam.description'), type: 'text' },
+		{
+			key: 'articleFamily',
+			label: t('exam.articleFamily'),
+			type: 'select',
+			options: articleFamiliesOptions,
+		},
 		{ key: 'defaultResult', label: t('exam.defaultResult'), type: 'text' },
 	];
 
@@ -59,6 +75,7 @@ export const ExamsTable = ({ onDelete, onEdit, headerActions }: IOwnProps) => {
 		code: t('exam.code'),
 		examtype: t('exam.examtype'),
 		description: t('exam.description'),
+		articleFamily: t('exam.articleFamily'),
 		procedure: t('exam.procedure'),
 		defaultResult: t('exam.defaultResult'),
 	};
@@ -66,6 +83,7 @@ export const ExamsTable = ({ onDelete, onEdit, headerActions }: IOwnProps) => {
 		'code',
 		'examtype',
 		'description',
+		'articleFamily',
 		'procedure',
 		'defaultResult',
 	];
@@ -82,6 +100,9 @@ export const ExamsTable = ({ onDelete, onEdit, headerActions }: IOwnProps) => {
 				code: item.code ?? '',
 				examtype: item.examtype?.description ?? '',
 				description: item.description ?? '',
+				articleFamily: item.articleFamily
+					? `${item.articleFamily.code} - ${item.articleFamily.description}`
+					: '',
 				procedure: item.procedure ?? '',
 				defaultResult: item.defaultResult ?? '',
 			};

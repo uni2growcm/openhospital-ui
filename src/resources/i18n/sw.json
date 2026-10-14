@@ -257,7 +257,8 @@
 		"rowupdatesuccess": "Operation Row updated successfully",
 		"rowcreatesuccess": "Operation Row created successfully",
 		"rowdeletesuccess": "Operation Row deleted successfully",
-		"dateafteradmission": "Must be greater than admission date"
+		"dateafteradmission": "Must be greater than admission date",
+		"articleFamily": "Familia ya makala"
 	},
 	"common": {
 		"ok": "OK",
@@ -569,5 +570,8 @@
 		"deleted": "Familia ya makala imefutwa",
 		"deleting": "Inafuta familia ya makala...",
 		"deleteSuccess": "Familia ya makala imefutwa kikamilifu!"
+	},
+	"exam": {
+		"articleFamily": "Familia ya makala"
 	}
 }

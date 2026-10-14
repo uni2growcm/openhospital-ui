@@ -19,4 +19,8 @@ export const getInitialFields: (
 		type: 'number',
 		value: `${operation?.major ?? 1}`,
 	},
+	articleFamily: {
+		type: 'text',
+		value: operation?.articleFamily?.id ? `${operation.articleFamily.id}` : '',
+	},
 });

@@ -71,7 +71,9 @@ const ArticleFamilyForm: FC<IArticleFamilyFormProps> = ({
 		onSubmit: (values) => {
 			const formattedValues = formatAllFieldValues(fields, values);
 			if (formattedValues.code) {
-				formattedValues.code = (formattedValues.code as string).trim().toUpperCase();
+				formattedValues.code = (formattedValues.code as string)
+					.trim()
+					.toUpperCase();
 			}
 			if (creationMode) {
 				formattedValues.id = 0;

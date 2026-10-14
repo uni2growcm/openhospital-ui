@@ -427,7 +427,8 @@
 		"classes": {
 			"major": "Gross",
 			"minor": "Klein"
-		}
+		},
+		"articleFamily": "Artikelfamilie"
 	},
 	"common": {
 		"ok": "OK",
@@ -842,7 +843,8 @@
 		"examtype": "Exam Typ",
 		"description": "Name",
 		"procedure": "Verfahren",
-		"defaultResult": "Standardwert"
+		"defaultResult": "Standardwert",
+		"articleFamily": "Artikelfamilie"
 	},
 	"supplier": {
 		"name": "Name",

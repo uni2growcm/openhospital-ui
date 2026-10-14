@@ -257,7 +257,8 @@
 		"rowupdatesuccess": "Operation Row updated successfully",
 		"rowcreatesuccess": "Operation Row created successfully",
 		"rowdeletesuccess": "Operation Row deleted successfully",
-		"dateafteradmission": "Must be greater than admission date"
+		"dateafteradmission": "Must be greater than admission date",
+		"articleFamily": "Familia de artículos"
 	},
 	"common": {
 		"ok": "OK",
@@ -569,5 +570,8 @@
 		"deleted": "Familia de artículos eliminada",
 		"deleting": "Eliminando familia de artículos...",
 		"deleteSuccess": "¡La familia de artículos se ha eliminado correctamente!"
+	},
+	"exam": {
+		"articleFamily": "Familia de artículos"
 	}
 }

@@ -483,7 +483,8 @@
 			"opd_admission": "OPD/Admission",
 			"admission": "Admission",
 			"opd": "OPD"
-		}
+		},
+		"articleFamily": "Article Family"
 	},
 	"common": {
 		"ok": "OK",
@@ -975,7 +976,8 @@
 		"validateProcedureMinMax": "Value can be only 1, 2 or 3",
 		"possibleValues": "Possible values",
 		"defaultValue": "Default value",
-		"invalidDefaultResult": "Default result should be one of possible values"
+		"invalidDefaultResult": "Default result should be one of possible values",
+		"articleFamily": "Article Family"
 	},
 	"vaccine": {
 		"code": "Code",

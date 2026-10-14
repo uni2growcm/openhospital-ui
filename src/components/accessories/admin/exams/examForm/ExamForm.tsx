@@ -23,6 +23,7 @@ import {
 	formatAllFieldValues,
 	getFromFields,
 } from '../../../../../libraries/formDataHandling/functions';
+import { getArticleFamilies } from '../../../../../state/articleFamilies';
 import { createExamReset, updateExamReset } from '../../../../../state/exams';
 import { getExamTypes } from '../../../../../state/types/exams';
 import type { IState } from '../../../../../types';
@@ -53,6 +54,18 @@ const ExamForm: FC<IExamProps> = ({
 	const infoBoxRef = useRef<HTMLDivElement>(null);
 
 	const examStore = useAppSelector((state) => state.exams);
+
+	const articleFamiliesState = useAppSelector(
+		(state) => state.articleFamilies.articleFamilyList,
+	);
+	const articleFamilyOptions = useMemo(
+		() =>
+			articleFamiliesState.data?.map((item) => ({
+				value: `${item.id}`,
+				label: `${item.code} - ${item.description}`,
+			})) ?? [],
+		[articleFamiliesState.data],
+	);
 
 	const examTypeState = useAppSelector(
 		(state: IState) => state.types.exams.getAll,
@@ -131,6 +144,9 @@ const ExamForm: FC<IExamProps> = ({
 			formattedValues.examtype = examTypeState.data?.find(
 				(item) => item.code === values.examtype,
 			);
+			formattedValues.articleFamily = articleFamiliesState.data?.find(
+				(item) => `${item.id}` === values.articleFamily,
+			);
 			onSubmit(formattedValues as any);
 		},
 	});
@@ -208,6 +224,7 @@ const ExamForm: FC<IExamProps> = ({
 
 	useEffect(() => {
 		dispatch(getExamTypes());
+		dispatch(getArticleFamilies(undefined));
 	}, [dispatch]);
 
 	useEffect(() => {
@@ -223,7 +240,7 @@ const ExamForm: FC<IExamProps> = ({
 			</div>
 			<form className="examForm__form" onSubmit={formik.handleSubmit}>
 				<div className="row start-sm center-xs">
-					<div className="examForm__item fullWidth">
+					<div className="examForm__item halfWidth">
 						<AutocompleteField
 							fieldName="examtype"
 							fieldValue={formik.values.examtype}
@@ -233,6 +250,19 @@ const ExamForm: FC<IExamProps> = ({
 							onBlur={onBlurCallback('examtype')}
 							options={examTypeStateOptions}
 							loading={examTypeState.status === 'LOADING'}
+							disabled={isLoading}
+						/>
+					</div>
+					<div className="examForm__item halfWidth">
+						<AutocompleteField
+							fieldName="articleFamily"
+							fieldValue={formik.values.articleFamily}
+							label={t('exam.articleFamily')}
+							isValid={isValid('articleFamily')}
+							errorText={getErrorText('articleFamily')}
+							onBlur={onBlurCallback('articleFamily')}
+							options={articleFamilyOptions}
+							loading={articleFamiliesState.status === 'LOADING'}
 							disabled={isLoading}
 						/>
 					</div>

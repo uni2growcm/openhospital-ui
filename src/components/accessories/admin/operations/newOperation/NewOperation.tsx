@@ -11,7 +11,7 @@ export const NewOperation = () => {
 	const { t } = useTranslation();
 	const create = useAppSelector((state) => state.operations.create);
 
-	const handleSubmit = (value: OperationDTO) => {
+	const handleSubmit = ({ lock, ...value }: OperationDTO) => {
 		dispatch(createOperation(value));
 	};
 
