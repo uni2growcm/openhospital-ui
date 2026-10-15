@@ -234,7 +234,8 @@
 		"billrecords": "Bill Records",
 		"visits": "Visits",
 		"patients": "Patients",
-		"prices": "Price List"
+		"prices": "Price List",
+		"staff": "Personal"
 	},
 	"pricelist": {
 		"code": "Code",
@@ -322,6 +323,13 @@
 		"searchpatientinstruction": "If you don't have the patient ID, fill as many fields as possible and click search",
 		"required": "This field is required",
 		"emptydata": "No data found!",
+		"page": "Page",
+		"previous": "Previous",
+		"next": "Next",
+		"first_page": "First page",
+		"last_page": "Last page",
+		"per_page": "Per page",
+		"total_items": "items",
 		"save": "Save",
 		"code": "Code",
 		"update": "update",
@@ -574,5 +582,23 @@
 		"cs": "Czech",
 		"sq": "Albanian",
 		"zh": "Chinese"
+	},
+	"staff": {
+		"code": "Código",
+		"firstName": "Nombre",
+		"lastName": "Apellido",
+		"profession": "Profesión",
+		"position": "Puesto",
+		"phone": "Teléfono",
+		"addStaff": "Agregar personal",
+		"editStaff": "Editar personal",
+		"updateStaff": "Actualizar personal",
+		"saveStaff": "Guardar personal",
+		"created": "Personal creado",
+		"updated": "Personal actualizado",
+		"deleted": "Personal eliminado",
+		"createSuccess": "¡El personal ha sido creado con éxito!",
+		"updateSuccess": "¡El personal {{code}} ha sido actualizado con éxito!",
+		"deleteSuccess": "¡El personal ha sido eliminado con éxito!"
 	}
 }
