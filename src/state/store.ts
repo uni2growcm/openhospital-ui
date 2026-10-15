@@ -18,6 +18,7 @@ import { permissionSlice } from './permissions';
 import { priceSlice } from './prices';
 import { radiologySlice } from './radiology';
 import { settingsSlice } from './settings';
+import { staffSlice } from './staff';
 import { summarySlice } from './summary';
 import { supplierSlice } from './suppliers';
 import { therapySlice } from './therapies';
@@ -61,6 +62,7 @@ const reducer = combineReducers({
 	suppliers: supplierSlice.reducer,
 	countries: countrySlice.reducer,
 	radiology: radiologySlice.reducer,
+	staff: staffSlice.reducer,
 });
 
 export const store = configureStore({

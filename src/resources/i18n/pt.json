@@ -234,7 +234,8 @@
 		"billrecords": "Bill Records",
 		"visits": "Visits",
 		"patients": "Patients",
-		"countries": "Países"
+		"countries": "Países",
+		"staff": "Pessoal"
 	},
 	"operation": {
 		"newoperation": "New Operation",
@@ -287,6 +288,13 @@
 		"searchpatientinstruction": "If you don't have the patient ID, fill as many fields as possible and click search",
 		"required": "This field is required",
 		"emptydata": "No data found!",
+		"page": "Page",
+		"previous": "Previous",
+		"next": "Next",
+		"first_page": "First page",
+		"last_page": "Last page",
+		"per_page": "Per page",
+		"total_items": "items",
 		"save": "Save",
 		"code": "Code",
 		"update": "update",
@@ -569,5 +577,23 @@
 		"deleted": "País excluído",
 		"deleting": "Excluindo país...",
 		"deleteSuccess": "País excluído com sucesso!"
+	},
+	"staff": {
+		"code": "Código",
+		"firstName": "Nome",
+		"lastName": "Sobrenome",
+		"profession": "Profissão",
+		"position": "Cargo",
+		"phone": "Telefone",
+		"addStaff": "Adicionar pessoal",
+		"editStaff": "Editar pessoal",
+		"updateStaff": "Atualizar pessoal",
+		"saveStaff": "Salvar pessoal",
+		"created": "Pessoal criado",
+		"updated": "Pessoal atualizado",
+		"deleted": "Pessoal excluído",
+		"createSuccess": "O pessoal foi criado com sucesso!",
+		"updateSuccess": "O pessoal {{code}} foi atualizado com sucesso!",
+		"deleteSuccess": "O pessoal foi excluído com sucesso!"
 	}
 }

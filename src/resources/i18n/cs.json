@@ -106,7 +106,8 @@
 		"patientdashboard": "Patient Dashboard",
 		"newtherapy": "New Therapy",
 		"managetherapy": "Manage Therapy",
-		"countries": "Countries"
+		"countries": "Countries",
+		"staff": "Personál"
 	},
 	"common": {
 		"ok": "OK",
@@ -132,7 +133,14 @@
 		"patienteditsuccessfull": "The patient was edit successfully.",
 		"patientregistrationsuccessfull": "The patient registration was successful.",
 		"somethingwrong": "Something went wrong, please retry later.",
-		"searchpatientinstruction": "If you don't have the patient ID, fill as many fields as possible and click search"
+		"searchpatientinstruction": "If you don't have the patient ID, fill as many fields as possible and click search",
+		"page": "Page",
+		"previous": "Previous",
+		"next": "Next",
+		"first_page": "First page",
+		"last_page": "Last page",
+		"per_page": "Per page",
+		"total_items": "items"
 	},
 	"therapy": {
 		"newtherapy": "New Therapy",
@@ -192,5 +200,23 @@
 		"deleted": "Country deleted",
 		"deleting": "Deleting country...",
 		"deleteSuccess": "Country has been deleted successfully!"
+	},
+	"staff": {
+		"code": "Kód",
+		"firstName": "Jméno",
+		"lastName": "Příjmení",
+		"profession": "Profese",
+		"position": "Pozice",
+		"phone": "Telefon",
+		"addStaff": "Přidat personál",
+		"editStaff": "Upravit personál",
+		"updateStaff": "Aktualizovat personál",
+		"saveStaff": "Uložit personál",
+		"created": "Personál vytvořen",
+		"updated": "Personál aktualizován",
+		"deleted": "Personál smazán",
+		"createSuccess": "Personál byl úspěšně vytvořen!",
+		"updateSuccess": "Personál {{code}} byl úspěšně aktualizován!",
+		"deleteSuccess": "Personál byl úspěšně smazán!"
 	}
 }

@@ -2,6 +2,7 @@ import {
 	AirlineSeatFlat,
 	ArrowForwardIosRounded,
 	AssignmentInd,
+	Badge,
 	BlurCircular,
 	GroupWork,
 	Healing,
@@ -41,6 +42,10 @@ const SideMenu = () => {
 		{
 			key: 'wards',
 			icon: <AirlineSeatFlat fontSize="small" />,
+		},
+		{
+			key: 'staff',
+			icon: <Badge fontSize="small" />,
 		},
 		{
 			key: 'diseases',
