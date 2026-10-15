@@ -35,6 +35,13 @@
       width: 100%;
     }
 
+    .textField {
+      .MuiFormHelperText-root.Mui-error {
+        position: static !important;
+        margin: 4px 0 0 0 !important;
+      }
+    }
+
     &.fullWidth {
       width: 100%;
     }

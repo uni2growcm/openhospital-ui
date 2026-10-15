@@ -141,6 +141,21 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 
 	const initialValues = getFromFields(fields, 'value');
 
+	const isValidRateInput = (rawVal: string): boolean => {
+		if (rawVal === '') return true;
+		const val = rawVal.replace(',', '.');
+		if (!/^\d*(\.\d{0,2})?$/.test(val)) return false;
+		const num = Number(val);
+		if (!Number.isNaN(num) && num > 100) return false;
+		return true;
+	};
+
+	const handleRateKeyDown = (e: React.KeyboardEvent<any>) => {
+		if (e.key === '-' || e.key === '+' || e.key === 'e' || e.key === 'E') {
+			e.preventDefault();
+		}
+	};
+
 	const validationSchema = object({
 		id: number().notRequired(),
 		description: string().required(t('common.required')),
@@ -148,21 +163,41 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 			.typeError(t('common.required'))
 			.min(0, t('validations.between', { min: 0, max: 100 }))
 			.max(100, t('validations.between', { min: 0, max: 100 }))
+			.test(
+				'max-two-decimals',
+				t('validations.decimals'),
+				(val) => val == null || /^\d+(\.\d{1,2})?$/.test(`${val}`),
+			)
 			.required(t('common.required')),
 		examRate: number()
 			.typeError(t('common.required'))
 			.min(0, t('validations.between', { min: 0, max: 100 }))
 			.max(100, t('validations.between', { min: 0, max: 100 }))
+			.test(
+				'max-two-decimals',
+				t('validations.decimals'),
+				(val) => val == null || /^\d+(\.\d{1,2})?$/.test(`${val}`),
+			)
 			.required(t('common.required')),
 		operationRate: number()
 			.typeError(t('common.required'))
 			.min(0, t('validations.between', { min: 0, max: 100 }))
 			.max(100, t('validations.between', { min: 0, max: 100 }))
+			.test(
+				'max-two-decimals',
+				t('validations.decimals'),
+				(val) => val == null || /^\d+(\.\d{1,2})?$/.test(`${val}`),
+			)
 			.required(t('common.required')),
 		otherRate: number()
 			.typeError(t('common.required'))
 			.min(0, t('validations.between', { min: 0, max: 100 }))
 			.max(100, t('validations.between', { min: 0, max: 100 }))
+			.test(
+				'max-two-decimals',
+				t('validations.decimals'),
+				(val) => val == null || /^\d+(\.\d{1,2})?$/.test(`${val}`),
+			)
 			.required(t('common.required')),
 	});
 
@@ -224,6 +259,14 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 		reductionPlanStore.update.status,
 	]);
 
+	const handleGeneralRateChange =
+		(fieldName: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+			const rawVal = e.target.value;
+			if (isValidRateInput(rawVal)) {
+				formik.setFieldValue(fieldName, rawVal.replace(',', '.'));
+			}
+		};
+
 	const handleRateBlur = (fieldName: string) => (e: React.FocusEvent<any>) => {
 		formik.handleBlur(e);
 		const currentVal = formik.values[fieldName];
@@ -232,16 +275,38 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 				? initialValues[fieldName]
 				: '0';
 			formik.setFieldValue(fieldName, defaultVal);
+		} else {
+			const num = Number(currentVal);
+			if (!Number.isNaN(num)) {
+				const clamped = Math.min(100, Math.max(0, num));
+				formik.setFieldValue(fieldName, `${Math.round(clamped * 100) / 100}`);
+			}
+		}
+	};
+
+	const handleSpecificRateChange =
+		(setter: (val: string) => void) =>
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			const rawVal = e.target.value;
+			if (isValidRateInput(rawVal)) {
+				setter(rawVal.replace(',', '.'));
+			}
+		};
+
+	const handleEditingRateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const rawVal = e.target.value;
+		if (isValidRateInput(rawVal)) {
+			setEditingRate(rawVal.replace(',', '.'));
 		}
 	};
 
 	const handleAddMedicalReduction = () => {
 		const med = medicalsList.find((m) => `${m.code}` === selectedMedicalCode);
 		const rate = Number(medicalRateInput);
-		if (med && !Number.isNaN(rate) && rate >= 0.01 && rate <= 100) {
+		if (med && !Number.isNaN(rate) && rate > 0 && rate <= 100) {
 			setMedicalReductions((prev) => [
 				...prev,
-				{ medical: med, reductionRate: rate },
+				{ medical: med, reductionRate: Math.round(rate * 100) / 100 },
 			]);
 			setSelectedMedicalCode('');
 			setMedicalRateInput('');
@@ -251,10 +316,10 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 	const handleAddExamReduction = () => {
 		const ex = examsList.find((e) => e.code === selectedExamCode);
 		const rate = Number(examRateInput);
-		if (ex && !Number.isNaN(rate) && rate >= 0.01 && rate <= 100) {
+		if (ex && !Number.isNaN(rate) && rate > 0 && rate <= 100) {
 			setExamReductions((prev) => [
 				...prev,
-				{ exam: ex, reductionRate: rate },
+				{ exam: ex, reductionRate: Math.round(rate * 100) / 100 },
 			]);
 			setSelectedExamCode('');
 			setExamRateInput('');
@@ -264,10 +329,10 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 	const handleAddOperationReduction = () => {
 		const op = operationsList.find((o) => o.code === selectedOperationCode);
 		const rate = Number(operationRateInput);
-		if (op && !Number.isNaN(rate) && rate >= 0.01 && rate <= 100) {
+		if (op && !Number.isNaN(rate) && rate > 0 && rate <= 100) {
 			setOperationReductions((prev) => [
 				...prev,
-				{ operation: op, reductionRate: rate },
+				{ operation: op, reductionRate: Math.round(rate * 100) / 100 },
 			]);
 			setSelectedOperationCode('');
 			setOperationRateInput('');
@@ -277,10 +342,10 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 	const handleAddOtherReduction = () => {
 		const other = pricesOthersList.find((p) => `${p.id}` === selectedOtherId);
 		const rate = Number(otherRateInput);
-		if (other && !Number.isNaN(rate) && rate >= 0.01 && rate <= 100) {
+		if (other && !Number.isNaN(rate) && rate > 0 && rate <= 100) {
 			setPriceOtherReductions((prev) => [
 				...prev,
-				{ pricesOthers: other, reductionRate: rate },
+				{ pricesOthers: other, reductionRate: Math.round(rate * 100) / 100 },
 			]);
 			setSelectedOtherId('');
 			setOtherRateInput('');
@@ -306,34 +371,35 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 	const handleSaveEdit = () => {
 		if (editingCategory === null || editingIndex === null) return;
 		const rate = Number(editingRate);
-		if (Number.isNaN(rate) || rate < 0.01 || rate > 100) return;
+		if (Number.isNaN(rate) || rate <= 0 || rate > 100) return;
+		const roundedRate = Math.round(rate * 100) / 100;
 
 		switch (editingCategory) {
 			case 'medicals':
 				setMedicalReductions((prev) =>
 					prev.map((item, i) =>
-						i === editingIndex ? { ...item, reductionRate: rate } : item,
+						i === editingIndex ? { ...item, reductionRate: roundedRate } : item,
 					),
 				);
 				break;
 			case 'exams':
 				setExamReductions((prev) =>
 					prev.map((item, i) =>
-						i === editingIndex ? { ...item, reductionRate: rate } : item,
+						i === editingIndex ? { ...item, reductionRate: roundedRate } : item,
 					),
 				);
 				break;
 			case 'operations':
 				setOperationReductions((prev) =>
 					prev.map((item, i) =>
-						i === editingIndex ? { ...item, reductionRate: rate } : item,
+						i === editingIndex ? { ...item, reductionRate: roundedRate } : item,
 					),
 				);
 				break;
 			case 'others':
 				setPriceOtherReductions((prev) =>
 					prev.map((item, i) =>
-						i === editingIndex ? { ...item, reductionRate: rate } : item,
+						i === editingIndex ? { ...item, reductionRate: roundedRate } : item,
 					),
 				);
 				break;
@@ -396,9 +462,12 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 							label={t('reductionPlan.medicalRate')}
 							isValid={isValid('medicalRate')}
 							errorText={getErrorText('medicalRate')}
+							onChange={handleGeneralRateChange('medicalRate')}
+							onKeyDown={handleRateKeyDown}
 							onBlur={handleRateBlur('medicalRate')}
 							InputLabelProps={{ shrink: true }}
 							type="number"
+							inputProps={{ min: 0, max: 100, step: 0.01 }}
 							disabled={isLoading}
 						/>
 					</div>
@@ -409,9 +478,12 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 							label={t('reductionPlan.examRate')}
 							isValid={isValid('examRate')}
 							errorText={getErrorText('examRate')}
+							onChange={handleGeneralRateChange('examRate')}
+							onKeyDown={handleRateKeyDown}
 							onBlur={handleRateBlur('examRate')}
 							InputLabelProps={{ shrink: true }}
 							type="number"
+							inputProps={{ min: 0, max: 100, step: 0.01 }}
 							disabled={isLoading}
 						/>
 					</div>
@@ -422,9 +494,12 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 							label={t('reductionPlan.operationRate')}
 							isValid={isValid('operationRate')}
 							errorText={getErrorText('operationRate')}
+							onChange={handleGeneralRateChange('operationRate')}
+							onKeyDown={handleRateKeyDown}
 							onBlur={handleRateBlur('operationRate')}
 							InputLabelProps={{ shrink: true }}
 							type="number"
+							inputProps={{ min: 0, max: 100, step: 0.01 }}
 							disabled={isLoading}
 						/>
 					</div>
@@ -435,9 +510,12 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 							label={t('reductionPlan.otherRate')}
 							isValid={isValid('otherRate')}
 							errorText={getErrorText('otherRate')}
+							onChange={handleGeneralRateChange('otherRate')}
+							onKeyDown={handleRateKeyDown}
 							onBlur={handleRateBlur('otherRate')}
 							InputLabelProps={{ shrink: true }}
 							type="number"
+							inputProps={{ min: 0, max: 100, step: 0.01 }}
 							disabled={isLoading}
 						/>
 					</div>
@@ -501,7 +579,8 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									type="number"
 									label={t('reductionPlan.rate')}
 									value={medicalRateInput}
-									onChange={(e) => setMedicalRateInput(e.target.value)}
+									onChange={handleSpecificRateChange(setMedicalRateInput)}
+									onKeyDown={handleRateKeyDown}
 									inputProps={{ min: 0.01, max: 100, step: 0.01 }}
 								/>
 								<Button
@@ -511,7 +590,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									disabled={
 										!selectedMedicalCode ||
 										medicalRateInput === '' ||
-										Number(medicalRateInput) < 0.01 ||
+										Number(medicalRateInput) <= 0 ||
 										Number(medicalRateInput) > 100
 									}
 								>
@@ -561,8 +640,9 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																	size="small"
 																	type="number"
 																	value={editingRate}
-																	onChange={(e) => setEditingRate(e.target.value)}
+																	onChange={handleEditingRateChange}
 																	onKeyDown={(e) => {
+																		handleRateKeyDown(e);
 																		if (e.key === 'Enter') {
 																			e.preventDefault();
 																			handleSaveEdit();
@@ -587,7 +667,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																		disabled={
 																			editingRate === '' ||
 																			Number.isNaN(Number(editingRate)) ||
-																			Number(editingRate) < 0.01 ||
+																			Number(editingRate) <= 0 ||
 																			Number(editingRate) > 100
 																		}
 																		title={t('reductionPlan.saveItem')}
@@ -692,7 +772,8 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									type="number"
 									label={t('reductionPlan.rate')}
 									value={examRateInput}
-									onChange={(e) => setExamRateInput(e.target.value)}
+									onChange={handleSpecificRateChange(setExamRateInput)}
+									onKeyDown={handleRateKeyDown}
 									inputProps={{ min: 0.01, max: 100, step: 0.01 }}
 								/>
 								<Button
@@ -702,7 +783,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									disabled={
 										!selectedExamCode ||
 										examRateInput === '' ||
-										Number(examRateInput) < 0.01 ||
+										Number(examRateInput) <= 0 ||
 										Number(examRateInput) > 100
 									}
 								>
@@ -752,8 +833,9 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																	size="small"
 																	type="number"
 																	value={editingRate}
-																	onChange={(e) => setEditingRate(e.target.value)}
+																	onChange={handleEditingRateChange}
 																	onKeyDown={(e) => {
+																		handleRateKeyDown(e);
 																		if (e.key === 'Enter') {
 																			e.preventDefault();
 																			handleSaveEdit();
@@ -778,7 +860,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																		disabled={
 																			editingRate === '' ||
 																			Number.isNaN(Number(editingRate)) ||
-																			Number(editingRate) < 0.01 ||
+																			Number(editingRate) <= 0 ||
 																			Number(editingRate) > 100
 																		}
 																		title={t('reductionPlan.saveItem')}
@@ -883,7 +965,8 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									type="number"
 									label={t('reductionPlan.rate')}
 									value={operationRateInput}
-									onChange={(e) => setOperationRateInput(e.target.value)}
+									onChange={handleSpecificRateChange(setOperationRateInput)}
+									onKeyDown={handleRateKeyDown}
 									inputProps={{ min: 0.01, max: 100, step: 0.01 }}
 								/>
 								<Button
@@ -893,7 +976,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									disabled={
 										!selectedOperationCode ||
 										operationRateInput === '' ||
-										Number(operationRateInput) < 0.01 ||
+										Number(operationRateInput) <= 0 ||
 										Number(operationRateInput) > 100
 									}
 								>
@@ -920,7 +1003,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 							) : (
 								<TableContainer component={Paper} className="tableContainer">
 									<MuiTable size="small">
-										<TableHead>
+ 										<TableHead>
 											<TableRow>
 												<TableCell>{t('reductionPlan.item')}</TableCell>
 												<TableCell>{t('reductionPlan.rate')}</TableCell>
@@ -943,8 +1026,9 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																	size="small"
 																	type="number"
 																	value={editingRate}
-																	onChange={(e) => setEditingRate(e.target.value)}
+																	onChange={handleEditingRateChange}
 																	onKeyDown={(e) => {
+																		handleRateKeyDown(e);
 																		if (e.key === 'Enter') {
 																			e.preventDefault();
 																			handleSaveEdit();
@@ -969,7 +1053,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																		disabled={
 																			editingRate === '' ||
 																			Number.isNaN(Number(editingRate)) ||
-																			Number(editingRate) < 0.01 ||
+																			Number(editingRate) <= 0 ||
 																			Number(editingRate) > 100
 																		}
 																		title={t('reductionPlan.saveItem')}
@@ -1074,7 +1158,8 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									type="number"
 									label={t('reductionPlan.rate')}
 									value={otherRateInput}
-									onChange={(e) => setOtherRateInput(e.target.value)}
+									onChange={handleSpecificRateChange(setOtherRateInput)}
+									onKeyDown={handleRateKeyDown}
 									inputProps={{ min: 0.01, max: 100, step: 0.01 }}
 								/>
 								<Button
@@ -1084,7 +1169,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									disabled={
 										!selectedOtherId ||
 										otherRateInput === '' ||
-										Number(otherRateInput) < 0.01 ||
+										Number(otherRateInput) <= 0 ||
 										Number(otherRateInput) > 100
 									}
 								>
@@ -1134,8 +1219,9 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																	size="small"
 																	type="number"
 																	value={editingRate}
-																	onChange={(e) => setEditingRate(e.target.value)}
+																	onChange={handleEditingRateChange}
 																	onKeyDown={(e) => {
+																		handleRateKeyDown(e);
 																		if (e.key === 'Enter') {
 																			e.preventDefault();
 																			handleSaveEdit();
@@ -1160,7 +1246,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																		disabled={
 																			editingRate === '' ||
 																			Number.isNaN(Number(editingRate)) ||
-																			Number(editingRate) < 0.01 ||
+																			Number(editingRate) <= 0 ||
 																			Number(editingRate) > 100
 																		}
 																		title={t('reductionPlan.saveItem')}

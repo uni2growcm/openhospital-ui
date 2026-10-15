@@ -25,4 +25,7 @@ export interface IProps {
 	rows?: number;
 	required?: FIELD_VALIDATION;
 	maxLength?: number;
+	onChange?: (e: any) => void;
+	onKeyDown?: (e: any) => void;
+	inputProps?: any;
 }

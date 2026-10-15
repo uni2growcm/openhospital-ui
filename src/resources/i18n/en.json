@@ -25,6 +25,8 @@
 		"max": "the value must not exceed {{max}}",
 		"minLength": "the value length must be at least {{min}}",
 		"maxLength": "the value length must not exceed {{max}}",
+		"between": "the value must be between {{min}} and {{max}}",
+		"decimals": "maximum 2 decimal places allowed",
 		"email": "The value is not a valid email address",
 		"number": "the value is not a valid number"
 	},
