@@ -106,7 +106,8 @@
 		"patientdashboard": "Patient Dashboard",
 		"newtherapy": "New Therapy",
 		"managetherapy": "Manage Therapy",
-		"reductionPlans": "Reduction Plans"
+		"reductionPlans": "Reduction Plans",
+		"staff": "员工"
 	},
 	"common": {
 		"ok": "OK",
@@ -132,7 +133,14 @@
 		"patienteditsuccessfull": "The patient was edit successfully.",
 		"patientregistrationsuccessfull": "The patient registration was successful.",
 		"somethingwrong": "Something went wrong, please retry later.",
-		"searchpatientinstruction": "If you don't have the patient ID, fill as many fields as possible and click search"
+		"searchpatientinstruction": "If you don't have the patient ID, fill as many fields as possible and click search",
+		"page": "Page",
+		"previous": "Previous",
+		"next": "Next",
+		"first_page": "First page",
+		"last_page": "Last page",
+		"per_page": "Per page",
+		"total_items": "items"
 	},
 	"therapy": {
 		"newtherapy": "New Therapy",
@@ -212,5 +220,23 @@
 			"not_found": "Reduction plan not found.",
 			"description_duplicate": "A reduction plan with this description already exists."
 		}
+	},
+	"staff": {
+		"code": "代码",
+		"firstName": "名字",
+		"lastName": "姓氏",
+		"profession": "职业",
+		"position": "职位",
+		"phone": "电话",
+		"addStaff": "添加员工",
+		"editStaff": "编辑员工",
+		"updateStaff": "更新员工",
+		"saveStaff": "保存员工",
+		"created": "员工已创建",
+		"updated": "员工已更新",
+		"deleted": "员工已删除",
+		"createSuccess": "员工已成功创建！",
+		"updateSuccess": "员工 {{code}} 已成功更新！",
+		"deleteSuccess": "员工已成功删除！"
 	}
 }
