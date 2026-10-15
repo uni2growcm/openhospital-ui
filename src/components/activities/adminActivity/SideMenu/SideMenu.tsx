@@ -9,6 +9,7 @@ import {
 	LocalDrink,
 	LocalHospitalSharp,
 	People,
+	Percent,
 	SupervisedUserCircle,
 	Tune,
 } from '@mui/icons-material';
@@ -32,6 +33,10 @@ const SideMenu = () => {
 
 	const changeAdminSection = useCallback(
 		(section: IAdminSection) => {
+			if (section === 'reductionPlans') {
+				navigate(PATHS.admin_reductionplans);
+				return;
+			}
 			navigate(`${PATHS.admin}/${section}`);
 		},
 		[navigate],
@@ -71,6 +76,10 @@ const SideMenu = () => {
 			icon: <People fontSize="small" />,
 		},
 		{
+			key: 'reductionPlans',
+			icon: <Percent fontSize="small" />,
+		},
+		{
 			key: 'settings',
 			icon: <Tune fontSize="small" />,
 		},
@@ -87,9 +96,13 @@ const SideMenu = () => {
 					key={item.key}
 					icon={item.icon}
 					label={t(`nav.${item.key}`)}
-					selected={location.pathname
-						.slice(location.pathname.lastIndexOf('admin') + 6)
-						.startsWith(item.key)}
+					selected={
+						item.key === 'reductionPlans'
+							? location.pathname.includes('reduction-plans')
+							: location.pathname
+									.slice(location.pathname.lastIndexOf('admin') + 6)
+									.startsWith(item.key)
+					}
 					onClick={() => {
 						changeAdminSection(item.key);
 					}}

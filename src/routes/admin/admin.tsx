@@ -206,6 +206,33 @@ export const ADMIN_ROUTES: RouteObject[] = [
 			})),
 	},
 	{
+		path: getPath(PATHS.admin_reductionplans),
+		lazy: async () =>
+			import('../../components/accessories/admin/reductionPlans').then(
+				(module) => ({
+					Component: module.ReductionPlans,
+				}),
+			),
+	},
+	{
+		path: getPath(PATHS.admin_reductionplans_new),
+		lazy: async () =>
+			import('../../components/accessories/admin/reductionPlans').then(
+				(module) => ({
+					Component: module.NewReductionPlan,
+				}),
+			),
+	},
+	{
+		path: getPath(PATHS.admin_reductionplans_edit),
+		lazy: async () =>
+			import('../../components/accessories/admin/reductionPlans').then(
+				(module) => ({
+					Component: module.EditReductionPlan,
+				}),
+			),
+	},
+	{
 		path: getPath(PATHS.admin_types),
 		lazy: async () =>
 			import('./types').then((module) => ({

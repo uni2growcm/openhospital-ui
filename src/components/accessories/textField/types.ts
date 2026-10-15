@@ -21,7 +21,11 @@ export interface IProps {
 		| Partial<InputProps>
 		| Partial<FilledInputProps>
 		| Partial<OutlinedInputProps>;
+	InputLabelProps?: any;
 	rows?: number;
 	required?: FIELD_VALIDATION;
 	maxLength?: number;
+	onChange?: (e: any) => void;
+	onKeyDown?: (e: any) => void;
+	inputProps?: any;
 }

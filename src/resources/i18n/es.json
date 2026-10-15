@@ -234,6 +234,7 @@
 		"billrecords": "Bill Records",
 		"visits": "Visits",
 		"patients": "Patients",
+		"reductionPlans": "Planes de reducción",
 		"staff": "Personal"
 	},
 	"operation": {
@@ -546,6 +547,56 @@
 		"cs": "Czech",
 		"sq": "Albanian",
 		"zh": "Chinese"
+	},
+	"reductionPlan": {
+		"addReductionPlan": "Agregar plan de reducción",
+		"addNewReductionPlan": "Agregar nuevo plan de reducción",
+		"editReductionPlan": "Editar plan de reducción",
+		"saveReductionPlan": "Guardar plan de reducción",
+		"updateReductionPlan": "Guardar cambios",
+		"description": "Descripción",
+		"medicalRate": "Tasa Medicamentos (%)",
+		"examRate": "Tasa Exámenes (%)",
+		"operationRate": "Tasa Operaciones (%)",
+		"otherRate": "Tasa Otros (%)",
+		"generalRates": "Tasas de reducción generales",
+		"specificReductions": "Reducciones específicas",
+		"medicals": "Medicamentos",
+		"exams": "Exámenes",
+		"operations": "Operaciones",
+		"others": "Otros precios",
+		"item": "Elemento",
+		"rate": "Tasa (%)",
+		"actions": "Acciones",
+		"addItem": "Agregar",
+		"selectMedical": "Seleccionar medicamento...",
+		"selectExam": "Seleccionar examen...",
+		"selectOperation": "Seleccionar operación...",
+		"selectOther": "Seleccionar otro precio...",
+		"removeAll": "Eliminar todo",
+		"noSpecificReductions": "No se definieron reducciones específicas (se aplica la tasa general).",
+		"deleting": "Eliminando plan de reducción...",
+		"deleted": "Plan de reducción eliminado",
+		"deleteSuccess": "Plan de reducción eliminado con éxito",
+		"created": "Plan de reducción creado",
+		"createSuccess": "Plan de reducción creado con éxito",
+		"updated": "Plan de reducción actualizado",
+		"updateSuccess": "Plan de reducción actualizado con éxito",
+		"editItem": "Modificar",
+		"saveItem": "Guardar",
+		"cancelEdit": "Cancelar"
+	},
+	"errors": {
+		"reductionplan": {
+			"integrity_violation": "Violación de la integridad de datos del plan de reducción.",
+			"not_found": "Plan de reducción no encontrado.",
+			"description_duplicate": "Ya existe un plan de reducción con esta descripción."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Violación de la integridad de datos del plan de reducción.",
+			"not_found": "Plan de reducción no encontrado.",
+			"description_duplicate": "Ya existe un plan de reducción con esta descripción."
+		}
 	},
 	"staff": {
 		"code": "Código",

@@ -7,13 +7,26 @@
 		"internalerror": "Une erreur interne s'est produite",
 		"lab": {
 			"someexamswithoutresultpleasecheck": "Certains examens n'ont pas de résultats. Veuillez vérifier."
-		}
+		},
+		"reductionplan": {
+			"integrity_violation": "Violation d'intégrité des données du plan de réduction.",
+			"not_found": "Plan de réduction non trouvé.",
+			"description_duplicate": "Un plan de réduction avec cette description existe déjà."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Violation d'intégrité des données du plan de réduction.",
+			"not_found": "Plan de réduction non trouvé.",
+			"description_duplicate": "Un plan de réduction avec cette description existe déjà."
+		},
+		"angal.sql.thedatahasbeenupdatedbysomeoneelse.msg": "Les données ont été modifiées par un autre utilisateur ou ont expiré. Veuillez rafraîchir la page avant de réessayer."
 	},
 	"validations": {
 		"min": "La valeur doit être au moins {{min}}",
 		"max": "la valeur ne doit pas dépasser {{max}}",
 		"minLength": "la longueur de la valeur doit être au moins {{min}}",
 		"maxLength": "la longueur de la valeur ne doit pas dépasser {{max}}",
+		"between": "la valeur doit être comprise entre {{min}} et {{max}}",
+		"decimals": "maximum 2 chiffres après la virgule autorisés",
 		"email": "La valeur n'est pas une adresse e-mail valide",
 		"number": "la valeur n'est pas un nombre valide"
 	},
@@ -420,7 +433,8 @@
 		"hospitalInfo": "Informations sur l'hôpital",
 		"hospital": "Hôpital",
 		"settings": "Paramètres",
-		"radiology": "Radiologie"
+		"radiology": "Radiologie",
+		"reductionPlans": "Plans de réduction"
 	},
 	"operation": {
 		"newoperation": "Nouvelle opération",
@@ -891,15 +905,33 @@
 			"elderly": "Âgé"
 		},
 		"lab": {
-			"undefined": { "txt": "Indéfini" },
-			"blood": { "txt": "Sang" },
-			"cfs": { "txt": "CFS" },
-			"film": { "txt": "FILM" },
-			"sputum": { "txt": "Sputum" },
-			"stool": { "txt": "Excréments" },
-			"swabs": { "txt": "Écouvillons" },
-			"tissues": { "txt": "Tissus" },
-			"urine": { "txt": "Urine" }
+			"undefined": {
+				"txt": "Indéfini"
+			},
+			"blood": {
+				"txt": "Sang"
+			},
+			"cfs": {
+				"txt": "CFS"
+			},
+			"film": {
+				"txt": "FILM"
+			},
+			"sputum": {
+				"txt": "Sputum"
+			},
+			"stool": {
+				"txt": "Excréments"
+			},
+			"swabs": {
+				"txt": "Écouvillons"
+			},
+			"tissues": {
+				"txt": "Tissus"
+			},
+			"urine": {
+				"txt": "Urine"
+			}
 		},
 		"common": {
 			"thecodeisalreadyinuse": {
@@ -1304,5 +1336,43 @@
 			"time": "Temps d'étude",
 			"lastUpdate": "Dernière mise à jour"
 		}
+	},
+	"reductionPlan": {
+		"addReductionPlan": "Ajouter un plan de réduction",
+		"addNewReductionPlan": "Ajouter un nouveau plan de réduction",
+		"editReductionPlan": "Modifier le plan de réduction",
+		"saveReductionPlan": "Enregistrer le plan de réduction",
+		"updateReductionPlan": "Enregistrer les modifications",
+		"description": "Description",
+		"medicalRate": "Taux Médicaments (%)",
+		"examRate": "Taux Examens (%)",
+		"operationRate": "Taux Opérations (%)",
+		"otherRate": "Taux Autres (%)",
+		"generalRates": "Taux de réduction généraux",
+		"specificReductions": "Réductions spécifiques",
+		"medicals": "Médicaments",
+		"exams": "Examens",
+		"operations": "Opérations",
+		"others": "Autres prix",
+		"item": "Élément",
+		"rate": "Taux (%)",
+		"actions": "Actions",
+		"addItem": "Ajouter",
+		"selectMedical": "Sélectionner un médicament...",
+		"selectExam": "Sélectionner un examen...",
+		"selectOperation": "Sélectionner une opération...",
+		"selectOther": "Sélectionner un autre prix...",
+		"removeAll": "Tout supprimer",
+		"noSpecificReductions": "Aucune réduction spécifique définie (le taux général s'applique).",
+		"deleting": "Suppression du plan de réduction...",
+		"deleted": "Plan de réduction supprimé",
+		"deleteSuccess": "Le plan de réduction a été supprimé avec succès",
+		"created": "Plan de réduction créé",
+		"createSuccess": "Le plan de réduction a été créé avec succès",
+		"updated": "Plan de réduction mis à jour",
+		"updateSuccess": "Le plan de réduction a été mis à jour avec succès",
+		"editItem": "Modifier",
+		"saveItem": "Valider",
+		"cancelEdit": "Annuler"
 	}
 }

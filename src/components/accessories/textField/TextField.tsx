@@ -16,9 +16,13 @@ const TextField: FunctionComponent<IProps> = ({
 	onBlur,
 	disabled,
 	InputProps,
+	InputLabelProps,
 	rows = 10,
 	required = FIELD_VALIDATION.IDLE,
 	maxLength,
+	onChange,
+	onKeyDown,
+	inputProps,
 }) => {
 	const { t } = useTranslation();
 
@@ -30,7 +34,8 @@ const TextField: FunctionComponent<IProps> = ({
 				id={field.name}
 				label={required === FIELD_VALIDATION.SUGGESTED ? `${label} **` : label}
 				type={type || ''}
-				onChange={field.onChange}
+				onChange={onChange ?? field.onChange}
+				onKeyDown={onKeyDown}
 				onBlur={onBlur}
 				value={field.value}
 				error={isValid}
@@ -43,8 +48,8 @@ const TextField: FunctionComponent<IProps> = ({
 				margin="dense"
 				disabled={disabled}
 				InputProps={InputProps}
-				inputProps={{ maxLength }}
-				InputLabelProps={{ shrink: !!field.value }}
+				inputProps={{ maxLength, ...inputProps }}
+				InputLabelProps={InputLabelProps ?? { shrink: !!field.value }}
 				required={required === FIELD_VALIDATION.REQUIRED}
 			/>
 			{maxLength && maxLength > 0 && (

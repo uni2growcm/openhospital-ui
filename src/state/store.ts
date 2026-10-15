@@ -16,6 +16,7 @@ import { patientSlice } from './patients';
 import { permissionSlice } from './permissions';
 import { priceSlice } from './prices';
 import { radiologySlice } from './radiology';
+import { reductionPlansSlice } from './reductionPlans';
 import { settingsSlice } from './settings';
 import { staffSlice } from './staff';
 import { summarySlice } from './summary';
@@ -60,6 +61,7 @@ const reducer = combineReducers({
 	types: typesReducer,
 	suppliers: supplierSlice.reducer,
 	radiology: radiologySlice.reducer,
+	reductionPlans: reductionPlansSlice.reducer,
 	staff: staffSlice.reducer,
 });
 
