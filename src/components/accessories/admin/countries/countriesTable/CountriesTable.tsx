@@ -1,33 +1,40 @@
 import { CircularProgress } from '@mui/material';
-import { type ReactNode, useRef } from 'react';
+import { type ReactNode, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ConfirmationDialog from '~/components/accessories/confirmationDialog/ConfirmationDialog';
 import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
+import { scrollToElement } from '~/libraries/uiUtils/scrollToElement';
 import checkIcon from '../../../../../assets/check-icon.png';
 import type { CountryDTO } from '../../../../../generated';
 import {
 	deleteCountryReset,
-	getCountries,
+	getCountriesPaged,
 } from '../../../../../state/countries';
 import InfoBox from '../../../infoBox/InfoBox';
-import type { TFilterField } from '../../../table/filter/types';
 import Table from '../../../table/Table';
 import classes from './CountriesTable.module.scss';
+
+const DEFAULT_PAGE_SIZE = 10;
 
 interface IOwnProps {
 	onEdit: (row: any) => void;
 	onDelete: (row: any) => void;
 	headerActions?: ReactNode;
+	searchTerm?: string;
 }
 
 export const CountriesTable = ({
 	onEdit,
 	onDelete,
 	headerActions,
+	searchTerm,
 }: IOwnProps) => {
 	const dispatch = useAppDispatch();
 	const { t } = useTranslation();
 	const infoBoxRef = useRef<HTMLDivElement>(null);
+
+	const [page, setPage] = useState(0);
+	const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
 
 	const header = ['isoCode', 'name', 'phoneCode'];
 
@@ -39,17 +46,57 @@ export const CountriesTable = ({
 
 	const order = ['isoCode', 'name', 'phoneCode'];
 
-	const filters: TFilterField[] = [
-		{ key: 'isoCode', label: t('country.isoCode'), type: 'text' },
-		{ key: 'name', label: t('country.name'), type: 'text' },
-		{ key: 'phoneCode', label: t('country.phoneCode'), type: 'text' },
-	];
+	const {
+		data: pagedData,
+		status,
+		error,
+	} = useAppSelector((state) => state.countries.pagedCountries);
 
-	const { data, status, error } = useAppSelector(
-		(state) => state.countries.countryList,
-	);
+	const data = pagedData?.data;
+	const pageInfo = pagedData?.pageInfo;
 
 	const deleteCountryState = useAppSelector((state) => state.countries.delete);
+
+	const prevSearchRef = useRef(searchTerm);
+	useEffect(() => {
+		if (prevSearchRef.current !== searchTerm) {
+			prevSearchRef.current = searchTerm;
+			setPage(0);
+		}
+	}, [searchTerm]);
+
+	useEffect(() => {
+		const handler = setTimeout(() => {
+			dispatch(
+				getCountriesPaged({
+					page,
+					size: pageSize,
+					search: searchTerm?.trim() ? searchTerm.trim() : undefined,
+				}),
+			);
+		}, 300);
+
+		return () => clearTimeout(handler);
+	}, [dispatch, page, pageSize, searchTerm]);
+
+	useEffect(() => {
+		if (deleteCountryState.status === 'FAIL') {
+			scrollToElement(infoBoxRef.current);
+		}
+
+		if (
+			deleteCountryState.status === 'SUCCESS' ||
+			deleteCountryState.status === 'SUCCESS_EMPTY'
+		) {
+			dispatch(
+				getCountriesPaged({
+					page,
+					size: pageSize,
+					search: searchTerm?.trim() ? searchTerm.trim() : undefined,
+				}),
+			);
+		}
+	}, [deleteCountryState.status, dispatch, page, pageSize, searchTerm]);
 
 	const formatDataToDisplay = (countries: CountryDTO[]) => {
 		return countries.map((item) => ({
@@ -92,22 +139,33 @@ export const CountriesTable = ({
 					case 'SUCCESS':
 						return (
 							<>
-								<Table
-									rowData={formattedRows}
-									rawData={formattedRows}
-									tableHeader={header}
-									labelData={label}
-									columnsOrder={order}
-									rowsPerPage={10}
-									isCollapsabile={true}
-									onEdit={handleEdit}
-									onDelete={onDelete}
-									filterColumns={filters}
-									showEmptyCell={false}
-									rowKey="isoCode"
-									manualFilter={false}
-									headerActions={headerActions}
-								/>
+								{(data ?? []).length === 0 ? (
+									<InfoBox type="info" message={t('common.emptydata')} />
+								) : (
+									<Table
+										rowData={formattedRows}
+										rawData={data}
+										tableHeader={header}
+										labelData={label}
+										columnsOrder={order}
+										rowsPerPage={pageSize}
+										isCollapsabile={true}
+										onEdit={handleEdit}
+										onDelete={onDelete}
+										showEmptyCell={false}
+										rowKey="id"
+										manualFilter={false}
+										headerActions={headerActions}
+										serverPagination={{
+											page,
+											totalPages: pageInfo?.totalPages ?? 0,
+											totalElements: pageInfo?.totalNbOfElements,
+											setPage,
+											pageSize,
+											setPageSize,
+										}}
+									/>
+								)}
 								{deleteCountryState.isLoading && (
 									<div ref={infoBoxRef} className="info-box-container">
 										<InfoBox type="info" message={t('country.deleting')} />
@@ -132,7 +190,15 @@ export const CountriesTable = ({
 									info={t('country.deleteSuccess')}
 									primaryButtonLabel="Ok"
 									handlePrimaryButtonClick={() => {
-										dispatch(getCountries(undefined));
+										dispatch(
+											getCountriesPaged({
+												page,
+												size: pageSize,
+												search: searchTerm?.trim()
+													? searchTerm.trim()
+													: undefined,
+											}),
+										);
 										dispatch(deleteCountryReset());
 									}}
 									handleSecondaryButtonClick={() => ({})}

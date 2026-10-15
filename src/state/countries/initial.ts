@@ -9,4 +9,7 @@ export const initial: ICountryState = {
 		status: 'IDLE',
 		data: [],
 	}),
+	pagedCountries: new ApiResponse({
+		status: 'IDLE',
+	}),
 };

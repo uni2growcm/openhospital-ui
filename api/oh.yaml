@@ -6172,6 +6172,41 @@ paths:
                   $ref: "#/components/schemas/DiseaseDTO"
       security:
       - bearerAuth: []
+  /countries/paged:
+    get:
+      tags:
+      - Countries
+      summary: "Get active countries page by page, optionally filtered by keyword"
+      operationId: getCountriesPaged
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageCountryDTO"
+      security:
+      - bearerAuth: []
   /bills/pending:
     get:
       tags:
@@ -7180,11 +7215,11 @@ components:
           format: int32
           description: lock
           example: 0
+        opd:
+          type: boolean
         female:
           type: boolean
         male:
-          type: boolean
-        opd:
           type: boolean
         pharmacy:
           type: boolean
@@ -9663,6 +9698,15 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/PatientExaminationDTO"
+        pageInfo:
+          $ref: "#/components/schemas/PageInfoDTO"
+    PageCountryDTO:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/CountryDTO"
         pageInfo:
           $ref: "#/components/schemas/PageInfoDTO"
     PageAdmissionDTO:

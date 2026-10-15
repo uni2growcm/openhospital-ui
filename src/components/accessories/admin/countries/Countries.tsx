@@ -1,11 +1,11 @@
 import { Search } from '@mui/icons-material';
 import { InputAdornment, TextField } from '@mui/material';
-import { type ChangeEvent, useEffect, useState } from 'react';
+import { type ChangeEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { AdminActivityContent } from '~/components/activities/adminActivity';
 import { useAppDispatch } from '~/libraries/hooks/redux';
-import { deleteCountry, getCountries } from '~/state/countries';
+import { deleteCountry } from '~/state/countries';
 import { PATHS } from '../../../../consts';
 import type { CountryDTO } from '../../../../generated';
 import Button from '../../button/Button';
@@ -17,14 +17,6 @@ export const Countries = () => {
 	const dispatch = useAppDispatch();
 	const { t } = useTranslation();
 	const [searchTerm, setSearchTerm] = useState('');
-
-	useEffect(() => {
-		const handler = setTimeout(() => {
-			dispatch(getCountries(searchTerm.trim() ? searchTerm.trim() : undefined));
-		}, 300);
-
-		return () => clearTimeout(handler);
-	}, [dispatch, searchTerm]);
 
 	const handleEdit = (row: CountryDTO) => {
 		if (row?.id != null) {
@@ -81,6 +73,7 @@ export const Countries = () => {
 				<CountriesTable
 					onEdit={handleEdit}
 					onDelete={handleDelete}
+					searchTerm={searchTerm}
 				/>
 			</div>
 		</AdminActivityContent>

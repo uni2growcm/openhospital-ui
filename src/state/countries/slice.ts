@@ -32,6 +32,15 @@ export const countrySlice = createSlice({
 			.addCase(thunks.getCountries.rejected, (state, action) => {
 				state.countryList = ApiResponse.error(action.payload);
 			})
+			.addCase(thunks.getCountriesPaged.pending, (state) => {
+				state.pagedCountries = ApiResponse.loading();
+			})
+			.addCase(thunks.getCountriesPaged.fulfilled, (state, action) => {
+				state.pagedCountries = ApiResponse.value(action.payload);
+			})
+			.addCase(thunks.getCountriesPaged.rejected, (state, action) => {
+				state.pagedCountries = ApiResponse.error(action.payload);
+			})
 			.addCase(thunks.createCountry.pending, (state) => {
 				state.create = ApiResponse.loading();
 			})
