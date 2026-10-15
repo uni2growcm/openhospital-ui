@@ -8,13 +8,3 @@ export interface IPriceItem {
 	description: string;
 	editable: boolean;
 }
-
-export interface IPriceCategorySectionProps {
-	title: string;
-	items: IPriceItem[];
-	values: Record<string, IPriceRowValue>;
-	onPriceChange: (item: string, price: number) => void;
-	onVariableChange: (item: string, variable: boolean) => void;
-	expanded: boolean;
-	onToggle: () => void;
-}

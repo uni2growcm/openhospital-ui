@@ -1,4 +1,4 @@
-import { CircularProgress, TextField } from '@mui/material';
+import { Checkbox, CircularProgress, Tab, Tabs } from '@mui/material';
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
@@ -16,19 +16,29 @@ import {
 	updatePricesReset,
 } from '../../../../../state/prices';
 import { getPricesOthers } from '../../../../../state/pricesOthers';
+import checkIcon from '../../../../../assets/check-icon.png';
 import Button from '../../../button/Button';
 import ConfirmationDialog from '../../../confirmationDialog/ConfirmationDialog';
 import InfoBox from '../../../infoBox/InfoBox';
 import SelectField from '../../../selectField/SelectField';
-import checkIcon from '../../../../../assets/check-icon.png';
+import type { TFilterField } from '../../../table/filter/types';
+import Table from '../../../table/Table';
 import classes from './PriceBrowser.module.scss';
-import { PriceCategorySection } from './PriceCategorySection';
+import './styles.scss';
 import type { IPriceItem, IPriceRowValue } from './types';
 
 const CATEGORIES = ['EXA', 'OPE', 'MED', 'OTH'] as const;
 type Category = (typeof CATEGORIES)[number];
+type PriceTab = 'all' | Category;
 
-const rowKey = (group: string, item: string) => `${group}:${item}`;
+const CATEGORY_LABEL_KEY: Record<Category, string> = {
+	EXA: 'exams',
+	OPE: 'operations',
+	MED: 'medicals',
+	OTH: 'others',
+};
+
+const makeRowKey = (group: string, item: string) => `${group}:${item}`;
 
 export const PriceBrowser = () => {
 	const dispatch = useAppDispatch();
@@ -54,14 +64,8 @@ export const PriceBrowser = () => {
 	);
 
 	const [selectedListId, setSelectedListId] = useState('');
-	const [search, setSearch] = useState('');
+	const [currentTab, setCurrentTab] = useState<PriceTab>('all');
 	const [values, setValues] = useState<Record<string, IPriceRowValue>>({});
-	const [expanded, setExpanded] = useState<Record<Category, boolean>>({
-		EXA: true,
-		OPE: true,
-		MED: true,
-		OTH: true,
-	});
 
 	useEffect(() => {
 		dispatch(getPriceLists());
@@ -117,13 +121,13 @@ export const PriceBrowser = () => {
 		(prices ?? [])
 			.filter((price) => price.list?.id === listId)
 			.forEach((price) => {
-				priceByKey.set(rowKey(price.group, price.item), price);
+				priceByKey.set(makeRowKey(price.group, price.item), price);
 			});
 
 		const nextValues: Record<string, IPriceRowValue> = {};
 		for (const category of CATEGORIES) {
 			for (const item of itemsByCategory[category]) {
-				const key = rowKey(category, item.item);
+				const key = makeRowKey(category, item.item);
 				const existing = priceByKey.get(key);
 				nextValues[key] = {
 					price: existing?.price ?? 0,
@@ -134,18 +138,8 @@ export const PriceBrowser = () => {
 		setValues(nextValues);
 	}, [selectedListId, prices, itemsByCategory]);
 
-	const filterItems = (items: IPriceItem[]) => {
-		if (!search.trim()) {
-			return items;
-		}
-		const term = search.trim().toLowerCase();
-		return items.filter((item) =>
-			item.description.toLowerCase().includes(term),
-		);
-	};
-
 	const handlePriceChange = (group: Category, item: string, price: number) => {
-		const key = rowKey(group, item);
+		const key = makeRowKey(group, item);
 		setValues((previous) => ({
 			...previous,
 			[key]: { price, variable: previous[key]?.variable ?? false },
@@ -157,23 +151,49 @@ export const PriceBrowser = () => {
 		item: string,
 		variable: boolean,
 	) => {
-		const key = rowKey(group, item);
+		const key = makeRowKey(group, item);
 		setValues((previous) => ({
 			...previous,
 			[key]: { price: previous[key]?.price ?? 0, variable },
 		}));
 	};
 
-	const valuesForCategory = (category: Category) => {
-		const result: Record<string, IPriceRowValue> = {};
-		for (const item of itemsByCategory[category]) {
-			result[item.item] = values[rowKey(category, item.item)] ?? {
-				price: 0,
-				variable: false,
+	const rowsForCategory = (category: Category) =>
+		itemsByCategory[category].map((itemEntry) => {
+			const key = makeRowKey(category, itemEntry.item);
+			const value = values[key] ?? { price: 0, variable: false };
+			return {
+				code: key,
+				item: itemEntry.description,
+				category: t(`pricelist.${CATEGORY_LABEL_KEY[category]}`),
+				price: (
+					<input
+						type="number"
+						className="priceBrowser__priceInput"
+						value={value.price}
+						disabled={!itemEntry.editable}
+						onChange={(e) =>
+							handlePriceChange(category, itemEntry.item, Number(e.target.value))
+						}
+					/>
+				),
+				variable: (
+					<Checkbox
+						size="small"
+						checked={value.variable}
+						disabled={!itemEntry.editable}
+						onChange={(e) =>
+							handleVariableChange(category, itemEntry.item, e.target.checked)
+						}
+					/>
+				),
 			};
-		}
-		return result;
-	};
+		});
+
+	const rowsForTab = (tab: PriceTab) =>
+		tab === 'all'
+			? CATEGORIES.flatMap((category) => rowsForCategory(category))
+			: rowsForCategory(tab);
 
 	const selectedList = (priceLists ?? []).find(
 		(list) => `${list.id}` === selectedListId,
@@ -185,7 +205,7 @@ export const PriceBrowser = () => {
 		}
 		const priceDTO: PriceDTO[] = CATEGORIES.flatMap((category) =>
 			itemsByCategory[category].map((item) => {
-				const value = values[rowKey(category, item.item)] ?? {
+				const value = values[makeRowKey(category, item.item)] ?? {
 					price: 0,
 					variable: false,
 				};
@@ -201,6 +221,37 @@ export const PriceBrowser = () => {
 		);
 		dispatch(updatePrices({ id: selectedList.id ?? 0, priceDTO }));
 	};
+
+	const header = (tab: PriceTab) => [
+		'item',
+		...(tab === 'all' ? ['category'] : []),
+		'price',
+		'variable',
+	];
+
+	const label = {
+		item: t('pricelist.itemname'),
+		category: t('pricelist.category'),
+		price: t('pricelist.priceCol'),
+		variable: t('pricelist.variable'),
+	};
+
+	const filters: TFilterField[] = [
+		{ key: 'item', label: t('pricelist.itemname'), type: 'text' },
+		...(currentTab === 'all'
+			? [
+					{
+						key: 'category',
+						label: t('pricelist.category'),
+						type: 'select' as const,
+						options: CATEGORIES.map((category) => {
+							const categoryLabel = t(`pricelist.${CATEGORY_LABEL_KEY[category]}`);
+							return { label: categoryLabel, value: categoryLabel };
+						}),
+					},
+				]
+			: []),
+	];
 
 	return (
 		<AdminActivityContent title={t('pricelist.pricebrowser')}>
@@ -245,87 +296,37 @@ export const PriceBrowser = () => {
 									label: `${list.name} (${list.currency})`,
 								}))}
 							/>
-							<TextField
-								className={classes.search}
-								size="small"
-								label={t('pricelist.search')}
-								value={search}
-								onChange={(e) => setSearch(e.target.value)}
-							/>
 						</div>
 
+						<Tabs
+							value={currentTab}
+							onChange={(_event, newValue) => setCurrentTab(newValue)}
+							aria-label="price-categories"
+							variant="scrollable"
+							scrollButtons="auto"
+						>
+							<Tab label={t('pricelist.all')} value="all" />
+							{CATEGORIES.map((category) => (
+								<Tab
+									key={category}
+									label={t(`pricelist.${CATEGORY_LABEL_KEY[category]}`)}
+									value={category}
+								/>
+							))}
+						</Tabs>
+
 						<div className={classes.categories}>
-							<PriceCategorySection
-								title={t('pricelist.exams')}
-								items={filterItems(itemsByCategory.EXA)}
-								values={valuesForCategory('EXA')}
-								onPriceChange={(item, price) =>
-									handlePriceChange('EXA', item, price)
-								}
-								onVariableChange={(item, variable) =>
-									handleVariableChange('EXA', item, variable)
-								}
-								expanded={expanded.EXA}
-								onToggle={() =>
-									setExpanded((previous) => ({
-										...previous,
-										EXA: !previous.EXA,
-									}))
-								}
-							/>
-							<PriceCategorySection
-								title={t('pricelist.operations')}
-								items={filterItems(itemsByCategory.OPE)}
-								values={valuesForCategory('OPE')}
-								onPriceChange={(item, price) =>
-									handlePriceChange('OPE', item, price)
-								}
-								onVariableChange={(item, variable) =>
-									handleVariableChange('OPE', item, variable)
-								}
-								expanded={expanded.OPE}
-								onToggle={() =>
-									setExpanded((previous) => ({
-										...previous,
-										OPE: !previous.OPE,
-									}))
-								}
-							/>
-							<PriceCategorySection
-								title={t('pricelist.medicals')}
-								items={filterItems(itemsByCategory.MED)}
-								values={valuesForCategory('MED')}
-								onPriceChange={(item, price) =>
-									handlePriceChange('MED', item, price)
-								}
-								onVariableChange={(item, variable) =>
-									handleVariableChange('MED', item, variable)
-								}
-								expanded={expanded.MED}
-								onToggle={() =>
-									setExpanded((previous) => ({
-										...previous,
-										MED: !previous.MED,
-									}))
-								}
-							/>
-							<PriceCategorySection
-								title={t('pricelist.others')}
-								items={filterItems(itemsByCategory.OTH)}
-								values={valuesForCategory('OTH')}
-								onPriceChange={(item, price) =>
-									handlePriceChange('OTH', item, price)
-								}
-								onVariableChange={(item, variable) =>
-									handleVariableChange('OTH', item, variable)
-								}
-								expanded={expanded.OTH}
-								onToggle={() =>
-									setExpanded((previous) => ({
-										...previous,
-										OTH: !previous.OTH,
-									}))
-								}
+							<Table
+								key={currentTab}
+								rowData={rowsForTab(currentTab)}
+								tableHeader={header(currentTab)}
+								labelData={label}
+								columnsOrder={['item', ...(currentTab === 'all' ? ['category'] : [])]}
+								rowsPerPage={15}
+								showEmptyCell={false}
+								filterColumns={filters}
+								manualFilter={false}
+								rowKey="code"
 							/>
 						</div>
 
