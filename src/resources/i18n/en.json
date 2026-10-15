@@ -1306,6 +1306,29 @@
 	"accounting": {
 		"title": "Accounting",
 		"manageBills": "Manage Bills",
-		"archiveBills": "Archive Bills"
+		"archiveBills": "Archive Bills",
+		"tabs": {
+			"overview": "Overview",
+			"bills": "Bills",
+			"payments": "Payments"
+		},
+		"subtitles": {
+			"overview": "Year {{year}} · all users",
+			"bills": "Patient bills, payments and refunds",
+			"payments": "Every payment received, by date, patient and cashier"
+		},
+		"actions": {
+			"year": "Year",
+			"newBill": "New bill",
+			"reports": "Reports",
+			"archiveClosed": "Archive closed",
+			"exportSage": "Export Sage",
+			"exportPdf": "Export PDF",
+			"exportCsv": "Export CSV",
+			"paymentsByUserReport": "Payments by user report"
+		},
+		"placeholder": {
+			"comingSoon": "This section is under development and will be available soon."
+		}
 	}
 }

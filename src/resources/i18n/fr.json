@@ -1301,6 +1301,29 @@
 	"accounting": {
 		"title": "Comptabilité",
 		"manageBills": "Gérer les factures",
-		"archiveBills": "Factures archivées"
+		"archiveBills": "Factures archivées",
+		"tabs": {
+			"overview": "Vue d'ensemble",
+			"bills": "Factures",
+			"payments": "Paiements"
+		},
+		"subtitles": {
+			"overview": "Année {{year}} · tous les utilisateurs",
+			"bills": "Factures patients, paiements et remboursements",
+			"payments": "Chaque paiement reçu, par date, patient et caissier"
+		},
+		"actions": {
+			"year": "Année",
+			"newBill": "Nouvelle facture",
+			"reports": "Rapports",
+			"archiveClosed": "Archiver clôturées",
+			"exportSage": "Exporter Sage",
+			"exportPdf": "Exporter PDF",
+			"exportCsv": "Exporter CSV",
+			"paymentsByUserReport": "Rapport paiements par utilisateur"
+		},
+		"placeholder": {
+			"comingSoon": "Cette section est en cours de développement et sera disponible prochainement."
+		}
 	}
 }

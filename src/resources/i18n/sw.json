@@ -543,6 +543,29 @@
 	"accounting": {
 		"title": "Uhasibu",
 		"manageBills": "Dhibiti ankara",
-		"archiveBills": "Ankara zilizohifadhiwa"
+		"archiveBills": "Ankara zilizohifadhiwa",
+		"tabs": {
+			"overview": "Muhtasari",
+			"bills": "Ankara",
+			"payments": "Malipo"
+		},
+		"subtitles": {
+			"overview": "Mwaka {{year}} · watumiaji wote",
+			"bills": "Ankara za wagonjwa, malipo na marejesho",
+			"payments": "Kila malipo yaliyopokelewa, kwa tarehe, mgonjwa na mweka hazina"
+		},
+		"actions": {
+			"year": "Mwaka",
+			"newBill": "Ankara mpya",
+			"reports": "Ripoti",
+			"archiveClosed": "Hifadhi zilizofungwa",
+			"exportSage": "Hamisha Sage",
+			"exportPdf": "Hamisha PDF",
+			"exportCsv": "Hamisha CSV",
+			"paymentsByUserReport": "Ripoti ya malipo kwa mtumiaji"
+		},
+		"placeholder": {
+			"comingSoon": "Sehemu hii inatengenezwa na itapatikana hivi karibuni."
+		}
 	}
 }

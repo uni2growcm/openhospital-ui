@@ -1248,6 +1248,29 @@
 	"accounting": {
 		"title": "ኣሰራርሓ ሒሳብ",
 		"manageBills": "ቢላታት ኣመሓድር",
-		"archiveBills": "ዝተዓቀቡ ቢላታት"
+		"archiveBills": "ዝተዓቀቡ ቢላታት",
+		"tabs": {
+			"overview": "ሓፈሻዊ ትሕዝቶ",
+			"bills": "ቢላታት",
+			"payments": "ክፍሊታት"
+		},
+		"subtitles": {
+			"overview": "ዓመት {{year}} · ኩሎም ተጠቀምቲ",
+			"bills": "ናይ ሕሙማት ቢላታት፣ ክፍሊታትን ተመላሲ ገንዘብን",
+			"payments": "ነፍሲ ወከፍ ዝተቐበሎ ክፍሊት፣ ብዕለት፣ ብሕሙምን ተቐባሊ ገንዘብን"
+		},
+		"actions": {
+			"year": "ዓመት",
+			"newBill": "ሓድሽ ቢል",
+			"reports": "ጸብጻባት",
+			"archiveClosed": "ዝተዓጸዉ ዓቅብ",
+			"exportSage": "Sage ሰደድ",
+			"exportPdf": "PDF ሰደድ",
+			"exportCsv": "CSV ሰደድ",
+			"paymentsByUserReport": "ጸብጻብ ክፍሊታት ብተጠቃሚ"
+		},
+		"placeholder": {
+			"comingSoon": "እዚ ክፍሊ ኣብ ምምዕባል ይርከብ ኣሎ፣ ድሕሪ ሓጺር እዋን ድማ ክርከብ እዩ።"
+		}
 	}
 }

@@ -1248,6 +1248,29 @@
 	"accounting": {
 		"title": "የሂሳብ አያያዝ",
 		"manageBills": "ሂሳቦችን አስተዳድር",
-		"archiveBills": "የተቀመጡ ሂሳቦች"
+		"archiveBills": "የተቀመጡ ሂሳቦች",
+		"tabs": {
+			"overview": "አጠቃላይ እይታ",
+			"bills": "ሂሳቦች",
+			"payments": "ክፍያዎች"
+		},
+		"subtitles": {
+			"overview": "ዓመት {{year}} · ሁሉም ተጠቃሚዎች",
+			"bills": "የታካሚ ሂሳቦች፣ ክፍያዎች እና ተመላሾች",
+			"payments": "እያንዳንዱ የተቀበለው ክፍያ፣ በቀን፣ በታካሚ እና ገንዘብ ተቀባይ"
+		},
+		"actions": {
+			"year": "ዓመት",
+			"newBill": "አዲስ ሂሳብ",
+			"reports": "ሪፖርቶች",
+			"archiveClosed": "የተዘጉትን መዝግብ",
+			"exportSage": "Sage ላክ",
+			"exportPdf": "PDF ላክ",
+			"exportCsv": "CSV ላክ",
+			"paymentsByUserReport": "የክፍያዎች ሪፖርት በተጠቃሚ"
+		},
+		"placeholder": {
+			"comingSoon": "ይህ ክፍል በመገንባት ላይ ነው እና በቅርቡ ይገኛል።"
+		}
 	}
 }

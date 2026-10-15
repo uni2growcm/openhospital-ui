@@ -543,6 +543,29 @@
 	"accounting": {
 		"title": "المحاسبة",
 		"manageBills": "إدارة الفواتير",
-		"archiveBills": "الفواتير المؤرشفة"
+		"archiveBills": "الفواتير المؤرشفة",
+		"tabs": {
+			"overview": "نظرة عامة",
+			"bills": "الفواتير",
+			"payments": "المدفوعات"
+		},
+		"subtitles": {
+			"overview": "سنة {{year}} · جميع المستخدمين",
+			"bills": "فواتير المرضى والمدفوعات والاستردادات",
+			"payments": "كل دفعة مستلمة، حسب التاريخ والمريض وأمين الصندوق"
+		},
+		"actions": {
+			"year": "السنة",
+			"newBill": "فاتورة جديدة",
+			"reports": "التقارير",
+			"archiveClosed": "أرشفة المغلقة",
+			"exportSage": "تصدير Sage",
+			"exportPdf": "تصدير PDF",
+			"exportCsv": "تصدير CSV",
+			"paymentsByUserReport": "تقرير المدفوعات حسب المستخدم"
+		},
+		"placeholder": {
+			"comingSoon": "هذا القسم قيد التطوير وسيتوفر قريباً."
+		}
 	}
 }

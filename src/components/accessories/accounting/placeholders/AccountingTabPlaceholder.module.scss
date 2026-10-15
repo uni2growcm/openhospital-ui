@@ -1,0 +1,43 @@
+.placeholderContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 96px 40px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  text-align: center;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: #f8fafc;
+  color: #64748b;
+  margin-bottom: 24px;
+
+  svg {
+    font-size: 36px;
+  }
+}
+
+.placeholderTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0b1a30;
+  margin-bottom: 12px;
+}
+
+.placeholderDescription {
+  font-size: 16px;
+  color: #64748b;
+  max-width: 520px;
+  line-height: 1.6;
+}

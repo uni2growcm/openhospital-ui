@@ -543,6 +543,29 @@
 	"accounting": {
 		"title": "Contabilidade",
 		"manageBills": "Gerir faturas",
-		"archiveBills": "Faturas arquivadas"
+		"archiveBills": "Faturas arquivadas",
+		"tabs": {
+			"overview": "Visão geral",
+			"bills": "Faturas",
+			"payments": "Pagamentos"
+		},
+		"subtitles": {
+			"overview": "Ano {{year}} · todos os utilizadores",
+			"bills": "Faturas de pacientes, pagamentos e reembolsos",
+			"payments": "Cada pagamento recebido, por data, paciente e caixa"
+		},
+		"actions": {
+			"year": "Ano",
+			"newBill": "Nova fatura",
+			"reports": "Relatórios",
+			"archiveClosed": "Arquivar fechadas",
+			"exportSage": "Exportar Sage",
+			"exportPdf": "Exportar PDF",
+			"exportCsv": "Exportar CSV",
+			"paymentsByUserReport": "Relatório de pagamentos por utilizador"
+		},
+		"placeholder": {
+			"comingSoon": "Esta secção está em desenvolvimento e estará disponível em breve."
+		}
 	}
 }

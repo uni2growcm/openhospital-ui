@@ -166,6 +166,29 @@
 	"accounting": {
 		"title": "Účetnictví",
 		"manageBills": "Správa účtů",
-		"archiveBills": "Archivované účty"
+		"archiveBills": "Archivované účty",
+		"tabs": {
+			"overview": "Přehled",
+			"bills": "Účty",
+			"payments": "Platby"
+		},
+		"subtitles": {
+			"overview": "Rok {{year}} · všichni uživatelé",
+			"bills": "Účty pacientů, platby a refundace",
+			"payments": "Každá přijatá platba podle data, pacienta a pokladníka"
+		},
+		"actions": {
+			"year": "Rok",
+			"newBill": "Nový účet",
+			"reports": "Zprávy",
+			"archiveClosed": "Archivovat uzavřené",
+			"exportSage": "Exportovat Sage",
+			"exportPdf": "Exportovat PDF",
+			"exportCsv": "Exportovat CSV",
+			"paymentsByUserReport": "Zpráva o platbách podle uživatele"
+		},
+		"placeholder": {
+			"comingSoon": "Tato sekce je ve vývoji a bude brzy k dispozici."
+		}
 	}
 }

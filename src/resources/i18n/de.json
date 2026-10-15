@@ -879,6 +879,29 @@
 	"accounting": {
 		"title": "Buchhaltung",
 		"manageBills": "Rechnungen verwalten",
-		"archiveBills": "Archivierte Rechnungen"
+		"archiveBills": "Archivierte Rechnungen",
+		"tabs": {
+			"overview": "Übersicht",
+			"bills": "Rechnungen",
+			"payments": "Zahlungen"
+		},
+		"subtitles": {
+			"overview": "Jahr {{year}} · alle Benutzer",
+			"bills": "Patientenrechnungen, Zahlungen und Rückerstattungen",
+			"payments": "Jede erhaltene Zahlung nach Datum, Patient und Kassierer"
+		},
+		"actions": {
+			"year": "Jahr",
+			"newBill": "Neue Rechnung",
+			"reports": "Berichte",
+			"archiveClosed": "Geschlossene archivieren",
+			"exportSage": "Sage exportieren",
+			"exportPdf": "PDF exportieren",
+			"exportCsv": "CSV exportieren",
+			"paymentsByUserReport": "Zahlungsbericht nach Benutzer"
+		},
+		"placeholder": {
+			"comingSoon": "Dieser Bereich befindet sich in der Entwicklung und ist in Kürze verfügbar."
+		}
 	}
 }
