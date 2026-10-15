@@ -1,0 +1,71 @@
+@import "../../../styles/variables";
+@import "../../../../node_modules/susy/sass/susy";
+
+.accounting {
+  display: flex;
+  flex-direction: column;
+  margin: 0px;
+  height: calc(100vh - 120px);
+  @include susy-media($smartphone) {
+    height: 100%;
+  }
+  .accounting__background {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $c-color-secondary;
+    @include susy-media($smartphone) {
+      padding: 24px 0px;
+    }
+  }
+
+  .accounting__content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    padding: 24px 48px;
+    width: 100%;
+    height: 100%;
+    @include susy-media($smartphone) {
+      padding: 8px;
+    }
+  }
+
+  .accounting__actions {
+    display: flex;
+    width: fit-content;
+    flex-wrap: wrap;
+    gap: 16px;
+    @include susy-media($smartphone) {
+      * {
+        width: 100%;
+      }
+    }
+  }
+
+  .accountingActivity__content {
+    display: flex;
+    flex-direction: column;
+    max-width: 1280px;
+    width: 100%;
+    gap: 48px;
+    .accountingActivity__content_title {
+      font-size: xx-large;
+      color: $c-black;
+      font-weight: bolder;
+
+      @include susy-media($tablet_port) {
+        font-size: x-large;
+      }
+      @include susy-media($smartphone) {
+        font-size: x-large;
+      }
+      @include susy-media($smartphone_small) {
+        font-size: x-large;
+      }
+    }
+  }
+}

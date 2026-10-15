@@ -233,7 +233,8 @@
 		"managebills": "Manage Bills",
 		"billrecords": "Bill Records",
 		"visits": "Visits",
-		"patients": "Patients"
+		"patients": "Patients",
+		"accounting": "Uhasibu"
 	},
 	"operation": {
 		"newoperation": "New Operation",
@@ -538,5 +539,10 @@
 		"cs": "Czech",
 		"sq": "Albanian",
 		"zh": "Chinese"
+	},
+	"accounting": {
+		"title": "Uhasibu",
+		"manageBills": "Dhibiti ankara",
+		"archiveBills": "Ankara zilizohifadhiwa"
 	}
 }

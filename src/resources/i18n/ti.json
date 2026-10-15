@@ -416,7 +416,8 @@
 		"users": "ተጠቀምቲ &amp; ጉጅለታት",
 		"types": "ዓይነታት ምምሕዳር",
 		"hospitalInfo": "ሆስፒታል ሓበሬታ",
-		"hospital": "ሆስፒታል"
+		"hospital": "ሆስፒታል",
+		"accounting": "ኣሰራርሓ ሒሳብ"
 	},
 	"operation": {
 		"newoperation": "ሓድሽ ስርሒት።",
@@ -875,15 +876,33 @@
 			"elderly": "ዓብዪ"
 		},
 		"lab": {
-			"undefined": { "txt": "ዘይተገልጸ" },
-			"blood": { "txt": "ደም" },
-			"cfs": { "txt": "ሲኤፍኤስ" },
-			"film": { "txt": "ፊልሚ" },
-			"sputum": { "txt": "ረስኒ" },
-			"stool": { "txt": "ድኳ" },
-			"swabs": { "txt": "ስዋብ" },
-			"tissues": { "txt": "ቲሹታት" },
-			"urine": { "txt": "ሽንቲ" }
+			"undefined": {
+				"txt": "ዘይተገልጸ"
+			},
+			"blood": {
+				"txt": "ደም"
+			},
+			"cfs": {
+				"txt": "ሲኤፍኤስ"
+			},
+			"film": {
+				"txt": "ፊልሚ"
+			},
+			"sputum": {
+				"txt": "ረስኒ"
+			},
+			"stool": {
+				"txt": "ድኳ"
+			},
+			"swabs": {
+				"txt": "ስዋብ"
+			},
+			"tissues": {
+				"txt": "ቲሹታት"
+			},
+			"urine": {
+				"txt": "ሽንቲ"
+			}
 		},
 		"common": {
 			"thecodeisalreadyinuse": {
@@ -1225,5 +1244,10 @@
 		"updateSuccess": "ዓይነት ፈተና ብዓወት ተሓዲሱ ኣሎ!",
 		"cancelCreation": "ርግጸኛ ዲኻ ነቲ ናይ ፈተና ዓይነት ምፍጣር ክትስርዞ?",
 		"cancelUpdate": "ርግጸኛ ዲኻ ነቲ ናይ ፈተና ዓይነት update ክትስርዞ?"
+	},
+	"accounting": {
+		"title": "ኣሰራርሓ ሒሳብ",
+		"manageBills": "ቢላታት ኣመሓድር",
+		"archiveBills": "ዝተዓቀቡ ቢላታት"
 	}
 }

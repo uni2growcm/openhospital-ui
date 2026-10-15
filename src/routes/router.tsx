@@ -81,6 +81,15 @@ export const useAppRouter = () => {
 							],
 						},
 						{
+							path: 'accounting',
+							lazy: async () =>
+								import(
+									'../components/activities/accountingActivity/AccountingActivity'
+								).then((module) => ({
+									Component: module.AccountingActivity,
+								})),
+						},
+						{
 							path: 'admin',
 							lazy: async () =>
 								import('./admin').then((module) => ({
