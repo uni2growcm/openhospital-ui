@@ -105,7 +105,8 @@
 		"searchpatient": "Search Patient",
 		"patientdashboard": "Patient Dashboard",
 		"newtherapy": "New Therapy",
-		"managetherapy": "Manage Therapy"
+		"managetherapy": "Manage Therapy",
+		"accounting": "会计"
 	},
 	"common": {
 		"ok": "OK",
@@ -161,5 +162,10 @@
 		"therapy": "Therapy",
 		"opd": "Diagnostics",
 		"booking": "Prescriptions"
+	},
+	"accounting": {
+		"title": "会计",
+		"manageBills": "管理账单",
+		"archiveBills": "归档账单"
 	}
 }

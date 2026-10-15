@@ -419,7 +419,8 @@
 		"hospitalInfo": "Hospital Info",
 		"hospital": "Hospital",
 		"settings": "Settings",
-		"radiology": "Radiology"
+		"radiology": "Radiology",
+		"accounting": "Accounting"
 	},
 	"operation": {
 		"newoperation": "New Operation",
@@ -883,15 +884,33 @@
 			"elderly": "Elderly"
 		},
 		"lab": {
-			"undefined": { "txt": "Undefined" },
-			"blood": { "txt": "Blood" },
-			"cfs": { "txt": "CFS" },
-			"film": { "txt": "FILM" },
-			"sputum": { "txt": "Sputum" },
-			"stool": { "txt": "Stool" },
-			"swabs": { "txt": "Swabs" },
-			"tissues": { "txt": "Tissues" },
-			"urine": { "txt": "Urine" }
+			"undefined": {
+				"txt": "Undefined"
+			},
+			"blood": {
+				"txt": "Blood"
+			},
+			"cfs": {
+				"txt": "CFS"
+			},
+			"film": {
+				"txt": "FILM"
+			},
+			"sputum": {
+				"txt": "Sputum"
+			},
+			"stool": {
+				"txt": "Stool"
+			},
+			"swabs": {
+				"txt": "Swabs"
+			},
+			"tissues": {
+				"txt": "Tissues"
+			},
+			"urine": {
+				"txt": "Urine"
+			}
 		},
 		"common": {
 			"thecodeisalreadyinuse": {
@@ -1283,5 +1302,10 @@
 		"buttons": {
 			"menu": "Plugins"
 		}
+	},
+	"accounting": {
+		"title": "Accounting",
+		"manageBills": "Manage Bills",
+		"archiveBills": "Archive Bills"
 	}
 }

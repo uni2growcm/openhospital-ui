@@ -105,7 +105,8 @@
 		"searchpatient": "Search Patient",
 		"patientdashboard": "Patient Dashboard",
 		"newtherapy": "New Therapy",
-		"managetherapy": "Manage Therapy"
+		"managetherapy": "Manage Therapy",
+		"accounting": "Účetnictví"
 	},
 	"common": {
 		"ok": "OK",
@@ -161,5 +162,10 @@
 		"therapy": "Therapy",
 		"opd": "Diagnostics",
 		"booking": "Prescriptions"
+	},
+	"accounting": {
+		"title": "Účetnictví",
+		"manageBills": "Správa účtů",
+		"archiveBills": "Archivované účty"
 	}
 }

@@ -416,7 +416,8 @@
 		"users": "ተጠቃሚዎች እና ቡድኖች",
 		"types": "ዓይነቶችን ያስተዳድሩ",
 		"hospitalInfo": "የሆስፒታል መረጃ",
-		"hospital": "ሆስፒታል"
+		"hospital": "ሆስፒታል",
+		"accounting": "የሂሳብ አያያዝ"
 	},
 	"operation": {
 		"newoperation": "አዲስ ኦፕሬሽን",
@@ -875,15 +876,33 @@
 			"elderly": "አረጋውያን"
 		},
 		"lab": {
-			"undefined": { "txt": "ያልተገለጸ" },
-			"blood": { "txt": "ደም" },
-			"cfs": { "txt": "ሲኤፍኤስ" },
-			"film": { "txt": "ፊልም" },
-			"sputum": { "txt": "አክታ" },
-			"stool": { "txt": "በርጩማ" },
-			"swabs": { "txt": "ስዋዎች" },
-			"tissues": { "txt": "ቲሹዎች" },
-			"urine": { "txt": "ሽንት" }
+			"undefined": {
+				"txt": "ያልተገለጸ"
+			},
+			"blood": {
+				"txt": "ደም"
+			},
+			"cfs": {
+				"txt": "ሲኤፍኤስ"
+			},
+			"film": {
+				"txt": "ፊልም"
+			},
+			"sputum": {
+				"txt": "አክታ"
+			},
+			"stool": {
+				"txt": "በርጩማ"
+			},
+			"swabs": {
+				"txt": "ስዋዎች"
+			},
+			"tissues": {
+				"txt": "ቲሹዎች"
+			},
+			"urine": {
+				"txt": "ሽንት"
+			}
 		},
 		"common": {
 			"thecodeisalreadyinuse": {
@@ -1225,5 +1244,10 @@
 		"updateSuccess": "የፈተናው አይነት በተሳካ ሁኔታ ዘምኗል!",
 		"cancelCreation": "እርግጠኛ ነህ የፈተና አይነት መፍጠር መሰረዝህን እርግጠኛ ነህ?",
 		"cancelUpdate": "እርግጠኛ ነህ የፈተናውን አይነት ማዘመን መሰረዝህን እርግጠኛ ነህ?"
+	},
+	"accounting": {
+		"title": "የሂሳብ አያያዝ",
+		"manageBills": "ሂሳቦችን አስተዳድር",
+		"archiveBills": "የተቀመጡ ሂሳቦች"
 	}
 }
