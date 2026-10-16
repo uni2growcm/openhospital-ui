@@ -135,6 +135,16 @@
 
   .appHeader__home_icon {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $c-color-primary;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+
+    svg {
+      font-size: 14px;
+    }
   }
 
   .appHeader__identified__main__headline {
@@ -217,8 +227,7 @@
           }
         }
         span,
-        p,
-        a {
+        p {
           color: $c-black;
           font-size: small;
           @include susy-media($tablet_land) {
@@ -229,6 +238,48 @@
           }
           @include susy-media($smartphone) {
             color: $c-white;
+          }
+        }
+
+        a {
+          color: $c-color-primary;
+          text-decoration: none;
+          font-size: small;
+
+          span,
+          p,
+          .MuiTypography-root {
+            color: $c-color-primary;
+            text-decoration: none;
+          }
+
+          &:hover {
+            text-decoration: none;
+          }
+
+          @include susy-media($tablet_land) {
+            color: $c-white;
+            span,
+            p,
+            .MuiTypography-root {
+              color: $c-white;
+            }
+          }
+          @include susy-media($tablet_port) {
+            color: $c-white;
+            span,
+            p,
+            .MuiTypography-root {
+              color: $c-white;
+            }
+          }
+          @include susy-media($smartphone) {
+            color: $c-white;
+            span,
+            p,
+            .MuiTypography-root {
+              color: $c-white;
+            }
           }
         }
       }

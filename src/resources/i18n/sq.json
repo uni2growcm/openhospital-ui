@@ -879,6 +879,29 @@
 	"accounting": {
 		"title": "Kontabiliteti",
 		"manageBills": "Menaxho faturat",
-		"archiveBills": "Faturat e arkivuara"
+		"archiveBills": "Faturat e arkivuara",
+		"tabs": {
+			"overview": "Përmbledhje",
+			"bills": "Faturat",
+			"payments": "Pagesat"
+		},
+		"subtitles": {
+			"overview": "Viti {{year}} · të gjithë përdoruesit",
+			"bills": "Faturat e pacientëve, pagesat dhe rimbursimet",
+			"payments": "Çdo pagesë e marrë, sipas datës, pacientit dhe arkëtarit"
+		},
+		"actions": {
+			"year": "Viti",
+			"newBill": "Faturë e re",
+			"reports": "Raportet",
+			"archiveClosed": "Arkivo të mbyllurat",
+			"exportSage": "Eksporto Sage",
+			"exportPdf": "Eksporto PDF",
+			"exportCsv": "Eksporto CSV",
+			"paymentsByUserReport": "Raporti i pagesave sipas përdoruesit"
+		},
+		"placeholder": {
+			"comingSoon": "Kjo pjesë është në zhvillim dhe do të jetë e disponueshme së shpejti."
+		}
 	}
 }

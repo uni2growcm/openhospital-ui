@@ -166,6 +166,29 @@
 	"accounting": {
 		"title": "会计",
 		"manageBills": "管理账单",
-		"archiveBills": "归档账单"
+		"archiveBills": "归档账单",
+		"tabs": {
+			"overview": "概览",
+			"bills": "账单",
+			"payments": "付款"
+		},
+		"subtitles": {
+			"overview": "{{year}} 年 · 所有用户",
+			"bills": "患者账单、付款和退款",
+			"payments": "按日期、患者和收费员列出的每笔付款"
+		},
+		"actions": {
+			"year": "年份",
+			"newBill": "新建账单",
+			"reports": "报告",
+			"archiveClosed": "归档已结清账单",
+			"exportSage": "导出 Sage",
+			"exportPdf": "导出 PDF",
+			"exportCsv": "导出 CSV",
+			"paymentsByUserReport": "按用户列出的付款报告"
+		},
+		"placeholder": {
+			"comingSoon": "此部分正在开发中，即将推出。"
+		}
 	}
 }

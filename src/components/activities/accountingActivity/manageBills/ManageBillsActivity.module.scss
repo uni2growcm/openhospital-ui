@@ -1,0 +1,101 @@
+@import "../../../../styles/variables";
+@import "../../../../../node_modules/susy/sass/susy";
+
+.manageBills {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  min-height: calc(100vh - 120px);
+  background-color: $c-color-secondary;
+
+  @include susy-media($smartphone) {
+    min-height: 100%;
+  }
+
+  .background {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $c-color-secondary;
+    width: 100%;
+
+    @include susy-media($smartphone) {
+      padding: 24px 0;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    padding: 24px 48px;
+    width: 100%;
+    height: 100%;
+
+    @include susy-media($smartphone) {
+      padding: 8px;
+    }
+  }
+
+  .contentInner {
+    display: flex;
+    flex-direction: column;
+    max-width: 1280px;
+    width: 100%;
+  }
+
+  .headerRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .titleSection {
+    display: flex;
+    flex-direction: column;
+
+    .title {
+      font-size: xx-large;
+      color: $c-black;
+      font-weight: bolder;
+      margin: 0;
+      line-height: 1.2;
+
+      @include susy-media($tablet_port) {
+        font-size: x-large;
+      }
+      @include susy-media($smartphone) {
+        font-size: x-large;
+      }
+      @include susy-media($smartphone_small) {
+        font-size: x-large;
+      }
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: #64748b;
+      margin-top: 6px;
+      font-weight: 400;
+
+      @include susy-media($smartphone) {
+        font-size: 13.5px;
+      }
+    }
+  }
+
+  .actionsSection {
+    display: flex;
+    align-items: center;
+  }
+
+  .tabContent {
+    width: 100%;
+    margin-top: 24px;
+  }
+}

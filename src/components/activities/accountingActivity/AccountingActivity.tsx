@@ -1,6 +1,7 @@
 import { Inventory, Receipt } from '@mui/icons-material';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router';
 import { useAppSelector } from '~/libraries/hooks/redux';
 import { PATHS } from '../../../consts';
 import AppHeader from '../../accessories/appHeader/AppHeader';
@@ -16,6 +17,7 @@ const actions = [
 
 export const AccountingActivity: FC = () => {
 	const { t } = useTranslation();
+	const navigate = useNavigate();
 
 	const { userCredentials } = useAppSelector((state) => ({
 		userCredentials: state.main.authentication?.data,
@@ -23,6 +25,12 @@ export const AccountingActivity: FC = () => {
 
 	const breadcrumbMap = {
 		[t('nav.accounting')]: PATHS.accounting,
+	};
+
+	const handleActionClick = (key: string) => {
+		if (key === 'manageBills') {
+			navigate(PATHS.accounting_bills);
+		}
 	};
 
 	return (
@@ -41,7 +49,7 @@ export const AccountingActivity: FC = () => {
 							{actions.map((action) => (
 								<LargeButton
 									key={action.key}
-									handleClick={() => {}}
+									handleClick={() => handleActionClick(action.key)}
 									data-cy={action.key}
 								>
 									<div className="largeButton__inner">

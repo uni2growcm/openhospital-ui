@@ -90,6 +90,15 @@ export const useAppRouter = () => {
 								})),
 						},
 						{
+							path: 'accounting/bills',
+							lazy: async () =>
+								import(
+									'../components/activities/accountingActivity/manageBills/ManageBillsActivity'
+								).then((module) => ({
+									Component: module.ManageBillsActivity,
+								})),
+						},
+						{
 							path: 'admin',
 							lazy: async () =>
 								import('./admin').then((module) => ({
