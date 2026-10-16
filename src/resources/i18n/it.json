@@ -14,6 +14,16 @@
 			"phonecode_exists": "Un paese con questo prefisso telefonico esiste già.",
 			"not_found": "Paese non trovato.",
 			"integrity_violation": "Violazione dell'integrità dei dati del paese."
+		},
+		"reductionplan": {
+			"integrity_violation": "Violazione dell'integrità dei dati del piano di riduzione.",
+			"not_found": "Piano di riduzione non trovato.",
+			"description_duplicate": "Esiste già un piano di riduzione con questa descrizione."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Violazione dell'integrità dei dati del piano di riduzione.",
+			"not_found": "Piano di riduzione non trovato.",
+			"description_duplicate": "Esiste già un piano di riduzione con questa descrizione."
 		}
 	},
 	"validations": {
@@ -425,7 +435,8 @@
 		"types": "Gestisci i Tipi",
 		"hospitalInfo": "Informazioni dell'Ospedale",
 		"hospital": "Ospedale",
-		"countries": "Paesi"
+		"countries": "Paesi",
+		"reductionPlans": "Piani di riduzione"
 	},
 	"operation": {
 		"newoperation": "Nuovo intervento chirurgico",
@@ -1298,5 +1309,43 @@
 		"deleted": "Paese eliminato",
 		"deleting": "Eliminazione del paese in corso...",
 		"deleteSuccess": "Il paese è stato eliminato con successo!"
+	},
+	"reductionPlan": {
+		"addReductionPlan": "Aggiungi piano di riduzione",
+		"addNewReductionPlan": "Aggiungi nuovo piano di riduzione",
+		"editReductionPlan": "Modifica piano di riduzione",
+		"saveReductionPlan": "Salva piano di riduzione",
+		"updateReductionPlan": "Salva modifiche",
+		"description": "Descrizione",
+		"medicalRate": "Tariffa Farmaci (%)",
+		"examRate": "Tariffa Esami (%)",
+		"operationRate": "Tariffa Operazioni (%)",
+		"otherRate": "Tariffa Altro (%)",
+		"generalRates": "Tariffe di riduzione generali",
+		"specificReductions": "Riduzioni specifiche",
+		"medicals": "Farmaci",
+		"exams": "Esami",
+		"operations": "Operazioni",
+		"others": "Altri prezzi",
+		"item": "Elemento",
+		"rate": "Tariffa (%)",
+		"actions": "Azioni",
+		"addItem": "Aggiungi",
+		"selectMedical": "Seleziona un farmaco...",
+		"selectExam": "Seleziona un esame...",
+		"selectOperation": "Seleziona un'operazione...",
+		"selectOther": "Seleziona altro prezzo...",
+		"removeAll": "Rimuovi tutto",
+		"noSpecificReductions": "Nessuna riduzione specifica definita (si applica la tariffa generale).",
+		"deleting": "Eliminazione del piano di riduzione...",
+		"deleted": "Piano di riduzione eliminato",
+		"deleteSuccess": "Piano di riduzione eliminato con successo",
+		"created": "Piano di riduzione creato",
+		"createSuccess": "Piano di riduzione creato con successo",
+		"updated": "Piano di riduzione aggiornato",
+		"updateSuccess": "Piano di riduzione aggiornato con successo",
+		"editItem": "Modifica",
+		"saveItem": "Salva",
+		"cancelEdit": "Annulla"
 	}
 }

@@ -14,6 +14,16 @@
 			"phonecode_exists": "Ein Land mit dieser Vorwahl existiert bereits.",
 			"not_found": "Land nicht gefunden.",
 			"integrity_violation": "Datenintegritätsverletzung für das Land."
+		},
+		"reductionplan": {
+			"integrity_violation": "Datenintegritätsverletzung des Ermäßigungsplans.",
+			"not_found": "Ermäßigungsplan nicht gefunden.",
+			"description_duplicate": "Ein Ermäßigungsplan mit dieser Bezeichnung existiert bereits."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Datenintegritätsverletzung des Ermäßigungsplans.",
+			"not_found": "Ermäßigungsplan nicht gefunden.",
+			"description_duplicate": "Ein Ermäßigungsplan mit dieser Bezeichnung existiert bereits."
 		}
 	},
 	"validations": {
@@ -385,7 +395,8 @@
 		"types": "Typen verwalten",
 		"hospitalInfo": "Krankenhausinfo",
 		"hospital": "Krankenhaus",
-		"countries": "Länder"
+		"countries": "Länder",
+		"reductionPlans": "Ermäßigungspläne"
 	},
 	"operation": {
 		"newoperation": "Neue Operation",
@@ -929,5 +940,43 @@
 		"deleted": "Land gelöscht",
 		"deleting": "Land wird gelöscht...",
 		"deleteSuccess": "Land wurde erfolgreich gelöscht!"
+	},
+	"reductionPlan": {
+		"addReductionPlan": "Ermäßigungsplan hinzufügen",
+		"addNewReductionPlan": "Neuen Ermäßigungsplan hinzufügen",
+		"editReductionPlan": "Ermäßigungsplan bearbeiten",
+		"saveReductionPlan": "Ermäßigungsplan speichern",
+		"updateReductionPlan": "Änderungen speichern",
+		"description": "Bezeichnung",
+		"medicalRate": "Medikamente Satz (%)",
+		"examRate": "Untersuchungen Satz (%)",
+		"operationRate": "Operationen Satz (%)",
+		"otherRate": "Sonstige Satz (%)",
+		"generalRates": "Allgemeine Ermäßigungssätze",
+		"specificReductions": "Spezifische Ermäßigungen",
+		"medicals": "Medikamente",
+		"exams": "Untersuchungen",
+		"operations": "Operationen",
+		"others": "Sonstige Preise",
+		"item": "Element",
+		"rate": "Satz (%)",
+		"actions": "Aktionen",
+		"addItem": "Hinzufügen",
+		"selectMedical": "Medikament auswählen...",
+		"selectExam": "Untersuchung auswählen...",
+		"selectOperation": "Operation auswählen...",
+		"selectOther": "Sonstigen Preis auswählen...",
+		"removeAll": "Alle entfernen",
+		"noSpecificReductions": "Keine spezifischen Ermäßigungen definiert (allgemeiner Satz gilt).",
+		"deleting": "Ermäßigungsplan wird gelöscht...",
+		"deleted": "Ermäßigungsplan gelöscht",
+		"deleteSuccess": "Ermäßigungsplan erfolgreich gelöscht",
+		"created": "Ermäßigungsplan erstellt",
+		"createSuccess": "Ermäßigungsplan erfolgreich erstellt",
+		"updated": "Ermäßigungsplan aktualisiert",
+		"updateSuccess": "Ermäßigungsplan erfolgreich aktualisiert",
+		"editItem": "Bearbeiten",
+		"saveItem": "Speichern",
+		"cancelEdit": "Abbrechen"
 	}
 }

@@ -14,4 +14,5 @@ export type IAdminSection =
 	| 'users'
 	| 'settings'
 	| 'types'
-	| 'hospitalInfo';
+	| 'hospitalInfo'
+	| 'reductionPlans';
