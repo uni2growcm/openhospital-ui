@@ -8,6 +8,13 @@
 		"lab": {
 			"someexamswithoutresultpleasecheck": "Einige Prüfungen ohne Ergebnis, bitte überprüfen."
 		},
+		"country": {
+			"isocode_exists": "Ein Land mit diesem ISO-Code existiert bereits.",
+			"name_exists": "Ein Land mit diesem Namen existiert bereits.",
+			"phonecode_exists": "Ein Land mit dieser Vorwahl existiert bereits.",
+			"not_found": "Land nicht gefunden.",
+			"integrity_violation": "Datenintegritätsverletzung für das Land."
+		},
 		"reductionplan": {
 			"integrity_violation": "Datenintegritätsverletzung des Ermäßigungsplans.",
 			"not_found": "Ermäßigungsplan nicht gefunden.",
@@ -388,6 +395,7 @@
 		"types": "Typen verwalten",
 		"hospitalInfo": "Krankenhausinfo",
 		"hospital": "Krankenhaus",
+		"countries": "Länder",
 		"reductionPlans": "Ermäßigungspläne"
 	},
 	"operation": {
@@ -911,6 +919,26 @@
 		"opdInclude": "OPD",
 		"ipdInInclude": "IP In",
 		"ipdOutInclude": "IP Out"
+	},
+	"country": {
+		"id": "Länder-ID",
+		"isoCode": "ISO-Code",
+		"name": "Name",
+		"phoneCode": "Telefonvorwahl",
+		"isoCodeInvalidFormat": "Der ISO-Code muss aus 2 Großbuchstaben bestehen",
+		"phoneCodeInvalidFormat": "Ungültiges Telefonvorwahlformat",
+		"addNewCountry": "Neues Land hinzufügen",
+		"editCountry": "Land bearbeiten",
+		"updateCountry": "Änderungen speichern",
+		"saveCountry": "Speichern",
+		"addCountry": "Neues Land",
+		"updated": "Land aktualisiert",
+		"updateSuccess": "Land wurde erfolgreich aktualisiert!",
+		"created": "Land erstellt",
+		"createSuccess": "Land wurde erfolgreich erstellt!",
+		"deleted": "Land gelöscht",
+		"deleting": "Land wird gelöscht...",
+		"deleteSuccess": "Land wurde erfolgreich gelöscht!"
 	},
 	"reductionPlan": {
 		"addReductionPlan": "Ermäßigungsplan hinzufügen",

@@ -8,6 +8,13 @@
 		"lab": {
 			"someexamswithoutresultpleasecheck": "Disa ekzaminime pa rezultat ju lutemi kontrolloni."
 		},
+		"country": {
+			"isocode_exists": "A country with this ISO code already exists.",
+			"name_exists": "A country with this name already exists.",
+			"phonecode_exists": "A country with this phone code already exists.",
+			"not_found": "Country not found.",
+			"integrity_violation": "Country data integrity violation."
+		},
 		"reductionplan": {
 			"integrity_violation": "Reduction plan data integrity violation.",
 			"not_found": "Reduction plan not found.",
@@ -388,6 +395,7 @@
 		"types": "Menaxho llojet",
 		"hospitalInfo": "Info mbi Spitalin",
 		"hospital": "Spitali",
+		"countries": "Countries",
 		"reductionPlans": "Reduction Plans"
 	},
 	"operation": {
@@ -911,6 +919,26 @@
 		"opdInclude": "DPJ",
 		"ipdInInclude": "PB Hyrje",
 		"ipdOutInclude": "PB Dalje"
+	},
+	"country": {
+		"id": "Country ID",
+		"isoCode": "ISO Code",
+		"name": "Country Name",
+		"phoneCode": "Phone Code",
+		"isoCodeInvalidFormat": "ISO code must be 2 uppercase letters",
+		"phoneCodeInvalidFormat": "Invalid phone code format",
+		"addNewCountry": "Add a new country",
+		"editCountry": "Edit country",
+		"updateCountry": "Save changes",
+		"saveCountry": "Save",
+		"addCountry": "New country",
+		"updated": "Country updated",
+		"updateSuccess": "Country has been updated successfully!",
+		"created": "Country created",
+		"createSuccess": "Country has been created successfully!",
+		"deleted": "Country deleted",
+		"deleting": "Deleting country...",
+		"deleteSuccess": "Country has been deleted successfully!"
 	},
 	"reductionPlan": {
 		"addReductionPlan": "Add Reduction Plan",

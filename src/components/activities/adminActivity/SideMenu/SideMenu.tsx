@@ -9,6 +9,7 @@ import {
 	LocalDrink,
 	LocalHospitalSharp,
 	People,
+	Public,
 	Percent,
 	SupervisedUserCircle,
 	Tune,
@@ -70,6 +71,10 @@ const SideMenu = () => {
 		{
 			key: 'suppliers',
 			icon: <SupervisedUserCircle fontSize="small" />,
+		},
+		{
+			key: 'countries',
+			icon: <Public fontSize="small" />,
 		},
 		{
 			key: 'users',
