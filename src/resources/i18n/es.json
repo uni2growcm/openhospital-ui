@@ -566,6 +566,48 @@
 		},
 		"placeholder": {
 			"comingSoon": "Esta sección está en desarrollo y estará disponible pronto."
+		},
+		"overview": {
+			"kpi": {
+				"cashedIn": "CASHED IN",
+				"cashedInSubtitle": "{{currency}} · {{period}}",
+				"outstandingDebt": "OUTSTANDING DEBT",
+				"outstandingDebtSubtitle": "{{currency}} · {{count}} pending bills",
+				"billsIssued": "BILLS ISSUED",
+				"billsIssuedSubtitle": "{{count}} closed",
+				"refunded": "REFUNDED",
+				"refundedSubtitle": "{{currency}} · {{count}} refunds"
+			},
+			"chart": {
+				"title": "Payments and debts by month",
+				"paid": "Paid",
+				"notPaid": "Not paid"
+			},
+			"topItems": {
+				"title": "Top items by revenue",
+				"empty": "No items recorded for this year"
+			},
+			"indebtedPatients": {
+				"title": "Most indebted patients",
+				"empty": "No indebted patients found",
+				"billsCount": "· {{count}} bill(s)"
+			},
+			"reports": {
+				"title": "Reports",
+				"subtitle": "Run for the period chosen in Bills, as PDF or Excel.",
+				"patientStatement": "Patient statement",
+				"todayClosure": "Today closure",
+				"badDebtsOnly": "Bad debts only (short)",
+				"allBills": "All bills (full)",
+				"paymentsByUser": "Payments by user",
+				"paymentsAndRefundsByUser": "Payments & refunds by user",
+				"incomesByItemCategory": "Incomes by item category",
+				"refunds": "Refunds",
+				"debtsByItemCategory": "Debts by item category",
+				"billsByReductionPlan": "Bills by reduction plan",
+				"globalConsumptionByService": "Global consumption by service",
+				"exportSelected": "Selected report: {{report}}"
+			}
 		}
 	}
 }

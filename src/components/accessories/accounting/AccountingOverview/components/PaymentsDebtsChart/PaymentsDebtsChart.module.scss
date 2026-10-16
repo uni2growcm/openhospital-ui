@@ -1,0 +1,28 @@
+.chartCard {
+  background: #ffffff;
+  border: 1px solid #e7ebf0;
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.chartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.chartTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.chartContainer {
+  position: relative;
+  height: 280px;
+  width: 100%;
+}

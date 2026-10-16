@@ -27,12 +27,24 @@ const getPayments = (bills: BillDTO[]): Observable<FullBillDTO[]> => {
 			return obs.pipe(
 				map((payments) => {
 					return {
+						bill: bill,
 						billDTO: bill,
+						billItems: [] as BillItemsDTO[],
 						billItemsDTO: [] as BillItemsDTO[],
+						billPayments: payments,
 						billPaymentsDTO: payments,
 					} as any as FullBillDTO;
 				}),
-				catchError((_error) => of({ billDTO: bill } as any as FullBillDTO)),
+				catchError((_error) =>
+					of({
+						bill: bill,
+						billDTO: bill,
+						billItems: [] as BillItemsDTO[],
+						billItemsDTO: [] as BillItemsDTO[],
+						billPayments: [] as BillPaymentsDTO[],
+						billPaymentsDTO: [] as BillPaymentsDTO[],
+					} as any as FullBillDTO),
+				),
 			);
 		}),
 	);
@@ -43,24 +55,38 @@ const getItems = (bills: FullBillDTO[]): Observable<FullBillDTO[]> => {
 	if (bills.length === 0) return of([]);
 	const fbills = forkJoin(
 		bills.map((fbill: FullBillDTO) => {
+			const bill = fbill.bill ?? (fbill as any).billDTO;
+			const billPayments =
+				fbill.billPayments ?? (fbill as any).billPaymentsDTO ?? [];
+			const billId = bill?.id ? bill.id : 0;
 			const obs = wrapper(() =>
 				api.getItems({
-					billId: fbill?.bill?.id ? fbill.bill.id : 0,
+					billId,
 				}),
 			);
 			return obs.pipe(
 				map((items) => {
 					return {
-						billDTO: fbill.bill,
+						bill: bill,
+						billDTO: bill,
+						billItems: items,
 						billItemsDTO: items,
-						billPaymentsDTO: fbill.billPayments,
+						billPayments: billPayments,
+						billPaymentsDTO: billPayments,
 					} as any as FullBillDTO;
 				}),
-				catchError((_error) => of({ ...fbill })),
+				catchError((_error) =>
+					of({
+						...fbill,
+						bill: bill,
+						billDTO: bill,
+						billPayments: billPayments,
+						billItems: fbill.billItems ?? (fbill as any).billItemsDTO ?? [],
+					} as any as FullBillDTO),
+				),
 			);
 		}),
 	);
-
 	return fbills;
 };
 
@@ -112,7 +138,10 @@ export const searchBills = createAsyncThunk(
 				api.searchBills({
 					datefrom: filter.fromDate,
 					dateto: filter.toDate,
-					patientCode: filter.patientCode,
+					patientCode:
+						filter.patientCode && filter.patientCode > 0
+							? filter.patientCode
+							: undefined,
 				}),
 			)
 				.pipe(
@@ -134,7 +163,10 @@ export const searchPayments = createAsyncThunk(
 				api.searchBillsPayments({
 					datefrom: filter.fromDate,
 					dateto: filter.toDate,
-					patientCode: filter.patientCode,
+					patientCode:
+						filter.patientCode && filter.patientCode > 0
+							? filter.patientCode
+							: undefined,
 				}),
 			),
 		).catch((error) => thunkApi.rejectWithValue(error.response)),
@@ -181,7 +213,6 @@ export const getBillsByYear = createAsyncThunk(
 				api.searchBills({
 					datefrom: new Date(year, 0, 1).toISOString(),
 					dateto: new Date(year, 11, 31).toISOString(),
-					patientCode: 0,
 				}),
 			)
 				.pipe(
