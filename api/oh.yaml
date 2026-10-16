@@ -8186,6 +8186,7 @@ components:
           format: double
           description: Price
           example: 1500
+          minimum: 0.0
         lock:
           type: integer
           format: int32

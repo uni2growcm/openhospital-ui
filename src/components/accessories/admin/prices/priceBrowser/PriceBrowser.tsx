@@ -140,9 +140,10 @@ export const PriceBrowser = () => {
 
 	const handlePriceChange = (group: Category, item: string, price: number) => {
 		const key = makeRowKey(group, item);
+		const safePrice = Number.isNaN(price) ? 0 : Math.max(0, price);
 		setValues((previous) => ({
 			...previous,
-			[key]: { price, variable: previous[key]?.variable ?? false },
+			[key]: { price: safePrice, variable: previous[key]?.variable ?? false },
 		}));
 	};
 
@@ -169,6 +170,8 @@ export const PriceBrowser = () => {
 				price: (
 					<input
 						type="number"
+						min="0"
+						step="0.01"
 						className="priceBrowser__priceInput"
 						value={value.price}
 						disabled={!itemEntry.editable}
