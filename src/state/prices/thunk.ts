@@ -6,9 +6,15 @@ import {
 	type PriceListDTO,
 	PriceListsApi,
 } from '../../generated';
+import {
+	OthersPriceApi,
+	type PriceListDTO,
+	PriceListsApi,
+} from '../../generated';
 import { customConfiguration } from '../../libraries/apiUtils/configuration';
 
 const api = new PriceListsApi(customConfiguration());
+const othersPriceApi = new OthersPriceApi(customConfiguration());
 
 export const getPrices = createAsyncThunk(
 	'prices/getPrices',
@@ -62,6 +68,14 @@ export const copyPriceList = createAsyncThunk(
 	'prices/copyPriceList',
 	async (payload: { id: number; factor: number; step: number }, thunkApi) =>
 		firstValueFrom(wrapper(() => api.copyByFactorAndStep(payload))).catch(
+			(error) => thunkApi.rejectWithValue(error.response),
+		),
+);
+
+export const getPricesOthers = createAsyncThunk(
+	'prices/getPricesOthers',
+	async (_, thunkApi) =>
+		firstValueFrom(wrapper(() => othersPriceApi.getPricesOthers())).catch(
 			(error) => thunkApi.rejectWithValue(error.response),
 		),
 );

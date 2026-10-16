@@ -234,6 +234,7 @@
 		"billrecords": "Bill Records",
 		"visits": "Visits",
 		"patients": "Patients",
+		"reductionPlans": "Reduction Plans",
 		"prices": "Price List",
 		"staff": "الموظفون"
 	},
@@ -583,6 +584,56 @@
 		"cs": "Czech",
 		"sq": "Albanian",
 		"zh": "Chinese"
+	},
+	"reductionPlan": {
+		"addReductionPlan": "Add Reduction Plan",
+		"addNewReductionPlan": "Add new reduction plan",
+		"editReductionPlan": "Edit Reduction Plan",
+		"saveReductionPlan": "Save Reduction Plan",
+		"updateReductionPlan": "Save changes",
+		"description": "Description",
+		"medicalRate": "Medical Rate (%)",
+		"examRate": "Exam Rate (%)",
+		"operationRate": "Operation Rate (%)",
+		"otherRate": "Other Rate (%)",
+		"generalRates": "General Reduction Rates",
+		"specificReductions": "Specific Reductions",
+		"medicals": "Medicals",
+		"exams": "Exams",
+		"operations": "Operations",
+		"others": "Other Prices",
+		"item": "Item",
+		"rate": "Rate (%)",
+		"actions": "Actions",
+		"addItem": "Add Item",
+		"selectMedical": "Select a medical...",
+		"selectExam": "Select an exam...",
+		"selectOperation": "Select an operation...",
+		"selectOther": "Select a price other...",
+		"removeAll": "Remove All",
+		"noSpecificReductions": "No specific reductions defined (general rate applies).",
+		"deleting": "Deleting reduction plan...",
+		"deleted": "Reduction Plan Deleted",
+		"deleteSuccess": "Reduction plan deleted successfully",
+		"created": "Reduction Plan Created",
+		"createSuccess": "Reduction plan created successfully",
+		"updated": "Reduction Plan Updated",
+		"updateSuccess": "Reduction plan updated successfully",
+		"editItem": "تعديل",
+		"saveItem": "حفظ",
+		"cancelEdit": "إلغاء"
+	},
+	"errors": {
+		"reductionplan": {
+			"integrity_violation": "Reduction plan data integrity violation.",
+			"not_found": "Reduction plan not found.",
+			"description_duplicate": "A reduction plan with this description already exists."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Reduction plan data integrity violation.",
+			"not_found": "Reduction plan not found.",
+			"description_duplicate": "A reduction plan with this description already exists."
+		}
 	},
 	"staff": {
 		"code": "الرمز",

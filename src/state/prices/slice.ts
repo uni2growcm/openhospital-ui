@@ -50,6 +50,18 @@ export const priceSlice = createSlice({
 			.addCase(thunks.getPriceLists.rejected, (state, action) => {
 				state.getPriceLists = ApiResponse.error(action.payload);
 			})
+			// Get Prices Others
+			.addCase(thunks.getPricesOthers.pending, (state) => {
+				state.getPricesOthers = ApiResponse.loading();
+			})
+			.addCase(thunks.getPricesOthers.fulfilled, (state, action) => {
+				state.getPricesOthers = isEmpty(action.payload)
+					? ApiResponse.empty()
+					: ApiResponse.value(action.payload);
+			})
+			.addCase(thunks.getPricesOthers.rejected, (state, action) => {
+				state.getPricesOthers = ApiResponse.error(action.payload);
+			})
 			// Create Price List
 			.addCase(thunks.createPriceList.pending, (state) => {
 				state.createPriceList = ApiResponse.loading();

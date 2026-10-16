@@ -7,6 +7,16 @@
 		"internalerror": "ውሽጣዊ ጌጋ ኣጋጢሙ",
 		"lab": {
 			"someexamswithoutresultpleasecheck": "ገለ ውጽኢት ዘይብሉ ፈተናታት በጃኹም መርምሩ።"
+		},
+		"reductionplan": {
+			"integrity_violation": "Reduction plan data integrity violation.",
+			"not_found": "Reduction plan not found.",
+			"description_duplicate": "A reduction plan with this description already exists."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Reduction plan data integrity violation.",
+			"not_found": "Reduction plan not found.",
+			"description_duplicate": "A reduction plan with this description already exists."
 		}
 	},
 	"validations": {
@@ -417,7 +427,8 @@
 		"users": "ተጠቀምቲ &amp; ጉጅለታት",
 		"types": "ዓይነታት ምምሕዳር",
 		"hospitalInfo": "ሆስፒታል ሓበሬታ",
-		"hospital": "ሆስፒታል"
+		"hospital": "ሆስፒታል",
+		"reductionPlans": "Reduction Plans"
 	},
 	"operation": {
 		"newoperation": "ሓድሽ ስርሒት።",
@@ -1305,5 +1316,43 @@
 		"updateSuccess": "ዓይነት ፈተና ብዓወት ተሓዲሱ ኣሎ!",
 		"cancelCreation": "ርግጸኛ ዲኻ ነቲ ናይ ፈተና ዓይነት ምፍጣር ክትስርዞ?",
 		"cancelUpdate": "ርግጸኛ ዲኻ ነቲ ናይ ፈተና ዓይነት update ክትስርዞ?"
+	},
+	"reductionPlan": {
+		"addReductionPlan": "Add Reduction Plan",
+		"addNewReductionPlan": "Add new reduction plan",
+		"editReductionPlan": "Edit Reduction Plan",
+		"saveReductionPlan": "Save Reduction Plan",
+		"updateReductionPlan": "Save changes",
+		"description": "Description",
+		"medicalRate": "Medical Rate (%)",
+		"examRate": "Exam Rate (%)",
+		"operationRate": "Operation Rate (%)",
+		"otherRate": "Other Rate (%)",
+		"generalRates": "General Reduction Rates",
+		"specificReductions": "Specific Reductions",
+		"medicals": "Medicals",
+		"exams": "Exams",
+		"operations": "Operations",
+		"others": "Other Prices",
+		"item": "Item",
+		"rate": "Rate (%)",
+		"actions": "Actions",
+		"addItem": "Add Item",
+		"selectMedical": "Select a medical...",
+		"selectExam": "Select an exam...",
+		"selectOperation": "Select an operation...",
+		"selectOther": "Select a price other...",
+		"removeAll": "Remove All",
+		"noSpecificReductions": "No specific reductions defined (general rate applies).",
+		"deleting": "Deleting reduction plan...",
+		"deleted": "Reduction Plan Deleted",
+		"deleteSuccess": "Reduction plan deleted successfully",
+		"created": "Reduction Plan Created",
+		"createSuccess": "Reduction plan created successfully",
+		"updated": "Reduction Plan Updated",
+		"updateSuccess": "Reduction plan updated successfully",
+		"editItem": "ኣመዓራርይ",
+		"saveItem": "ኣዕቅብ",
+		"cancelEdit": "ሰርዝ"
 	}
 }
