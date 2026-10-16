@@ -2,15 +2,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { firstValueFrom } from 'rxjs';
 import { wrapper } from '~/libraries/apiUtils/wrapper';
 import {
+  OthersPriceApi,
 	type PriceDTO,
 	type PriceListDTO,
 	PriceListsApi,
 } from '../../generated';
-import {
-	OthersPriceApi,
-	type PriceListDTO,
-	PriceListsApi,
-} from '../../generated';
+
 import { customConfiguration } from '../../libraries/apiUtils/configuration';
 
 const api = new PriceListsApi(customConfiguration());
