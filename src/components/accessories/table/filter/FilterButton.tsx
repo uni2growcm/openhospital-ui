@@ -105,9 +105,9 @@ export const FilterButton = ({ field, onChange }: IOwnProps) => {
 			formik.submitForm();
 		}, 250);
 
-		return () => clearInterval(submit);
+		return () => clearTimeout(submit);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [formik.submitForm]);
+	}, [formik.values]);
 
 	return (
 		<div>

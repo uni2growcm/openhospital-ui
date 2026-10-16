@@ -17,6 +17,12 @@ export const priceSlice = createSlice({
 		deletePriceListReset: (state) => {
 			state.deletePriceList = initial.deletePriceList;
 		},
+		updatePricesReset: (state) => {
+			state.updatePrices = initial.updatePrices;
+		},
+		copyPriceListReset: (state) => {
+			state.copyPriceList = initial.copyPriceList;
+		},
 	},
 	extraReducers: (builder) =>
 		builder
@@ -85,6 +91,26 @@ export const priceSlice = createSlice({
 			})
 			.addCase(thunks.deletePriceList.rejected, (state, action) => {
 				state.deletePriceList = ApiResponse.error(action.payload);
+			})
+			// Update Prices
+			.addCase(thunks.updatePrices.pending, (state) => {
+				state.updatePrices = ApiResponse.loading();
+			})
+			.addCase(thunks.updatePrices.fulfilled, (state, action) => {
+				state.updatePrices = ApiResponse.value(action.payload);
+			})
+			.addCase(thunks.updatePrices.rejected, (state, action) => {
+				state.updatePrices = ApiResponse.error(action.payload);
+			})
+			// Copy Price List
+			.addCase(thunks.copyPriceList.pending, (state) => {
+				state.copyPriceList = ApiResponse.loading();
+			})
+			.addCase(thunks.copyPriceList.fulfilled, (state, action) => {
+				state.copyPriceList = ApiResponse.value(action.payload);
+			})
+			.addCase(thunks.copyPriceList.rejected, (state, action) => {
+				state.copyPriceList = ApiResponse.error(action.payload);
 			}),
 });
 
@@ -92,4 +118,6 @@ export const {
 	createPriceListReset,
 	updatePriceListReset,
 	deletePriceListReset,
+	updatePricesReset,
+	copyPriceListReset,
 } = priceSlice.actions;
