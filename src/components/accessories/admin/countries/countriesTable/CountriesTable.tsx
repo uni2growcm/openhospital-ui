@@ -11,6 +11,7 @@ import {
 	getCountriesPaged,
 } from '../../../../../state/countries';
 import InfoBox from '../../../infoBox/InfoBox';
+import type { TFilterField } from '../../../table/filter/types';
 import Table from '../../../table/Table';
 import classes from './CountriesTable.module.scss';
 
@@ -20,14 +21,12 @@ interface IOwnProps {
 	onEdit: (row: any) => void;
 	onDelete: (row: any) => void;
 	headerActions?: ReactNode;
-	searchTerm?: string;
 }
 
 export const CountriesTable = ({
 	onEdit,
 	onDelete,
 	headerActions,
-	searchTerm,
 }: IOwnProps) => {
 	const dispatch = useAppDispatch();
 	const { t } = useTranslation();
@@ -46,6 +45,12 @@ export const CountriesTable = ({
 
 	const order = ['isoCode', 'name', 'phoneCode'];
 
+	const filters: TFilterField[] = [
+		{ key: 'isoCode', label: t('country.isoCode'), type: 'text' },
+		{ key: 'name', label: t('country.name'), type: 'text' },
+		{ key: 'phoneCode', label: t('country.phoneCode'), type: 'text' },
+	];
+
 	const {
 		data: pagedData,
 		status,
@@ -57,27 +62,14 @@ export const CountriesTable = ({
 
 	const deleteCountryState = useAppSelector((state) => state.countries.delete);
 
-	const prevSearchRef = useRef(searchTerm);
 	useEffect(() => {
-		if (prevSearchRef.current !== searchTerm) {
-			prevSearchRef.current = searchTerm;
-			setPage(0);
-		}
-	}, [searchTerm]);
-
-	useEffect(() => {
-		const handler = setTimeout(() => {
-			dispatch(
-				getCountriesPaged({
-					page,
-					size: pageSize,
-					search: searchTerm?.trim() ? searchTerm.trim() : undefined,
-				}),
-			);
-		}, 300);
-
-		return () => clearTimeout(handler);
-	}, [dispatch, page, pageSize, searchTerm]);
+		dispatch(
+			getCountriesPaged({
+				page,
+				size: pageSize,
+			}),
+		);
+	}, [dispatch, page, pageSize]);
 
 	useEffect(() => {
 		if (deleteCountryState.status === 'FAIL') {
@@ -92,11 +84,10 @@ export const CountriesTable = ({
 				getCountriesPaged({
 					page,
 					size: pageSize,
-					search: searchTerm?.trim() ? searchTerm.trim() : undefined,
 				}),
 			);
 		}
-	}, [deleteCountryState.status, dispatch, page, pageSize, searchTerm]);
+	}, [deleteCountryState.status, dispatch, page, pageSize]);
 
 	const formatDataToDisplay = (countries: CountryDTO[]) => {
 		return countries.map((item) => ({
@@ -153,6 +144,7 @@ export const CountriesTable = ({
 										onEdit={handleEdit}
 										onDelete={onDelete}
 										showEmptyCell={false}
+										filterColumns={filters}
 										rowKey="id"
 										manualFilter={false}
 										headerActions={headerActions}
@@ -194,9 +186,6 @@ export const CountriesTable = ({
 											getCountriesPaged({
 												page,
 												size: pageSize,
-												search: searchTerm?.trim()
-													? searchTerm.trim()
-													: undefined,
 											}),
 										);
 										dispatch(deleteCountryReset());

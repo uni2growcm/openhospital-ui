@@ -921,7 +921,6 @@
 		"ipdOutInclude": "PB Dalje"
 	},
 	"country": {
-		"searchPlaceholder": "Kërko shtet...",
 		"id": "Country ID",
 		"isoCode": "ISO Code",
 		"name": "Country Name",

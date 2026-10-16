@@ -1187,7 +1187,6 @@
 		"deleteSuccess": "Fournisseur supprimé avec succès !"
 	},
 	"country": {
-		"searchPlaceholder": "Rechercher un pays...",
 		"id": "Identifiant du pays",
 		"isoCode": "Code ISO",
 		"name": "Nom du pays",

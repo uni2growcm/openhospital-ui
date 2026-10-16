@@ -564,7 +564,6 @@
 		}
 	},
 	"country": {
-		"searchPlaceholder": "Pesquisar país...",
 		"id": "ID do país",
 		"isoCode": "Código ISO",
 		"name": "Nome",

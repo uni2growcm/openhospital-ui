@@ -6323,7 +6323,7 @@ paths:
     get:
       tags:
       - Countries
-      summary: "Get active countries page by page, optionally filtered by keyword"
+      summary: Get active countries page by page
       operationId: getCountriesPaged
       parameters:
       - name: page
@@ -6340,11 +6340,6 @@ paths:
           type: integer
           format: int32
           default: 10
-      - name: search
-        in: query
-        required: false
-        schema:
-          type: string
       responses:
         "200":
           description: OK
@@ -7362,13 +7357,13 @@ components:
           format: int32
           description: lock
           example: 0
-        female:
-          type: boolean
-        male:
-          type: boolean
         opd:
           type: boolean
         pharmacy:
+          type: boolean
+        male:
+          type: boolean
+        female:
           type: boolean
       required:
       - beds
@@ -8492,11 +8487,11 @@ components:
           type: string
           description: "Flag record deleted, values are 'Y' OR 'N' "
           example: "N"
+        fhu:
+          type: string
         yprog:
           type: integer
           format: int32
-        fhu:
-          type: string
       required:
       - admDate
       - admitted

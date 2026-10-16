@@ -187,7 +187,6 @@
 		}
 	},
 	"country": {
-		"searchPlaceholder": "Hledat zemi...",
 		"id": "Country ID",
 		"isoCode": "ISO Code",
 		"name": "Country Name",

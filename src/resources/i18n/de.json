@@ -921,7 +921,6 @@
 		"ipdOutInclude": "IP Out"
 	},
 	"country": {
-		"searchPlaceholder": "Land suchen...",
 		"id": "Länder-ID",
 		"isoCode": "ISO-Code",
 		"name": "Name",

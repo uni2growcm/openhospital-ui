@@ -1290,7 +1290,6 @@
 		"cancelUpdate": "እርግጠኛ ነህ የፈተናውን አይነት ማዘመን መሰረዝህን እርግጠኛ ነህ?"
 	},
 	"country": {
-		"searchPlaceholder": "አገር ፈልግ...",
 		"id": "Country ID",
 		"isoCode": "ISO Code",
 		"name": "Country Name",

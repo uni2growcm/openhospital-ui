@@ -187,7 +187,6 @@
 		}
 	},
 	"country": {
-		"searchPlaceholder": "搜索国家...",
 		"id": "Country ID",
 		"isoCode": "ISO Code",
 		"name": "Country Name",

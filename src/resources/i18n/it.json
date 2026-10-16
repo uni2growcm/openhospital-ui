@@ -1290,7 +1290,6 @@
 		"cancelUpdate": "Confermi la cancellazione delle modifiche a tipo esame?"
 	},
 	"country": {
-		"searchPlaceholder": "Cerca paese...",
 		"id": "ID Paese",
 		"isoCode": "Codice ISO",
 		"name": "Nome",

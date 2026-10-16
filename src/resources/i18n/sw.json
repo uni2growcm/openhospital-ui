@@ -564,7 +564,6 @@
 		}
 	},
 	"country": {
-		"searchPlaceholder": "Tafuta nchi...",
 		"id": "Country ID",
 		"isoCode": "ISO Code",
 		"name": "Country Name",

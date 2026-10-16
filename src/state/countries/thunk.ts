@@ -16,16 +16,12 @@ export const getCountries = createAsyncThunk(
 
 export const getCountriesPaged = createAsyncThunk(
 	'countries/getCountriesPaged',
-	async (
-		{ page, size, search }: { page?: number; size?: number; search?: string },
-		thunkApi,
-	) =>
+	async ({ page, size }: { page?: number; size?: number }, thunkApi) =>
 		firstValueFrom(
 			wrapper(() =>
 				api.getCountriesPaged({
 					page: page ?? 0,
 					size: size ?? 10,
-					search,
 				}),
 			),
 		).catch((error) => thunkApi.rejectWithValue(error.response)),

@@ -564,7 +564,6 @@
 		}
 	},
 	"country": {
-		"searchPlaceholder": "البحث عن بلد...",
 		"id": "Country ID",
 		"isoCode": "ISO Code",
 		"name": "Country Name",
