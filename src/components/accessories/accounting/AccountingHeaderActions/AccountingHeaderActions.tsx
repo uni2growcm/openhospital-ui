@@ -9,7 +9,7 @@ import {
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import DateField from '../../dateField/DateField';
-import type { IAccountingHeaderActionsProps } from '../types';
+import { AccountingTab, type IAccountingHeaderActionsProps } from '../types';
 import classes from './AccountingHeaderActions.module.scss';
 
 export const AccountingHeaderActions: FC<IAccountingHeaderActionsProps> = ({
@@ -26,7 +26,7 @@ export const AccountingHeaderActions: FC<IAccountingHeaderActionsProps> = ({
 }) => {
 	const { t } = useTranslation();
 
-	if (activeTab === 'overview') {
+	if (activeTab === AccountingTab.OVERVIEW) {
 		const yearDateIso = selectedYear
 			? new Date(
 					Number.parseInt(selectedYear, 10) || new Date().getFullYear(),
@@ -36,8 +36,14 @@ export const AccountingHeaderActions: FC<IAccountingHeaderActionsProps> = ({
 			: new Date().toISOString();
 
 		return (
-			<div className={classes.actionsContainer}>
-				<div className={classes.yearFieldWrapper}>
+			<div
+				data-cy="accounting-header-actions"
+				className={classes.actionsContainer}
+			>
+				<div
+					data-cy="accounting-year-field"
+					className={classes.yearFieldWrapper}
+				>
 					<DateField
 						fieldName="year"
 						views={['year']}
@@ -60,6 +66,7 @@ export const AccountingHeaderActions: FC<IAccountingHeaderActionsProps> = ({
 				</div>
 				<button
 					type="button"
+					data-cy="accounting-new-bill-button"
 					className={classes.primaryButton}
 					onClick={onNewBill}
 				>
@@ -70,11 +77,15 @@ export const AccountingHeaderActions: FC<IAccountingHeaderActionsProps> = ({
 		);
 	}
 
-	if (activeTab === 'bills') {
+	if (activeTab === AccountingTab.BILLS) {
 		return (
-			<div className={classes.actionsContainer}>
+			<div
+				data-cy="accounting-header-actions"
+				className={classes.actionsContainer}
+			>
 				<button
 					type="button"
+					data-cy="accounting-reports-button"
 					className={classes.outlineButton}
 					onClick={onReports}
 				>
@@ -85,6 +96,7 @@ export const AccountingHeaderActions: FC<IAccountingHeaderActionsProps> = ({
 
 				<button
 					type="button"
+					data-cy="accounting-archive-closed-button"
 					className={classes.outlineButton}
 					onClick={onArchiveClosed}
 				>
@@ -94,6 +106,7 @@ export const AccountingHeaderActions: FC<IAccountingHeaderActionsProps> = ({
 
 				<button
 					type="button"
+					data-cy="accounting-export-sage-button"
 					className={classes.outlineButton}
 					onClick={onExportSage}
 				>
@@ -103,6 +116,7 @@ export const AccountingHeaderActions: FC<IAccountingHeaderActionsProps> = ({
 
 				<button
 					type="button"
+					data-cy="accounting-export-pdf-button"
 					className={classes.outlineButton}
 					onClick={onExportPdf}
 				>
@@ -112,6 +126,7 @@ export const AccountingHeaderActions: FC<IAccountingHeaderActionsProps> = ({
 
 				<button
 					type="button"
+					data-cy="accounting-new-bill-button"
 					className={classes.primaryButton}
 					onClick={onNewBill}
 				>
@@ -122,11 +137,15 @@ export const AccountingHeaderActions: FC<IAccountingHeaderActionsProps> = ({
 		);
 	}
 
-	if (activeTab === 'payments') {
+	if (activeTab === AccountingTab.PAYMENTS) {
 		return (
-			<div className={classes.actionsContainer}>
+			<div
+				data-cy="accounting-header-actions"
+				className={classes.actionsContainer}
+			>
 				<button
 					type="button"
+					data-cy="accounting-export-csv-button"
 					className={classes.outlineButton}
 					onClick={onExportCsv}
 				>
@@ -136,6 +155,7 @@ export const AccountingHeaderActions: FC<IAccountingHeaderActionsProps> = ({
 
 				<button
 					type="button"
+					data-cy="accounting-payments-by-user-button"
 					className={classes.outlineButton}
 					onClick={onPaymentsByUserReport}
 				>

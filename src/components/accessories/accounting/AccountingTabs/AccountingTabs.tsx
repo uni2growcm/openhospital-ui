@@ -1,13 +1,13 @@
 import classNames from 'classnames';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { AccountingTab, IAccountingTabsProps } from '../types';
+import { AccountingTab, type IAccountingTabsProps } from '../types';
 import classes from './AccountingTabs.module.scss';
 
 const TABS: { id: AccountingTab; labelKey: string }[] = [
-	{ id: 'overview', labelKey: 'accounting.tabs.overview' },
-	{ id: 'bills', labelKey: 'accounting.tabs.bills' },
-	{ id: 'payments', labelKey: 'accounting.tabs.payments' },
+	{ id: AccountingTab.OVERVIEW, labelKey: 'accounting.tabs.overview' },
+	{ id: AccountingTab.BILLS, labelKey: 'accounting.tabs.bills' },
+	{ id: AccountingTab.PAYMENTS, labelKey: 'accounting.tabs.payments' },
 ];
 
 export const AccountingTabs: FC<IAccountingTabsProps> = ({
@@ -17,12 +17,17 @@ export const AccountingTabs: FC<IAccountingTabsProps> = ({
 	const { t } = useTranslation();
 
 	return (
-		<div className={classes.tabsContainer} role="tablist">
+		<div
+			data-cy="accounting-tabs"
+			className={classes.tabsContainer}
+			role="tablist"
+		>
 			{TABS.map((tab) => (
 				<button
 					key={tab.id}
 					type="button"
 					role="tab"
+					data-cy={`accounting-tab-${tab.id}`}
 					aria-selected={activeTab === tab.id}
 					className={classNames(classes.tabItem, {
 						[classes.active]: activeTab === tab.id,

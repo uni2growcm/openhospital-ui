@@ -5,14 +5,16 @@ import { useAppSelector } from '../../../../libraries/hooks/redux';
 import { AccountingHeaderActions } from '../../../accessories/accounting/AccountingHeaderActions/AccountingHeaderActions';
 import { AccountingTabs } from '../../../accessories/accounting/AccountingTabs/AccountingTabs';
 import { AccountingTabPlaceholder } from '../../../accessories/accounting/placeholders/AccountingTabPlaceholder';
-import type { AccountingTab } from '../../../accessories/accounting/types';
+import { AccountingTab } from '../../../accessories/accounting/types';
 import AppHeader from '../../../accessories/appHeader/AppHeader';
 import Footer from '../../../accessories/footer/Footer';
 import classes from './ManageBillsActivity.module.scss';
 
 export const ManageBillsActivity: FC = () => {
 	const { t } = useTranslation();
-	const [currentTab, setCurrentTab] = useState<AccountingTab>('overview');
+	const [currentTab, setCurrentTab] = useState<AccountingTab>(
+		AccountingTab.OVERVIEW,
+	);
 	const [selectedYear, setSelectedYear] = useState<string>(() =>
 		new Date().getFullYear().toString(),
 	);
@@ -30,11 +32,11 @@ export const ManageBillsActivity: FC = () => {
 
 	const getSubtitle = () => {
 		switch (currentTab) {
-			case 'overview':
+			case AccountingTab.OVERVIEW:
 				return t('accounting.subtitles.overview', { year: selectedYear });
-			case 'bills':
+			case AccountingTab.BILLS:
 				return t('accounting.subtitles.bills');
-			case 'payments':
+			case AccountingTab.PAYMENTS:
 				return t('accounting.subtitles.payments');
 		}
 	};
@@ -50,8 +52,12 @@ export const ManageBillsActivity: FC = () => {
 					<div className={classes.contentInner}>
 						<div className={classes.headerRow}>
 							<div className={classes.titleSection}>
-								<h1 className={classes.title}>{t('accounting.title')}</h1>
-								<div className={classes.subtitle}>{getSubtitle()}</div>
+								<h1 data-cy="activity-title" className={classes.title}>
+									{t('accounting.title')}
+								</h1>
+								<div data-cy="activity-subtitle" className={classes.subtitle}>
+									{getSubtitle()}
+								</div>
 							</div>
 							<div className={classes.actionsSection}>
 								<AccountingHeaderActions

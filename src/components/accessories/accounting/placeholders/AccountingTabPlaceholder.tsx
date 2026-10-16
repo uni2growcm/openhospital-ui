@@ -5,7 +5,7 @@ import {
 } from '@mui/icons-material';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { IAccountingTabPlaceholderProps } from '../types';
+import { AccountingTab, type IAccountingTabPlaceholderProps } from '../types';
 import classes from './AccountingTabPlaceholder.module.scss';
 
 export const AccountingTabPlaceholder: FC<IAccountingTabPlaceholderProps> = ({
@@ -15,22 +15,28 @@ export const AccountingTabPlaceholder: FC<IAccountingTabPlaceholderProps> = ({
 
 	const renderIcon = () => {
 		switch (tab) {
-			case 'overview':
+			case AccountingTab.OVERVIEW:
 				return <DashboardOutlined />;
-			case 'bills':
+			case AccountingTab.BILLS:
 				return <ReceiptLongOutlined />;
-			case 'payments':
+			case AccountingTab.PAYMENTS:
 				return <PaymentOutlined />;
 		}
 	};
 
 	return (
-		<div className={classes.placeholderContainer}>
+		<div
+			data-cy="accounting-tab-placeholder"
+			className={classes.placeholderContainer}
+		>
 			<div className={classes.iconWrapper}>{renderIcon()}</div>
-			<div className={classes.placeholderTitle}>
+			<div data-cy="placeholder-title" className={classes.placeholderTitle}>
 				{t(`accounting.tabs.${tab}`)}
 			</div>
-			<div className={classes.placeholderDescription}>
+			<div
+				data-cy="placeholder-description"
+				className={classes.placeholderDescription}
+			>
 				{t('accounting.placeholder.comingSoon')}
 			</div>
 		</div>

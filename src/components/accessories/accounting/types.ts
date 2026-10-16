@@ -1,4 +1,8 @@
-export type AccountingTab = 'overview' | 'bills' | 'payments';
+export enum AccountingTab {
+	OVERVIEW = 'overview',
+	BILLS = 'bills',
+	PAYMENTS = 'payments',
+}
 
 export interface IAccountingHeaderActionsProps {
 	activeTab: AccountingTab;
