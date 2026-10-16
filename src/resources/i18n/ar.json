@@ -556,6 +556,11 @@
 			"phonecode_exists": "A country with this phone code already exists.",
 			"not_found": "Country not found.",
 			"integrity_violation": "Country data integrity violation."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Reduction plan data integrity violation.",
+			"not_found": "Reduction plan not found.",
+			"description_duplicate": "A reduction plan with this description already exists."
 		}
 	},
 	"country": {
@@ -616,18 +621,6 @@
 		"editItem": "تعديل",
 		"saveItem": "حفظ",
 		"cancelEdit": "إلغاء"
-	},
-	"errors": {
-		"reductionplan": {
-			"integrity_violation": "Reduction plan data integrity violation.",
-			"not_found": "Reduction plan not found.",
-			"description_duplicate": "A reduction plan with this description already exists."
-		},
-		"reductionPlan": {
-			"integrity_violation": "Reduction plan data integrity violation.",
-			"not_found": "Reduction plan not found.",
-			"description_duplicate": "A reduction plan with this description already exists."
-		}
 	},
 	"staff": {
 		"code": "الرمز",

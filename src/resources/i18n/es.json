@@ -556,6 +556,11 @@
 			"phonecode_exists": "Ya existe un país con este prefijo telefónico.",
 			"not_found": "País no encontrado.",
 			"integrity_violation": "Violación de integridad de datos del país."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Violación de la integridad de datos del plan de reducción.",
+			"not_found": "Plan de reducción no encontrado.",
+			"description_duplicate": "Ya existe un plan de reducción con esta descripción."
 		}
 	},
 	"country": {
@@ -616,18 +621,6 @@
 		"editItem": "Modificar",
 		"saveItem": "Guardar",
 		"cancelEdit": "Cancelar"
-	},
-	"errors": {
-		"reductionplan": {
-			"integrity_violation": "Violación de la integridad de datos del plan de reducción.",
-			"not_found": "Plan de reducción no encontrado.",
-			"description_duplicate": "Ya existe un plan de reducción con esta descripción."
-		},
-		"reductionPlan": {
-			"integrity_violation": "Violación de la integridad de datos del plan de reducción.",
-			"not_found": "Plan de reducción no encontrado.",
-			"description_duplicate": "Ya existe un plan de reducción con esta descripción."
-		}
 	},
 	"staff": {
 		"code": "Código",
