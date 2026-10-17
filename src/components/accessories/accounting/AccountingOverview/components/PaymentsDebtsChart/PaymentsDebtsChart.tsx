@@ -126,7 +126,10 @@ export const PaymentsDebtsChart: FC<IPaymentsDebtsChartProps> = ({ data }) => {
 					{t('accounting.overview.chart.title')}
 				</h2>
 			</div>
-			<div className={classes.chartContainer}>
+			<div
+				data-cy="overview-stacked-bar-chart"
+				className={classes.chartContainer}
+			>
 				<Bar data={chartData} options={options} />
 			</div>
 		</div>

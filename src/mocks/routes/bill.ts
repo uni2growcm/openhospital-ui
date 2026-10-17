@@ -22,7 +22,10 @@ export const billRoutes = (server: PollyServer) => {
 			res.status(201).json(
 				billResults.filter((item) => {
 					return (
-						(+code === 1 || item.id === 10 || item.patient?.code === +code) &&
+						(!code ||
+							+code === 1 ||
+							item.id === 10 ||
+							item.patient?.code === +code) &&
 						item.status === 'O'
 					);
 				}),
@@ -34,7 +37,7 @@ export const billRoutes = (server: PollyServer) => {
 			res.status(201).json(
 				billResults.filter((item) => {
 					return (
-						(+code === 0 || item.patient?.code === +code) &&
+						(!code || +code === 0 || item.patient?.code === +code) &&
 						(!req.query.datefrom ||
 							new Date(req.query.datefrom?.toString()).getFullYear() ===
 								new Date(item.date).getFullYear())
@@ -56,7 +59,7 @@ export const billRoutes = (server: PollyServer) => {
 			res.status(200).json(
 				billPaymentsDTOs.filter((item) => {
 					const bill = billResults.find((bill) => bill.id === item.billId);
-					return +code === 0 || bill?.patient?.code === +code; //(+item.date >= +datefrom && +item.date <= +dateto) ;
+					return !code || +code === 0 || bill?.patient?.code === +code;
 				}),
 			);
 		});

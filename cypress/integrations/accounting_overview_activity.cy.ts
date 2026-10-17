@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+export {};
+
 const ACCOUNTING_BILLS_PATH = '/accounting/bills';
 
 describe('Accounting Overview E2E spec', () => {
