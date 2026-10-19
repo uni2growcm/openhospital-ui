@@ -17,7 +17,25 @@
 			"code_exists": "በዚ ኮድ ዘለዎ ናይ ኣቕሓ ስድራቤት ድሮ ኣሎ።",
 			"not_found": "ናይ ኣቕሓ ስድራቤት ኣይተረኽበን።",
 			"integrity_violation": "ናይ ኣቕሓ ስድራቤት ዳታ ምጥሓስ ቅኑዕነት።"
-		}
+		},
+		"country": {
+			"isocode_exists": "A country with this ISO code already exists.",
+			"name_exists": "A country with this name already exists.",
+			"phonecode_exists": "A country with this phone code already exists.",
+			"not_found": "Country not found.",
+			"integrity_violation": "Country data integrity violation."
+		},
+		"reductionplan": {
+			"integrity_violation": "Reduction plan data integrity violation.",
+			"not_found": "Reduction plan not found.",
+			"description_duplicate": "A reduction plan with this description already exists."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Reduction plan data integrity violation.",
+			"not_found": "Reduction plan not found.",
+			"description_duplicate": "A reduction plan with this description already exists."
+		},
+		"forbidden": "ነዚ ተግባር ንምፍጻም ዘድሊ ፍቓድ የብልኩምን。"
 	},
 	"validations": {
 		"min": "እቲ ዋጋ እንተወሓደ {{min}} ክኸውን ኣለዎ።",
@@ -417,6 +435,7 @@
 		"consultancy": "ናይ ምኽሪ ስራሕ",
 		"administration": "ምምሕዳር",
 		"wards": "ዋርድያታት",
+		"staff": "ሰራሕተኛታት",
 		"diseases": "ሕማማት",
 		"operations": "ስርሒታት",
 		"vaccines": "ክታበት",
@@ -427,7 +446,9 @@
 		"types": "ዓይነታት ምምሕዳር",
 		"hospitalInfo": "ሆስፒታል ሓበሬታ",
 		"hospital": "ሆስፒታል",
-		"articleFamilies": "ናይ ኣቕሓ ስድራቤታት"
+		"articleFamilies": "ናይ ኣቕሓ ስድራቤታት",
+		"countries": "Countries",
+		"reductionPlans": "Reduction Plans"
 	},
 	"operation": {
 		"newoperation": "ሓድሽ ስርሒት።",
@@ -512,6 +533,13 @@
 		"searchpatientinstruction": "መለለዪ ሕሙም እንተዘይብልካ ብዝተኻእለ መጠን ብዙሓት ዓውድታት መሊእካ ምድላይ ጠውቕ",
 		"required": "እዚ ዓውዲ እዚ የድሊ",
 		"emptydata": "ዝኾነ ምእታው ኣይተረኽበን!",
+		"page": "ገጽ",
+		"previous": "ናይ ቅድሚ",
+		"next": "ቀጺሉ",
+		"first_page": "ቀዳማይ ገጽ",
+		"last_page": "ናይ መወዳእታ ገጽ",
+		"per_page": "ንገጽ",
+		"total_items": "ንጥፈታት",
 		"save": "ምቑጣብ",
 		"code": "ኮድ",
 		"update": "ኣዘምን",
@@ -1187,6 +1215,24 @@
 		"updateSuccess": "ዋርድ {{code}} ብዓወት ተሓዲሱ ኣሎ!",
 		"deleteSuccess": "ዋርድ {{code}} ብዓወት ተደምሲሱ!"
 	},
+	"staff": {
+		"code": "ኮድ",
+		"firstName": "ቀዳማይ ስም",
+		"lastName": "ናይ ኣቦ ስም",
+		"profession": "ሞያ",
+		"position": "ቦታ",
+		"phone": "ተሌፎን",
+		"addStaff": "ሰራሕተኛ ወስኽ",
+		"editStaff": "ሰራሕተኛ ኣመሓይሽ",
+		"updateStaff": "ሰራሕተኛ ኣዘምን",
+		"saveStaff": "ሰራሕተኛ ኣቐምጥ",
+		"created": "ሰራሕተኛ ተፈጢሩ",
+		"updated": "ሰራሕተኛ ተዓርዩ",
+		"deleted": "ሰራሕተኛ ተሰሪዙ",
+		"createSuccess": "ሰራሕተኛ ብዓወት ተፈጢሩ!",
+		"updateSuccess": "ሰራሕተኛ {{code}} ብዓወት ተዓርዩ!",
+		"deleteSuccess": "ሰራሕተኛ ብዓወት ተሰሪዙ!"
+	},
 	"disease": {
 		"code": "ኮድ",
 		"name": "ሽም",
@@ -1274,5 +1320,63 @@
 		"deleted": "Article family deleted",
 		"deleting": "Deleting article family...",
 		"deleteSuccess": "Article family has been deleted successfully!"
+	},
+	"country": {
+		"id": "Country ID",
+		"isoCode": "ISO Code",
+		"name": "Country Name",
+		"phoneCode": "Phone Code",
+		"isoCodeInvalidFormat": "ISO code must be 2 uppercase letters",
+		"phoneCodeInvalidFormat": "Invalid phone code format",
+		"addNewCountry": "Add a new country",
+		"editCountry": "Edit country",
+		"updateCountry": "Save changes",
+		"saveCountry": "Save",
+		"addCountry": "New country",
+		"updated": "Country updated",
+		"updateSuccess": "Country has been updated successfully!",
+		"created": "Country created",
+		"createSuccess": "Country has been created successfully!",
+		"deleted": "Country deleted",
+		"deleting": "Deleting country...",
+		"deleteSuccess": "Country has been deleted successfully!"
+	},
+	"reductionPlan": {
+		"addReductionPlan": "Add Reduction Plan",
+		"addNewReductionPlan": "Add new reduction plan",
+		"editReductionPlan": "Edit Reduction Plan",
+		"saveReductionPlan": "Save Reduction Plan",
+		"updateReductionPlan": "Save changes",
+		"description": "Description",
+		"medicalRate": "Medical Rate (%)",
+		"examRate": "Exam Rate (%)",
+		"operationRate": "Operation Rate (%)",
+		"otherRate": "Other Rate (%)",
+		"generalRates": "General Reduction Rates",
+		"specificReductions": "Specific Reductions",
+		"medicals": "Medicals",
+		"exams": "Exams",
+		"operations": "Operations",
+		"others": "Other Prices",
+		"item": "Item",
+		"rate": "Rate (%)",
+		"actions": "Actions",
+		"addItem": "Add Item",
+		"selectMedical": "Select a medical...",
+		"selectExam": "Select an exam...",
+		"selectOperation": "Select an operation...",
+		"selectOther": "Select a price other...",
+		"removeAll": "Remove All",
+		"noSpecificReductions": "No specific reductions defined (general rate applies).",
+		"deleting": "Deleting reduction plan...",
+		"deleted": "Reduction Plan Deleted",
+		"deleteSuccess": "Reduction plan deleted successfully",
+		"created": "Reduction Plan Created",
+		"createSuccess": "Reduction plan created successfully",
+		"updated": "Reduction Plan Updated",
+		"updateSuccess": "Reduction plan updated successfully",
+		"editItem": "ኣመዓራርይ",
+		"saveItem": "ኣዕቅብ",
+		"cancelEdit": "ሰርዝ"
 	}
 }

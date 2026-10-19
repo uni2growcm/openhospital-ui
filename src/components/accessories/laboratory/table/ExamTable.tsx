@@ -42,6 +42,7 @@ export const ExamTable: FC<IExamTableProps> = ({
 	handleDelete,
 	handleEdit,
 	handleCancel,
+	serverPagination,
 }) => {
 	const { t } = useTranslation();
 	const dispatch = useAppDispatch();
@@ -180,6 +181,7 @@ export const ExamTable: FC<IExamTableProps> = ({
 				onDelete={canDelete ? onDelete : undefined}
 				onCancel={canDelete ? onCancel : undefined}
 				displayRowAction={shouldDisplayAction}
+				serverPagination={serverPagination}
 			/>
 			{deleteStatus === 'FAIL' && (
 				<div className="info-box-container">

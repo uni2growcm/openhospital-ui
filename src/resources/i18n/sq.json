@@ -17,7 +17,25 @@
 			"code_exists": "Një familje artikujsh me këtë kod tashmë ekziston.",
 			"not_found": "Familja e artikujve nuk u gjet.",
 			"integrity_violation": "Shkelje e integritetit të të dhënave të familjes së artikujve."
-		}
+		},
+		"country": {
+			"isocode_exists": "A country with this ISO code already exists.",
+			"name_exists": "A country with this name already exists.",
+			"phonecode_exists": "A country with this phone code already exists.",
+			"not_found": "Country not found.",
+			"integrity_violation": "Country data integrity violation."
+		},
+		"reductionplan": {
+			"integrity_violation": "Reduction plan data integrity violation.",
+			"not_found": "Reduction plan not found.",
+			"description_duplicate": "A reduction plan with this description already exists."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Reduction plan data integrity violation.",
+			"not_found": "Reduction plan not found.",
+			"description_duplicate": "A reduction plan with this description already exists."
+		},
+		"forbidden": "Nuk keni lejet e nevojshme për të kryer këtë veprim."
 	},
 	"validations": {
 		"min": "vlera duhet të jetë së paku {{min}}",
@@ -377,6 +395,7 @@
 		"consultancy": "Konsultim",
 		"administration": "Administrimi",
 		"wards": "Repartet",
+		"staff": "Personeli",
 		"diseases": "Sëmundjet",
 		"operations": "Operacionet",
 		"vaccines": "Vaksinat",
@@ -387,7 +406,9 @@
 		"users": "Përdoruesit & Grupet",
 		"types": "Menaxho llojet",
 		"hospitalInfo": "Info mbi Spitalin",
-		"hospital": "Spitali"
+		"hospital": "Spitali",
+		"countries": "Countries",
+		"reductionPlans": "Reduction Plans"
 	},
 	"operation": {
 		"newoperation": "Operacion i ri",
@@ -458,6 +479,13 @@
 		"searchpatientinstruction": "Nëse nuk e keni ID-në e pacientit, plotësoni sa më shumë fusha të jetë e mundur dhe klikoni kërkimin",
 		"required": "Kjo fushë është e nevojshme",
 		"emptydata": "Nuk u gjet asnjë e dhënë!",
+		"page": "Faqja",
+		"previous": "Mëparshme",
+		"next": "Tjetër",
+		"first_page": "Faqja e parë",
+		"last_page": "Faqja e fundit",
+		"per_page": "Për faqe",
+		"total_items": "elementë",
 		"save": "Ruaj",
 		"code": "Kodi",
 		"update": "aktualizo",
@@ -898,6 +926,24 @@
 		"updateSuccess": "Reparti {{code}} u krijua me sukses!",
 		"deleteSuccess": "Reparti {{code}} u fshi me sukses!"
 	},
+	"staff": {
+		"code": "Kodi",
+		"firstName": "Emri",
+		"lastName": "Mbiemri",
+		"profession": "Profesioni",
+		"position": "Pozicioni",
+		"phone": "Telefoni",
+		"addStaff": "Shto personel",
+		"editStaff": "Modifiko personelin",
+		"updateStaff": "Përditëso personelin",
+		"saveStaff": "Ruaj personelin",
+		"created": "Personeli u krijua",
+		"updated": "Personeli u përditësua",
+		"deleted": "Personeli u fshi",
+		"createSuccess": "Personeli u krijua me sukses!",
+		"updateSuccess": "Personeli {{code}} u përditësua me sukses!",
+		"deleteSuccess": "Personeli u fshi me sukses!"
+	},
 	"disease": {
 		"code": "Kodi",
 		"name": "Emri",
@@ -905,5 +951,63 @@
 		"opdInclude": "DPJ",
 		"ipdInInclude": "PB Hyrje",
 		"ipdOutInclude": "PB Dalje"
+	},
+	"country": {
+		"id": "Country ID",
+		"isoCode": "ISO Code",
+		"name": "Country Name",
+		"phoneCode": "Phone Code",
+		"isoCodeInvalidFormat": "ISO code must be 2 uppercase letters",
+		"phoneCodeInvalidFormat": "Invalid phone code format",
+		"addNewCountry": "Add a new country",
+		"editCountry": "Edit country",
+		"updateCountry": "Save changes",
+		"saveCountry": "Save",
+		"addCountry": "New country",
+		"updated": "Country updated",
+		"updateSuccess": "Country has been updated successfully!",
+		"created": "Country created",
+		"createSuccess": "Country has been created successfully!",
+		"deleted": "Country deleted",
+		"deleting": "Deleting country...",
+		"deleteSuccess": "Country has been deleted successfully!"
+	},
+	"reductionPlan": {
+		"addReductionPlan": "Add Reduction Plan",
+		"addNewReductionPlan": "Add new reduction plan",
+		"editReductionPlan": "Edit Reduction Plan",
+		"saveReductionPlan": "Save Reduction Plan",
+		"updateReductionPlan": "Save changes",
+		"description": "Description",
+		"medicalRate": "Medical Rate (%)",
+		"examRate": "Exam Rate (%)",
+		"operationRate": "Operation Rate (%)",
+		"otherRate": "Other Rate (%)",
+		"generalRates": "General Reduction Rates",
+		"specificReductions": "Specific Reductions",
+		"medicals": "Medicals",
+		"exams": "Exams",
+		"operations": "Operations",
+		"others": "Other Prices",
+		"item": "Item",
+		"rate": "Rate (%)",
+		"actions": "Actions",
+		"addItem": "Add Item",
+		"selectMedical": "Select a medical...",
+		"selectExam": "Select an exam...",
+		"selectOperation": "Select an operation...",
+		"selectOther": "Select a price other...",
+		"removeAll": "Remove All",
+		"noSpecificReductions": "No specific reductions defined (general rate applies).",
+		"deleting": "Deleting reduction plan...",
+		"deleted": "Reduction Plan Deleted",
+		"deleteSuccess": "Reduction plan deleted successfully",
+		"created": "Reduction Plan Created",
+		"createSuccess": "Reduction plan created successfully",
+		"updated": "Reduction Plan Updated",
+		"updateSuccess": "Reduction plan updated successfully",
+		"editItem": "Modifiko",
+		"saveItem": "Ruaj",
+		"cancelEdit": "Anulo"
 	}
 }

@@ -1,16 +1,147 @@
 import {
-	Pagination as MaterialPagination,
-	type PaginationProps,
-} from '@mui/material';
-import type { FunctionComponent } from 'react';
+	FirstPage,
+	KeyboardArrowLeft,
+	KeyboardArrowRight,
+	LastPage,
+} from '@mui/icons-material';
+import { IconButton } from '@mui/material';
+import { type FunctionComponent, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import Button from '../button/Button';
 import './styles.scss';
+import type { IProps } from './types';
 
-const Pagination: FunctionComponent<PaginationProps> = ({
-	...paginationProps
+const Pagination: FunctionComponent<IProps> = ({
+	page,
+	totalPages,
+	totalElements,
+	setPage,
+	disabled = false,
+	pageSize,
+	setPageSize,
+	className = '',
 }) => {
+	const { t } = useTranslation();
+	const [sizeInput, setSizeInput] = useState<string>(
+		pageSize !== undefined ? String(pageSize) : '',
+	);
+
+	useEffect(() => {
+		if (pageSize !== undefined) {
+			setSizeInput(String(pageSize));
+		}
+	}, [pageSize]);
+
+	const commitSize = () => {
+		if (!setPageSize || pageSize === undefined) {
+			return;
+		}
+		const parsed = Number.parseInt(sizeInput, 10);
+		if (!Number.isNaN(parsed) && parsed > 0 && parsed <= 500) {
+			setPageSize(parsed);
+			setPage(0);
+		} else {
+			setSizeInput(String(pageSize));
+		}
+	};
+
+	if (totalPages <= 0 && (totalElements === undefined || totalElements === 0)) {
+		return null;
+	}
+
+	const pages: number[] = [];
+	const start = Math.max(0, page - 2);
+	const end = Math.min(Math.max(0, totalPages - 1), page + 2);
+	for (let i = start; i <= end; i++) {
+		pages.push(i);
+	}
+
 	return (
-		<div className={'pagination'}>
-			<MaterialPagination {...paginationProps} />
+		<div className={`pagination ${className}`}>
+			<span className="pagination_info">
+				{t('common.page')} {totalPages > 0 ? page + 1 : 0} / {totalPages}
+				{totalElements !== undefined && (
+					<>
+						{' '}
+						— {totalElements} {t('common.total_items')}
+					</>
+				)}
+			</span>
+
+			<div className="pagination_controls">
+				{pageSize !== undefined && setPageSize && (
+					<div className="pagination_pageSize">
+						<span>{t('common.per_page')} :</span>
+						<input
+							type="number"
+							min="1"
+							max="500"
+							value={sizeInput}
+							onChange={(e) => setSizeInput(e.target.value)}
+							onBlur={commitSize}
+							onKeyDown={(e) => {
+								if (e.key === 'Enter') {
+									commitSize();
+								}
+							}}
+							disabled={disabled}
+						/>
+					</div>
+				)}
+
+				<IconButton
+					size="small"
+					sx={{ '&:not(.Mui-disabled)': { color: 'rgba(0, 0, 0, 0.87)' } }}
+					title={t('common.first_page')}
+					disabled={page === 0 || disabled}
+					onClick={() => setPage(0)}
+				>
+					<FirstPage />
+				</IconButton>
+
+				<IconButton
+					size="small"
+					sx={{ '&:not(.Mui-disabled)': { color: 'rgba(0, 0, 0, 0.87)' } }}
+					title={t('common.previous')}
+					disabled={page === 0 || disabled}
+					onClick={() => setPage(Math.max(0, page - 1))}
+				>
+					<KeyboardArrowLeft />
+				</IconButton>
+
+				{pages.map((p) => (
+					<Button
+						key={p}
+						type="button"
+						variant={p === page ? 'contained' : 'outlined'}
+						disabled={disabled}
+						className={p === page ? 'pagination_currentPage' : ''}
+						onClick={() => setPage(p)}
+					>
+						{p + 1}
+					</Button>
+				))}
+
+				<IconButton
+					size="small"
+					sx={{ '&:not(.Mui-disabled)': { color: 'rgba(0, 0, 0, 0.87)' } }}
+					title={t('common.next')}
+					disabled={page + 1 >= totalPages || disabled}
+					onClick={() => setPage(page + 1)}
+				>
+					<KeyboardArrowRight />
+				</IconButton>
+
+				<IconButton
+					size="small"
+					sx={{ '&:not(.Mui-disabled)': { color: 'rgba(0, 0, 0, 0.87)' } }}
+					title={t('common.last_page')}
+					disabled={page + 1 >= totalPages || disabled}
+					onClick={() => setPage(totalPages - 1)}
+				>
+					<LastPage />
+				</IconButton>
+			</div>
 		</div>
 	);
 };

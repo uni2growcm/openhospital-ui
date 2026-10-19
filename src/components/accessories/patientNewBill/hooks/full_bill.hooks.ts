@@ -49,13 +49,14 @@ export const useFullBill = () => {
 
 	const [bill, setBill] = useState<BillDTO>(() => {
 		return (
-			pendings[0]?.bill ?? {
+			pendings[0]?.bill ??
+			({
 				id: 0,
 				date: parseDate(Date.now().toString()),
 				patName: patient?.firstName,
 				patient: patient,
 				user: user,
-			}
+			} as BillDTO)
 		);
 	});
 	const { t } = useTranslation();
@@ -173,7 +174,9 @@ export const useFullBill = () => {
 	useEffect(() => {
 		if (!creationMode) {
 			const fullBill = pendings[0];
-			setBill({ ...fullBill.bill });
+			if (fullBill.bill) {
+				setBill({ ...fullBill.bill } as BillDTO);
+			}
 			setBillItems([...(fullBill.billItems ?? [])]);
 			setBillPayments([...(fullBill.billPayments ?? [])]);
 		}
