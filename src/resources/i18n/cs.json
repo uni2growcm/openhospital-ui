@@ -184,7 +184,8 @@
 			"integrity_violation": "Reduction plan data integrity violation.",
 			"not_found": "Reduction plan not found.",
 			"description_duplicate": "A reduction plan with this description already exists."
-		}
+		},
+		"forbidden": "Nemáte požadovaná oprávnění k provedení této akce."
 	},
 	"country": {
 		"id": "Country ID",

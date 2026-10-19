@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router';
 import { object, string } from 'yup';
 import DiscardButton from '~/components/accessories/discardButton/DiscardButton';
 import ResetButton from '~/components/accessories/resetButton/resetButton';
+import { resolveApiErrorMessage } from '~/libraries/apiUtils/resolveApiErrorMessage';
 import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
 import checkIcon from '../../../../../assets/check-icon.png';
 import { PATHS } from '../../../../../consts';
@@ -40,16 +41,11 @@ const CountryForm: FC<ICountryFormProps> = ({
 	const countryStore = useAppSelector((state) => state.countries);
 
 	const errorMessage = useMemo(() => {
-		const rawKey = creationMode
-			? countryStore.create.error?.message
-			: countryStore.update.error?.message;
-		return rawKey ? t(rawKey) : t('common.somethingwrong');
-	}, [
-		creationMode,
-		t,
-		countryStore.create.error?.message,
-		countryStore.update.error?.message,
-	]);
+		const error = creationMode
+			? countryStore.create.error
+			: countryStore.update.error;
+		return resolveApiErrorMessage(error, t);
+	}, [creationMode, t, countryStore.create.error, countryStore.update.error]);
 
 	const initialValues = getFromFields(fields, 'value');
 

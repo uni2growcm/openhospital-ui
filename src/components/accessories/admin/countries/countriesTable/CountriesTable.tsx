@@ -2,6 +2,7 @@ import { CircularProgress } from '@mui/material';
 import { type ReactNode, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ConfirmationDialog from '~/components/accessories/confirmationDialog/ConfirmationDialog';
+import { resolveApiErrorMessage } from '~/libraries/apiUtils/resolveApiErrorMessage';
 import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
 import { scrollToElement } from '~/libraries/uiUtils/scrollToElement';
 import checkIcon from '../../../../../assets/check-icon.png';
@@ -113,11 +114,7 @@ export const CountriesTable = ({
 						return (
 							<InfoBox
 								type="error"
-								message={
-									error?.message
-										? t(error?.message)
-										: t('common.somethingwrong')
-								}
+								message={resolveApiErrorMessage(error, t)}
 							/>
 						);
 					case 'LOADING':
@@ -149,7 +146,7 @@ export const CountriesTable = ({
 										labelData={label}
 										columnsOrder={order}
 										rowsPerPage={pageSize}
-										isCollapsabile={true}
+										isCollapsabile={false}
 										onEdit={handleEdit}
 										onDelete={onDelete}
 										showEmptyCell={false}
@@ -176,11 +173,10 @@ export const CountriesTable = ({
 									<div ref={infoBoxRef} className="info-box-container">
 										<InfoBox
 											type="error"
-											message={
-												deleteCountryState.error?.message
-													? t(deleteCountryState.error?.message)
-													: t('common.somethingwrong')
-											}
+											message={resolveApiErrorMessage(
+												deleteCountryState.error,
+												t,
+											)}
 										/>
 									</div>
 								)}

@@ -24,7 +24,8 @@
 			"integrity_violation": "Datenintegritätsverletzung des Ermäßigungsplans.",
 			"not_found": "Ermäßigungsplan nicht gefunden.",
 			"description_duplicate": "Ein Ermäßigungsplan mit dieser Bezeichnung existiert bereits."
-		}
+		},
+		"forbidden": "Sie verfügen nicht über die erforderlichen Berechtigungen, um diese Aktion auszuführen."
 	},
 	"validations": {
 		"min": "Der Wert muss mindestens {{min}} sein",

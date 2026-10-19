@@ -24,7 +24,8 @@
 			"integrity_violation": "Reduction plan data integrity violation.",
 			"not_found": "Reduction plan not found.",
 			"description_duplicate": "A reduction plan with this description already exists."
-		}
+		},
+		"forbidden": "ነዚ ተግባር ንምፍጻም ዘድሊ ፍቓድ የብልኩምን。"
 	},
 	"validations": {
 		"min": "እቲ ዋጋ እንተወሓደ {{min}} ክኸውን ኣለዎ።",

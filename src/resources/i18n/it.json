@@ -24,7 +24,8 @@
 			"integrity_violation": "Violazione dell'integrità dei dati del piano di riduzione.",
 			"not_found": "Piano di riduzione non trovato.",
 			"description_duplicate": "Esiste già un piano di riduzione con questa descrizione."
-		}
+		},
+		"forbidden": "Non disponi delle autorizzazioni necessarie per eseguire questa azione."
 	},
 	"validations": {
 		"min": "Il valore deve essere almeno {{min}}",

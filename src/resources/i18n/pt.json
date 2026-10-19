@@ -561,7 +561,8 @@
 			"integrity_violation": "Violação de integridade dos dados do plano de redução.",
 			"not_found": "Plano de redução não encontrado.",
 			"description_duplicate": "Já existe um plano de redução com esta descrição."
-		}
+		},
+		"forbidden": "Você não tem as permissões necessárias para realizar esta ação."
 	},
 	"country": {
 		"id": "ID do país",

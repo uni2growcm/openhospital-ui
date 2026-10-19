@@ -561,7 +561,8 @@
 			"integrity_violation": "Reduction plan data integrity violation.",
 			"not_found": "Reduction plan not found.",
 			"description_duplicate": "A reduction plan with this description already exists."
-		}
+		},
+		"forbidden": "ليس لديك الصلاحيات المطلوبة لتنفيذ هذا الإجراء."
 	},
 	"country": {
 		"id": "Country ID",
