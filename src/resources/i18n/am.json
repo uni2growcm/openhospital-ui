@@ -1304,7 +1304,6 @@
 		"cancelUpdate": "እርግጠኛ ነህ የፈተናውን አይነት ማዘመን መሰረዝህን እርግጠኛ ነህ?"
 	},
 	"articleFamily": {
-		"searchPlaceholder": "የዕቃ ቤተሰብ ፈልግ...",
 		"id": "የዕቃ ቤተሰብ መለያ",
 		"code": "ኮድ",
 		"description": "መግለጫ",

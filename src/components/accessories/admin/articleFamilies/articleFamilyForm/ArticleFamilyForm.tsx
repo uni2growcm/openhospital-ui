@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router';
 import { object, string } from 'yup';
 import DiscardButton from '~/components/accessories/discardButton/DiscardButton';
 import ResetButton from '~/components/accessories/resetButton/resetButton';
+import { resolveApiErrorMessage } from '~/libraries/apiUtils/resolveApiErrorMessage';
 import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
 import checkIcon from '../../../../../assets/check-icon.png';
 import { PATHS } from '../../../../../consts';
@@ -40,15 +41,15 @@ const ArticleFamilyForm: FC<IArticleFamilyFormProps> = ({
 	const articleFamilyStore = useAppSelector((state) => state.articleFamilies);
 
 	const errorMessage = useMemo(() => {
-		const rawKey = creationMode
-			? articleFamilyStore.create.error?.message
-			: articleFamilyStore.update.error?.message;
-		return rawKey ? t(rawKey) : t('common.somethingwrong');
+		const error = creationMode
+			? articleFamilyStore.create.error
+			: articleFamilyStore.update.error;
+		return resolveApiErrorMessage(error, t);
 	}, [
 		creationMode,
 		t,
-		articleFamilyStore.create.error?.message,
-		articleFamilyStore.update.error?.message,
+		articleFamilyStore.create.error,
+		articleFamilyStore.update.error,
 	]);
 
 	const initialValues = getFromFields(fields, 'value');

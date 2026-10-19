@@ -1201,7 +1201,6 @@
 		"deleteSuccess": "Supplier has been deleted successfully!"
 	},
 	"articleFamily": {
-		"searchPlaceholder": "Search article family...",
 		"id": "Article Family ID",
 		"code": "Code",
 		"description": "Description",

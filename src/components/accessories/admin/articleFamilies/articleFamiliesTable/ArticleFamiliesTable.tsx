@@ -1,7 +1,8 @@
 import { CircularProgress } from '@mui/material';
-import { type ReactNode, useRef } from 'react';
+import { type ReactNode, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import ConfirmationDialog from '~/components/accessories/confirmationDialog/ConfirmationDialog';
+import { resolveApiErrorMessage } from '~/libraries/apiUtils/resolveApiErrorMessage';
 import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
 import checkIcon from '../../../../../assets/check-icon.png';
 import type { ArticleFamilyDTO } from '../../../../../generated';
@@ -28,6 +29,10 @@ export const ArticleFamiliesTable = ({
 	const dispatch = useAppDispatch();
 	const { t } = useTranslation();
 	const infoBoxRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		dispatch(getArticleFamilies());
+	}, [dispatch]);
 
 	const header = ['code', 'description'];
 
@@ -72,14 +77,15 @@ export const ArticleFamiliesTable = ({
 				switch (status) {
 					case 'FAIL':
 						return (
-							<InfoBox
-								type="error"
-								message={
-									error?.message
-										? t(error?.message)
-										: t('common.somethingwrong')
-								}
-							/>
+							<>
+								{headerActions && (
+									<div className={classes.headerActions}>{headerActions}</div>
+								)}
+								<InfoBox
+									type="error"
+									message={resolveApiErrorMessage(error, t)}
+								/>
+							</>
 						);
 					case 'LOADING':
 						return (
@@ -89,6 +95,16 @@ export const ArticleFamiliesTable = ({
 						);
 
 					case 'SUCCESS':
+						if (!data || data.length === 0) {
+							return (
+								<>
+									{headerActions && (
+										<div className={classes.headerActions}>{headerActions}</div>
+									)}
+									<InfoBox type="info" message={t('common.emptydata')} />
+								</>
+							);
+						}
 						return (
 							<>
 								<Table
@@ -119,11 +135,10 @@ export const ArticleFamiliesTable = ({
 									<div ref={infoBoxRef} className="info-box-container">
 										<InfoBox
 											type="error"
-											message={
-												deleteArticleFamilyState.error?.message
-													? t(deleteArticleFamilyState.error?.message)
-													: t('common.somethingwrong')
-											}
+											message={resolveApiErrorMessage(
+												deleteArticleFamilyState.error,
+												t,
+											)}
 										/>
 									</div>
 								)}
@@ -134,7 +149,7 @@ export const ArticleFamiliesTable = ({
 									info={t('articleFamily.deleteSuccess')}
 									primaryButtonLabel="Ok"
 									handlePrimaryButtonClick={() => {
-										dispatch(getArticleFamilies(undefined));
+										dispatch(getArticleFamilies());
 										dispatch(deleteArticleFamilyReset());
 									}}
 									handleSecondaryButtonClick={() => ({})}
@@ -142,7 +157,14 @@ export const ArticleFamiliesTable = ({
 							</>
 						);
 					case 'SUCCESS_EMPTY':
-						return <InfoBox type="info" message={t('common.emptydata')} />;
+						return (
+							<>
+								{headerActions && (
+									<div className={classes.headerActions}>{headerActions}</div>
+								)}
+								<InfoBox type="info" message={t('common.emptydata')} />
+							</>
+						);
 					default:
 						return;
 				}

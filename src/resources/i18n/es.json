@@ -564,7 +564,6 @@
 		}
 	},
 	"articleFamily": {
-		"searchPlaceholder": "Buscar familia de artículos...",
 		"id": "ID de la familia de artículos",
 		"code": "Código",
 		"description": "Descripción",

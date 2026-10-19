@@ -186,7 +186,6 @@
 		}
 	},
 	"articleFamily": {
-		"searchPlaceholder": "Hledat skupinu artiklů...",
 		"id": "ID skupiny artiklů",
 		"code": "Kód",
 		"description": "Popis",

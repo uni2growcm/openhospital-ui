@@ -186,7 +186,6 @@
 		}
 	},
 	"articleFamily": {
-		"searchPlaceholder": "搜索项目系列...",
 		"id": "项目系列 ID",
 		"code": "代码",
 		"description": "描述",

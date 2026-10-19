@@ -884,7 +884,6 @@
 		"note": "Notiz"
 	},
 	"articleFamily": {
-		"searchPlaceholder": "Artikelfamilie suchen...",
 		"id": "Artikelfamilie ID",
 		"code": "Code",
 		"description": "Bezeichnung",

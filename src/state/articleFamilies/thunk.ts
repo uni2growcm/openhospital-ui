@@ -8,14 +8,10 @@ const api = new ArticleFamiliesApi(customConfiguration());
 
 export const getArticleFamilies = createAsyncThunk(
 	'articleFamilies/getArticleFamilies',
-	async (search: string | undefined, thunkApi) => {
-		const request = search?.trim()
-			? () => api.searchArticleFamilies({ q: search.trim() })
-			: () => api.getAllArticleFamilies();
-		return firstValueFrom(wrapper(request)).catch((error) =>
+	async (_, thunkApi) =>
+		firstValueFrom(wrapper(() => api.getAllArticleFamilies())).catch((error) =>
 			thunkApi.rejectWithValue(error.response),
-		);
-	},
+		),
 );
 
 export const createArticleFamily = createAsyncThunk(

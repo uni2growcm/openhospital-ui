@@ -1201,7 +1201,6 @@
 		"deleteSuccess": "Fournisseur supprimé avec succès !"
 	},
 	"articleFamily": {
-		"searchPlaceholder": "Rechercher une famille d'articles...",
 		"id": "ID Famille d'articles",
 		"code": "Code",
 		"description": "Description",

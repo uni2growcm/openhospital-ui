@@ -564,7 +564,6 @@
 		}
 	},
 	"articleFamily": {
-		"searchPlaceholder": "البحث عن عائلة أصناف...",
 		"id": "معرف عائلة الأصناف",
 		"code": "الرمز",
 		"description": "الوصف",

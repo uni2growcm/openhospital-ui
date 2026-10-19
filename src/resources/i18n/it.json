@@ -1190,7 +1190,6 @@
 		"deleteSuccess": "Il fornitore è stato correttamente cancellato"
 	},
 	"articleFamily": {
-		"searchPlaceholder": "Cerca famiglia di articoli...",
 		"id": "ID Famiglia di articoli",
 		"code": "Codice",
 		"description": "Descrizione",
