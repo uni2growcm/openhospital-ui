@@ -131,7 +131,16 @@ export const CountriesTable = ({
 						return (
 							<>
 								{(data ?? []).length === 0 ? (
-									<InfoBox type="info" message={t('common.emptydata')} />
+									<>
+										{headerActions && (
+											<div className={classes.header}>
+												<div className={classes.headerActions}>
+													{headerActions}
+												</div>
+											</div>
+										)}
+										<InfoBox type="info" message={t('common.emptydata')} />
+									</>
 								) : (
 									<Table
 										rowData={formattedRows}
@@ -195,7 +204,16 @@ export const CountriesTable = ({
 							</>
 						);
 					case 'SUCCESS_EMPTY':
-						return <InfoBox type="info" message={t('common.emptydata')} />;
+						return (
+							<>
+								{headerActions && (
+									<div className={classes.header}>
+										<div className={classes.headerActions}>{headerActions}</div>
+									</div>
+								)}
+								<InfoBox type="info" message={t('common.emptydata')} />
+							</>
+						);
 					default:
 						return;
 				}

@@ -1,3 +1,19 @@
 .table {
   display: grid;
 }
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 12px;
+
+  .headerActions {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+}
