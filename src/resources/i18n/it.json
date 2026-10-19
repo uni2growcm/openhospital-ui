@@ -579,7 +579,14 @@
 		"cancelMessage": "Sei sicuro di voler annullare questa operazione? Tutti i dati non salvati andranno persi.",
 		"back": "Indietro",
 		"backToEdit": "No, continua a modificare",
-		"discardMessage": "Vuoi davvero annullare questa operazione? Tutti i dati non salvati andranno persi."
+		"discardMessage": "Vuoi davvero annullare questa operazione? Tutti i dati non salvati andranno persi.",
+		"page": "Pagina",
+		"previous": "Precedente",
+		"next": "Successiva",
+		"first_page": "Prima pagina",
+		"last_page": "Ultima pagina",
+		"per_page": "Per pagina",
+		"total_items": "elementi"
 	},
 	"permission": {
 		"denied": "Autorizzazione negata",
