@@ -234,6 +234,7 @@
 		"billrecords": "Bill Records",
 		"visits": "Visits",
 		"patients": "Patients",
+		"countries": "Países",
 		"reductionPlans": "Planes de reducción",
 		"staff": "Personal"
 	},
@@ -548,6 +549,41 @@
 		"sq": "Albanian",
 		"zh": "Chinese"
 	},
+	"errors": {
+		"country": {
+			"isocode_exists": "Ya existe un país con este código ISO.",
+			"name_exists": "Ya existe un país con este nombre.",
+			"phonecode_exists": "Ya existe un país con este prefijo telefónico.",
+			"not_found": "País no encontrado.",
+			"integrity_violation": "Violación de integridad de datos del país."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Violación de la integridad de datos del plan de reducción.",
+			"not_found": "Plan de reducción no encontrado.",
+			"description_duplicate": "Ya existe un plan de reducción con esta descripción."
+		},
+		"forbidden": "No tiene los permisos requeridos para realizar esta acción."
+	},
+	"country": {
+		"id": "ID del país",
+		"isoCode": "Código ISO",
+		"name": "Nombre",
+		"phoneCode": "Prefijo telefónico",
+		"isoCodeInvalidFormat": "El código ISO debe tener 2 letras mayúsculas",
+		"phoneCodeInvalidFormat": "Formato de prefijo telefónico no válido",
+		"addNewCountry": "Agregar un nuevo país",
+		"editCountry": "Editar país",
+		"updateCountry": "Guardar cambios",
+		"saveCountry": "Guardar",
+		"addCountry": "Nuevo país",
+		"updated": "País actualizado",
+		"updateSuccess": "¡El país ha sido actualizado con éxito!",
+		"created": "País creado",
+		"createSuccess": "¡El país ha sido creado con éxito!",
+		"deleted": "País eliminado",
+		"deleting": "Eliminando país...",
+		"deleteSuccess": "¡El país ha sido eliminado con éxito!"
+	},
 	"reductionPlan": {
 		"addReductionPlan": "Agregar plan de reducción",
 		"addNewReductionPlan": "Agregar nuevo plan de reducción",
@@ -585,18 +621,6 @@
 		"editItem": "Modificar",
 		"saveItem": "Guardar",
 		"cancelEdit": "Cancelar"
-	},
-	"errors": {
-		"reductionplan": {
-			"integrity_violation": "Violación de la integridad de datos del plan de reducción.",
-			"not_found": "Plan de reducción no encontrado.",
-			"description_duplicate": "Ya existe un plan de reducción con esta descripción."
-		},
-		"reductionPlan": {
-			"integrity_violation": "Violación de la integridad de datos del plan de reducción.",
-			"not_found": "Plan de reducción no encontrado.",
-			"description_duplicate": "Ya existe un plan de reducción con esta descripción."
-		}
 	},
 	"staff": {
 		"code": "Código",

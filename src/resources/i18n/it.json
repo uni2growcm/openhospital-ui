@@ -8,6 +8,13 @@
 		"lab": {
 			"someexamswithoutresultpleasecheck": "Alcuni esami senza esito, si prega di verificare."
 		},
+		"country": {
+			"isocode_exists": "Un paese con questo codice ISO esiste già.",
+			"name_exists": "Un paese con questo nome esiste già.",
+			"phonecode_exists": "Un paese con questo prefisso telefonico esiste già.",
+			"not_found": "Paese non trovato.",
+			"integrity_violation": "Violazione dell'integrità dei dati del paese."
+		},
 		"reductionplan": {
 			"integrity_violation": "Violazione dell'integrità dei dati del piano di riduzione.",
 			"not_found": "Piano di riduzione non trovato.",
@@ -17,7 +24,8 @@
 			"integrity_violation": "Violazione dell'integrità dei dati del piano di riduzione.",
 			"not_found": "Piano di riduzione non trovato.",
 			"description_duplicate": "Esiste già un piano di riduzione con questa descrizione."
-		}
+		},
+		"forbidden": "Non disponi delle autorizzazioni necessarie per eseguire questa azione."
 	},
 	"validations": {
 		"min": "Il valore deve essere almeno {{min}}",
@@ -428,6 +436,7 @@
 		"types": "Gestisci i Tipi",
 		"hospitalInfo": "Informazioni dell'Ospedale",
 		"hospital": "Ospedale",
+		"countries": "Paesi",
 		"reductionPlans": "Piani di riduzione"
 	},
 	"operation": {
@@ -1280,6 +1289,26 @@
 		"updateSuccess": "Il tipo esame è stato aggiornato con successo",
 		"cancelCreation": "Confermi la cancellazione della creazione tipo esame?",
 		"cancelUpdate": "Confermi la cancellazione delle modifiche a tipo esame?"
+	},
+	"country": {
+		"id": "ID Paese",
+		"isoCode": "Codice ISO",
+		"name": "Nome",
+		"phoneCode": "Prefisso telefonico",
+		"isoCodeInvalidFormat": "Il codice ISO deve essere composto da 2 lettere maiuscole",
+		"phoneCodeInvalidFormat": "Formato del prefisso telefonico non valido",
+		"addNewCountry": "Aggiungi un nuovo paese",
+		"editCountry": "Modifica paese",
+		"updateCountry": "Salva modifiche",
+		"saveCountry": "Salva",
+		"addCountry": "Nuovo paese",
+		"updated": "Paese aggiornato",
+		"updateSuccess": "Il paese è stato aggiornato con successo!",
+		"created": "Paese creato",
+		"createSuccess": "Il paese è stato creato con successo!",
+		"deleted": "Paese eliminato",
+		"deleting": "Eliminazione del paese in corso...",
+		"deleteSuccess": "Il paese è stato eliminato con successo!"
 	},
 	"reductionPlan": {
 		"addReductionPlan": "Aggiungi piano di riduzione",

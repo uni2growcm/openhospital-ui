@@ -9,6 +9,7 @@ export type IAdminSection =
 	| 'vaccines'
 	| 'prices'
 	| 'suppliers'
+	| 'countries'
 	| 'telemetry'
 	| 'users'
 	| 'settings'

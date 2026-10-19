@@ -106,6 +106,7 @@
 		"patientdashboard": "Patient Dashboard",
 		"newtherapy": "New Therapy",
 		"managetherapy": "Manage Therapy",
+		"countries": "Countries",
 		"reductionPlans": "Reduction Plans",
 		"staff": "员工"
 	},
@@ -171,6 +172,41 @@
 		"opd": "Diagnostics",
 		"booking": "Prescriptions"
 	},
+	"errors": {
+		"country": {
+			"isocode_exists": "A country with this ISO code already exists.",
+			"name_exists": "A country with this name already exists.",
+			"phonecode_exists": "A country with this phone code already exists.",
+			"not_found": "Country not found.",
+			"integrity_violation": "Country data integrity violation."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Reduction plan data integrity violation.",
+			"not_found": "Reduction plan not found.",
+			"description_duplicate": "A reduction plan with this description already exists."
+		},
+		"forbidden": "您没有执行此操作所需的权限。"
+	},
+	"country": {
+		"id": "Country ID",
+		"isoCode": "ISO Code",
+		"name": "Country Name",
+		"phoneCode": "Phone Code",
+		"isoCodeInvalidFormat": "ISO code must be 2 uppercase letters",
+		"phoneCodeInvalidFormat": "Invalid phone code format",
+		"addNewCountry": "Add a new country",
+		"editCountry": "Edit country",
+		"updateCountry": "Save changes",
+		"saveCountry": "Save",
+		"addCountry": "New country",
+		"updated": "Country updated",
+		"updateSuccess": "Country has been updated successfully!",
+		"created": "Country created",
+		"createSuccess": "Country has been created successfully!",
+		"deleted": "Country deleted",
+		"deleting": "Deleting country...",
+		"deleteSuccess": "Country has been deleted successfully!"
+	},
 	"reductionPlan": {
 		"addReductionPlan": "Add Reduction Plan",
 		"addNewReductionPlan": "Add new reduction plan",
@@ -208,18 +244,6 @@
 		"editItem": "修改",
 		"saveItem": "保存",
 		"cancelEdit": "取消"
-	},
-	"errors": {
-		"reductionplan": {
-			"integrity_violation": "Reduction plan data integrity violation.",
-			"not_found": "Reduction plan not found.",
-			"description_duplicate": "A reduction plan with this description already exists."
-		},
-		"reductionPlan": {
-			"integrity_violation": "Reduction plan data integrity violation.",
-			"not_found": "Reduction plan not found.",
-			"description_duplicate": "A reduction plan with this description already exists."
-		}
 	},
 	"staff": {
 		"code": "代码",
