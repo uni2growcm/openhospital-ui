@@ -53,6 +53,40 @@ export const bills = [
 		);
 	}),
 
+	http.get('/bills/search', ({ request }) => {
+		const params = new URL(request.url).searchParams;
+		const code = params.get('patient_code');
+		const status = params.get('status');
+		const page = Number(params.get('page') ?? '0');
+		const size = Number(params.get('size') ?? '10');
+
+		const filtered = billResults.filter((item) => {
+			return (
+				(!code || +code === 0 || item.patient?.code === +code) &&
+				(!status || item.status === status)
+			);
+		});
+
+		const start = page * size;
+		const data = filtered.slice(start, start + size);
+
+		return HttpResponse.json(
+			{
+				data,
+				pageInfo: {
+					page,
+					size,
+					nbOfElements: data.length,
+					totalPages: Math.max(Math.ceil(filtered.length / size), 1),
+					totalNbOfElements: filtered.length,
+					hasPreviousPage: page > 0,
+					hasNextPage: start + size < filtered.length,
+				},
+			},
+			{ status: 200 },
+		);
+	}),
+
 	http.get('/bills/payments', ({ request }) => {
 		const code = new URL(request.url).searchParams.get('patient_code') || '0';
 

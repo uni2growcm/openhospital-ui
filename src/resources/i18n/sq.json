@@ -690,7 +690,7 @@
 		"validatetodate": "duhet të jetë më e madhe ose e barabartë me datën e fillimit",
 		"billid": "Kodi i faturës",
 		"amount": "Shuma",
-		"balance": "Për pagesë",
+		"balance": "Bilanci",
 		"status": "Statusi",
 		"items": "Artikujt",
 		"designation": "Emërtimi",
@@ -902,6 +902,31 @@
 		},
 		"placeholder": {
 			"comingSoon": "Kjo pjesë është në zhvillim dhe do të jetë e disponueshme së shpejti."
+		},
+		"bills": {
+			"guarantor": "Garantuesi",
+			"allUsers": "Të gjithë përdoruesit",
+			"search": "Kërko",
+			"reset": "Rivendos",
+			"selectHint": "Zgjidhni një faturë për të vepruar mbi të",
+			"refund": "Rimbursim",
+			"quickRange": {
+				"last7days": "7 ditët e fundit",
+				"thisMonth": "Këtë muaj",
+				"pickMonth": "Zgjidh muajin...",
+				"pickYear": "Zgjidh vitin..."
+			},
+			"columns": {
+				"type": "Departamenti"
+			},
+			"type": {
+				"opd": "Ambulator",
+				"ipd": "I shtruar"
+			},
+			"summary": {
+				"selectedPeriod": "Periudha e zgjedhur",
+				"myCash": "Arka ime · {{user}}"
+			}
 		}
 	}
 }

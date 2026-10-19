@@ -189,6 +189,31 @@
 		},
 		"placeholder": {
 			"comingSoon": "Tato sekce je ve vývoji a bude brzy k dispozici."
+		},
+		"bills": {
+			"guarantor": "Ručitel",
+			"allUsers": "Všichni uživatelé",
+			"search": "Hledat",
+			"reset": "Obnovit",
+			"selectHint": "Vyberte účet, se kterým chcete pracovat",
+			"refund": "Vrácení peněz",
+			"quickRange": {
+				"last7days": "Posledních 7 dní",
+				"thisMonth": "Tento měsíc",
+				"pickMonth": "Vybrat měsíc...",
+				"pickYear": "Vybrat rok..."
+			},
+			"columns": {
+				"type": "Oddělení"
+			},
+			"type": {
+				"opd": "Ambulantní",
+				"ipd": "Hospitalizovaný"
+			},
+			"summary": {
+				"selectedPeriod": "Vybrané období",
+				"myCash": "Moje pokladna · {{user}}"
+			}
 		}
 	}
 }

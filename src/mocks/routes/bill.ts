@@ -43,6 +43,36 @@ export const billRoutes = (server: PollyServer) => {
 			);
 		});
 
+		server.get('/search').intercept((req, res) => {
+			const code = req.query.patient_code;
+			const status = req.query.status;
+			const page = Number(req.query.page ?? 0);
+			const size = Number(req.query.size ?? 10);
+
+			const filtered = billResults.filter((item) => {
+				return (
+					(!code || +code === 0 || item.patient?.code === +code) &&
+					(!status || item.status === status)
+				);
+			});
+
+			const start = page * size;
+			const data = filtered.slice(start, start + size);
+
+			res.status(200).json({
+				data,
+				pageInfo: {
+					page,
+					size,
+					nbOfElements: data.length,
+					totalPages: Math.max(Math.ceil(filtered.length / size), 1),
+					totalNbOfElements: filtered.length,
+					hasPreviousPage: page > 0,
+					hasNextPage: start + size < filtered.length,
+				},
+			});
+		});
+
 		server.get('/payments/:bill_id').intercept((_req, res) => {
 			res.status(201).json(billPaymentsDTOs);
 		});

@@ -9,6 +9,7 @@ import {
 	type BillPaymentsDTO,
 	BillsApi,
 	type FullBillDTO,
+	type SearchBillsPageableRequest,
 	type UpdateBillRequest,
 } from '../../generated';
 import { customConfiguration } from '../../libraries/apiUtils/configuration';
@@ -124,6 +125,27 @@ export const searchBills = createAsyncThunk(
 					catchError(() => of([])),
 				),
 		).catch((error) => thunkApi.rejectWithValue(error.response)),
+);
+
+export const searchBillsPageable = createAsyncThunk(
+	'bills/searchBillsPageable',
+	async (params: SearchBillsPageableRequest, thunkApi) =>
+		firstValueFrom(wrapper(() => api.searchBillsPageable(params))).catch(
+			(error) => thunkApi.rejectWithValue(error.response),
+		),
+);
+
+/**
+ * Same endpoint as searchBillsPageable, kept as a separate thunk/state slot so the
+ * unpaginated fetch backing status-tab counts and summary cards (status-agnostic,
+ * large size) doesn't race with or overwrite the paginated table page in the store.
+ */
+export const searchBillsSummary = createAsyncThunk(
+	'bills/searchBillsSummary',
+	async (params: SearchBillsPageableRequest, thunkApi) =>
+		firstValueFrom(wrapper(() => api.searchBillsPageable(params))).catch(
+			(error) => thunkApi.rejectWithValue(error.response),
+		),
 );
 
 export const searchPayments = createAsyncThunk(

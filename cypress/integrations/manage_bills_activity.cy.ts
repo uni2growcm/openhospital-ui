@@ -81,7 +81,55 @@ describe('ManageBillsActivity spec', () => {
 			.should('be.visible')
 			.contains('New bill');
 
-		cy.dataCy('placeholder-title').contains('Bills');
+		cy.dataCy('bills-listing').should('be.visible');
+	});
+
+	it('should display the bills listing filters, status tabs and table', () => {
+		cy.dataCy('accounting-tab-bills').click();
+
+		cy.dataCy('bills-listing').should('be.visible');
+		cy.dataCy('bills-filter-form').should('be.visible');
+		cy.dataCy('bills-search-button').should('be.visible').contains('Search');
+
+		cy.dataCy('bills-status-tab-ALL').should('be.visible').and('contain', '5');
+		cy.dataCy('bills-status-tab-O').should('be.visible').and('contain', '4');
+		cy.dataCy('bills-status-tab-C').should('be.visible').and('contain', '1');
+
+		cy.contains('Antonio Carlos').should('be.visible');
+		cy.contains('Cedimo Andrea').should('be.visible');
+	});
+
+	it('should filter the table rows when a status tab is clicked', () => {
+		cy.dataCy('accounting-tab-bills').click();
+
+		// Wait for the initial load to settle before interacting — the table ignores
+		// status-tab/page clicks while a fetch is already in flight.
+		cy.dataCy('bills-status-tab-ALL').should('contain', '5');
+
+		cy.dataCy('bills-status-tab-C').click();
+		cy.dataCy('bills-status-tab-C').should(
+			'have.attr',
+			'aria-selected',
+			'true',
+		);
+		cy.get('tbody tr').should('have.length', 1);
+
+		// Wait for that fetch to settle too before switching back.
+		cy.dataCy('bills-status-tab-C').should('contain', '1');
+		cy.dataCy('bills-status-tab-ALL').click();
+		cy.get('tbody tr').should('have.length', 5);
+	});
+
+	it('should display row action buttons that do not navigate or trigger a request', () => {
+		cy.dataCy('accounting-tab-bills').click();
+
+		cy.dataCy('table-view-action').should('have.length.greaterThan', 0);
+		cy.dataCy('table-edit-action').should('have.length.greaterThan', 0);
+		cy.dataCy('table-print-action').should('have.length.greaterThan', 0);
+
+		cy.dataCy('table-view-action').first().click();
+		cy.url().should('include', ACCOUNTING_BILLS_PATH);
+		cy.dataCy('bills-listing').should('be.visible');
 	});
 
 	it('should switch to Payments tab and display its actions, subtitle, and placeholder', () => {
