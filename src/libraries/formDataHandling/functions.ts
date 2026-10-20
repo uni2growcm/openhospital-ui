@@ -156,7 +156,7 @@ export const updateFields = (
 				draft[key as string].value = value ? 'true' : 'false';
 				return;
 			}
-			draft[key as string].value = value;
+			draft[key as string].value = value ?? '';
 		});
 	});
 };

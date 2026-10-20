@@ -10,6 +10,7 @@ import type { FunctionComponent } from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { object, string } from 'yup';
+import { resolveApiErrorMessage } from '~/libraries/apiUtils/resolveApiErrorMessage';
 import { useAppDispatch } from '~/libraries/hooks/redux';
 import { createCountry, createCountryReset } from '~/state/types/countries';
 import type { CountryDTO } from '../../../generated';
@@ -45,13 +46,7 @@ const AddCountryModal: FunctionComponent<IProps> = ({
 				formik.resetForm();
 				dispatch(createCountryReset());
 			} else {
-				const status = (result.payload as { status?: string } | undefined)
-					?.status;
-				setApiError(
-					status === 'BAD_REQUEST'
-						? t('patient.countryalreadyexists')
-						: t('errors.somethingwrong'),
-				);
+				setApiError(resolveApiErrorMessage(result.payload, t));
 			}
 		},
 	});
