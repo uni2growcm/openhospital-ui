@@ -45,7 +45,10 @@ const Pagination: FunctionComponent<IProps> = ({
 		}
 	};
 
-	if (totalPages <= 0 && (totalElements === undefined || totalElements === 0)) {
+	if (
+		totalPages <= 0 &&
+		(totalElements === undefined || totalElements === 0)
+	) {
 		return null;
 	}
 
