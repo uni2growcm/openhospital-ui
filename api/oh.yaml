@@ -467,6 +467,15 @@ paths:
         required: false
         schema:
           type: string
+          enum:
+          - angal.typology.deliverytype
+          - angal.typology.visittype
+          - angal.typology.partnertype
+          - angal.typology.familyplanningmethodtype
+          - angal.typology.familyplanningvisittype
+          - angal.typology.hivtreatmenttype
+          - angal.typology.tuberculosisregimen
+          - angal.typology.tuberculosiscontact
       responses:
         "200":
           description: OK
@@ -4179,6 +4188,15 @@ paths:
         required: false
         schema:
           type: string
+          enum:
+          - angal.typology.deliverytype
+          - angal.typology.visittype
+          - angal.typology.partnertype
+          - angal.typology.familyplanningmethodtype
+          - angal.typology.familyplanningvisittype
+          - angal.typology.hivtreatmenttype
+          - angal.typology.tuberculosisregimen
+          - angal.typology.tuberculosiscontact
       - name: page
         in: query
         required: false
