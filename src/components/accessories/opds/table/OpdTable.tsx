@@ -8,7 +8,7 @@ import Table from '../../table/Table';
 import './styles.scss';
 import type { IOpdTableProps } from './types';
 
-export const OpdTable: FC<IOpdTableProps> = ({ data }) => {
+export const OpdTable: FC<IOpdTableProps> = ({ data, serverPagination }) => {
 	const { t } = useTranslation();
 	const header = [
 		'id',
@@ -97,6 +97,7 @@ export const OpdTable: FC<IOpdTableProps> = ({ data }) => {
 				rowsPerPage={5}
 				detailColSpan={10}
 				isCollapsabile={true}
+				serverPagination={serverPagination}
 			/>
 			<CustomModal
 				open={open}

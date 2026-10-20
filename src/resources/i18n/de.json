@@ -511,7 +511,14 @@
 		"value": "Wert",
 		"true": "Aktiv",
 		"false": "False",
-		"all": "Alle"
+		"all": "Alle",
+		"page": "Seite",
+		"previous": "Zurück",
+		"next": "Weiter",
+		"first_page": "Erste Seite",
+		"last_page": "Letzte Seite",
+		"per_page": "Pro Seite",
+		"total_items": "Einträge"
 	},
 	"permission": {
 		"denied": "Zugriff verweigert",
