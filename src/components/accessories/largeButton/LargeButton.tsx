@@ -14,7 +14,7 @@ const LargeButton: FunctionComponent<IProps> = ({
 	return (
 		<Button
 			{...props}
-			data-slot="large-button"
+			data-cy="large-button"
 			className={`largeButton ${className}`}
 			variant={variant}
 			onClick={handleClick ?? onClick}
