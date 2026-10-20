@@ -140,7 +140,10 @@ export const ReductionPlansTable = ({
 								/>
 								{deleteReductionPlanState.isLoading && (
 									<div ref={infoBoxRef} className="info-box-container">
-										<InfoBox type="info" message={t('reductionPlan.deleting')} />
+										<InfoBox
+											type="info"
+											message={t('reductionPlan.deleting')}
+										/>
 									</div>
 								)}
 								{deleteReductionPlanState.status === 'FAIL' && (

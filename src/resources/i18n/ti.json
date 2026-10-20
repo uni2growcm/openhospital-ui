@@ -8,6 +8,16 @@
 		"lab": {
 			"someexamswithoutresultpleasecheck": "ገለ ውጽኢት ዘይብሉ ፈተናታት በጃኹም መርምሩ።"
 		},
+		"articlefamily": {
+			"code_exists": "በዚ ኮድ ዘለዎ ናይ ኣቕሓ ስድራቤት ድሮ ኣሎ።",
+			"not_found": "ናይ ኣቕሓ ስድራቤት ኣይተረኽበን።",
+			"integrity_violation": "ናይ ኣቕሓ ስድራቤት ዳታ ምጥሓስ ቅኑዕነት።"
+		},
+		"articleFamily": {
+			"code_exists": "በዚ ኮድ ዘለዎ ናይ ኣቕሓ ስድራቤት ድሮ ኣሎ።",
+			"not_found": "ናይ ኣቕሓ ስድራቤት ኣይተረኽበን።",
+			"integrity_violation": "ናይ ኣቕሓ ስድራቤት ዳታ ምጥሓስ ቅኑዕነት።"
+		},
 		"country": {
 			"isocode_exists": "A country with this ISO code already exists.",
 			"name_exists": "A country with this name already exists.",
@@ -436,6 +446,7 @@
 		"types": "ዓይነታት ምምሕዳር",
 		"hospitalInfo": "ሆስፒታል ሓበሬታ",
 		"hospital": "ሆስፒታል",
+		"articleFamilies": "ናይ ኣቕሓ ስድራቤታት",
 		"countries": "Countries",
 		"reductionPlans": "Reduction Plans"
 	},
@@ -490,7 +501,8 @@
 			"opd_admission": "ኦፒዲ/ምእታው",
 			"admission": "መእተዊ",
 			"opd": "ኦፒዲ"
-		}
+		},
+		"articleFamily": "ናይ ኣቕሓ ስድራቤት"
 	},
 	"common": {
 		"ok": "እሺ",
@@ -984,7 +996,8 @@
 		"validateProcedureMinMax": "ዋጋ 1፣ 2 ወይ 3 ጥራይ ክኸውን ይኽእል።",
 		"possibleValues": "ክኾኑ ዝኽእሉ ክብርታት",
 		"defaultValue": "ነባሪ ዋጋ",
-		"invalidDefaultResult": "ነባሪ ውጽኢት ሓደ ካብቶም ክኾኑ ዝኽእሉ ክብርታት ክኸውን ኣለዎ።"
+		"invalidDefaultResult": "ነባሪ ውጽኢት ሓደ ካብቶም ክኾኑ ዝኽእሉ ክብርታት ክኸውን ኣለዎ።",
+		"articleFamily": "ናይ ኣቕሓ ስድራቤት"
 	},
 	"vaccine": {
 		"code": "ኮድ",
@@ -1289,6 +1302,23 @@
 		"updateSuccess": "ዓይነት ፈተና ብዓወት ተሓዲሱ ኣሎ!",
 		"cancelCreation": "ርግጸኛ ዲኻ ነቲ ናይ ፈተና ዓይነት ምፍጣር ክትስርዞ?",
 		"cancelUpdate": "ርግጸኛ ዲኻ ነቲ ናይ ፈተና ዓይነት update ክትስርዞ?"
+	},
+	"articleFamily": {
+		"id": "መፍለዪ ናይ ኣቕሓ ስድራቤት",
+		"code": "ኮድ",
+		"description": "መግለጺ",
+		"addNewArticleFamily": "ሓድሽ ናይ ኣቕሓ ስድራቤት ወስኽ",
+		"editArticleFamily": "Edit article family",
+		"updateArticleFamily": "Save changes",
+		"saveArticleFamily": "Save",
+		"addArticleFamily": "New article family",
+		"updated": "Article family updated",
+		"updateSuccess": "Article family has been updated successfully!",
+		"created": "Article family created",
+		"createSuccess": "Article family has been created successfully!",
+		"deleted": "Article family deleted",
+		"deleting": "Deleting article family...",
+		"deleteSuccess": "Article family has been deleted successfully!"
 	},
 	"country": {
 		"id": "Country ID",

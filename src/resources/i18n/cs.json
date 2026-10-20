@@ -106,6 +106,7 @@
 		"patientdashboard": "Patient Dashboard",
 		"newtherapy": "New Therapy",
 		"managetherapy": "Manage Therapy",
+		"articleFamilies": "Skupiny artiklů",
 		"countries": "Countries",
 		"reductionPlans": "Reduction Plans",
 		"staff": "Personál"
@@ -173,6 +174,39 @@
 		"booking": "Prescriptions"
 	},
 	"errors": {
+		"articlefamily": {
+			"code_exists": "Skupina artiklů s tímto kódem již existuje.",
+			"not_found": "Skupina artiklů nebyla nalezena.",
+			"integrity_violation": "Porušení integrity dat skupiny artiklů."
+		},
+		"articleFamily": {
+			"code_exists": "Skupina artiklů s tímto kódem již existuje.",
+			"not_found": "Skupina artiklů nebyla nalezena.",
+			"integrity_violation": "Porušení integrity dat skupiny artiklů."
+		}
+	},
+	"articleFamily": {
+		"id": "ID skupiny artiklů",
+		"code": "Kód",
+		"description": "Popis",
+		"addNewArticleFamily": "Přidat novou skupinu artiklů",
+		"editArticleFamily": "Upravit skupinu artiklů",
+		"updateArticleFamily": "Uložit změny",
+		"saveArticleFamily": "Uložit",
+		"addArticleFamily": "Nová skupina artiklů",
+		"updated": "Skupina artiklů aktualizována",
+		"updateSuccess": "Skupina artiklů byla úspěšně aktualizována!",
+		"created": "Skupina artiklů vytvořena",
+		"createSuccess": "Skupina artiklů byla úspěšně vytvořena!",
+		"deleted": "Skupina artiklů smazána",
+		"deleting": "Mazání skupiny artiklů...",
+		"deleteSuccess": "Skupina artiklů byla úspěšně smazána!"
+	},
+	"exam": {
+		"articleFamily": "Skupina artiklů"
+	},
+	"operation": {
+		"articleFamily": "Skupina artiklů",
 		"country": {
 			"isocode_exists": "A country with this ISO code already exists.",
 			"name_exists": "A country with this name already exists.",

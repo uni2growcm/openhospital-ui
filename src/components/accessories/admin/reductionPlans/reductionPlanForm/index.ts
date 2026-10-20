@@ -1,4 +1,4 @@
-export { default } from './ReductionPlanForm';
-export * from './ReductionPlanForm';
-export * from './types';
 export * from './consts';
+export * from './ReductionPlanForm';
+export { default } from './ReductionPlanForm';
+export * from './types';

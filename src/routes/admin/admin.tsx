@@ -164,6 +164,33 @@ export const ADMIN_ROUTES: RouteObject[] = [
 			})),
 	},
 	{
+		path: getPath(PATHS.admin_article_families),
+		lazy: async () =>
+			import('../../components/accessories/admin/articleFamilies').then(
+				(module) => ({
+					Component: module.ArticleFamilies,
+				}),
+			),
+	},
+	{
+		path: getPath(PATHS.admin_article_families_new),
+		lazy: async () =>
+			import('../../components/accessories/admin/articleFamilies').then(
+				(module) => ({
+					Component: module.NewArticleFamily,
+				}),
+			),
+	},
+	{
+		path: getPath(PATHS.admin_article_families_edit),
+		lazy: async () =>
+			import('../../components/accessories/admin/articleFamilies').then(
+				(module) => ({
+					Component: module.EditArticleFamily,
+				}),
+			),
+	},
+	{
 		path: getPath(PATHS.admin_countries),
 		lazy: async () =>
 			import('../../components/accessories/admin/countries').then((module) => ({

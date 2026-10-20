@@ -1,6 +1,5 @@
 import type { TFunction } from 'i18next';
 
-
 export const resolveApiErrorMessage = (
 	error: any,
 	t: TFunction,

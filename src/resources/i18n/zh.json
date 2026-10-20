@@ -106,6 +106,7 @@
 		"patientdashboard": "Patient Dashboard",
 		"newtherapy": "New Therapy",
 		"managetherapy": "Manage Therapy",
+		"articleFamilies": "项目系列",
 		"countries": "Countries",
 		"reductionPlans": "Reduction Plans",
 		"staff": "员工"
@@ -173,6 +174,39 @@
 		"booking": "Prescriptions"
 	},
 	"errors": {
+		"articlefamily": {
+			"code_exists": "具有此代码的项目系列已存在。",
+			"not_found": "未找到项目系列。",
+			"integrity_violation": "项目系列数据完整性违规。"
+		},
+		"articleFamily": {
+			"code_exists": "具有此代码的项目系列已存在。",
+			"not_found": "未找到项目系列。",
+			"integrity_violation": "项目系列数据完整性违规。"
+		}
+	},
+	"articleFamily": {
+		"id": "项目系列 ID",
+		"code": "代码",
+		"description": "描述",
+		"addNewArticleFamily": "添加新项目系列",
+		"editArticleFamily": "编辑项目系列",
+		"updateArticleFamily": "保存更改",
+		"saveArticleFamily": "保存",
+		"addArticleFamily": "新项目系列",
+		"updated": "项目系列已更新",
+		"updateSuccess": "项目系列更新成功！",
+		"created": "Article family created",
+		"createSuccess": "Article family has been created successfully!",
+		"deleted": "Article family deleted",
+		"deleting": "Deleting article family...",
+		"deleteSuccess": "Article family has been deleted successfully!"
+	},
+	"exam": {
+		"articleFamily": "项目系列"
+	},
+	"operation": {
+		"articleFamily": "项目系列",
 		"country": {
 			"isocode_exists": "A country with this ISO code already exists.",
 			"name_exists": "A country with this name already exists.",

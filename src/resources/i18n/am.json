@@ -8,6 +8,16 @@
 		"lab": {
 			"someexamswithoutresultpleasecheck": "አንዳንድ ፈተናዎች ያለ ውጤት እባክዎ ያረጋግጡ።"
 		},
+		"articlefamily": {
+			"code_exists": "በዚህ ኮድ ያለ የዕቃ ቤተሰብ አስቀድሞ አለ።",
+			"not_found": "የዕቃ ቤተሰብ አልተገኘም።",
+			"integrity_violation": "የዕቃ ቤተሰብ የውሂብ ታማኝነት ጥሰት።"
+		},
+		"articleFamily": {
+			"code_exists": "በዚህ ኮድ ያለ የዕቃ ቤተሰብ አስቀድሞ አለ።",
+			"not_found": "የዕቃ ቤተሰብ አልተገኘም።",
+			"integrity_violation": "የዕቃ ቤተሰብ የውሂብ ታማኝነት ጥሰት።"
+		},
 		"country": {
 			"isocode_exists": "A country with this ISO code already exists.",
 			"name_exists": "A country with this name already exists.",
@@ -436,6 +446,7 @@
 		"types": "ዓይነቶችን ያስተዳድሩ",
 		"hospitalInfo": "የሆስፒታል መረጃ",
 		"hospital": "ሆስፒታል",
+		"articleFamilies": "የዕቃ ቤተሰቦች",
 		"countries": "Countries",
 		"reductionPlans": "Reduction Plans"
 	},
@@ -490,7 +501,8 @@
 			"opd_admission": "OPD/መግቢያ",
 			"admission": "መግቢያ",
 			"opd": "ኦህዴድ"
-		}
+		},
+		"articleFamily": "የዕቃ ቤተሰብ"
 	},
 	"common": {
 		"ok": "እሺ",
@@ -984,7 +996,8 @@
 		"validateProcedureMinMax": "ዋጋ 1, 2 ወይም 3 ብቻ ሊሆን ይችላል",
 		"possibleValues": "ሊሆኑ የሚችሉ እሴቶች",
 		"defaultValue": "ነባሪ እሴት",
-		"invalidDefaultResult": "ነባሪ ውጤት ሊሆኑ ከሚችሉ እሴቶች ውስጥ አንዱ መሆን አለበት።"
+		"invalidDefaultResult": "ነባሪ ውጤት ሊሆኑ ከሚችሉ እሴቶች ውስጥ አንዱ መሆን አለበት።",
+		"articleFamily": "የዕቃ ቤተሰብ"
 	},
 	"vaccine": {
 		"code": "ኮድ",
@@ -1289,6 +1302,23 @@
 		"updateSuccess": "የፈተናው አይነት በተሳካ ሁኔታ ዘምኗል!",
 		"cancelCreation": "እርግጠኛ ነህ የፈተና አይነት መፍጠር መሰረዝህን እርግጠኛ ነህ?",
 		"cancelUpdate": "እርግጠኛ ነህ የፈተናውን አይነት ማዘመን መሰረዝህን እርግጠኛ ነህ?"
+	},
+	"articleFamily": {
+		"id": "የዕቃ ቤተሰብ መለያ",
+		"code": "ኮድ",
+		"description": "መግለጫ",
+		"addNewArticleFamily": "አዲስ የዕቃ ቤተሰብ አክል",
+		"editArticleFamily": "የዕቃ ቤተሰብ አርትዕ",
+		"updateArticleFamily": "ለውጦችን አስቀምጥ",
+		"saveArticleFamily": "አስቀምጥ",
+		"addArticleFamily": "አዲስ የዕቃ ቤተሰብ",
+		"updated": "የዕቃ ቤተሰብ ተዘምኗል",
+		"updateSuccess": "የዕቃ ቤተሰብ በተሳካ ሁኔታ ተዘምኗል!",
+		"created": "የዕቃ ቤተሰብ ተፈጥሯል",
+		"createSuccess": "የዕቃ ቤተሰብ በተሳካ ሁኔታ ተፈጥሯል!",
+		"deleted": "የዕቃ ቤተሰብ ተሰርዟል",
+		"deleting": "የዕቃ ቤተሰብ በመሰረዝ ላይ...",
+		"deleteSuccess": "የዕቃ ቤተሰብ በተሳካ ሁኔታ ተሰርዟል!"
 	},
 	"country": {
 		"id": "Country ID",

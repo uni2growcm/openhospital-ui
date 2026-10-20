@@ -8,6 +8,16 @@
 		"lab": {
 			"someexamswithoutresultpleasecheck": "Einige Prüfungen ohne Ergebnis, bitte überprüfen."
 		},
+		"articleFamily": {
+			"code_exists": "Eine Artikelfamilie mit diesem Code existiert bereits.",
+			"not_found": "Artikelfamilie nicht gefunden.",
+			"integrity_violation": "Datenintegritätsverletzung der Artikelfamilie."
+		},
+		"articlefamily": {
+			"code_exists": "Eine Artikelfamilie mit diesem Code existiert bereits.",
+			"not_found": "Artikelfamilie nicht gefunden.",
+			"integrity_violation": "Datenintegritätsverletzung der Artikelfamilie."
+		},
 		"country": {
 			"isocode_exists": "Ein Land mit diesem ISO-Code existiert bereits.",
 			"name_exists": "Ein Land mit diesem Namen existiert bereits.",
@@ -391,6 +401,7 @@
 		"vaccines": "Impfungen",
 		"prices": "Preisliste",
 		"suppliers": "Lieferanten",
+		"articleFamilies": "Artikelfamilien",
 		"telemetry": "Telemetrie",
 		"users": "Benutzer & Gruppen",
 		"types": "Typen verwalten",
@@ -437,7 +448,8 @@
 		"classes": {
 			"major": "Gross",
 			"minor": "Klein"
-		}
+		},
+		"articleFamily": "Artikelfamilie"
 	},
 	"common": {
 		"ok": "OK",
@@ -859,7 +871,8 @@
 		"examtype": "Exam Typ",
 		"description": "Name",
 		"procedure": "Verfahren",
-		"defaultResult": "Standardwert"
+		"defaultResult": "Standardwert",
+		"articleFamily": "Artikelfamilie"
 	},
 	"supplier": {
 		"name": "Name",
@@ -869,6 +882,23 @@
 		"fax": "Fax",
 		"email": "Email Adresse",
 		"note": "Notiz"
+	},
+	"articleFamily": {
+		"id": "Artikelfamilie ID",
+		"code": "Code",
+		"description": "Bezeichnung",
+		"addNewArticleFamily": "Neue Artikelfamilie hinzufügen",
+		"editArticleFamily": "Artikelfamilie bearbeiten",
+		"updateArticleFamily": "Änderungen speichern",
+		"saveArticleFamily": "Speichern",
+		"addArticleFamily": "Neue Artikelfamilie",
+		"updated": "Artikelfamilie aktualisiert",
+		"updateSuccess": "Die Artikelfamilie wurde erfolgreich aktualisiert!",
+		"created": "Artikelfamilie erstellt",
+		"createSuccess": "Die Artikelfamilie wurde erfolgreich erstellt!",
+		"deleted": "Artikelfamilie gelöscht",
+		"deleting": "Artikelfamilie wird gelöscht...",
+		"deleteSuccess": "Die Artikelfamilie wurde erfolgreich gelöscht!"
 	},
 	"ward": {
 		"code": "Code",

@@ -8,6 +8,16 @@
 		"lab": {
 			"someexamswithoutresultpleasecheck": "Some exams without result please check."
 		},
+		"articleFamily": {
+			"code_exists": "An article family with this code already exists.",
+			"not_found": "Article family not found.",
+			"integrity_violation": "Article family data integrity violation."
+		},
+		"articlefamily": {
+			"code_exists": "An article family with this code already exists.",
+			"not_found": "Article family not found.",
+			"integrity_violation": "Article family data integrity violation."
+		},
 		"country": {
 			"isocode_exists": "A country with this ISO code already exists.",
 			"name_exists": "A country with this name already exists.",
@@ -435,6 +445,7 @@
 		"vaccines": "Vaccines",
 		"prices": "Price List",
 		"suppliers": "Suppliers",
+		"articleFamilies": "Article Families",
 		"countries": "Countries",
 		"telemetry": "Telemetry",
 		"users": "Users & Groups",
@@ -496,7 +507,8 @@
 			"opd_admission": "OPD/Admission",
 			"admission": "Admission",
 			"opd": "OPD"
-		}
+		},
+		"articleFamily": "Article Family"
 	},
 	"common": {
 		"ok": "OK",
@@ -995,7 +1007,8 @@
 		"validateProcedureMinMax": "Value can be only 1, 2 or 3",
 		"possibleValues": "Possible values",
 		"defaultValue": "Default value",
-		"invalidDefaultResult": "Default result should be one of possible values"
+		"invalidDefaultResult": "Default result should be one of possible values",
+		"articleFamily": "Article Family"
 	},
 	"vaccine": {
 		"code": "Code",
@@ -1186,6 +1199,23 @@
 		"deleted": "Supplier deleted",
 		"deleting": "Deleting supplier...",
 		"deleteSuccess": "Supplier has been deleted successfully!"
+	},
+	"articleFamily": {
+		"id": "Article Family ID",
+		"code": "Code",
+		"description": "Description",
+		"addNewArticleFamily": "Add a new article family",
+		"editArticleFamily": "Edit article family",
+		"updateArticleFamily": "Save changes",
+		"saveArticleFamily": "Save",
+		"addArticleFamily": "New article family",
+		"updated": "Article family updated",
+		"updateSuccess": "Article family has been updated successfully!",
+		"created": "Article family created",
+		"createSuccess": "Article family has been created successfully!",
+		"deleted": "Article family deleted",
+		"deleting": "Deleting article family...",
+		"deleteSuccess": "Article family has been deleted successfully!"
 	},
 	"country": {
 		"id": "Country ID",

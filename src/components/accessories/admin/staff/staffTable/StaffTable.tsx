@@ -1,5 +1,11 @@
 import { CircularProgress } from '@mui/material';
-import { type FunctionComponent, type ReactNode, useEffect, useRef, useState } from 'react';
+import {
+	type FunctionComponent,
+	type ReactNode,
+	useEffect,
+	useRef,
+	useState,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import type { StaffDTO } from '~/generated/models/StaffDTO';
 import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
@@ -8,8 +14,8 @@ import { scrollToElement } from '../../../../../libraries/uiUtils/scrollToElemen
 import { deleteStaffReset, getStaffPaged } from '../../../../../state/staff';
 import ConfirmationDialog from '../../../confirmationDialog/ConfirmationDialog';
 import InfoBox from '../../../infoBox/InfoBox';
-import Table from '../../../table/Table';
 import type { TFilterField } from '../../../table/filter/types';
+import Table from '../../../table/Table';
 import classes from './StaffTable.module.scss';
 
 const DEFAULT_PAGE_SIZE = 10;
@@ -32,7 +38,14 @@ export const StaffTable: FunctionComponent<IOwnProps> = ({
 	const [page, setPage] = useState(0);
 	const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
 
-	const header = ['code', 'firstName', 'lastName', 'profession', 'position', 'phone'];
+	const header = [
+		'code',
+		'firstName',
+		'lastName',
+		'profession',
+		'position',
+		'phone',
+	];
 
 	const label = {
 		code: t('staff.code'),
@@ -42,7 +55,14 @@ export const StaffTable: FunctionComponent<IOwnProps> = ({
 		position: t('staff.position'),
 		phone: t('staff.phone'),
 	};
-	const order = ['code', 'firstName', 'lastName', 'profession', 'position', 'phone'];
+	const order = [
+		'code',
+		'firstName',
+		'lastName',
+		'profession',
+		'position',
+		'phone',
+	];
 
 	const filters: TFilterField[] = [
 		{ key: 'firstName', label: t('staff.firstName'), type: 'text' },
@@ -52,9 +72,11 @@ export const StaffTable: FunctionComponent<IOwnProps> = ({
 		{ key: 'phone', label: t('staff.phone'), type: 'text' },
 	];
 
-	const { data: pagedData, status, error } = useAppSelector(
-		(state) => state.staff.pagedStaff,
-	);
+	const {
+		data: pagedData,
+		status,
+		error,
+	} = useAppSelector((state) => state.staff.pagedStaff);
 
 	const data = pagedData?.data;
 	const pageInfo = pagedData?.pageInfo;
@@ -121,7 +143,10 @@ export const StaffTable: FunctionComponent<IOwnProps> = ({
 							<>
 								{deleteStaffState.status === 'FAIL' && (
 									<div ref={infoBoxRef} className="info-box-container">
-										<InfoBox type="error" message={deleteStaffState.error?.message} />
+										<InfoBox
+											type="error"
+											message={deleteStaffState.error?.message}
+										/>
 									</div>
 								)}
 								{(data ?? []).length === 0 ? (

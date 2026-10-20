@@ -39,7 +39,9 @@ export const EditReductionPlan = () => {
 	const currentPlan = selectedPlan ?? state;
 	const formKey = selectedPlan
 		? `plan-${selectedPlan.id}-${selectedPlan.lock ?? 0}`
-		: (state ? `state-${state.id}-${state.lock ?? 0}` : `empty-${id}`);
+		: state
+			? `state-${state.id}-${state.lock ?? 0}`
+			: `empty-${id}`;
 
 	useEffect(() => {
 		if (!id || (state && state.id !== Number(id))) {

@@ -234,6 +234,7 @@
 		"billrecords": "Bill Records",
 		"visits": "Visits",
 		"patients": "Patients",
+		"articleFamilies": "Familia za makala",
 		"countries": "Countries",
 		"reductionPlans": "Reduction Plans",
 		"staff": "Wafanyakazi"
@@ -259,7 +260,8 @@
 		"rowupdatesuccess": "Operation Row updated successfully",
 		"rowcreatesuccess": "Operation Row created successfully",
 		"rowdeletesuccess": "Operation Row deleted successfully",
-		"dateafteradmission": "Must be greater than admission date"
+		"dateafteradmission": "Must be greater than admission date",
+		"articleFamily": "Familia ya makala"
 	},
 	"common": {
 		"ok": "OK",
@@ -550,6 +552,36 @@
 		"zh": "Chinese"
 	},
 	"errors": {
+		"articlefamily": {
+			"code_exists": "Familia ya makala yenye msimbo huu tayari ipo.",
+			"not_found": "Familia ya makala haikupatikana.",
+			"integrity_violation": "Ukiukaji wa uadilifu wa data ya familia ya makala."
+		},
+		"articleFamily": {
+			"code_exists": "Familia ya makala yenye msimbo huu tayari ipo.",
+			"not_found": "Familia ya makala haikupatikana.",
+			"integrity_violation": "Ukiukaji wa uadilifu wa data ya familia ya makala."
+		}
+	},
+	"articleFamily": {
+		"id": "Kitambulisho cha familia ya makala",
+		"code": "Msimbo",
+		"description": "Maelezo",
+		"addNewArticleFamily": "Ongeza familia mpya ya makala",
+		"editArticleFamily": "Hariri familia ya makala",
+		"updateArticleFamily": "Hifadhi mabadiliko",
+		"saveArticleFamily": "Hifadhi",
+		"addArticleFamily": "Familia mpya ya makala",
+		"updated": "Familia ya makala imesasishwa",
+		"updateSuccess": "Familia ya makala imesasishwa kikamilifu!",
+		"created": "Familia ya makala imeundwa",
+		"createSuccess": "Familia ya makala imeundwa kikamilifu!",
+		"deleted": "Familia ya makala imefutwa",
+		"deleting": "Inafuta familia ya makala...",
+		"deleteSuccess": "Familia ya makala imefutwa kikamilifu!"
+	},
+	"exam": {
+		"articleFamily": "Familia ya makala",
 		"country": {
 			"isocode_exists": "A country with this ISO code already exists.",
 			"name_exists": "A country with this name already exists.",

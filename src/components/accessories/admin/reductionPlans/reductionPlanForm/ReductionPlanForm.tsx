@@ -2,20 +2,27 @@ import { Check, Close, Delete, Edit } from '@mui/icons-material';
 import {
 	Autocomplete,
 	IconButton,
+	Table as MuiTable,
+	TextField as MuiTextField,
 	Paper,
 	Tab,
-	Table as MuiTable,
 	TableBody,
 	TableCell,
 	TableContainer,
 	TableHead,
 	TableRow,
 	Tabs,
-	TextField as MuiTextField,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import { get, has } from 'lodash';
-import { type FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+	type FC,
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { number, object, string } from 'yup';
@@ -104,7 +111,8 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 	const [selectedExamCode, setSelectedExamCode] = useState<string>('');
 	const [examRateInput, setExamRateInput] = useState<string>('');
 
-	const [selectedOperationCode, setSelectedOperationCode] = useState<string>('');
+	const [selectedOperationCode, setSelectedOperationCode] =
+		useState<string>('');
 	const [operationRateInput, setOperationRateInput] = useState<string>('');
 
 	const [selectedOtherId, setSelectedOtherId] = useState<string>('');
@@ -128,7 +136,8 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 		else if (rawErr.response?.data?.message) msg = rawErr.response.data.message;
 		else if (rawErr.response?.message) msg = rawErr.response.message;
 		else if (rawErr.data?.message) msg = rawErr.data.message;
-		else if (rawErr.message && rawErr.message !== 'ajax error') msg = rawErr.message;
+		else if (rawErr.message && rawErr.message !== 'ajax error')
+			msg = rawErr.message;
 		else if (rawErr.error) msg = rawErr.error;
 
 		return t(msg);
@@ -208,7 +217,9 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 		onSubmit: (values) => {
 			const formattedValues = formatAllFieldValues(fields, values);
 			const payload: ReductionPlanDTO = {
-				id: creationMode ? undefined : initialPlan?.id ?? Number(formattedValues.id),
+				id: creationMode
+					? undefined
+					: (initialPlan?.id ?? Number(formattedValues.id)),
 				description: formattedValues.description,
 				medicalRate: Number(formattedValues.medicalRate),
 				examRate: Number(formattedValues.examRate),
@@ -271,9 +282,10 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 		formik.handleBlur(e);
 		const currentVal = formik.values[fieldName];
 		if (currentVal === '' || currentVal === null || currentVal === undefined) {
-			const defaultVal = initialValues[fieldName] != null && initialValues[fieldName] !== ''
-				? initialValues[fieldName]
-				: '0';
+			const defaultVal =
+				initialValues[fieldName] != null && initialValues[fieldName] !== ''
+					? initialValues[fieldName]
+					: '0';
 			formik.setFieldValue(fieldName, defaultVal);
 		} else {
 			const num = Number(currentVal);
@@ -428,8 +440,6 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 		return pricesOthersList.filter((p) => !usedIds.has(p.id));
 	}, [pricesOthersList, priceOtherReductions]);
 
-
-
 	return (
 		<div className="reductionPlanForm">
 			<form onSubmit={formik.handleSubmit}>
@@ -521,7 +531,9 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 					</div>
 				</div>
 
-				<h3 className="sectionTitle">{t('reductionPlan.specificReductions')}</h3>
+				<h3 className="sectionTitle">
+					{t('reductionPlan.specificReductions')}
+				</h3>
 				<div className="specificReductionsContainer">
 					<Tabs
 						value={activeTab}
@@ -532,10 +544,18 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 						indicatorColor="primary"
 						textColor="primary"
 					>
-						<Tab label={`${t('reductionPlan.medicals')} (${medicalReductions.length})`} />
-						<Tab label={`${t('reductionPlan.exams')} (${examReductions.length})`} />
-						<Tab label={`${t('reductionPlan.operations')} (${operationReductions.length})`} />
-						<Tab label={`${t('reductionPlan.others')} (${priceOtherReductions.length})`} />
+						<Tab
+							label={`${t('reductionPlan.medicals')} (${medicalReductions.length})`}
+						/>
+						<Tab
+							label={`${t('reductionPlan.exams')} (${examReductions.length})`}
+						/>
+						<Tab
+							label={`${t('reductionPlan.operations')} (${operationReductions.length})`}
+						/>
+						<Tab
+							label={`${t('reductionPlan.others')} (${priceOtherReductions.length})`}
+						/>
 					</Tabs>
 
 					{activeTab === 0 && (
@@ -621,13 +641,16 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 											<TableRow>
 												<TableCell>{t('reductionPlan.item')}</TableCell>
 												<TableCell>{t('reductionPlan.rate')}</TableCell>
-												<TableCell align="right">{t('reductionPlan.actions')}</TableCell>
+												<TableCell align="right">
+													{t('reductionPlan.actions')}
+												</TableCell>
 											</TableRow>
 										</TableHead>
 										<TableBody>
 											{medicalReductions.map((item, index) => {
 												const isEditing =
-													editingCategory === 'medicals' && editingIndex === index;
+													editingCategory === 'medicals' &&
+													editingIndex === index;
 												return (
 													<TableRow key={index}>
 														<TableCell>
@@ -651,7 +674,11 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																		}
 																	}}
 																	autoFocus
-																	inputProps={{ min: 0.01, max: 100, step: 0.01 }}
+																	inputProps={{
+																		min: 0.01,
+																		max: 100,
+																		step: 0.01,
+																	}}
 																/>
 															) : (
 																`${item.reductionRate}%`
@@ -746,9 +773,8 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 											option.code === value.code
 										}
 										value={
-											availableExams.find(
-												(e) => e.code === selectedExamCode,
-											) ?? null
+											availableExams.find((e) => e.code === selectedExamCode) ??
+											null
 										}
 										onChange={(_e, val) =>
 											setSelectedExamCode(
@@ -814,7 +840,9 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 											<TableRow>
 												<TableCell>{t('reductionPlan.item')}</TableCell>
 												<TableCell>{t('reductionPlan.rate')}</TableCell>
-												<TableCell align="right">{t('reductionPlan.actions')}</TableCell>
+												<TableCell align="right">
+													{t('reductionPlan.actions')}
+												</TableCell>
 											</TableRow>
 										</TableHead>
 										<TableBody>
@@ -844,7 +872,11 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																		}
 																	}}
 																	autoFocus
-																	inputProps={{ min: 0.01, max: 100, step: 0.01 }}
+																	inputProps={{
+																		min: 0.01,
+																		max: 100,
+																		step: 0.01,
+																	}}
 																/>
 															) : (
 																`${item.reductionRate}%`
@@ -1003,21 +1035,25 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 							) : (
 								<TableContainer component={Paper} className="tableContainer">
 									<MuiTable size="small">
- 										<TableHead>
+										<TableHead>
 											<TableRow>
 												<TableCell>{t('reductionPlan.item')}</TableCell>
 												<TableCell>{t('reductionPlan.rate')}</TableCell>
-												<TableCell align="right">{t('reductionPlan.actions')}</TableCell>
+												<TableCell align="right">
+													{t('reductionPlan.actions')}
+												</TableCell>
 											</TableRow>
 										</TableHead>
 										<TableBody>
 											{operationReductions.map((item, index) => {
 												const isEditing =
-													editingCategory === 'operations' && editingIndex === index;
+													editingCategory === 'operations' &&
+													editingIndex === index;
 												return (
 													<TableRow key={index}>
 														<TableCell>
-															{item.operation.description} ({item.operation.code})
+															{item.operation.description} (
+															{item.operation.code})
 														</TableCell>
 														<TableCell>
 															{isEditing ? (
@@ -1037,7 +1073,11 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																		}
 																	}}
 																	autoFocus
-																	inputProps={{ min: 0.01, max: 100, step: 0.01 }}
+																	inputProps={{
+																		min: 0.01,
+																		max: 100,
+																		step: 0.01,
+																	}}
 																/>
 															) : (
 																`${item.reductionRate}%`
@@ -1137,9 +1177,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 											) ?? null
 										}
 										onChange={(_e, val) =>
-											setSelectedOtherId(
-												val?.id != null ? `${val.id}` : '',
-											)
+											setSelectedOtherId(val?.id != null ? `${val.id}` : '')
 										}
 										noOptionsText={t('common.nooptionsfound')}
 										renderInput={(params) => (
@@ -1200,17 +1238,21 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 											<TableRow>
 												<TableCell>{t('reductionPlan.item')}</TableCell>
 												<TableCell>{t('reductionPlan.rate')}</TableCell>
-												<TableCell align="right">{t('reductionPlan.actions')}</TableCell>
+												<TableCell align="right">
+													{t('reductionPlan.actions')}
+												</TableCell>
 											</TableRow>
 										</TableHead>
 										<TableBody>
 											{priceOtherReductions.map((item, index) => {
 												const isEditing =
-													editingCategory === 'others' && editingIndex === index;
+													editingCategory === 'others' &&
+													editingIndex === index;
 												return (
 													<TableRow key={index}>
 														<TableCell>
-															{item.pricesOthers.description} ({item.pricesOthers.code})
+															{item.pricesOthers.description} (
+															{item.pricesOthers.code})
 														</TableCell>
 														<TableCell>
 															{isEditing ? (
@@ -1230,7 +1272,11 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																		}
 																	}}
 																	autoFocus
-																	inputProps={{ min: 0.01, max: 100, step: 0.01 }}
+																	inputProps={{
+																		min: 0.01,
+																		max: 100,
+																		step: 0.01,
+																	}}
 																/>
 															) : (
 																`${item.reductionRate}%`
