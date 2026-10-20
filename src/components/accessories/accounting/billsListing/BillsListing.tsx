@@ -1,10 +1,5 @@
 import { Replay } from '@mui/icons-material';
-import {
-	Chip,
-	CircularProgress,
-	Popover,
-	TablePagination,
-} from '@mui/material';
+import { Chip, CircularProgress, Popover } from '@mui/material';
 import { StaticDatePicker } from '@mui/x-date-pickers';
 import classNames from 'classnames';
 import { useFormik } from 'formik';
@@ -131,6 +126,7 @@ export const BillsListing: FC = () => {
 		null,
 	);
 	const [page, setPage] = useState(0);
+	const [pageSize, setPageSize] = useState(PAGE_SIZE);
 
 	const today = useMemo(() => new Date(), []);
 
@@ -149,7 +145,12 @@ export const BillsListing: FC = () => {
 	// Real server-side pagination: fetches exactly one page (PAGE_SIZE rows) for
 	// the current filters + status tab.
 	const fetchPage = useCallback(
-		(values: TFilterValues, status: TStatusTab, pageIndex: number) =>
+		(
+			values: TFilterValues,
+			status: TStatusTab,
+			pageIndex: number,
+			size: number = pageSize,
+		) =>
 			dispatch(
 				searchBillsPageable({
 					datefrom: values.fromDate,
@@ -158,10 +159,10 @@ export const BillsListing: FC = () => {
 					guarantor: values.guarantor || undefined,
 					status: statusParam(status),
 					page: pageIndex,
-					size: PAGE_SIZE,
+					size,
 				}),
 			),
-		[dispatch],
+		[dispatch, pageSize],
 	);
 
 	// Separate, status-agnostic, unpaginated-ish fetch backing status-tab counts
@@ -310,6 +311,20 @@ export const BillsListing: FC = () => {
 			}
 			setPage(newPage);
 			fetchPage(values, statusTab, newPage);
+		},
+		[fetchPage, values, statusTab, isLoading],
+	);
+
+	// Page size changes are server-side too: a new size re-fetches page 0
+	// from the API rather than just re-slicing the rows we already have.
+	const handlePageSizeChange = useCallback(
+		(newSize: number) => {
+			if (isLoading) {
+				return;
+			}
+			setPageSize(newSize);
+			setPage(0);
+			fetchPage(values, statusTab, 0, newSize);
 		},
 		[fetchPage, values, statusTab, isLoading],
 	);
@@ -757,34 +772,32 @@ export const BillsListing: FC = () => {
 			) : pageBills.length === 0 ? (
 				<InfoBox type="info" message={t('common.emptydata')} />
 			) : (
-				<>
-					<Table
-						rowData={rowData}
-						rawData={rawFilterData}
-						rowKey="billId"
-						dateFields={dateFields}
-						tableHeader={header}
-						labelData={label}
-						columnsOrder={columnsOrder}
-						filterColumns={filters}
-						manualFilter={false}
-						rowsPerPage={PAGE_SIZE}
-						hidePaginator={true}
-						initialOrderBy="date"
-						onView={noop}
-						onEdit={noop}
-						onPrint={noop}
-					/>
-					<TablePagination
-						component="div"
-						data-cy="bills-pagination"
-						count={pageInfo?.totalNbOfElements ?? 0}
-						page={page}
-						rowsPerPage={PAGE_SIZE}
-						rowsPerPageOptions={[PAGE_SIZE]}
-						onPageChange={handlePageChange}
-					/>
-				</>
+				<Table
+					rowData={rowData}
+					rawData={rawFilterData}
+					rowKey="billId"
+					dateFields={dateFields}
+					tableHeader={header}
+					labelData={label}
+					columnsOrder={columnsOrder}
+					filterColumns={filters}
+					manualFilter={false}
+					rowsPerPage={pageSize}
+					initialOrderBy="date"
+					onView={noop}
+					onEdit={noop}
+					onPrint={noop}
+					serverPagination={{
+						page,
+						totalPages: pageInfo?.totalPages ?? 0,
+						totalElements: pageInfo?.totalNbOfElements,
+						setPage: (p) => handlePageChange(undefined, p),
+						disabled: isLoading,
+						pageSize,
+						setPageSize: handlePageSizeChange,
+						className: 'bills-pagination',
+					}}
+				/>
 			)}
 		</div>
 	);
