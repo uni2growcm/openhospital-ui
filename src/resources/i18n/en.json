@@ -586,14 +586,7 @@
 		"saveandprint": "Save and Print",
 		"updateandprint": "Update and Print",
 		"printData": "Print Data",
-		"failedtodownloadthereport": "Failed to download report.",
-		"page": "Page",
-		"previous": "Previous",
-		"next": "Next",
-		"first_page": "First page",
-		"last_page": "Last page",
-		"per_page": "Per page",
-		"total_items": "items"
+		"failedtodownloadthereport": "Failed to download report."
 	},
 	"permission": {
 		"denied": "Permission denied",

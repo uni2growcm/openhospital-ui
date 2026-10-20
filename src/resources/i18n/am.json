@@ -579,14 +579,7 @@
 		"cancelMessage": "ይህን ክዋኔ መሰረዝህን እርግጠኛ ነህ? ሁሉም ያልተቀመጠ ውሂብ ይጠፋል።",
 		"back": "ተመለስ",
 		"backToEdit": "አይ፣ ማረምዎን ይቀጥሉ",
-		"discardMessage": "ይህን ክዋኔ ለመጣል እርግጠኛ ነዎት? ሁሉም ያልተቀመጠ ውሂብ ይጠፋል።",
-		"page": "ገጽ",
-		"previous": "ቀዳሚ",
-		"next": "ቀጣይ",
-		"first_page": "መጀመሪያ ገጽ",
-		"last_page": "የመጨረሻ ገጽ",
-		"per_page": "በገጽ",
-		"total_items": "ንጥሎች"
+		"discardMessage": "ይህን ክዋኔ ለመጣል እርግጠኛ ነዎት? ሁሉም ያልተቀመጠ ውሂብ ይጠፋል።"
 	},
 	"permission": {
 		"denied": "ፍቃድ ተከልክሏል።",

@@ -131,14 +131,7 @@
 		"patienteditsuccessfull": "The patient was edit successfully.",
 		"patientregistrationsuccessfull": "The patient registration was successful.",
 		"somethingwrong": "Something went wrong, please retry later.",
-		"searchpatientinstruction": "If you don't have the patient ID, fill as many fields as possible and click search",
-		"page": "Page",
-		"previous": "Previous",
-		"next": "Next",
-		"first_page": "First page",
-		"last_page": "Last page",
-		"per_page": "Per page",
-		"total_items": "items"
+		"searchpatientinstruction": "If you don't have the patient ID, fill as many fields as possible and click search"
 	},
 	"therapy": {
 		"newtherapy": "New Therapy",

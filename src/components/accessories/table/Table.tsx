@@ -13,6 +13,7 @@ import {
 import {
 	IconButton,
 	Table as MaterialComponent,
+	TablePagination,
 	TableSortLabel,
 } from '@mui/material';
 import Paper from '@mui/material/Paper';
@@ -38,7 +39,6 @@ import {
 import type { TOrder } from '../../../libraries/sortUtils/types';
 import Button from '../button/Button';
 import ConfirmationDialog from '../confirmationDialog/ConfirmationDialog';
-import Pagination from '../pagination/Pagination';
 import { FilterButton } from './filter/FilterButton';
 import type { TFilterValues } from './filter/types';
 import './styles.scss';
@@ -83,7 +83,6 @@ const Table: FunctionComponent<IProps> = ({
 	renderCustomActions,
 	hideHeader = false,
 	hidePaginator = false,
-	serverPagination,
 	customRenderDetails,
 	isExpanded = false,
 }) => {
@@ -91,7 +90,6 @@ const Table: FunctionComponent<IProps> = ({
 	const [order, setOrder] = React.useState<TOrder>('desc');
 	const [orderBy, setOrderBy] = React.useState(initialOrderBy ?? 'date'); //keyof -> DTO
 	const [page, setPage] = React.useState(0);
-	const [clientPageSize, setClientPageSize] = React.useState(rowsPerPage);
 	const [openConfirmation, setOpenConfirmation] = useState<{
 		action?: TActions;
 		open: boolean;
@@ -99,9 +97,8 @@ const Table: FunctionComponent<IProps> = ({
 	const [currentRow, setCurrentRow] = useState({} as any);
 	const [expanded, setExpanded] = useState(isExpanded);
 	const [filters, setFilters] = useState<Record<string, TFilterValues>>({});
-	const handleClientPageSizeChange = (size: number) => {
-		setClientPageSize(size);
-		setPage(0);
+	const handleChangePage = (_event: unknown, newPage: number) => {
+		setPage(newPage);
 	};
 	const createSortHandler =
 		(property: any) => (event: React.MouseEvent<unknown>) => {
@@ -470,12 +467,7 @@ const Table: FunctionComponent<IProps> = ({
 									? dateComparator(order, orderBy)
 									: defaultComparator(order, orderBy),
 							)
-							.slice(
-								serverPagination ? 0 : page * clientPageSize,
-								serverPagination
-									? filteredData.length
-									: page * clientPageSize + clientPageSize,
-							)
+							.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 							.map((row, index) => {
 								return (
 									<TableBodyRow
@@ -501,19 +493,18 @@ const Table: FunctionComponent<IProps> = ({
 					</TableBody>
 				</MaterialComponent>
 			</TableContainer>
-			{!hidePaginator &&
-				(serverPagination ? (
-					<Pagination {...serverPagination} />
-				) : (
-					<Pagination
-						page={page}
-						totalPages={Math.ceil(filteredData.length / clientPageSize)}
-						totalElements={filteredData.length}
-						setPage={setPage}
-						pageSize={clientPageSize}
-						setPageSize={handleClientPageSizeChange}
-					/>
-				))}
+			{filteredData.length > rowsPerPage && !hidePaginator ? (
+				<TablePagination
+					component="div"
+					count={filteredData.length}
+					rowsPerPage={rowsPerPage}
+					rowsPerPageOptions={[rowsPerPage]}
+					page={page}
+					onPageChange={handleChangePage}
+				/>
+			) : (
+				''
+			)}
 
 			<ConfirmationDialog
 				isOpen={openConfirmation.open && openConfirmation.action === 'delete'}

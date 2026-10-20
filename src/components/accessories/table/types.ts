@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import type { IProps as IPaginationProps } from '../pagination/types';
 import type { TFilterField, TFilterValues } from './filter/types';
 
 export interface IProps {
@@ -67,11 +66,6 @@ export interface IProps {
 	renderCustomActions?: (row: any) => ReactNode;
 	hideHeader?: boolean;
 	hidePaginator?: boolean;
-	/**
-	 * When provided, the table renders the shared server-side [Pagination] component (the
-	 * same one used across the app) instead of the built-in client-side [TablePagination].
-	 */
-	serverPagination?: IPaginationProps;
 	customRenderDetails?: (row: any) => ReactNode;
 	isExpanded?: boolean;
 }

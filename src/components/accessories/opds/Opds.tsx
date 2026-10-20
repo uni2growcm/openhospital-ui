@@ -9,6 +9,7 @@ import { searchOpds } from '../../../state/opds';
 import { getDiseaseTypes } from '../../../state/types/diseases';
 import { getWards } from '../../../state/wards';
 import InfoBox from '../infoBox/InfoBox';
+import Pagination from '../pagination/Pagination';
 import { initialFilter, initialFilterFields } from './consts';
 import { OpdFilterForm } from './filter/OpdFilterForm';
 import type { TFilterValues } from './filter/types';
@@ -25,7 +26,7 @@ export const Opds: FC = () => {
 	const { data, status, error, page, pageInfo, handlePageChange } = useOpds();
 
 	useEffect(() => {
-		dispatch(searchOpds({ ...filter, paged: true }));
+		dispatch(searchOpds({ ...filter, paged: false }));
 	}, [dispatch, filter]);
 
 	useEffect(() => {
@@ -36,13 +37,11 @@ export const Opds: FC = () => {
 		setFilter({ ...values, page: 0, size: filter.size });
 	};
 
-	const handleSizeChange = (size: number) => {
-		setFilter((previous) => ({ ...previous, size, page: 0 }));
-	};
-
 	const handleResetFilter = () => {
 		setFilter(initialFilter as TFilterValues);
 	};
+
+	const onPageChange = (e: any, page: number) => handlePageChange(e, page - 1);
 
 	const errorMessage = error || t('common.somethingwrong');
 
@@ -98,16 +97,11 @@ export const Opds: FC = () => {
 									fields={fields}
 									handleResetFilter={handleResetFilter}
 								/>
-								<OpdTable
-									data={data ?? []}
-									serverPagination={{
-										page: pageInfo?.page ?? 0,
-										totalPages: pageInfo?.totalPages ?? 0,
-										totalElements: pageInfo?.totalNbOfElements,
-										setPage: (p) => handlePageChange(undefined, p),
-										pageSize: filter.size,
-										setPageSize: handleSizeChange,
-									}}
+								<OpdTable data={data ?? []} />
+								<Pagination
+									page={(pageInfo?.page ?? 0) + 1}
+									count={pageInfo?.totalPages}
+									onChange={onPageChange}
 								/>
 							</Permission>
 						);

@@ -511,14 +511,7 @@
 		"value": "Vlera",
 		"true": "Aktiv",
 		"false": "Jo-aktiv",
-		"all": "Të gjitha",
-		"page": "Faqja",
-		"previous": "Mëparshme",
-		"next": "Tjetër",
-		"first_page": "Faqja e parë",
-		"last_page": "Faqja e fundit",
-		"per_page": "Për faqe",
-		"total_items": "elementë"
+		"all": "Të gjitha"
 	},
 	"permission": {
 		"denied": "Leja u refuzua",

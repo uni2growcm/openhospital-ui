@@ -27,6 +27,7 @@ import {
 import type { IState } from '../../../types';
 import ConfirmationDialog from '../confirmationDialog/ConfirmationDialog';
 import InfoBox from '../infoBox/InfoBox';
+import Pagination from '../pagination/Pagination';
 import { ChangeLabStatus } from './ChangeLabStatus';
 import { initialFilter, initialFilterFields } from './consts';
 import { EditLaboratoryContent } from './EditLaboratoryContent';
@@ -99,10 +100,6 @@ export const Exams: FC = () => {
 		setFilter({ ...values, page: 0, size: filter.size });
 	};
 
-	const handleSizeChange = (size: number) => {
-		setFilter((previous) => ({ ...previous, size, page: 0 }));
-	};
-
 	const onEdit = (row: LaboratoryDTO) => {
 		if (row.status === LaboratoryDTOStatusEnum.Draft) {
 			setSelectedExamRow(row);
@@ -137,6 +134,8 @@ export const Exams: FC = () => {
 		setCanceledObjCode(code === undefined ? '' : `${code}`);
 		dispatch(cancelLab(code));
 	};
+	const onPageChange = (e: any, page: number) => handlePageChange(e, page - 1);
+
 	const errorMessage = useAppSelector((state: IState) =>
 		state.laboratories.searchLabs.error?.message
 			? state.laboratories.searchLabs.error?.message
@@ -194,20 +193,19 @@ export const Exams: FC = () => {
 							</div>
 						)}
 						{status === 'SUCCESS' && (
-							<ExamTable
-								data={data ?? []}
-								handleDelete={onDelete}
-								handleCancel={onCancel}
-								handleEdit={onEdit}
-								serverPagination={{
-									page: pageInfo?.page ?? 0,
-									totalPages: pageInfo?.totalPages ?? 0,
-									totalElements: pageInfo?.totalNbOfElements,
-									setPage: (p) => handlePageChange(undefined, p),
-									pageSize: filter.size,
-									setPageSize: handleSizeChange,
-								}}
-							/>
+							<>
+								<ExamTable
+									data={data ?? []}
+									handleDelete={onDelete}
+									handleCancel={onCancel}
+									handleEdit={onEdit}
+								/>
+								<Pagination
+									page={(pageInfo?.page ?? 0) + 1}
+									count={pageInfo?.totalPages}
+									onChange={onPageChange}
+								/>
+							</>
 						)}
 						{labStore.deleteLab.status === 'LOADING' && (
 							<CircularProgress

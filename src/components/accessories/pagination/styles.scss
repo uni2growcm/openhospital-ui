@@ -1,56 +1,10 @@
 @import "../../../styles/variables";
 
 .pagination {
+  padding: 10px 5px;
+  margin: 15px auto;
+  position: relative;
+  border-radius: 5px;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 12px 4px;
-  border-top: 1px solid $c-grey-lighter;
-
-  .pagination_info {
-    font-size: 0.85rem;
-    color: rgba(0, 0, 0, 0.87);
-  }
-
-  .pagination_controls {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 4px;
-
-    .button {
-      min-width: 32px;
-      padding: 4px 10px !important;
-      font-size: 0.8rem;
-    }
-  }
-
-  .pagination_pageSize {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-right: 8px;
-    font-size: 0.85rem;
-    color: rgba(0, 0, 0, 0.87);
-
-    input {
-      width: 56px;
-      padding: 4px 6px;
-      text-align: center;
-      border: 1px solid $c-grey-lighter;
-      border-radius: 4px;
-
-      &:focus {
-        outline: none;
-        border-color: $c-color-primary;
-      }
-    }
-  }
-
-  .pagination_currentPage {
-    pointer-events: none;
-    font-weight: 600;
-  }
+  justify-content: flex-end;
 }

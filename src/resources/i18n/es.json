@@ -306,14 +306,7 @@
 		"lessthan": "The value must not exceed {{value}}.",
 		"confirm": "Confirm",
 		"invaliddate": "Invalid Date",
-		"outofrange": "Out of range",
-		"page": "Page",
-		"previous": "Previous",
-		"next": "Next",
-		"first_page": "First page",
-		"last_page": "Last page",
-		"per_page": "Per page",
-		"total_items": "items"
+		"outofrange": "Out of range"
 	},
 	"therapy": {
 		"newtherapy": "New Therapy",
