@@ -7,7 +7,6 @@ import {
 	type PriceListDTO,
 	PriceListsApi,
 } from '../../generated';
-
 import { customConfiguration } from '../../libraries/apiUtils/configuration';
 
 const api = new PriceListsApi(customConfiguration());
