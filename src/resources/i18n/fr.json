@@ -587,7 +587,14 @@
 		"printData": "Imprimer les données",
 		"saveandprint": "Enregistrer et imprimer",
 		"updateandprint": "Mettre à jour et imprimer",
-		"failedtodownloadthereport": "Échec de téléchargement du rapport"
+		"failedtodownloadthereport": "Échec de téléchargement du rapport",
+		"page": "Page",
+		"previous": "Précédent",
+		"next": "Suivant",
+		"first_page": "Première page",
+		"last_page": "Dernière page",
+		"per_page": "Par page",
+		"total_items": "éléments"
 	},
 	"permission": {
 		"denied": "Autorisation refusée",
