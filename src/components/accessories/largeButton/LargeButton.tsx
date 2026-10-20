@@ -6,6 +6,7 @@ import type { IProps } from './types';
 const LargeButton: FunctionComponent<IProps> = ({
 	children,
 	handleClick,
+	onClick,
 	variant = 'contained',
 	className = '',
 	...props
@@ -13,10 +14,10 @@ const LargeButton: FunctionComponent<IProps> = ({
 	return (
 		<Button
 			{...props}
-			data-slot="large-button"
+			data-cy="large-button"
 			className={`largeButton ${className}`}
 			variant={variant}
-			onClick={handleClick}
+			onClick={handleClick ?? onClick}
 		>
 			{children}
 		</Button>
