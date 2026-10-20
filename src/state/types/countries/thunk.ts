@@ -10,7 +10,7 @@ const api = new CountriesApi(customConfiguration());
 export const getCountries = createAsyncThunk(
 	'countries/getAll',
 	async (_, thunkApi) =>
-		firstValueFrom(wrapper(() => api.getCountries())).catch((error) =>
+		firstValueFrom(wrapper(() => api.getCountries({}))).catch((error) =>
 			thunkApi.rejectWithValue(error.response),
 		),
 );
@@ -18,7 +18,7 @@ export const getCountries = createAsyncThunk(
 export const createCountry = createAsyncThunk(
 	'countries/create',
 	async (countryDTO: CountryDTO, thunkApi) =>
-		firstValueFrom(wrapper(() => api.newCountry({ countryDTO }))).catch(
+		firstValueFrom(wrapper(() => api.createCountry({ countryDTO }))).catch(
 			(error) => thunkApi.rejectWithValue(error.response),
 		),
 );
