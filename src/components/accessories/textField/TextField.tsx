@@ -67,7 +67,7 @@ const TextField: FunctionComponent<IProps> = ({
 				>
 					<small>
 						{t('common.remainingchars', {
-							current: maxLength - field.value.length,
+							current: maxLength - (field.value?.length ?? 0),
 							max: maxLength,
 						})}
 					</small>

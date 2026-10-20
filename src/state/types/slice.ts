@@ -2,6 +2,7 @@ import { combineReducers } from '@reduxjs/toolkit';
 import { admissionTypeSlice } from './admissions';
 import { ageTypeSlice } from './ageTypes';
 import { configSlice } from './config';
+import { countrySlice } from './countries';
 import { deliveryTypeSlice } from './deliveries';
 import { deliveryResultTypeSlice } from './deliveryResults';
 import { dischargeTypeSlice } from './discharges';
@@ -10,6 +11,7 @@ import { examTypeSlice } from './exams';
 import { medicalTypeSlice } from './medicals';
 import { operationTypeSlice } from './operations';
 import { pregnantTreatmentTypeSlice } from './pregnantTreatment';
+import { reductionPlanSlice } from './reductionPlans';
 import { vaccineTypeSlice } from './vaccines';
 
 const typesReducer = combineReducers({
@@ -25,6 +27,8 @@ const typesReducer = combineReducers({
 	medicals: medicalTypeSlice.reducer,
 	pregnantTreatment: pregnantTreatmentTypeSlice.reducer,
 	deliveryResult: deliveryResultTypeSlice.reducer,
+	countries: countrySlice.reducer,
+	reductionPlans: reductionPlanSlice.reducer,
 });
 
 export default typesReducer;

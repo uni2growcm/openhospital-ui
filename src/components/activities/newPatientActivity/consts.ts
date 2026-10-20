@@ -52,17 +52,6 @@ const bloodTypeOptions = [
 	},
 ];
 
-const yesOrNoOptions = [
-	{
-		label: 'common.yes',
-		value: 'Y',
-	},
-	{
-		label: 'common.no',
-		value: 'N',
-	},
-];
-
 const yesOrNoOrUnknownOptions = [
 	{
 		label: 'common.yes',
@@ -78,6 +67,110 @@ const yesOrNoOrUnknownOptions = [
 	},
 ];
 
+const aliveOrDeadOrUnknownOptions = [
+	{
+		label: 'common.alive',
+		value: 'A',
+	},
+	{
+		label: 'common.dead',
+		value: 'D',
+	},
+	{
+		label: 'common.unknown',
+		value: 'U',
+	},
+];
+
+const geographicPositionOptions = [
+	{
+		label: 'patient.geographicpositions.in',
+		value: 'IN',
+	},
+	{
+		label: 'patient.geographicpositions.out',
+		value: 'OUT',
+	},
+	{
+		label: 'patient.geographicpositions.outd',
+		value: 'OUTD',
+	},
+];
+
+const maritalStatusOptions = [
+	{
+		label: 'patient.maritalstatuses.unknown',
+		value: 'unknown',
+	},
+	{
+		label: 'patient.maritalstatuses.single',
+		value: 'single',
+	},
+	{
+		label: 'patient.maritalstatuses.married',
+		value: 'married',
+	},
+	{
+		label: 'patient.maritalstatuses.divorced',
+		value: 'divorced',
+	},
+	{
+		label: 'patient.maritalstatuses.widowed',
+		value: 'widowed',
+	},
+];
+
+const professionOptions = [
+	{
+		label: 'patient.professions.unknown',
+		value: 'unknown',
+	},
+	{
+		label: 'patient.professions.other',
+		value: 'other',
+	},
+	{
+		label: 'patient.professions.farming',
+		value: 'farming',
+	},
+	{
+		label: 'patient.professions.construction',
+		value: 'construction',
+	},
+	{
+		label: 'patient.professions.medicine',
+		value: 'medicine',
+	},
+	{
+		label: 'patient.professions.foodhospitality',
+		value: 'foodhospitality',
+	},
+	{
+		label: 'patient.professions.homemaker',
+		value: 'homemaker',
+	},
+	{
+		label: 'patient.professions.mechanic',
+		value: 'mechanic',
+	},
+	{
+		label: 'patient.professions.business',
+		value: 'business',
+	},
+	{
+		label: 'patient.professions.janitorial',
+		value: 'janitorial',
+	},
+	{
+		label: 'patient.professions.mining',
+		value: 'mining',
+	},
+	{
+		label: 'patient.professions.engineering',
+		value: 'engineering',
+	},
+];
+
 export const initialFields: TFields<TPatientDataFormFieldName> = {
 	firstName: {
 		value: '',
@@ -90,6 +183,10 @@ export const initialFields: TFields<TPatientDataFormFieldName> = {
 	birthDate: {
 		value: '',
 		type: 'date',
+	},
+	birthPlace: {
+		value: '',
+		type: 'text',
 	},
 	age: {
 		value: '28',
@@ -127,6 +224,36 @@ export const initialFields: TFields<TPatientDataFormFieldName> = {
 	mother: {
 		value: PatientDTOMotherEnum.A,
 		type: 'text',
+		options: aliveOrDeadOrUnknownOptions,
+	},
+	numberOfChildren: {
+		value: '',
+		type: 'number',
+	},
+	geographicPosition: {
+		value: '',
+		type: 'text',
+		options: geographicPositionOptions,
+	},
+	parentsResidence: {
+		value: '',
+		type: 'text',
+	},
+	transportMeans: {
+		value: '',
+		type: 'text',
+	},
+	blama: {
+		value: '',
+		type: 'text',
+	},
+	country: {
+		value: '',
+		type: 'text',
+	},
+	affiliatedPatientCode: {
+		value: '',
+		type: 'text',
 	},
 	fatherName: {
 		value: '',
@@ -135,6 +262,7 @@ export const initialFields: TFields<TPatientDataFormFieldName> = {
 	father: {
 		value: PatientDTOFatherEnum.A,
 		type: 'text',
+		options: aliveOrDeadOrUnknownOptions,
 	},
 	bloodType: {
 		value: '',
@@ -144,7 +272,7 @@ export const initialFields: TFields<TPatientDataFormFieldName> = {
 	hasInsurance: {
 		value: 'N',
 		type: 'text',
-		options: yesOrNoOptions,
+		options: yesOrNoOrUnknownOptions,
 	},
 	parentTogether: {
 		value: 'U',
@@ -154,6 +282,32 @@ export const initialFields: TFields<TPatientDataFormFieldName> = {
 	taxCode: {
 		value: '',
 		type: 'text',
+	},
+	maritalStatus: {
+		value: '',
+		type: 'text',
+		options: maritalStatusOptions,
+	},
+	profession: {
+		value: '',
+		type: 'text',
+		options: professionOptions,
+	},
+	priceList: {
+		value: '',
+		type: 'text',
+	},
+	reductionPlan: {
+		value: '',
+		type: 'text',
+	},
+	consensusFlag: {
+		value: 'false',
+		type: 'boolean',
+	},
+	consensusServiceFlag: {
+		value: 'false',
+		type: 'boolean',
 	},
 	blobPhoto: {
 		value: '',
