@@ -7,7 +7,35 @@
 		"internalerror": "የውስጥ ስህተት ተከስቷል።",
 		"lab": {
 			"someexamswithoutresultpleasecheck": "አንዳንድ ፈተናዎች ያለ ውጤት እባክዎ ያረጋግጡ።"
-		}
+		},
+		"articlefamily": {
+			"code_exists": "በዚህ ኮድ ያለ የዕቃ ቤተሰብ አስቀድሞ አለ።",
+			"not_found": "የዕቃ ቤተሰብ አልተገኘም።",
+			"integrity_violation": "የዕቃ ቤተሰብ የውሂብ ታማኝነት ጥሰት።"
+		},
+		"articleFamily": {
+			"code_exists": "በዚህ ኮድ ያለ የዕቃ ቤተሰብ አስቀድሞ አለ።",
+			"not_found": "የዕቃ ቤተሰብ አልተገኘም።",
+			"integrity_violation": "የዕቃ ቤተሰብ የውሂብ ታማኝነት ጥሰት።"
+		},
+		"country": {
+			"isocode_exists": "A country with this ISO code already exists.",
+			"name_exists": "A country with this name already exists.",
+			"phonecode_exists": "A country with this phone code already exists.",
+			"not_found": "Country not found.",
+			"integrity_violation": "Country data integrity violation."
+		},
+		"reductionplan": {
+			"integrity_violation": "Reduction plan data integrity violation.",
+			"not_found": "Reduction plan not found.",
+			"description_duplicate": "A reduction plan with this description already exists."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Reduction plan data integrity violation.",
+			"not_found": "Reduction plan not found.",
+			"description_duplicate": "A reduction plan with this description already exists."
+		},
+		"forbidden": "ይህን እርምጃ ለመፈፀም የሚያስፈልጉ ፈቃዶች የሉዎትም።"
 	},
 	"validations": {
 		"min": "እሴቱ ቢያንስ {{min}} መሆን አለበት",
@@ -407,6 +435,7 @@
 		"consultancy": "ማማከር",
 		"administration": "አስተዳደር",
 		"wards": "ዋርድስ",
+		"staff": "ሰራተኞች",
 		"diseases": "በሽታዎች",
 		"operations": "ስራዎች",
 		"vaccines": "ክትባቶች",
@@ -416,7 +445,10 @@
 		"users": "ተጠቃሚዎች እና ቡድኖች",
 		"types": "ዓይነቶችን ያስተዳድሩ",
 		"hospitalInfo": "የሆስፒታል መረጃ",
-		"hospital": "ሆስፒታል"
+		"hospital": "ሆስፒታል",
+		"articleFamilies": "የዕቃ ቤተሰቦች",
+		"countries": "Countries",
+		"reductionPlans": "Reduction Plans"
 	},
 	"operation": {
 		"newoperation": "አዲስ ኦፕሬሽን",
@@ -469,7 +501,8 @@
 			"opd_admission": "OPD/መግቢያ",
 			"admission": "መግቢያ",
 			"opd": "ኦህዴድ"
-		}
+		},
+		"articleFamily": "የዕቃ ቤተሰብ"
 	},
 	"common": {
 		"ok": "እሺ",
@@ -500,6 +533,13 @@
 		"searchpatientinstruction": "የታካሚ መታወቂያ ከሌልዎት በተቻለ መጠን ብዙ መስኮችን ይሙሉ እና ፍለጋን ጠቅ ያድርጉ",
 		"required": "ይህ መስክ ያስፈልጋል",
 		"emptydata": "ምንም ግቤት አልተገኘም!",
+		"page": "ገጽ",
+		"previous": "ቀዳሚ",
+		"next": "ቀጣይ",
+		"first_page": "መጀመሪያ ገጽ",
+		"last_page": "የመጨረሻ ገጽ",
+		"per_page": "በገጽ",
+		"total_items": "ንጥሎች",
 		"save": "አስቀምጥ",
 		"code": "ኮድ",
 		"update": "አዘምን",
@@ -968,7 +1008,8 @@
 		"validateProcedureMinMax": "ዋጋ 1, 2 ወይም 3 ብቻ ሊሆን ይችላል",
 		"possibleValues": "ሊሆኑ የሚችሉ እሴቶች",
 		"defaultValue": "ነባሪ እሴት",
-		"invalidDefaultResult": "ነባሪ ውጤት ሊሆኑ ከሚችሉ እሴቶች ውስጥ አንዱ መሆን አለበት።"
+		"invalidDefaultResult": "ነባሪ ውጤት ሊሆኑ ከሚችሉ እሴቶች ውስጥ አንዱ መሆን አለበት።",
+		"articleFamily": "የዕቃ ቤተሰብ"
 	},
 	"vaccine": {
 		"code": "ኮድ",
@@ -1193,6 +1234,24 @@
 		"updateSuccess": "ዋርድ {{code}} በተሳካ ሁኔታ ዘምኗል!",
 		"deleteSuccess": "ዋርድ {{code}} በተሳካ ሁኔታ ተሰርዟል!"
 	},
+	"staff": {
+		"code": "ኮድ",
+		"firstName": "የመጀመሪያ ስም",
+		"lastName": "የአባት ስም",
+		"profession": "ሙያ",
+		"position": "ቦታ",
+		"phone": "ስልክ",
+		"addStaff": "ሰራተኛ ጨምር",
+		"editStaff": "ሰራተኛ አርትዕ",
+		"updateStaff": "ሰራተኛ አዘምን",
+		"saveStaff": "ሰራተኛ አስቀምጥ",
+		"created": "ሰራተኛ ተፈጥሯል",
+		"updated": "ሰራተኛ ዘምኗል",
+		"deleted": "ሰራተኛ ተሰርዟል",
+		"createSuccess": "ሰራተኛው በተሳካ ሁኔታ ተፈጥሯል!",
+		"updateSuccess": "ሰራተኛ {{code}} በተሳካ ሁኔታ ዘምኗል!",
+		"deleteSuccess": "ሰራተኛው በተሳካ ሁኔታ ተሰርዟል!"
+	},
 	"disease": {
 		"code": "ኮድ",
 		"name": "ስም",
@@ -1262,5 +1321,80 @@
 		"updateSuccess": "የፈተናው አይነት በተሳካ ሁኔታ ዘምኗል!",
 		"cancelCreation": "እርግጠኛ ነህ የፈተና አይነት መፍጠር መሰረዝህን እርግጠኛ ነህ?",
 		"cancelUpdate": "እርግጠኛ ነህ የፈተናውን አይነት ማዘመን መሰረዝህን እርግጠኛ ነህ?"
+	},
+	"articleFamily": {
+		"id": "የዕቃ ቤተሰብ መለያ",
+		"code": "ኮድ",
+		"description": "መግለጫ",
+		"addNewArticleFamily": "አዲስ የዕቃ ቤተሰብ አክል",
+		"editArticleFamily": "የዕቃ ቤተሰብ አርትዕ",
+		"updateArticleFamily": "ለውጦችን አስቀምጥ",
+		"saveArticleFamily": "አስቀምጥ",
+		"addArticleFamily": "አዲስ የዕቃ ቤተሰብ",
+		"updated": "የዕቃ ቤተሰብ ተዘምኗል",
+		"updateSuccess": "የዕቃ ቤተሰብ በተሳካ ሁኔታ ተዘምኗል!",
+		"created": "የዕቃ ቤተሰብ ተፈጥሯል",
+		"createSuccess": "የዕቃ ቤተሰብ በተሳካ ሁኔታ ተፈጥሯል!",
+		"deleted": "የዕቃ ቤተሰብ ተሰርዟል",
+		"deleting": "የዕቃ ቤተሰብ በመሰረዝ ላይ...",
+		"deleteSuccess": "የዕቃ ቤተሰብ በተሳካ ሁኔታ ተሰርዟል!"
+	},
+	"country": {
+		"id": "Country ID",
+		"isoCode": "ISO Code",
+		"name": "Country Name",
+		"phoneCode": "Phone Code",
+		"isoCodeInvalidFormat": "ISO code must be 2 uppercase letters",
+		"phoneCodeInvalidFormat": "Invalid phone code format",
+		"addNewCountry": "Add a new country",
+		"editCountry": "Edit country",
+		"updateCountry": "Save changes",
+		"saveCountry": "Save",
+		"addCountry": "New country",
+		"updated": "Country updated",
+		"updateSuccess": "Country has been updated successfully!",
+		"created": "Country created",
+		"createSuccess": "Country has been created successfully!",
+		"deleted": "Country deleted",
+		"deleting": "Deleting country...",
+		"deleteSuccess": "Country has been deleted successfully!"
+	},
+	"reductionPlan": {
+		"addReductionPlan": "Add Reduction Plan",
+		"addNewReductionPlan": "Add new reduction plan",
+		"editReductionPlan": "Edit Reduction Plan",
+		"saveReductionPlan": "Save Reduction Plan",
+		"updateReductionPlan": "Save changes",
+		"description": "Description",
+		"medicalRate": "Medical Rate (%)",
+		"examRate": "Exam Rate (%)",
+		"operationRate": "Operation Rate (%)",
+		"otherRate": "Other Rate (%)",
+		"generalRates": "General Reduction Rates",
+		"specificReductions": "Specific Reductions",
+		"medicals": "Medicals",
+		"exams": "Exams",
+		"operations": "Operations",
+		"others": "Other Prices",
+		"item": "Item",
+		"rate": "Rate (%)",
+		"actions": "Actions",
+		"addItem": "Add Item",
+		"selectMedical": "Select a medical...",
+		"selectExam": "Select an exam...",
+		"selectOperation": "Select an operation...",
+		"selectOther": "Select a price other...",
+		"removeAll": "Remove All",
+		"noSpecificReductions": "No specific reductions defined (general rate applies).",
+		"deleting": "Deleting reduction plan...",
+		"deleted": "Reduction Plan Deleted",
+		"deleteSuccess": "Reduction plan deleted successfully",
+		"created": "Reduction Plan Created",
+		"createSuccess": "Reduction plan created successfully",
+		"updated": "Reduction Plan Updated",
+		"updateSuccess": "Reduction plan updated successfully",
+		"editItem": "አስተካክል",
+		"saveItem": "አስቀምጥ",
+		"cancelEdit": "ይቅር"
 	}
 }

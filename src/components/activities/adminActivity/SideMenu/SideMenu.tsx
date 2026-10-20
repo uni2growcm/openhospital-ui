@@ -2,12 +2,16 @@ import {
 	AirlineSeatFlat,
 	ArrowForwardIosRounded,
 	AssignmentInd,
+	Badge,
 	BlurCircular,
+	Category,
 	GroupWork,
 	Healing,
 	LocalDrink,
 	LocalHospitalSharp,
 	People,
+	Percent,
+	Public,
 	SupervisedUserCircle,
 	Tune,
 } from '@mui/icons-material';
@@ -31,6 +35,14 @@ const SideMenu = () => {
 
 	const changeAdminSection = useCallback(
 		(section: IAdminSection) => {
+			if (section === 'articleFamilies') {
+				navigate(PATHS.admin_article_families);
+				return;
+			}
+			if (section === 'reductionPlans') {
+				navigate(PATHS.admin_reductionplans);
+				return;
+			}
 			navigate(`${PATHS.admin}/${section}`);
 		},
 		[navigate],
@@ -40,6 +52,10 @@ const SideMenu = () => {
 		{
 			key: 'wards',
 			icon: <AirlineSeatFlat fontSize="small" />,
+		},
+		{
+			key: 'staff',
+			icon: <Badge fontSize="small" />,
 		},
 		{
 			key: 'diseases',
@@ -62,8 +78,20 @@ const SideMenu = () => {
 			icon: <SupervisedUserCircle fontSize="small" />,
 		},
 		{
+			key: 'articleFamilies',
+			icon: <Category fontSize="small" />,
+		},
+		{
+			key: 'countries',
+			icon: <Public fontSize="small" />,
+		},
+		{
 			key: 'users',
 			icon: <People fontSize="small" />,
+		},
+		{
+			key: 'reductionPlans',
+			icon: <Percent fontSize="small" />,
 		},
 		{
 			key: 'settings',
@@ -82,9 +110,15 @@ const SideMenu = () => {
 					key={item.key}
 					icon={item.icon}
 					label={t(`nav.${item.key}`)}
-					selected={location.pathname
-						.slice(location.pathname.lastIndexOf('admin') + 6)
-						.startsWith(item.key)}
+					selected={
+						item.key === 'articleFamilies'
+							? location.pathname.includes('article-families')
+							: item.key === 'reductionPlans'
+								? location.pathname.includes('reduction-plans')
+								: location.pathname
+										.slice(location.pathname.lastIndexOf('admin') + 6)
+										.startsWith(item.key)
+					}
 					onClick={() => {
 						changeAdminSection(item.key);
 					}}

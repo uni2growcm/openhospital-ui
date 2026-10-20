@@ -13,6 +13,7 @@ import {
 	OperationDTOOpeForEnum,
 } from '../../../../../generated';
 import { scrollToElement } from '../../../../../libraries/uiUtils/scrollToElement';
+import { getArticleFamilies } from '../../../../../state/articleFamilies';
 import {
 	deleteOperationReset,
 	getOperations,
@@ -38,11 +39,23 @@ export const OperationTable: FunctionComponent<IOwnProps> = ({
 	const { t } = useTranslation();
 	const infoBoxRef = useRef<HTMLDivElement>(null);
 
+	useEffect(() => {
+		dispatch(getArticleFamilies(undefined));
+	}, [dispatch]);
+
 	const operationTypesOptions = useAppSelector(
 		(state) =>
 			state.types.operations.getAll.data?.map((item) => ({
 				label: item.description,
 				value: item.code,
+			})) ?? [],
+	);
+
+	const articleFamiliesOptions = useAppSelector(
+		(state) =>
+			state.articleFamilies.articleFamilyList.data?.map((item) => ({
+				value: `${item.code} - ${item.description}`,
+				label: `${item.code} - ${item.description}`,
 			})) ?? [],
 	);
 
@@ -55,17 +68,32 @@ export const OperationTable: FunctionComponent<IOwnProps> = ({
 		});
 	};
 
-	const header = ['code', 'type', 'description', 'class', 'opeFor'];
+	const header = [
+		'code',
+		'type',
+		'description',
+		'articleFamily',
+		'class',
+		'opeFor',
+	];
 
 	const label = {
 		code: t('operation.code'),
 		type: t('operation.type'),
 		description: t('operation.description'),
+		articleFamily: t('operation.articleFamily'),
 		class: t('operation.class'),
 		opeFor: t('operation.opeFor'),
 	};
 
-	const order = ['code', 'type', 'description', 'class', 'opeFor'];
+	const order = [
+		'code',
+		'type',
+		'description',
+		'articleFamily',
+		'class',
+		'opeFor',
+	];
 	const filters: TFilterField[] = [
 		{ key: 'description', label: t('operation.description'), type: 'text' },
 		{
@@ -73,6 +101,12 @@ export const OperationTable: FunctionComponent<IOwnProps> = ({
 			label: t('operation.type'),
 			type: 'select',
 			options: operationTypesOptions,
+		},
+		{
+			key: 'articleFamily',
+			label: t('operation.articleFamily'),
+			type: 'select',
+			options: articleFamiliesOptions,
 		},
 		{
 			key: 'class',
@@ -117,6 +151,9 @@ export const OperationTable: FunctionComponent<IOwnProps> = ({
 				code: item.code ?? '',
 				type: item.type?.description ?? '',
 				description: item.description ?? '',
+				articleFamily: item.articleFamily
+					? `${item.articleFamily.code} - ${item.articleFamily.description}`
+					: '',
 				opeFor: t(`operation.contextOptions.${item.opeFor}`),
 				class:
 					item.major === 0

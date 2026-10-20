@@ -467,15 +467,6 @@ paths:
         required: false
         schema:
           type: string
-          enum:
-          - angal.typology.deliverytype
-          - angal.typology.visittype
-          - angal.typology.partnertype
-          - angal.typology.familyplanningmethodtype
-          - angal.typology.familyplanningvisittype
-          - angal.typology.hivtreatmenttype
-          - angal.typology.tuberculosisregimen
-          - angal.typology.tuberculosiscontact
       responses:
         "200":
           description: OK
@@ -586,6 +577,60 @@ paths:
                 $ref: "#/components/schemas/SupplierDTO"
       security:
       - bearerAuth: []
+  /staff:
+    get:
+      tags:
+      - Staff
+      operationId: getStaff
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StaffDTO"
+      security:
+      - bearerAuth: []
+    put:
+      tags:
+      - Staff
+      operationId: updateStaff
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StaffDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StaffDTO"
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - Staff
+      operationId: newStaff
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StaffDTO"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StaffDTO"
+      security:
+      - bearerAuth: []
   /settings/{code}:
     put:
       tags:
@@ -610,6 +655,98 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SettingDTO"
+      security:
+      - bearerAuth: []
+  /reduction-plans/{id}:
+    get:
+      tags:
+      - Reduction Plans
+      summary: Get a reduction plan by ID
+      operationId: getReductionPlan
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Reduction plan retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReductionPlanDTO"
+        "404":
+          description: Reduction plan not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReductionPlanDTO"
+      security:
+      - bearerAuth: []
+    put:
+      tags:
+      - Reduction Plans
+      summary: Update an existing reduction plan
+      operationId: updateReductionPlan
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReductionPlanDTO"
+        required: true
+      responses:
+        "200":
+          description: Reduction plan updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReductionPlanDTO"
+        "400":
+          description: Invalid request payload
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReductionPlanDTO"
+        "404":
+          description: Reduction plan not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReductionPlanDTO"
+        "409":
+          description: Conflict or data integrity violation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReductionPlanDTO"
+      security:
+      - bearerAuth: []
+    delete:
+      tags:
+      - Reduction Plans
+      summary: Delete a reduction plan by ID (soft delete)
+      operationId: deleteReductionPlan
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "204":
+          description: Reduction plan successfully deleted
+        "404":
+          description: Reduction plan not found
       security:
       - bearerAuth: []
   /pricesothers/{id}:
@@ -1911,6 +2048,98 @@ paths:
                 $ref: "#/components/schemas/DeliveryResultTypeDTO"
       security:
       - bearerAuth: []
+  /countries/{id}:
+    get:
+      tags:
+      - Countries
+      summary: Get country by ID
+      operationId: getCountry
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Country found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CountryDTO"
+        "404":
+          description: Country not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CountryDTO"
+      security:
+      - bearerAuth: []
+    put:
+      tags:
+      - Countries
+      summary: Update an existing country
+      operationId: updateCountry
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CountryDTO"
+        required: true
+      responses:
+        "200":
+          description: Country updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CountryDTO"
+        "400":
+          description: Invalid request payload
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CountryDTO"
+        "404":
+          description: Country not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CountryDTO"
+        "409":
+          description: Conflict with an existing country
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CountryDTO"
+      security:
+      - bearerAuth: []
+    delete:
+      tags:
+      - Countries
+      summary: Soft-delete a country by ID
+      operationId: deleteCountry
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "204":
+          description: Country successfully deleted
+        "404":
+          description: Country not found
+      security:
+      - bearerAuth: []
   /bills/{id}:
     get:
       tags:
@@ -1976,6 +2205,98 @@ paths:
             application/json:
               schema:
                 type: boolean
+      security:
+      - bearerAuth: []
+  /article-families/{id}:
+    get:
+      tags:
+      - Article Families
+      summary: Get an article family by ID
+      operationId: getArticleFamily
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Article family retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleFamilyDTO"
+        "404":
+          description: Article family not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleFamilyDTO"
+      security:
+      - bearerAuth: []
+    put:
+      tags:
+      - Article Families
+      summary: Update an existing article family
+      operationId: updateArticleFamily
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArticleFamilyDTO"
+        required: true
+      responses:
+        "200":
+          description: Article family updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleFamilyDTO"
+        "400":
+          description: Invalid request payload
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleFamilyDTO"
+        "404":
+          description: Article family not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleFamilyDTO"
+        "409":
+          description: Conflict with an existing article family
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleFamilyDTO"
+      security:
+      - bearerAuth: []
+    delete:
+      tags:
+      - Article Families
+      summary: Delete an article family by ID (soft delete)
+      operationId: deleteArticleFamily
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "204":
+          description: Article family successfully deleted
+        "404":
+          description: Article family not found
       security:
       - bearerAuth: []
   /agetypes:
@@ -2611,6 +2932,61 @@ paths:
             application/json:
               schema:
                 type: boolean
+      security:
+      - bearerAuth: []
+  /reduction-plans:
+    get:
+      tags:
+      - Reduction Plans
+      summary: Get all reduction plans or search by description
+      operationId: getReductionPlans
+      parameters:
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: List of reduction plans retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ReductionPlanDTO"
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - Reduction Plans
+      summary: Create a new reduction plan
+      operationId: createReductionPlan
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReductionPlanDTO"
+        required: true
+      responses:
+        "201":
+          description: Reduction plan created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReductionPlanDTO"
+        "400":
+          description: Invalid request payload
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReductionPlanDTO"
+        "409":
+          description: Conflict or data integrity violation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReductionPlanDTO"
       security:
       - bearerAuth: []
   /pricesothers:
@@ -3252,6 +3628,62 @@ paths:
                 $ref: "#/components/schemas/PatientExaminationDTO"
       security:
       - bearerAuth: []
+  /countries:
+    get:
+      tags:
+      - Countries
+      summary: Get all active countries or search by keyword
+      operationId: getCountries
+      parameters:
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CountryDTO"
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - Countries
+      summary: Create a new country
+      operationId: createCountry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CountryDTO"
+        required: true
+      responses:
+        "201":
+          description: Country created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CountryDTO"
+        "400":
+          description: Invalid request payload
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CountryDTO"
+        "409":
+          description: "Country already exists (duplicate ISO code, name or phone\
+            \ code)"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CountryDTO"
+      security:
+      - bearerAuth: []
   /bills:
     get:
       tags:
@@ -3408,6 +3840,55 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LoginResponse"
+      security:
+      - bearerAuth: []
+  /article-families:
+    get:
+      tags:
+      - Article Families
+      summary: Get all active article families
+      operationId: getAllArticleFamilies
+      responses:
+        "200":
+          description: List of active article families retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ArticleFamilyDTO"
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - Article Families
+      summary: Create a new article family
+      operationId: createArticleFamily
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArticleFamilyDTO"
+        required: true
+      responses:
+        "201":
+          description: Article family created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleFamilyDTO"
+        "400":
+          description: Invalid request payload
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleFamilyDTO"
+        "409":
+          description: Article family code already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleFamilyDTO"
       security:
       - bearerAuth: []
   /admissions/discharge:
@@ -3698,15 +4179,6 @@ paths:
         required: false
         schema:
           type: string
-          enum:
-          - angal.typology.deliverytype
-          - angal.typology.visittype
-          - angal.typology.partnertype
-          - angal.typology.familyplanningmethodtype
-          - angal.typology.familyplanningvisittype
-          - angal.typology.hivtreatmenttype
-          - angal.typology.tuberculosisregimen
-          - angal.typology.tuberculosiscontact
       - name: page
         in: query
         required: false
@@ -4024,6 +4496,103 @@ paths:
             application/json:
               schema:
                 type: boolean
+      security:
+      - bearerAuth: []
+  /staff/{code}:
+    get:
+      tags:
+      - Staff
+      operationId: getStaff_1
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StaffDTO"
+      security:
+      - bearerAuth: []
+    delete:
+      tags:
+      - Staff
+      operationId: deleteStaff
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+      security:
+      - bearerAuth: []
+  /staff/search:
+    get:
+      tags:
+      - Staff
+      operationId: searchStaff
+      parameters:
+      - name: keyword
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StaffDTO"
+      security:
+      - bearerAuth: []
+  /staff/paged:
+    get:
+      tags:
+      - Staff
+      operationId: getStaffPaged
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - name: keyword
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageStaffDTO"
       security:
       - bearerAuth: []
   /settings:
@@ -6049,6 +6618,36 @@ paths:
                   $ref: "#/components/schemas/DiseaseDTO"
       security:
       - bearerAuth: []
+  /countries/paged:
+    get:
+      tags:
+      - Countries
+      summary: Get active countries page by page
+      operationId: getCountriesPaged
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageCountryDTO"
+      security:
+      - bearerAuth: []
   /bills/pending:
     get:
       tags:
@@ -6188,6 +6787,29 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/BillItemsDTO"
+      security:
+      - bearerAuth: []
+  /article-families/search:
+    get:
+      tags:
+      - Article Families
+      summary: Search active article families
+      operationId: searchArticleFamilies
+      parameters:
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Matching article families retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ArticleFamilyDTO"
       security:
       - bearerAuth: []
   /agetypes/{index}:
@@ -7520,6 +8142,43 @@ components:
       required:
       - supId
       - supName
+    StaffDTO:
+      type: object
+      description: Class representing a staff member (personnel)
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The staff member's code
+        firstName:
+          type: string
+          description: The first name of the staff member
+          maxLength: 50
+        lastName:
+          type: string
+          description: The last name of the staff member
+          maxLength: 50
+        profession:
+          type: string
+          description: The profession of the staff member
+          maxLength: 50
+        position:
+          type: string
+          description: The position of the staff member
+          maxLength: 50
+        phone:
+          type: string
+          description: The phone number of the staff member
+          maxLength: 50
+        lock:
+          type: integer
+          format: int32
+          description: lock
+          example: 0
+      required:
+      - firstName
+      - lastName
+      - position
     UpdateSettingDTO:
       type: object
       properties:
@@ -7590,6 +8249,305 @@ components:
       - defaultValue
       - id
       - type
+    ArticleFamilyDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Identifier of the article family
+          example: 1
+        code:
+          type: string
+          description: Code of the article family
+          example: MED
+          maxLength: 50
+          minLength: 0
+        description:
+          type: string
+          description: Description of the article family
+          example: Medicines and Drugs
+          maxLength: 255
+          minLength: 0
+        lock:
+          type: integer
+          format: int32
+          description: Optimistic locking version indicator
+          example: 0
+      required:
+      - code
+      - description
+    ExamDTO:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Exam Code
+          example: "01.01"
+          maxLength: 10
+        description:
+          type: string
+          description: Exam Description
+          example: 1.1
+          maxLength: 100
+        procedure:
+          type: integer
+          format: int32
+          description: Exam Procedure
+          example: 1
+        defaultResult:
+          type: string
+          description: Exam Default Result
+          example: '>=12 (NORMAL)'
+          maxLength: 50
+        examtype:
+          $ref: "#/components/schemas/ExamTypeDTO"
+          description: Exam Type
+        articleFamily:
+          $ref: "#/components/schemas/ArticleFamilyDTO"
+          description: Article Family
+        lock:
+          type: integer
+          format: int32
+          description: Lock
+          example: 0
+    ExamReductionDTO:
+      type: object
+      description: Class representing an exam reduction
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Identifier of the exam reduction
+          example: 1
+        exam:
+          $ref: "#/components/schemas/ExamDTO"
+          description: The exam
+        reductionRate:
+          type: number
+          description: Reduction rate percentage
+          example: 25.0
+          maximum: 100.00
+          minimum: 0.01
+        lock:
+          type: integer
+          format: int32
+          description: Lock version
+          example: 0
+      required:
+      - exam
+      - reductionRate
+    ExamTypeDTO:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Exam Type Code
+          example: HB
+        description:
+          type: string
+          description: Exam Type Description
+          example: 1.Haematology
+          maxLength: 50
+    MedicalDTO:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The id of the medical
+          example: 1
+          maxLength: 5
+        prod_code:
+          type: string
+          description: The product code
+          example: PARA
+        type:
+          $ref: "#/components/schemas/MedicalTypeDTO"
+          description: The medical type
+        description:
+          type: string
+          description: The description of the medical
+          example: Paracétamol
+          maxLength: 100
+        initialqty:
+          type: number
+          format: double
+          description: The initial quantity of the medical
+          example: 21
+        pcsperpck:
+          type: integer
+          format: int32
+          description: The number of pieces per packet
+          example: 100
+        inqty:
+          type: number
+          format: double
+          description: The input quantity of the medical
+          example: 340
+        outqty:
+          type: number
+          format: double
+          description: The out quantity of the medical
+          example: 8
+        minqty:
+          type: number
+          format: double
+          description: The min quantity of the medical
+          example: 15
+        lock:
+          type: integer
+          format: int32
+          description: Lock
+          example: 0
+    MedicalReductionDTO:
+      type: object
+      description: Class representing a medical reduction
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Identifier of the medical reduction
+          example: 1
+        medical:
+          $ref: "#/components/schemas/MedicalDTO"
+          description: The medical item
+        reductionRate:
+          type: number
+          description: Reduction rate percentage
+          example: 15.0
+          maximum: 100.00
+          minimum: 0.01
+        lock:
+          type: integer
+          format: int32
+          description: Lock version
+          example: 0
+      required:
+      - medical
+      - reductionRate
+    MedicalTypeDTO:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Code of the medical type
+          example: M
+          maxLength: 1
+        description:
+          type: string
+          description: Description of the medical type
+          example: Medical material
+          maxLength: 30
+      required:
+      - code
+      - description
+    OperationDTO:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The code of operation
+          maxLength: 10
+        description:
+          type: string
+          description: The operation description
+          maxLength: 50
+        type:
+          $ref: "#/components/schemas/OperationTypeDTO"
+          description: The operation type
+        articleFamily:
+          $ref: "#/components/schemas/ArticleFamilyDTO"
+          description: The article family
+        opeFor:
+          type: string
+          description: The operation context
+          enum:
+          - opd_admission
+          - admission
+          - opd
+          example: opd_admission
+        major:
+          type: integer
+          format: int32
+          description: The operation major
+        lock:
+          type: integer
+          format: int32
+          description: Lock
+          example: 0
+      required:
+      - code
+      - description
+      - major
+      - opeFor
+      - type
+    OperationReductionDTO:
+      type: object
+      description: Class representing an operation reduction
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Identifier of the operation reduction
+          example: 1
+        operation:
+          $ref: "#/components/schemas/OperationDTO"
+          description: The operation
+        reductionRate:
+          type: number
+          description: Reduction rate percentage
+          example: 20.0
+          maximum: 100.00
+          minimum: 0.01
+        lock:
+          type: integer
+          format: int32
+          description: Lock version
+          example: 0
+      required:
+      - operation
+      - reductionRate
+    OperationTypeDTO:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The operation code
+          maxLength: 2
+        description:
+          type: string
+          description: The operation type
+          maxLength: 50
+      required:
+      - code
+      - description
+    PriceOtherReductionDTO:
+      type: object
+      description: Class representing a price other reduction
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Identifier of the price other reduction
+          example: 1
+        pricesOthers:
+          $ref: "#/components/schemas/PricesOthersDTO"
+          description: The other price item
+        reductionRate:
+          type: number
+          description: Reduction rate percentage
+          example: 10.0
+          maximum: 100.00
+          minimum: 0.01
+        lock:
+          type: integer
+          format: int32
+          description: Lock version
+          example: 0
+      required:
+      - pricesOthers
+      - reductionRate
     PricesOthersDTO:
       type: object
       description: Class representing a price others
@@ -7606,6 +8564,9 @@ components:
           type: string
           description: The description
           maxLength: 100
+        articleFamily:
+          $ref: "#/components/schemas/ArticleFamilyDTO"
+          description: The article family
         lock:
           type: integer
           format: int32
@@ -7631,6 +8592,75 @@ components:
       - description
       - ipdInclude
       - opdInclude
+    ReductionPlanDTO:
+      type: object
+      description: Class representing a reduction plan
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Identifier of the reduction plan
+          example: 1
+        description:
+          type: string
+          description: Description of the reduction plan
+          example: Staff Discount
+          maxLength: 100
+          minLength: 0
+        operationRate:
+          type: number
+          description: General operation reduction rate percentage
+          example: 10.0
+          maximum: 100.00
+          minimum: 0.00
+        medicalRate:
+          type: number
+          description: General medical reduction rate percentage
+          example: 10.0
+          maximum: 100.00
+          minimum: 0.00
+        examRate:
+          type: number
+          description: General exam reduction rate percentage
+          example: 10.0
+          maximum: 100.00
+          minimum: 0.00
+        otherRate:
+          type: number
+          description: General other items reduction rate percentage
+          example: 10.0
+          maximum: 100.00
+          minimum: 0.00
+        lock:
+          type: integer
+          format: int32
+          description: Lock version
+          example: 0
+        examReductions:
+          type: array
+          description: Specific exam reductions
+          items:
+            $ref: "#/components/schemas/ExamReductionDTO"
+        medicalReductions:
+          type: array
+          description: Specific medical reductions
+          items:
+            $ref: "#/components/schemas/MedicalReductionDTO"
+        operationReductions:
+          type: array
+          description: Specific operation reductions
+          items:
+            $ref: "#/components/schemas/OperationReductionDTO"
+        priceOtherReductions:
+          type: array
+          description: Specific price other reductions
+          items:
+            $ref: "#/components/schemas/PriceOtherReductionDTO"
+      required:
+      - examRate
+      - medicalRate
+      - operationRate
+      - otherRate
     PriceListDTO:
       type: object
       description: Class representing a price list
@@ -7736,57 +8766,6 @@ components:
           description: Patient id
       required:
       - patientId
-    OperationTypeDTO:
-      type: object
-      properties:
-        code:
-          type: string
-          description: The operation code
-          maxLength: 2
-        description:
-          type: string
-          description: The operation type
-          maxLength: 50
-      required:
-      - code
-      - description
-    OperationDTO:
-      type: object
-      properties:
-        code:
-          type: string
-          description: The code of operation
-          maxLength: 10
-        description:
-          type: string
-          description: The operation description
-          maxLength: 50
-        type:
-          $ref: "#/components/schemas/OperationTypeDTO"
-          description: The operation type
-        opeFor:
-          type: string
-          description: The operation context
-          enum:
-          - opd_admission
-          - admission
-          - opd
-          example: opd_admission
-        major:
-          type: integer
-          format: int32
-          description: The operation major
-        lock:
-          type: integer
-          format: int32
-          description: Lock
-          example: 0
-      required:
-      - code
-      - description
-      - major
-      - opeFor
-      - type
     AdmissionDTO:
       type: object
       properties:
@@ -8272,73 +9251,6 @@ components:
       - code
       - description
       - type
-    MedicalTypeDTO:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Code of the medical type
-          example: M
-          maxLength: 1
-        description:
-          type: string
-          description: Description of the medical type
-          example: Medical material
-          maxLength: 30
-      required:
-      - code
-      - description
-    MedicalDTO:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: The id of the medical
-          example: 1
-          maxLength: 5
-        prod_code:
-          type: string
-          description: The product code
-          example: PARA
-        type:
-          $ref: "#/components/schemas/MedicalTypeDTO"
-          description: The medical type
-        description:
-          type: string
-          description: The description of the medical
-          example: Paracétamol
-          maxLength: 100
-        initialqty:
-          type: number
-          format: double
-          description: The initial quantity of the medical
-          example: 21
-        pcsperpck:
-          type: integer
-          format: int32
-          description: The number of pieces per packet
-          example: 100
-        inqty:
-          type: number
-          format: double
-          description: The input quantity of the medical
-          example: 340
-        outqty:
-          type: number
-          format: double
-          description: The out quantity of the medical
-          example: 8
-        minqty:
-          type: number
-          format: double
-          description: The min quantity of the medical
-          example: 15
-        lock:
-          type: integer
-          format: int32
-          description: Lock
-          example: 0
     MalnutritionDTO:
       type: object
       properties:
@@ -8378,49 +9290,6 @@ components:
       - dateSupp
       - height
       - weight
-    ExamDTO:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Exam Code
-          example: "01.01"
-          maxLength: 10
-        description:
-          type: string
-          description: Exam Description
-          example: 1.1
-          maxLength: 100
-        procedure:
-          type: integer
-          format: int32
-          description: Exam Procedure
-          example: 1
-        defaultResult:
-          type: string
-          description: Exam Default Result
-          example: '>=12 (NORMAL)'
-          maxLength: 50
-        examtype:
-          $ref: "#/components/schemas/ExamTypeDTO"
-          description: Exam Type
-        lock:
-          type: integer
-          format: int32
-          description: Lock
-          example: 0
-    ExamTypeDTO:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Exam Type Code
-          example: HB
-        description:
-          type: string
-          description: Exam Type Description
-          example: 1.Haematology
-          maxLength: 50
     LabWithRowsDTO:
       type: object
       properties:
@@ -8659,6 +9528,39 @@ components:
       required:
       - patientCode
       - pex_date
+    CountryDTO:
+      type: object
+      description: Class representing a country
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: ID of the country
+          example: 1
+        isoCode:
+          type: string
+          description: ISO code of the country (2 letters)
+          example: CM
+          maxLength: 2
+          minLength: 2
+          pattern: "^[A-Za-z]{2}$"
+        name:
+          type: string
+          description: Name of the country
+          example: Cameroon
+          maxLength: 100
+          minLength: 0
+        phoneCode:
+          type: string
+          description: Phone code / dial code of the country
+          example: "+237"
+          maxLength: 10
+          minLength: 0
+        lock:
+          type: integer
+          format: int32
+          description: Optimistic lock version
+          example: 0
     BillItemsDTO:
       type: object
       description: Class representing a billItem
@@ -9169,13 +10071,13 @@ components:
           format: int32
         sort:
           $ref: "#/components/schemas/SortObject"
-        numberOfElements:
-          type: integer
-          format: int32
         first:
           type: boolean
         last:
           type: boolean
+        numberOfElements:
+          type: integer
+          format: int32
         empty:
           type: boolean
     PageableObject:
@@ -9205,6 +10107,37 @@ components:
           type: boolean
         empty:
           type: boolean
+    PageInfoDTO:
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int32
+        page:
+          type: integer
+          format: int32
+        nbOfElements:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int64
+        totalNbOfElements:
+          type: integer
+          format: int64
+        hasPreviousPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+    PageStaffDTO:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/StaffDTO"
+        pageInfo:
+          $ref: "#/components/schemas/PageInfoDTO"
     Series:
       type: object
       properties:
@@ -9459,28 +10392,6 @@ components:
           type: array
           items:
             type: string
-    PageInfoDTO:
-      type: object
-      properties:
-        size:
-          type: integer
-          format: int32
-        page:
-          type: integer
-          format: int32
-        nbOfElements:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int64
-        totalNbOfElements:
-          type: integer
-          format: int64
-        hasPreviousPage:
-          type: boolean
-        hasNextPage:
-          type: boolean
     PagePatientDTO:
       type: object
       properties:
@@ -9549,6 +10460,15 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/PatientExaminationDTO"
+        pageInfo:
+          $ref: "#/components/schemas/PageInfoDTO"
+    PageCountryDTO:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/CountryDTO"
         pageInfo:
           $ref: "#/components/schemas/PageInfoDTO"
     PageAdmissionDTO:

@@ -7,13 +7,44 @@
 		"internalerror": "An internal error occured",
 		"lab": {
 			"someexamswithoutresultpleasecheck": "Some exams without result please check."
-		}
+		},
+		"articleFamily": {
+			"code_exists": "An article family with this code already exists.",
+			"not_found": "Article family not found.",
+			"integrity_violation": "Article family data integrity violation."
+		},
+		"articlefamily": {
+			"code_exists": "An article family with this code already exists.",
+			"not_found": "Article family not found.",
+			"integrity_violation": "Article family data integrity violation."
+		},
+		"country": {
+			"isocode_exists": "A country with this ISO code already exists.",
+			"name_exists": "A country with this name already exists.",
+			"phonecode_exists": "A country with this phone code already exists.",
+			"not_found": "Country not found.",
+			"integrity_violation": "Country data integrity violation."
+		},
+		"reductionplan": {
+			"integrity_violation": "Reduction plan data integrity violation.",
+			"not_found": "Reduction plan not found.",
+			"description_duplicate": "A reduction plan with this description already exists."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Reduction plan data integrity violation.",
+			"not_found": "Reduction plan not found.",
+			"description_duplicate": "A reduction plan with this description already exists."
+		},
+		"angal.sql.thedatahasbeenupdatedbysomeoneelse.msg": "The data has been updated by someone else or is out of date. Please refresh the page before trying again.",
+		"forbidden": "You do not have the required permissions to perform this action."
 	},
 	"validations": {
 		"min": "the value must be at least {{min}}",
 		"max": "the value must not exceed {{max}}",
 		"minLength": "the value length must be at least {{min}}",
 		"maxLength": "the value length must not exceed {{max}}",
+		"between": "the value must be between {{min}} and {{max}}",
+		"decimals": "maximum 2 decimal places allowed",
 		"email": "The value is not a valid email address",
 		"number": "the value is not a valid number"
 	},
@@ -408,18 +439,22 @@
 		"consultancy": "Consultancy",
 		"administration": "Administration",
 		"wards": "Wards",
+		"staff": "Personnel",
 		"diseases": "Diseases",
 		"operations": "Operations",
 		"vaccines": "Vaccines",
 		"prices": "Price List",
 		"suppliers": "Suppliers",
+		"articleFamilies": "Article Families",
+		"countries": "Countries",
 		"telemetry": "Telemetry",
 		"users": "Users & Groups",
 		"types": "Manage Types",
 		"hospitalInfo": "Hospital Info",
 		"hospital": "Hospital",
 		"settings": "Settings",
-		"radiology": "Radiology"
+		"radiology": "Radiology",
+		"reductionPlans": "Reduction Plans"
 	},
 	"operation": {
 		"newoperation": "New Operation",
@@ -472,7 +507,8 @@
 			"opd_admission": "OPD/Admission",
 			"admission": "Admission",
 			"opd": "OPD"
-		}
+		},
+		"articleFamily": "Article Family"
 	},
 	"common": {
 		"ok": "OK",
@@ -503,6 +539,13 @@
 		"searchpatientinstruction": "If you don't have the patient ID, fill as many fields as possible and click search",
 		"required": "This field is required",
 		"emptydata": "No entry found!",
+		"page": "Page",
+		"previous": "Previous",
+		"next": "Next",
+		"first_page": "First page",
+		"last_page": "Last page",
+		"per_page": "Per page",
+		"total_items": "items",
 		"save": "Save",
 		"code": "Code",
 		"update": "update",
@@ -976,7 +1019,8 @@
 		"validateProcedureMinMax": "Value can be only 1, 2 or 3",
 		"possibleValues": "Possible values",
 		"defaultValue": "Default value",
-		"invalidDefaultResult": "Default result should be one of possible values"
+		"invalidDefaultResult": "Default result should be one of possible values",
+		"articleFamily": "Article Family"
 	},
 	"vaccine": {
 		"code": "Code",
@@ -1175,6 +1219,43 @@
 		"deleting": "Deleting supplier...",
 		"deleteSuccess": "Supplier has been deleted successfully!"
 	},
+	"articleFamily": {
+		"id": "Article Family ID",
+		"code": "Code",
+		"description": "Description",
+		"addNewArticleFamily": "Add a new article family",
+		"editArticleFamily": "Edit article family",
+		"updateArticleFamily": "Save changes",
+		"saveArticleFamily": "Save",
+		"addArticleFamily": "New article family",
+		"updated": "Article family updated",
+		"updateSuccess": "Article family has been updated successfully!",
+		"created": "Article family created",
+		"createSuccess": "Article family has been created successfully!",
+		"deleted": "Article family deleted",
+		"deleting": "Deleting article family...",
+		"deleteSuccess": "Article family has been deleted successfully!"
+	},
+	"country": {
+		"id": "Country ID",
+		"isoCode": "ISO Code",
+		"name": "Country Name",
+		"phoneCode": "Phone Code",
+		"isoCodeInvalidFormat": "ISO code must be 2 uppercase letters",
+		"phoneCodeInvalidFormat": "Invalid phone code format",
+		"addNewCountry": "Add a new country",
+		"editCountry": "Edit country",
+		"updateCountry": "Save changes",
+		"saveCountry": "Save",
+		"addCountry": "New country",
+		"updated": "Country updated",
+		"updateSuccess": "Country has been updated successfully!",
+		"created": "Country created",
+		"createSuccess": "Country has been created successfully!",
+		"deleted": "Country deleted",
+		"deleting": "Deleting country...",
+		"deleteSuccess": "Country has been deleted successfully!"
+	},
 	"ward": {
 		"code": "Code",
 		"description": "Description",
@@ -1200,6 +1281,24 @@
 		"createSuccess": "Ward has been created successfully!",
 		"updateSuccess": "Ward {{code}} has been updated successfully!",
 		"deleteSuccess": "Ward {{code}} has been deleted successfully!"
+	},
+	"staff": {
+		"code": "Code",
+		"firstName": "First Name",
+		"lastName": "Last Name",
+		"profession": "Profession",
+		"position": "Position",
+		"phone": "Phone",
+		"addStaff": "Add Personnel",
+		"editStaff": "Edit Personnel",
+		"updateStaff": "Update Personnel",
+		"saveStaff": "Save Personnel",
+		"created": "Personnel Created",
+		"updated": "Personnel updated",
+		"deleted": "Personnel deleted",
+		"createSuccess": "Personnel has been created successfully!",
+		"updateSuccess": "Personnel {{code}} has been updated successfully!",
+		"deleteSuccess": "Personnel has been deleted successfully!"
 	},
 	"disease": {
 		"code": "Code",
@@ -1320,5 +1419,43 @@
 		"buttons": {
 			"menu": "Plugins"
 		}
+	},
+	"reductionPlan": {
+		"addReductionPlan": "Add Reduction Plan",
+		"addNewReductionPlan": "Add new reduction plan",
+		"editReductionPlan": "Edit Reduction Plan",
+		"saveReductionPlan": "Save Reduction Plan",
+		"updateReductionPlan": "Save changes",
+		"description": "Description",
+		"medicalRate": "Medical Rate (%)",
+		"examRate": "Exam Rate (%)",
+		"operationRate": "Operation Rate (%)",
+		"otherRate": "Other Rate (%)",
+		"generalRates": "General Reduction Rates",
+		"specificReductions": "Specific Reductions",
+		"medicals": "Medicals",
+		"exams": "Exams",
+		"operations": "Operations",
+		"others": "Other Prices",
+		"item": "Item",
+		"rate": "Rate (%)",
+		"actions": "Actions",
+		"addItem": "Add Item",
+		"selectMedical": "Select a medical...",
+		"selectExam": "Select an exam...",
+		"selectOperation": "Select an operation...",
+		"selectOther": "Select a price other...",
+		"removeAll": "Remove All",
+		"noSpecificReductions": "No specific reductions defined (general rate applies).",
+		"deleting": "Deleting reduction plan...",
+		"deleted": "Reduction Plan Deleted",
+		"deleteSuccess": "Reduction plan deleted successfully",
+		"created": "Reduction Plan Created",
+		"createSuccess": "Reduction plan created successfully",
+		"updated": "Reduction Plan Updated",
+		"updateSuccess": "Reduction plan updated successfully",
+		"editItem": "Edit",
+		"saveItem": "Save",
+		"cancelEdit": "Cancel"
 	}
 }

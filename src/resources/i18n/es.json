@@ -233,7 +233,11 @@
 		"managebills": "Manage Bills",
 		"billrecords": "Bill Records",
 		"visits": "Visits",
-		"patients": "Patients"
+		"patients": "Patients",
+		"articleFamilies": "Familias de artículos",
+		"countries": "Países",
+		"reductionPlans": "Planes de reducción",
+		"staff": "Personal"
 	},
 	"operation": {
 		"newoperation": "New Operation",
@@ -256,7 +260,8 @@
 		"rowupdatesuccess": "Operation Row updated successfully",
 		"rowcreatesuccess": "Operation Row created successfully",
 		"rowdeletesuccess": "Operation Row deleted successfully",
-		"dateafteradmission": "Must be greater than admission date"
+		"dateafteradmission": "Must be greater than admission date",
+		"articleFamily": "Familia de artículos"
 	},
 	"common": {
 		"ok": "OK",
@@ -286,6 +291,13 @@
 		"searchpatientinstruction": "If you don't have the patient ID, fill as many fields as possible and click search",
 		"required": "This field is required",
 		"emptydata": "No data found!",
+		"page": "Page",
+		"previous": "Previous",
+		"next": "Next",
+		"first_page": "First page",
+		"last_page": "Last page",
+		"per_page": "Per page",
+		"total_items": "items",
 		"save": "Save",
 		"code": "Code",
 		"update": "update",
@@ -573,5 +585,126 @@
 		"hivTreatmentTypes": "Tipos de tratamiento de VIH",
 		"tuberculosisRegimens": "Pautas para tuberculosis",
 		"tuberculosisContacts": "Tipos de contacto de tuberculosis"
+	},
+	"errors": {
+		"articlefamily": {
+			"code_exists": "Ya existe una familia de artículos con este código.",
+			"not_found": "Familia de artículos no encontrada.",
+			"integrity_violation": "Violación de integridad de datos de la familia de artículos."
+		},
+		"articleFamily": {
+			"code_exists": "Ya existe una familia de artículos con este código.",
+			"not_found": "Familia de artículos no encontrada.",
+			"integrity_violation": "Violación de integridad de datos de la familia de artículos."
+		}
+	},
+	"articleFamily": {
+		"id": "ID de la familia de artículos",
+		"code": "Código",
+		"description": "Descripción",
+		"addNewArticleFamily": "Agregar una nueva familia de artículos",
+		"editArticleFamily": "Editar familia de artículos",
+		"updateArticleFamily": "Guardar cambios",
+		"saveArticleFamily": "Guardar",
+		"addArticleFamily": "Nueva familia de artículos",
+		"updated": "Familia de artículos actualizada",
+		"updateSuccess": "¡La familia de artículos se ha actualizado correctamente!",
+		"created": "Familia de artículos creada",
+		"createSuccess": "¡La familia de artículos se ha creado correctamente!",
+		"deleted": "Familia de artículos eliminada",
+		"deleting": "Eliminando familia de artículos...",
+		"deleteSuccess": "¡La familia de artículos se ha eliminado correctamente!"
+	},
+	"exam": {
+		"articleFamily": "Familia de artículos",
+		"country": {
+			"isocode_exists": "Ya existe un país con este código ISO.",
+			"name_exists": "Ya existe un país con este nombre.",
+			"phonecode_exists": "Ya existe un país con este prefijo telefónico.",
+			"not_found": "País no encontrado.",
+			"integrity_violation": "Violación de integridad de datos del país."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Violación de la integridad de datos del plan de reducción.",
+			"not_found": "Plan de reducción no encontrado.",
+			"description_duplicate": "Ya existe un plan de reducción con esta descripción."
+		},
+		"forbidden": "No tiene los permisos requeridos para realizar esta acción."
+	},
+	"country": {
+		"id": "ID del país",
+		"isoCode": "Código ISO",
+		"name": "Nombre",
+		"phoneCode": "Prefijo telefónico",
+		"isoCodeInvalidFormat": "El código ISO debe tener 2 letras mayúsculas",
+		"phoneCodeInvalidFormat": "Formato de prefijo telefónico no válido",
+		"addNewCountry": "Agregar un nuevo país",
+		"editCountry": "Editar país",
+		"updateCountry": "Guardar cambios",
+		"saveCountry": "Guardar",
+		"addCountry": "Nuevo país",
+		"updated": "País actualizado",
+		"updateSuccess": "¡El país ha sido actualizado con éxito!",
+		"created": "País creado",
+		"createSuccess": "¡El país ha sido creado con éxito!",
+		"deleted": "País eliminado",
+		"deleting": "Eliminando país...",
+		"deleteSuccess": "¡El país ha sido eliminado con éxito!"
+	},
+	"reductionPlan": {
+		"addReductionPlan": "Agregar plan de reducción",
+		"addNewReductionPlan": "Agregar nuevo plan de reducción",
+		"editReductionPlan": "Editar plan de reducción",
+		"saveReductionPlan": "Guardar plan de reducción",
+		"updateReductionPlan": "Guardar cambios",
+		"description": "Descripción",
+		"medicalRate": "Tasa Medicamentos (%)",
+		"examRate": "Tasa Exámenes (%)",
+		"operationRate": "Tasa Operaciones (%)",
+		"otherRate": "Tasa Otros (%)",
+		"generalRates": "Tasas de reducción generales",
+		"specificReductions": "Reducciones específicas",
+		"medicals": "Medicamentos",
+		"exams": "Exámenes",
+		"operations": "Operaciones",
+		"others": "Otros precios",
+		"item": "Elemento",
+		"rate": "Tasa (%)",
+		"actions": "Acciones",
+		"addItem": "Agregar",
+		"selectMedical": "Seleccionar medicamento...",
+		"selectExam": "Seleccionar examen...",
+		"selectOperation": "Seleccionar operación...",
+		"selectOther": "Seleccionar otro precio...",
+		"removeAll": "Eliminar todo",
+		"noSpecificReductions": "No se definieron reducciones específicas (se aplica la tasa general).",
+		"deleting": "Eliminando plan de reducción...",
+		"deleted": "Plan de reducción eliminado",
+		"deleteSuccess": "Plan de reducción eliminado con éxito",
+		"created": "Plan de reducción creado",
+		"createSuccess": "Plan de reducción creado con éxito",
+		"updated": "Plan de reducción actualizado",
+		"updateSuccess": "Plan de reducción actualizado con éxito",
+		"editItem": "Modificar",
+		"saveItem": "Guardar",
+		"cancelEdit": "Cancelar"
+	},
+	"staff": {
+		"code": "Código",
+		"firstName": "Nombre",
+		"lastName": "Apellido",
+		"profession": "Profesión",
+		"position": "Puesto",
+		"phone": "Teléfono",
+		"addStaff": "Agregar personal",
+		"editStaff": "Editar personal",
+		"updateStaff": "Actualizar personal",
+		"saveStaff": "Guardar personal",
+		"created": "Personal creado",
+		"updated": "Personal actualizado",
+		"deleted": "Personal eliminado",
+		"createSuccess": "¡El personal ha sido creado con éxito!",
+		"updateSuccess": "¡El personal {{code}} ha sido actualizado con éxito!",
+		"deleteSuccess": "¡El personal ha sido eliminado con éxito!"
 	}
 }

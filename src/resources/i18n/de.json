@@ -7,7 +7,35 @@
 		"internalerror": "Es ist ein interner Fehler aufgetreten",
 		"lab": {
 			"someexamswithoutresultpleasecheck": "Einige Prüfungen ohne Ergebnis, bitte überprüfen."
-		}
+		},
+		"articleFamily": {
+			"code_exists": "Eine Artikelfamilie mit diesem Code existiert bereits.",
+			"not_found": "Artikelfamilie nicht gefunden.",
+			"integrity_violation": "Datenintegritätsverletzung der Artikelfamilie."
+		},
+		"articlefamily": {
+			"code_exists": "Eine Artikelfamilie mit diesem Code existiert bereits.",
+			"not_found": "Artikelfamilie nicht gefunden.",
+			"integrity_violation": "Datenintegritätsverletzung der Artikelfamilie."
+		},
+		"country": {
+			"isocode_exists": "Ein Land mit diesem ISO-Code existiert bereits.",
+			"name_exists": "Ein Land mit diesem Namen existiert bereits.",
+			"phonecode_exists": "Ein Land mit dieser Vorwahl existiert bereits.",
+			"not_found": "Land nicht gefunden.",
+			"integrity_violation": "Datenintegritätsverletzung für das Land."
+		},
+		"reductionplan": {
+			"integrity_violation": "Datenintegritätsverletzung des Ermäßigungsplans.",
+			"not_found": "Ermäßigungsplan nicht gefunden.",
+			"description_duplicate": "Ein Ermäßigungsplan mit dieser Bezeichnung existiert bereits."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Datenintegritätsverletzung des Ermäßigungsplans.",
+			"not_found": "Ermäßigungsplan nicht gefunden.",
+			"description_duplicate": "Ein Ermäßigungsplan mit dieser Bezeichnung existiert bereits."
+		},
+		"forbidden": "Sie verfügen nicht über die erforderlichen Berechtigungen, um diese Aktion auszuführen."
 	},
 	"validations": {
 		"min": "Der Wert muss mindestens {{min}} sein",
@@ -367,16 +395,20 @@
 		"consultancy": "Beratungsgespräch",
 		"administration": "Verwaltung",
 		"wards": "Stationen",
+		"staff": "Personal",
 		"diseases": "Krankheiten",
 		"operations": "Eingriffe",
 		"vaccines": "Impfungen",
 		"prices": "Preisliste",
 		"suppliers": "Lieferanten",
+		"articleFamilies": "Artikelfamilien",
 		"telemetry": "Telemetrie",
 		"users": "Benutzer & Gruppen",
 		"types": "Typen verwalten",
 		"hospitalInfo": "Krankenhausinfo",
-		"hospital": "Krankenhaus"
+		"hospital": "Krankenhaus",
+		"countries": "Länder",
+		"reductionPlans": "Ermäßigungspläne"
 	},
 	"operation": {
 		"newoperation": "Neue Operation",
@@ -416,7 +448,8 @@
 		"classes": {
 			"major": "Gross",
 			"minor": "Klein"
-		}
+		},
+		"articleFamily": "Artikelfamilie"
 	},
 	"common": {
 		"ok": "OK",
@@ -446,6 +479,13 @@
 		"searchpatientinstruction": "Wenn Sie die Patienten-ID nicht haben, füllen Sie so viele Felder wie möglich aus und klicken Sie auf „Suchen“.",
 		"required": "Dies ist ein Pflichtfeld",
 		"emptydata": "Keine Daten gefunden!",
+		"page": "Seite",
+		"previous": "Zurück",
+		"next": "Weiter",
+		"first_page": "Erste Seite",
+		"last_page": "Letzte Seite",
+		"per_page": "Pro Seite",
+		"total_items": "Einträge",
 		"save": "Speichern",
 		"code": "Code",
 		"update": "aktualisieren",
@@ -844,7 +884,8 @@
 		"examtype": "Exam Typ",
 		"description": "Name",
 		"procedure": "Verfahren",
-		"defaultResult": "Standardwert"
+		"defaultResult": "Standardwert",
+		"articleFamily": "Artikelfamilie"
 	},
 	"supplier": {
 		"name": "Name",
@@ -854,6 +895,23 @@
 		"fax": "Fax",
 		"email": "Email Adresse",
 		"note": "Notiz"
+	},
+	"articleFamily": {
+		"id": "Artikelfamilie ID",
+		"code": "Code",
+		"description": "Bezeichnung",
+		"addNewArticleFamily": "Neue Artikelfamilie hinzufügen",
+		"editArticleFamily": "Artikelfamilie bearbeiten",
+		"updateArticleFamily": "Änderungen speichern",
+		"saveArticleFamily": "Speichern",
+		"addArticleFamily": "Neue Artikelfamilie",
+		"updated": "Artikelfamilie aktualisiert",
+		"updateSuccess": "Die Artikelfamilie wurde erfolgreich aktualisiert!",
+		"created": "Artikelfamilie erstellt",
+		"createSuccess": "Die Artikelfamilie wurde erfolgreich erstellt!",
+		"deleted": "Artikelfamilie gelöscht",
+		"deleting": "Artikelfamilie wird gelöscht...",
+		"deleteSuccess": "Die Artikelfamilie wurde erfolgreich gelöscht!"
 	},
 	"ward": {
 		"code": "Code",
@@ -879,6 +937,24 @@
 		"createSuccess": "Station wurde erfolgreich erstellt!",
 		"updateSuccess": "Station {{Code}} wurde erfolgreich aktualisiert!",
 		"deleteSuccess": "Station {{Code}} wurde erfolgreich gelöscht!"
+	},
+	"staff": {
+		"code": "Code",
+		"firstName": "Vorname",
+		"lastName": "Nachname",
+		"profession": "Beruf",
+		"position": "Position",
+		"phone": "Telefon",
+		"addStaff": "Personal hinzufügen",
+		"editStaff": "Personal bearbeiten",
+		"updateStaff": "Personal aktualisieren",
+		"saveStaff": "Personal speichern",
+		"created": "Personal erstellt",
+		"updated": "Personal aktualisiert",
+		"deleted": "Personal gelöscht",
+		"createSuccess": "Das Personal wurde erfolgreich erstellt!",
+		"updateSuccess": "Das Personal {{code}} wurde erfolgreich aktualisiert!",
+		"deleteSuccess": "Das Personal wurde erfolgreich gelöscht!"
 	},
 	"disease": {
 		"code": "Code",
@@ -909,5 +985,63 @@
 		"hivTreatmentTypes": "HIV-Behandlungstypen",
 		"tuberculosisRegimens": "Tuberkulose-Behandlungsschemata",
 		"tuberculosisContacts": "Tuberkulose-Kontakttypen"
+	},
+	"country": {
+		"id": "Länder-ID",
+		"isoCode": "ISO-Code",
+		"name": "Name",
+		"phoneCode": "Telefonvorwahl",
+		"isoCodeInvalidFormat": "Der ISO-Code muss aus 2 Großbuchstaben bestehen",
+		"phoneCodeInvalidFormat": "Ungültiges Telefonvorwahlformat",
+		"addNewCountry": "Neues Land hinzufügen",
+		"editCountry": "Land bearbeiten",
+		"updateCountry": "Änderungen speichern",
+		"saveCountry": "Speichern",
+		"addCountry": "Neues Land",
+		"updated": "Land aktualisiert",
+		"updateSuccess": "Land wurde erfolgreich aktualisiert!",
+		"created": "Land erstellt",
+		"createSuccess": "Land wurde erfolgreich erstellt!",
+		"deleted": "Land gelöscht",
+		"deleting": "Land wird gelöscht...",
+		"deleteSuccess": "Land wurde erfolgreich gelöscht!"
+	},
+	"reductionPlan": {
+		"addReductionPlan": "Ermäßigungsplan hinzufügen",
+		"addNewReductionPlan": "Neuen Ermäßigungsplan hinzufügen",
+		"editReductionPlan": "Ermäßigungsplan bearbeiten",
+		"saveReductionPlan": "Ermäßigungsplan speichern",
+		"updateReductionPlan": "Änderungen speichern",
+		"description": "Bezeichnung",
+		"medicalRate": "Medikamente Satz (%)",
+		"examRate": "Untersuchungen Satz (%)",
+		"operationRate": "Operationen Satz (%)",
+		"otherRate": "Sonstige Satz (%)",
+		"generalRates": "Allgemeine Ermäßigungssätze",
+		"specificReductions": "Spezifische Ermäßigungen",
+		"medicals": "Medikamente",
+		"exams": "Untersuchungen",
+		"operations": "Operationen",
+		"others": "Sonstige Preise",
+		"item": "Element",
+		"rate": "Satz (%)",
+		"actions": "Aktionen",
+		"addItem": "Hinzufügen",
+		"selectMedical": "Medikament auswählen...",
+		"selectExam": "Untersuchung auswählen...",
+		"selectOperation": "Operation auswählen...",
+		"selectOther": "Sonstigen Preis auswählen...",
+		"removeAll": "Alle entfernen",
+		"noSpecificReductions": "Keine spezifischen Ermäßigungen definiert (allgemeiner Satz gilt).",
+		"deleting": "Ermäßigungsplan wird gelöscht...",
+		"deleted": "Ermäßigungsplan gelöscht",
+		"deleteSuccess": "Ermäßigungsplan erfolgreich gelöscht",
+		"created": "Ermäßigungsplan erstellt",
+		"createSuccess": "Ermäßigungsplan erfolgreich erstellt",
+		"updated": "Ermäßigungsplan aktualisiert",
+		"updateSuccess": "Ermäßigungsplan erfolgreich aktualisiert",
+		"editItem": "Bearbeiten",
+		"saveItem": "Speichern",
+		"cancelEdit": "Abbrechen"
 	}
 }

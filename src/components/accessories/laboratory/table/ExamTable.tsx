@@ -42,6 +42,7 @@ export const ExamTable: FC<IExamTableProps> = ({
 	handleDelete,
 	handleEdit,
 	handleCancel,
+	serverPagination,
 }) => {
 	const { t } = useTranslation();
 	const dispatch = useAppDispatch();
@@ -71,7 +72,7 @@ export const ExamTable: FC<IExamTableProps> = ({
 		if (data && data.length > 0)
 			results = data.map((e) => {
 				return {
-          id: e.laboratoryDTO?.code ?? '',
+					id: e.laboratoryDTO?.code ?? '',
 					code: e.laboratoryDTO?.code ?? '',
 					date: renderDateTime(e.laboratoryDTO?.labDate ?? ''),
 					patName: e.laboratoryDTO?.patName ?? '',
@@ -180,6 +181,7 @@ export const ExamTable: FC<IExamTableProps> = ({
 				onDelete={canDelete ? onDelete : undefined}
 				onCancel={canDelete ? onCancel : undefined}
 				displayRowAction={shouldDisplayAction}
+				serverPagination={serverPagination}
 			/>
 			{deleteStatus === 'FAIL' && (
 				<div className="info-box-container">

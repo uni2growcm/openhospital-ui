@@ -32,6 +32,27 @@ export const ADMIN_ROUTES: RouteObject[] = [
 			})),
 	},
 	{
+		path: getPath(PATHS.admin_staff),
+		lazy: async () =>
+			import('../../components/accessories/admin/staff').then((module) => ({
+				Component: module.Staff,
+			})),
+	},
+	{
+		path: getPath(PATHS.admin_staff_new),
+		lazy: async () =>
+			import('../../components/accessories/admin/staff').then((module) => ({
+				Component: module.NewStaff,
+			})),
+	},
+	{
+		path: getPath(PATHS.admin_staff_edit),
+		lazy: async () =>
+			import('../../components/accessories/admin/staff').then((module) => ({
+				Component: module.EditStaff,
+			})),
+	},
+	{
 		path: getPath(PATHS.admin_diseases),
 		lazy: async () =>
 			import('../../components/accessories/admin/diseases').then((module) => ({
@@ -143,6 +164,54 @@ export const ADMIN_ROUTES: RouteObject[] = [
 			})),
 	},
 	{
+		path: getPath(PATHS.admin_article_families),
+		lazy: async () =>
+			import('../../components/accessories/admin/articleFamilies').then(
+				(module) => ({
+					Component: module.ArticleFamilies,
+				}),
+			),
+	},
+	{
+		path: getPath(PATHS.admin_article_families_new),
+		lazy: async () =>
+			import('../../components/accessories/admin/articleFamilies').then(
+				(module) => ({
+					Component: module.NewArticleFamily,
+				}),
+			),
+	},
+	{
+		path: getPath(PATHS.admin_article_families_edit),
+		lazy: async () =>
+			import('../../components/accessories/admin/articleFamilies').then(
+				(module) => ({
+					Component: module.EditArticleFamily,
+				}),
+			),
+	},
+	{
+		path: getPath(PATHS.admin_countries),
+		lazy: async () =>
+			import('../../components/accessories/admin/countries').then((module) => ({
+				Component: module.Countries,
+			})),
+	},
+	{
+		path: getPath(PATHS.admin_countries_new),
+		lazy: async () =>
+			import('../../components/accessories/admin/countries').then((module) => ({
+				Component: module.NewCountry,
+			})),
+	},
+	{
+		path: getPath(PATHS.admin_countries_edit),
+		lazy: async () =>
+			import('../../components/accessories/admin/countries').then((module) => ({
+				Component: module.EditCountry,
+			})),
+	},
+	{
 		path: getPath(PATHS.admin_users),
 		lazy: async () =>
 			import('../../components/accessories/admin/users').then((module) => ({
@@ -183,6 +252,33 @@ export const ADMIN_ROUTES: RouteObject[] = [
 			import('../../components/accessories/admin/settings').then((module) => ({
 				Component: module.Settings,
 			})),
+	},
+	{
+		path: getPath(PATHS.admin_reductionplans),
+		lazy: async () =>
+			import('../../components/accessories/admin/reductionPlans').then(
+				(module) => ({
+					Component: module.ReductionPlans,
+				}),
+			),
+	},
+	{
+		path: getPath(PATHS.admin_reductionplans_new),
+		lazy: async () =>
+			import('../../components/accessories/admin/reductionPlans').then(
+				(module) => ({
+					Component: module.NewReductionPlan,
+				}),
+			),
+	},
+	{
+		path: getPath(PATHS.admin_reductionplans_edit),
+		lazy: async () =>
+			import('../../components/accessories/admin/reductionPlans').then(
+				(module) => ({
+					Component: module.EditReductionPlan,
+				}),
+			),
 	},
 	{
 		path: getPath(PATHS.admin_types),
