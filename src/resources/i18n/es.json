@@ -234,6 +234,8 @@
 		"billrecords": "Bill Records",
 		"visits": "Visits",
 		"patients": "Patients",
+		"articleFamilies": "Familias de artículos",
+		"countries": "Países",
 		"reductionPlans": "Planes de reducción",
 		"prices": "Price List",
 		"staff": "Personal"
@@ -295,7 +297,8 @@
 		"rowupdatesuccess": "Operation Row updated successfully",
 		"rowcreatesuccess": "Operation Row created successfully",
 		"rowdeletesuccess": "Operation Row deleted successfully",
-		"dateafteradmission": "Must be greater than admission date"
+		"dateafteradmission": "Must be greater than admission date",
+		"articleFamily": "Familia de artículos"
 	},
 	"common": {
 		"ok": "OK",
@@ -585,6 +588,71 @@
 		"sq": "Albanian",
 		"zh": "Chinese"
 	},
+	"errors": {
+		"articlefamily": {
+			"code_exists": "Ya existe una familia de artículos con este código.",
+			"not_found": "Familia de artículos no encontrada.",
+			"integrity_violation": "Violación de integridad de datos de la familia de artículos."
+		},
+		"articleFamily": {
+			"code_exists": "Ya existe una familia de artículos con este código.",
+			"not_found": "Familia de artículos no encontrada.",
+			"integrity_violation": "Violación de integridad de datos de la familia de artículos."
+		}
+	},
+	"articleFamily": {
+		"id": "ID de la familia de artículos",
+		"code": "Código",
+		"description": "Descripción",
+		"addNewArticleFamily": "Agregar una nueva familia de artículos",
+		"editArticleFamily": "Editar familia de artículos",
+		"updateArticleFamily": "Guardar cambios",
+		"saveArticleFamily": "Guardar",
+		"addArticleFamily": "Nueva familia de artículos",
+		"updated": "Familia de artículos actualizada",
+		"updateSuccess": "¡La familia de artículos se ha actualizado correctamente!",
+		"created": "Familia de artículos creada",
+		"createSuccess": "¡La familia de artículos se ha creado correctamente!",
+		"deleted": "Familia de artículos eliminada",
+		"deleting": "Eliminando familia de artículos...",
+		"deleteSuccess": "¡La familia de artículos se ha eliminado correctamente!"
+	},
+	"exam": {
+		"articleFamily": "Familia de artículos",
+		"country": {
+			"isocode_exists": "Ya existe un país con este código ISO.",
+			"name_exists": "Ya existe un país con este nombre.",
+			"phonecode_exists": "Ya existe un país con este prefijo telefónico.",
+			"not_found": "País no encontrado.",
+			"integrity_violation": "Violación de integridad de datos del país."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Violación de la integridad de datos del plan de reducción.",
+			"not_found": "Plan de reducción no encontrado.",
+			"description_duplicate": "Ya existe un plan de reducción con esta descripción."
+		},
+		"forbidden": "No tiene los permisos requeridos para realizar esta acción."
+	},
+	"country": {
+		"id": "ID del país",
+		"isoCode": "Código ISO",
+		"name": "Nombre",
+		"phoneCode": "Prefijo telefónico",
+		"isoCodeInvalidFormat": "El código ISO debe tener 2 letras mayúsculas",
+		"phoneCodeInvalidFormat": "Formato de prefijo telefónico no válido",
+		"addNewCountry": "Agregar un nuevo país",
+		"editCountry": "Editar país",
+		"updateCountry": "Guardar cambios",
+		"saveCountry": "Guardar",
+		"addCountry": "Nuevo país",
+		"updated": "País actualizado",
+		"updateSuccess": "¡El país ha sido actualizado con éxito!",
+		"created": "País creado",
+		"createSuccess": "¡El país ha sido creado con éxito!",
+		"deleted": "País eliminado",
+		"deleting": "Eliminando país...",
+		"deleteSuccess": "¡El país ha sido eliminado con éxito!"
+	},
 	"reductionPlan": {
 		"addReductionPlan": "Agregar plan de reducción",
 		"addNewReductionPlan": "Agregar nuevo plan de reducción",
@@ -622,18 +690,6 @@
 		"editItem": "Modificar",
 		"saveItem": "Guardar",
 		"cancelEdit": "Cancelar"
-	},
-	"errors": {
-		"reductionplan": {
-			"integrity_violation": "Violación de la integridad de datos del plan de reducción.",
-			"not_found": "Plan de reducción no encontrado.",
-			"description_duplicate": "Ya existe un plan de reducción con esta descripción."
-		},
-		"reductionPlan": {
-			"integrity_violation": "Violación de la integridad de datos del plan de reducción.",
-			"not_found": "Plan de reducción no encontrado.",
-			"description_duplicate": "Ya existe un plan de reducción con esta descripción."
-		}
 	},
 	"staff": {
 		"code": "Código",

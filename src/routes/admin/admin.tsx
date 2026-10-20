@@ -192,6 +192,54 @@ export const ADMIN_ROUTES: RouteObject[] = [
 			})),
 	},
 	{
+		path: getPath(PATHS.admin_article_families),
+		lazy: async () =>
+			import('../../components/accessories/admin/articleFamilies').then(
+				(module) => ({
+					Component: module.ArticleFamilies,
+				}),
+			),
+	},
+	{
+		path: getPath(PATHS.admin_article_families_new),
+		lazy: async () =>
+			import('../../components/accessories/admin/articleFamilies').then(
+				(module) => ({
+					Component: module.NewArticleFamily,
+				}),
+			),
+	},
+	{
+		path: getPath(PATHS.admin_article_families_edit),
+		lazy: async () =>
+			import('../../components/accessories/admin/articleFamilies').then(
+				(module) => ({
+					Component: module.EditArticleFamily,
+				}),
+			),
+	},
+	{
+		path: getPath(PATHS.admin_countries),
+		lazy: async () =>
+			import('../../components/accessories/admin/countries').then((module) => ({
+				Component: module.Countries,
+			})),
+	},
+	{
+		path: getPath(PATHS.admin_countries_new),
+		lazy: async () =>
+			import('../../components/accessories/admin/countries').then((module) => ({
+				Component: module.NewCountry,
+			})),
+	},
+	{
+		path: getPath(PATHS.admin_countries_edit),
+		lazy: async () =>
+			import('../../components/accessories/admin/countries').then((module) => ({
+				Component: module.EditCountry,
+			})),
+	},
+	{
 		path: getPath(PATHS.admin_users),
 		lazy: async () =>
 			import('../../components/accessories/admin/users').then((module) => ({

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { firstValueFrom } from 'rxjs';
 import { wrapper } from '~/libraries/apiUtils/wrapper';
-import { type StaffDTO, StaffApi } from '../../generated';
+import { StaffApi, type StaffDTO } from '../../generated';
 import { customConfiguration } from '../../libraries/apiUtils/configuration';
 
 const api = new StaffApi(customConfiguration());

@@ -9,25 +9,25 @@ const api = new ReductionPlansApi(customConfiguration());
 export const getReductionPlans = createAsyncThunk(
 	'reductionPlans/getReductionPlans',
 	async (q: string | undefined, thunkApi) =>
-		firstValueFrom(wrapper(() => api.getReductionPlans({ q }))).catch(
-			(error) => thunkApi.rejectWithValue(error.response),
+		firstValueFrom(wrapper(() => api.getReductionPlans({ q }))).catch((error) =>
+			thunkApi.rejectWithValue(error.response),
 		),
 );
 
 export const getReductionPlan = createAsyncThunk(
 	'reductionPlans/getReductionPlan',
 	async (id: number, thunkApi) =>
-		firstValueFrom(wrapper(() => api.getReductionPlan({ id }))).catch(
-			(error) => thunkApi.rejectWithValue(error.response),
+		firstValueFrom(wrapper(() => api.getReductionPlan({ id }))).catch((error) =>
+			thunkApi.rejectWithValue(error.response),
 		),
 );
 
 export const createReductionPlan = createAsyncThunk(
 	'reductionPlans/createReductionPlan',
 	async (reductionPlanDTO: ReductionPlanDTO, thunkApi) =>
-		firstValueFrom(wrapper(() => api.createReductionPlan({ reductionPlanDTO }))).catch(
-			(error) => thunkApi.rejectWithValue(error.response),
-		),
+		firstValueFrom(
+			wrapper(() => api.createReductionPlan({ reductionPlanDTO })),
+		).catch((error) => thunkApi.rejectWithValue(error.response)),
 );
 
 export const updateReductionPlan = createAsyncThunk(
@@ -55,7 +55,7 @@ export const updateReductionPlan = createAsyncThunk(
 export const deleteReductionPlan = createAsyncThunk(
 	'reductionPlans/deleteReductionPlan',
 	async (id: number, thunkApi) =>
-		firstValueFrom(wrapper(() => api.deleteReductionPlan({ id }))).catch((error) =>
-			thunkApi.rejectWithValue(error.response),
+		firstValueFrom(wrapper(() => api.deleteReductionPlan({ id }))).catch(
+			(error) => thunkApi.rejectWithValue(error.response),
 		),
 );

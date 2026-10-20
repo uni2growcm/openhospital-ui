@@ -1,2 +1,2 @@
-export { default } from './NewReductionPlan';
 export * from './NewReductionPlan';
+export { default } from './NewReductionPlan';

@@ -8,6 +8,23 @@
 		"lab": {
 			"someexamswithoutresultpleasecheck": "Einige Prüfungen ohne Ergebnis, bitte überprüfen."
 		},
+		"articleFamily": {
+			"code_exists": "Eine Artikelfamilie mit diesem Code existiert bereits.",
+			"not_found": "Artikelfamilie nicht gefunden.",
+			"integrity_violation": "Datenintegritätsverletzung der Artikelfamilie."
+		},
+		"articlefamily": {
+			"code_exists": "Eine Artikelfamilie mit diesem Code existiert bereits.",
+			"not_found": "Artikelfamilie nicht gefunden.",
+			"integrity_violation": "Datenintegritätsverletzung der Artikelfamilie."
+		},
+		"country": {
+			"isocode_exists": "Ein Land mit diesem ISO-Code existiert bereits.",
+			"name_exists": "Ein Land mit diesem Namen existiert bereits.",
+			"phonecode_exists": "Ein Land mit dieser Vorwahl existiert bereits.",
+			"not_found": "Land nicht gefunden.",
+			"integrity_violation": "Datenintegritätsverletzung für das Land."
+		},
 		"reductionplan": {
 			"integrity_violation": "Datenintegritätsverletzung des Ermäßigungsplans.",
 			"not_found": "Ermäßigungsplan nicht gefunden.",
@@ -17,7 +34,8 @@
 			"integrity_violation": "Datenintegritätsverletzung des Ermäßigungsplans.",
 			"not_found": "Ermäßigungsplan nicht gefunden.",
 			"description_duplicate": "Ein Ermäßigungsplan mit dieser Bezeichnung existiert bereits."
-		}
+		},
+		"forbidden": "Sie verfügen nicht über die erforderlichen Berechtigungen, um diese Aktion auszuführen."
 	},
 	"validations": {
 		"min": "Der Wert muss mindestens {{min}} sein",
@@ -383,11 +401,13 @@
 		"vaccines": "Impfungen",
 		"prices": "Preisliste",
 		"suppliers": "Lieferanten",
+		"articleFamilies": "Artikelfamilien",
 		"telemetry": "Telemetrie",
 		"users": "Benutzer & Gruppen",
 		"types": "Typen verwalten",
 		"hospitalInfo": "Krankenhausinfo",
 		"hospital": "Krankenhaus",
+		"countries": "Länder",
 		"reductionPlans": "Ermäßigungspläne"
 	},
 	"operation": {
@@ -428,7 +448,8 @@
 		"classes": {
 			"major": "Gross",
 			"minor": "Klein"
-		}
+		},
+		"articleFamily": "Artikelfamilie"
 	},
 	"common": {
 		"ok": "OK",
@@ -850,7 +871,8 @@
 		"examtype": "Exam Typ",
 		"description": "Name",
 		"procedure": "Verfahren",
-		"defaultResult": "Standardwert"
+		"defaultResult": "Standardwert",
+		"articleFamily": "Artikelfamilie"
 	},
 	"supplier": {
 		"name": "Name",
@@ -860,6 +882,23 @@
 		"fax": "Fax",
 		"email": "Email Adresse",
 		"note": "Notiz"
+	},
+	"articleFamily": {
+		"id": "Artikelfamilie ID",
+		"code": "Code",
+		"description": "Bezeichnung",
+		"addNewArticleFamily": "Neue Artikelfamilie hinzufügen",
+		"editArticleFamily": "Artikelfamilie bearbeiten",
+		"updateArticleFamily": "Änderungen speichern",
+		"saveArticleFamily": "Speichern",
+		"addArticleFamily": "Neue Artikelfamilie",
+		"updated": "Artikelfamilie aktualisiert",
+		"updateSuccess": "Die Artikelfamilie wurde erfolgreich aktualisiert!",
+		"created": "Artikelfamilie erstellt",
+		"createSuccess": "Die Artikelfamilie wurde erfolgreich erstellt!",
+		"deleted": "Artikelfamilie gelöscht",
+		"deleting": "Artikelfamilie wird gelöscht...",
+		"deleteSuccess": "Die Artikelfamilie wurde erfolgreich gelöscht!"
 	},
 	"ward": {
 		"code": "Code",
@@ -947,6 +986,26 @@
 		"opdInclude": "OPD",
 		"ipdInInclude": "IP In",
 		"ipdOutInclude": "IP Out"
+	},
+	"country": {
+		"id": "Länder-ID",
+		"isoCode": "ISO-Code",
+		"name": "Name",
+		"phoneCode": "Telefonvorwahl",
+		"isoCodeInvalidFormat": "Der ISO-Code muss aus 2 Großbuchstaben bestehen",
+		"phoneCodeInvalidFormat": "Ungültiges Telefonvorwahlformat",
+		"addNewCountry": "Neues Land hinzufügen",
+		"editCountry": "Land bearbeiten",
+		"updateCountry": "Änderungen speichern",
+		"saveCountry": "Speichern",
+		"addCountry": "Neues Land",
+		"updated": "Land aktualisiert",
+		"updateSuccess": "Land wurde erfolgreich aktualisiert!",
+		"created": "Land erstellt",
+		"createSuccess": "Land wurde erfolgreich erstellt!",
+		"deleted": "Land gelöscht",
+		"deleting": "Land wird gelöscht...",
+		"deleteSuccess": "Land wurde erfolgreich gelöscht!"
 	},
 	"reductionPlan": {
 		"addReductionPlan": "Ermäßigungsplan hinzufügen",

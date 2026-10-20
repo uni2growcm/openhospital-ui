@@ -8,6 +8,23 @@
 		"lab": {
 			"someexamswithoutresultpleasecheck": "Certains examens n'ont pas de résultats. Veuillez vérifier."
 		},
+		"articleFamily": {
+			"code_exists": "Une famille d'articles avec ce code existe déjà.",
+			"not_found": "Famille d'articles non trouvée.",
+			"integrity_violation": "Violation d'intégrité des données de la famille d'articles."
+		},
+		"articlefamily": {
+			"code_exists": "Une famille d'articles avec ce code existe déjà.",
+			"not_found": "Famille d'articles non trouvée.",
+			"integrity_violation": "Violation d'intégrité des données de la famille d'articles."
+		},
+		"country": {
+			"isocode_exists": "Un pays avec ce code ISO existe déjà.",
+			"name_exists": "Un pays avec ce nom existe déjà.",
+			"phonecode_exists": "Un pays avec cet indicatif téléphonique existe déjà.",
+			"not_found": "Pays introuvable.",
+			"integrity_violation": "Erreur d'intégrité des données du pays."
+		},
 		"reductionplan": {
 			"integrity_violation": "Violation d'intégrité des données du plan de réduction.",
 			"not_found": "Plan de réduction non trouvé.",
@@ -18,7 +35,8 @@
 			"not_found": "Plan de réduction non trouvé.",
 			"description_duplicate": "Un plan de réduction avec cette description existe déjà."
 		},
-		"angal.sql.thedatahasbeenupdatedbysomeoneelse.msg": "Les données ont été modifiées par un autre utilisateur ou ont expiré. Veuillez rafraîchir la page avant de réessayer."
+		"angal.sql.thedatahasbeenupdatedbysomeoneelse.msg": "Les données ont été modifiées par un autre utilisateur ou ont expiré. Veuillez rafraîchir la page avant de réessayer.",
+		"forbidden": "Vous n'avez pas les autorisations nécessaires pour effectuer cette action."
 	},
 	"validations": {
 		"min": "La valeur doit être au moins {{min}}",
@@ -427,6 +445,8 @@
 		"vaccines": "Vaccins",
 		"prices": "Liste de prix",
 		"suppliers": "Fournisseurs",
+		"articleFamilies": "Familles d'articles",
+		"countries": "Pays",
 		"telemetry": "Télémétrie",
 		"users": "Utilisateurs & Groupes",
 		"types": "Gérer les types",
@@ -487,7 +507,8 @@
 			"opd_admission": "OPD/Admission",
 			"admission": "Admission",
 			"opd": "OPD"
-		}
+		},
+		"articleFamily": "Famille d'articles"
 	},
 	"common": {
 		"ok": "OK",
@@ -986,7 +1007,8 @@
 		"validateProcedureMinMax": "La valeur ne peut être que 1, 2 ou 3",
 		"possibleValues": "Valeurs possibles",
 		"defaultValue": "Valeur par défaut",
-		"invalidDefaultResult": "Le résultat par défaut doit être l’une des valeurs possibles"
+		"invalidDefaultResult": "Le résultat par défaut doit être l’une des valeurs possibles",
+		"articleFamily": "Famille d'articles"
 	},
 	"vaccine": {
 		"code": "Code",
@@ -1213,6 +1235,43 @@
 		"deleted": "Fournisseur supprimé",
 		"deleting": "Suppression du fournisseur...",
 		"deleteSuccess": "Fournisseur supprimé avec succès !"
+	},
+	"articleFamily": {
+		"id": "ID Famille d'articles",
+		"code": "Code",
+		"description": "Description",
+		"addNewArticleFamily": "Ajouter une nouvelle famille d'articles",
+		"editArticleFamily": "Modifier la famille d'articles",
+		"updateArticleFamily": "Enregistrer les modifications",
+		"saveArticleFamily": "Enregistrer",
+		"addArticleFamily": "Nouvelle famille d'articles",
+		"updated": "Famille d'articles mise à jour",
+		"updateSuccess": "La famille d'articles a été mise à jour avec succès !",
+		"created": "Famille d'articles créée",
+		"createSuccess": "La famille d'articles a été créée avec succès !",
+		"deleted": "Famille d'articles supprimée",
+		"deleting": "Suppression de la famille d'articles...",
+		"deleteSuccess": "La famille d'articles a été supprimée avec succès !"
+	},
+	"country": {
+		"id": "Identifiant du pays",
+		"isoCode": "Code ISO",
+		"name": "Nom du pays",
+		"phoneCode": "Indicatif téléphonique",
+		"isoCodeInvalidFormat": "Le code ISO doit être composé de 2 lettres majuscules",
+		"phoneCodeInvalidFormat": "Format d'indicatif téléphonique invalide",
+		"addNewCountry": "Ajouter un nouveau pays",
+		"editCountry": "Modifier le pays",
+		"updateCountry": "Enregistrer les modifications",
+		"saveCountry": "Enregistrer",
+		"addCountry": "Nouveau pays",
+		"updated": "Pays mis à jour",
+		"updateSuccess": "Le pays a été mis à jour avec succès !",
+		"created": "Pays créé",
+		"createSuccess": "Le pays a été créé avec succès !",
+		"deleted": "Pays supprimé",
+		"deleting": "Suppression du pays...",
+		"deleteSuccess": "Le pays a été supprimé avec succès !"
 	},
 	"ward": {
 		"code": "Code",

@@ -4,4 +4,5 @@ export type ExamFormFieldName =
 	| 'description'
 	| 'procedure'
 	| 'defaultResult'
+	| 'articleFamily'
 	| 'rows';

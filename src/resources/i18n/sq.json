@@ -8,6 +8,23 @@
 		"lab": {
 			"someexamswithoutresultpleasecheck": "Disa ekzaminime pa rezultat ju lutemi kontrolloni."
 		},
+		"articleFamily": {
+			"code_exists": "Një familje artikujsh me këtë kod tashmë ekziston.",
+			"not_found": "Familja e artikujve nuk u gjet.",
+			"integrity_violation": "Shkelje e integritetit të të dhënave të familjes së artikujve."
+		},
+		"articlefamily": {
+			"code_exists": "Një familje artikujsh me këtë kod tashmë ekziston.",
+			"not_found": "Familja e artikujve nuk u gjet.",
+			"integrity_violation": "Shkelje e integritetit të të dhënave të familjes së artikujve."
+		},
+		"country": {
+			"isocode_exists": "A country with this ISO code already exists.",
+			"name_exists": "A country with this name already exists.",
+			"phonecode_exists": "A country with this phone code already exists.",
+			"not_found": "Country not found.",
+			"integrity_violation": "Country data integrity violation."
+		},
 		"reductionplan": {
 			"integrity_violation": "Reduction plan data integrity violation.",
 			"not_found": "Reduction plan not found.",
@@ -17,7 +34,8 @@
 			"integrity_violation": "Reduction plan data integrity violation.",
 			"not_found": "Reduction plan not found.",
 			"description_duplicate": "A reduction plan with this description already exists."
-		}
+		},
+		"forbidden": "Nuk keni lejet e nevojshme për të kryer këtë veprim."
 	},
 	"validations": {
 		"min": "vlera duhet të jetë së paku {{min}}",
@@ -383,11 +401,13 @@
 		"vaccines": "Vaksinat",
 		"prices": "Lista e çmimeve",
 		"suppliers": "Furnitorët",
+		"articleFamilies": "Familjet e artikujve",
 		"telemetry": "Telemetria",
 		"users": "Përdoruesit & Grupet",
 		"types": "Menaxho llojet",
 		"hospitalInfo": "Info mbi Spitalin",
 		"hospital": "Spitali",
+		"countries": "Countries",
 		"reductionPlans": "Reduction Plans"
 	},
 	"operation": {
@@ -428,7 +448,8 @@
 		"classes": {
 			"major": "I madh",
 			"minor": "I vogël"
-		}
+		},
+		"articleFamily": "Familje artikujsh"
 	},
 	"common": {
 		"ok": "OK",
@@ -850,7 +871,8 @@
 		"examtype": "Lloji i ekzaminimit",
 		"description": "Emri",
 		"procedure": "Procedura",
-		"defaultResult": "Vlera standard"
+		"defaultResult": "Vlera standard",
+		"articleFamily": "Familje artikujsh"
 	},
 	"supplier": {
 		"name": "Emri",
@@ -860,6 +882,23 @@
 		"fax": "Faks",
 		"email": "Adresa Email",
 		"note": "Shënim"
+	},
+	"articleFamily": {
+		"id": "ID e familjes së artikujve",
+		"code": "Kodi",
+		"description": "Përshkrimi",
+		"addNewArticleFamily": "Shto një familje të re artikujsh",
+		"editArticleFamily": "Ndrysho familjen e artikujve",
+		"updateArticleFamily": "Ruaj ndryshimet",
+		"saveArticleFamily": "Ruaj",
+		"addArticleFamily": "Familje e re artikujsh",
+		"updated": "Familja e artikujve u përditësua",
+		"updateSuccess": "Familja e artikujve u përditësua me sukses!",
+		"created": "Familja e artikujve u krijua",
+		"createSuccess": "Familja e artikujve u krijua me sukses!",
+		"deleted": "Familja e artikujve u fshi",
+		"deleting": "Duke fshirë familjen e artikujve...",
+		"deleteSuccess": "Familja e artikujve u fshi me sukses!"
 	},
 	"ward": {
 		"code": "Kodi",
@@ -947,6 +986,26 @@
 		"opdInclude": "DPJ",
 		"ipdInInclude": "PB Hyrje",
 		"ipdOutInclude": "PB Dalje"
+	},
+	"country": {
+		"id": "Country ID",
+		"isoCode": "ISO Code",
+		"name": "Country Name",
+		"phoneCode": "Phone Code",
+		"isoCodeInvalidFormat": "ISO code must be 2 uppercase letters",
+		"phoneCodeInvalidFormat": "Invalid phone code format",
+		"addNewCountry": "Add a new country",
+		"editCountry": "Edit country",
+		"updateCountry": "Save changes",
+		"saveCountry": "Save",
+		"addCountry": "New country",
+		"updated": "Country updated",
+		"updateSuccess": "Country has been updated successfully!",
+		"created": "Country created",
+		"createSuccess": "Country has been created successfully!",
+		"deleted": "Country deleted",
+		"deleting": "Deleting country...",
+		"deleteSuccess": "Country has been deleted successfully!"
 	},
 	"reductionPlan": {
 		"addReductionPlan": "Add Reduction Plan",

@@ -12,6 +12,7 @@ export const NewExam = () => {
 
 	const handleSubmit = ({
 		rows,
+		lock,
 		...examDTO
 	}: ExamDTO & { rows: string[] | undefined }) => {
 		dispatch(createExam({ examWithRowsDTO: { exam: examDTO, rows } }));

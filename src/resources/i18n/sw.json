@@ -235,6 +235,8 @@
 		"visits": "Visits",
 		"patients": "Patients",
 		"prices": "Price List",
+		"articleFamilies": "Familia za makala",
+		"countries": "Countries",
 		"reductionPlans": "Reduction Plans",
 		"staff": "Wafanyakazi"
 	},
@@ -295,7 +297,8 @@
 		"rowupdatesuccess": "Operation Row updated successfully",
 		"rowcreatesuccess": "Operation Row created successfully",
 		"rowdeletesuccess": "Operation Row deleted successfully",
-		"dateafteradmission": "Must be greater than admission date"
+		"dateafteradmission": "Must be greater than admission date",
+		"articleFamily": "Familia ya makala"
 	},
 	"common": {
 		"ok": "OK",
@@ -585,6 +588,71 @@
 		"sq": "Albanian",
 		"zh": "Chinese"
 	},
+	"errors": {
+		"articlefamily": {
+			"code_exists": "Familia ya makala yenye msimbo huu tayari ipo.",
+			"not_found": "Familia ya makala haikupatikana.",
+			"integrity_violation": "Ukiukaji wa uadilifu wa data ya familia ya makala."
+		},
+		"articleFamily": {
+			"code_exists": "Familia ya makala yenye msimbo huu tayari ipo.",
+			"not_found": "Familia ya makala haikupatikana.",
+			"integrity_violation": "Ukiukaji wa uadilifu wa data ya familia ya makala."
+		}
+	},
+	"articleFamily": {
+		"id": "Kitambulisho cha familia ya makala",
+		"code": "Msimbo",
+		"description": "Maelezo",
+		"addNewArticleFamily": "Ongeza familia mpya ya makala",
+		"editArticleFamily": "Hariri familia ya makala",
+		"updateArticleFamily": "Hifadhi mabadiliko",
+		"saveArticleFamily": "Hifadhi",
+		"addArticleFamily": "Familia mpya ya makala",
+		"updated": "Familia ya makala imesasishwa",
+		"updateSuccess": "Familia ya makala imesasishwa kikamilifu!",
+		"created": "Familia ya makala imeundwa",
+		"createSuccess": "Familia ya makala imeundwa kikamilifu!",
+		"deleted": "Familia ya makala imefutwa",
+		"deleting": "Inafuta familia ya makala...",
+		"deleteSuccess": "Familia ya makala imefutwa kikamilifu!"
+	},
+	"exam": {
+		"articleFamily": "Familia ya makala",
+		"country": {
+			"isocode_exists": "A country with this ISO code already exists.",
+			"name_exists": "A country with this name already exists.",
+			"phonecode_exists": "A country with this phone code already exists.",
+			"not_found": "Country not found.",
+			"integrity_violation": "Country data integrity violation."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Reduction plan data integrity violation.",
+			"not_found": "Reduction plan not found.",
+			"description_duplicate": "A reduction plan with this description already exists."
+		},
+		"forbidden": "Huna ruhusa zinazohitajika kutekeleza kitendo hiki."
+	},
+	"country": {
+		"id": "Country ID",
+		"isoCode": "ISO Code",
+		"name": "Country Name",
+		"phoneCode": "Phone Code",
+		"isoCodeInvalidFormat": "ISO code must be 2 uppercase letters",
+		"phoneCodeInvalidFormat": "Invalid phone code format",
+		"addNewCountry": "Add a new country",
+		"editCountry": "Edit country",
+		"updateCountry": "Save changes",
+		"saveCountry": "Save",
+		"addCountry": "New country",
+		"updated": "Country updated",
+		"updateSuccess": "Country has been updated successfully!",
+		"created": "Country created",
+		"createSuccess": "Country has been created successfully!",
+		"deleted": "Country deleted",
+		"deleting": "Deleting country...",
+		"deleteSuccess": "Country has been deleted successfully!"
+	},
 	"reductionPlan": {
 		"addReductionPlan": "Add Reduction Plan",
 		"addNewReductionPlan": "Add new reduction plan",
@@ -622,18 +690,6 @@
 		"editItem": "Hariri",
 		"saveItem": "Hifadhi",
 		"cancelEdit": "Ghairi"
-	},
-	"errors": {
-		"reductionplan": {
-			"integrity_violation": "Reduction plan data integrity violation.",
-			"not_found": "Reduction plan not found.",
-			"description_duplicate": "A reduction plan with this description already exists."
-		},
-		"reductionPlan": {
-			"integrity_violation": "Reduction plan data integrity violation.",
-			"not_found": "Reduction plan not found.",
-			"description_duplicate": "A reduction plan with this description already exists."
-		}
 	},
 	"staff": {
 		"code": "Nambari",

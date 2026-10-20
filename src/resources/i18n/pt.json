@@ -235,6 +235,8 @@
 		"visits": "Visits",
 		"patients": "Patients",
 		"prices": "Price List",
+		"articleFamilies": "Famílias de artigos",
+		"countries": "Países",
 		"reductionPlans": "Reduction Plans",
 		"staff": "Pessoal"
 	},
@@ -295,7 +297,8 @@
 		"rowupdatesuccess": "Operation Row updated successfully",
 		"rowcreatesuccess": "Operation Row created successfully",
 		"rowdeletesuccess": "Operation Row deleted successfully",
-		"dateafteradmission": "Must be greater than admission date"
+		"dateafteradmission": "Must be greater than admission date",
+		"articleFamily": "Família de artigos"
 	},
 	"common": {
 		"ok": "OK",
@@ -585,6 +588,71 @@
 		"sq": "Albanian",
 		"zh": "Chinese"
 	},
+	"errors": {
+		"articlefamily": {
+			"code_exists": "Já existe uma família de artigos com este código.",
+			"not_found": "Família de artigos não encontrada.",
+			"integrity_violation": "Violação de integridade dos dados da família de artigos."
+		},
+		"articleFamily": {
+			"code_exists": "Já existe uma família de artigos com este código.",
+			"not_found": "Família de artigos não encontrada.",
+			"integrity_violation": "Violação de integridade dos dados da família de artigos."
+		}
+	},
+	"articleFamily": {
+		"id": "ID da família de artigos",
+		"code": "Código",
+		"description": "Descrição",
+		"addNewArticleFamily": "Adicionar uma nova família de artigos",
+		"editArticleFamily": "Editar família de artigos",
+		"updateArticleFamily": "Salvar alterações",
+		"saveArticleFamily": "Salvar",
+		"addArticleFamily": "Nova família de artigos",
+		"updated": "Família de artigos atualizada",
+		"updateSuccess": "A família de artigos foi atualizada com sucesso!",
+		"created": "Família de artigos criada",
+		"createSuccess": "A família de artigos foi criada com sucesso!",
+		"deleted": "Família de artigos excluída",
+		"deleting": "Excluindo família de artigos...",
+		"deleteSuccess": "A família de artigos foi excluída com sucesso!"
+	},
+	"exam": {
+		"articleFamily": "Família de artigos",
+		"country": {
+			"isocode_exists": "Já existe um país com este código ISO.",
+			"name_exists": "Já existe um país com este nome.",
+			"phonecode_exists": "Já existe um país com este código telefônico.",
+			"not_found": "País não encontrado.",
+			"integrity_violation": "Violação de integridade dos dados do país."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Violação de integridade dos dados do plano de redução.",
+			"not_found": "Plano de redução não encontrado.",
+			"description_duplicate": "Já existe um plano de redução com esta descrição."
+		},
+		"forbidden": "Você não tem as permissões necessárias para realizar esta ação."
+	},
+	"country": {
+		"id": "ID do país",
+		"isoCode": "Código ISO",
+		"name": "Nome",
+		"phoneCode": "Código telefônico",
+		"isoCodeInvalidFormat": "O código ISO deve ter 2 letras maiúsculas",
+		"phoneCodeInvalidFormat": "Formato de código telefônico inválido",
+		"addNewCountry": "Adicionar novo país",
+		"editCountry": "Editar país",
+		"updateCountry": "Salvar alterações",
+		"saveCountry": "Salvar",
+		"addCountry": "Novo país",
+		"updated": "País atualizado",
+		"updateSuccess": "País atualizado com sucesso!",
+		"created": "País criado",
+		"createSuccess": "País criado com sucesso!",
+		"deleted": "País excluído",
+		"deleting": "Excluindo país...",
+		"deleteSuccess": "País excluído com sucesso!"
+	},
 	"reductionPlan": {
 		"addReductionPlan": "Add Reduction Plan",
 		"addNewReductionPlan": "Add new reduction plan",
@@ -622,18 +690,6 @@
 		"editItem": "Editar",
 		"saveItem": "Salvar",
 		"cancelEdit": "Cancelar"
-	},
-	"errors": {
-		"reductionplan": {
-			"integrity_violation": "Reduction plan data integrity violation.",
-			"not_found": "Reduction plan not found.",
-			"description_duplicate": "A reduction plan with this description already exists."
-		},
-		"reductionPlan": {
-			"integrity_violation": "Reduction plan data integrity violation.",
-			"not_found": "Reduction plan not found.",
-			"description_duplicate": "A reduction plan with this description already exists."
-		}
 	},
 	"staff": {
 		"code": "Código",

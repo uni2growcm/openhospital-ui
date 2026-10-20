@@ -106,6 +106,8 @@
 		"patientdashboard": "Patient Dashboard",
 		"newtherapy": "New Therapy",
 		"managetherapy": "Manage Therapy",
+		"articleFamilies": "项目系列",
+		"countries": "Countries",
 		"prices": "Price List",
 		"reductionPlans": "Reduction Plans",
 		"staff": "员工"
@@ -208,6 +210,74 @@
 		"opd": "Diagnostics",
 		"booking": "Prescriptions"
 	},
+	"errors": {
+		"articlefamily": {
+			"code_exists": "具有此代码的项目系列已存在。",
+			"not_found": "未找到项目系列。",
+			"integrity_violation": "项目系列数据完整性违规。"
+		},
+		"articleFamily": {
+			"code_exists": "具有此代码的项目系列已存在。",
+			"not_found": "未找到项目系列。",
+			"integrity_violation": "项目系列数据完整性违规。"
+		}
+	},
+	"articleFamily": {
+		"id": "项目系列 ID",
+		"code": "代码",
+		"description": "描述",
+		"addNewArticleFamily": "添加新项目系列",
+		"editArticleFamily": "编辑项目系列",
+		"updateArticleFamily": "保存更改",
+		"saveArticleFamily": "保存",
+		"addArticleFamily": "新项目系列",
+		"updated": "项目系列已更新",
+		"updateSuccess": "项目系列更新成功！",
+		"created": "Article family created",
+		"createSuccess": "Article family has been created successfully!",
+		"deleted": "Article family deleted",
+		"deleting": "Deleting article family...",
+		"deleteSuccess": "Article family has been deleted successfully!"
+	},
+	"exam": {
+		"articleFamily": "项目系列"
+	},
+	"operation": {
+		"articleFamily": "项目系列",
+		"country": {
+			"isocode_exists": "A country with this ISO code already exists.",
+			"name_exists": "A country with this name already exists.",
+			"phonecode_exists": "A country with this phone code already exists.",
+			"not_found": "Country not found.",
+			"integrity_violation": "Country data integrity violation."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Reduction plan data integrity violation.",
+			"not_found": "Reduction plan not found.",
+			"description_duplicate": "A reduction plan with this description already exists."
+		},
+		"forbidden": "您没有执行此操作所需的权限。"
+	},
+	"country": {
+		"id": "Country ID",
+		"isoCode": "ISO Code",
+		"name": "Country Name",
+		"phoneCode": "Phone Code",
+		"isoCodeInvalidFormat": "ISO code must be 2 uppercase letters",
+		"phoneCodeInvalidFormat": "Invalid phone code format",
+		"addNewCountry": "Add a new country",
+		"editCountry": "Edit country",
+		"updateCountry": "Save changes",
+		"saveCountry": "Save",
+		"addCountry": "New country",
+		"updated": "Country updated",
+		"updateSuccess": "Country has been updated successfully!",
+		"created": "Country created",
+		"createSuccess": "Country has been created successfully!",
+		"deleted": "Country deleted",
+		"deleting": "Deleting country...",
+		"deleteSuccess": "Country has been deleted successfully!"
+	},
 	"reductionPlan": {
 		"addReductionPlan": "Add Reduction Plan",
 		"addNewReductionPlan": "Add new reduction plan",
@@ -245,18 +315,6 @@
 		"editItem": "修改",
 		"saveItem": "保存",
 		"cancelEdit": "取消"
-	},
-	"errors": {
-		"reductionplan": {
-			"integrity_violation": "Reduction plan data integrity violation.",
-			"not_found": "Reduction plan not found.",
-			"description_duplicate": "A reduction plan with this description already exists."
-		},
-		"reductionPlan": {
-			"integrity_violation": "Reduction plan data integrity violation.",
-			"not_found": "Reduction plan not found.",
-			"description_duplicate": "A reduction plan with this description already exists."
-		}
 	},
 	"staff": {
 		"code": "代码",

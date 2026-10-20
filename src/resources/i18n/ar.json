@@ -234,6 +234,8 @@
 		"billrecords": "Bill Records",
 		"visits": "Visits",
 		"patients": "Patients",
+		"articleFamilies": "عائلات الأصناف",
+		"countries": "Countries",
 		"reductionPlans": "Reduction Plans",
 		"prices": "Price List",
 		"staff": "الموظفون"
@@ -295,7 +297,8 @@
 		"rowupdatesuccess": "Operation Row updated successfully",
 		"rowcreatesuccess": "Operation Row created successfully",
 		"rowdeletesuccess": "Operation Row deleted successfully",
-		"dateafteradmission": "Must be greater than admission date"
+		"dateafteradmission": "Must be greater than admission date",
+		"articleFamily": "عائلة أصناف"
 	},
 	"common": {
 		"ok": "OK",
@@ -585,6 +588,71 @@
 		"sq": "Albanian",
 		"zh": "Chinese"
 	},
+	"errors": {
+		"articlefamily": {
+			"code_exists": "توجد عائلة أصناف بهذا الرمز بالفعل.",
+			"not_found": "عائلة الأصناف غير موجودة.",
+			"integrity_violation": "انتهاك سلامة بيانات عائلة الأصناف."
+		},
+		"articleFamily": {
+			"code_exists": "توجد عائلة أصناف بهذا الرمز بالفعل.",
+			"not_found": "عائلة الأصناف غير موجودة.",
+			"integrity_violation": "انتهاك سلامة بيانات عائلة الأصناف."
+		}
+	},
+	"articleFamily": {
+		"id": "معرف عائلة الأصناف",
+		"code": "الرمز",
+		"description": "الوصف",
+		"addNewArticleFamily": "إضافة عائلة أصناف جديدة",
+		"editArticleFamily": "تعديل عائلة الأصناف",
+		"updateArticleFamily": "حفظ التغييرات",
+		"saveArticleFamily": "حفظ",
+		"addArticleFamily": "عائلة أصناف جديدة",
+		"updated": "تم تحديث عائلة الأصناف",
+		"updateSuccess": "تم تحديث عائلة الأصناف بنجاح!",
+		"created": "تم إنشاء عائلة الأصناف",
+		"createSuccess": "تم إنشاء عائلة الأصناف بنجاح!",
+		"deleted": "تم حذف عائلة الأصناف",
+		"deleting": "جارٍ حذف عائلة الأصناف...",
+		"deleteSuccess": "تم حذف عائلة الأصناف بنجاح!"
+	},
+	"exam": {
+		"articleFamily": "عائلة أصناف",
+		"country": {
+			"isocode_exists": "A country with this ISO code already exists.",
+			"name_exists": "A country with this name already exists.",
+			"phonecode_exists": "A country with this phone code already exists.",
+			"not_found": "Country not found.",
+			"integrity_violation": "Country data integrity violation."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Reduction plan data integrity violation.",
+			"not_found": "Reduction plan not found.",
+			"description_duplicate": "A reduction plan with this description already exists."
+		},
+		"forbidden": "ليس لديك الصلاحيات المطلوبة لتنفيذ هذا الإجراء."
+	},
+	"country": {
+		"id": "Country ID",
+		"isoCode": "ISO Code",
+		"name": "Country Name",
+		"phoneCode": "Phone Code",
+		"isoCodeInvalidFormat": "ISO code must be 2 uppercase letters",
+		"phoneCodeInvalidFormat": "Invalid phone code format",
+		"addNewCountry": "Add a new country",
+		"editCountry": "Edit country",
+		"updateCountry": "Save changes",
+		"saveCountry": "Save",
+		"addCountry": "New country",
+		"updated": "Country updated",
+		"updateSuccess": "Country has been updated successfully!",
+		"created": "Country created",
+		"createSuccess": "Country has been created successfully!",
+		"deleted": "Country deleted",
+		"deleting": "Deleting country...",
+		"deleteSuccess": "Country has been deleted successfully!"
+	},
 	"reductionPlan": {
 		"addReductionPlan": "Add Reduction Plan",
 		"addNewReductionPlan": "Add new reduction plan",
@@ -622,18 +690,6 @@
 		"editItem": "تعديل",
 		"saveItem": "حفظ",
 		"cancelEdit": "إلغاء"
-	},
-	"errors": {
-		"reductionplan": {
-			"integrity_violation": "Reduction plan data integrity violation.",
-			"not_found": "Reduction plan not found.",
-			"description_duplicate": "A reduction plan with this description already exists."
-		},
-		"reductionPlan": {
-			"integrity_violation": "Reduction plan data integrity violation.",
-			"not_found": "Reduction plan not found.",
-			"description_duplicate": "A reduction plan with this description already exists."
-		}
 	},
 	"staff": {
 		"code": "الرمز",

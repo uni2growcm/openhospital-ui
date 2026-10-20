@@ -106,6 +106,8 @@
 		"patientdashboard": "Patient Dashboard",
 		"newtherapy": "New Therapy",
 		"managetherapy": "Manage Therapy",
+		"articleFamilies": "Skupiny artiklů",
+		"countries": "Countries",
 		"reductionPlans": "Reduction Plans",
 		"prices": "Price List",
 		"staff": "Personál"
@@ -208,6 +210,74 @@
 		"opd": "Diagnostics",
 		"booking": "Prescriptions"
 	},
+	"errors": {
+		"articlefamily": {
+			"code_exists": "Skupina artiklů s tímto kódem již existuje.",
+			"not_found": "Skupina artiklů nebyla nalezena.",
+			"integrity_violation": "Porušení integrity dat skupiny artiklů."
+		},
+		"articleFamily": {
+			"code_exists": "Skupina artiklů s tímto kódem již existuje.",
+			"not_found": "Skupina artiklů nebyla nalezena.",
+			"integrity_violation": "Porušení integrity dat skupiny artiklů."
+		}
+	},
+	"articleFamily": {
+		"id": "ID skupiny artiklů",
+		"code": "Kód",
+		"description": "Popis",
+		"addNewArticleFamily": "Přidat novou skupinu artiklů",
+		"editArticleFamily": "Upravit skupinu artiklů",
+		"updateArticleFamily": "Uložit změny",
+		"saveArticleFamily": "Uložit",
+		"addArticleFamily": "Nová skupina artiklů",
+		"updated": "Skupina artiklů aktualizována",
+		"updateSuccess": "Skupina artiklů byla úspěšně aktualizována!",
+		"created": "Skupina artiklů vytvořena",
+		"createSuccess": "Skupina artiklů byla úspěšně vytvořena!",
+		"deleted": "Skupina artiklů smazána",
+		"deleting": "Mazání skupiny artiklů...",
+		"deleteSuccess": "Skupina artiklů byla úspěšně smazána!"
+	},
+	"exam": {
+		"articleFamily": "Skupina artiklů"
+	},
+	"operation": {
+		"articleFamily": "Skupina artiklů",
+		"country": {
+			"isocode_exists": "A country with this ISO code already exists.",
+			"name_exists": "A country with this name already exists.",
+			"phonecode_exists": "A country with this phone code already exists.",
+			"not_found": "Country not found.",
+			"integrity_violation": "Country data integrity violation."
+		},
+		"reductionPlan": {
+			"integrity_violation": "Reduction plan data integrity violation.",
+			"not_found": "Reduction plan not found.",
+			"description_duplicate": "A reduction plan with this description already exists."
+		},
+		"forbidden": "Nemáte požadovaná oprávnění k provedení této akce."
+	},
+	"country": {
+		"id": "Country ID",
+		"isoCode": "ISO Code",
+		"name": "Country Name",
+		"phoneCode": "Phone Code",
+		"isoCodeInvalidFormat": "ISO code must be 2 uppercase letters",
+		"phoneCodeInvalidFormat": "Invalid phone code format",
+		"addNewCountry": "Add a new country",
+		"editCountry": "Edit country",
+		"updateCountry": "Save changes",
+		"saveCountry": "Save",
+		"addCountry": "New country",
+		"updated": "Country updated",
+		"updateSuccess": "Country has been updated successfully!",
+		"created": "Country created",
+		"createSuccess": "Country has been created successfully!",
+		"deleted": "Country deleted",
+		"deleting": "Deleting country...",
+		"deleteSuccess": "Country has been deleted successfully!"
+	},
 	"reductionPlan": {
 		"addReductionPlan": "Add Reduction Plan",
 		"addNewReductionPlan": "Add new reduction plan",
@@ -245,18 +315,6 @@
 		"editItem": "Upravit",
 		"saveItem": "Uložit",
 		"cancelEdit": "Zrušit"
-	},
-	"errors": {
-		"reductionplan": {
-			"integrity_violation": "Reduction plan data integrity violation.",
-			"not_found": "Reduction plan not found.",
-			"description_duplicate": "A reduction plan with this description already exists."
-		},
-		"reductionPlan": {
-			"integrity_violation": "Reduction plan data integrity violation.",
-			"not_found": "Reduction plan not found.",
-			"description_duplicate": "A reduction plan with this description already exists."
-		}
 	},
 	"staff": {
 		"code": "Kód",
