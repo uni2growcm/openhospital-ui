@@ -450,7 +450,7 @@
 		"validatetodate": "should be greater or equal to start date",
 		"billid": "Bill Code",
 		"amount": "Amount",
-		"balance": "To Pay",
+		"balance": "Saldo",
 		"status": "Status",
 		"items": "Items",
 		"designation": "Designation",
@@ -573,6 +573,31 @@
 		},
 		"placeholder": {
 			"comingSoon": "Esta sección está en desarrollo y estará disponible pronto."
+		},
+		"bills": {
+			"guarantor": "Garante",
+			"allUsers": "Todos los usuarios",
+			"search": "Buscar",
+			"reset": "Restablecer",
+			"selectHint": "Seleccione una factura para actuar sobre ella",
+			"refund": "Reembolso",
+			"quickRange": {
+				"last7days": "Últimos 7 días",
+				"thisMonth": "Este mes",
+				"pickMonth": "Elegir mes...",
+				"pickYear": "Elegir año..."
+			},
+			"columns": {
+				"type": "Departamento"
+			},
+			"type": {
+				"opd": "Ambulatorio",
+				"ipd": "Hospitalizado"
+			},
+			"summary": {
+				"selectedPeriod": "Período seleccionado",
+				"myCash": "Mi caja · {{user}}"
+			}
 		}
 	}
 }

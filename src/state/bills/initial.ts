@@ -6,6 +6,8 @@ export const initial: IBillsState = {
 	updateBill: new ApiResponse({ status: 'IDLE' }),
 	getBill: new ApiResponse({ status: 'IDLE' }),
 	searchBills: new ApiResponse({ status: 'IDLE', data: [] }),
+	searchBillsPageable: new ApiResponse({ status: 'IDLE' }),
+	searchBillsSummary: new ApiResponse({ status: 'IDLE' }),
 	getPendingBills: new ApiResponse({ status: 'IDLE', data: [] }),
 	searchPayments: new ApiResponse({ status: 'IDLE', data: [] }),
 	delete: new ApiResponse({ status: 'IDLE' }),

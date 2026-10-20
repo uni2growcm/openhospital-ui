@@ -1,0 +1,291 @@
+@import "../../../../styles/variables";
+
+.billsListing {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 16px;
+
+  // Scoped to this page only — Table is shared app-wide and hardcodes
+  // color="primary" on the view-details icon for every other screen.
+  :global {
+    [data-cy='table-view-action'] svg {
+      color: $c-black !important;
+    }
+  }
+}
+
+.filterBar {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background-color: #ffffff;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.filterForm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+.filterItem {
+  width: 220px;
+  height: 56px;
+
+  :global {
+    .MuiFormControl-root,
+    .dateField,
+    .dateField__light,
+    .autocomplete,
+    .selectField {
+      width: 100%;
+      height: 100%;
+      // .autocomplete / .selectField hardcode their own
+      // `margin-top: 8px !important`, which otherwise wins over a plain
+      // `margin: 0` here and knocks Patient/Garant 8px lower than the date
+      // fields.
+      margin: 0 !important;
+    }
+
+    // MUI X Date Pickers use their own "MuiPickers*" class namespace, not
+    // MuiInputBase/MuiOutlinedInput, so they need a separate rule to be
+    // forced to the same 56px height as the other filter fields.
+    .MuiInputBase-root,
+    .MuiPickersInputBase-root {
+      height: 56px;
+      box-sizing: border-box;
+    }
+
+    .MuiInputLabel-root {
+      top: 0 !important;
+    }
+  }
+}
+
+.filterItemWide {
+  width: 320px;
+}
+
+.filterButtons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: auto;
+  height: 56px;
+
+  :global {
+    .MuiButtonBase-root {
+      height: 56px;
+    }
+  }
+}
+
+.quickRange {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.quickRangeChip {
+  background: none;
+  border: 1px solid #d0d7de;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #24292f;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+
+  &:hover {
+    border-color: #8c959f;
+  }
+
+  &.active {
+    background-color: $c-black;
+    border-color: $c-black;
+    color: #ffffff;
+  }
+}
+
+.summaryCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.summaryCard {
+  background-color: #ffffff;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  padding: 20px 24px;
+}
+
+.summaryCardDark {
+  background-color: $c-black;
+  border-color: $c-black;
+  color: #ffffff;
+}
+
+.summaryCardTitle {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 14px;
+}
+
+.summaryCardRow {
+  display: flex;
+  gap: 32px;
+}
+
+.summaryValue {
+  display: block;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.currencyUnit {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.summaryLabel {
+  display: block;
+  font-size: 13px;
+  opacity: 0.7;
+  margin-bottom: 4px;
+}
+
+.warn {
+  color: #a3420b;
+}
+
+.statusTabsBar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid #d0d7de;
+}
+
+.statusTabs {
+  display: flex;
+  gap: 24px;
+}
+
+.tabActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 8px;
+}
+
+.tabActionsHint {
+  font-size: 13px;
+  color: #57606a;
+}
+
+.tabActionIcon {
+  margin-right: 6px;
+}
+
+.statusTab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  padding: 10px 2px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #5b6577;
+  cursor: pointer;
+  transition: color 0.15s ease-in-out;
+
+  &:hover {
+    color: $c-black;
+  }
+
+  &.active {
+    color: $c-black;
+    font-weight: 700;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 2px;
+      background-color: $c-color-primary;
+    }
+
+    .statusTabCount {
+      background-color: $c-black;
+      color: #ffffff;
+    }
+  }
+}
+
+.statusTabCount {
+  background-color: #eaeef2;
+  color: #57606a;
+  border-radius: 999px;
+  padding: 1px 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.chip {
+  font-weight: 700;
+}
+
+// MUI's own `MuiChip-filledDefault` class sets background/text color and
+// wins the cascade over a same-specificity module class, so these need
+// !important to actually take effect over it.
+.chipOpd {
+  background-color: #eaeef2 !important;
+  color: $c-gray !important;
+}
+
+.chipIpd {
+  background-color: #eaeef2 !important;
+  color: $c-gray !important;
+}
+
+.chipPending {
+  background-color: $c-warning-light !important;
+  color: $c-warning !important;
+}
+
+.chipClosed {
+  background-color: $c-info-light !important;
+  color: $c-info !important;
+}
+
+.chipDeleted {
+  background-color: #ffebe9 !important;
+  color: #cf222e !important;
+}
+
+.billId {
+  color: $c-color-primary;
+  font-weight: 700;
+}
+
+.balanceDue {
+  color: #a3420b;
+  font-weight: 700;
+}
+
+.balanceZero {
+  color: $c-grey-medium;
+}

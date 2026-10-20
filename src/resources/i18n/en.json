@@ -783,7 +783,7 @@
 		"validatetodate": "should be greater or equal to start date",
 		"billid": "Bill Code",
 		"amount": "Amount",
-		"balance": "To Pay",
+		"balance": "Balance",
 		"status": "Status",
 		"items": "Items",
 		"designation": "Designation",
@@ -1336,6 +1336,31 @@
 		},
 		"placeholder": {
 			"comingSoon": "This section is under development and will be available soon."
+		},
+		"bills": {
+			"guarantor": "Guarantor",
+			"allUsers": "All users",
+			"search": "Search",
+			"reset": "Reset",
+			"selectHint": "Select a bill to act on it",
+			"refund": "Refund",
+			"quickRange": {
+				"last7days": "Last 7 days",
+				"thisMonth": "This month",
+				"pickMonth": "Pick month...",
+				"pickYear": "Pick year..."
+			},
+			"columns": {
+				"type": "Department"
+			},
+			"type": {
+				"opd": "OPD",
+				"ipd": "IPD"
+			},
+			"summary": {
+				"selectedPeriod": "Selected period",
+				"myCash": "My cash · {{user}}"
+			}
 		}
 	}
 }

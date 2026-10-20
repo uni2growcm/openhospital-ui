@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { PATHS } from '../../../../consts';
 import { useAppSelector } from '../../../../libraries/hooks/redux';
 import { AccountingHeaderActions } from '../../../accessories/accounting/AccountingHeaderActions/AccountingHeaderActions';
+import { BillsListing } from '../../../accessories/accounting/billsListing/BillsListing';
 import { AccountingTabs } from '../../../accessories/accounting/AccountingTabs/AccountingTabs';
 import { AccountingTabPlaceholder } from '../../../accessories/accounting/placeholders/AccountingTabPlaceholder';
 import { AccountingTab } from '../../../accessories/accounting/types';
@@ -74,7 +75,11 @@ export const ManageBillsActivity: FC = () => {
 						/>
 
 						<div className={classes.tabContent}>
-							<AccountingTabPlaceholder tab={currentTab} />
+							{currentTab === AccountingTab.BILLS ? (
+								<BillsListing />
+							) : (
+								<AccountingTabPlaceholder tab={currentTab} />
+							)}
 						</div>
 					</div>
 				</div>

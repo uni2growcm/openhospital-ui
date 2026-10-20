@@ -86,11 +86,20 @@ const PatientPicker: FC<IProps> = ({
 
 	const initialValues = getInitialFields();
 
+	const lastSearchWasIdOnly = useRef(false);
+
 	const formik = useFormik({
 		initialValues,
 		enableReinitialize: true,
 		onSubmit: (values) => {
 			const formattedValues = formatAllFieldValues(initialFields, values);
+			lastSearchWasIdOnly.current = !!(
+				values.id &&
+				!values.firstName &&
+				!values.secondName &&
+				!values.address &&
+				!values.birthDate
+			);
 			dispatch(searchPatient(formattedValues as TValues));
 		},
 	});
@@ -143,6 +152,27 @@ const PatientPicker: FC<IProps> = ({
 		(state) => state.patients.searchResults.status,
 	);
 
+	// Searching by code alone is unambiguous: if Enter yields exactly one
+	// match, select it immediately instead of forcing an extra click.
+	// biome-ignore lint/correctness/useExhaustiveDependencies: onBlur is the prop callback, stable enough for this one-shot effect
+	useEffect(() => {
+		if (
+			searchStatus === 'SUCCESS' &&
+			lastSearchWasIdOnly.current &&
+			patientData?.length === 1
+		) {
+			const patient = patientData[0];
+			lastSearchWasIdOnly.current = false;
+			handleClick(patient);
+			if (inputRef.current) {
+				onBlur(
+					{ target: inputRef.current } as React.FocusEvent<HTMLInputElement>,
+					patient,
+				);
+			}
+		}
+	}, [searchStatus, patientData]);
+
 	const errorMessage = useAppSelector(
 		(state) =>
 			state.patients.searchResults.error?.message || t('common.somethingwrong'),
@@ -174,6 +204,7 @@ const PatientPicker: FC<IProps> = ({
 									<PatientSearchItem
 										patient={patient}
 										hideAdditionalInformation={true}
+										getPatientSuccessCallback={handleClick}
 									/>
 								</div>
 							))}

@@ -775,7 +775,7 @@
 		"validatetodate": "Deve essere maggiore o uguale alla data di inizio",
 		"billid": "Codice pagamento",
 		"amount": "Totale",
-		"balance": "Da pagare",
+		"balance": "Saldo",
 		"status": "Stato",
 		"items": "Vodi del pagamento",
 		"designation": "Designazione",
@@ -1278,6 +1278,31 @@
 		},
 		"placeholder": {
 			"comingSoon": "Questa sezione è in fase di sviluppo e sarà presto disponibile."
+		},
+		"bills": {
+			"guarantor": "Garante",
+			"allUsers": "Tutti gli utenti",
+			"search": "Cerca",
+			"reset": "Reimposta",
+			"selectHint": "Seleziona una fattura su cui agire",
+			"refund": "Rimborso",
+			"quickRange": {
+				"last7days": "Ultimi 7 giorni",
+				"thisMonth": "Questo mese",
+				"pickMonth": "Scegli mese...",
+				"pickYear": "Scegli anno..."
+			},
+			"columns": {
+				"type": "Reparto"
+			},
+			"type": {
+				"opd": "Ambulatoriale",
+				"ipd": "Ricoverato"
+			},
+			"summary": {
+				"selectedPeriod": "Periodo selezionato",
+				"myCash": "La mia cassa · {{user}}"
+			}
 		}
 	}
 }

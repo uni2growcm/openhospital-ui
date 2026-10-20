@@ -450,7 +450,7 @@
 		"validatetodate": "should be greater or equal to start date",
 		"billid": "Bill Code",
 		"amount": "Amount",
-		"balance": "To Pay",
+		"balance": "Saldo",
 		"status": "Status",
 		"items": "Items",
 		"designation": "Designation",
@@ -573,6 +573,31 @@
 		},
 		"placeholder": {
 			"comingSoon": "Esta secção está em desenvolvimento e estará disponível em breve."
+		},
+		"bills": {
+			"guarantor": "Fiador",
+			"allUsers": "Todos os usuários",
+			"search": "Pesquisar",
+			"reset": "Repor",
+			"selectHint": "Selecione uma fatura para agir sobre ela",
+			"refund": "Reembolso",
+			"quickRange": {
+				"last7days": "Últimos 7 dias",
+				"thisMonth": "Este mês",
+				"pickMonth": "Escolher mês...",
+				"pickYear": "Escolher ano..."
+			},
+			"columns": {
+				"type": "Departamento"
+			},
+			"type": {
+				"opd": "Ambulatório",
+				"ipd": "Internado"
+			},
+			"summary": {
+				"selectedPeriod": "Período selecionado",
+				"myCash": "Meu caixa · {{user}}"
+			}
 		}
 	}
 }

@@ -783,7 +783,7 @@
 		"validatetodate": "Doit être supérieur ou égal à la date de début",
 		"billid": "Code de la facture",
 		"amount": "Montant",
-		"balance": "A payer",
+		"balance": "Solde",
 		"status": "Statut",
 		"items": "Eléments",
 		"designation": "Désignation",
@@ -1331,6 +1331,31 @@
 		},
 		"placeholder": {
 			"comingSoon": "Cette section est en cours de développement et sera disponible prochainement."
+		},
+		"bills": {
+			"guarantor": "Garant",
+			"allUsers": "Tous les utilisateurs",
+			"search": "Rechercher",
+			"reset": "Réinitialiser",
+			"selectHint": "Sélectionnez une facture pour agir dessus",
+			"refund": "Remboursement",
+			"quickRange": {
+				"last7days": "7 derniers jours",
+				"thisMonth": "Ce mois-ci",
+				"pickMonth": "Choisir un mois...",
+				"pickYear": "Choisir une année..."
+			},
+			"columns": {
+				"type": "Département"
+			},
+			"type": {
+				"opd": "Externe",
+				"ipd": "Hospitalisé"
+			},
+			"summary": {
+				"selectedPeriod": "Période sélectionnée",
+				"myCash": "Ma caisse · {{user}}"
+			}
 		}
 	}
 }

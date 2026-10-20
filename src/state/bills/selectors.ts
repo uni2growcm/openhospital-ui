@@ -73,6 +73,41 @@ export const selectBills = createSelector(
 	(searchState) => searchState.data,
 );
 
+export const selectSearchBillsPageableState = createSelector(
+	[selectBillsState],
+	(billsState) => billsState.searchBillsPageable,
+);
+
+export const selectSearchBillsPageableLoading = createSelector(
+	[selectSearchBillsPageableState],
+	(searchState) => searchState.isLoading,
+);
+
+export const selectSearchBillsPageableError = createSelector(
+	[selectSearchBillsPageableState],
+	(searchState) => searchState.error,
+);
+
+export const selectBillsPage = createSelector(
+	[selectSearchBillsPageableState],
+	(searchState) => searchState.data,
+);
+
+export const selectSearchBillsSummaryState = createSelector(
+	[selectBillsState],
+	(billsState) => billsState.searchBillsSummary,
+);
+
+export const selectSearchBillsSummaryLoading = createSelector(
+	[selectSearchBillsSummaryState],
+	(searchState) => searchState.isLoading,
+);
+
+export const selectBillsSummary = createSelector(
+	[selectSearchBillsSummaryState],
+	(searchState) => searchState.data,
+);
+
 export const selectGetPendingBillsState = createSelector(
 	[selectBillsState],
 	(billsState) => billsState.getPendingBills,

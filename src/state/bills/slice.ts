@@ -123,6 +123,30 @@ export const billSlice = createSlice({
 			.addCase(thunks.searchBills.rejected, (state, action) => {
 				state.searchBills = ApiResponse.error(action.payload);
 			})
+			// Search Bills Pageable
+			.addCase(thunks.searchBillsPageable.pending, (state) => {
+				state.searchBillsPageable = ApiResponse.loading();
+			})
+			.addCase(thunks.searchBillsPageable.fulfilled, (state, action) => {
+				state.searchBillsPageable = isEmpty(action.payload?.data)
+					? ApiResponse.value({ data: [], pageInfo: action.payload?.pageInfo })
+					: ApiResponse.value(action.payload);
+			})
+			.addCase(thunks.searchBillsPageable.rejected, (state, action) => {
+				state.searchBillsPageable = ApiResponse.error(action.payload);
+			})
+			// Search Bills Summary (counts + summary cards, unpaginated)
+			.addCase(thunks.searchBillsSummary.pending, (state) => {
+				state.searchBillsSummary = ApiResponse.loading();
+			})
+			.addCase(thunks.searchBillsSummary.fulfilled, (state, action) => {
+				state.searchBillsSummary = isEmpty(action.payload?.data)
+					? ApiResponse.value({ data: [], pageInfo: action.payload?.pageInfo })
+					: ApiResponse.value(action.payload);
+			})
+			.addCase(thunks.searchBillsSummary.rejected, (state, action) => {
+				state.searchBillsSummary = ApiResponse.error(action.payload);
+			})
 			// Search Payments
 			.addCase(thunks.searchPayments.pending, (state) => {
 				state.searchPayments = ApiResponse.loading();

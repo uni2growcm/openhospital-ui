@@ -697,7 +697,7 @@
 		"validatetodate": "sollte größer oder gleich dem Startdatum sein",
 		"billid": "Rechnungsnummer",
 		"amount": "Summe",
-		"balance": "Zu bezahlen",
+		"balance": "Saldo",
 		"status": "Status",
 		"items": "Artikel",
 		"designation": "Bezeichnung",
@@ -909,6 +909,31 @@
 		},
 		"placeholder": {
 			"comingSoon": "Dieser Bereich befindet sich in der Entwicklung und ist in Kürze verfügbar."
+		},
+		"bills": {
+			"guarantor": "Bürge",
+			"allUsers": "Alle Benutzer",
+			"search": "Suchen",
+			"reset": "Zurücksetzen",
+			"selectHint": "Wählen Sie eine Rechnung aus, um eine Aktion durchzuführen",
+			"refund": "Rückerstattung",
+			"quickRange": {
+				"last7days": "Letzte 7 Tage",
+				"thisMonth": "Dieser Monat",
+				"pickMonth": "Monat wählen...",
+				"pickYear": "Jahr wählen..."
+			},
+			"columns": {
+				"type": "Abteilung"
+			},
+			"type": {
+				"opd": "Ambulant",
+				"ipd": "Stationär"
+			},
+			"summary": {
+				"selectedPeriod": "Ausgewählter Zeitraum",
+				"myCash": "Meine Kasse · {{user}}"
+			}
 		}
 	}
 }

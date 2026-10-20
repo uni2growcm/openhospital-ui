@@ -450,7 +450,7 @@
 		"validatetodate": "should be greater or equal to start date",
 		"billid": "Bill Code",
 		"amount": "Amount",
-		"balance": "To Pay",
+		"balance": "Salio",
 		"status": "Status",
 		"items": "Items",
 		"designation": "Designation",
@@ -573,6 +573,31 @@
 		},
 		"placeholder": {
 			"comingSoon": "Sehemu hii inatengenezwa na itapatikana hivi karibuni."
+		},
+		"bills": {
+			"guarantor": "Mdhamini",
+			"allUsers": "Watumiaji wote",
+			"search": "Tafuta",
+			"reset": "Weka upya",
+			"selectHint": "Chagua bili ili kutenda juu yake",
+			"refund": "Kurejesha pesa",
+			"quickRange": {
+				"last7days": "Siku 7 zilizopita",
+				"thisMonth": "Mwezi huu",
+				"pickMonth": "Chagua mwezi...",
+				"pickYear": "Chagua mwaka..."
+			},
+			"columns": {
+				"type": "Idara"
+			},
+			"type": {
+				"opd": "Nje",
+				"ipd": "Amelazwa"
+			},
+			"summary": {
+				"selectedPeriod": "Kipindi kilichochaguliwa",
+				"myCash": "Pesa yangu · {{user}}"
+			}
 		}
 	}
 }

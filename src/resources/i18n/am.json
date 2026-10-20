@@ -775,7 +775,7 @@
 		"validatetodate": "ከመጀመሪያው ቀን የበለጠ ወይም እኩል መሆን አለበት",
 		"billid": "የቢል ኮድ",
 		"amount": "መጠን",
-		"balance": "ለመክፈል",
+		"balance": "ቀሪ ሂሳብ",
 		"status": "ሁኔታ",
 		"items": "እቃዎች",
 		"designation": "ስያሜ",
@@ -1278,6 +1278,31 @@
 		},
 		"placeholder": {
 			"comingSoon": "ይህ ክፍል በመገንባት ላይ ነው እና በቅርቡ ይገኛል።"
+		},
+		"bills": {
+			"guarantor": "ዋስ",
+			"allUsers": "ሁሉም ተጠቃሚዎች",
+			"search": "ፈልግ",
+			"reset": "ዳግም አስጀምር",
+			"selectHint": "እርምጃ ለመውሰድ ደረሰኝ ይምረጡ",
+			"refund": "ተመላሽ ገንዘብ",
+			"quickRange": {
+				"last7days": "ያለፉት 7 ቀናት",
+				"thisMonth": "በዚህ ወር",
+				"pickMonth": "ወር ይምረጡ...",
+				"pickYear": "ዓመት ይምረጡ..."
+			},
+			"columns": {
+				"type": "ክፍል"
+			},
+			"type": {
+				"opd": "ተመላላሽ",
+				"ipd": "ሆስፒታል ገብቶ"
+			},
+			"summary": {
+				"selectedPeriod": "የተመረጠው ጊዜ",
+				"myCash": "የእኔ ካዝና · {{user}}"
+			}
 		}
 	}
 }

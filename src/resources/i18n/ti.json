@@ -775,7 +775,7 @@
 		"validatetodate": "ካብ ዕለት ምጅማር ክዓቢ ወይ ማዕረ ክኸውን ኣለዎ።",
 		"billid": "ሕጊ እማመ",
 		"amount": "መጠን",
-		"balance": "ንኽኸፍል",
+		"balance": "ተረፍ ሕሳብ",
 		"status": "ኩነታት",
 		"items": "ኣቕሑ",
 		"designation": "ምስረታ",
@@ -1278,6 +1278,31 @@
 		},
 		"placeholder": {
 			"comingSoon": "እዚ ክፍሊ ኣብ ምምዕባል ይርከብ ኣሎ፣ ድሕሪ ሓጺር እዋን ድማ ክርከብ እዩ።"
+		},
+		"bills": {
+			"guarantor": "ውሕስ",
+			"allUsers": "ኩሎም ተጠቀምቲ",
+			"search": "ድለ",
+			"reset": "ዳግም ጀምር",
+			"selectHint": "ንሕሳብ ፋክቱር ንምምራጽ ምረጽ",
+			"refund": "ምምላስ ገንዘብ",
+			"quickRange": {
+				"last7days": "ናይ ዝሓለፉ 7 ማዓልቲ",
+				"thisMonth": "እዚ ወርሒ",
+				"pickMonth": "ወርሒ ምረጽ...",
+				"pickYear": "ዓመት ምረጽ..."
+			},
+			"columns": {
+				"type": "ክፍሊ"
+			},
+			"type": {
+				"opd": "ወፃእተኛ ሕሙም",
+				"ipd": "ኣብ ሆስፒታል ዝኣተወ"
+			},
+			"summary": {
+				"selectedPeriod": "እተመርጸ ግዜ",
+				"myCash": "ናተይ ገንዘብ · {{user}}"
+			}
 		}
 	}
 }
