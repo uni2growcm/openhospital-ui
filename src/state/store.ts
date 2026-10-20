@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { admissionSlice } from './admissions';
 import { billSlice } from './bills';
+import { countrySlice } from './countries';
 import { dashboardSlice } from './dashboard';
 import { diseaseSlice } from './diseases';
 import { examinationSlice } from './examinations';
@@ -16,7 +17,9 @@ import { patientSlice } from './patients';
 import { permissionSlice } from './permissions';
 import { priceSlice } from './prices';
 import { radiologySlice } from './radiology';
+import { reductionPlansSlice } from './reductionPlans';
 import { settingsSlice } from './settings';
+import { staffSlice } from './staff';
 import { summarySlice } from './summary';
 import { supplierSlice } from './suppliers';
 import { therapySlice } from './therapies';
@@ -58,7 +61,10 @@ const reducer = combineReducers({
 	vaccines: vaccineSlice.reducer,
 	types: typesReducer,
 	suppliers: supplierSlice.reducer,
+	countries: countrySlice.reducer,
 	radiology: radiologySlice.reducer,
+	reductionPlans: reductionPlansSlice.reducer,
+	staff: staffSlice.reducer,
 });
 
 export const store = configureStore({
