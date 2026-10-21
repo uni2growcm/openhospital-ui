@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+export {};
+
 const ACCOUNTING_BILLS_PATH = '/accounting/bills';
 const ACCOUNTING_PATH = '/accounting';
 
@@ -31,15 +33,28 @@ describe('ManageBillsActivity spec', () => {
 			.contains('Payments');
 	});
 
-	it('should display overview header actions and placeholder content', () => {
+	it('should display overview header actions and full overview dashboard', () => {
 		cy.dataCy('accounting-header-actions').should('be.visible');
 		cy.dataCy('accounting-year-field').should('be.visible');
 		cy.dataCy('accounting-new-bill-button')
 			.should('be.visible')
 			.contains('New bill');
-		cy.dataCy('accounting-tab-placeholder').should('be.visible');
-		cy.dataCy('placeholder-title').contains('Overview');
-		cy.dataCy('placeholder-description').should('contain', 'under development');
+		cy.dataCy('accounting-overview').should('be.visible');
+		cy.dataCy('overview-kpi-grid').should('be.visible');
+		cy.dataCy('kpi-card-cashed-in').should('be.visible');
+		cy.dataCy('kpi-card-outstanding-debt').should('be.visible');
+		cy.dataCy('kpi-card-bills-issued').should('be.visible');
+		cy.dataCy('kpi-card-refunded').should('be.visible');
+		cy.dataCy('overview-chart-card').should('be.visible');
+		cy.dataCy('overview-top-items-card').should('be.visible');
+		cy.dataCy('overview-indebted-patients-card').should('be.visible');
+		cy.dataCy('overview-reports-card').should('be.visible');
+	});
+
+	it('should interact with the reports panel and display a feedback banner', () => {
+		cy.dataCy('report-item-patientStatement').should('be.visible');
+		cy.dataCy('report-item-todayClosure').should('be.visible').click();
+		cy.dataCy('report-feedback-banner').should('be.visible');
 	});
 
 	it('should switch to Bills tab and display its actions, subtitle, and placeholder', () => {
@@ -117,7 +132,7 @@ describe('ManageBillsActivity spec', () => {
 		cy.dataCy('placeholder-title').contains('Payments');
 	});
 
-	it('should switch back to Overview tab when clicked', () => {
+	it('should switch back to Overview tab when clicked and restore dashboard', () => {
 		cy.dataCy('accounting-tab-overview').click();
 		cy.dataCy('accounting-tab-overview').should(
 			'have.attr',
@@ -126,7 +141,8 @@ describe('ManageBillsActivity spec', () => {
 		);
 		cy.dataCy('accounting-year-field').should('be.visible');
 		cy.dataCy('accounting-new-bill-button').should('be.visible');
-		cy.dataCy('placeholder-title').contains('Overview');
+		cy.dataCy('accounting-overview').should('be.visible');
+		cy.dataCy('overview-kpi-grid').should('be.visible');
 	});
 
 	it('should navigate from accounting home to bills management via Manage Bills action', () => {

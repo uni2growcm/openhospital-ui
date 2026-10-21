@@ -1331,6 +1331,48 @@
 		},
 		"placeholder": {
 			"comingSoon": "Cette section est en cours de développement et sera disponible prochainement."
+		},
+		"overview": {
+			"kpi": {
+				"cashedIn": "ENCAISSÉ",
+				"cashedInSubtitle": "{{currency}} · {{period}}",
+				"outstandingDebt": "DETTE RESTANTE",
+				"outstandingDebtSubtitle": "{{currency}} · {{count}} factures en attente",
+				"billsIssued": "FACTURES ÉMISES",
+				"billsIssuedSubtitle": "{{count}} clôturées",
+				"refunded": "REMBOURSÉ",
+				"refundedSubtitle": "{{currency}} · {{count}} remboursements"
+			},
+			"chart": {
+				"title": "Paiements et dettes par mois",
+				"paid": "Payé",
+				"notPaid": "Non payé"
+			},
+			"topItems": {
+				"title": "Articles par revenu",
+				"empty": "Aucun article enregistré pour cette année"
+			},
+			"indebtedPatients": {
+				"title": "Patients les plus endettés",
+				"empty": "Aucun patient endetté trouvé",
+				"billsCount": "· {{count}} facture(s)"
+			},
+			"reports": {
+				"title": "Rapports",
+				"subtitle": "Exécuter pour la période choisie dans Factures, en PDF ou Excel.",
+				"patientStatement": "Relevé patient",
+				"todayClosure": "Clôture journalière",
+				"badDebtsOnly": "Créances douteuses uniquement (court)",
+				"allBills": "Toutes les factures (complet)",
+				"paymentsByUser": "Paiements par utilisateur",
+				"paymentsAndRefundsByUser": "Paiements & remboursements par utilisateur",
+				"incomesByItemCategory": "Revenus par catégorie d'articles",
+				"refunds": "Remboursements",
+				"debtsByItemCategory": "Dettes par catégorie d'articles",
+				"billsByReductionPlan": "Factures par plan de réduction",
+				"globalConsumptionByService": "Consommation globale par service",
+				"exportSelected": "Rapport sélectionné : {{report}}"
+			}
 		}
 	}
 }
