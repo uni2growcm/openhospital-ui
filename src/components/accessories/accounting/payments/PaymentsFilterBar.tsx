@@ -144,6 +144,7 @@ export const PaymentsFilterBar: FC<IPaymentsFilterBarProps> = ({
 					onChange={(value) => setFieldValue('user', value)}
 					options={userOptions}
 					translateOptions={false}
+					displayEmpty
 				/>
 			</div>
 			<div className={classes.filterItem}>
