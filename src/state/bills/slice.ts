@@ -134,6 +134,28 @@ export const billSlice = createSlice({
 			})
 			.addCase(thunks.searchPayments.rejected, (state, action) => {
 				state.searchPayments = ApiResponse.error(action.payload);
+			})
+			// Search Payments Pageable
+			.addCase(thunks.searchPaymentsPageable.pending, (state) => {
+				state.searchPaymentsPageable = ApiResponse.loading();
+			})
+			.addCase(thunks.searchPaymentsPageable.fulfilled, (state, action) => {
+				state.searchPaymentsPageable = ApiResponse.value(action.payload);
+			})
+			.addCase(thunks.searchPaymentsPageable.rejected, (state, action) => {
+				state.searchPaymentsPageable = ApiResponse.error(action.payload);
+			})
+			// Get Payment Users
+			.addCase(thunks.getPaymentUsers.pending, (state) => {
+				state.getPaymentUsers = ApiResponse.loading();
+			})
+			.addCase(thunks.getPaymentUsers.fulfilled, (state, action) => {
+				state.getPaymentUsers = isEmpty(action.payload)
+					? ApiResponse.empty()
+					: ApiResponse.value(action.payload);
+			})
+			.addCase(thunks.getPaymentUsers.rejected, (state, action) => {
+				state.getPaymentUsers = ApiResponse.error(action.payload);
 			}),
 });
 

@@ -909,6 +909,26 @@
 		},
 		"placeholder": {
 			"comingSoon": "Kjo pjesë është në zhvillim dhe do të jetë e disponueshme së shpejti."
+		},
+		"payments": {
+			"title": "Pagesat",
+			"from": "Nga",
+			"to": "Deri",
+			"patient": "Pacienti",
+			"receivedBy": "Pranuar nga",
+			"allUsers": "Të gjithë përdoruesit",
+			"search": "Kërko",
+			"totalReceived": "Totali i pranuar",
+			"payments": "Pagesat",
+			"onNBills": "në {{count}} fatura",
+			"listView": "Lista",
+			"byDayView": "Sipas ditës",
+			"date": "Data",
+			"bill": "Fatura",
+			"amount": "Shuma",
+			"total": "Totali",
+			"code": "Kodi {{code}}",
+			"reset": "Rivendos"
 		}
 	}
 }

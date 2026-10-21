@@ -573,6 +573,26 @@
 		},
 		"placeholder": {
 			"comingSoon": "Esta sección está en desarrollo y estará disponible pronto."
+		},
+		"payments": {
+			"title": "Pagos",
+			"from": "Desde",
+			"to": "Hasta",
+			"patient": "Paciente",
+			"receivedBy": "Recibido por",
+			"allUsers": "Todos los usuarios",
+			"search": "Buscar",
+			"totalReceived": "Total recibido",
+			"payments": "Pagos",
+			"onNBills": "en {{count}} facturas",
+			"listView": "Lista",
+			"byDayView": "Por día",
+			"date": "Fecha",
+			"bill": "Factura",
+			"amount": "Importe",
+			"total": "Total",
+			"code": "Código {{code}}",
+			"reset": "Restablecer"
 		}
 	}
 }

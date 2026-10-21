@@ -1278,6 +1278,26 @@
 		},
 		"placeholder": {
 			"comingSoon": "Questa sezione è in fase di sviluppo e sarà presto disponibile."
+		},
+		"payments": {
+			"title": "Pagamenti",
+			"from": "Da",
+			"to": "A",
+			"patient": "Paziente",
+			"receivedBy": "Ricevuto da",
+			"allUsers": "Tutti gli utenti",
+			"search": "Cerca",
+			"totalReceived": "Totale ricevuto",
+			"payments": "Pagamenti",
+			"onNBills": "su {{count}} fatture",
+			"listView": "Elenco",
+			"byDayView": "Per giorno",
+			"date": "Data",
+			"bill": "Fattura",
+			"amount": "Importo",
+			"total": "Totale",
+			"code": "Codice {{code}}",
+			"reset": "Reimposta"
 		}
 	}
 }

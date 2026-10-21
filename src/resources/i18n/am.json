@@ -1278,6 +1278,26 @@
 		},
 		"placeholder": {
 			"comingSoon": "ይህ ክፍል በመገንባት ላይ ነው እና በቅርቡ ይገኛል።"
+		},
+		"payments": {
+			"title": "ክፍያዎች",
+			"from": "ከ",
+			"to": "እስከ",
+			"patient": "ታካሚ",
+			"receivedBy": "የተቀበለው",
+			"allUsers": "ሁሉም ተጠቃሚዎች",
+			"search": "ፈልግ",
+			"totalReceived": "ጠቅላላ የተቀበለ",
+			"payments": "ክፍያዎች",
+			"onNBills": "በ {{count}} ደረሰኞች ላይ",
+			"listView": "ዝርዝር",
+			"byDayView": "በቀን",
+			"date": "ቀን",
+			"bill": "ደረሰኝ",
+			"amount": "መጠን",
+			"total": "ጠቅላላ",
+			"code": "ኮድ {{code}}",
+			"reset": "ዳግም አስጀምር"
 		}
 	}
 }

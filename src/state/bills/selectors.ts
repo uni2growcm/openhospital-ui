@@ -113,6 +113,51 @@ export const selectPayments = createSelector(
 	(searchState) => searchState.data,
 );
 
+export const selectSearchPaymentsPageableState = createSelector(
+	[selectBillsState],
+	(billsState) => billsState.searchPaymentsPageable,
+);
+
+export const selectSearchPaymentsPageableLoading = createSelector(
+	[selectSearchPaymentsPageableState],
+	(searchState) => searchState.isLoading,
+);
+
+export const selectSearchPaymentsPageableError = createSelector(
+	[selectSearchPaymentsPageableState],
+	(searchState) => searchState.error,
+);
+
+export const selectPaymentsPageableData = createSelector(
+	[selectSearchPaymentsPageableState],
+	(searchState) => searchState.data?.data,
+);
+
+export const selectPaymentsPageInfo = createSelector(
+	[selectSearchPaymentsPageableState],
+	(searchState) => searchState.data?.pageInfo,
+);
+
+export const selectGetPaymentUsersState = createSelector(
+	[selectBillsState],
+	(billsState) => billsState.getPaymentUsers,
+);
+
+export const selectGetPaymentUsersLoading = createSelector(
+	[selectGetPaymentUsersState],
+	(getState) => getState.isLoading,
+);
+
+export const selectGetPaymentUsersError = createSelector(
+	[selectGetPaymentUsersState],
+	(getState) => getState.error,
+);
+
+export const selectPaymentUsers = createSelector(
+	[selectGetPaymentUsersState],
+	(getState) => getState.data,
+);
+
 export const selectDeleteBillState = createSelector(
 	[selectBillsState],
 	(billsState) => billsState.delete,

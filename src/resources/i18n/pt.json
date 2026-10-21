@@ -573,6 +573,26 @@
 		},
 		"placeholder": {
 			"comingSoon": "Esta secção está em desenvolvimento e estará disponível em breve."
+		},
+		"payments": {
+			"title": "Pagamentos",
+			"from": "De",
+			"to": "Até",
+			"patient": "Paciente",
+			"receivedBy": "Recebido por",
+			"allUsers": "Todos os utilizadores",
+			"search": "Pesquisar",
+			"totalReceived": "Total recebido",
+			"payments": "Pagamentos",
+			"onNBills": "em {{count}} faturas",
+			"listView": "Lista",
+			"byDayView": "Por dia",
+			"date": "Data",
+			"bill": "Fatura",
+			"amount": "Valor",
+			"total": "Total",
+			"code": "Código {{code}}",
+			"reset": "Repor"
 		}
 	}
 }

@@ -573,6 +573,26 @@
 		},
 		"placeholder": {
 			"comingSoon": "هذا القسم قيد التطوير وسيتوفر قريباً."
+		},
+		"payments": {
+			"title": "المدفوعات",
+			"from": "من",
+			"to": "إلى",
+			"patient": "المريض",
+			"receivedBy": "استلمه",
+			"allUsers": "جميع المستخدمين",
+			"search": "بحث",
+			"totalReceived": "إجمالي المستلم",
+			"payments": "المدفوعات",
+			"onNBills": "في {{count}} فاتورة",
+			"listView": "قائمة",
+			"byDayView": "حسب اليوم",
+			"date": "التاريخ",
+			"bill": "الفاتورة",
+			"amount": "المبلغ",
+			"total": "الإجمالي",
+			"code": "الرمز {{code}}",
+			"reset": "إعادة التعيين"
 		}
 	}
 }

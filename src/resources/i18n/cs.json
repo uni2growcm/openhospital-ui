@@ -196,6 +196,26 @@
 		},
 		"placeholder": {
 			"comingSoon": "Tato sekce je ve vývoji a bude brzy k dispozici."
+		},
+		"payments": {
+			"title": "Platby",
+			"from": "Od",
+			"to": "Do",
+			"patient": "Pacient",
+			"receivedBy": "Přijal(a)",
+			"allUsers": "Všichni uživatelé",
+			"search": "Hledat",
+			"totalReceived": "Celkem přijato",
+			"payments": "Platby",
+			"onNBills": "u {{count}} účtů",
+			"listView": "Seznam",
+			"byDayView": "Podle dne",
+			"date": "Datum",
+			"bill": "Účet",
+			"amount": "Částka",
+			"total": "Celkem",
+			"code": "Kód {{code}}",
+			"reset": "Obnovit"
 		}
 	}
 }

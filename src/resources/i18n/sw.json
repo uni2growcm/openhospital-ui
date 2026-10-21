@@ -573,6 +573,26 @@
 		},
 		"placeholder": {
 			"comingSoon": "Sehemu hii inatengenezwa na itapatikana hivi karibuni."
+		},
+		"payments": {
+			"title": "Malipo",
+			"from": "Kuanzia",
+			"to": "Hadi",
+			"patient": "Mgonjwa",
+			"receivedBy": "Alipokelewa na",
+			"allUsers": "Watumiaji wote",
+			"search": "Tafuta",
+			"totalReceived": "Jumla iliyopokelewa",
+			"payments": "Malipo",
+			"onNBills": "kwenye bili {{count}}",
+			"listView": "Orodha",
+			"byDayView": "Kwa siku",
+			"date": "Tarehe",
+			"bill": "Bili",
+			"amount": "Kiasi",
+			"total": "Jumla",
+			"code": "Nambari {{code}}",
+			"reset": "Weka upya"
 		}
 	}
 }

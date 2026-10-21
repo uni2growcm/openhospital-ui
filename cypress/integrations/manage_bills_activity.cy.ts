@@ -114,7 +114,10 @@ describe('ManageBillsActivity spec', () => {
 			.should('be.visible')
 			.contains('Payments by user report');
 
-		cy.dataCy('placeholder-title').contains('Payments');
+		// the Payments tab now renders the real listing instead of a placeholder —
+		// see accounting_payments_activity.cy.ts for full coverage of this component.
+		cy.dataCy('payments-listing').should('be.visible');
+		cy.dataCy('accounting-tab-placeholder').should('not.exist');
 	});
 
 	it('should switch back to Overview tab when clicked', () => {
