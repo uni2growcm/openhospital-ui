@@ -196,6 +196,26 @@
 		},
 		"placeholder": {
 			"comingSoon": "此部分正在开发中，即将推出。"
+		},
+		"payments": {
+			"title": "付款",
+			"from": "从",
+			"to": "至",
+			"patient": "患者",
+			"receivedBy": "收款人",
+			"allUsers": "所有用户",
+			"search": "搜索",
+			"totalReceived": "总收款",
+			"payments": "付款",
+			"onNBills": "共 {{count}} 张账单",
+			"listView": "列表",
+			"byDayView": "按日",
+			"date": "日期",
+			"bill": "账单",
+			"amount": "金额",
+			"total": "合计",
+			"code": "编号 {{code}}",
+			"reset": "重置"
 		}
 	}
 }

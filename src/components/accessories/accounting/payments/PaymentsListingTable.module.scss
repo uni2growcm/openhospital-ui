@@ -1,0 +1,137 @@
+@import "../../../../styles/variables";
+
+.tableContainer {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.tableHeaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tableTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: #0b1a30;
+}
+
+.viewToggle {
+  display: inline-flex;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.toggleButton {
+  background: #ffffff;
+  border: none;
+  outline: none;
+  padding: 8px 16px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #24292f;
+  cursor: pointer;
+
+  & + & {
+    border-left: 1px solid #d0d7de;
+  }
+
+  &.active {
+    background-color: #0b1a30;
+    color: #ffffff;
+  }
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    text-align: left;
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+  thead th {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #57606a;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid #eef1f4;
+  }
+
+  tbody tr:last-child {
+    border-bottom: none;
+  }
+}
+
+.amountHeader {
+  text-align: right;
+}
+
+.dateCell {
+  white-space: nowrap;
+  color: #57606a;
+}
+
+.billCell {
+  color: $c-color-primary;
+  font-weight: 700;
+}
+
+.patientName {
+  font-weight: 700;
+  color: #0b1a30;
+}
+
+.patientCode {
+  font-size: 12.5px;
+  color: #57606a;
+}
+
+.amountCell {
+  text-align: right;
+  font-weight: 800;
+  color: #0b1a30;
+}
+
+.dayHeaderRow {
+  background-color: #f6f8fa;
+
+  td {
+    font-weight: 700;
+    color: #0b1a30;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+.totalRow {
+  font-weight: 800;
+
+  td {
+    border-top: 2px solid #e2e8f0;
+    color: #0b1a30;
+  }
+}
+
+.emptyState {
+  padding: 32px 20px;
+  text-align: center;
+  color: #57606a;
+  font-size: 14px;
+}

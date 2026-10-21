@@ -13,6 +13,7 @@ import {
 import type * as React from 'react';
 import { type FC, useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import '../../activities/searchPatientActivity/styles.scss';
 import './styles.scss';
 
 import { Search } from '@mui/icons-material';

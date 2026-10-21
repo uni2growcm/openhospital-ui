@@ -8,6 +8,8 @@ export const initial: IBillsState = {
 	searchBills: new ApiResponse({ status: 'IDLE', data: [] }),
 	getPendingBills: new ApiResponse({ status: 'IDLE', data: [] }),
 	searchPayments: new ApiResponse({ status: 'IDLE', data: [] }),
+	searchPaymentsPageable: new ApiResponse({ status: 'IDLE' }),
+	getPaymentUsers: new ApiResponse({ status: 'IDLE', data: [] }),
 	delete: new ApiResponse({ status: 'IDLE' }),
 	payBill: new ApiResponse({ status: 'IDLE' }),
 	closeBill: new ApiResponse({ status: 'IDLE' }),

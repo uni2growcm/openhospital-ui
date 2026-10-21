@@ -1331,6 +1331,26 @@
 		},
 		"placeholder": {
 			"comingSoon": "Cette section est en cours de développement et sera disponible prochainement."
+		},
+		"payments": {
+			"title": "Paiements",
+			"from": "Du",
+			"to": "Au",
+			"patient": "Patient",
+			"receivedBy": "Reçu par",
+			"allUsers": "Tous les utilisateurs",
+			"search": "Rechercher",
+			"totalReceived": "Total reçu",
+			"payments": "Paiements",
+			"onNBills": "sur {{count}} factures",
+			"listView": "Liste",
+			"byDayView": "Par jour",
+			"date": "Date",
+			"bill": "Facture",
+			"amount": "Montant",
+			"total": "Total",
+			"code": "Code {{code}}",
+			"reset": "Réinitialiser"
 		}
 	}
 }

@@ -27,6 +27,7 @@ const SelectField: FunctionComponent<IProps> = ({
 	disabled = false,
 	variant = 'outlined',
 	required = FIELD_VALIDATION.IDLE,
+	displayEmpty = false,
 }) => {
 	const [value, setValue] = useState('');
 	const { t } = useTranslation();
@@ -63,6 +64,7 @@ const SelectField: FunctionComponent<IProps> = ({
 				onBlur={handleOnBlur}
 				label={required === FIELD_VALIDATION.SUGGESTED ? `${label} **` : label}
 				error={isValid}
+				displayEmpty={displayEmpty}
 			>
 				{isLoading && (
 					<MenuItem value="" key={'nano'}>

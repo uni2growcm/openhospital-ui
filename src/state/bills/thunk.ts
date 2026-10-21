@@ -140,6 +140,34 @@ export const searchPayments = createAsyncThunk(
 		).catch((error) => thunkApi.rejectWithValue(error.response)),
 );
 
+export const searchPaymentsPageable = createAsyncThunk(
+	'bills/searchPaymentsPageable',
+	async (
+		filter: TFilterValues & { user?: string; page: number; size: number },
+		thunkApi,
+	) =>
+		firstValueFrom(
+			wrapper(() =>
+				api.searchBillsPaymentsPageable({
+					datefrom: filter.fromDate,
+					dateto: filter.toDate,
+					patientCode: filter.patientCode,
+					user: filter.user,
+					page: filter.page,
+					size: filter.size,
+				}),
+			),
+		).catch((error) => thunkApi.rejectWithValue(error.response)),
+);
+
+export const getPaymentUsers = createAsyncThunk(
+	'bills/getPaymentUsers',
+	async (_, thunkApi) =>
+		firstValueFrom(wrapper(() => api.getPaymentsUsers())).catch((error) =>
+			thunkApi.rejectWithValue(error.response),
+		),
+);
+
 export const deleteBill = createAsyncThunk(
 	'bills/deleteBill',
 	async (id: number | undefined, thunkApi) =>

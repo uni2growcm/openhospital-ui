@@ -1278,6 +1278,26 @@
 		},
 		"placeholder": {
 			"comingSoon": "እዚ ክፍሊ ኣብ ምምዕባል ይርከብ ኣሎ፣ ድሕሪ ሓጺር እዋን ድማ ክርከብ እዩ።"
+		},
+		"payments": {
+			"title": "ክፍሊታት",
+			"from": "ካብ",
+			"to": "ክሳብ",
+			"patient": "ሕሙም",
+			"receivedBy": "ዝተቐበሎ",
+			"allUsers": "ኩሎም ተጠቀምቲ",
+			"search": "ድለ",
+			"totalReceived": "ጠቅላላ ዝተቐብለ",
+			"payments": "ክፍሊታት",
+			"onNBills": "ኣብ {{count}} ደረሰኝ",
+			"listView": "ዝርዝር",
+			"byDayView": "በብመዓልቲ",
+			"date": "ዕለት",
+			"bill": "ደረሰኝ",
+			"amount": "መጠን",
+			"total": "ጠቅላላ",
+			"code": "ኮድ {{code}}",
+			"reset": "ዳግም ጀምር"
 		}
 	}
 }

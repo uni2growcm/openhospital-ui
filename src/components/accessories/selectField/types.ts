@@ -14,4 +14,5 @@ export interface IProps {
 	disabled?: boolean;
 	variant?: 'standard' | 'outlined' | 'filled';
 	required?: FIELD_VALIDATION;
+	displayEmpty?: boolean;
 }

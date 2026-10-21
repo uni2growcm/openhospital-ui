@@ -1336,6 +1336,26 @@
 		},
 		"placeholder": {
 			"comingSoon": "This section is under development and will be available soon."
+		},
+		"payments": {
+			"title": "Payments",
+			"from": "From",
+			"to": "To",
+			"patient": "Patient",
+			"receivedBy": "Received by",
+			"allUsers": "All users",
+			"search": "Search",
+			"totalReceived": "Total received",
+			"payments": "Payments",
+			"onNBills": "on {{count}} bills",
+			"listView": "List",
+			"byDayView": "By day",
+			"date": "Date",
+			"bill": "Bill",
+			"amount": "Amount",
+			"total": "Total",
+			"code": "Code {{code}}",
+			"reset": "Reset"
 		}
 	}
 }

@@ -8,6 +8,7 @@ import { AccountingTabPlaceholder } from '../../../accessories/accounting/placeh
 import { AccountingTab } from '../../../accessories/accounting/types';
 import AppHeader from '../../../accessories/appHeader/AppHeader';
 import Footer from '../../../accessories/footer/Footer';
+import { PaymentsListing } from '../managePayments/PaymentsListing';
 import classes from './ManageBillsActivity.module.scss';
 
 export const ManageBillsActivity: FC = () => {
@@ -74,7 +75,11 @@ export const ManageBillsActivity: FC = () => {
 						/>
 
 						<div className={classes.tabContent}>
-							<AccountingTabPlaceholder tab={currentTab} />
+							{currentTab === AccountingTab.PAYMENTS ? (
+								<PaymentsListing />
+							) : (
+								<AccountingTabPlaceholder tab={currentTab} />
+							)}
 						</div>
 					</div>
 				</div>

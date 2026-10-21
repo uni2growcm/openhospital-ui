@@ -1,4 +1,9 @@
-import type { BillDTO, BillPaymentsDTO, FullBillDTO } from '../../generated';
+import type {
+	BillDTO,
+	BillPaymentsDTO,
+	FullBillDTO,
+	PageBillPaymentsDTO,
+} from '../../generated';
 import type { ApiResponse } from '../types';
 
 export type IBillsState = {
@@ -8,6 +13,8 @@ export type IBillsState = {
 	searchBills: ApiResponse<FullBillDTO[]>;
 	getPendingBills: ApiResponse<FullBillDTO[]>;
 	searchPayments: ApiResponse<BillPaymentsDTO[]>;
+	searchPaymentsPageable: ApiResponse<PageBillPaymentsDTO>;
+	getPaymentUsers: ApiResponse<string[]>;
 	delete: ApiResponse<void>;
 	payBill: ApiResponse<FullBillDTO>;
 	closeBill: ApiResponse<FullBillDTO>;

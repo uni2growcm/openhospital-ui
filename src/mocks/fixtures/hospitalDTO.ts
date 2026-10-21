@@ -8,5 +8,6 @@ export const hospitalDTO: HospitalDTO = {
 	telephone: '+256 0472621076',
 	fax: '+256 0',
 	email: 'angal@ucmb.ug.co.',
+	currencyCod: 'FCFA',
 	lock: 0,
 };

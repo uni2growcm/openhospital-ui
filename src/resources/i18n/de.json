@@ -909,6 +909,26 @@
 		},
 		"placeholder": {
 			"comingSoon": "Dieser Bereich befindet sich in der Entwicklung und ist in Kürze verfügbar."
+		},
+		"payments": {
+			"title": "Zahlungen",
+			"from": "Von",
+			"to": "Bis",
+			"patient": "Patient",
+			"receivedBy": "Erhalten von",
+			"allUsers": "Alle Benutzer",
+			"search": "Suchen",
+			"totalReceived": "Gesamt erhalten",
+			"payments": "Zahlungen",
+			"onNBills": "bei {{count}} Rechnungen",
+			"listView": "Liste",
+			"byDayView": "Nach Tag",
+			"date": "Datum",
+			"bill": "Rechnung",
+			"amount": "Betrag",
+			"total": "Gesamt",
+			"code": "Code {{code}}",
+			"reset": "Zurücksetzen"
 		}
 	}
 }
