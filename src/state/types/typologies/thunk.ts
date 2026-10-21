@@ -4,7 +4,7 @@ import { wrapper } from '~/libraries/apiUtils/wrapper';
 import {
 	TypologiesApi,
 	type TypologyDTO,
-	type GetTypologiesFamilyEnum,
+	type TypologyDTOFamilyEnum,
 } from '../../../generated';
 import { customConfiguration } from '../../../libraries/apiUtils/configuration';
 
@@ -12,7 +12,7 @@ const api = new TypologiesApi(customConfiguration());
 
 export const getTypologies = createAsyncThunk(
 	'typologies/getTypologies',
-	async (family: GetTypologiesFamilyEnum | undefined, thunkApi) =>
+	async (family: TypologyDTOFamilyEnum | undefined, thunkApi) =>
 		firstValueFrom(wrapper(() => api.getTypologies({ family }))).catch(
 			(error) => thunkApi.rejectWithValue(error.response),
 		),

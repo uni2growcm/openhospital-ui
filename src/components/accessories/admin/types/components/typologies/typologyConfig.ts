@@ -1,11 +1,10 @@
 import {
-	GetTypologiesFamilyEnum,
 	TypologyDTOFamilyEnum,
 } from '../../../../../../generated';
 
 export interface TypologyFamilyConfig {
 	family: TypologyDTOFamilyEnum;
-	getFamilyParam: GetTypologiesFamilyEnum;
+	getFamilyParam: TypologyDTOFamilyEnum;
 	pathSegment: string;
 	translationKey: string;
 }
@@ -13,43 +12,43 @@ export interface TypologyFamilyConfig {
 export const TYPOLOGY_FAMILIES: Record<string, TypologyFamilyConfig> = {
 	visittypes: {
 		family: TypologyDTOFamilyEnum.Visittype,
-		getFamilyParam: GetTypologiesFamilyEnum.Visittype,
+		getFamilyParam: TypologyDTOFamilyEnum.Visittype,
 		pathSegment: 'visittypes',
 		translationKey: 'types.visitTypes',
 	},
 	partnertypes: {
 		family: TypologyDTOFamilyEnum.Partnertype,
-		getFamilyParam: GetTypologiesFamilyEnum.Partnertype,
+		getFamilyParam: TypologyDTOFamilyEnum.Partnertype,
 		pathSegment: 'partnertypes',
 		translationKey: 'types.partnerTypes',
 	},
 	familyplanningmethods: {
 		family: TypologyDTOFamilyEnum.Familyplanningmethodtype,
-		getFamilyParam: GetTypologiesFamilyEnum.Familyplanningmethodtype,
+		getFamilyParam: TypologyDTOFamilyEnum.Familyplanningmethodtype,
 		pathSegment: 'familyplanningmethods',
 		translationKey: 'types.familyPlanningMethods',
 	},
 	familyplanningvisittypes: {
 		family: TypologyDTOFamilyEnum.Familyplanningvisittype,
-		getFamilyParam: GetTypologiesFamilyEnum.Familyplanningvisittype,
+		getFamilyParam: TypologyDTOFamilyEnum.Familyplanningvisittype,
 		pathSegment: 'familyplanningvisittypes',
 		translationKey: 'types.familyPlanningVisitTypes',
 	},
 	hivtreatmenttypes: {
 		family: TypologyDTOFamilyEnum.Hivtreatmenttype,
-		getFamilyParam: GetTypologiesFamilyEnum.Hivtreatmenttype,
+		getFamilyParam: TypologyDTOFamilyEnum.Hivtreatmenttype,
 		pathSegment: 'hivtreatmenttypes',
 		translationKey: 'types.hivTreatmentTypes',
 	},
 	tuberculosisregimens: {
 		family: TypologyDTOFamilyEnum.Tuberculosisregimen,
-		getFamilyParam: GetTypologiesFamilyEnum.Tuberculosisregimen,
+		getFamilyParam: TypologyDTOFamilyEnum.Tuberculosisregimen,
 		pathSegment: 'tuberculosisregimens',
 		translationKey: 'types.tuberculosisRegimens',
 	},
 	tuberculosiscontacts: {
 		family: TypologyDTOFamilyEnum.Tuberculosiscontact,
-		getFamilyParam: GetTypologiesFamilyEnum.Tuberculosiscontact,
+		getFamilyParam: TypologyDTOFamilyEnum.Tuberculosiscontact,
 		pathSegment: 'tuberculosiscontacts',
 		translationKey: 'types.tuberculosisContacts',
 	},
