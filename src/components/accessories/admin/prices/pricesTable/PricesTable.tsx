@@ -76,7 +76,7 @@ export const PricesTable = ({ onEdit, onDelete, headerActions }: IOwnProps) => {
 	};
 
 	const handleDuplicateConfirm = () => {
-		if (!duplicateRow?.id) {
+		if (duplicateRow?.id === undefined || duplicateRow?.id === null) {
 			return;
 		}
 		dispatch(
