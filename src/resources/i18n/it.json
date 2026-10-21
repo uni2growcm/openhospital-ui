@@ -1023,7 +1023,6 @@
 		"description": "Descrizione",
 		"currency": "Valuta",
 		"addPriceList": "Aggiungi listino prezzi",
-		"editPriceList": "Modifica listino prezzi",
 		"updatePriceList": "Aggiorna listino prezzi",
 		"savePriceList": "Salva listino prezzi",
 		"created": "Listino prezzi creato",

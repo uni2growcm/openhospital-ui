@@ -1034,7 +1034,6 @@
 		"description": "Description",
 		"currency": "Devise",
 		"addPriceList": "Ajouter une liste de prix",
-		"editPriceList": "Modifier la liste de prix",
 		"updatePriceList": "Mettre à jour la liste de prix",
 		"savePriceList": "Enregistrer la liste de prix",
 		"created": "Liste de prix créée",

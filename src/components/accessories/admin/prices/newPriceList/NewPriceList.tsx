@@ -1,10 +1,10 @@
+import { useTranslation } from 'react-i18next';
 import { AdminActivityContent } from '~/components/activities/adminActivity';
-import { useTranslation } from '~/libraries/hooks';
 import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
 import type { PriceListDTO } from '../../../../../generated';
 import { createPriceList } from '../../../../../state/prices';
-import PriceListForm from '../priceListForm/PriceListForm';
 import { getInitialFields } from '../priceListForm/consts';
+import PriceListForm from '../priceListForm/PriceListForm';
 
 export const NewPriceList = () => {
 	const dispatch = useAppDispatch();

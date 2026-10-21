@@ -100,13 +100,13 @@ export const FilterButton = ({ field, onChange }: IOwnProps) => {
 			: '';
 	};
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: debounce must restart only when the form values change, not when formik's recreated-every-render submitForm identity changes
 	useEffect(() => {
 		const submit = setTimeout(() => {
 			formik.submitForm();
 		}, 250);
 
 		return () => clearTimeout(submit);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [formik.values]);
 
 	return (

@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { firstValueFrom } from 'rxjs';
 import { wrapper } from '~/libraries/apiUtils/wrapper';
 import {
-  OthersPriceApi,
+	OthersPriceApi,
 	type PriceDTO,
 	type PriceListDTO,
 	PriceListsApi,

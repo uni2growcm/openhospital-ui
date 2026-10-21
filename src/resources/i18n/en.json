@@ -1034,7 +1034,6 @@
 		"description": "Description",
 		"currency": "Currency",
 		"addPriceList": "Add Price List",
-		"editPriceList": "Edit Price List",
 		"updatePriceList": "Update Price List",
 		"savePriceList": "Save Price List",
 		"created": "Price List Created",

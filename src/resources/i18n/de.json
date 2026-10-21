@@ -931,7 +931,6 @@
 		"description": "Beschreibung",
 		"currency": "Währung",
 		"addPriceList": "Preisliste hinzufügen",
-		"editPriceList": "Preisliste bearbeiten",
 		"updatePriceList": "Preisliste aktualisieren",
 		"savePriceList": "Preisliste speichern",
 		"created": "Preisliste erstellt",

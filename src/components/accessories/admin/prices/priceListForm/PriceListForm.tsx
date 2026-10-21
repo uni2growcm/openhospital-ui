@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router';
 import { object, string } from 'yup';
 import DiscardButton from '~/components/accessories/discardButton/DiscardButton';
 import ResetButton from '~/components/accessories/resetButton/resetButton';
+import { resolveApiErrorMessage } from '~/libraries/apiUtils/resolveApiErrorMessage';
 import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
 import { FIELD_VALIDATION } from '~/types';
 import checkIcon from '../../../../../assets/check-icon.png';
@@ -42,15 +43,17 @@ const PriceListForm: FC<IPriceListFormProps> = ({
 
 	const errorMessage = useMemo(
 		() =>
-			(creationMode
-				? priceListStore.createPriceList.error?.message
-				: priceListStore.updatePriceList.error?.message) ??
-			t('common.somethingwrong'),
+			resolveApiErrorMessage(
+				creationMode
+					? priceListStore.createPriceList.error
+					: priceListStore.updatePriceList.error,
+				t,
+			),
 		[
 			creationMode,
 			t,
-			priceListStore.createPriceList.error?.message,
-			priceListStore.updatePriceList.error?.message,
+			priceListStore.createPriceList.error,
+			priceListStore.updatePriceList.error,
 		],
 	);
 

@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import { type ReactNode, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { resolveApiErrorMessage } from '~/libraries/apiUtils/resolveApiErrorMessage';
 import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
 import checkIcon from '../../../../../assets/check-icon.png';
 import type { PriceListDTO } from '../../../../../generated';
@@ -141,7 +142,12 @@ export const PricesTable = ({ onEdit, onDelete, headerActions }: IOwnProps) => {
 			{(() => {
 				switch (status) {
 					case 'FAIL':
-						return <InfoBox type="error" message={error?.message} />;
+						return (
+							<InfoBox
+								type="error"
+								message={resolveApiErrorMessage(error, t)}
+							/>
+						);
 					case 'LOADING':
 						return (
 							<CircularProgress
@@ -156,7 +162,7 @@ export const PricesTable = ({ onEdit, onDelete, headerActions }: IOwnProps) => {
 									<div ref={infoBoxRef} className="info-box-container">
 										<InfoBox
 											type="error"
-											message={deletePriceList.error?.message}
+											message={resolveApiErrorMessage(deletePriceList.error, t)}
 										/>
 									</div>
 								)}
@@ -231,10 +237,10 @@ export const PricesTable = ({ onEdit, onDelete, headerActions }: IOwnProps) => {
 										{copyPriceListState.status === 'FAIL' && (
 											<InfoBox
 												type="error"
-												message={
-													copyPriceListState.error?.message ??
-													t('common.somethingwrong')
-												}
+												message={resolveApiErrorMessage(
+													copyPriceListState.error,
+													t,
+												)}
 											/>
 										)}
 									</DialogContent>

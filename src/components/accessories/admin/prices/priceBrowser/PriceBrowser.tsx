@@ -3,7 +3,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { AdminActivityContent } from '~/components/activities/adminActivity';
+import { resolveApiErrorMessage } from '~/libraries/apiUtils/resolveApiErrorMessage';
 import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
+import checkIcon from '../../../../../assets/check-icon.png';
 import { PATHS } from '../../../../../consts';
 import type { PriceDTO } from '../../../../../generated';
 import { getExams } from '../../../../../state/exams';
@@ -12,11 +14,10 @@ import { getOperations } from '../../../../../state/operations';
 import {
 	getPriceLists,
 	getPrices,
+	getPricesOthers,
 	updatePrices,
 	updatePricesReset,
 } from '../../../../../state/prices';
-import { getPricesOthers } from '../../../../../state/pricesOthers';
-import checkIcon from '../../../../../assets/check-icon.png';
 import Button from '../../../button/Button';
 import ConfirmationDialog from '../../../confirmationDialog/ConfirmationDialog';
 import InfoBox from '../../../infoBox/InfoBox';
@@ -57,7 +58,7 @@ export const PriceBrowser = () => {
 		(state) => state.medicals.medicalsOrderByName,
 	);
 	const { data: othersPrices } = useAppSelector(
-		(state) => state.pricesOthers.getPricesOthers,
+		(state) => state.prices.getPricesOthers,
 	);
 	const updatePricesState = useAppSelector(
 		(state) => state.prices.updatePrices,
@@ -176,7 +177,11 @@ export const PriceBrowser = () => {
 						value={value.price}
 						disabled={!itemEntry.editable}
 						onChange={(e) =>
-							handlePriceChange(category, itemEntry.item, Number(e.target.value))
+							handlePriceChange(
+								category,
+								itemEntry.item,
+								Number(e.target.value),
+							)
 						}
 					/>
 				),
@@ -248,7 +253,9 @@ export const PriceBrowser = () => {
 						label: t('pricelist.category'),
 						type: 'select' as const,
 						options: CATEGORIES.map((category) => {
-							const categoryLabel = t(`pricelist.${CATEGORY_LABEL_KEY[category]}`);
+							const categoryLabel = t(
+								`pricelist.${CATEGORY_LABEL_KEY[category]}`,
+							);
 							return { label: categoryLabel, value: categoryLabel };
 						}),
 					},
@@ -324,7 +331,10 @@ export const PriceBrowser = () => {
 								rowData={rowsForTab(currentTab)}
 								tableHeader={header(currentTab)}
 								labelData={label}
-								columnsOrder={['item', ...(currentTab === 'all' ? ['category'] : [])]}
+								columnsOrder={[
+									'item',
+									...(currentTab === 'all' ? ['category'] : []),
+								]}
 								rowsPerPage={15}
 								showEmptyCell={false}
 								filterColumns={filters}
@@ -336,9 +346,7 @@ export const PriceBrowser = () => {
 						{updatePricesState.status === 'FAIL' && (
 							<InfoBox
 								type="error"
-								message={
-									updatePricesState.error?.message ?? t('common.somethingwrong')
-								}
+								message={resolveApiErrorMessage(updatePricesState.error, t)}
 							/>
 						)}
 
