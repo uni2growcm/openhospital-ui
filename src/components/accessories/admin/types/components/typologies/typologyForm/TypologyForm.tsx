@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router';
 import { object, string } from 'yup';
 import DiscardButton from '~/components/accessories/discardButton/DiscardButton';
 import ResetButton from '~/components/accessories/resetButton/resetButton';
+import { resolveApiErrorMessage } from '~/libraries/apiUtils/resolveApiErrorMessage';
 import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
 import checkIcon from '../../../../../../../assets/check-icon.png';
 import {
@@ -42,22 +43,16 @@ const TypologyForm: FC<ITypologyFormProps> = ({
 	const typologiesStore = useAppSelector((state) => state.types.typologies);
 
 	const errorMessage = useMemo(() => {
-		const rawErr = creationMode
+		const error = creationMode
 			? typologiesStore.create.error
 			: typologiesStore.update.error;
-
-		if (!rawErr) return t('common.somethingwrong');
-
-		let msg = t('common.somethingwrong');
-		if (typeof rawErr === 'string') msg = rawErr;
-		else if (rawErr.response?.data?.message) msg = rawErr.response.data.message;
-		else if (rawErr.response?.message) msg = rawErr.response.message;
-		else if (rawErr.data?.message) msg = rawErr.data.message;
-		else if (rawErr.message && rawErr.message !== 'ajax error') msg = rawErr.message;
-		else if (rawErr.error) msg = rawErr.error;
-
-		return t(msg);
-	}, [creationMode, t, typologiesStore.create.error, typologiesStore.update.error]);
+		return resolveApiErrorMessage(error, t);
+	}, [
+		creationMode,
+		t,
+		typologiesStore.create.error,
+		typologiesStore.update.error,
+	]);
 
 	const initialValues = getFromFields(fields, 'value');
 

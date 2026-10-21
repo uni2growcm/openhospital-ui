@@ -467,15 +467,6 @@ paths:
         required: false
         schema:
           type: string
-          enum:
-          - angal.typology.deliverytype
-          - angal.typology.visittype
-          - angal.typology.partnertype
-          - angal.typology.familyplanningmethodtype
-          - angal.typology.familyplanningvisittype
-          - angal.typology.hivtreatmenttype
-          - angal.typology.tuberculosisregimen
-          - angal.typology.tuberculosiscontact
       responses:
         "200":
           description: OK
@@ -4188,15 +4179,6 @@ paths:
         required: false
         schema:
           type: string
-          enum:
-          - angal.typology.deliverytype
-          - angal.typology.visittype
-          - angal.typology.partnertype
-          - angal.typology.familyplanningmethodtype
-          - angal.typology.familyplanningvisittype
-          - angal.typology.hivtreatmenttype
-          - angal.typology.tuberculosisregimen
-          - angal.typology.tuberculosiscontact
       - name: page
         in: query
         required: false
@@ -8099,14 +8081,14 @@ components:
           type: string
           description: Family of the typology
           enum:
-          - angal.typology.deliverytype
-          - angal.typology.visittype
-          - angal.typology.partnertype
-          - angal.typology.familyplanningmethodtype
-          - angal.typology.familyplanningvisittype
-          - angal.typology.hivtreatmenttype
-          - angal.typology.tuberculosisregimen
-          - angal.typology.tuberculosiscontact
+          - DELIVERYTYPE
+          - VISITTYPE
+          - PARTNERTYPE
+          - FAMILYPLANNINGMETHODTYPE
+          - FAMILYPLANNINGVISITTYPE
+          - HIVTREATMENTTYPE
+          - TUBERCULOSISREGIMEN
+          - TUBERCULOSISCONTACT
           example: VISITTYPE
       required:
       - code
@@ -10069,12 +10051,12 @@ components:
     PageTypologyDTO:
       type: object
       properties:
-        totalPages:
-          type: integer
-          format: int32
         totalElements:
           type: integer
           format: int64
+        totalPages:
+          type: integer
+          format: int32
         pageable:
           $ref: "#/components/schemas/PageableObject"
         size:

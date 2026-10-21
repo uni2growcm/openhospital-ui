@@ -1,6 +1,7 @@
 import { CircularProgress } from '@mui/material';
 import { type ReactNode, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { resolveApiErrorMessage } from '~/libraries/apiUtils/resolveApiErrorMessage';
 import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
 import checkIcon from '../../../../../../../assets/check-icon.png';
 import type { TypologyDTO } from '../../../../../../../generated';
@@ -69,9 +70,7 @@ const TypologiesTable = (props: IOwnProps) => {
 				<div ref={infoBoxRef} className="info-box-container">
 					<InfoBox
 						type="error"
-						message={
-							deleteTypology.error?.message ?? t('common.somethingwrong')
-						}
+						message={resolveApiErrorMessage(deleteTypology.error, t)}
 					/>
 				</div>
 			)}
@@ -108,10 +107,17 @@ const TypologiesTable = (props: IOwnProps) => {
 				</div>
 			)}
 			{status === 'FAIL' && (
-				<InfoBox
-					type="error"
-					message={error?.message ?? t('common.somethingwrong')}
-				/>
+				<>
+					{headerActions && (
+						<div className="header">
+							<div className="headerActions">{headerActions}</div>
+						</div>
+					)}
+					<InfoBox
+						type="error"
+						message={resolveApiErrorMessage(error, t)}
+					/>
+				</>
 			)}
 			<ConfirmationDialog
 				isOpen={deleteTypology.status === 'SUCCESS'}
