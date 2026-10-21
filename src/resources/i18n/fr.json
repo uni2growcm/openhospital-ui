@@ -18,6 +18,11 @@
 			"not_found": "Famille d'articles non trouvée.",
 			"integrity_violation": "Violation d'intégrité des données de la famille d'articles."
 		},
+		"typology": {
+			"code_exists": "Un type avec ce code existe déjà.",
+			"not_found": "Type non trouvé.",
+			"integrity_violation": "Violation d'intégrité des données du type."
+		},
 		"country": {
 			"isocode_exists": "Un pays avec ce code ISO existe déjà.",
 			"name_exists": "Un pays avec ce nom existe déjà.",

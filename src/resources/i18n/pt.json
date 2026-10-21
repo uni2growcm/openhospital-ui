@@ -596,6 +596,11 @@
 			"code_exists": "Já existe uma família de artigos com este código.",
 			"not_found": "Família de artigos não encontrada.",
 			"integrity_violation": "Violação de integridade dos dados da família de artigos."
+		},
+		"typology": {
+			"code_exists": "Já existe um tipo com este código.",
+			"not_found": "Tipo não encontrado.",
+			"integrity_violation": "Violação de integridade dos dados do tipo."
 		}
 	},
 	"articleFamily": {
