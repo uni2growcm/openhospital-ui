@@ -2,6 +2,7 @@ import {
 	AirlineSeatFlat,
 	ArrowForwardIosRounded,
 	AssignmentInd,
+	AttachMoney,
 	Badge,
 	BlurCircular,
 	Category,
@@ -72,6 +73,10 @@ const SideMenu = () => {
 		{
 			key: 'vaccines',
 			icon: <LocalDrink fontSize="small" />,
+		},
+		{
+			key: 'prices',
+			icon: <AttachMoney fontSize="small" />,
 		},
 		{
 			key: 'suppliers',

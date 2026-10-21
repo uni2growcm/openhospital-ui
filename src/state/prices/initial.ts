@@ -8,4 +8,6 @@ export const initial: IPricesState = {
 	createPriceList: new ApiResponse({ status: 'IDLE' }),
 	updatePriceList: new ApiResponse({ status: 'IDLE' }),
 	deletePriceList: new ApiResponse({ status: 'IDLE' }),
+	updatePrices: new ApiResponse({ status: 'IDLE' }),
+	copyPriceList: new ApiResponse({ status: 'IDLE' }),
 };

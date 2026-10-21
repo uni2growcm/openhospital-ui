@@ -3,6 +3,7 @@ import { firstValueFrom } from 'rxjs';
 import { wrapper } from '~/libraries/apiUtils/wrapper';
 import {
 	OthersPriceApi,
+	type PriceDTO,
 	type PriceListDTO,
 	PriceListsApi,
 } from '../../generated';
@@ -48,6 +49,22 @@ export const deletePriceList = createAsyncThunk(
 	async (id: number, thunkApi) =>
 		firstValueFrom(wrapper(() => api.deletePriceList({ id }))).catch((error) =>
 			thunkApi.rejectWithValue(error.response),
+		),
+);
+
+export const updatePrices = createAsyncThunk(
+	'prices/updatePrices',
+	async (payload: { id: number; priceDTO: PriceDTO[] }, thunkApi) =>
+		firstValueFrom(wrapper(() => api.updatePrices(payload))).catch((error) =>
+			thunkApi.rejectWithValue(error.response),
+		),
+);
+
+export const copyPriceList = createAsyncThunk(
+	'prices/copyPriceList',
+	async (payload: { id: number; factor: number; step: number }, thunkApi) =>
+		firstValueFrom(wrapper(() => api.copyByFactorAndStep(payload))).catch(
+			(error) => thunkApi.rejectWithValue(error.response),
 		),
 );
 
