@@ -595,6 +595,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 								</div>
 								<MuiTextField
 									className="rateInput"
+									data-cy="reduction-rate-input"
 									size="small"
 									type="number"
 									label={t('reductionPlan.rate')}
@@ -606,6 +607,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 								<Button
 									type="button"
 									variant="contained"
+									dataCy="add-reduction-item"
 									onClick={handleAddMedicalReduction}
 									disabled={
 										!selectedMedicalCode ||
@@ -620,6 +622,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									<Button
 										type="button"
 										variant="text"
+										dataCy="remove-all-reductions"
 										onClick={() => {
 											handleCancelEdit();
 											setMedicalReductions([]);
@@ -660,6 +663,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 															{isEditing ? (
 																<MuiTextField
 																	className="tableRateInput"
+																	data-cy="editing-rate-input"
 																	size="small"
 																	type="number"
 																	value={editingRate}
@@ -691,6 +695,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																		size="small"
 																		color="primary"
 																		onClick={handleSaveEdit}
+																		data-cy="save-reduction-item"
 																		disabled={
 																			editingRate === '' ||
 																			Number.isNaN(Number(editingRate)) ||
@@ -704,6 +709,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																	<IconButton
 																		size="small"
 																		onClick={handleCancelEdit}
+																		data-cy="cancel-reduction-item"
 																		title={t('reductionPlan.cancelEdit')}
 																	>
 																		<Close fontSize="small" />
@@ -722,6 +728,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																			)
 																		}
 																		disabled={editingIndex !== null}
+																		data-cy="edit-reduction-item"
 																		title={t('reductionPlan.editItem')}
 																	>
 																		<Edit fontSize="small" />
@@ -741,6 +748,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																			);
 																		}}
 																		disabled={editingIndex !== null}
+																		data-cy="delete-reduction-item"
 																		title={t('common.delete')}
 																	>
 																		<Delete fontSize="small" />
@@ -794,6 +802,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 								</div>
 								<MuiTextField
 									className="rateInput"
+									data-cy="reduction-rate-input"
 									size="small"
 									type="number"
 									label={t('reductionPlan.rate')}
@@ -805,6 +814,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 								<Button
 									type="button"
 									variant="contained"
+									dataCy="add-reduction-item"
 									onClick={handleAddExamReduction}
 									disabled={
 										!selectedExamCode ||
@@ -819,6 +829,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									<Button
 										type="button"
 										variant="text"
+										dataCy="remove-all-reductions"
 										onClick={() => {
 											handleCancelEdit();
 											setExamReductions([]);
@@ -858,6 +869,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 															{isEditing ? (
 																<MuiTextField
 																	className="tableRateInput"
+																	data-cy="editing-rate-input"
 																	size="small"
 																	type="number"
 																	value={editingRate}
@@ -889,6 +901,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																		size="small"
 																		color="primary"
 																		onClick={handleSaveEdit}
+																		data-cy="save-reduction-item"
 																		disabled={
 																			editingRate === '' ||
 																			Number.isNaN(Number(editingRate)) ||
@@ -902,6 +915,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																	<IconButton
 																		size="small"
 																		onClick={handleCancelEdit}
+																		data-cy="cancel-reduction-item"
 																		title={t('reductionPlan.cancelEdit')}
 																	>
 																		<Close fontSize="small" />
@@ -920,6 +934,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																			)
 																		}
 																		disabled={editingIndex !== null}
+																		data-cy="edit-reduction-item"
 																		title={t('reductionPlan.editItem')}
 																	>
 																		<Edit fontSize="small" />
@@ -939,6 +954,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																			);
 																		}}
 																		disabled={editingIndex !== null}
+																		data-cy="delete-reduction-item"
 																		title={t('common.delete')}
 																	>
 																		<Delete fontSize="small" />
@@ -993,6 +1009,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 								</div>
 								<MuiTextField
 									className="rateInput"
+									data-cy="reduction-rate-input"
 									size="small"
 									type="number"
 									label={t('reductionPlan.rate')}
@@ -1004,6 +1021,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 								<Button
 									type="button"
 									variant="contained"
+									dataCy="add-reduction-item"
 									onClick={handleAddOperationReduction}
 									disabled={
 										!selectedOperationCode ||
@@ -1018,6 +1036,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									<Button
 										type="button"
 										variant="text"
+										dataCy="remove-all-reductions"
 										onClick={() => {
 											handleCancelEdit();
 											setOperationReductions([]);
@@ -1059,6 +1078,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 															{isEditing ? (
 																<MuiTextField
 																	className="tableRateInput"
+																	data-cy="editing-rate-input"
 																	size="small"
 																	type="number"
 																	value={editingRate}
@@ -1090,6 +1110,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																		size="small"
 																		color="primary"
 																		onClick={handleSaveEdit}
+																		data-cy="save-reduction-item"
 																		disabled={
 																			editingRate === '' ||
 																			Number.isNaN(Number(editingRate)) ||
@@ -1103,6 +1124,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																	<IconButton
 																		size="small"
 																		onClick={handleCancelEdit}
+																		data-cy="cancel-reduction-item"
 																		title={t('reductionPlan.cancelEdit')}
 																	>
 																		<Close fontSize="small" />
@@ -1121,6 +1143,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																			)
 																		}
 																		disabled={editingIndex !== null}
+																		data-cy="edit-reduction-item"
 																		title={t('reductionPlan.editItem')}
 																	>
 																		<Edit fontSize="small" />
@@ -1140,6 +1163,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																			);
 																		}}
 																		disabled={editingIndex !== null}
+																		data-cy="delete-reduction-item"
 																		title={t('common.delete')}
 																	>
 																		<Delete fontSize="small" />
@@ -1192,6 +1216,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 								</div>
 								<MuiTextField
 									className="rateInput"
+									data-cy="reduction-rate-input"
 									size="small"
 									type="number"
 									label={t('reductionPlan.rate')}
@@ -1203,6 +1228,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 								<Button
 									type="button"
 									variant="contained"
+									dataCy="add-reduction-item"
 									onClick={handleAddOtherReduction}
 									disabled={
 										!selectedOtherId ||
@@ -1217,6 +1243,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 									<Button
 										type="button"
 										variant="text"
+										dataCy="remove-all-reductions"
 										onClick={() => {
 											handleCancelEdit();
 											setPriceOtherReductions([]);
@@ -1258,6 +1285,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 															{isEditing ? (
 																<MuiTextField
 																	className="tableRateInput"
+																	data-cy="editing-rate-input"
 																	size="small"
 																	type="number"
 																	value={editingRate}
@@ -1289,6 +1317,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																		size="small"
 																		color="primary"
 																		onClick={handleSaveEdit}
+																		data-cy="save-reduction-item"
 																		disabled={
 																			editingRate === '' ||
 																			Number.isNaN(Number(editingRate)) ||
@@ -1302,6 +1331,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																	<IconButton
 																		size="small"
 																		onClick={handleCancelEdit}
+																		data-cy="cancel-reduction-item"
 																		title={t('reductionPlan.cancelEdit')}
 																	>
 																		<Close fontSize="small" />
@@ -1320,6 +1350,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																			)
 																		}
 																		disabled={editingIndex !== null}
+																		data-cy="edit-reduction-item"
 																		title={t('reductionPlan.editItem')}
 																	>
 																		<Edit fontSize="small" />
@@ -1339,6 +1370,7 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 																			);
 																		}}
 																		disabled={editingIndex !== null}
+																		data-cy="delete-reduction-item"
 																		title={t('common.delete')}
 																	>
 																		<Delete fontSize="small" />
@@ -1359,7 +1391,12 @@ const ReductionPlanForm: FC<IReductionPlanFormProps> = ({
 
 				<div className="reductionPlanForm__buttonSet">
 					<div className="submit_button">
-						<Button type="submit" variant="contained" disabled={isLoading}>
+						<Button
+							type="submit"
+							variant="contained"
+							dataCy="submit-form"
+							disabled={isLoading}
+						>
 							{submitButtonLabel}
 						</Button>
 					</div>

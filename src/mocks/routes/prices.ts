@@ -1,5 +1,6 @@
 import type { PollyServer } from '@pollyjs/core';
 import { priceDTO } from '../fixtures/priceDTO';
+import { pricesOthersDTO } from '../fixtures/pricesOthersDTO';
 
 export const pricesRoutes = (server: PollyServer) => {
 	server.namespace('/pricelists/prices', () => {
@@ -16,6 +17,12 @@ export const pricesRoutes = (server: PollyServer) => {
 				default:
 					res.status(200).json(priceDTO);
 			}
+		});
+	});
+
+	server.namespace('/pricesothers', () => {
+		server.get('/').intercept((_req, res) => {
+			res.status(200).json(pricesOthersDTO);
 		});
 	});
 };

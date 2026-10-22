@@ -28,7 +28,10 @@ export const ReductionPlans = () => {
 
 	return (
 		<AdminActivityContent title={t('nav.reductionPlans')}>
-			<div className={classes.reductionPlans}>
+			<div
+				className={classes.reductionPlans}
+				data-cy="reduction-plans-activity"
+			>
 				<ReductionPlansTable
 					onEdit={handleEdit}
 					onDelete={handleDelete}
@@ -40,6 +43,7 @@ export const ReductionPlans = () => {
 							type="button"
 							variant="contained"
 							color="primary"
+							dataCy="add-new-reductionplan"
 						>
 							{t('reductionPlan.addReductionPlan')}
 						</Button>
