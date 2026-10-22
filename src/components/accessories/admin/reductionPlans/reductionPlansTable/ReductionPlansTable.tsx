@@ -92,7 +92,7 @@ export const ReductionPlansTable = ({
 	};
 
 	return (
-		<div className={classes.table}>
+		<div className={classes.table} data-cy="reduction-plans-table">
 			{(() => {
 				switch (status) {
 					case 'FAIL':

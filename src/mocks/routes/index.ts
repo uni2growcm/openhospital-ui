@@ -25,6 +25,7 @@ export * from './permission';
 export * from './plugins';
 export * from './pregnantTreatmentType';
 export * from './prices';
+export * from './reductionPlans';
 export * from './settings';
 export * from './suppliers';
 export * from './therapies';

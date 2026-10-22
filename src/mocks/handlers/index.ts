@@ -26,6 +26,7 @@ import { permissions } from './permissions';
 import { plugins } from './plugins';
 import { pregnantTreatmentTypes } from './pregnantTreatmentTypes';
 import { prices } from './prices';
+import { reductionPlans } from './reductionPlans';
 import { settings } from './settings';
 import { suppliers } from './suppliers';
 import { therapies } from './therapies';
@@ -63,6 +64,7 @@ export const handlers: Parameters<typeof setupWorker> = [
 	...permissions,
 	...pregnantTreatmentTypes,
 	...prices,
+	...reductionPlans,
 	...settings,
 	...suppliers,
 	...therapies,
