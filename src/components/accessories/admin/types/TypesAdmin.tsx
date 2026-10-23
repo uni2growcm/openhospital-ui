@@ -79,20 +79,17 @@ export const TypesAdmin = () => {
 		[t],
 	);
 
-	const typeFromUrl = useMemo(
-		() => {
-			const currentSubPath = location.pathname.substring(
-				`${PATHS.admin_types_base}/`.length,
-			);
-			return typeOptions.find(
-				(typeOption) =>
-					typeOption.value &&
-					(currentSubPath === typeOption.value ||
-						currentSubPath.startsWith(`${typeOption.value}/`)),
-			);
-		},
-		[location, typeOptions],
-	);
+	const typeFromUrl = useMemo(() => {
+		const currentSubPath = location.pathname.substring(
+			`${PATHS.admin_types_base}/`.length,
+		);
+		return typeOptions.find(
+			(typeOption) =>
+				typeOption.value &&
+				(currentSubPath === typeOption.value ||
+					currentSubPath.startsWith(`${typeOption.value}/`)),
+		);
+	}, [location, typeOptions]);
 
 	useEffect(() => {
 		if (

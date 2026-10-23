@@ -46,4 +46,3 @@ export const resolveApiErrorMessage = (
 
 	return t(fallbackKey);
 };
-

@@ -29,6 +29,7 @@ import { prices } from './prices';
 import { settings } from './settings';
 import { suppliers } from './suppliers';
 import { therapies } from './therapies';
+import { typologies } from './typologies';
 import { userGroups } from './userGroups';
 import { users } from './users';
 import { vaccines } from './vaccines';
@@ -66,6 +67,7 @@ export const handlers: Parameters<typeof setupWorker> = [
 	...settings,
 	...suppliers,
 	...therapies,
+	...typologies,
 	...userGroups,
 	...users,
 	...vaccines,

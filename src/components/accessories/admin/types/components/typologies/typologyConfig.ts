@@ -1,6 +1,4 @@
-import {
-	TypologyDTOFamilyEnum,
-} from '../../../../../../generated';
+import { TypologyDTOFamilyEnum } from '../../../../../../generated';
 
 export interface TypologyFamilyConfig {
 	family: TypologyDTOFamilyEnum;

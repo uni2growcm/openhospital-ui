@@ -113,10 +113,7 @@ const TypologiesTable = (props: IOwnProps) => {
 							<div className="headerActions">{headerActions}</div>
 						</div>
 					)}
-					<InfoBox
-						type="error"
-						message={resolveApiErrorMessage(error, t)}
-					/>
+					<InfoBox type="error" message={resolveApiErrorMessage(error, t)} />
 				</>
 			)}
 			<ConfirmationDialog
