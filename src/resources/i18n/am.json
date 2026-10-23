@@ -611,7 +611,7 @@
 		"datebefore": "ከመጨረሻው ቀን በፊት መሆን አለበት።",
 		"dateafter": "ከመጀመሪያው ቀን በኋላ መሆን አለበት",
 		"option": "አማራጭ",
-		"deleted": "ተሰርዟል",
+		"deleted": "ተሰርዟል።",
 		"restore": "እነበረበት መልስ",
 		"restoreConfirmation": "ይህን ንጥል ወደነበረበት መመለስ እርግጠኛ ነዎት?",
 		"softDelete": "እንደተሰረዘ ምልክት አድርግበት",
