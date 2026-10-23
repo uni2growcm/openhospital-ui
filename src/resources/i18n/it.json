@@ -18,6 +18,11 @@
 			"not_found": "Famiglia di articoli non trovata.",
 			"integrity_violation": "Violazione dell'integrità dei dati della famiglia di articoli."
 		},
+		"typology": {
+			"code_exists": "Un tipo con questo codice esiste già.",
+			"not_found": "Tipo non trovato.",
+			"integrity_violation": "Violazione dell'integrità dei dati del tipo."
+		},
 		"country": {
 			"isocode_exists": "Un paese con questo codice ISO esiste già.",
 			"name_exists": "Un paese con questo nome esiste già.",
@@ -619,7 +624,19 @@
 		"cancelMessage": "Sei sicuro di voler annullare questa operazione? Tutti i dati non salvati andranno persi.",
 		"back": "Indietro",
 		"backToEdit": "No, continua a modificare",
-		"discardMessage": "Vuoi davvero annullare questa operazione? Tutti i dati non salvati andranno persi."
+		"discardMessage": "Vuoi davvero annullare questa operazione? Tutti i dati non salvati andranno persi.",
+		"add": "Aggiungi",
+		"edit": "Modifica",
+		"description": "Descrizione",
+		"created": "Creato",
+		"updated": "Aggiornato",
+		"createdSuccessfully": "Elemento creato con successo",
+		"updatedSuccessfully": "Elemento aggiornato con successo",
+		"deletedSuccessfully": "Elemento eliminato con successo",
+		"typeCreated": "{{type}} creato",
+		"typeCreateSuccess": "{{type}} creato con successo!",
+		"typeUpdated": "{{type}} aggiornato",
+		"typeUpdateSuccess": "{{type}} aggiornato con successo!"
 	},
 	"permission": {
 		"denied": "Autorizzazione negata",
@@ -1030,7 +1047,14 @@
 		"medicals": "Tipo di farmaco",
 		"chooseATypeToStart": "Scegli un tipo per iniziare",
 		"pregnantTreatment": "Tipo di trattamento per gravidanza",
-		"deliveryResultType": "Tipo di esito di parto"
+		"deliveryResultType": "Tipo di esito di parto",
+		"visitTypes": "Tipo di visita",
+		"partnerTypes": "Tipo di partner",
+		"familyPlanningMethods": "Metodi di pianificazione familiare",
+		"familyPlanningVisitTypes": "Tipo di visita di pianificazione familiare",
+		"hivTreatmentTypes": "Tipo di trattamento HIV",
+		"tuberculosisRegimens": "Regimi antitubercolari",
+		"tuberculosisContacts": "Tipo di contatto per la tubercolosi"
 	},
 	"vaccineTypes": {
 		"code": "Codice",

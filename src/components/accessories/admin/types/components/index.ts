@@ -8,4 +8,5 @@ export * from './exams';
 export * from './medicals';
 export * from './operations';
 export * from './pregnanttreatmenttypes';
+export * from './typologies';
 export * from './vaccines';

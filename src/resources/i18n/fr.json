@@ -18,6 +18,11 @@
 			"not_found": "Famille d'articles non trouvée.",
 			"integrity_violation": "Violation d'intégrité des données de la famille d'articles."
 		},
+		"typology": {
+			"code_exists": "Un type avec ce code existe déjà.",
+			"not_found": "Type non trouvé.",
+			"integrity_violation": "Violation d'intégrité des données du type."
+		},
 		"country": {
 			"isocode_exists": "Un pays avec ce code ISO existe déjà.",
 			"name_exists": "Un pays avec ce nom existe déjà.",
@@ -629,7 +634,19 @@
 		"printData": "Imprimer les données",
 		"saveandprint": "Enregistrer et imprimer",
 		"updateandprint": "Mettre à jour et imprimer",
-		"failedtodownloadthereport": "Échec de téléchargement du rapport"
+		"failedtodownloadthereport": "Échec de téléchargement du rapport",
+		"add": "Ajouter",
+		"edit": "Modifier",
+		"description": "Description",
+		"created": "Créé",
+		"updated": "Mis à jour",
+		"createdSuccessfully": "Élément créé avec succès",
+		"updatedSuccessfully": "Élément mis à jour avec succès",
+		"deletedSuccessfully": "Élément supprimé avec succès",
+		"typeCreated": "{{type}} créé",
+		"typeCreateSuccess": "Le {{type}} a été créé avec succès !",
+		"typeUpdated": "{{type}} mis à jour",
+		"typeUpdateSuccess": "Le {{type}} a été mis à jour avec succès !"
 	},
 	"permission": {
 		"denied": "Autorisation refusée",
@@ -1041,7 +1058,14 @@
 		"medicals": "Types de médicament",
 		"chooseATypeToStart": "Choisissez un type pour commencer...",
 		"pregnantTreatment": "Types de traitement pour enceintes",
-		"deliveryResultType": "Types de résultats de livraison"
+		"deliveryResultType": "Types de résultats de livraison",
+		"visitTypes": "Types de visite",
+		"partnerTypes": "Types de partenaire",
+		"familyPlanningMethods": "Méthodes de planification familiale",
+		"familyPlanningVisitTypes": "Types de visite de planification familiale",
+		"hivTreatmentTypes": "Types de traitement VIH",
+		"tuberculosisRegimens": "Régimes antituberculeux",
+		"tuberculosisContacts": "Types de contact tuberculose"
 	},
 	"vaccineTypes": {
 		"code": "Code",

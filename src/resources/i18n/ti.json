@@ -619,7 +619,19 @@
 		"cancelMessage": "ነዚ ስርሒት ከም እትስርዞ ርግጸኛ ዲኻ ? ኩሉ ዘይተዓቀበ ዳታ ክጠፍእ እዩ።",
 		"back": "ዝባን",
 		"backToEdit": "ኣይፋልን ኣርትዖት ቀጽል",
-		"discardMessage": "ነዚ ስርሒት ከም እትድርብይዎ ርግጸኛታት ዲኹም ? ኩሉ ዘይተዓቀበ ዳታ ክጠፍእ እዩ።"
+		"discardMessage": "ነዚ ስርሒት ከም እትድርብይዎ ርግጸኛታት ዲኹም ? ኩሉ ዘይተዓቀበ ዳታ ክጠፍእ እዩ።",
+		"add": "ወስኽ",
+		"edit": "ኣዐሪ",
+		"description": "መግለጺ",
+		"created": "ተፈጢሩ",
+		"updated": "ተመሓይሹ",
+		"createdSuccessfully": "እቲ ንጥፊ ብዓወት ተፈጢሩ",
+		"updatedSuccessfully": "እቲ ንጥፊ ብዓወት ተመሓይሹ",
+		"deletedSuccessfully": "እቲ ንጥፊ ብዓወት ተደምሲሱ",
+		"typeCreated": "{{type}} ተፈጢሩ",
+		"typeCreateSuccess": "{{type}} ብዓወት ተፈጢሩ!",
+		"typeUpdated": "{{type}} ተመሓይሹ",
+		"typeUpdateSuccess": "{{type}} ብዓወት ተመሓይሹ!"
 	},
 	"permission": {
 		"denied": "ፍቓድ ተኸልኪሉ።",
@@ -1030,7 +1042,14 @@
 		"medicals": "ዓይነታት ሕክምናዊ",
 		"chooseATypeToStart": "ንኽትጅምሮ ዓይነት ምረጽ...",
 		"pregnantTreatment": "ዓይነታት ሕክምና ጥንሲ",
-		"deliveryResultType": "ዓይነታት ውጽኢት ኣወሃህባ"
+		"deliveryResultType": "ዓይነታት ውጽኢት ኣወሃህባ",
+		"visitTypes": "ዓይነታት ምብጻሕ",
+		"partnerTypes": "ዓይነታት መሻርኽቲ",
+		"familyPlanningMethods": "ኣገባባት ምድላው ስድራቤት",
+		"familyPlanningVisitTypes": "ዓይነታት ምብጻሕ ምድላው ስድራቤት",
+		"hivTreatmentTypes": "ዓይነታት ሕክምና ኤች.ኣይ.ቪ",
+		"tuberculosisRegimens": "ስርዓታት ሕክምና ዓሶ ሳንቡእ",
+		"tuberculosisContacts": "ዓይነታት ርክብ ዓሶ ሳንቡእ"
 	},
 	"vaccineTypes": {
 		"code": "ኮድ",

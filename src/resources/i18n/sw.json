@@ -318,7 +318,20 @@
 		"lessthan": "The value must not exceed {{value}}.",
 		"confirm": "Confirm",
 		"invaliddate": "Invalid Date",
-		"outofrange": "Out of range"
+		"outofrange": "Out of range",
+		"add": "Ongeza",
+		"edit": "Hariri",
+		"description": "Maelezo",
+		"created": "Imeundwa",
+		"updated": "Imesasishwa",
+		"deleted": "Imefutwa",
+		"createdSuccessfully": "Kipengee kimeundwa kwa mafanikio",
+		"updatedSuccessfully": "Kipengee kimesasishwa kwa mafanikio",
+		"deletedSuccessfully": "Kipengee kimefutwa kwa mafanikio",
+		"typeCreated": "{{type}} imeundwa",
+		"typeCreateSuccess": "{{type}} imeundwa kwa mafanikio!",
+		"typeUpdated": "{{type}} imesasishwa",
+		"typeUpdateSuccess": "{{type}} imesasishwa kwa mafanikio!"
 	},
 	"therapy": {
 		"newtherapy": "New Therapy",
@@ -550,6 +563,28 @@
 		"cs": "Czech",
 		"sq": "Albanian",
 		"zh": "Chinese"
+	},
+	"types": {
+		"selectAType": "Chagua aina",
+		"vaccines": "Aina za chanjo",
+		"exams": "Aina za uchunguzi",
+		"admissions": "Aina za kulazwa",
+		"ages": "Aina za umri",
+		"diseases": "Aina za magonjwa",
+		"discharges": "Aina za kuruhusiwa",
+		"deliveries": "Aina za uzazi",
+		"operations": "Aina za upasuaji",
+		"medicals": "Aina za dawa",
+		"chooseATypeToStart": "Chagua aina ili kuanza...",
+		"pregnantTreatment": "Aina za matibabu ya ujauzito",
+		"deliveryResultType": "Aina za matokeo ya uzazi",
+		"visitTypes": "Aina za ziara",
+		"partnerTypes": "Aina za mshirika",
+		"familyPlanningMethods": "Njia za uzazi wa mpango",
+		"familyPlanningVisitTypes": "Aina za ziara za uzazi wa mpango",
+		"hivTreatmentTypes": "Aina za matibabu ya VVU",
+		"tuberculosisRegimens": "Mifumo ya matibabu ya kifua kikuu",
+		"tuberculosisContacts": "Aina za mawasiliano ya kifua kikuu"
 	},
 	"errors": {
 		"articlefamily": {

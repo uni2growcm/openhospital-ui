@@ -28,6 +28,7 @@ export * from './prices';
 export * from './settings';
 export * from './suppliers';
 export * from './therapies';
+export * from './typologies';
 export * from './userGroups';
 export * from './users';
 export * from './vaccine';

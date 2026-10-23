@@ -10,6 +10,7 @@ import { examTypeSlice } from './exams';
 import { medicalTypeSlice } from './medicals';
 import { operationTypeSlice } from './operations';
 import { pregnantTreatmentTypeSlice } from './pregnantTreatment';
+import { typologySlice } from './typologies';
 import { vaccineTypeSlice } from './vaccines';
 
 const typesReducer = combineReducers({
@@ -25,6 +26,7 @@ const typesReducer = combineReducers({
 	medicals: medicalTypeSlice.reducer,
 	pregnantTreatment: pregnantTreatmentTypeSlice.reducer,
 	deliveryResult: deliveryResultTypeSlice.reducer,
+	typologies: typologySlice.reducer,
 });
 
 export default typesReducer;

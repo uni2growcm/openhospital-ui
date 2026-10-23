@@ -619,7 +619,19 @@
 		"cancelMessage": "ይህን ክዋኔ መሰረዝህን እርግጠኛ ነህ? ሁሉም ያልተቀመጠ ውሂብ ይጠፋል።",
 		"back": "ተመለስ",
 		"backToEdit": "አይ፣ ማረምዎን ይቀጥሉ",
-		"discardMessage": "ይህን ክዋኔ ለመጣል እርግጠኛ ነዎት? ሁሉም ያልተቀመጠ ውሂብ ይጠፋል።"
+		"discardMessage": "ይህን ክዋኔ ለመጣል እርግጠኛ ነዎት? ሁሉም ያልተቀመጠ ውሂብ ይጠፋል።",
+		"add": "አክል",
+		"edit": "አርትዕ",
+		"description": "መግለጫ",
+		"created": "ተፈጥሯል",
+		"updated": "ተዘምኗል",
+		"createdSuccessfully": "ንጥሉ በተሳካ ሁኔታ ተፈጥሯል",
+		"updatedSuccessfully": "ንጥሉ በተሳካ ሁኔታ ተዘምኗል",
+		"deletedSuccessfully": "ንጥሉ በተሳካ ሁኔታ ተሰርዟል",
+		"typeCreated": "{{type}} ተፈጥሯል",
+		"typeCreateSuccess": "{{type}} በተሳካ ሁኔታ ተፈጥሯል!",
+		"typeUpdated": "{{type}} ተዘምኗል",
+		"typeUpdateSuccess": "{{type}} በተሳካ ሁኔታ ተዘምኗል!"
 	},
 	"permission": {
 		"denied": "ፍቃድ ተከልክሏል።",
@@ -1030,7 +1042,14 @@
 		"medicals": "የሕክምና ዓይነቶች",
 		"chooseATypeToStart": "ለመጀመር አይነት ይምረጡ...",
 		"pregnantTreatment": "የእርግዝና ህክምና ዓይነቶች",
-		"deliveryResultType": "የመላኪያ ውጤቶች ዓይነቶች"
+		"deliveryResultType": "የመላኪያ ውጤቶች ዓይነቶች",
+		"visitTypes": "የጉብኝት ዓይነቶች",
+		"partnerTypes": "የአጋር ዓይነቶች",
+		"familyPlanningMethods": "የቤተሰብ እቅድ ዘዴዎች",
+		"familyPlanningVisitTypes": "የቤተሰብ እቅድ ጉብኝት ዓይነቶች",
+		"hivTreatmentTypes": "የኤችአይቪ ሕክምና ዓይነቶች",
+		"tuberculosisRegimens": "የሳንባ ነቀርሳ ሕክምና ሥርዓቶች",
+		"tuberculosisContacts": "የሳንባ ነቀርሳ ግንኙነት ዓይነቶች"
 	},
 	"vaccineTypes": {
 		"code": "ኮድ",

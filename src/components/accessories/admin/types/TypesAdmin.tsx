@@ -45,21 +45,51 @@ export const TypesAdmin = () => {
 						label: t('types.pregnantTreatment'),
 						value: 'pregnanttreatmenttypes',
 					},
+					{
+						label: t('types.visitTypes'),
+						value: 'visittypes',
+					},
+					{
+						label: t('types.partnerTypes'),
+						value: 'partnertypes',
+					},
+					{
+						label: t('types.familyPlanningMethods'),
+						value: 'familyplanningmethods',
+					},
+					{
+						label: t('types.familyPlanningVisitTypes'),
+						value: 'familyplanningvisittypes',
+					},
+					{
+						label: t('types.hivTreatmentTypes'),
+						value: 'hivtreatmenttypes',
+					},
+					{
+						label: t('types.tuberculosisRegimens'),
+						value: 'tuberculosisregimens',
+					},
+					{
+						label: t('types.tuberculosisContacts'),
+						value: 'tuberculosiscontacts',
+					},
 				],
 				(type) => type.label,
 			),
 		[t],
 	);
 
-	const typeFromUrl = useMemo(
-		() =>
-			typeOptions.find((typeOption) =>
-				typeOption.value?.includes(
-					location.pathname.substring(`${PATHS.admin_types_base}/`.length),
-				),
-			),
-		[location, typeOptions],
-	);
+	const typeFromUrl = useMemo(() => {
+		const currentSubPath = location.pathname.substring(
+			`${PATHS.admin_types_base}/`.length,
+		);
+		return typeOptions.find(
+			(typeOption) =>
+				typeOption.value &&
+				(currentSubPath === typeOption.value ||
+					currentSubPath.startsWith(`${typeOption.value}/`)),
+		);
+	}, [location, typeOptions]);
 
 	useEffect(() => {
 		if (
