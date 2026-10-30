@@ -419,7 +419,8 @@
 		"hospitalInfo": "Hospital Info",
 		"hospital": "Hospital",
 		"settings": "Settings",
-		"radiology": "Radiology"
+		"radiology": "Radiology",
+		"userProfile": "User Profile"
 	},
 	"operation": {
 		"newoperation": "New Operation",
@@ -1283,5 +1284,33 @@
 		"buttons": {
 			"menu": "Plugins"
 		}
+	},
+	"profile": {
+		"title": "User Profile",
+		"details": "Profile details",
+		"detailsDescription": "Your personal information and permissions.",
+		"username": "Username",
+		"group": "Group",
+		"description": "Description",
+		"noDescription": "No description provided",
+		"permissions": "Permissions",
+		"password": "Change password",
+		"passwordDescription": "Update the password used to sign in to your account.",
+		"oldPassword": "Current password",
+		"newPassword": "New password",
+		"confirmPassword": "Confirm new password",
+		"oldPasswordRequired": "Current password is required",
+		"newPasswordRequired": "New password is required",
+		"confirmPasswordRequired": "Please confirm the new password",
+		"passwordTooShort": "Password must be at least 5 characters long",
+		"passwordTooWeak": "Password must contain at least 1 uppercase letter, 1 lowercase letter and 1 digit",
+		"passwordMustMatch": "Passwords must match",
+		"passwordUpdatedTitle": "Password updated",
+		"passwordUpdatedMessage": "Your password has been updated successfully.",
+		"savePassword": "Update password",
+		"settings": "Personal settings",
+		"settingsDescription": "Customize your personal experience.",
+		"language": "Language",
+		"languageUpdated": "Language preference saved successfully."
 	}
 }

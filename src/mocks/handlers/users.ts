@@ -1,4 +1,5 @@
 import { HttpResponse } from 'msw';
+import type { UserDTO } from '~/generated';
 import { permissionList } from '../fixtures/permissionList';
 import { userGroupsDTO } from '../fixtures/userGroupsDTO';
 import { usersDTO } from '../fixtures/usersDTO';
@@ -6,6 +7,29 @@ import { badRequest, http } from '../utils';
 
 export const users = [
 	http.get('/users/me', () => {
+		return HttpResponse.json(
+			{
+				userName: 'admin',
+				permissions: permissionList,
+				userGroup: userGroupsDTO[0],
+			},
+			{ status: 200 },
+		);
+	}),
+
+	http.put('/users/me', async ({ request }) => {
+		const body = (await request.json()) as UserDTO;
+		return HttpResponse.json(
+			{
+				userName: body.userName,
+				permissions: permissionList,
+				userGroup: userGroupsDTO[0],
+			},
+			{ status: 200 },
+		);
+	}),
+
+	http.put('/users/me/password', () => {
 		return HttpResponse.json(
 			{
 				userName: 'admin',

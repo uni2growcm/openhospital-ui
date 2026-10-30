@@ -1,4 +1,4 @@
-import type { UserDTO } from '../../generated';
+import type { UserDTO, UserProfileDTO } from '../../generated';
 import type { ApiResponse } from '../types';
 
 export type IUserState = {
@@ -7,4 +7,5 @@ export type IUserState = {
 	create: ApiResponse<UserDTO>;
 	update: ApiResponse<UserDTO>;
 	delete: ApiResponse<void>;
+	updatePassword: ApiResponse<UserProfileDTO>;
 };

@@ -1,6 +1,7 @@
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import HomeIcon from '@mui/icons-material/Home';
 import NavigateBefore from '@mui/icons-material/NavigateBefore';
+import PersonIcon from '@mui/icons-material/Person';
 import { Tooltip, Typography } from '@mui/material';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import classNames from 'classnames';
@@ -75,6 +76,13 @@ const AppHeader: FunctionComponent<IOwnProps> = ({ breadcrumbMap }) => {
 							&nbsp;
 							<strong className="user-name">{username}</strong>
 						</span>
+						<Tooltip title={t('nav.userProfile')} aria-label="user profile">
+							<PersonIcon
+								className="userInfo__toolbar_icon"
+								id="user_profile_icon"
+								onClick={() => navigate(PATHS.user_profile)}
+							/>
+						</Tooltip>
 						<Tooltip title={t('login.signout')} aria-label="sign out">
 							<ExitToAppIcon
 								className="userInfo__toolbar_icon"

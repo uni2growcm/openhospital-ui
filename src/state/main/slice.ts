@@ -12,6 +12,9 @@ export const mainSlice = createSlice({
 		resetForgotPassword: (state) => {
 			state.forgotpassword = initial.forgotpassword;
 		},
+		saveUserSettingsReset: (state) => {
+			state.saveSettings = initial.saveSettings;
+		},
 		setAuthenticationSuccess: (
 			state,
 			{ payload }: PayloadAction<IAuthentication>,
@@ -79,11 +82,32 @@ export const mainSlice = createSlice({
 			})
 			.addCase(thunks.getUserSettings.rejected, (state, action) => {
 				state.settings = ApiResponse.error(action.payload);
+			})
+			// Save User Settings
+			.addCase(thunks.saveUserSettings.pending, (state) => {
+				state.saveSettings = ApiResponse.loading();
+			})
+			.addCase(thunks.saveUserSettings.fulfilled, (state, action) => {
+				state.saveSettings = ApiResponse.value(action.payload);
+				const settings = state.settings.data ?? [];
+				const index = settings.findIndex(
+					(setting) => setting.configName === action.payload.configName,
+				);
+				if (index >= 0) {
+					settings[index] = action.payload;
+				} else {
+					settings.push(action.payload);
+				}
+				state.settings = ApiResponse.value(settings);
+			})
+			.addCase(thunks.saveUserSettings.rejected, (state, action) => {
+				state.saveSettings = ApiResponse.error(action.payload);
 			}),
 });
 
 export const {
 	resetForgotPassword,
+	saveUserSettingsReset,
 	setAuthenticationSuccess,
 	setLogoutLoading,
 	setLogoutSuccess,
