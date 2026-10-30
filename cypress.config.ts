@@ -6,7 +6,7 @@ import plugin from './cypress/plugins';
 export default defineConfig({
 	retries: 3,
 	e2e: {
-		baseUrl: 'http://127.0.0.1:5173',
+		baseUrl: 'http://localhost:5173',
 		setupNodeEvents(on, config) {
 			plugin(on, config);
 

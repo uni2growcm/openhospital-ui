@@ -11,7 +11,7 @@
 		"preview": "vite preview",
 		"build": "tsc --noEmit && vite build",
 		"test": "vitest run",
-		"e2e": "start-server-and-test start:ci http://127.0.0.1:5173 cypress:open",
+		"e2e": "start-server-and-test start:ci http://localhost:5173 cypress:open",
 		"e2e:run": "cypress run",
 		"cypress:open": "cypress open",
 		"build:staging": "env-cmd -f .env.staging npm run build",
