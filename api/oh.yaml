@@ -341,6 +341,26 @@ paths:
                 $ref: "#/components/schemas/UserProfileDTO"
       security:
       - bearerAuth: []
+  /users/me/password:
+    put:
+      tags:
+      - Users
+      operationId: updatePassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PasswordDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserProfileDTO"
+      security:
+      - bearerAuth: []
   /usergroups/{group_code}:
     get:
       tags:
@@ -7244,6 +7264,27 @@ components:
             $ref: "#/components/schemas/PermissionDTO"
       required:
       - code
+    PasswordDTO:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The name of the user whose password is to be changed
+          example: admin
+        oldPasswd:
+          type: string
+          description: The current password of the user
+          example: 21@U2g423
+          maxLength: 50
+        newPasswd:
+          type: string
+          description: The new password of the user
+          example: new21@U2g423
+          maxLength: 50
+      required:
+      - newPasswd
+      - oldPasswd
+      - username
     UserProfileDTO:
       type: object
       properties:

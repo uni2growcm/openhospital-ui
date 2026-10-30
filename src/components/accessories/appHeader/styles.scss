@@ -474,14 +474,17 @@
       }
     }
     .userInfo__toolbar {
+      display: flex;
+      align-items: center;
+      gap: 7px;
       margin-left: 25px;
       line-height: 1.5rem;
       font-size: 0.9rem;
       color: #fff;
       .userInfo__toolbar_icon {
-        margin-left: 7px;
+        margin-left: 0;
         cursor: pointer;
-        float: right;
+        float: none;
       }
       span.user-welcome {
         @include susy-media($smartphone) {

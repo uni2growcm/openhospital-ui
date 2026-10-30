@@ -1,7 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { firstValueFrom } from 'rxjs';
 import { wrapper } from '~/libraries/apiUtils/wrapper';
-import { type GetUserRequest, type UserDTO, UsersApi } from '../../generated';
+import {
+	type GetUserRequest,
+	type PasswordDTO,
+	type UserDTO,
+	UsersApi,
+} from '../../generated';
 import { customConfiguration } from '../../libraries/apiUtils/configuration';
 
 const api = new UsersApi(customConfiguration());
@@ -45,5 +50,13 @@ export const deleteUser = createAsyncThunk(
 	async (username: string, thunkApi) =>
 		firstValueFrom(wrapper(() => api.deleteUser({ username }))).catch((error) =>
 			thunkApi.rejectWithValue(error.response),
+		),
+);
+
+export const updatePassword = createAsyncThunk(
+	'users/updatePassword',
+	async (passwordDTO: PasswordDTO, thunkApi) =>
+		firstValueFrom(wrapper(() => api.updatePassword({ passwordDTO }))).catch(
+			(error) => thunkApi.rejectWithValue(error.response),
 		),
 );

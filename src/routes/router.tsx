@@ -43,6 +43,15 @@ export const useAppRouter = () => {
 					element: <Private />,
 					children: [
 						{
+							path: 'profile',
+							lazy: async () =>
+								import(
+									'../components/accessories/userProfile/UserProfile'
+								).then((module) => ({
+									Component: module.UserProfile,
+								})),
+						},
+						{
 							path: 'dashboard',
 							lazy: async () =>
 								import('../components/accessories/dashboard/Dashboard').then(

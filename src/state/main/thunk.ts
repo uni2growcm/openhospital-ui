@@ -1,8 +1,14 @@
 import { createAsyncThunk, type Dispatch } from '@reduxjs/toolkit';
 import { concat, firstValueFrom } from 'rxjs';
 import { tap, toArray } from 'rxjs/operators';
-import { LoginApi, UserSettingsApi, UsersApi } from '../../generated';
+import {
+	LoginApi,
+	type UserSettingDTO,
+	UserSettingsApi,
+	UsersApi,
+} from '../../generated';
 import { customConfiguration } from '../../libraries/apiUtils/configuration';
+import { wrapper } from '../../libraries/apiUtils/wrapper';
 import { saveAuthenticationDataToSession } from '../../libraries/authUtils/saveAuthenticationDataToSession';
 import { savePermissionDataToSession } from '../../libraries/authUtils/savePermissionDataToSession';
 import { SessionStorage } from '../../libraries/storage/storage';
@@ -75,6 +81,21 @@ export const getUserSettings = createAsyncThunk(
 		firstValueFrom(userSettingsApi.getUserSettings()).catch((error) =>
 			thunkApi.rejectWithValue(error.response),
 		),
+);
+
+export const saveUserSettings = createAsyncThunk(
+	'main/saveUserSettings',
+	async (userSettingDTO: UserSettingDTO, thunkApi) =>
+		firstValueFrom(
+			wrapper(() =>
+				userSettingDTO.id > 0
+					? userSettingsApi.updateUserSettings({
+							id: userSettingDTO.id,
+							userSettingDTO,
+						})
+					: userSettingsApi.newUserSettings({ userSettingDTO }),
+			),
+		).catch((error) => thunkApi.rejectWithValue(error.response)),
 );
 
 export const refreshToken = createAsyncThunk(

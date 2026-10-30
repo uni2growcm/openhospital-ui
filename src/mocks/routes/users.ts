@@ -18,6 +18,20 @@ export const userRoutes = (server: PollyServer) => {
 				.status(200)
 				.json([{ id: 1, configName: 'landing', configValue: '/' }]);
 		});
+		server.put('/me').intercept((req, res) => {
+			res.status(200).json({
+				userName: req.jsonBody()?.userName,
+				permissions: permissionList,
+				userGroupName: 'ADMIN',
+			});
+		});
+		server.put('/me/password').intercept((_req, res) => {
+			res.status(200).json({
+				userName: 'admin',
+				permissions: permissionList,
+				userGroupName: 'ADMIN',
+			});
+		});
 		server.get('/').intercept((_req, res) => {
 			res.status(200).json(usersDTO);
 		});

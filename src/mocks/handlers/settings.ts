@@ -10,6 +10,19 @@ export const settings = [
 		);
 	}),
 
+	http.post('/usersettings', async ({ request }) => {
+		const body = (await request.json()) as UserSettingDTO;
+		return HttpResponse.json({ ...body, id: 1 }, { status: 200 });
+	}),
+
+	http.put('/usersettings/{id}', async ({ request, params }) => {
+		const body = (await request.json()) as UserSettingDTO;
+		return HttpResponse.json(
+			{ ...body, id: Number(params.id) },
+			{ status: 200 },
+		);
+	}),
+
 	http.get('/usersettings/{configName}', ({ params }) => {
 		const setting =
 			params.configName === 'dashboard'

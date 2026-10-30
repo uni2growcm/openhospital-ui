@@ -14,4 +14,7 @@ export const initial: IMainState = {
 	settings: new ApiResponse({
 		status: 'IDLE',
 	}),
+	saveSettings: new ApiResponse({
+		status: 'IDLE',
+	}),
 };

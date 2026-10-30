@@ -85,4 +85,5 @@ export const PATHS = {
 	patient_radiology_studies: '/patients/details/:id/radiology/studies',
 	patient_radiology_series:
 		'/patients/details/:id/radiology/studies/:studyId/series',
+	user_profile: '/profile',
 };
