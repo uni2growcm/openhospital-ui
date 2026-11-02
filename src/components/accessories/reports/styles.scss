@@ -1,0 +1,93 @@
+@import "../../../styles/variables";
+@import "../../../../node_modules/susy/sass/susy";
+
+.reports {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 40px;
+
+  .reports__title {
+    margin: 0;
+  }
+
+  .reports__help {
+    margin: 0;
+    color: $c-grey-medium;
+  }
+
+  .reports__search {
+    max-width: 420px;
+
+    @include susy-media($smartphone) {
+      max-width: 100%;
+    }
+  }
+
+  .reports__loader {
+    display: flex;
+    justify-content: center;
+  }
+
+  .reports__excelIcon {
+    color: #1d6f42;
+  }
+}
+
+.reportDialog {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 8px;
+  min-width: 420px;
+
+  @include susy-media($smartphone) {
+    min-width: 0;
+  }
+
+  .reportDialog__row {
+    display: flex;
+    gap: 12px;
+
+    @include susy-media($smartphone) {
+      flex-direction: column;
+    }
+  }
+
+  .reportDialog__field {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    .selectField {
+      width: 100%;
+    }
+  }
+
+  .reportDialog__hint {
+    font-size: 12px;
+    color: $c-grey-medium;
+  }
+
+  .reportDialog__info {
+    margin: 0;
+  }
+
+  .reportDialog__buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+}
+
+.reportPreview {
+  height: 80vh;
+  padding: 0 !important;
+
+  .reportPreview__frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+}

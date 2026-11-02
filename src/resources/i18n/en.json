@@ -373,6 +373,7 @@
 		"previousentries": "Previous Triages"
 	},
 	"nav": {
+		"reports": "Reports",
 		"pharmacy": "Pharmacy",
 		"ward": "Ward",
 		"billing": "Billing",
@@ -1282,6 +1283,72 @@
 	"plugins": {
 		"buttons": {
 			"menu": "Plugins"
+		}
+	},
+	"reports": {
+		"title": "Reports",
+		"help": "Find a report, press the print icon or the green Excel icon, fill in the parameters, then confirm.",
+		"search": "Search a report",
+		"noParameters": "This report has no parameter.",
+		"categories": {
+			"all": "All",
+			"statistics": "Statistics",
+			"pharmacy": "Pharmacy",
+			"wards": "Wards",
+			"accounting": "Accounting",
+			"lists": "Lists"
+		},
+		"columns": {
+			"code": "Code",
+			"description": "Description",
+			"category": "Category",
+			"parameters": "Parameters"
+		},
+		"params": {
+			"none": "None",
+			"dateRange": "Period",
+			"monthYear": "Month and year",
+			"date": "Date",
+			"ward": "Ward",
+			"pharmacyWard": "Ward pharmacy",
+			"medical": "Medical",
+			"medicalType": "Medical type",
+			"search": "Search",
+			"user": "User"
+		},
+		"fields": {
+			"month": "Month",
+			"year": "Year",
+			"ward": "Ward",
+			"mainStore": "Main store",
+			"medical": "Medical",
+			"medicalHint": "Leave empty to print all the medicals (PDF only).",
+			"medicalType": "Medical type",
+			"search": "Medical name contains",
+			"user": "User"
+		},
+		"actions": {
+			"print": "Print",
+			"preview": "Preview (PDF)",
+			"excel": "Excel",
+			"download": "Download"
+		},
+		"list": {
+			"pharmaceuticalStock": "Pharmaceutical stock",
+			"pharmaceuticalAMC": "Average monthly consumption (AMC)",
+			"stockCard": "Stock card",
+			"pharmaceuticalOrder": "Pharmaceuticals to order",
+			"pharmaceuticalStockWard": "Ward pharmacy stock",
+			"wardVisits": "Ward visits of the day",
+			"billsUserInDate": "Bills report by user",
+			"examsList": "List of exams",
+			"diseasesList": "List of diseases",
+			"operationsList": "List of operations"
+		},
+		"errors": {
+			"print": "The report could not be generated.",
+			"statistics": "The statistic reports could not be loaded.",
+			"stockCardExcelMedical": "Select a medical to export the stock card to Excel."
 		}
 	}
 }

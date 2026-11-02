@@ -58,6 +58,7 @@ const AppHeader: FunctionComponent<IOwnProps> = ({ breadcrumbMap }) => {
 	const canAccessPatient = usePermission('patients.access');
 	const canAccessVisit = usePermission('opds.access');
 	const canAccessLaboratory = usePermission('laboratories.access');
+	const canAccessReports = usePermission('reports.read');
 	const canAccessDashboard = usePermission('dashboard.access');
 	const canAccessAdmin = usePermission('admin.access');
 
@@ -172,6 +173,15 @@ const AppHeader: FunctionComponent<IOwnProps> = ({ breadcrumbMap }) => {
 									onClick={() => navigate(PATHS.laboratory)}
 								>
 									{t('nav.laboratory')}
+								</div>
+							)}
+							{canAccessReports && (
+								<div
+									className="appHeader__nav__item"
+									data-cy="app-header-reports"
+									onClick={() => navigate(PATHS.reports)}
+								>
+									{t('nav.reports')}
 								</div>
 							)}
 							<PluginMenu

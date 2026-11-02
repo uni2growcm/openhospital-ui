@@ -373,6 +373,7 @@
 		"previousentries": "Triages précédentes"
 	},
 	"nav": {
+		"reports": "Rapports",
 		"pharmacy": "Pharmacie",
 		"ward": "Pavillon",
 		"billing": "Facturation",
@@ -1277,6 +1278,72 @@
 			"referrencingPhysician": "Médecin référent",
 			"time": "Temps d'étude",
 			"lastUpdate": "Dernière mise à jour"
+		}
+	},
+	"reports": {
+		"title": "Rapports",
+		"help": "Recherchez un rapport, cliquez sur l'icône d'impression ou sur l'icône Excel verte, renseignez les paramètres, puis validez.",
+		"search": "Rechercher un rapport",
+		"noParameters": "Ce rapport n'a aucun paramètre.",
+		"categories": {
+			"all": "Tous",
+			"statistics": "Statistiques",
+			"pharmacy": "Pharmacie",
+			"wards": "Services",
+			"accounting": "Comptabilité",
+			"lists": "Listes"
+		},
+		"columns": {
+			"code": "Code",
+			"description": "Description",
+			"category": "Catégorie",
+			"parameters": "Paramètres"
+		},
+		"params": {
+			"none": "Aucun",
+			"dateRange": "Période",
+			"monthYear": "Mois et année",
+			"date": "Date",
+			"ward": "Service",
+			"pharmacyWard": "Pharmacie de service",
+			"medical": "Médicament",
+			"medicalType": "Type de médicament",
+			"search": "Recherche",
+			"user": "Utilisateur"
+		},
+		"fields": {
+			"month": "Mois",
+			"year": "Année",
+			"ward": "Service",
+			"mainStore": "Magasin principal",
+			"medical": "Médicament",
+			"medicalHint": "Laisser vide pour imprimer tous les médicaments (PDF uniquement).",
+			"medicalType": "Type de médicament",
+			"search": "Le nom du médicament contient",
+			"user": "Utilisateur"
+		},
+		"actions": {
+			"print": "Imprimer",
+			"preview": "Aperçu (PDF)",
+			"excel": "Excel",
+			"download": "Télécharger"
+		},
+		"list": {
+			"pharmaceuticalStock": "Stock pharmaceutique",
+			"pharmaceuticalAMC": "Consommation mensuelle moyenne (CMM)",
+			"stockCard": "Fiche de stock",
+			"pharmaceuticalOrder": "Produits pharmaceutiques à commander",
+			"pharmaceuticalStockWard": "Stock de la pharmacie de service",
+			"wardVisits": "Visites du jour du service",
+			"billsUserInDate": "Rapport des factures par utilisateur",
+			"examsList": "Liste des examens",
+			"diseasesList": "Liste des maladies",
+			"operationsList": "Liste des opérations"
+		},
+		"errors": {
+			"print": "Le rapport n'a pas pu être généré.",
+			"statistics": "Les rapports statistiques n'ont pas pu être chargés.",
+			"stockCardExcelMedical": "Sélectionnez un médicament pour exporter la fiche de stock vers Excel."
 		}
 	}
 }
