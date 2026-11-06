@@ -54,16 +54,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: Start server
-        run: |
-          npm ci
-          npm run start:ci > server.log 2>&1 &
-
-      - name: Wait for server
-        run: npx wait-on http-get://127.0.0.1:5173 --timeout 120000 || (cat server.log && exit 1)
-
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
           record: false
+          start: npm run start:ci
+          wait-on: "http://127.0.0.1:5173"
+          wait-on-timeout: 120
+          spec: cypress/integrations/admin_activities/diseases_activities/manage_diseases_activity.cy.ts
+          config: retries=0,defaultCommandTimeout=5000
+
+      - name: Upload screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
