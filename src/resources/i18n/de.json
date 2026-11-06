@@ -341,6 +341,7 @@
 		"therapy": "Therapie",
 		"booking": "Buchung",
 		"laboratory": "Labor",
+		"maternity": "Entbindung",
 		"newlaboratory": "Neu",
 		"editlaboratory": "Bearbeiten",
 		"operation": "Operation",
@@ -863,5 +864,11 @@
 		"opdInclude": "OPD",
 		"ipdInInclude": "IP In",
 		"ipdOutInclude": "IP Out"
+	},
+	"maternity": {
+		"title": "Entbindungsstation",
+		"pregnancy_care": "Schwangerschaftsvorsorge",
+		"hiv_followup": "HIV-Nachsorge",
+		"family_planning": "Familienplanung"
 	}
 }

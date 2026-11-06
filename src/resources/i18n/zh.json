@@ -99,6 +99,7 @@
 		"triage": "Triage",
 		"therapy": "Therapy",
 		"booking": "Booking",
+		"maternity": "产科",
 		"dashboard": "Dashboard",
 		"newpatient": "New patient",
 		"editpatient": "Edit Patient",
@@ -168,5 +169,11 @@
 		"therapy": "Therapy",
 		"opd": "Diagnostics",
 		"booking": "Prescriptions"
+	},
+	"maternity": {
+		"title": "产科",
+		"pregnancy_care": "孕期保健",
+		"hiv_followup": "艾滋病随访",
+		"family_planning": "计划生育"
 	}
 }

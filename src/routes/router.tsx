@@ -88,6 +88,15 @@ export const useAppRouter = () => {
 								})),
 							children: ADMIN_ROUTES,
 						},
+						{
+							path: 'maternity',
+							lazy: async () =>
+								import(
+									'../components/activities/maternityActivity/MaternityActivity'
+								).then((module) => ({
+									Component: module.MaternityActivity,
+								})),
+						},
 						...patientRoutes,
 						...remotes
 							.filter(

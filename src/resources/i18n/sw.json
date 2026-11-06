@@ -211,6 +211,7 @@
 		"therapy": "Tiba",
 		"booking": "Booking",
 		"laboratory": "Laboratory",
+		"maternity": "Uzazi",
 		"newlaboratory": "New",
 		"editlaboratory": "Edit",
 		"operation": "Operation",
@@ -545,5 +546,11 @@
 		"cs": "Czech",
 		"sq": "Albanian",
 		"zh": "Chinese"
+	},
+	"maternity": {
+		"title": "Uzazi",
+		"pregnancy_care": "Huduma ya ujauzito",
+		"hiv_followup": "Ufuatiliaji wa VVU",
+		"family_planning": "Uzazi wa mpango"
 	}
 }

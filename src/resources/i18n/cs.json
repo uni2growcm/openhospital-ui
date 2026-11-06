@@ -99,6 +99,7 @@
 		"triage": "Triage",
 		"therapy": "Therapy",
 		"booking": "Booking",
+		"maternity": "Porodnice",
 		"dashboard": "Dashboard",
 		"newpatient": "New patient",
 		"editpatient": "Edit Patient",
@@ -168,5 +169,11 @@
 		"therapy": "Therapy",
 		"opd": "Diagnostics",
 		"booking": "Prescriptions"
+	},
+	"maternity": {
+		"title": "Porodnice",
+		"pregnancy_care": "Péče v těhotenství",
+		"hiv_followup": "Sledování HIV",
+		"family_planning": "Plánované rodičovství"
 	}
 }

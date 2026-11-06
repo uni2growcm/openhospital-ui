@@ -211,6 +211,7 @@
 		"therapy": "العلاج",
 		"booking": "Booking",
 		"laboratory": "Laboratory",
+		"maternity": "قسم الولادة",
 		"newlaboratory": "New",
 		"editlaboratory": "Edit",
 		"operation": "Operation",
@@ -545,5 +546,11 @@
 		"cs": "Czech",
 		"sq": "Albanian",
 		"zh": "Chinese"
+	},
+	"maternity": {
+		"title": "قسم الولادة",
+		"pregnancy_care": "رعاية الحمل",
+		"hiv_followup": "متابعة فيروس نقص المناعة البشرية",
+		"family_planning": "تنظيم الأسرة"
 	}
 }

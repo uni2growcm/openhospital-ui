@@ -341,6 +341,7 @@
 		"therapy": "Terapia",
 		"booking": "Rezervimi",
 		"laboratory": "Laboratori",
+		"maternity": "Materniteti",
 		"newlaboratory": "E re",
 		"editlaboratory": "Redakto",
 		"operation": "Operacion",
@@ -863,5 +864,11 @@
 		"opdInclude": "DPJ",
 		"ipdInInclude": "PB Hyrje",
 		"ipdOutInclude": "PB Dalje"
+	},
+	"maternity": {
+		"title": "Materniteti",
+		"pregnancy_care": "Kujdesi për shtatzëninë",
+		"hiv_followup": "Ndjekja e HIV",
+		"family_planning": "Planifikimi familjar"
 	}
 }

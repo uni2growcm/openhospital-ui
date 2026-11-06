@@ -174,6 +174,13 @@ const AppHeader: FunctionComponent<IOwnProps> = ({ breadcrumbMap }) => {
 									{t('nav.laboratory')}
 								</div>
 							)}
+							<div
+								data-cy="nav-maternity"
+								className="appHeader__nav__item"
+								onClick={() => navigate(PATHS.maternity)}
+							>
+								{t('nav.maternity')}
+							</div>
 							<PluginMenu
 								className="appHeader__nav__item"
 								onSelect={(remote) => navigate(`/${remote.name}`)}
