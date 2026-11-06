@@ -59,7 +59,7 @@ jobs:
         with:
           record: false
           start: npm run start:ci
-          wait-on: "http://127.0.0.1:5173"
+          wait-on: "http://localhost:5173"
           wait-on-timeout: 120
           spec: cypress/integrations/admin_activities/diseases_activities/manage_diseases_activity.cy.ts
           config: retries=0,defaultCommandTimeout=5000
