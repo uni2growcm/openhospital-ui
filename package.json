@@ -6,7 +6,7 @@
 		"transifex:source": "node scripts/transifex/syncSource.js",
 		"transifex:files": "node scripts/transifex/syncFiles.js",
 		"start": "vite dev",
-		"start:ci": "vite dev -m test",
+		"start:ci": "vite dev -m test --host 127.0.0.1 --port 5173 --strictPort",
 		"dev": "vite",
 		"preview": "vite preview",
 		"build": "tsc --noEmit && vite build",
