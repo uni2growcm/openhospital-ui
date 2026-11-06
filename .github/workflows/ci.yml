@@ -60,4 +60,4 @@ jobs:
         with:
           record: false
           start: npm run start:ci
-          wait-on: "http://127.0.0.1:5173"
+          wait-on: "http://localhost:5173"
