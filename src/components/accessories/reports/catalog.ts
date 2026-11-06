@@ -51,8 +51,12 @@ export type TReportValues = {
 };
 
 export interface IReportDefinition {
-	/** Unique identifier, shown in the "Code" column */
+	/** Unique identifier of the report (several statistic reports share the same code) */
+	id: string;
+	/** Code shown in the "Code" column (e.g. "HMIS 105") */
 	code: string;
+	/** Base of the downloaded file name */
+	fileName: string;
 	category: TReportCategory;
 	title: string;
 	params: TReportParam[];
@@ -112,15 +116,38 @@ const statisticParams = (
 	}
 };
 
+/**
+ * Statistic report titles are written "<code> - <description>" (e.g. "HMIS 105 - OPD by diagnosis"):
+ * split them to show the code and the description in their own column.
+ */
+export const splitStatisticTitle = (
+	title: string | undefined,
+	fallback: string,
+): { code: string; description: string } => {
+	const value = (title ?? '').trim();
+	const separator = value.indexOf(' - ');
+	if (separator > 0) {
+		return {
+			code: value.slice(0, separator).trim(),
+			description: value.slice(separator + 3).trim(),
+		};
+	}
+	return { code: fallback, description: value || fallback };
+};
+
 export const statisticDefinition = (
 	report: StatisticReportDTO,
 ): IReportDefinition => {
 	const params = statisticParams(report.parameterType);
 	const isDateRange = params.includes('dateRange');
+	const fileName = report.fileName ?? '';
+	const { code, description } = splitStatisticTitle(report.title, fileName);
 	return {
-		code: report.fileName ?? '',
+		id: `${report.folder ?? ''}/${fileName}`,
+		code,
+		fileName,
 		category: 'statistics',
-		title: report.title || report.fileName || '',
+		title: description,
 		params,
 		required: params,
 		formats: ['pdf', 'xlsx'],
@@ -130,7 +157,10 @@ export const statisticDefinition = (
 				fileName: report.fileName ?? '',
 				format,
 				...(isDateRange
-					? { fromDate: apiDate(values.fromDate), toDate: apiDate(values.toDate) }
+					? {
+							fromDate: apiDate(values.fromDate),
+							toDate: apiDate(values.toDate),
+						}
 					: { month: Number(values.month), year: Number(values.year) }),
 			}),
 		fileSuffix: isDateRange ? dateRangeSuffix : monthYearSuffix,
@@ -141,7 +171,16 @@ export const statisticDefinition = (
  * Reports of the rpt_base folder that are launched, in the GUI, from the modules (pharmacy, wards, accounting)
  * and only need generic parameters. The reports bound to one record (a bill, an admission, a patient...) stay in their module.
  */
-const staticDefinitions = (t: (key: string) => string): IReportDefinition[] => [
+type TStaticDefinition = Omit<IReportDefinition, 'id' | 'fileName'>;
+
+const staticDefinitions = (t: (key: string) => string): IReportDefinition[] =>
+	staticReports(t).map((report) => ({
+		...report,
+		id: report.code,
+		fileName: report.code,
+	}));
+
+const staticReports = (t: (key: string) => string): TStaticDefinition[] => [
 	// Pharmacy
 	{
 		code: 'PharmaceuticalStock',
@@ -284,7 +323,7 @@ export const reportFileName = (
 	format: TReportFormat,
 ) => {
 	const suffix = report.fileSuffix?.(values);
-	return `${report.code}${suffix ? `_${suffix}` : ''}.${format}`;
+	return `${report.fileName}${suffix ? `_${suffix}` : ''}.${format}`;
 };
 
 export const useReportDefinitions = (): IReportDefinition[] => {

@@ -31,6 +31,9 @@ type TTab = 'all' | TReportCategory;
 
 type TPreview = { blob: Blob; fileName: string; title: string };
 
+/** Report to print and the action chosen in the list (print as PDF or export to Excel) */
+type TSelection = { report: IReportDefinition; format: TReportFormat };
+
 export const Reports: FC = () => {
 	const { t, i18n } = useTranslation();
 	const dispatch = useAppDispatch();
@@ -39,7 +42,7 @@ export const Reports: FC = () => {
 
 	const [currentTab, setCurrentTab] = useState<TTab>('all');
 	const [search, setSearch] = useState('');
-	const [selected, setSelected] = useState<IReportDefinition>();
+	const [selected, setSelected] = useState<TSelection>();
 	const [preview, setPreview] = useState<TPreview>();
 
 	useEffect(() => {
@@ -71,14 +74,15 @@ export const Reports: FC = () => {
 			: params.map((param) => t(`reports.params.${param}`)).join(', ');
 
 	const rowData = visibleReports.map((report) => ({
+		id: report.id,
 		code: report.code,
 		description: report.title,
 		parameters: describeParams(report.params),
 		category: t(`reports.categories.${report.category}`),
 	}));
 
-	const findReport = (code: string) =>
-		visibleReports.find((report) => report.code === code);
+	const findReport = (id: string) =>
+		visibleReports.find((report) => report.id === id);
 
 	const handlePrinted = (
 		blob: Blob,
@@ -89,21 +93,21 @@ export const Reports: FC = () => {
 		if (format === 'xlsx') {
 			downloadBlob(blob, fileName);
 		} else {
-			setPreview({ blob, fileName, title: selected.title });
+			setPreview({ blob, fileName, title: selected.report.title });
 		}
 		setSelected(undefined);
 	};
 
-	const renderActions = (row: { code: string }) => {
-		const report = findReport(row.code);
+	const renderActions = (row: { id: string }) => {
+		const report = findReport(row.id);
 		if (!report) return null;
 		return (
 			<>
 				<Tooltip title={t('reports.actions.print')}>
 					<IconButton
 						size="small"
-						data-cy={`print-report-${report.code}`}
-						onClick={() => setSelected(report)}
+						data-cy={`print-report-${report.fileName}`}
+						onClick={() => setSelected({ report, format: 'pdf' })}
 					>
 						<Print color="secondary" />
 					</IconButton>
@@ -112,8 +116,8 @@ export const Reports: FC = () => {
 					<Tooltip title={t('reports.actions.excel')}>
 						<IconButton
 							size="small"
-							data-cy={`export-excel-${report.code}`}
-							onClick={() => setSelected(report)}
+							data-cy={`export-excel-${report.fileName}`}
+							onClick={() => setSelected({ report, format: 'xlsx' })}
 						>
 							<Description className="reports__excelIcon" />
 						</IconButton>
@@ -150,7 +154,7 @@ export const Reports: FC = () => {
 				<Autocomplete
 					freeSolo
 					size="small"
-					options={visibleReports.map((report) => report.title)}
+					options={[...new Set(visibleReports.map((report) => report.title))]}
 					inputValue={search}
 					onInputChange={(_e, value) => setSearch(value)}
 					renderInput={(params) => (
@@ -195,7 +199,7 @@ export const Reports: FC = () => {
 					columnsOrder={['code', 'description', 'category']}
 					rowsPerPage={15}
 					showEmptyCell={false}
-					rowKey="code"
+					rowKey="id"
 					renderCustomActions={renderActions}
 				/>
 			</div>
@@ -203,7 +207,8 @@ export const Reports: FC = () => {
 			{selected && (
 				<ReportParametersDialog
 					open={!!selected}
-					report={selected}
+					report={selected.report}
+					format={selected.format}
 					onClose={() => setSelected(undefined)}
 					onPrinted={handlePrinted}
 				/>

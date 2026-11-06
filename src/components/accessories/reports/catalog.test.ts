@@ -5,6 +5,7 @@ import {
 	apiDate,
 	defaultReportValues,
 	reportFileName,
+	splitStatisticTitle,
 	statisticDefinition,
 	type TReportValues,
 } from './catalog';
@@ -60,9 +61,13 @@ describe('statisticDefinition', () => {
 		const report = statisticDefinition({
 			folder: 'rpt_extra',
 			fileName: 'hmis105_opd_attendance',
-			title: 'OPD attendance',
+			title: 'HMIS 105 - OPD attendance',
 			parameterType: 'MONTH_YEAR',
 		});
+
+		expect(report.id).toBe('rpt_extra/hmis105_opd_attendance');
+		expect(report.code).toBe('HMIS 105');
+		expect(report.title).toBe('OPD attendance');
 
 		report.print(values, 'pdf');
 
@@ -88,6 +93,40 @@ describe('statisticDefinition', () => {
 
 		expect(report.params).toEqual([]);
 		expect(report.title).toBe('OH099_Static');
+	});
+});
+
+describe('splitStatisticTitle', () => {
+	it('splits the code from the description', () => {
+		expect(
+			splitStatisticTitle(
+				'HMIS 105 - OPD by diagnosis',
+				'hmis105_opd_by_diagnosis',
+			),
+		).toEqual({ code: 'HMIS 105', description: 'OPD by diagnosis' });
+	});
+
+	it('keeps the dashes of the description', () => {
+		expect(
+			splitStatisticTitle(
+				'MOH 705A - Under 5 Years - Daily Outpatient Morbidity Summary Sheet',
+				'MOH705A',
+			),
+		).toEqual({
+			code: 'MOH 705A',
+			description: 'Under 5 Years - Daily Outpatient Morbidity Summary Sheet',
+		});
+	});
+
+	it('falls back on the file name when the title has no code', () => {
+		expect(splitStatisticTitle('Registered patients', 'OH001')).toEqual({
+			code: 'OH001',
+			description: 'Registered patients',
+		});
+		expect(splitStatisticTitle(undefined, 'OH099_Static')).toEqual({
+			code: 'OH099_Static',
+			description: 'OH099_Static',
+		});
 	});
 });
 

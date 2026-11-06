@@ -19,6 +19,12 @@ export const statisticReports: StatisticReportDTO[] = [
 		title: 'HMIS 105 - OPD attendance',
 		parameterType: 'MONTH_YEAR',
 	},
+	{
+		folder: 'rpt_extra',
+		fileName: 'hmis105_opd_by_diagnosis',
+		title: 'HMIS 105 - OPD by diagnosis',
+		parameterType: 'MONTH_YEAR',
+	},
 ];
 
 /** Content type returned by a report download, according to the requested format */
