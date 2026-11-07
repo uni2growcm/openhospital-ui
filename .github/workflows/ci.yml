@@ -60,7 +60,7 @@ jobs:
           node-version: 20
       # https://github.com/cypress-io/github-action
       - name: Cypress run
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v7
         with:
           record: false
           start: npm run start:ci
