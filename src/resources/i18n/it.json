@@ -381,6 +381,7 @@
 		"therapy": "Terapia farmacologica",
 		"booking": "Prenotazione",
 		"laboratory": "Prestazioni diagnostiche",
+		"maternity": "Maternità",
 		"newlaboratory": "Nuovo",
 		"editlaboratory": "Aggiorna",
 		"operation": "Intervento chirurgico",
@@ -1232,5 +1233,11 @@
 		"updateSuccess": "Il tipo esame è stato aggiornato con successo",
 		"cancelCreation": "Confermi la cancellazione della creazione tipo esame?",
 		"cancelUpdate": "Confermi la cancellazione delle modifiche a tipo esame?"
+	},
+	"maternity": {
+		"title": "Maternità",
+		"pregnancy_care": "Assistenza alla gravidanza",
+		"hiv_followup": "Follow-up HIV",
+		"family_planning": "Pianificazione familiare"
 	}
 }

@@ -211,6 +211,7 @@
 		"therapy": "Terapia",
 		"booking": "Booking",
 		"laboratory": "Laboratory",
+		"maternity": "Maternidade",
 		"newlaboratory": "New",
 		"editlaboratory": "Edit",
 		"operation": "Operation",
@@ -545,5 +546,11 @@
 		"cs": "Czech",
 		"sq": "Albanian",
 		"zh": "Chinese"
+	},
+	"maternity": {
+		"title": "Maternidade",
+		"pregnancy_care": "Cuidados na gravidez",
+		"hiv_followup": "Acompanhamento do HIV",
+		"family_planning": "Planejamento familiar"
 	}
 }

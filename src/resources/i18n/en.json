@@ -382,6 +382,7 @@
 		"therapy": "Therapy",
 		"booking": "Booking",
 		"laboratory": "Laboratory",
+		"maternity": "Maternity",
 		"newlaboratory": "New",
 		"editlaboratory": "Edit",
 		"operation": "Operation",
@@ -1290,5 +1291,11 @@
 		"buttons": {
 			"menu": "Plugins"
 		}
+	},
+	"maternity": {
+		"title": "Maternity",
+		"pregnancy_care": "Pregnancy care",
+		"hiv_followup": "HIV follow up",
+		"family_planning": "Family planning"
 	}
 }

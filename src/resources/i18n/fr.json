@@ -382,6 +382,7 @@
 		"therapy": "Thérapie",
 		"booking": "Réservation",
 		"laboratory": "Laboratoire",
+		"maternity": "Maternité",
 		"newlaboratory": "Nouveau",
 		"editlaboratory": "Modifier",
 		"operation": "Opération",
@@ -1285,5 +1286,11 @@
 			"time": "Temps d'étude",
 			"lastUpdate": "Dernière mise à jour"
 		}
+	},
+	"maternity": {
+		"title": "Maternité",
+		"pregnancy_care": "Soins prénataux",
+		"hiv_followup": "Suivi VIH",
+		"family_planning": "Planification familiale"
 	}
 }

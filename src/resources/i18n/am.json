@@ -381,6 +381,7 @@
 		"therapy": "ሕክምና",
 		"booking": "ቦታ ማስያዝ",
 		"laboratory": "ላቦራቶሪ",
+		"maternity": "የወሊድ ክፍል",
 		"newlaboratory": "አዲስ",
 		"editlaboratory": "አርትዕ",
 		"operation": "ኦፕሬሽን",
@@ -1232,5 +1233,11 @@
 		"updateSuccess": "የፈተናው አይነት በተሳካ ሁኔታ ዘምኗል!",
 		"cancelCreation": "እርግጠኛ ነህ የፈተና አይነት መፍጠር መሰረዝህን እርግጠኛ ነህ?",
 		"cancelUpdate": "እርግጠኛ ነህ የፈተናውን አይነት ማዘመን መሰረዝህን እርግጠኛ ነህ?"
+	},
+	"maternity": {
+		"title": "የወሊድ ክፍል",
+		"pregnancy_care": "የእርግዝና እንክብካቤ",
+		"hiv_followup": "የኤች.አይ.ቪ ክትትል",
+		"family_planning": "የቤተሰብ ምጣኔ"
 	}
 }

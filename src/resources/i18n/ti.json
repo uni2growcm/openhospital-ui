@@ -381,6 +381,7 @@
 		"therapy": "ቴራፒ",
 		"booking": "ምዝገባ",
 		"laboratory": "ላቦራቶሪ",
+		"maternity": "ክፍሊ ሕርሲ",
 		"newlaboratory": "ሓድሽ",
 		"editlaboratory": "ምዕራይ",
 		"operation": "ስርሒት",
@@ -1232,5 +1233,11 @@
 		"updateSuccess": "ዓይነት ፈተና ብዓወት ተሓዲሱ ኣሎ!",
 		"cancelCreation": "ርግጸኛ ዲኻ ነቲ ናይ ፈተና ዓይነት ምፍጣር ክትስርዞ?",
 		"cancelUpdate": "ርግጸኛ ዲኻ ነቲ ናይ ፈተና ዓይነት update ክትስርዞ?"
+	},
+	"maternity": {
+		"title": "ክፍሊ ሕርሲ",
+		"pregnancy_care": "ክንክን ጥንሲ",
+		"hiv_followup": "ክትትል ኤች.ኣይ.ቪ",
+		"family_planning": "ውጥን ስድራቤት"
 	}
 }
