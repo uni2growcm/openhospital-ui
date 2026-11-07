@@ -9,15 +9,16 @@ const LargeButton: FunctionComponent<IProps> = ({
 	onClick,
 	variant = 'contained',
 	className = '',
+	'data-cy': dataCy = 'large-button',
 	...props
 }) => {
 	return (
 		<Button
-			{...props}
-			data-cy="large-button"
+			data-cy={dataCy}
 			className={`largeButton ${className}`}
 			variant={variant}
 			onClick={handleClick ?? onClick}
+			{...props}
 		>
 			{children}
 		</Button>
