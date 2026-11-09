@@ -27,6 +27,8 @@ import './styles.scss';
 
 type IOwnProps = {
 	report: IReportDefinition;
+	/** Action chosen in the list: only the matching button is shown */
+	format: TReportFormat;
 	open: boolean;
 	onClose: () => void;
 	onPrinted: (blob: Blob, format: TReportFormat, fileName: string) => void;
@@ -45,6 +47,7 @@ const dialogDataCy = (params: TReportParam[]) => {
 
 export const ReportParametersDialog: FC<IOwnProps> = ({
 	report,
+	format,
 	open,
 	onClose,
 	onPrinted,
@@ -53,7 +56,6 @@ export const ReportParametersDialog: FC<IOwnProps> = ({
 	const dispatch = useAppDispatch();
 	const [values, setValues] = useState<TReportValues>(defaultReportValues);
 	const [submitted, setSubmitted] = useState(false);
-	const [pendingFormat, setPendingFormat] = useState<TReportFormat>();
 	const [validationError, setValidationError] = useState<string>();
 
 	const printState = useAppSelector((state) => state.reports.print);
@@ -127,13 +129,12 @@ export const ReportParametersDialog: FC<IOwnProps> = ({
 	const errorOf = (key: keyof TReportValues) =>
 		submitted ? (errors[key] ?? '') : '';
 
-	const handlePrint = (format: TReportFormat) => async () => {
+	const handlePrint = async () => {
 		setSubmitted(true);
 		const customError = report.validate?.(values, format);
 		setValidationError(customError);
 		if (!isValid || customError) return;
 
-		setPendingFormat(format);
 		try {
 			const blob = await dispatch(
 				printReport(() => report.print(values, format)),
@@ -141,8 +142,6 @@ export const ReportParametersDialog: FC<IOwnProps> = ({
 			onPrinted(blob, format, reportFileName(report, values, format));
 		} catch {
 			// the error is displayed from the store
-		} finally {
-			setPendingFormat(undefined);
 		}
 	};
 
@@ -383,32 +382,33 @@ export const ReportParametersDialog: FC<IOwnProps> = ({
 			)}
 
 			<div className="reportDialog__buttons">
-				<Button
-					type="button"
-					variant="contained"
-					dataCy="report-validate"
-					disabled={isPrinting || (submitted && !isValid)}
-					onClick={handlePrint('pdf')}
-				>
-					{pendingFormat === 'pdf' ? (
-						<CircularProgress size={18} color="inherit" />
-					) : (
-						t('reports.actions.preview')
-					)}
-				</Button>
-				{report.formats.includes('xlsx') && (
+				{format === 'xlsx' ? (
 					<Button
 						type="button"
 						variant="contained"
 						color="success"
 						dataCy="report-export-excel"
 						disabled={isPrinting || (submitted && !isValid)}
-						onClick={handlePrint('xlsx')}
+						onClick={handlePrint}
 					>
-						{pendingFormat === 'xlsx' ? (
+						{isPrinting ? (
 							<CircularProgress size={18} color="inherit" />
 						) : (
 							t('reports.actions.excel')
+						)}
+					</Button>
+				) : (
+					<Button
+						type="button"
+						variant="contained"
+						dataCy="report-validate"
+						disabled={isPrinting || (submitted && !isValid)}
+						onClick={handlePrint}
+					>
+						{isPrinting ? (
+							<CircularProgress size={18} color="inherit" />
+						) : (
+							t('reports.actions.preview')
 						)}
 					</Button>
 				)}
