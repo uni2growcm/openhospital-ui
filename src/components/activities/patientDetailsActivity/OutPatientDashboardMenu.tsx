@@ -90,14 +90,19 @@ const OutPatientDashboardMenu: FunctionComponent<IOwnProps> = ({
 	const patient = useAppSelector(
 		(state: IState) => state.patients.selectedPatient.data,
 	);
+	
+	const patientStatus = useAppSelector(
+		(state: IState) => state.patients.selectedPatient.status,
+	);
 
 	useEffect(() => {
-		if (!enabledMock) {
-			if (id) {
-				dispatch(getPatient(id));
-			}
-		}
-	}, [id, dispatch, enabledMock]);
+		if (enabledMock || !id) return;
+
+		if (patientStatus !== 'IDLE') return;
+
+		dispatch(getPatient(id));
+	}, [id, dispatch, enabledMock, patientStatus]);
+
 
 	return (
 		<div

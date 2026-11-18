@@ -5,6 +5,7 @@ import {
 	type FunctionComponent,
 	useCallback,
 	useEffect,
+	useRef,
 	useState,
 } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -42,8 +43,8 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
 	const dispatch = useAppDispatch();
 	const [activityTransitionState, setActivityTransitionState] =
 		useState<TActivityTransitionState>('IDLE');
-	const patient = useAppSelector(
-		(state) => state.patients.selectedPatient.data,
+	const patientCode = useAppSelector(
+		(state) => state.patients.selectedPatient.data?.code,
 	);
 	const currentAdmission = useAppSelector(
 		(state: IState) => state.admissions.currentAdmissionByPatientId.data,
@@ -74,6 +75,8 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
 	const admTypeStatus = useAppSelector(
 		(state: IState) => state.types.admissions.getAll.status,
 	);
+
+	const resetExecuted = useRef(false);
 
 	const renderOptions = (
 		data:
@@ -122,14 +125,23 @@ export const CurrentAdmissionForm: FunctionComponent<IOwnProps> = ({
 	});
 
 	useEffect(() => {
-		if (activityTransitionState === 'TO_RESET') {
-			dispatch(updateAdmissionReset());
-			if (patient?.code) {
-				dispatch(getPatient(patient?.code?.toString()));
-			}
-			onDiscard();
+		 if (activityTransitionState !== 'TO_RESET') {
+			resetExecuted.current = false;
+			return;
 		}
-	}, [dispatch, activityTransitionState, patient, onDiscard]);
+
+		if (resetExecuted.current) return;
+
+		resetExecuted.current = true;
+
+		dispatch(updateAdmissionReset());
+
+		if (patientCode) {
+			dispatch(getPatient(patientCode.toString()));
+		}
+
+		onDiscard();
+	}, [dispatch, activityTransitionState, patientCode, onDiscard]);
 
 	const { setFieldValue, handleBlur } = formik;
 
