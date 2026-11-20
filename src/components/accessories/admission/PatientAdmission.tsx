@@ -1,5 +1,5 @@
 import { isEmpty } from 'lodash';
-import { type FC, useEffect, useRef, useState } from 'react';
+import { type FC, useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 import PatientDetailsActivityContent from '~/components/activities/patientDetailsActivityContent/PatientDetailsActivityContent';
@@ -80,9 +80,22 @@ export const PatientAdmission: FC = () => {
 		(state) => state.patients.selectedPatient.data?.code,
 	);
 
+	const previousCreateStatus = useRef(createStatus);
+	const previousUpdateStatus = useRef(updateStatus);
+	const lastOpdPatientRef = useRef<number | null>(null);
+
 	useEffect(() => {
-		if (patientCode && creationMode) {
-			dispatch(getLastOpd(parseInt(id ?? '', 10)));
+		const patientId = Number(id);
+
+		if (
+			patientCode &&
+			creationMode &&
+			Number.isFinite(patientId) &&
+			patientId > 0 &&
+			lastOpdPatientRef.current !== patientId
+		) {
+			lastOpdPatientRef.current = patientId;
+			dispatch(getLastOpd(patientId));
 		}
 	}, [dispatch, patientCode, creationMode, id]);
 
@@ -154,20 +167,33 @@ export const PatientAdmission: FC = () => {
 	}, [dispatch, activityTransitionState]);
 
 	useEffect(() => {
-		if (createStatus === 'SUCCESS' || updateStatus === 'SUCCESS') {
-			dispatch(getPatient(id ?? ''));
-			dispatch(getCurrentAdmission(parseInt(id ?? '', 10)));
+		const createSucceeded =
+			previousCreateStatus.current !== 'SUCCESS' &&
+			createStatus === 'SUCCESS';
+
+		const updateSucceeded =
+			previousUpdateStatus.current !== 'SUCCESS' &&
+			updateStatus === 'SUCCESS';
+
+		if (createSucceeded || updateSucceeded) {
+			if (id) {
+				dispatch(getPatient(id));
+				dispatch(getCurrentAdmission(Number(id)));
+			}
 		}
+
+		previousCreateStatus.current = createStatus;
+		previousUpdateStatus.current = updateStatus;
 	}, [createStatus, id, updateStatus, dispatch]);
 
-	const resetFormCallback = () => {
+	const resetFormCallback = useCallback(() => {
 		setCreationMode(true);
 		setShouldResetForm(false);
 		setShouldUpdateTable(false);
 		setActivityTransitionState('IDLE');
 		setAdmissionToEdit(undefined);
 		scrollToElement(null);
-	};
+	}, []);
 
 	useEffect(() => {
 		if (id) {
@@ -184,9 +210,9 @@ export const PatientAdmission: FC = () => {
 		scrollToElement(null);
 	};
 
-	const onCurrentAdmissionChange = (value: boolean) => {
+	const onCurrentAdmissionChange = useCallback((value: boolean) => {
 		setIsEditingCurrent(value);
-	};
+	}, []);
 
 	return (
 		<PatientDetailsActivityContent title={t('patient.admissions')}>

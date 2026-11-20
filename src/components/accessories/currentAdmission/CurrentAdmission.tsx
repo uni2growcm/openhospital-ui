@@ -1,4 +1,4 @@
-import { type FunctionComponent, useEffect, useState } from 'react';
+import { type FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '~/libraries/hooks/redux';
 import type { AdmissionDTO } from '../../../generated';
 import { updateAdmission } from '../../../state/admissions';
@@ -23,9 +23,9 @@ export const CurrentAdmission: FunctionComponent<IOwnProps> = ({
 		setEditionMode(true);
 	};
 
-	const handleDiscard = () => {
+	const handleDiscard =  useCallback(() => {
 		setEditionMode(false);
-	};
+	}, []);
 
 	const fields = useFields(currentAdmission, lastOpd?.disease);
 

@@ -273,10 +273,6 @@ const AdmissionForm: FC<AdmissionProps> = ({
 	);
 
 	useEffect(() => {
-		dispatch(getDiseasesIpdOut());
-	}, [dispatch]);
-
-	useEffect(() => {
 		dispatch(getDiseasesIpdIn());
 		dispatch(getAdmissionTypes());
 		dispatch(getWards());
